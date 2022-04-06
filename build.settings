@@ -1,0 +1,53 @@
+settings = {
+	orientation = {
+		default = 'portrait',
+		supported = {'portrait'}
+	},
+
+	android = {
+		minSdkVersion = '16',
+		usesPermissions = {
+			'android.permission.INTERNET',
+			'android.permission.ACCESS_NETWORK_STATE',
+			'android.permission.READ_EXTERNAL_STORAGE',
+			'android.permission.WRITE_EXTERNAL_STORAGE',
+			'android.permission.MANAGE_EXTERNAL_STORAGE',
+			'android.permission.RECEIVE_BOOT_COMPLETED',
+			'android.permission.REQUEST_INSTALL_PACKAGES',
+			'android.permission.VIBRATE'
+		},
+
+		applicationChildElements = {
+            [[
+                <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID"
+                    android:value="ca-app-pub-3712284233366817~8085200542"/>
+            ]]
+        }
+	},
+
+	window = {
+		defaultViewWidth = 360,
+		defaultViewHeight = 640
+	},
+
+	splashScreen = {
+	    enable = false
+	},
+
+	plugins = {
+		['plugin.cnkFileManager'] = {publisherId = 'es.cnksoft'},
+		['plugin.pasteboard'] = {publisherId = 'com.coronalabs'},
+		['plugin.utf8'] = {publisherId = 'com.coronalabs'},
+		['plugin.zip'] = {publisherId = 'com.coronalabs'},
+		['plugin.notifications.v2'] = {publisherId = 'com.coronalabs'},
+		['plugin.exportFile'] = {publisherId = 'com.solar2d'},
+		['plugin.nanosvg'] = {publisherId = 'com.coronalabs'},
+		['plugin.orientation'] = {publisherId = 'tech.scotth'},
+		['plugin.admob'] = {publisherId = 'com.coronalabs'}
+	},
+
+	excludeFiles = {
+		all = {'Icon.png', 'Icon-*dpi.png', 'Images.xcassets'},
+		android = {'LaunchScreen.storyboardc'}
+	}
+}
