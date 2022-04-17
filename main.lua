@@ -25,8 +25,26 @@ if system.getInfo 'environment' ~= 'simulator' then
                 display.newImage('Sprites/amogus.png', ZERO_X + 75, ZERO_Y + 75)
             elseif version > BUILD then
                 WINDOW.new(STR['menu.version.new'], {STR['button.close'], STR['button.download']}, function(event)
-                    system.openURL(link)
-                    native.requestExit()
+                    timer.performWithDelay(1, function()
+                        WINDOW.new(STR['menu.version.wait'], {}, function(event)
+                            EXPORT.export({
+                                path = DOC_DIR .. '/tester.apk', name = 'CCode.apk',
+                                listener = function(event)
+                                    OS_REMOVE(DOC_DIR .. '/tester.apk')
+                                    native.requestExit()
+                                end
+                            })
+                        end, 3)
+                    end)
+
+                    network.download(link, 'GET', function(e)
+                        if e.phase == 'ended' and e.isError then
+                            system.openURL(link)
+                            native.requestExit()
+                        elseif e.phase == 'ended' then
+                            WINDOW.remove()
+                        end
+                    end, 'tester.apk', system.DocumentsDirectory)
                 end, 2)
             end
         end
@@ -63,7 +81,7 @@ elseif system.getInfo 'environment' == 'simulator' and true then
     -- SETTINGS.group.isVisible = true
 
     -- EDITOR = require 'Core.Editor.interface'
-    -- EDITOR.create('newText', 3, {}, 2)
+    -- EDITOR.create('newText', 3, {{'hello world', 't'}}, 2)
 
     -- NEW_BLOCK = require 'Interfaces.new-block'
     -- NEW_BLOCK.create()

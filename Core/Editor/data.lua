@@ -3,19 +3,25 @@ local M = {}
 M.fun = {
     names = {},
     keys = {
-        'get_text', 'random_str', 'tonumber', 'tostring', 'unix_time',
+        'get_text', 'random_str', 'tonumber', 'tostring', 'totable', 'unix_time',
         'encode', 'gsub', 'sub', 'len', 'find', 'color_pixel', 'read_save', 'match'
     }
 }
 
 M.math = {
     names = {},
-    keys = {'4', '5', '6'}
+    keys = {
+        'random', 'radical', 'power', 'round', 'remainder',
+        'module', 'max', 'min', 'sin', 'cos', 'tan', 'ctan', 'pi'
+    }
 }
 
 M.prop = {
     names = {},
-    keys = {'7', '8', '9'}
+    keys = {
+        'touch', 'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation',
+        'alpha', 'name_texture', 'velocity_x', 'velocity_y', 'angular_velocity'
+    }
 }
 
 M.log = {
@@ -33,7 +39,7 @@ M.device = {
 
 M.set = function(key, name)
     if (key == 'f' or key == 'm' or key == 'p'
-    --[[or name == 'finger_touching_screen_x' or name == 'finger_touching_screen_y']]) and name ~= 'unix_time' then
+    --[[or name == 'finger_touching_screen_x' or name == 'finger_touching_screen_y']]) and name ~= 'unix_time' and name ~= 'pi' then
         EDITOR.cursor[1] = EDITOR.cursor[1] + 1
         table.remove(EDITOR.data, EDITOR.cursor[1] - 1)
         table.insert(EDITOR.data, EDITOR.cursor[1] - 1, {'(', 's'})

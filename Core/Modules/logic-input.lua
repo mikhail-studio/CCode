@@ -3,10 +3,16 @@ local M = {}
 
 M.cancel = function() pcall(function()
     ALERT = true
-    M.group:removeSelf() M.group = nil
-    BLOCKS.group[8]:setIsLocked(false, 'vertical')
-    -- BLOCKS.group:removeSelf() BLOCKS.group = nil
-    -- BLOCKS.create() BLOCKS.group.isVisible = true
+    M.group:removeSelf()
+    M.group = nil
+
+    if M.isEditor then
+        EDITOR.group:removeSelf() EDITOR.group = nil
+        EDITOR.create(unpack(M.isEditor))
+        EDITOR.group.isVisible = true
+    else
+        BLOCKS.group[8]:setIsLocked(false, 'vertical')
+    end
 end) end
 
 M.listener = function(e)
@@ -213,14 +219,14 @@ end
 
 M.gen = function(mode, scroll)
     local vars = COPY_TABLE(mode == 'event' and M.vars.event or mode == 'script' and M.vars.script or M.vars.project)
-    local buttons, buttonsY = {}, 35 vars[#vars + 1] = STR['blocks.createvar']
+    local buttons, buttonsY = {}, 35 vars[#vars + 1] = STR['blocks.create.var']
 
     if M.params[1] == 'funs' then
         vars = COPY_TABLE(mode == 'script' and M.funs.script or M.funs.project)
-        vars[#vars + 1] = STR['blocks.createfun']
+        vars[#vars + 1] = STR['blocks.create.fun']
     elseif M.params[1] == 'tables' then
         vars = COPY_TABLE(mode == 'event' and M.tables.event or mode == 'script' and M.tables.script or M.tables.project)
-        vars[#vars + 1] = STR['blocks.createtable']
+        vars[#vars + 1] = STR['blocks.create.table']
     end
 
     for i = 1, #vars do
@@ -274,177 +280,180 @@ M.gen = function(mode, scroll)
     end
 end
 
-M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal)
-    if not M.group then
-        ALERT = false
-        M.active = mode == 'funs' and 'script' or 'event'
-        M.group = display.newGroup()
-        M.data = GET_GAME_CODE(CURRENT_LINK)
-        M.params = {mode, blockIndex, paramsIndex}
-        M.vars = {project = M.data.vars, script = M.data.scripts[CURRENT_SCRIPT].vars, event = {}}
-        M.tables = {project = M.data.tables, script = M.data.scripts[CURRENT_SCRIPT].tables, event = {}}
-        M.funs = {project = M.data.funs, script = M.data.scripts[CURRENT_SCRIPT].funs}
+M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor)
+    pcall(function()
+        if not M.group then
+            ALERT = false
+            M.isEditor = isEditor
+            M.active = mode == 'funs' and 'script' or 'event'
+            M.group = display.newGroup()
+            M.data = GET_GAME_CODE(CURRENT_LINK)
+            M.params = {mode, blockIndex, paramsIndex}
+            M.vars = {project = M.data.vars, script = M.data.scripts[CURRENT_SCRIPT].vars, event = {}}
+            M.tables = {project = M.data.tables, script = M.data.scripts[CURRENT_SCRIPT].tables, event = {}}
+            M.funs = {project = M.data.funs, script = M.data.scripts[CURRENT_SCRIPT].funs}
 
-        for i = blockIndex, 1, -1 do
-            if M.data.scripts[CURRENT_SCRIPT].params[i].event then
-                M.vars.index = i
-                M.vars.event = M.data.scripts[CURRENT_SCRIPT].params[i].vars
-                M.tables.event = M.data.scripts[CURRENT_SCRIPT].params[i].tables
-                break
-            end
-        end
-
-        if paramsData and paramsData[1] and type(paramsData[1]) == 'table' then
-            if paramsData[1][2] == 'vE' then
-                for i = 1, #M.vars.event do
-                    if M.vars.event[i] == paramsData[1][1] then
-                        table.remove(M.vars.event, i)
-                        table.insert(M.vars.event, 1, paramsData[1][1])
-                    end
-                end
-            elseif paramsData[1][2] == 'vS' then
-                M.active = 'script'
-                for i = 1, #M.vars.script do
-                    if M.vars.script[i] == paramsData[1][1] then
-                        table.remove(M.vars.script, i)
-                        table.insert(M.vars.script, 1, paramsData[1][1])
-                    end
-                end
-            elseif paramsData[1][2] == 'vP' then
-                M.active = 'project'
-                for i = 1, #M.vars.project do
-                    if M.vars.project[i] == paramsData[1][1] then
-                        table.remove(M.vars.project, i)
-                        table.insert(M.vars.project, 1, paramsData[1][1])
-                    end
-                end
-            elseif paramsData[1][2] == 'tE' then
-                for i = 1, #M.tables.event do
-                    if M.tables.event[i] == paramsData[1][1] then
-                        table.remove(M.tables.event, i)
-                        table.insert(M.tables.event, 1, paramsData[1][1])
-                    end
-                end
-            elseif paramsData[1][2] == 'tS' then
-                M.active = 'script'
-                for i = 1, #M.tables.script do
-                    if M.tables.script[i] == paramsData[1][1] then
-                        table.remove(M.tables.script, i)
-                        table.insert(M.tables.script, 1, paramsData[1][1])
-                    end
-                end
-            elseif paramsData[1][2] == 'tP' then
-                M.active = 'project'
-                for i = 1, #M.tables.project do
-                    if M.tables.project[i] == paramsData[1][1] then
-                        table.remove(M.tables.project, i)
-                        table.insert(M.tables.project, 1, paramsData[1][1])
-                    end
-                end
-            elseif paramsData[1][2] == 'fS' then
-                for i = 1, #M.funs.script do
-                    if M.funs.script[i] == paramsData[1][1] then
-                        table.remove(M.funs.script, i)
-                        table.insert(M.funs.script, 1, paramsData[1][1])
-                    end
-                end
-            elseif paramsData[1][2] == 'fP' then
-                M.active = 'project'
-                for i = 1, #M.funs.project do
-                    if M.funs.project[i] == paramsData[1][1] then
-                        table.remove(M.funs.project, i)
-                        table.insert(M.funs.project, 1, paramsData[1][1])
-                    end
+            for i = blockIndex, 1, -1 do
+                if M.data.scripts[CURRENT_SCRIPT].params[i].event then
+                    M.vars.index = i
+                    M.vars.event = M.data.scripts[CURRENT_SCRIPT].params[i].vars
+                    M.tables.event = M.data.scripts[CURRENT_SCRIPT].params[i].tables
+                    break
                 end
             end
+
+            if paramsData and paramsData[1] and type(paramsData[1]) == 'table' then
+                if paramsData[1][2] == 'vE' then
+                    for i = 1, #M.vars.event do
+                        if M.vars.event[i] == paramsData[1][1] then
+                            table.remove(M.vars.event, i)
+                            table.insert(M.vars.event, 1, paramsData[1][1])
+                        end
+                    end
+                elseif paramsData[1][2] == 'vS' then
+                    M.active = 'script'
+                    for i = 1, #M.vars.script do
+                        if M.vars.script[i] == paramsData[1][1] then
+                            table.remove(M.vars.script, i)
+                            table.insert(M.vars.script, 1, paramsData[1][1])
+                        end
+                    end
+                elseif paramsData[1][2] == 'vP' then
+                    M.active = 'project'
+                    for i = 1, #M.vars.project do
+                        if M.vars.project[i] == paramsData[1][1] then
+                            table.remove(M.vars.project, i)
+                            table.insert(M.vars.project, 1, paramsData[1][1])
+                        end
+                    end
+                elseif paramsData[1][2] == 'tE' then
+                    for i = 1, #M.tables.event do
+                        if M.tables.event[i] == paramsData[1][1] then
+                            table.remove(M.tables.event, i)
+                            table.insert(M.tables.event, 1, paramsData[1][1])
+                        end
+                    end
+                elseif paramsData[1][2] == 'tS' then
+                    M.active = 'script'
+                    for i = 1, #M.tables.script do
+                        if M.tables.script[i] == paramsData[1][1] then
+                            table.remove(M.tables.script, i)
+                            table.insert(M.tables.script, 1, paramsData[1][1])
+                        end
+                    end
+                elseif paramsData[1][2] == 'tP' then
+                    M.active = 'project'
+                    for i = 1, #M.tables.project do
+                        if M.tables.project[i] == paramsData[1][1] then
+                            table.remove(M.tables.project, i)
+                            table.insert(M.tables.project, 1, paramsData[1][1])
+                        end
+                    end
+                elseif paramsData[1][2] == 'fS' then
+                    for i = 1, #M.funs.script do
+                        if M.funs.script[i] == paramsData[1][1] then
+                            table.remove(M.funs.script, i)
+                            table.insert(M.funs.script, 1, paramsData[1][1])
+                        end
+                    end
+                elseif paramsData[1][2] == 'fP' then
+                    M.active = 'project'
+                    for i = 1, #M.funs.project do
+                        if M.funs.project[i] == paramsData[1][1] then
+                            table.remove(M.funs.project, i)
+                            table.insert(M.funs.project, 1, paramsData[1][1])
+                        end
+                    end
+                end
+            end
+
+            local bg = display.newRect(CENTER_X, CENTER_Y - 100, DISPLAY_WIDTH / 1.5, DISPLAY_HEIGHT / 2)
+                bg.y = bg.height < 400 and CENTER_Y or CENTER_Y - 100
+                bg.height = bg.height < 400 and DISPLAY_HEIGHT / 1.5 or DISPLAY_HEIGHT / 2
+                bg:setFillColor(0.18, 0.18, 0.2)
+            M.group:insert(bg)
+
+            M.scroll = WIDGET.newScrollView({
+                    x = bg.x, y = bg.y - 35,
+                    width = bg.width, height = bg.height - 70,
+                    hideBackground = true, hideScrollBar = true,
+                    horizontalScrollDisabled = true, isBounceEnabled = true
+                }) local width, y = M.scroll.width / 3, M.scroll.y + M.scroll.height / 2 + 35
+            M.group:insert(M.scroll)
+
+            local buttonEvent, textEvent, buttonScript, textScript, buttonProject, textProject
+
+            if mode ~= 'funs' then
+                buttonEvent = display.newRect(bg.x - width, y, width, 70)
+                    buttonEvent:addEventListener('touch', M.select)
+                M.group:insert(buttonEvent)
+
+                textEvent = display.newText(STR['editor.list.event'], buttonEvent.x, buttonEvent.y, 'ubuntu', 26)
+                    buttonEvent.id = 'event'
+                M.group:insert(textEvent)
+            end
+
+            if not isLocal then
+                buttonScript = display.newRect(bg.x, y, width, 70)
+                    buttonScript:addEventListener('touch', M.select)
+                M.group:insert(buttonScript)
+
+                textScript = display.newText(STR['editor.list.script'], buttonScript.x, buttonScript.y, 'ubuntu', 26)
+                    buttonScript.id = 'script'
+                M.group:insert(textScript)
+
+                buttonProject = display.newRect(bg.x + width, y, width, 70)
+                    buttonProject:addEventListener('touch', M.select)
+                M.group:insert(buttonProject)
+
+                textProject = display.newText(STR['editor.list.project'], buttonProject.x, buttonProject.y, 'ubuntu', 26)
+                    buttonProject.id = 'project'
+                M.group:insert(textProject)
+            end
+
+            M.clear = function()
+                if mode ~= 'funs' then buttonEvent:setFillColor(0.26, 0.26, 0.28) end
+                if not isLocal then buttonScript:setFillColor(0.26, 0.26, 0.28) end
+                if not isLocal then buttonProject:setFillColor(0.26, 0.26, 0.28) end
+                if M.active == 'event' and mode ~= 'funs' then buttonEvent:setFillColor(0.2, 0.2, 0.22) end
+                if M.active == 'script' and not isLocal then buttonScript:setFillColor(0.2, 0.2, 0.22) end
+                if M.active == 'project' and not isLocal then buttonProject:setFillColor(0.2, 0.2, 0.22) end
+            end
+
+            local delimiter1 = display.newRect(bg.x - width / 2, y, 3, 70)
+                delimiter1:setFillColor(0.6)
+            M.group:insert(delimiter1)
+
+            local delimiter2 = display.newRect(bg.x + width / 2, y, 3, 70)
+                delimiter2:setFillColor(0.6)
+            M.group:insert(delimiter2)
+
+            local delimiter3 = display.newRect(bg.x, y - 33.5, bg.width, 3)
+                delimiter3:setFillColor(0.6)
+            M.group:insert(delimiter3)
+
+            if mode == 'funs' then
+                delimiter1:removeSelf()
+                delimiter2.x = CENTER_X
+                buttonScript.width = bg.width / 2
+                buttonProject.width = bg.width / 2
+                buttonScript.x = CENTER_X - bg.width / 4
+                buttonProject.x = CENTER_X + bg.width / 4
+                textScript.x = buttonScript.x
+                textProject.x = buttonProject.x
+            elseif isLocal then
+                delimiter1:removeSelf()
+                delimiter2:removeSelf()
+                buttonEvent.width = bg.width
+                buttonEvent.x = CENTER_X
+                textEvent.x = CENTER_X
+            end
+
+            M.clear()
+            EXITS.add(M.cancel)
+            M.gen(M.active, M.scroll)
         end
-
-        local bg = display.newRect(CENTER_X, CENTER_Y - 100, DISPLAY_WIDTH / 1.5, DISPLAY_HEIGHT / 2)
-            bg.y = bg.height < 400 and CENTER_Y or CENTER_Y - 100
-            bg.height = bg.height < 400 and DISPLAY_HEIGHT / 1.5 or DISPLAY_HEIGHT / 2
-            bg:setFillColor(0.18, 0.18, 0.2)
-        M.group:insert(bg)
-
-        M.scroll = WIDGET.newScrollView({
-                x = bg.x, y = bg.y - 35,
-                width = bg.width, height = bg.height - 70,
-                hideBackground = true, hideScrollBar = true,
-                horizontalScrollDisabled = true, isBounceEnabled = true
-            }) local width, y = M.scroll.width / 3, M.scroll.y + M.scroll.height / 2 + 35
-        M.group:insert(M.scroll)
-
-        local buttonEvent, textEvent, buttonScript, textScript, buttonProject, textProject
-
-        if mode ~= 'funs' then
-            buttonEvent = display.newRect(bg.x - width, y, width, 70)
-                buttonEvent:addEventListener('touch', M.select)
-            M.group:insert(buttonEvent)
-
-            textEvent = display.newText(STR['editor.list.event'], buttonEvent.x, buttonEvent.y, 'ubuntu', 26)
-                buttonEvent.id = 'event'
-            M.group:insert(textEvent)
-        end
-
-        if not isLocal then
-            buttonScript = display.newRect(bg.x, y, width, 70)
-                buttonScript:addEventListener('touch', M.select)
-            M.group:insert(buttonScript)
-
-            textScript = display.newText(STR['editor.list.script'], buttonScript.x, buttonScript.y, 'ubuntu', 26)
-                buttonScript.id = 'script'
-            M.group:insert(textScript)
-
-            buttonProject = display.newRect(bg.x + width, y, width, 70)
-                buttonProject:addEventListener('touch', M.select)
-            M.group:insert(buttonProject)
-
-            textProject = display.newText(STR['editor.list.project'], buttonProject.x, buttonProject.y, 'ubuntu', 26)
-                buttonProject.id = 'project'
-            M.group:insert(textProject)
-        end
-
-        M.clear = function()
-            if mode ~= 'funs' then buttonEvent:setFillColor(0.26, 0.26, 0.28) end
-            if not isLocal then buttonScript:setFillColor(0.26, 0.26, 0.28) end
-            if not isLocal then buttonProject:setFillColor(0.26, 0.26, 0.28) end
-            if M.active == 'event' and mode ~= 'funs' then buttonEvent:setFillColor(0.2, 0.2, 0.22) end
-            if M.active == 'script' and not isLocal then buttonScript:setFillColor(0.2, 0.2, 0.22) end
-            if M.active == 'project' and not isLocal then buttonProject:setFillColor(0.2, 0.2, 0.22) end
-        end
-
-        local delimiter1 = display.newRect(bg.x - width / 2, y, 3, 70)
-            delimiter1:setFillColor(0.6)
-        M.group:insert(delimiter1)
-
-        local delimiter2 = display.newRect(bg.x + width / 2, y, 3, 70)
-            delimiter2:setFillColor(0.6)
-        M.group:insert(delimiter2)
-
-        local delimiter3 = display.newRect(bg.x, y - 33.5, bg.width, 3)
-            delimiter3:setFillColor(0.6)
-        M.group:insert(delimiter3)
-
-        if mode == 'funs' then
-            delimiter1:removeSelf()
-            delimiter2.x = CENTER_X
-            buttonScript.width = bg.width / 2
-            buttonProject.width = bg.width / 2
-            buttonScript.x = CENTER_X - bg.width / 4
-            buttonProject.x = CENTER_X + bg.width / 4
-            textScript.x = buttonScript.x
-            textProject.x = buttonProject.x
-        elseif isLocal then
-            delimiter1:removeSelf()
-            delimiter2:removeSelf()
-            buttonEvent.width = bg.width
-            buttonEvent.x = CENTER_X
-            textEvent.x = CENTER_X
-        end
-
-        M.clear()
-        EXITS.add(M.cancel)
-        M.gen(M.active, M.scroll)
-    end
+    end)
 end
 
 M.select = function(e)

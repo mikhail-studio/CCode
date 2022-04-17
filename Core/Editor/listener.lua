@@ -1,5 +1,8 @@
+local PARAMS = require 'Core.Modules.params-listener'
+local COLOR = require 'Core.Modules.interface-color'
 local LIST = require 'Core.Modules.interface-list'
 local BLOCK = require 'Core.Modules.logic-block'
+local LOGIC = require 'Core.Modules.logic-input'
 local TEXT = require 'Core.Editor.text'
 local INFO = require 'Data.info'
 local M = {}
@@ -13,8 +16,11 @@ M.find = function(data)
     end
 end
 
-M.rect = function(index, restart, data)
-    if INFO.listName[restart[1]][index + 1] == 'value' then
+M.rect = function(target, restart, data)
+    local index = target.index
+    local type = INFO.listName[restart[1]][index + 1]
+
+    if type == 'value' then
         if TEXT.check(COPY_TABLE(data)) then
             local param = TEXT.number(data, true)
             local data = GET_GAME_CODE(CURRENT_LINK)
@@ -34,11 +40,66 @@ M.rect = function(index, restart, data)
         else
             EDITOR.group[9]:setIsLocked(true, 'vertical')
             EDITOR.group[66]:setIsLocked(true, 'vertical')
+
             WINDOW.new(STR['editor.window.error'], {STR['button.close'], STR['editor.button.error']}, function(e)
                 EDITOR.group[9]:setIsLocked(false, 'vertical')
                 EDITOR.group[66]:setIsLocked(false, 'vertical')
             end, 3)
         end
+    elseif type == 'color' and ALERT then
+        local data = GET_GAME_CODE(CURRENT_LINK)
+        local blockIndex, paramsIndex = restart[2], index
+        local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
+
+        EDITOR.group[9]:setIsLocked(true, 'vertical')
+        EDITOR.group[66]:setIsLocked(true, 'vertical')
+
+        COLOR.new(COPY_TABLE((paramsData[1] and paramsData[1][1]) and JSON.decode(paramsData[1][1]) or {255, 255, 255}), function(e)
+            if e.input then
+                data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex][1] = {e.rgb, 'c'}
+                BLOCKS.group.blocks[blockIndex].data.params[paramsIndex][1] = {e.rgb, 'c'}
+                BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[blockIndex].data.params, paramsIndex)
+                SET_GAME_CODE(CURRENT_LINK, data)
+            end
+
+            table.remove(restart[3], M.find(restart[3]))
+            EDITOR.group:removeSelf() EDITOR.group = nil
+            EDITOR.create(unpack(restart))
+            EDITOR.group.isVisible = true
+        end)
+    elseif type == 'body' and ALERT then
+        local data = GET_GAME_CODE(CURRENT_LINK)
+        local blockIndex, paramsIndex = restart[2], index
+        local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
+        local listX = target.parent.parent.x + target.x + target.width / 2
+        local listY = target.parent.parent.y + target.y - target.height
+
+        EDITOR.group[9]:setIsLocked(true, 'vertical')
+        EDITOR.group[66]:setIsLocked(true, 'vertical')
+
+        LIST.new(PARAMS.getListButtons(type), listX, listY, 'down', function(e)
+            if e.index > 0 then
+                data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex][1] = {PARAMS.getListValue(type, e.text), 'sl'}
+                BLOCKS.group.blocks[blockIndex].data.params[paramsIndex][1] = {PARAMS.getListValue(type, e.text), 'sl'}
+                BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[blockIndex].data.params, paramsIndex)
+                SET_GAME_CODE(CURRENT_LINK, data)
+            end
+
+            table.remove(restart[3], M.find(restart[3]))
+            EDITOR.group:removeSelf() EDITOR.group = nil
+            EDITOR.create(unpack(restart))
+            EDITOR.group.isVisible = true
+        end)
+    elseif (type == 'var' or type == 'table' or type == 'fun') and ALERT then
+        local data = GET_GAME_CODE(CURRENT_LINK)
+        local blockIndex, paramsIndex = restart[2], index
+        local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
+
+        EDITOR.group[9]:setIsLocked(true, 'vertical')
+        EDITOR.group[66]:setIsLocked(true, 'vertical')
+
+        table.remove(restart[3], M.find(restart[3]))
+        LOGIC.new(type .. 's', blockIndex, paramsIndex, COPY_TABLE(paramsData), nil, restart)
     end
 end
 

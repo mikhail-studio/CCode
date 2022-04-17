@@ -84,6 +84,14 @@ M.create = function()
         orientation_icon_right:setFillColor(1)
     orientation_group:insert(orientation_icon_right)
 
+    if CENTER_X == 360 then
+        local splash = display.newImage('Sprites/splash.png', ZERO_X + 10, MAX_Y - 10)
+            splash.width = splash.width / 4
+            splash.height = splash.height / 4
+            splash.anchorX, splash.anchorY = 0, 1
+        M.group:insert(splash)
+    end
+
     lang_button:addEventListener('touch', function(e) LISTENER(e, 'lang') end)
     confirm_button:addEventListener('touch', function(e) LISTENER(e, 'confirm') end)
     show_ads_button:addEventListener('touch', function(e) LISTENER(e, 'show') end)

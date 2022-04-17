@@ -11,6 +11,7 @@ ADMOB = require 'plugin.admob'
 SVG = require 'plugin.nanosvg'
 UTF8 = require 'plugin.utf8'
 ZIP = require 'plugin.zip'
+PHYSICS = require 'physics'
 JSON = require 'json'
 LFS = require 'lfs'
 WIDGET = require 'widget'
@@ -33,7 +34,7 @@ if system.getInfo('deviceID') == '7274f48c57dc5cec' then
     display.safeActualContentHeight = display.actualContentHeight - 90
 end
 
-BUILD = 1147
+BUILD = 1148
 ALERT = true
 CENTER_Z = 0
 TOP_WIDTH = 0
@@ -231,7 +232,7 @@ end
 
 WIDGET.setTheme('widget_theme_android_holo_dark')
 display.setDefault('background', 0.15, 0.15, 0.17)
-display.setStatusBar(display.HiddenStatusBar)
+display.setStatusBar(display.HiddenStatusBar) math.randomseed(os.time())
 DEVELOPERS = JSON.decode(READ_FILE(system.pathForFile('Emitter/developers.json')))
 math.round = function(num) return tonumber(string.match(tostring(num), '(.*)%.')) or num end
 math.hex = function(hex) local r, g, b = hex:match('(..)(..)(..)') return {tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)} end

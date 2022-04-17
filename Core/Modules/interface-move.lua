@@ -75,9 +75,9 @@ M.upd = function(e, scroll, group, type)
 
                 if type == 'scripts' then table.insert(M.data.scripts, M.index, script) end
                 if type == 'images' then table.insert(M.data.resources.images, M.index, image) end
-                if type == 'sounds' then table.insert(M.data.resources.sounds, M.index, image) end
-                if type == 'videos' then table.insert(M.data.resources.videos, M.index, image) end
-                if type == 'fonts' then table.insert(M.data.resources.fonts, M.index, image) end
+                if type == 'sounds' then table.insert(M.data.resources.sounds, M.index, sound) end
+                if type == 'videos' then table.insert(M.data.resources.videos, M.index, video) end
+                if type == 'fonts' then table.insert(M.data.resources.fonts, M.index, font) end
                 table.insert(group.data, M.index, {x = x, y = group.data[M.index - 1].y + 150, text = text})
             end
         elseif group.data[M.index].y - e.target.y > 150 then
@@ -119,9 +119,9 @@ M.upd = function(e, scroll, group, type)
 
                 if type == 'scripts' then table.insert(M.data.scripts, M.index, script) end
                 if type == 'images' then table.insert(M.data.resources.images, M.index, image) end
-                if type == 'sounds' then table.insert(M.data.resources.sounds, M.index, image) end
-                if type == 'videos' then table.insert(M.data.resources.videos, M.index, image) end
-                if type == 'fonts' then table.insert(M.data.resources.fonts, M.index, image) end
+                if type == 'sounds' then table.insert(M.data.resources.sounds, M.index, sound) end
+                if type == 'videos' then table.insert(M.data.resources.videos, M.index, video) end
+                if type == 'fonts' then table.insert(M.data.resources.fonts, M.index, font) end
                 table.insert(group.data, M.index, {x = x, y = M.index == 1 and 75 or group.data[M.index - 1].y + 150, text = text})
             end
         end

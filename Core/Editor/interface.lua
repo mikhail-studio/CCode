@@ -112,7 +112,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
                     e.target.click = false
                     e.target:setFillColor(1)
                     e.target.alpha = 0.005
-                    LISTENER.rect(e.target.index, COPY_TABLE(M.restart), COPY_TABLE(M.data))
+                    LISTENER.rect(e.target, COPY_TABLE(M.restart), COPY_TABLE(M.data))
                 end
             end
 

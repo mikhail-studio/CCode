@@ -20,6 +20,8 @@ return function(params, default)
             if params[i][1] == 'unix_time' then result = result .. '()' end
         elseif params[i][2] == 'd' then
             result = result .. ' device[\'' .. params[i][1] .. '\']()'
+        elseif params[i][2] == 'sl' then
+            result = result .. ' select[\'' .. params[i][1] .. '\']()'
         elseif params[i][2] == 'm' then
             result = result .. ' math[\'' .. params[i][1] .. '\']'
         elseif params[i][2] == 'p' then

@@ -180,6 +180,10 @@ listeners.but_okay = function(target)
         end
 
         FONTS.group[8]:setScrollHeight(150 * #FONTS.group.data)
+
+        WINDOW.new(STR['fonts.needexit'], {STR['button.close'], STR['button.okay']}, function(e)
+            native.requestExit()
+        end, 3)
     elseif INDEX_LIST == 2 then
         for i = #FONTS.group.blocks, 1, -1 do
             FONTS.group.blocks[i].checkbox.isVisible = false

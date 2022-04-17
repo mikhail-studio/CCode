@@ -8,8 +8,8 @@ M.listType = {
     'control',
     'none',
     'none',
-    'none',
-    'none',
+    'physics',
+    'groups',
     'shapes',
     'none',
     'none',
@@ -79,6 +79,8 @@ M.listBlock = {
         'if',
         'foreverEnd',
         'forever',
+        'repeatEnd',
+        'repeat',
         'forEnd',
         'for',
         'requestApi',
@@ -91,6 +93,55 @@ M.listBlock = {
         'newRect',
         'setSprite',
         'setColor'
+    },
+
+    ['groups'] = {
+        'newGroup',
+        'removeGroup',
+        'showGroup',
+        'hideGroup',
+        'addObject',
+        'setGroupPos',
+        'setGroupPosX',
+        'setGroupPosY',
+        'setGroupAlpha',
+        'updGroupPosX',
+        'updGroupPosY',
+        'updGroupAlpha'
+    },
+
+    ['physics'] = {
+        'setBody',
+        'removeBody',
+        'setBodyType',
+        'setHitboxBox',
+        'setHitboxCircle',
+        'setHitboxMesh',
+        'setHitboxPolygon',
+        'updHitbox',
+        'setGravity',
+        'setLinearVelocity',
+        'setLinearVelocityX',
+        'setLinearVelocityY',
+        'setSensor',
+        'removeSensor',
+        'setFixedRotation',
+        'removeFixedRotation',
+        'setWorldGravity',
+        'setHitboxVisible',
+        'removeHitboxVisible',
+        'setBullet',
+        'removeBullet',
+        'setAwake',
+        'setAngularVelocity',
+        'setAngularDamping',
+        'setLinearDamping',
+        'setForce',
+        'setTorque',
+        'setLinearImpulse',
+        'setAngularImpulse',
+        'startPhysics',
+        'stopPhysics'
     }
 }
 
@@ -98,10 +149,10 @@ M.listName = {
     -- events
     ['onStart'] = {'events', 'text'},
         ['onFun'] = {'events', 'fun'},
-        ['onFunParams'] = {'events', 'fun', 'local'},
-        ['onTouchBegan'] = {'events', 'fun', 'local'},
-        ['onTouchEnded'] = {'events', 'fun', 'local'},
-        ['onTouchMoved'] = {'events', 'fun', 'local'},
+        ['onFunParams'] = {'events', 'fun', 'localtable'},
+        ['onTouchBegan'] = {'events', 'fun', 'localtable'},
+        ['onTouchEnded'] = {'events', 'fun', 'localtable'},
+        ['onTouchMoved'] = {'events', 'fun', 'localtable'},
 
     -- vars
     ['setVar'] = {'vars', 'var', 'value'},
@@ -153,7 +204,9 @@ M.listName = {
         ['ifEnd'] = {'control'},
         ['forever'] = {'control'},
         ['foreverEnd'] = {'control'},
-        ['for'] = {'control', 'value'},
+        ['repeat'] = {'control', 'value'},
+        ['repeatEnd'] = {'control'},
+        ['for'] = {'control', 'value', 'value', 'localvar', 'value'},
         ['forEnd'] = {'control'},
         ['requestExit'] = {'control'},
 
@@ -162,13 +215,61 @@ M.listName = {
         ['newRoundedRect'] = {'shapes', 'value', 'value', 'value', 'value', 'value', 'value'},
         ['newCircle'] = {'shapes', 'value', 'value', 'value', 'value'},
         ['setSprite'] = {'shapes', 'value', 'value'},
-        ['setColor'] = {'shapes', 'value', 'color'}
+        ['setColor'] = {'shapes', 'value', 'color'},
+
+    -- groups
+    ['newGroup'] = {'groups', 'value'},
+        ['removeGroup'] = {'groups', 'value'},
+        ['showGroup'] = {'groups', 'value'},
+        ['hideGroup'] = {'groups', 'value'},
+        ['addObject'] = {'groups', 'value', 'value'},
+        ['setGroupPos'] = {'groups', 'value', 'value', 'value'},
+        ['setGroupPosX'] = {'groups', 'value', 'value'},
+        ['setGroupPosY'] = {'groups', 'value', 'value'},
+        ['setGroupAlpha'] = {'groups', 'value', 'value'},
+        ['updGroupPosX'] = {'groups', 'value', 'value'},
+        ['updGroupPosY'] = {'groups', 'value', 'value'},
+        ['updGroupAlpha'] = {'groups', 'value', 'value'},
+
+    -- physics
+    ['setBody'] = {'physics', 'value', 'body', 'value', 'value', 'value', 'value'},
+        ['removeBody'] = {'physics', 'value'},
+        ['setBodyType'] = {'physics', 'value', 'body'},
+        ['setHitboxBox'] = {'physics', 'value', 'value', 'value', 'value', 'value', 'value'},
+        ['setHitboxCircle'] = {'physics', 'value', 'value'},
+        ['setHitboxMesh'] = {'physics', 'value', 'value'},
+        ['setHitboxPolygon'] = {'physics', 'value', 'value'},
+        ['updHitbox'] = {'physics', 'value'},
+        ['setGravity'] = {'physics', 'value', 'value'},
+        ['setLinearVelocity'] = {'physics', 'value', 'value', 'value'},
+        ['setLinearVelocityX'] = {'physics', 'value', 'value'},
+        ['setLinearVelocityY'] = {'physics', 'value', 'value'},
+        ['setSensor'] = {'physics', 'value'},
+        ['removeSensor'] = {'physics', 'value'},
+        ['setFixedRotation'] = {'physics', 'value'},
+        ['removeFixedRotation'] = {'physics', 'value'},
+        ['setWorldGravity'] = {'physics', 'value', 'value'},
+        ['setHitboxVisible'] = {'physics'},
+        ['removeHitboxVisible'] = {'physics'},
+        ['setBullet'] = {'physics', 'value'},
+        ['removeBullet'] = {'physics', 'value'},
+        ['setAwake'] = {'physics', 'value'},
+        ['setAngularVelocity'] = {'physics', 'value', 'value'},
+        ['setAngularDamping'] = {'physics', 'value', 'value'},
+        ['setLinearDamping'] = {'physics', 'value', 'value'},
+        ['setForce'] = {'physics', 'value', 'value', 'value', 'value', 'value'},
+        ['setTorque'] = {'physics', 'value', 'value'},
+        ['setLinearImpulse'] = {'physics', 'value', 'value', 'value', 'value', 'value'},
+        ['setAngularImpulse'] = {'physics', 'value', 'value'},
+        ['startPhysics'] = {'physics'},
+        ['stopPhysics'] = {'physics'}
 }
 
 M.listNested = {
     ['forever'] = {'foreverEnd'},
     ['timer'] = {'timerEnd'},
     ['if'] = {'ifEnd'},
+    ['repeat'] = {'repeatEnd'},
     ['for'] = {'forEnd'}
 }
 
@@ -202,6 +303,10 @@ M.getBlockColor = function(name, comment, type)
         return 0.41, 0.68, 0.3
     elseif type == 'shapes' then
         return 0.16, 0.66, 0.45
+    elseif type == 'groups' then
+        return 0.73, 0.4, 0.28
+    elseif type == 'physics' then
+        return 0.49, 0.2, 0.75
     elseif type == 'control' then
         return 0.6, 0.55, 0.4
     elseif type == 'everyone' then

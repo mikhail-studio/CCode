@@ -3,21 +3,25 @@ local EVENTS = require 'Core.Simulation.events'
 local M = {}
 
 local function getStartLua()
-    local funs = ' local fun, device = require \'Core.Functions.fun\', require \'Core.Functions.device\''
-    local code = ' GAME.orientation = CURRENT_ORIENTATION display.setDefault(\'background\', 0)'
+    local funs3 = ' local math, prop = require \'Core.Functions.math\', require \'Core.Functions.prop\''
+    local funs1 = ' local fun, device = require \'Core.Functions.fun\', require \'Core.Functions.device\''
+    local funs2 = ' local other, select = require \'Core.Functions.other\', require \'Core.Functions.select\''
+    local code1 = ' GAME.orientation = CURRENT_ORIENTATION display.setDefault(\'background\', 0)'
     local code2 = ' GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {}'
-    local code3 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640}'
-    local code4 = ' GAME.group.const.touch_fun = function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
-    local code5 = ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y return true end'
-    local code6 = ' Runtime:addEventListener(\'touch\', GAME.group.const.touch_fun)'
-    return 'local varsP, tablesP, funsP = {}, {}, {}' .. funs .. code .. code2 .. code3 .. code4 .. code5 .. code6
+    local code3 = ' GAME.group.groups = {}'
+    local code4 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} device.start()'
+    local code5 = ' GAME.group.const.touch_fun = function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
+    local code6 = ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y return true end'
+    local code7 = ' Runtime:addEventListener(\'touch\', GAME.group.const.touch_fun) PHYSICS.start()'
+    return 'local varsP, tablesP, funsP = {}, {}, {}' .. funs1 .. funs2 .. funs3 .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7
 end
 
 M.remove = function()
     display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll()
     pcall(function() Runtime:removeEventListener('touch', M.group.const.touch_fun) end)
     pcall(function() MAIN:removeSelf() MAIN = display.newGroup() end)
-    pcall(function() M.group:removeSelf() M.group = nil end)
+    PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop()
+    pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil
     if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true}) end
 end
 
@@ -26,6 +30,7 @@ M.new = function(linkBuild)
     M.group = display.newGroup()
     M.orientation = CURRENT_ORIENTATION
     M.data = GET_GAME_CODE(linkBuild or CURRENT_LINK)
+    M.lua = M.lua .. ' GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'
     display.setDefault('background', 0)
 
     if M.data.settings.orientation == 'portrait' and CURRENT_ORIENTATION ~= 'portrait' then
@@ -85,7 +90,7 @@ M.new = function(linkBuild)
             for j = i, #nestedEvent do
                 local isFunBlock = dataEvent[j].name == 'onFun' or dataEvent[j].name == 'onFunParams'
                 or dataEvent[j].name == 'onTouchBegan' or dataEvent[j].name == 'onTouchEnded' or dataEvent[j].name == 'onTouchMoved'
-                local isFunProject = dataEvent[i].params[1][1] and dataEvent[i].params[1][1][2] == 'fP'
+                local isFunProject = dataEvent[j].params[1][1] and dataEvent[j].params[1][1][2] == 'fP'
                 local isFunScript = dataEvent[j].params[1][1] and dataEvent[j].params[1][1][2] == 'fS'
 
                 if nestedScript[dataEvent[j].script] and not dataEvent[j].comment and isFunBlock and (isFunScript or isFunProject) then

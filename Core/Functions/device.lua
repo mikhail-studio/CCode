@@ -13,11 +13,11 @@ M['height_screen'] = function()
 end
 
 M['top_point_screen'] = function()
-    return CENTER_Y * 2 - DISPLAY_HEIGHT / 2
+    return DISPLAY_HEIGHT / 2
 end
 
 M['bottom_point_screen'] = function()
-    return CENTER_Y * 2 + DISPLAY_HEIGHT / 2
+    return -DISPLAY_HEIGHT / 2
 end
 
 M['right_point_screen'] = function()
@@ -46,6 +46,15 @@ end
 
 M['finger_touching_screen_y'] = function()
     return CENTER_Y - GAME.group.const.touch_y
+end
+
+M['fps'] = function()
+    return M.FPS
+end
+
+M.start = function()
+    M.FPS, M._FPS = 60, 0 timer.performWithDelay(0, function() M._FPS = M._FPS + 1 end, 0)
+    timer.performWithDelay(1000, function() M.FPS, M._FPS = M._FPS > 60 and 60 or M._FPS, 0 end, 0)
 end
 
 return M

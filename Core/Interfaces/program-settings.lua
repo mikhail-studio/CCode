@@ -82,20 +82,24 @@ listeners.icon = function(target)
     local completeImportPicture = function(import)
         if import.done and import.done == 'ok' then
             local container = target.parent target:removeSelf()
-            local icon = display.newImage(CURRENT_LINK .. '/icon.png', system.DocumentsDirectory)
-                local diffSize = icon.height / icon.width
-                if icon.height > icon.width then
-                    icon.height = 90
-                    icon.width = 90 / diffSize
-                else
-                    icon.width = 90
-                    icon.height = 90 * diffSize
-                end
-            container:insert(icon, true)
-            PROGRAMS.group:removeSelf()
-            PROGRAMS.group = nil
-            PROGRAMS.create()
-            PROGRAMS.group.isVisible = false
+
+            timer.performWithDelay(1, function()
+                local icon = display.newImage(CURRENT_LINK .. '/icon.png', system.DocumentsDirectory)
+                    local diffSize = icon.height / icon.width
+                    if icon.height > icon.width then
+                        icon.height = 90
+                        icon.width = 90 / diffSize
+                    else
+                        icon.width = 90
+                        icon.height = 90 * diffSize
+                    end
+                container:insert(icon, true)
+
+                PROGRAMS.group:removeSelf()
+                PROGRAMS.group = nil
+                PROGRAMS.create()
+                PROGRAMS.group.isVisible = false
+            end)
         end
     end
 

@@ -34,7 +34,7 @@ return {
             zipFile = 'game.cc', srcFiles = list_in,
             zipBaseDir = system.DocumentsDirectory,
             srcBaseDir = system.DocumentsDirectory,
-            password = CRYPTO.hmac(CRYPTO.md5, 'cc.ode_?', '?.cc_ode') .. CRYPTO.digest(CRYPTO.md5, '_c.?code'),
+            password = 'cc.ode_?-?.cc_ode', -- CRYPTO.hmac(CRYPTO.md5, 'cc.ode_?', '?.cc_ode') .. CRYPTO.digest(CRYPTO.md5, '_c.?code'),
             listener = function(event)
                 if not event.isError then
                     OS_REMOVE(DOC_DIR .. '/game.lua')

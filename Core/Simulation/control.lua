@@ -19,7 +19,11 @@ M['requestFun'] = function(params)
 end
 
 M['requestExit'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() native.requestExit() end)'
+    if CURRENT_LINK ~= 'App' then
+        GAME.lua = GAME.lua .. ' pcall(function() EXITS.game() end)'
+    else
+        GAME.lua = GAME.lua .. ' pcall(function() native.requestExit() end)'
+    end
 end
 
 M['requestFunParams'] = function(params)
@@ -33,41 +37,43 @@ end
 
 M['setListener'] = function(params)
     local nameObj = CALC(params[1])
-    local nameFun = params[2][1][1]
-    local typeFun = params[2][1][2] == 'fS' and 'funsS' or 'funsP'
+    local nameFun = params[2][1] and params[2][1][1] or ''
+    local typeFun = (params[2][1] and params[2][1][2]) == 'fS' and 'funsS' or 'funsP'
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. nameObj .. ']:addEventListener(\'touch\', '
-    GAME.lua = GAME.lua .. ' function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
-    GAME.lua = GAME.lua .. ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y '
-    GAME.lua = GAME.lua .. typeFun .. '[\'' .. nameFun .. '\'](e) end) end)'
+    GAME.lua = GAME.lua .. ' function(e) local r1, r2 = pcall(function() GAME.group.const.touch = e.phase ~= \'ended\' and'
+    GAME.lua = GAME.lua .. ' e.phase ~= \'cancelled\' GAME.group.const.touch_x, GAME.group.const.touch_y, e.target._touch = e.x, e.y,'
+    GAME.lua = GAME.lua .. ' GAME.group.const.touch ' .. typeFun .. '[\'' .. nameFun .. '\'](e) end) return r2 end) end)'
 end
 
 M['setListener2'] = function(params)
     local nameObj = CALC(params[1])
-    local nameFun = params[2][1][1]
-    local typeFun = params[2][1][2] == 'fS' and 'funsS' or 'funsP'
-    local nameFun2 = params[3][1][1]
-    local typeFun2 = params[3][1][2] == 'fS' and 'funsS' or 'funsP'
+    local nameFun = params[2][1] and params[2][1][1] or ''
+    local typeFun = (params[2][1] and params[2][1][2]) == 'fS' and 'funsS' or 'funsP'
+    local nameFun2 = params[3][1] and params[3][1][1] or ''
+    local typeFun2 = (params[3][1] and params[3][1][2]) == 'fS' and 'funsS' or 'funsP'
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. nameObj .. ']:addEventListener(\'touch\', '
-    GAME.lua = GAME.lua .. ' function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
-    GAME.lua = GAME.lua .. ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y '
-    GAME.lua = GAME.lua .. typeFun .. '[\'' .. nameFun .. '\'](e) ' .. typeFun2 .. '[\'' .. nameFun2 .. '\'](e) end) end)'
+    GAME.lua = GAME.lua .. ' function(e) local r1, r2 = pcall(function() GAME.group.const.touch = e.phase ~= \'ended\' and'
+    GAME.lua = GAME.lua .. ' e.phase ~= \'cancelled\' GAME.group.const.touch_x, GAME.group.const.touch_y, e.target._touch = e.x, e.y,'
+    GAME.lua = GAME.lua .. ' GAME.group.const.touch ' .. typeFun .. '[\'' .. nameFun .. '\'](e) '
+    GAME.lua = GAME.lua .. typeFun2 .. '[\'' .. nameFun2 .. '\'](e) end) return r2 end) end)'
 end
 
 M['setListener3'] = function(params)
     local nameObj = CALC(params[1])
-    local nameFun = params[2][1][1]
-    local typeFun = params[2][1][2] == 'fS' and 'funsS' or 'funsP'
-    local nameFun2 = params[3][1][1]
-    local typeFun2 = params[3][1][2] == 'fS' and 'funsS' or 'funsP'
-    local nameFun3 = params[4][1][1]
-    local typeFun3 = params[4][1][2] == 'fS' and 'funsS' or 'funsP'
+    local nameFun = params[2][1] and params[2][1][1] or ''
+    local typeFun = (params[2][1] and params[2][1][2]) == 'fS' and 'funsS' or 'funsP'
+    local nameFun2 = params[3][1] and params[3][1][1] or ''
+    local typeFun2 = (params[3][1] and params[3][1][2]) == 'fS' and 'funsS' or 'funsP'
+    local nameFun3 = params[4][1] and params[4][1][1] or ''
+    local typeFun3 = (params[4][1] and params[4][1][2]) == 'fS' and 'funsS' or 'funsP'
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. nameObj .. ']:addEventListener(\'touch\', '
-    GAME.lua = GAME.lua .. ' function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
-    GAME.lua = GAME.lua .. ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y ' .. typeFun .. '[\'' .. nameFun .. '\'](e) '
-    GAME.lua = GAME.lua .. typeFun2 .. '[\'' .. nameFun2 .. '\'](e) ' .. typeFun3 .. '[\'' .. nameFun3 .. '\'](e) end) end)'
+    GAME.lua = GAME.lua .. ' function(e) local r1, r2 = pcall(function() GAME.group.const.touch = e.phase ~= \'ended\' and'
+    GAME.lua = GAME.lua .. ' e.phase ~= \'cancelled\' GAME.group.const.touch_x, GAME.group.const.touch_y, e.target._touch = e.x, e.y,'
+    GAME.lua = GAME.lua .. ' GAME.group.const.touch ' .. typeFun .. '[\'' .. nameFun .. '\'](e) '
+    GAME.lua = GAME.lua .. typeFun2 .. '[\'' .. nameFun2 .. '\'](e) ' .. typeFun3 .. '[\'' .. nameFun3 .. '\'](e) end) return r2 end) end)'
 end
 
 M['timer'] = function(params)
@@ -95,10 +101,21 @@ M['foreverEnd'] = function(params)
 end
 
 M['for'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() for i = 1, ' .. CALC(params[1]) .. ' do'
+    local type = (params[3][1] and params[3][1][2]) == 'vE' and 'varsE' or (params[3][1] and params[3][1][2]) == 'vS' and 'varsS' or 'varsP'
+    local name, from, to, step = params[3][1] and params[3][1][1] or '', CALC(params[1]), CALC(params[2]), CALC(params[4], '1')
+
+    GAME.lua = GAME.lua .. ' pcall(function() for i = ' .. from .. ', ' .. to .. ', ' .. step .. ' do ' .. type .. '[\'' .. name .. '\'] = i'
 end
 
 M['forEnd'] = function(params)
+    GAME.lua = GAME.lua .. ' end end)'
+end
+
+M['repeat'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() for i = 1, ' .. CALC(params[1]) .. ' do'
+end
+
+M['repeatEnd'] = function(params)
     GAME.lua = GAME.lua .. ' end end)'
 end
 

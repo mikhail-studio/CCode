@@ -5,6 +5,8 @@ M.CONTROL = require 'Core.Simulation.control'
 M.VARS = require 'Core.Simulation.vars'
 M.OBJECTS = require 'Core.Simulation.objects'
 M.SHAPES = require 'Core.Simulation.shapes'
+M.GROUPS = require 'Core.Simulation.groups'
+M.PHYSICS = require 'Core.Simulation.physics'
 
 M.requestNestedBlock = function(nested, params)
     for i = 1, #nested do
@@ -18,7 +20,7 @@ end
 M['onStart'] = function(nested, params)
     GAME.lua = GAME.lua .. ' pcall(function() local function event() local varsE, tablesE = {}, {}'
     M.requestNestedBlock(nested, params) GAME.lua = GAME.lua .. ' end event() end)'
-end 
+end
 
 M['onFun'] = function(nested, params)
     local name = params[1][1][1]

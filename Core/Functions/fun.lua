@@ -22,8 +22,8 @@ M['tonumber'] = function(str)
     return tonumber(str) or 0
 end
 
-M['tostring'] = function(num)
-    return tostring(num)
+M['tostring'] = function(any)
+    return tostring(any)
 end
 
 M['encode'] = function(t, prettify)

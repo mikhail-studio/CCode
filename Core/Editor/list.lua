@@ -58,9 +58,18 @@ local function getId(y)
     return (y - 35) / 70 + 1
 end
 
-local getFontSize getFontSize = function(width, text, size)
+local getFontSize getFontSize = function(width, text, size, isData)
     local checkText = display.newText(text, 0, 5000, 'ubuntu', size)
-    if checkText.width > width - 30 then checkText:removeSelf() return getFontSize(width, text, size - 1) else checkText:removeSelf() return size end
+
+    if isData then
+        return 26
+    elseif checkText.width > width - 30 then
+        checkText:removeSelf()
+        return getFontSize(width, text, size - 1)
+    else
+        checkText:removeSelf()
+        return size
+    end
 end
 
 listeners.set = function(target, buttons, isData, isList)
@@ -90,7 +99,7 @@ listeners.set = function(target, buttons, isData, isList)
                     end listScroll.buttons[i].count = 0
                 listScroll:insert(listScroll.buttons[i])
 
-                listScroll.buttons[i].text = display.newText(text, 20, listButtonsY, 'ubuntu', getFontSize(listScroll.width, text, 28))
+                listScroll.buttons[i].text = display.newText(text, 20, listButtonsY, 'ubuntu', getFontSize(listScroll.width, text, 24, isData))
                     if isData then
                         listScroll.buttons[i].text.id = getId(target.y) == 1
                         and (j == 1 and 'event' or j == 2 and 'script' or 'project')
