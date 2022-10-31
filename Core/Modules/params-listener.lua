@@ -6,12 +6,16 @@ local M = {}
 M.getListButtons = function(type)
     if type == 'body' then
         return {STR['blocks.select.dynamic'], STR['blocks.select.static']}
+    elseif type == 'animation' then
+        return {STR['blocks.select.forward'], STR['blocks.select.bounce']}
     end
 end
 
 M.getListValue = function(type, text)
     if type == 'body' then
         return text == STR['blocks.select.dynamic'] and 'dynamic' or 'static'
+    elseif type == 'animation' then
+        return text == STR['blocks.select.forward'] and 'forward' or 'bounce'
     end
 end
 
@@ -44,7 +48,7 @@ M.open = function(target)
             end BLOCKS.group[8]:setIsLocked(false, 'vertical')
         end, (paramsData[1] and paramsData[1][1]) and paramsData[1][1] or '') native.setKeyboardFocus(INPUT.box)
     elseif type == 'value' and ALERT then
-        if CENTER_X == 640 and system.getInfo 'environment' ~= 'simulator' then ADMOB.hide() end
+        -- if CENTER_X == 640 and system.getInfo 'environment' ~= 'simulator' then ADMOB.hide() end
         EDITOR = require 'Core.Editor.interface'
         EDITOR.create(blockName, blockIndex, paramsData, paramsIndex)
     elseif type == 'var' and ALERT then
@@ -72,7 +76,7 @@ M.open = function(target)
                 SET_GAME_CODE(CURRENT_LINK, data)
             end BLOCKS.group[8]:setIsLocked(false, 'vertical')
         end)
-    elseif type == 'body' then
+    elseif type == 'body' or type == 'animation' then
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
         LIST.new(M.getListButtons(type), listX, listY, listDirection, function(e)
             if e.index > 0 then

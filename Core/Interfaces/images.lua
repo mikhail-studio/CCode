@@ -3,6 +3,10 @@ local LIST = require 'Core.Modules.interface-list'
 local MOVE = require 'Core.Modules.interface-move'
 local FILTER = require 'Core.Modules.name-filter'
 
+listeners.but_title = function(target)
+    EXITS.images()
+end
+
 listeners.but_add = function(target)
     IMAGES.group[8]:setIsLocked(true, 'vertical')
     if IMAGES.group.isVisible then
@@ -53,7 +57,7 @@ listeners.but_add = function(target)
 end
 
 listeners.but_play = function(target)
-    if system.getInfo 'environment' ~= 'simulator' then ADMOB.hide() end
+    -- if system.getInfo 'environment' ~= 'simulator' then ADMOB.hide() end
     GAME_GROUP_OPEN = IMAGES
     IMAGES.group.isVisible = false
     GAME = require 'Core.Simulation.start'
@@ -97,14 +101,7 @@ listeners.but_list = function(target)
                 IMAGES.group[8]:setIsLocked(true, 'vertical')
                 INPUT.new(STR['images.entername'], function(event)
                     if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
-                        FILTER.check(event.target.text, function(ev)
-                            if ev.isError then
-                                INPUT.remove(false)
-                                WINDOW.new(STR['errors.' .. ev.typeError], {STR['button.close'], STR['button.okay']}, function() end, 5)
-                            else
-                                INPUT.remove(true, ev.text)
-                            end
-                        end, IMAGES.group.blocks)
+                        INPUT.remove(true, event.target.text)
                     end
                 end, function(e)
                     IMAGES.group[8]:setIsLocked(false, 'vertical')
@@ -218,19 +215,23 @@ return function(e)
             display.getCurrentStage():setFocus(e.target)
             e.target.click = true
             if e.target.button == 'but_list'
-            then e.target.width, e.target.height = 52, 52
+                then e.target.width, e.target.height = 52, 52
             else e.target.alpha = 0.6 end
         elseif e.phase == 'moved' and (math.abs(e.x - e.xStart) > 30 or math.abs(e.y - e.yStart) > 30) then
             e.target.click = false
             if e.target.button == 'but_list'
-            then e.target.width, e.target.height = 60, 60
+                then e.target.width, e.target.height = 60, 60
+            elseif e.target.button == 'but_title'
+                then e.target.alpha = 1
             else e.target.alpha = 0.9 end
         elseif e.phase == 'ended' or e.phase == 'cancelled' then
             display.getCurrentStage():setFocus(nil)
             if e.target.click then
                 e.target.click = false
                 if e.target.button == 'but_list'
-                then e.target.width, e.target.height = 60, 60
+                    then e.target.width, e.target.height = 60, 60
+                elseif e.target.button == 'but_title'
+                    then e.target.alpha = 1
                 else e.target.alpha = 0.9 end
                 listeners[e.target.button](e.target)
             end

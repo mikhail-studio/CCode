@@ -61,23 +61,23 @@ listeners.blocks = function()
 end
 
 listeners.new_block = function()
-    NEW_BLOCK.group:removeSelf()
-    NEW_BLOCK.group = nil
+    NEW_BLOCK.group.isVisible = false
+    NEW_BLOCK.group[4].isVisible = false
     BLOCKS.group.isVisible = true
-    if LOCAL.show_ads then ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'}) end
+    -- if LOCAL.show_ads then ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'}) end
 end
 
 listeners.editor = function()
     EDITOR.group:removeSelf()
     EDITOR.group = nil
     BLOCKS.group.isVisible = true
-    if LOCAL.show_ads then ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'}) end
+    -- if LOCAL.show_ads then ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'}) end
 end
 
 listeners.game = function()
     GAME.remove()
     GAME_GROUP_OPEN.group.isVisible = true
-    if LOCAL.show_ads then ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'}) end
+    -- if LOCAL.show_ads then ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'}) end
 end
 
 listeners.add = function(listener, arg)

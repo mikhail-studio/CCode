@@ -18,12 +18,26 @@ M['random_str'] = function(...)
     end
 end
 
+M['concat'] = function(...)
+    local args, str = {...}, ''
+
+    for i = 1, #args do
+        str = str .. args[i]
+    end
+
+    return str
+end
+
 M['tonumber'] = function(str)
     return tonumber(str) or 0
 end
 
 M['tostring'] = function(any)
     return tostring(any)
+end
+
+M['totable'] = function(str)
+    return JSON.decode(str)
 end
 
 M['encode'] = function(t, prettify)

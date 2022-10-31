@@ -61,13 +61,16 @@ M.getParamsValueText = function(params, i)
     local lastFun = false
 
     if params[i] then
-        for _, value in ipairs(params[i]) do
+        for _, value in pairs(params[i]) do
             if value[2] == 't' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
                 result = result .. '\'' .. UTF8.gsub(value[1], '\n', '\\n') .. '\''
-            elseif value[2] == 'n' or value[2] == 'u' or value[2] == 'c' or value[2] == 'fP' or value[2] == 'fS' then
+            elseif value[2] == 'n' or value[2] == 'u' or value[2] == 'c' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
                 result = result .. value[1]
+            elseif value[2] == 'fP' or value[2] == 'fS' then
+                if UTF8.len(result) > 0 then result = result .. ' ' end
+                result = result .. '$' .. value[1]
             elseif value[2] == 'tP' or value[2] == 'tS' or value[2] == 'tE' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
                 result = result .. '{' .. value[1] .. '}'
@@ -143,9 +146,10 @@ end
 M.new = function(name, scroll, group, index, event, params, comment, nested, vars, tables)
     local blockHeight, blockWidth, blockParams, lengthParams = 116, DISPLAY_WIDTH - BOTTOM_WIDTH - TOP_WIDTH - 60, {}, #INFO.listName[name] - 1
     if not event then blockHeight = lengthParams < 3 and 116 or (lengthParams < 5 and 176 or (lengthParams < 7 and 236 or (lengthParams < 9 and 296 or 356))) end
+    if blockWidth / 116 > 15 then blockWidth = 116 * 15 end
     blockParams = M.getPolygonParams(event, blockWidth, event and 102 or blockHeight)
 
-    local y = index == 1 and 50 or group.blocks[index - 1].y + group.blocks[index - 1].block.height / 2 + blockHeight / 2 - 2
+    local y = index == 1 and 50 or group.blocks[index - 1].y + group.blocks[index - 1].block.height / 2 + (blockHeight + 4) / 2 - 4
     if event then y = y + 24 end table.insert(group.blocks, index, display.newGroup())
 
     group.blocks[index].data = {event = event, comment = comment, name = name, params = params, nested = nested, vars = vars, tables = tables}
@@ -194,7 +198,7 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
     for i = 1, lengthParams do
         local textGetHeight = display.newText({
             text = STR['blocks.' .. name .. '.params'][i], align = 'left',
-            fontSize = 22, x = 0, y = 5000, font = 'ubuntu', width = 140
+            fontSize = 22, x = 0, y = 5000, font = 'ubuntu', width = 142
         }) if textGetHeight.height > 53 then textGetHeight.height = 53 end
 
         local nameY = M.getParamsNameY(lengthParams)[i]
@@ -203,7 +207,7 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
         group.blocks[index].params[i] = {}
         group.blocks[index].params[i].name = display.newText({
                 text = STR['blocks.' .. name .. '.params'][i], align = 'left', height = textGetHeight.height, fontSize = 22,
-                x = M.getParamsNameX(lengthParams, width)[i], y = nameY, font = 'ubuntu', width = 140
+                x = M.getParamsNameX(lengthParams, width)[i], y = nameY, font = 'ubuntu', width = 142
             }) textGetHeight:removeSelf()
         group.blocks[index]:insert(group.blocks[index].params[i].name)
 
@@ -260,7 +264,7 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
     end
 
     scroll:insert(group.blocks[index])
-    scroll:setScrollHeight(group.scrollHeight)
+    scroll:setScrollHeight(GET_SCROLL_HEIGHT(group))
 end
 
 return M

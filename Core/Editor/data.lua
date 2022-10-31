@@ -3,7 +3,7 @@ local M = {}
 M.fun = {
     names = {},
     keys = {
-        'get_text', 'random_str', 'tonumber', 'tostring', 'totable', 'unix_time',
+        'get_text', 'random_str', 'concat', 'tonumber', 'tostring', 'totable', 'unix_time',
         'encode', 'gsub', 'sub', 'len', 'find', 'color_pixel', 'read_save', 'match'
     }
 }
@@ -12,7 +12,8 @@ M.math = {
     names = {},
     keys = {
         'random', 'radical', 'power', 'round', 'remainder',
-        'module', 'max', 'min', 'sin', 'cos', 'tan', 'ctan', 'pi'
+        'module', 'max', 'min', 'sin', 'cos', 'tan', 'ctan', 'pi',
+        'factorial', 'log', 'log10', 'asin', 'acos', 'atan', 'atan2'
     }
 }
 
@@ -38,7 +39,7 @@ M.device = {
 }
 
 M.set = function(key, name)
-    if (key == 'f' or key == 'm' or key == 'p'
+    if (key == 'fS' or key == 'fP' or key == 'f' or key == 'm' or key == 'p'
     --[[or name == 'finger_touching_screen_x' or name == 'finger_touching_screen_y']]) and name ~= 'unix_time' and name ~= 'pi' then
         EDITOR.cursor[1] = EDITOR.cursor[1] + 1
         table.remove(EDITOR.data, EDITOR.cursor[1] - 1)
@@ -49,7 +50,8 @@ M.set = function(key, name)
         if name == 'gsub' or name == 'sub' then
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
-        elseif name == 'find' or name == 'match' or name == 'color_pixel' then
+        elseif name == 'find' or name == 'match' or name == 'color_pixel' or name == 'random'
+        or name == 'power' or name == 'remainder' or name == 'atan2' then
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
         end
     end

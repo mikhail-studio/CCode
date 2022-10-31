@@ -42,16 +42,18 @@ local listener = function(e, scroll, group, type)
 
             if not e.target.checkbox.isVisible then
                 if type == 'programs' and ALERT then
-                    group.isVisible = false
-                    PROGRAM = require 'Interfaces.program'
-                    PROGRAM.create(e.target.text.text)
-                    PROGRAM.group.isVisible = true
+                    if tonumber(GET_GAME_CODE(e.target.link).build) > 1160 then 
+                        group.isVisible = false
+                        PROGRAM = require 'Interfaces.program'
+                        PROGRAM.create(e.target.text.text)
+                        PROGRAM.group.isVisible = true
 
-                    CURRENT_LINK = e.target.link
-                    LOCAL.last = e.target.text.text
-                    LOCAL.last_link = CURRENT_LINK
-                    MENU.group[9].text = LOCAL.last
-                    NEW_DATA()
+                        CURRENT_LINK = e.target.link
+                        LOCAL.last = e.target.text.text
+                        LOCAL.last_link = CURRENT_LINK
+                        MENU.group[9].text = LOCAL.last
+                        NEW_DATA()
+                    end
                 elseif type == 'program' and ALERT then
                     if e.target.text.text == STR['program.scripts'] then
                         group.isVisible = false
@@ -352,9 +354,11 @@ M.new = function(text, scroll, group, type, index, filter, link)
         })
     scroll:insert(group.blocks[index].text)
 
-    group.blocks[index].container = display.newContainer(100, 100)
-        group.blocks[index].container:translate(scroll.width / 2 - group.blocks[index].width / 2 + 15, y)
-        group.blocks[index].container.anchorX = 0
+    group.blocks[index].container = display.newContainer(94, 94)
+        group.blocks[index].container:translate(scroll.width / 2 - group.blocks[index].width / 2 + 62, y)
+        group.blocks[index].container:setMask(MASK)
+        group.blocks[index].container.maskScaleX = 0.094
+        group.blocks[index].container.maskScaleY = 0.094
     scroll:insert(group.blocks[index].container)
 
     if link then
@@ -377,18 +381,18 @@ M.new = function(text, scroll, group, type, index, filter, link)
         group.blocks[index].icon = display.newImage(path, system.DocumentsDirectory)
             local diffSize = group.blocks[index].icon.height / group.blocks[index].icon.width
             if group.blocks[index].icon.height > group.blocks[index].icon.width then
-                group.blocks[index].icon.height = 90
-                group.blocks[index].icon.width = 90 / diffSize
+                group.blocks[index].icon.height = 94 * diffSize
+                group.blocks[index].icon.width = 94
             else
-                group.blocks[index].icon.width = 90
-                group.blocks[index].icon.height = 90 * diffSize
+                group.blocks[index].icon.width = 94 / diffSize
+                group.blocks[index].icon.height = 94
             end
         group.blocks[index].container:insert(group.blocks[index].icon, true)
 
         display.setDefault('magTextureFilter', 'linear')
         display.setDefault('minTextureFilter', 'linear')
     else
-        group.blocks[index].icon = display.newRoundedRect(group.blocks[index].container.x, y, 100, 100, 25)
+        group.blocks[index].icon = display.newRect(group.blocks[index].container.x, y, 94, 94)
             group.blocks[index].icon:setFillColor(0.15, 0.15, 0.17)
         group.blocks[index].container:insert(group.blocks[index].icon, true)
     end

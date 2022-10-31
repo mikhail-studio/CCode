@@ -18,21 +18,23 @@ M['requestFun'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() ' .. type .. '[\'' .. name .. '\']() end)'
 end
 
+M['returnValue'] = function(params)
+    GAME.lua = GAME.lua .. ' return (' .. CALC(params[1]) .. ')'
+end
+
 M['requestExit'] = function(params)
     if CURRENT_LINK ~= 'App' then
-        GAME.lua = GAME.lua .. ' pcall(function() EXITS.game() end)'
+        GAME.lua = GAME.lua .. ' pcall(function() EXITS.game() end) if coroutine.status(GAME.CO) == \'running\' then coroutine.yield() end'
     else
         GAME.lua = GAME.lua .. ' pcall(function() native.requestExit() end)'
     end
 end
 
 M['requestFunParams'] = function(params)
-    local nameFun = params[1][1][1]
-    local nameTable = params[2][1][1]
+    local nameFun, value = params[1][1][1], CALC(params[2])
     local typeFun = params[1][1][2] == 'fS' and 'funsS' or 'funsP'
-    local typeTable = params[2][1][2] == 'tE' and 'tablesE' or params[2][1][2] == 'tS' and 'tablesS' or 'tablesP'
 
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. typeFun .. '[\'' .. nameFun .. '\'](' .. typeTable .. '[\'' .. nameTable .. '\']) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. typeFun .. '[\'' .. nameFun .. '\'](' .. value .. ') end)'
 end
 
 M['setListener'] = function(params)
@@ -77,7 +79,7 @@ M['setListener3'] = function(params)
 end
 
 M['timer'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() timer.new((' .. CALC(params[1], '0') .. ' * 1000), ' .. CALC(params[2], '1') .. ', function()'
+    GAME.lua = GAME.lua .. ' pcall(function() timer.new((' .. CALC(params[1], '0') .. ') * 1000, ' .. CALC(params[2], '1') .. ', function()'
 end
 
 M['timerEnd'] = function(params)
@@ -88,16 +90,20 @@ M['if'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() if (' .. CALC(params[1]) .. ') then'
 end
 
+M['ifElse'] = function(params)
+    GAME.lua = GAME.lua .. ' elseif (' .. CALC(params[1]) .. ') then'
+end
+
 M['ifEnd'] = function(params)
     GAME.lua = GAME.lua .. ' end end)'
 end
 
 M['forever'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() timer.performWithDelay(0, function()'
+    GAME.lua = GAME.lua .. ' pcall(function() timer.performWithDelay(0, function(e) if GAME.group then'
 end
 
 M['foreverEnd'] = function(params)
-    GAME.lua = GAME.lua .. ' end, 0) end)'
+    GAME.lua = GAME.lua .. ' else timer.cancel(e.source) end end, 0) end)'
 end
 
 M['for'] = function(params)

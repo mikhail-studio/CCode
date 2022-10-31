@@ -3,10 +3,11 @@ local BLOCK = require 'Core.Modules.logic-block'
 local INFO = require 'Data.info'
 local M = {}
 
-local function getButtonText(comment, nested)
+local function getButtonText(comment, nested, name)
     local comment = comment and STR['button.uncomment'] or STR['button.comment']
     local nested = nested and (#nested > 0 and STR['button.show'] or STR['button.hide']) or nil
-    return {STR['button.remove'], STR['button.copy'], comment, nested}
+    local addIfElse = name == 'if' and STR['button.addIfElse'] or nil
+    return {STR['button.remove'], STR['button.copy'], comment, nested, addIfElse}
 end
 
 M.remove = function()
@@ -43,7 +44,7 @@ M.create = function(target, polygon, length, size, height, width, comment, param
             block.params[i] = {}
             block.params[i].name = display.newText({
                     text = STR['blocks.' .. name .. '.params'][i], align = 'left', height = target.params[i].name.height / size, fontSize = 22 / size,
-                    x = BLOCK.getParamsNameX(length, width)[i] / size, y = nameY / size, font = 'ubuntu', width = 140 / size
+                    x = BLOCK.getParamsNameX(length, width)[i] / size, y = nameY / size, font = 'ubuntu', width = 142 / size
                 })
             block:insert(block.params[i].name)
 
@@ -74,7 +75,7 @@ M.create = function(target, polygon, length, size, height, width, comment, param
         block.params[i] = {}
         block.params[i].name = display.newText({
                 text = STR['blocks.' .. name .. '.params'][i], align = 'left', height = target.params[i].name.height / size, fontSize = 22 / size,
-                x = target.params[i].name.x / size, y = target.params[i].name.y / size, font = 'ubuntu', width = 140 / size
+                x = target.params[i].name.x / size, y = target.params[i].name.y / size, font = 'ubuntu', width = 142 / size
             })
         block:insert(block.params[i].name)
 
@@ -102,6 +103,7 @@ M.new = function(target)
         local length, size, nested = #INFO.listName[target.data.name] - 1, 1.6, target.data.nested
         local height = nested and target.block.height / size + 340 or target.block.height / size + 264
         local width = target.block.width / size + 20 for i = 1, #polygon do polygon[i] = polygon[i] / size end
+        if target.data.name == 'if' then height = height + 76 end
 
         local bg = display.newRect(CENTER_X, CENTER_Y, DISPLAY_WIDTH, DISPLAY_HEIGHT)
             bg:setFillColor(1, 0.005)
@@ -120,13 +122,13 @@ M.new = function(target)
         local block = M.create(target, polygon, length, size, height, width, comment, params, name)
         local y = block.y + block.block.height / 2 + 50 M.group:insert(block)
 
-        for i = 1, #getButtonText(comment, nested) do
+        for i = 1, #getButtonText(comment, nested, name) do
             local button = display.newRect(CENTER_X, y, width - 25, 66)
                 button:setFillColor(0.2, 0.2, 0.22)
             M.group:insert(button)
 
             button.text = display.newText({
-                    text = getButtonText(comment, nested)[i], align = 'left', fontSize = 24,
+                    text = getButtonText(comment, nested, name)[i], align = 'left', fontSize = 24,
                     x = CENTER_X + 10, y = y, font = 'ubuntu', height = 28, width = width - 40
                 }) button.text.id = i
             M.group:insert(button.text)

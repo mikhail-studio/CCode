@@ -5,13 +5,13 @@ M.listType = {
     'events',
     'vars',
     'objects',
+    'objects2',
     'control',
-    'none',
-    'none',
     'physics',
+    'physics2',
     'groups',
     'shapes',
-    'none',
+    'widgets',
     'none',
     'none',
     'none',
@@ -50,6 +50,7 @@ M.listBlock = {
 
     ['objects'] = {
         'newObject',
+        'newSprite',
         'setPos',
         'setPosX',
         'setPosY',
@@ -73,9 +74,11 @@ M.listBlock = {
         'setListener3',
         'requestFun',
         'requestFunParams',
+        'returnValue',
         'timerEnd',
         'timer',
         'ifEnd',
+        'ifElse',
         'if',
         'foreverEnd',
         'forever',
@@ -91,8 +94,31 @@ M.listBlock = {
         'newCircle',
         'newRoundedRect',
         'newRect',
+        'newBitmap',
+        'setBitmapSprite',
+        'updBitmap',
+        'setPixel',
+        'setPixelRGB'
+    },
+
+    ['objects2'] = {
         'setSprite',
-        'setColor'
+        'setScale',
+        'setScaleX',
+        'setScaleY',
+        'newSeqAnimation',
+        'newParAnimation',
+        'playAnimation',
+        'pauseAnimation',
+        'setColor',
+        'newMask',
+        'addMaskToObject',
+        'setMaskPos',
+        'setMaskScale',
+        'setMaskScaleX',
+        'setMaskScaleY',
+        'setMaskHitTrue',
+        'setMaskHitFalse'
     },
 
     ['groups'] = {
@@ -128,8 +154,6 @@ M.listBlock = {
         'setFixedRotation',
         'removeFixedRotation',
         'setWorldGravity',
-        'setHitboxVisible',
-        'removeHitboxVisible',
         'setBullet',
         'removeBullet',
         'setAwake',
@@ -139,9 +163,26 @@ M.listBlock = {
         'setForce',
         'setTorque',
         'setLinearImpulse',
-        'setAngularImpulse',
+        'setAngularImpulse'
+    },
+
+    ['physics2'] = {
+        'setHitboxVisible',
+        'removeHitboxVisible',
         'startPhysics',
-        'stopPhysics'
+        'stopPhysics',
+        'setTextBody'
+    },
+
+    ['widgets'] = {
+        'newWebView',
+        'updWebViewSite',
+        'removeWebView',
+        'setWebViewPos',
+        'setWebViewSize',
+        'setWebViewFront',
+        'setWebViewBack',
+        'setWebViewLink'
     }
 }
 
@@ -175,6 +216,7 @@ M.listName = {
 
     -- objects
     ['newObject'] = {'objects', 'value', 'value', 'value', 'value'},
+        ['newSprite'] = {'objects', 'value', 'value', 'value', 'value', 'value', 'value', 'value', 'value'},
         ['setPos'] = {'objects', 'value', 'value', 'value'},
         ['setPosX'] = {'objects', 'value', 'value'},
         ['setPosY'] = {'objects', 'value', 'value'},
@@ -194,13 +236,15 @@ M.listName = {
     -- control
     ['requestApi'] = {'control', 'text'},
         ['requestFun'] = {'control', 'fun'},
-        ['requestFunParams'] = {'control', 'fun', 'table'},
+        ['requestFunParams'] = {'control', 'fun', 'value'},
+        ['returnValue'] = {'control', 'value'},
         ['setListener'] = {'control', 'value', 'fun'},
         ['setListener2'] = {'control', 'value', 'fun', 'fun'},
         ['setListener3'] = {'control', 'value', 'fun', 'fun', 'fun'},
         ['timer'] = {'control', 'value', 'value'},
         ['timerEnd'] = {'control'},
         ['if'] = {'control', 'value'},
+        ['ifElse'] = {'control', 'value'},
         ['ifEnd'] = {'control'},
         ['forever'] = {'control'},
         ['foreverEnd'] = {'control'},
@@ -214,8 +258,30 @@ M.listName = {
     ['newRect'] = {'shapes', 'value', 'color', 'value', 'value', 'value', 'value'},
         ['newRoundedRect'] = {'shapes', 'value', 'value', 'value', 'value', 'value', 'value'},
         ['newCircle'] = {'shapes', 'value', 'value', 'value', 'value'},
-        ['setSprite'] = {'shapes', 'value', 'value'},
-        ['setColor'] = {'shapes', 'value', 'color'},
+        ['newBitmap'] = {'shapes', 'value', 'value', 'value'},
+        ['setBitmapSprite'] = {'shapes', 'value', 'value'},
+        ['updBitmap'] = {'shapes', 'value'},
+        ['setPixel'] = {'shapes', 'value', 'value', 'value', 'color'},
+        ['setPixelRGB'] = {'shapes', 'value', 'value', 'value', 'value', 'value', 'value'},
+
+    -- objects2
+    ['setSprite'] = {'objects2', 'value', 'value'},
+        ['setScale'] = {'objects2', 'value', 'value'},
+        ['setScaleX'] = {'objects2', 'value', 'value'},
+        ['setScaleY'] = {'objects2', 'value', 'value'},
+        ['newSeqAnimation'] = {'objects2', 'value', 'animation', 'value', 'value', 'value', 'value'},
+        ['newParAnimation'] = {'objects2', 'value', 'value', 'animation', 'value', 'value'},
+        ['playAnimation'] = {'objects2', 'value', 'value'},
+        ['pauseAnimation'] = {'objects2', 'value', 'value'},
+        ['setColor'] = {'objects2', 'value', 'color'},
+        ['newMask'] = {'objects2', 'value', 'value'},
+        ['addMaskToObject'] = {'objects2', 'value', 'value'},
+        ['setMaskPos'] = {'objects2', 'value', 'value', 'value'},
+        ['setMaskScale'] = {'objects2', 'value', 'value'},
+        ['setMaskScaleX'] = {'objects2', 'value', 'value'},
+        ['setMaskScaleY'] = {'objects2', 'value', 'value'},
+        ['setMaskHitTrue'] = {'objects2', 'value'},
+        ['setMaskHitFalse'] = {'objects2', 'value'},
 
     -- groups
     ['newGroup'] = {'groups', 'value'},
@@ -249,8 +315,6 @@ M.listName = {
         ['setFixedRotation'] = {'physics', 'value'},
         ['removeFixedRotation'] = {'physics', 'value'},
         ['setWorldGravity'] = {'physics', 'value', 'value'},
-        ['setHitboxVisible'] = {'physics'},
-        ['removeHitboxVisible'] = {'physics'},
         ['setBullet'] = {'physics', 'value'},
         ['removeBullet'] = {'physics', 'value'},
         ['setAwake'] = {'physics', 'value'},
@@ -261,8 +325,23 @@ M.listName = {
         ['setTorque'] = {'physics', 'value', 'value'},
         ['setLinearImpulse'] = {'physics', 'value', 'value', 'value', 'value', 'value'},
         ['setAngularImpulse'] = {'physics', 'value', 'value'},
-        ['startPhysics'] = {'physics'},
-        ['stopPhysics'] = {'physics'}
+
+    -- physics2
+    ['setTextBody'] = {'physics2', 'value', 'body', 'value', 'value', 'value', 'value'},
+        ['setHitboxVisible'] = {'physics2'},
+        ['removeHitboxVisible'] = {'physics2'},
+        ['startPhysics'] = {'physics2'},
+        ['stopPhysics'] = {'physics2'},
+
+    -- widgets
+    ['newWebView'] = {'widgets', 'value', 'value', 'value', 'value'},
+        ['updWebViewSite'] = {'widgets', 'value'},
+        ['removeWebView'] = {'widgets', 'value'},
+        ['setWebViewPos'] = {'widgets', 'value', 'value', 'value'},
+        ['setWebViewSize'] = {'widgets', 'value', 'value', 'value'},
+        ['setWebViewFront'] = {'widgets', 'value'},
+        ['setWebViewBack'] = {'widgets', 'value'},
+        ['setWebViewLink'] = {'widgets', 'value', 'value'}
 }
 
 M.listNested = {
@@ -280,7 +359,7 @@ for i = 1, #M.listType do
     if M.listType[i] ~= 'none' and M.listType[i] ~= 'everyone' then
         for j = 1, #M.listBlock[M.listType[i]] do
             local k = M.listBlock[M.listType[i]][j]
-            if UTF8.sub(k, UTF8.len(k) - 2, UTF8.len(k)) ~= 'End' and not UTF8.find(M.listBlock._everyone, k .. ', ') then
+            if UTF8.sub(k, UTF8.len(k) - 2, UTF8.len(k)) ~= 'End' and k ~= 'ifElse' and not UTF8.find(M.listBlock._everyone, k .. ', ') then
                 table.insert(M.listBlock.everyone, k)
             end
         end
@@ -290,6 +369,10 @@ end
 M.getType = function(name)
     return M.listName[name][1]
 end
+
+-- math.randomseed(os.time())
+-- local r, g, b = math.random(0, 255) / 255, math.random(0, 255) / 255, math.random(0, 255) / 255
+-- print(r .. ', ' .. g .. ', ' .. b)
 
 M.getBlockColor = function(name, comment, type)
     local type = type or M.getType(name)
@@ -303,12 +386,18 @@ M.getBlockColor = function(name, comment, type)
         return 0.41, 0.68, 0.3
     elseif type == 'shapes' then
         return 0.16, 0.66, 0.45
+    elseif type == 'objects2' then
+        return 0.76, 0.3, 0.4
     elseif type == 'groups' then
         return 0.73, 0.4, 0.28
     elseif type == 'physics' then
-        return 0.49, 0.2, 0.75
+        return 0.6, 0.35, 0.8
+    elseif type == 'physics2' then
+        return 0.65, 0.35, 0.5
     elseif type == 'control' then
         return 0.6, 0.55, 0.4
+    elseif type == 'widgets' then
+        return 0.4, 0.45, 0.6
     elseif type == 'everyone' then
         return 0.15, 0.55, 0.4
     end

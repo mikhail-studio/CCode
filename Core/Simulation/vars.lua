@@ -10,10 +10,15 @@ M['newText'] = function(params)
 
     GAME.lua = GAME.lua .. ' pcall(function() local colors, font = ' .. colors .. ', other.getFont(' .. font .. ')'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. ']:removeSelf() end)'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '] = display.newText(tostring(' .. text .. '), ' .. posX .. ', ' .. posY .. ', font, ' .. size .. ')'
-    GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.texts[' .. name .. '])'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '] = display.newText(GAME.group, tostring(' .. text .. '), '
+    GAME.lua = GAME.lua .. posX .. ', ' .. posY .. ', font, ' .. size .. ') GAME.group:insert(GAME.group.texts[' .. name .. '])'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. ']:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].alpha = ' ..  alpha .. ' / 100 end) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].alpha = ' ..  alpha .. ' / 100 end)'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._density = 1 GAME.group.texts[' .. name .. ']._bounce = 0'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._friction = 0 GAME.group.texts[' .. name .. ']._gravity = 1'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._body = \'\' GAME.group.texts[' .. name .. ']._hitbox = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._touch = \'\' GAME.group.texts[' .. name .. ']._tag = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '].name = ' .. name .. ' end)'
 end
 
 M['newText2'] = function(params)
@@ -26,10 +31,15 @@ M['newText2'] = function(params)
 
     GAME.lua = GAME.lua .. ' pcall(function() local colors, font = ' .. colors .. ', other.getFont(' .. font .. ')'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. ']:removeSelf() end)'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '] = display.newText({text = tostring('
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '] = display.newText({parent = GAME.group, text = tostring('
     GAME.lua = GAME.lua .. text .. '), x = ' .. posX .. ', y = ' .. posY .. ', width = ' .. width .. ', height = ' .. height .. ', align = '
     GAME.lua = GAME.lua .. align .. ', font = font, fontSize = ' .. size .. '}) GAME.group:insert(GAME.group.texts[' .. name .. '])'
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. ']:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. ']:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._density = 1 GAME.group.texts[' .. name .. ']._bounce = 0'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._friction = 0 GAME.group.texts[' .. name .. ']._gravity = 1'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._body = \'\' GAME.group.texts[' .. name .. ']._hitbox = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._touch = \'\' GAME.group.texts[' .. name .. ']._tag = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '].name = ' .. name .. ' end)'
 end
 
 M['setVar'] = function(params)
@@ -43,7 +53,7 @@ M['updVar'] = function(params)
     local type = params[1][1][2] == 'vE' and 'varsE' or params[1][1][2] == 'vS' and 'varsS' or 'varsP'
     local name, value = params[1][1][1], CALC(params[2])
 
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. type .. '[\'' .. name .. '\'] = ' .. type .. '[\'' .. name .. '\'] + ' .. value .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. type .. '[\'' .. name .. '\'] = ' .. type .. '[\'' .. name .. '\'] + (' .. value .. ') end)'
 end
 
 M['addTable'] = function(params)

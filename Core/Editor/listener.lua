@@ -67,7 +67,7 @@ M.rect = function(target, restart, data)
             EDITOR.create(unpack(restart))
             EDITOR.group.isVisible = true
         end)
-    elseif type == 'body' and ALERT then
+    elseif (type == 'body' or type == 'animation') and ALERT then
         local data = GET_GAME_CODE(CURRENT_LINK)
         local blockIndex, paramsIndex = restart[2], index
         local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
@@ -117,12 +117,13 @@ M.list = function(target)
                 EDITOR.data = {{'|', '|'}}
                 EDITOR.backup = M.backup(EDITOR.backup, 'add', EDITOR.data)
                 TEXT.set(TEXT.gen(EDITOR.data, EDITOR.cursor[2]), EDITOR.group[9])
+                EDITOR.group[9]:scrollToPosition({y = 0, time = 0})
             elseif e.index == 2 and EDITOR.copy then
                 EDITOR.data = COPY_TABLE(EDITOR.copy[1])
                 EDITOR.cursor = COPY_TABLE(EDITOR.copy[2])
                 EDITOR.backup = M.backup(EDITOR.backup, 'add', EDITOR.data)
                 TEXT.set(TEXT.gen(EDITOR.data, EDITOR.cursor[2]), EDITOR.group[9])
-            elseif e.index == 1 then
+            elseif e.index == 1 and #EDITOR.data > 1 then
                 EDITOR.copy = {COPY_TABLE(EDITOR.data), COPY_TABLE(EDITOR.cursor)}
             end
         end

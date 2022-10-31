@@ -26,6 +26,8 @@ M.create = function()
     local title = display.newText(STR['menu.myprogram'], ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)
         title.anchorX = 0
         title.anchorY = 0
+        title.button = 'but_title'
+        title:addEventListener('touch', require 'Core.Interfaces.programs')
     M.group:insert(title)
 
     local title_list = display.newText('', CENTER_X, ZERO_Y + 62, 'ubuntu', 26)

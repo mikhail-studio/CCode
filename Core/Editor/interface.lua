@@ -48,6 +48,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     local title = display.newText(STR['program.editor'], ZERO_X + 10, ZERO_Y + 10, 'ubuntu', 32)
         title.anchorX = 0
         title.anchorY = 0
+        title.id = 'title'
     M.group:insert(title)
 
     local list = display.newRoundedRect(MAX_X - 50, ZERO_Y + 34, 80, 60, 10)
@@ -172,23 +173,65 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         end
 
         buttons[i]:addEventListener('touch', function(e)
+            local isSpeedID = e.target.text.id == '->' or e.target.text.id == '<-' or e.target.text.id == 'C' or tonumber(e.target.text.id)
+
             if e.phase == 'began' and ALERT then
                 display.getCurrentStage():setFocus(e.target)
                 e.target:setFillColor(0.18, 0.18, 0.2)
                 e.target.click = true
+
+                if isSpeedID then
+                    pcall(function()
+                        if e.target.timer then
+                            timer.cancel(e.target.timer)
+                            e.target.timer = nil
+                        end
+                    end)
+
+                    e.target.timer = timer.performWithDelay(400, function()
+                        if e.target.click and ALERT then
+                            e.target.timer2 = timer.performWithDelay(25, function()
+                                M.data, M.cursor, M.backup = LISTENER[e.target.text.id](M.data, M.cursor, M.backup)
+                                TEXT.set(TEXT.gen(M.data, M.cursor[2]), scroll)
+                            end, 0)
+                        end
+                    end)
+                end
             elseif e.phase == 'moved' and (math.abs(e.y - e.yStart) > 30 or math.abs(e.x - e.xStart) > 60) and ALERT then
+                pcall(function() if e.target.timer2 then timer.cancel(e.target.timer2) e.target.timer2 = nil end end)
+                pcall(function() if e.target.timer then timer.cancel(e.target.timer) e.target.timer = nil end end)
                 display.getCurrentStage():setFocus(nil)
                 e.target:setFillColor(0.15, 0.15, 0.17)
                 e.target.click = false
             elseif (e.phase == 'ended' or e.phase == 'cancelled') and ALERT then
+                local notHasTimer = true
                 display.getCurrentStage():setFocus(nil)
                 e.target:setFillColor(0.15, 0.15, 0.17)
+
+                pcall(function()
+                    if e.target.timer2 then
+                        notHasTimer = false
+                        timer.cancel(e.target.timer2)
+                        e.target.timer2 = nil
+                    end
+                end)
+
+                pcall(function()
+                    if e.target.timer then
+                        timer.cancel(e.target.timer)
+                        e.target.timer = nil
+                    end
+                end)
+
                 if e.target.click then
                     e.target.click = false
-                    M.data, M.cursor, M.backup = LISTENER[e.target.text.id](M.data, M.cursor, M.backup)
 
-                    if e.target.text.id ~= 'Ok' and e.target.text.id ~= 'Hide' and e.target.text.id ~= 'Text' and e.target.text.id ~= 'Local' then
-                        TEXT.set(TEXT.gen(M.data, M.cursor[2]), scroll)
+                    if notHasTimer then
+                        M.data, M.cursor, M.backup = LISTENER[e.target.text.id](M.data, M.cursor, M.backup)
+
+                        if e.target.text.id ~= 'Ok' and e.target.text.id ~= 'Hide' and e.target.text.id ~= 'Text' and e.target.text.id ~= 'Local' then
+                            TEXT.set(TEXT.gen(M.data, M.cursor[2]), scroll)
+                        end
                     end
                 end
             end
@@ -208,9 +251,9 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     listScroll.buttons = {}
     local listButtonsX = listScroll.width / 2
     local listButtonsY = 35
-    local listButtonsText = {'var', 'table', 'fun', 'math', 'prop', 'log', 'device'}
+    local listButtonsText = {'var', 'table', 'funs', 'fun', 'math', 'prop', 'log', 'device'}
 
-    for i = 1, 7 do
+    for i = 1, 8 do
         listScroll.buttons[i] = display.newRect(listButtonsX, listButtonsY, listScroll.width, 70)
             listScroll.buttons[i]:setFillColor(0.11, 0.11, 0.13)
             listScroll.buttons[i].isOpen = false
@@ -233,18 +276,23 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     local toolbarListener = function(e)
         if e.phase == 'began' and ALERT then
             display.getCurrentStage():setFocus(e.target)
-            e.target:setFillColor(0.18, 0.18, 0.2)
             e.target.click = true
+            if e.target.id == 'title' then e.target.alpha = 0.6
+            else e.target:setFillColor(0.18, 0.18, 0.2) end
         elseif e.phase == 'moved' and (math.abs(e.y - e.yStart) > 30 or math.abs(e.x - e.xStart) > 60) and ALERT then
             display.getCurrentStage():setFocus(nil)
-            e.target:setFillColor(0.15, 0.15, 0.17)
             e.target.click = false
+            if e.target.id == 'title' then e.target.alpha = 1
+            else e.target:setFillColor(0.15, 0.15, 0.17) end
         elseif (e.phase == 'ended' or e.phase == 'cancelled') and ALERT then
             display.getCurrentStage():setFocus(nil)
-            e.target:setFillColor(0.15, 0.15, 0.17)
+            if e.target.id == 'title' then e.target.alpha = 1
+            else e.target:setFillColor(0.15, 0.15, 0.17) end
             if e.target.click then
                 e.target.click = false
-                if e.target.text.id == 'undo' or e.target.text.id == 'redo' then
+                if e.target.id == 'title' then
+                    EXITS.editor()
+                elseif e.target.text.id == 'undo' or e.target.text.id == 'redo' then
                     M.backup, M.data, M.cursor = LISTENER.backup(M.backup, e.target.text.id, M.data, M.cursor)
                     TEXT.set(TEXT.gen(M.data, M.cursor[2]), scroll)
                 elseif e.target.text.id == 'list' then
@@ -256,6 +304,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         return true
     end
 
+    title:addEventListener('touch', toolbarListener)
     list:addEventListener('touch', toolbarListener)
     undo:addEventListener('touch', toolbarListener)
     redo:addEventListener('touch', toolbarListener)

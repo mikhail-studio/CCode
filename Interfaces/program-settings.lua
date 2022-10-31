@@ -126,6 +126,9 @@ M.create = function()
         container:insert(icon, true)
     end
 
+    title.id = 'title'
+    title:addEventListener('touch', require 'Core.Interfaces.program-settings')
+
     icon.id = 'icon'
     icon:addEventListener('touch', require 'Core.Interfaces.program-settings')
 

@@ -4,10 +4,11 @@ RESIZE = require 'Core.Modules.app-resize'
 INPUT = require 'Core.Modules.interface-input'
 WINDOW = require 'Core.Modules.interface-window'
 EXITS = require 'Core.Interfaces.exits'
+BITMAP = require 'plugin.memoryBitmap'
 FILE = require 'plugin.cnkFileManager'
 EXPORT = require 'plugin.exportFile'
 ORIENTATION = require 'plugin.orientation'
-ADMOB = require 'plugin.admob'
+-- ADMOB = require 'plugin.admob'
 SVG = require 'plugin.nanosvg'
 UTF8 = require 'plugin.utf8'
 ZIP = require 'plugin.zip'
@@ -30,11 +31,12 @@ for i = 1, #LANGS do
     end
 end
 
-if system.getInfo('deviceID') == '7274f48c57dc5cec' then
+if system.getInfo('deviceID') == '439ab4d7b739941c' then
     display.safeActualContentHeight = display.actualContentHeight - 90
 end
 
-BUILD = 1148
+LIVE = false
+BUILD = 1169
 ALERT = true
 CENTER_Z = 0
 TOP_WIDTH = 0
@@ -62,6 +64,13 @@ ZERO_X = CENTER_X - DISPLAY_WIDTH / 2
 ZERO_Y = CENTER_Y - DISPLAY_HEIGHT / 2 + TOP_HEIGHT
 MAX_X = CENTER_X + DISPLAY_WIDTH / 2
 MAX_Y = CENTER_Y + DISPLAY_HEIGHT / 2 - BOTTOM_HEIGHT
+MASK = graphics.newMask('Sprites/mask.png')
+
+for k, v in pairs(LANG.ru) do
+    if not STR[k] then
+        STR[k] = v
+    end
+end
 
 pcall(function()
     if system.getInfo 'environment' ~= 'simulator' then
@@ -69,6 +78,83 @@ pcall(function()
         GANIN = require 'plugin.ganin'
     end
 end)
+
+GET_NESTED_DATA = function(data, nestedInfo, INFO)
+    local data = COPY_TABLE(data)
+
+    for i = #nestedInfo, 1, -1 do
+        local current_params = nestedInfo[i][1]
+        local current_script = nestedInfo[i][2]
+
+        if data.scripts[current_script].params[current_params].event then
+            local fixIndex = current_params + 1
+
+            for j = fixIndex, #data.scripts[current_script].params do
+                if data.scripts[current_script].params[fixIndex].event then break end
+                table.insert(data.scripts[current_script].params[current_params].nested, data.scripts[current_script].params[fixIndex])
+                table.remove(data.scripts[current_script].params, fixIndex)
+            end
+        elseif INFO.listNested[data.scripts[current_script].params[current_params].name] then
+            local endIndex = #INFO.listNested[data.scripts[current_script].params[current_params].name]
+            local fixIndex = current_params + 1
+            local nestedEndIndex = 1
+
+            for j = fixIndex, #data.scripts[current_script].params do
+                if not data.scripts[current_script].params[fixIndex].event then
+                    local name = data.scripts[current_script].params[fixIndex].name
+                    local notNested = not (data.scripts[current_script].params[fixIndex].nested and #data.scripts[current_script].params[fixIndex].nested > 0)
+                    table.insert(data.scripts[current_script].params[current_params].nested, data.scripts[current_script].params[fixIndex])
+                    table.remove(data.scripts[current_script].params, fixIndex)
+
+                    if name == data.scripts[current_script].params[current_params].name and notNested then
+                        nestedEndIndex = nestedEndIndex + 1
+                    elseif name == INFO.listNested[data.scripts[current_script].params[current_params].name][endIndex] then
+                        nestedEndIndex = nestedEndIndex - 1
+                        if nestedEndIndex == 0 then break end
+                    end
+                else
+                    fixIndex = fixIndex + 1
+                end
+            end
+        end
+    end
+
+    return data
+end
+
+GET_FULL_DATA = function(data)
+    local data, nestedInfo = COPY_TABLE(data), {}
+
+    for i = 1, #data.scripts do
+        local blockIndex = 0
+
+        while blockIndex < #data.scripts[i].params do
+            blockIndex = blockIndex + 1
+
+            if data.scripts[i].params[blockIndex].nested and #data.scripts[i].params[blockIndex].nested > 0 then
+                table.insert(nestedInfo, {blockIndex, i})
+
+                for j = 1, #data.scripts[i].params[blockIndex].nested do
+                    local blockIndex, blockData = blockIndex + j, data.scripts[i].params[blockIndex].nested[j]
+                    table.insert(data.scripts[i].params, blockIndex, blockData)
+                end
+
+                data.scripts[i].params[blockIndex].nested = {}
+            end
+        end
+    end
+
+    return data, nestedInfo
+end
+
+GET_SCROLL_HEIGHT = function(group)
+    if not (group and #group.blocks > 0) then return 0 end
+
+    local b1 = group.blocks[1].y - group.blocks[1].block.height / 2
+    local b2 = group.blocks[#group.blocks].y + group.blocks[#group.blocks].block.height / 2
+
+    return math.abs(b1 - b2) + 100
+end
 
 READ_FILE = function(path, bin)
     local file, data = io.open(path, bin and 'rb' or 'r'), nil
@@ -99,6 +185,19 @@ IS_IMAGE = function(path)
     return is_image
 end
 
+IS_ZERO_TABLE = function(t)
+    local result = true
+
+    pcall(function()
+        for key, value in pairs(t) do
+            result = false
+            break
+        end
+    end)
+
+    return result
+end
+
 COPY_TABLE = function(t)
     local result = {}
 
@@ -111,6 +210,20 @@ COPY_TABLE = function(t)
             end
         end
     end end)
+
+    return result
+end
+
+COPY_TABLE_FP = function(t)
+    local result = {}
+
+    pcall(function()
+        if type(t[1]) == 'table' and #t == 1 then
+            result = COPY_TABLE(t[1])
+        else
+            result = COPY_TABLE(t)
+        end
+    end)
 
     return result
 end
@@ -220,10 +333,10 @@ NEW_APP_CODE = function(title, link)
 end
 
 local function adListener(event)
-    if event.phase == 'init' then
-        ADMOB.load('banner', {adUnitId='ca-app-pub-3712284233366817/8879724699', childSafe = true})
+    if event.phase == 'init' and LOCAL.show_ads then
+        -- ADMOB.load('banner', {adUnitId='ca-app-pub-3712284233366817/8879724699', childSafe = true})
     elseif event.phase == 'loaded' and event.type == 'banner' and LOCAL.show_ads then
-        ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'})
+        -- ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'})
     elseif event.phase == 'displayed' or event.phase == 'hidden' then
         -- ADMOB_HEIGHT = event.phase == 'hidden' and 0 or ADMOB.height() / 2
         -- setOrientationApp({type = CURRENT_ORIENTATION})
@@ -234,15 +347,18 @@ WIDGET.setTheme('widget_theme_android_holo_dark')
 display.setDefault('background', 0.15, 0.15, 0.17)
 display.setStatusBar(display.HiddenStatusBar) math.randomseed(os.time())
 DEVELOPERS = JSON.decode(READ_FILE(system.pathForFile('Emitter/developers.json')))
+
+math.factorial = function(num) if num == 0 then return 1 else return num * math.factorial(num - 1) end end
 math.round = function(num) return tonumber(string.match(tostring(num), '(.*)%.')) or num end
 math.hex = function(hex) local r, g, b = hex:match('(..)(..)(..)') return {tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)} end
 UTF8.trim = function(s) return UTF8.gsub(UTF8.gsub(s, '^%s+', ''), '%s+$', '') end
 UTF8.trimLeft = function(s) return UTF8.gsub(s, '^%s+', '') end
 UTF8.trimRight = function(s) return UTF8.gsub(s, '%s+$', '') end
 timer.new = function(sec, rep, lis) return timer.performWithDelay(sec, lis, rep) end
+
 if system.getInfo 'environment' == 'simulator' then JSON.encode, JSON.encode2 = JSON.prettify, JSON.encode
-else ADMOB.init(adListener, {appId="ca-app-pub-3712284233366817~8085200542", testMode = true}) end
-if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'}) end
+-- else ADMOB.init(adListener, {appId="ca-app-pub-3712284233366817~8085200542", testMode = true})
+end if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'}) end
 -- Runtime:addEventListener('unhandledError', function(event) return true end)
 
 GET_GLOBAL_TABLE = function()

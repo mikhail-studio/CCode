@@ -5,15 +5,13 @@ settings = {
 	},
 
 	android = {
-		minSdkVersion = '16',
+		minSdkVersion = '19',
 		usesPermissions = {
 			'android.permission.INTERNET',
 			'android.permission.ACCESS_NETWORK_STATE',
 			'android.permission.READ_EXTERNAL_STORAGE',
 			'android.permission.WRITE_EXTERNAL_STORAGE',
-			'android.permission.MANAGE_EXTERNAL_STORAGE',
 			'android.permission.RECEIVE_BOOT_COMPLETED',
-			'android.permission.REQUEST_INSTALL_PACKAGES',
 			'android.permission.VIBRATE'
 		},
 
@@ -43,7 +41,9 @@ settings = {
 		['plugin.exportFile'] = {publisherId = 'com.solar2d'},
 		['plugin.nanosvg'] = {publisherId = 'com.coronalabs'},
 		['plugin.orientation'] = {publisherId = 'tech.scotth'},
-		['plugin.admob'] = {publisherId = 'com.coronalabs'}
+		['plugin.memoryBitmap'] = {publisherId = 'com.coronalabs'},
+		['plugin.zeroconf'] = {publisherId = 'com.coronalabs'},
+		-- ['plugin.admob'] = {publisherId = 'com.coronalabs'}
 	},
 
 	excludeFiles = {

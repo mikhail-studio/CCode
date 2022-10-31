@@ -33,6 +33,8 @@ M.create = function(app)
     local title = display.newText(app, ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)
         title.anchorX = 0
         title.anchorY = 0
+        title.button = 'but_title'
+        title:addEventListener('touch', require 'Core.Interfaces.program')
     M.group:insert(title)
 
     local but_play = display.newImage('Sprites/play.png', MAX_X - 190, MAX_Y - 95)

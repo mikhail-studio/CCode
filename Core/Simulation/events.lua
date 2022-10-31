@@ -4,9 +4,12 @@ local M = {}
 M.CONTROL = require 'Core.Simulation.control'
 M.VARS = require 'Core.Simulation.vars'
 M.OBJECTS = require 'Core.Simulation.objects'
+M.OBJECTS2 = require 'Core.Simulation.objects2'
 M.SHAPES = require 'Core.Simulation.shapes'
 M.GROUPS = require 'Core.Simulation.groups'
 M.PHYSICS = require 'Core.Simulation.physics'
+M.PHYSICS2 = require 'Core.Simulation.physics2'
+M.WIDGETS = require 'Core.Simulation.widgets'
 
 M.requestNestedBlock = function(nested, params)
     for i = 1, #nested do
@@ -35,8 +38,8 @@ M['onFunParams'] = function(nested, params)
     local nameTable = params[2][1] and params[2][1][1] or '_ccode'
     local typeFun = params[1][1] and params[1][1][2] == 'fS' and 'funsS' or 'funsP'
 
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. typeFun .. '[\'' .. nameFun .. '\'] = function(p) local varsE, tablesE = {},'
-    GAME.lua = GAME.lua .. ' {[\'' .. nameTable .. '\'] = COPY_TABLE(p)}'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. typeFun .. '[\'' .. nameFun .. '\'] = function(...) local varsE, tablesE = {},'
+    GAME.lua = GAME.lua .. ' {[\'' .. nameTable .. '\'] = COPY_TABLE_FP({...})}'
     M.requestNestedBlock(nested, params) GAME.lua = GAME.lua .. ' end end)'
 end
 

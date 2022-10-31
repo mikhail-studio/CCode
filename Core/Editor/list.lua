@@ -3,6 +3,7 @@ local DATA = require 'Core.Editor.data'
 local TEXT = require 'Core.Editor.text'
 local listeners = {}
 local dataButtons = {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}
+local dataButtonsFuns = {STR['editor.list.script'], STR['editor.list.project']}
 
 listeners.listener = function(e)
     if e.phase == 'began' and ALERT then
@@ -25,6 +26,8 @@ listeners.listener = function(e)
                     e.target.text.ID == 'prop' and 'p' or
                     e.target.text.ID == 'log' and 'l' or
                     e.target.text.ID == 'device' and 'd' or
+                    e.target.text.id == '/fscript' and 'fS' or
+                    e.target.text.id == '/fproject' and 'fP' or
                     e.target.text.id == '/event' and 'vE' or
                     e.target.text.id == '/script' and 'vS' or
                     e.target.text.id == '/project' and 'vP' or
@@ -92,7 +95,8 @@ listeners.set = function(target, buttons, isData, isList)
                         listScroll.buttons[i].isOpen = false
                         listScroll.buttons[i]:setFillColor(0.14, 0.14, 0.16)
                     elseif target.text.id == 'event' or target.text.id == 'script' or target.text.id == 'project'
-                    or target.text.id == 'tevent' or target.text.id == 'tscript' or target.text.id == 'tproject' then
+                    or target.text.id == 'tevent' or target.text.id == 'tscript' or target.text.id == 'tproject'
+                    or target.text.id == 'fscript' or target.text.id == 'fproject' then
                         listScroll.buttons[i]:setFillColor(0.17, 0.17, 0.19)
                     else
                         listScroll.buttons[i]:setFillColor(0.14, 0.14, 0.16)
@@ -100,10 +104,9 @@ listeners.set = function(target, buttons, isData, isList)
                 listScroll:insert(listScroll.buttons[i])
 
                 listScroll.buttons[i].text = display.newText(text, 20, listButtonsY, 'ubuntu', getFontSize(listScroll.width, text, 24, isData))
-                    if isData then
-                        listScroll.buttons[i].text.id = getId(target.y) == 1
-                        and (j == 1 and 'event' or j == 2 and 'script' or 'project')
-                        or (j == 1 and 'tevent' or j == 2 and 'tscript' or 'tproject')
+                    if isData then local id = getId(target.y)
+                        listScroll.buttons[i].text.id = id == 1 and (j == 1 and 'event' or j == 2 and 'script' or 'project')
+                        or (id == 2 and (j == 1 and 'tevent' or j == 2 and 'tscript' or 'tproject') or (j == 1 and 'fscript' or 'fproject'))
                     elseif isList then
                         listScroll.buttons[i].text.id = buttons.keys[j]
                         listScroll.buttons[i].text.ID = target.text.id
@@ -153,6 +156,14 @@ listeners.set = function(target, buttons, isData, isList)
             listScroll:setScrollHeight(listScroll.scrollHeight)
         end
     end
+end
+
+listeners.fproject = function(target)
+    listeners.set(target, EDITOR.funs.project)
+end
+
+listeners.fscript = function(target)
+    listeners.set(target, EDITOR.funs.script)
 end
 
 listeners.tproject = function(target)
@@ -205,6 +216,10 @@ end
 
 listeners.table = function(target)
     listeners.set(target, dataButtons, true)
+end
+
+listeners.funs = function(target)
+    listeners.set(target, dataButtonsFuns, true)
 end
 
 return listeners

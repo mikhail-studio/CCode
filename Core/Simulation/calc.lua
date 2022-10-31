@@ -51,6 +51,10 @@ return function(params, default)
             result = result .. ' varsS[\'' .. params[i][1] .. '\']'
         elseif params[i][2] == 'vP' then
             result = result .. ' varsP[\'' .. params[i][1] .. '\']'
+        elseif params[i][2] == 'fS' then
+            result = result .. ' funsS[\'' .. params[i][1] .. '\']'
+        elseif params[i][2] == 'fP' then
+            result = result .. ' funsP[\'' .. params[i][1] .. '\']'
         end
 
         if index then

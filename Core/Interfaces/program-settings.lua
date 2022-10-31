@@ -1,5 +1,9 @@
 local listeners = {}
 
+listeners.title = function(target)
+    EXITS.psettings()
+end
+
 listeners.build_button = function(target)
     INPUT.new(STR['psettings.enterpackage'], function(event)
         if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
@@ -83,7 +87,7 @@ listeners.icon = function(target)
         if import.done and import.done == 'ok' then
             local container = target.parent target:removeSelf()
 
-            timer.performWithDelay(1, function()
+            timer.performWithDelay(20, function()
                 local icon = display.newImage(CURRENT_LINK .. '/icon.png', system.DocumentsDirectory)
                     local diffSize = icon.height / icon.width
                     if icon.height > icon.width then
@@ -111,11 +115,14 @@ return function(e)
         if e.phase == 'began' then
             display.getCurrentStage():setFocus(e.target)
             e.target.click = true
+            if e.target.id == 'title' then e.target.alpha = 0.6 end
         elseif e.phase == 'moved' and (math.abs(e.x - e.xStart) > 30 or math.abs(e.y - e.yStart) > 30) then
             display.getCurrentStage():setFocus(nil)
             e.target.click = false
+            if e.target.id == 'title' then e.target.alpha = 1 end
         elseif e.phase == 'ended' or e.phase == 'cancelled' then
             display.getCurrentStage():setFocus(nil)
+            if e.target.id == 'title' then e.target.alpha = 1 end
             if e.target.click then
                 e.target.click = false
                 listeners[e.target.id](e.target)

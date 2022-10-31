@@ -17,11 +17,11 @@ M['pos_y'] = function(name)
 end
 
 M['width'] = function(name)
-    return GAME.group.objects[name].width
+    return GAME.group.objects[name]._radius and GAME.group.objects[name].radius or GAME.group.objects[name].width
 end
 
 M['height'] = function(name)
-    return GAME.group.objects[name].height
+    return GAME.group.objects[name]._radius and GAME.group.objects[name].radius or GAME.group.objects[name].height
 end
 
 M['rotation'] = function(name)

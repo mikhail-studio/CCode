@@ -92,6 +92,7 @@ M.create = function()
         M.group:insert(splash)
     end
 
+    title:addEventListener('touch', function(e) LISTENER(e, 'title') end)
     lang_button:addEventListener('touch', function(e) LISTENER(e, 'lang') end)
     confirm_button:addEventListener('touch', function(e) LISTENER(e, 'confirm') end)
     show_ads_button:addEventListener('touch', function(e) LISTENER(e, 'show') end)

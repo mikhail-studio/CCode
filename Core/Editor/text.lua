@@ -58,6 +58,8 @@ M.gen = function(params, mode)
             text = text .. '"' .. params[i][1] .. '"'
         elseif params[i][2] == 'tE' or params[i][2] == 'tS' or params[i][2] == 'tP' then
             text = text .. '{' .. params[i][1] .. '}'
+        elseif params[i][2] == 'fS' or params[i][2] == 'fP' then
+            text = text .. '$' .. params[i][1]
         elseif params[i][2] == 'u' then
             text = text .. params[i][1]
         elseif params[i][2] == 't' then
@@ -82,7 +84,8 @@ M.gen = function(params, mode)
 
         if i ~= #params then
             if not ((params[i][2] == 'n' and params[i + 1][2] == 'n') or (params[i + 1][2] == 's' and params[i + 1][1] == ',')
-            or (params[i + 1][2] == 's' and params[i + 1][1] == '(' and (params[i][2] == 'f' or params[i][2] == 'm' or params[i][2] == 'p'))
+            or (params[i + 1][2] == 's' and params[i + 1][1] == '(' and (params[i][2] == 'f'
+            or params[i][2] == 'fS' or params[i][2] == 'fP' or params[i][2] == 'm' or params[i][2] == 'p'))
             or (params[i + 1][2] == 's' and params[i + 1][1] == '[' and (params[i][2] == 'tE' or params[i][2] == 'tS' or params[i][2] == 'tP'
             or (params[i][2] == 's' and (params[i][1] == ']' or params[i][1] == ')'))))
             or (params[i + 1][2] == 's' and params[i + 1][1] == '(' and params[i][2] == 'd'

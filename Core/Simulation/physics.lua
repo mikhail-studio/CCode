@@ -67,6 +67,14 @@ M['setLinearVelocityX'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']:setLinearVelocity(' .. speedX .. ', speedY) end)'
 end
 
+M['setLinearVelocityY'] = function(params)
+    local name = CALC(params[1])
+    local speedY = CALC(params[2], '0')
+
+    GAME.lua = GAME.lua .. ' pcall(function() local speedX, speedY = GAME.group.objects[' .. name .. ']:getLinearVelocity()'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']:setLinearVelocity(speedX, ' .. speedY .. ') end)'
+end
+
 M['setAngularVelocity'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].angularVelocity = ' .. CALC(params[2]) .. ' end)'
 end
@@ -112,14 +120,6 @@ end
 
 M['setTorque'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. ']:applyTorque(' .. CALC(params[2])  .. ') end)'
-end
-
-M['setHitboxVisible'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() PHYSICS.setDrawMode \'hybrid\' end)'
-end
-
-M['removeHitboxVisible'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() PHYSICS.setDrawMode \'normal\' end)'
 end
 
 M['setHitboxBox'] = function(params)
@@ -212,14 +212,6 @@ end
 
 M['removeBullet'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].isBullet = false end)'
-end
-
-M['startPhysics'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() PHYSICS.start() end)'
-end
-
-M['stopPhysics'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() PHYSICS.stop() end)'
 end
 
 return M

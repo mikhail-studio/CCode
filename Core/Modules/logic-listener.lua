@@ -98,7 +98,9 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
 
             local scrollY, diffScrollY = select(2, scroll:getContentPosition()), isCopy and 0 or select(2, scroll:getContentPosition())
             M.isEnd = UTF8.sub(e.target.data.name, UTF8.len(e.target.data.name) - 2, UTF8.len(e.target.data.name)) == 'End'
+            M.isEnd = M.isEnd or e.target.data.name == 'ifElse'
             M.index = e.target.getIndex(e.target)
+            M.currentTargetY = e.target.y
             M.nestedClose = {}
             M.heightClose = 0
             M.countClose = 0
@@ -108,7 +110,7 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
                     if group.blocks[i] and group.blocks[i].data.nested and #group.blocks[i].data.nested == 0 and not group.blocks[i].data.event then
                         INDEX_LIST = 4
                         M.countClose = M.countClose + 1
-                        if i < M.index then M.heightClose = M.heightClose + group.blocks[i].block.height - 4 end
+                        if i < M.index then M.heightClose = M.heightClose + group.blocks[i].block.height - 2 end
                         M.nestedClose[tostring(group.blocks[i])] = true
                         onCheckboxPress({target =  group.blocks[i]}) ALERT = true
                         LISTENER({target = {button = 'but_okay', click = true}, phase = 'ended'})
@@ -123,17 +125,19 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
             end
 
             if M.isEnd then
-                local nestedName = UTF8.sub(e.target.data.name, 1, UTF8.len(e.target.data.name) - 3)
                 local nestedEndIndex = 1
+                local nestedName = UTF8.sub(e.target.data.name, 1, UTF8.len(e.target.data.name) - 3)
+                if e.target.data.name == 'ifElse' then nestedName = 'if' end
 
                 for i = M.index - 1, 1, -1 do
                     local name = group.blocks[i].data.name
                     local notNested = not (group.blocks[i].data.nested and #group.blocks[i].data.nested > 0)
+                    if name == 'ifElse' and e.target.data.name ~= 'ifElse' then name = 'if' end
 
                     if name == nestedName and notNested then
                         nestedEndIndex = nestedEndIndex - 1
                         if nestedEndIndex == 0 then M.stopY, M.stopT, M.stopI = group.blocks[i].y, tostring(group.blocks[i]), i break end
-                    elseif name == e.target.data.name then
+                    elseif name == (e.target.data.name == 'ifElse' and 'ifEnd' or e.target.data.name) then
                         nestedEndIndex = nestedEndIndex + 1
                     end
                 end
@@ -144,6 +148,7 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
                     local name = group.blocks[i].data.name
                     local isEnd = UTF8.sub(name, UTF8.len(name) - 2, UTF8.len(name)) == 'End'
                     local notNested = not (group.blocks[i].data.nested and #group.blocks[i].data.nested > 0)
+                    if name == 'ifElse' and e.target.data.name ~= 'ifElse' then isEnd = true end
 
                     if INFO.listNested[name] and notNested then
                         nestedEndIndex = nestedEndIndex + 1
@@ -178,6 +183,8 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
                 end
             end
 
+            M.heightClose = M.currentTargetY - e.target.y
+
             ALERT = false
             scroll:setIsLocked(true, 'vertical')
             display.getCurrentStage():setFocus(e.target)
@@ -188,11 +195,15 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
             e.target.y = e.y or e.target.y
             e.target.x = e.target.x + 40
 
-            if e.target.data.event and group.blocks[M.index - 1] and M.heightClose > 0 then
-                scroll:scrollToPosition({y = scrollY + M.heightClose, time = 0})
+            if group.blocks[M.index - 1] and M.heightClose > 0 then
+                scroll:scrollToPosition({y = scrollY + M.heightClose > 0 and 0 or scrollY + M.heightClose, time = 0})
+                scrollY = select(2, scroll:getContentPosition())
             end
 
-            e.target.y = (e.y or e.target.y) - (diffScrollY > 0 and 0 or diffScrollY) - M.diffY - M.heightClose
+            if not isNewBlock then
+                e.target.y = e.target.y - (diffScrollY > 0 and 0 or diffScrollY) - M.diffY - M.heightClose
+            end
+
             M.lastY = e.target.y
             e.target:toFront()
 
@@ -358,9 +369,25 @@ local function stopMoveLogicBlock(e, group, scroll)
         scroll:setIsLocked(false, 'vertical')
 
         if M.countClose > 0 then
-            local diffBlockY = e.target.y - e.target.height / 2
-            local diffScrollY = M.diffY - diffBlockY + scroll.height / 2
+            local diffScrollY = scroll.y - e.target.y + e.target.height / 2
             scroll:scrollToPosition({y = diffScrollY > 0 and 0 or diffScrollY, time = 0})
+        end
+
+        if e.target.data.nested then
+            for j = M.index, #group.blocks do
+                if group.blocks[j].data.event and j ~= M.index then break end
+                for i = 2, #INFO.listName[group.blocks[j].data.name] do
+                    if INFO.listName[group.blocks[j].data.name][i] == 'var' or INFO.listName[group.blocks[j].data.name][i] == 'table' then
+                        LISTENER({blocks = group.blocks, bIndex = j, pIndex = i - 1})
+                    end
+                end
+            end
+        else
+            for i = 2, #INFO.listName[e.target.data.name] do
+                if INFO.listName[e.target.data.name][i] == 'var' or INFO.listName[e.target.data.name][i] == 'table' then
+                    LISTENER({blocks = group.blocks, bIndex = M.index, pIndex = i - 1})
+                end
+            end
         end
     end
 end

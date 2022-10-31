@@ -1,6 +1,10 @@
 local LIST = require 'Core.Modules.interface-list'
 local listeners = {}
 
+listeners.title = function(target)
+    EXITS.settings()
+end
+
 listeners.orientation = function(e)
     LOCAL.orientation = LOCAL.orientation == 'portrait' and 'landscape' or 'portrait'
     e.target.rotation = e.target.rotation + 90 NEW_DATA() native.requestExit()
@@ -11,8 +15,8 @@ listeners.pos = function(e)
 
     LIST.new(list, e.target.x, e.target.y - e.target.height / 2, 'down', function(e)
         if e.index > 0 then
-            LOCAL.pos_top_ads = e.text == STR['settings.topads'] ADMOB.hide()
-            if LOCAL.show_ads then ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'}) end
+            LOCAL.pos_top_ads = e.text == STR['settings.topads'] -- ADMOB.hide()
+            -- if LOCAL.show_ads then ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'}) end
 
             SETTINGS.group:removeSelf()
             SETTINGS.group = nil
@@ -29,8 +33,8 @@ listeners.show = function(e)
 
     LIST.new(list, e.target.x, e.target.y - e.target.height / 2, 'down', function(e)
         if e.index > 0 then
-            LOCAL.show_ads = e.text == STR['button.yes'] ADMOB.hide()
-            if LOCAL.show_ads then ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'}) end
+            LOCAL.show_ads = e.text == STR['button.yes'] -- ADMOB.hide()
+            -- if LOCAL.show_ads then ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'}) end
 
             SETTINGS.group:removeSelf()
             SETTINGS.group = nil
@@ -78,6 +82,12 @@ listeners.lang = function(e)
             MENU.group = nil
             MENU.create()
 
+            pcall(function()
+                NEW_BLOCK.group[4]:removeSelf()
+                NEW_BLOCK.group:removeSelf()
+                NEW_BLOCK.group = nil
+            end)
+
             SETTINGS.group:removeSelf()
             SETTINGS.group = nil
             SETTINGS.create()
@@ -92,15 +102,18 @@ return function(e, type)
     if ALERT then
         if e.phase == 'began' then
             display.getCurrentStage():setFocus(e.target)
-            if type ~= 'orientation' then e.target:setFillColor(0.22, 0.22, 0.24) end
+            if type == 'title' then e.target.alpha = 0.6
+            elseif type ~= 'orientation' then e.target:setFillColor(0.22, 0.22, 0.24) end
             e.target.click = true
         elseif e.phase == 'moved' and (math.abs(e.x - e.xStart) > 30 or math.abs(e.y - e.yStart) > 30) then
             display.getCurrentStage():setFocus(nil)
-            if type ~= 'orientation' then e.target:setFillColor(0, 0, 0, 0.005) end
+            if type == 'title' then e.target.alpha = 1
+            elseif type ~= 'orientation' then e.target:setFillColor(0, 0, 0, 0.005) end
             e.target.click = false
         elseif e.phase == 'ended' or e.phase == 'cancelled' then
             display.getCurrentStage():setFocus(nil)
-            if type ~= 'orientation' then e.target:setFillColor(0, 0, 0, 0.005) end
+            if type == 'title' then e.target.alpha = 1
+            elseif type ~= 'orientation' then e.target:setFillColor(0, 0, 0, 0.005) end
             if e.target.click then
                 e.target.click = false
                 listeners[type](e)

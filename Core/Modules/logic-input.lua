@@ -1,4 +1,5 @@
 local BLOCK = require 'Core.Modules.logic-block'
+local INFO = require 'Data.info'
 local M = {}
 
 M.cancel = function() pcall(function()
@@ -29,7 +30,8 @@ M.listener = function(e)
         if e.target.click then
             e.target.click = false
             e.target:setFillColor(0.14, 0.14, 0.16)
-            if e.target.isList and not e.target.isNew then
+            if e.target.isList and not e.target.isNew and M.alert then
+                M.alert = false
                 M.scroll:setIsLocked(true, 'vertical')
                 INPUT.new(STR['blocks.entertext'], function(event)
                     if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
@@ -37,12 +39,14 @@ M.listener = function(e)
                     end
                 end, function(event)
                     ALERT = false
+                    M.alert = true
                     M.scroll:setIsLocked(false, 'vertical')
                     timer.performWithDelay(1, function() EXITS.add(M.cancel) end)
                     if event.input then M.rename(e.target, event.text) end
                 end, e.target.text) native.setKeyboardFocus(INPUT.box)
             else
-                if e.target.isNew or (type(e.target.text) == 'table' and e.target.text.isNew) then
+                if M.alert and (e.target.isNew or (type(e.target.text) == 'table' and e.target.text.isNew)) then
+                    M.alert = false
                     M.scroll:setIsLocked(true, 'vertical')
                     INPUT.new(STR['blocks.entertext'], function(event)
                         if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
@@ -50,11 +54,12 @@ M.listener = function(e)
                         end
                     end, function(event)
                         ALERT = false
+                        M.alert = true
                         M.scroll:setIsLocked(false, 'vertical')
                         timer.performWithDelay(1, function() EXITS.add(M.cancel) end)
                         if event.input then M.set(event.text) end
                     end) native.setKeyboardFocus(INPUT.box)
-                else
+                elseif M.alert then
                     local blockIndex, paramsIndex = M.params[2], M.params[3]
                     local params = BLOCKS.group.blocks[blockIndex].data.params
                     local mode = M.active == 'event' and 'vE' or M.active == 'script' and 'vS' or 'vP'
@@ -92,8 +97,8 @@ M.set = function(name)
             if i == #t + 1 then table.insert(t, 1, name) end
         end
     elseif M.active == 'event' and name ~= '' then
-        local t = M.data.scripts[CURRENT_SCRIPT].params[M.vars.index].vars
-        if M.params[1] == 'tables' then t = M.data.scripts[CURRENT_SCRIPT].params[M.vars.index].tables end
+        local t = M.data.scripts[CURRENT_SCRIPT].params[M.getEventIndex(M.data, M.vars.index)].vars
+        if M.params[1] == 'tables' then t = M.data.scripts[CURRENT_SCRIPT].params[M.getEventIndex(M.data, M.vars.index)].tables end
 
         for i = 1, #t + 1 do
             if t[i] == name then return end
@@ -102,115 +107,208 @@ M.set = function(name)
     end
 
     SET_GAME_CODE(CURRENT_LINK, M.data)
-    M.remove(CENTER_X, CENTER_Y - 100, DISPLAY_WIDTH / 1.5, DISPLAY_HEIGHT / 2)
+    M.remove(M.scroll.x, M.scroll.y, M.scroll.width, M.scroll.height)
     M.gen(M.active, M.scroll)
 end
 
-M.rename = function(target, name)
-    if M.active == 'project' then
-        local t = M.params[1] == 'funs' and M.data.funs or M.params[1] == 'vars' and M.data.vars or M.data.tables
-        local type = M.params[1] == 'funs' and 'fP' or M.params[1] == 'vars' and 'vP' or 'tP'
+M.renameProject = function(data, text, name, type)
+    local data, nestedInfo = GET_FULL_DATA(data)
+    local t = type == 'fP' and data.funs or data.vars
+    if type == 'tP' then t = data.tables end
 
-        for i = 1, #t do
-            if t[i] == name then return end
-            if t[i] == target.text then
-                for j = i, #t do if t[j] == name then return end end
-                for j = 1, #M.data.scripts do
-                    for k = 1, #M.data.scripts[j].params do
-                        for u = 1, #M.data.scripts[j].params[k].params do
-                            for o = 1, #M.data.scripts[j].params[k].params[u] do
-                                if M.data.scripts[j].params[k].params[u][o][2] == type
-                                and M.data.scripts[j].params[k].params[u][o][1] == target.text then
-                                    if name == '' then
-                                        table.remove(M.data.scripts[j].params[k].params[u], o)
-                                        if CURRENT_SCRIPT == j then
-                                            BLOCKS.group.blocks[k].data.params = COPY_TABLE(M.data.scripts[CURRENT_SCRIPT].params[k].params)
-                                            BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
-                                        end
-                                    else
-                                        M.data.scripts[j].params[k].params[u][o][1] = name
-                                        if CURRENT_SCRIPT == j then
-                                            BLOCKS.group.blocks[k].data.params = COPY_TABLE(M.data.scripts[CURRENT_SCRIPT].params[k].params)
-                                            BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end if name == '' then table.remove(t, i) else t[i] = name end break
-            end
-        end
-    elseif M.active == 'script' then
-        local t = M.params[1] == 'funs' and M.data.scripts[CURRENT_SCRIPT].funs or M.data.scripts[CURRENT_SCRIPT].vars
-        local type = M.params[1] == 'funs' and 'fS' or M.params[1] == 'vars' and 'vS' or 'tS'
-        if M.params[1] == 'tables' then t = M.data.scripts[CURRENT_SCRIPT].tables end
-
-        for i = 1, #t do
-            if t[i] == name then return end
-            if t[i] == target.text then
-                for j = i, #t do if t[j] == name then return end end
-                for k = 1, #M.data.scripts[CURRENT_SCRIPT].params do
-                    for u = 1, #M.data.scripts[CURRENT_SCRIPT].params[k].params do
-                        for o = 1, #M.data.scripts[CURRENT_SCRIPT].params[k].params[u] do
-                            if M.data.scripts[CURRENT_SCRIPT].params[k].params[u][o][2] == type
-                            and M.data.scripts[CURRENT_SCRIPT].params[k].params[u][o][1] == target.text then
-                                if name == '' then
-                                    table.remove(M.data.scripts[CURRENT_SCRIPT].params[k].params[u], o)
-                                    BLOCKS.group.blocks[k].data.params = COPY_TABLE(M.data.scripts[CURRENT_SCRIPT].params[k].params)
-                                    BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
+    local function renameForAllParams(i)
+        for j = 1, #data.scripts do
+            for k = 1, #data.scripts[j].params do
+                for u = 1, #data.scripts[j].params[k].params do
+                    for o = #data.scripts[j].params[k].params[u], 1, -1 do
+                        if data.scripts[j].params[k].params[u][o][2] == type
+                        and data.scripts[j].params[k].params[u][o][1] == text then
+                            if name == '' then
+                                if INFO.listName[data.scripts[j].params[k].name][u + 1] == 'var'
+                                or INFO.listName[data.scripts[j].params[k].name][u + 1] == 'fun'
+                                or INFO.listName[data.scripts[j].params[k].name][u + 1] == 'table' then
+                                    table.remove(data.scripts[j].params[k].params[u], o)
                                 else
-                                    M.data.scripts[CURRENT_SCRIPT].params[k].params[u][o][1] = name
-                                    BLOCKS.group.blocks[k].data.params = COPY_TABLE(M.data.scripts[CURRENT_SCRIPT].params[k].params)
-                                    BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
+                                    data.scripts[j].params[k].params[u][o] = {'0', 'n'}
                                 end
+                            else
+                                data.scripts[j].params[k].params[u][o][1] = name
                             end
                         end
                     end
-                end if name == '' then table.remove(t, i) else t[i] = name end break
-            end
+                end
+            end if name == '' then table.remove(t, i) elseif i then t[i] = name end
         end
-    elseif M.active == 'event' then
-        local t = M.data.scripts[CURRENT_SCRIPT].params[M.vars.index].vars
-        local type = M.params[1] == 'tables' and 'tE' or 'vE'
-        if M.params[1] == 'tables' then t = M.data.scripts[CURRENT_SCRIPT].params[M.vars.index].tables end
 
-        for i = 1, #t do
-            if t[i] == name then return end
-            if t[i] == target.text then
-                for j = i, #t do if t[j] == name then return end end
-                for k = M.vars.index, #M.data.scripts[CURRENT_SCRIPT].params do
-                    if M.data.scripts[CURRENT_SCRIPT].params[k].event and k ~= M.vars.index then break end
-                    for u = 1, #M.data.scripts[CURRENT_SCRIPT].params[k].params do
-                        for o = 1, #M.data.scripts[CURRENT_SCRIPT].params[k].params[u] do
-                            if M.data.scripts[CURRENT_SCRIPT].params[k].params[u][o][2] == type
-                            and M.data.scripts[CURRENT_SCRIPT].params[k].params[u][o][1] == target.text then
-                                if name == '' then
-                                    table.remove(M.data.scripts[CURRENT_SCRIPT].params[k].params[u], o)
-                                    BLOCKS.group.blocks[k].data.params = COPY_TABLE(M.data.scripts[CURRENT_SCRIPT].params[k].params)
-                                    BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
-                                else
-                                    M.data.scripts[CURRENT_SCRIPT].params[k].params[u][o][1] = name
-                                    BLOCKS.group.blocks[k].data.params = COPY_TABLE(M.data.scripts[CURRENT_SCRIPT].params[k].params)
-                                    BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
-                                end
-                            end
-                        end
-                    end
-                end if name == '' then table.remove(t, i) else t[i] = name end break
+        data = GET_NESTED_DATA(data, nestedInfo, INFO)
+
+        for k = 1, #BLOCKS.group.blocks do
+            for u = 1, #BLOCKS.group.blocks[k].data.params do
+                for o = #BLOCKS.group.blocks[k].data.params[u], 1, -1 do
+                    if BLOCKS.group.blocks[k].data.params[u][o][2] == type
+                    and BLOCKS.group.blocks[k].data.params[u][o][1] == text then
+                        BLOCKS.group.blocks[k].data.params = COPY_TABLE(data.scripts[CURRENT_SCRIPT].params[k].params)
+                    end BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
+                end
             end
         end
     end
 
+    if #t == 0 then
+        renameForAllParams()
+    end
+
+    for i = 1, #t do
+        if t[i] == name then return end
+        if t[i] == text then
+            for j = i, #t do if t[j] == name then return end end
+            renameForAllParams(i) break
+        end
+    end
+
+    M.data = COPY_TABLE(data)
     SET_GAME_CODE(CURRENT_LINK, M.data)
+end
+
+M.renameScript = function(data, text, name, type)
+    local data, nestedInfo = GET_FULL_DATA(data)
+    local t = type == 'fS' and data.scripts[CURRENT_SCRIPT].funs or data.scripts[CURRENT_SCRIPT].vars
+    if type == 'tS' then t = data.scripts[CURRENT_SCRIPT].params[eventIndex].tables end
+
+    local function renameForAllParams(i)
+        for k = 1, #data.scripts[CURRENT_SCRIPT].params do
+            for u = 1, #data.scripts[CURRENT_SCRIPT].params[k].params do
+                for o = #data.scripts[CURRENT_SCRIPT].params[k].params[u], 1, -1 do
+                    if data.scripts[CURRENT_SCRIPT].params[k].params[u][o][2] == type
+                    and data.scripts[CURRENT_SCRIPT].params[k].params[u][o][1] == text then
+                        if name == '' then
+                            if INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'var'
+                            or INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'fun'
+                            or INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'table' then
+                                table.remove(data.scripts[CURRENT_SCRIPT].params[k].params[u], o)
+                            else
+                                data.scripts[CURRENT_SCRIPT].params[k].params[u][o] = {'0', 'n'}
+                            end
+                        else
+                            data.scripts[CURRENT_SCRIPT].params[k].params[u][o][1] = name
+                        end
+                    end
+                end
+            end
+        end if name == '' then table.remove(t, i) elseif i then t[i] = name end
+
+        data = GET_NESTED_DATA(data, nestedInfo, INFO)
+
+        for k = 1, #BLOCKS.group.blocks do
+            for u = 1, #BLOCKS.group.blocks[k].data.params do
+                for o = #BLOCKS.group.blocks[k].data.params[u], 1, -1 do
+                    if BLOCKS.group.blocks[k].data.params[u][o][2] == type
+                    and BLOCKS.group.blocks[k].data.params[u][o][1] == text then
+                        BLOCKS.group.blocks[k].data.params = COPY_TABLE(data.scripts[CURRENT_SCRIPT].params[k].params)
+                    end BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
+                end
+            end
+        end
+    end
+
+    if #t == 0 then
+        renameForAllParams()
+    end
+
+    for i = 1, #t do
+        if t[i] == name then return end
+        if t[i] == text then
+            for j = i, #t do if t[j] == name then return end end
+            renameForAllParams(i) break
+        end
+    end
+
+    M.data = COPY_TABLE(data)
+    SET_GAME_CODE(CURRENT_LINK, M.data)
+end
+
+M.renameEvent = function(data, text, name, type, eventIndex)
+    local data, nestedInfo = GET_FULL_DATA(data)
+    local eventIndex = M.getEventIndex(data, eventIndex)
+    local t = data.scripts[CURRENT_SCRIPT].params[eventIndex].vars
+    if type == 'tE' then t = data.scripts[CURRENT_SCRIPT].params[eventIndex].tables end
+
+    local function renameForAllParams(i)
+        for k = eventIndex, #data.scripts[CURRENT_SCRIPT].params do
+            if data.scripts[CURRENT_SCRIPT].params[k].event and k ~= eventIndex then break end
+            for u = 1, #data.scripts[CURRENT_SCRIPT].params[k].params do
+                for o = #data.scripts[CURRENT_SCRIPT].params[k].params[u], 1, -1 do
+                    if data.scripts[CURRENT_SCRIPT].params[k].params[u][o][2] == type
+                    and data.scripts[CURRENT_SCRIPT].params[k].params[u][o][1] == text then
+                        if name == '' then
+                            if INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'var'
+                            or INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'table' then
+                                table.remove(data.scripts[CURRENT_SCRIPT].params[k].params[u], o)
+                            else
+                                data.scripts[CURRENT_SCRIPT].params[k].params[u][o] = {'0', 'n'}
+                            end
+                        else
+                            data.scripts[CURRENT_SCRIPT].params[k].params[u][o][1] = name
+                        end
+                    end
+                end
+            end
+        end if name == '' and i then table.remove(t, i) elseif i then t[i] = name end
+
+        data = GET_NESTED_DATA(data, nestedInfo, INFO)
+
+        for k = eventIndex, #BLOCKS.group.blocks do
+            if BLOCKS.group.blocks[k].data.event and k ~= eventIndex then break end
+            for u = 1, #BLOCKS.group.blocks[k].data.params do
+                for o = #BLOCKS.group.blocks[k].data.params[u], 1, -1 do
+                    if BLOCKS.group.blocks[k].data.params[u][o][2] == type
+                    and BLOCKS.group.blocks[k].data.params[u][o][1] == text then
+                        BLOCKS.group.blocks[k].data.params = COPY_TABLE(data.scripts[CURRENT_SCRIPT].params[k].params)
+                    end BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
+                end
+            end
+        end
+    end
+
+    if #t == 0 then
+        renameForAllParams()
+    end
+
+    for i = 1, #t do
+        if t[i] == name then return end
+        if t[i] == text then
+            for j = i, #t do if t[j] == name then return end end
+            renameForAllParams(i) break
+        end
+    end
+
+    M.data = COPY_TABLE(data)
+    SET_GAME_CODE(CURRENT_LINK, M.data)
+end
+
+M.rename = function(target, name)
+    if M.active == 'project' then
+        M.renameProject(M.data, target.text, name, M.params[1] == 'funs' and 'fP' or (M.params[1] == 'tables' and 'tP' or 'vP'))
+    elseif M.active == 'script' then
+        M.renameScript(M.data, target.text, name, M.params[1] == 'funs' and 'fS' or (M.params[1] == 'tables' and 'tS' or 'vS'))
+    elseif M.active == 'event' then
+        M.renameEvent(M.data, target.text, name, M.params[1] == 'tables' and 'tE' or 'vE', M.vars.index)
+    end
+
+    M.vars = {project = M.data.vars, script = M.data.scripts[CURRENT_SCRIPT].vars, event = {}, index = M.vars.index}
+    M.tables = {project = M.data.tables, script = M.data.scripts[CURRENT_SCRIPT].tables, event = {}, index = M.tables.index}
+    M.funs = {project = M.data.funs, script = M.data.scripts[CURRENT_SCRIPT].funs}
+    M.vars.event = M.data.scripts[CURRENT_SCRIPT].params[M.tables.index].vars
+    M.tables.event = M.data.scripts[CURRENT_SCRIPT].params[M.tables.index].tables
+
     target.newName(name)
 end
 
 M.remove = function(x, y, width, height)
     M.scroll:removeSelf() M.clear()
     M.scroll = WIDGET.newScrollView({
-            x = x, y = y - 35,
-            width = width, height = height - 70,
+            x = x, y = y,
+            width = width, height = height,
             hideBackground = true, hideScrollBar = true,
             horizontalScrollDisabled = true, isBounceEnabled = true
         })
@@ -270,7 +368,7 @@ M.gen = function(mode, scroll)
         buttonsY = buttonsY + 70
         buttons[i].plus.newName = function(name)
             if name == '' then
-                M.remove(CENTER_X, CENTER_Y - 100, DISPLAY_WIDTH / 1.5, DISPLAY_HEIGHT / 2)
+                M.remove(M.scroll.x, M.scroll.y, M.scroll.width, M.scroll.height)
                 M.gen(M.active, M.scroll)
             else
                 buttons[i].text.text = name
@@ -280,10 +378,21 @@ M.gen = function(mode, scroll)
     end
 end
 
+M.getEventIndex = function(data, countEvent)
+    local _countEvent = 0
+    for i = 1, #data.scripts[CURRENT_SCRIPT].params do
+        if data.scripts[CURRENT_SCRIPT].params[i].event then
+            _countEvent = _countEvent + 1
+            if _countEvent == countEvent then return i end
+        end
+    end
+end
+
 M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor)
     pcall(function()
         if not M.group then
             ALERT = false
+            M.alert = true
             M.isEditor = isEditor
             M.active = mode == 'funs' and 'script' or 'event'
             M.group = display.newGroup()
@@ -293,14 +402,19 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor)
             M.tables = {project = M.data.tables, script = M.data.scripts[CURRENT_SCRIPT].tables, event = {}}
             M.funs = {project = M.data.funs, script = M.data.scripts[CURRENT_SCRIPT].funs}
 
-            for i = blockIndex, 1, -1 do
+            local countEvent = 0
+            local lastIndexEvent = 1
+            for i = 1, #M.data.scripts[CURRENT_SCRIPT].params do
                 if M.data.scripts[CURRENT_SCRIPT].params[i].event then
-                    M.vars.index = i
-                    M.vars.event = M.data.scripts[CURRENT_SCRIPT].params[i].vars
-                    M.tables.event = M.data.scripts[CURRENT_SCRIPT].params[i].tables
-                    break
+                    if i > blockIndex then break end
+                    countEvent = countEvent + 1
+                    lastIndexEvent = i
                 end
             end
+
+            M.vars.index, M.tables.index = countEvent, lastIndexEvent
+            M.vars.event = M.data.scripts[CURRENT_SCRIPT].params[lastIndexEvent].vars
+            M.tables.event = M.data.scripts[CURRENT_SCRIPT].params[lastIndexEvent].tables
 
             if paramsData and paramsData[1] and type(paramsData[1]) == 'table' then
                 if paramsData[1][2] == 'vE' then
@@ -467,9 +581,12 @@ M.select = function(e)
         display.getCurrentStage():setFocus(nil)
         if e.target.click then
             e.target.click = false
-            M.active = e.target.id
-            M.remove(CENTER_X, CENTER_Y - 100, DISPLAY_WIDTH / 1.5, DISPLAY_HEIGHT / 2)
-            M.gen(e.target.id, M.scroll)
+
+            if M.alert then
+                M.active = e.target.id
+                M.remove(M.scroll.x, M.scroll.y, M.scroll.width, M.scroll.height)
+                M.gen(e.target.id, M.scroll)
+            end
         end
     end
 
