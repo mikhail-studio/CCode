@@ -43,6 +43,7 @@ settings = {
 		['plugin.orientation'] = {publisherId = 'tech.scotth'},
 		['plugin.memoryBitmap'] = {publisherId = 'com.coronalabs'},
 		['plugin.zeroconf'] = {publisherId = 'com.coronalabs'},
+		['plugin.impack'] = {publisherId = 'com.xibalbastudios'},
 		-- ['plugin.admob'] = {publisherId = 'com.coronalabs'}
 	},
 

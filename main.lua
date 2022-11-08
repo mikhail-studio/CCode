@@ -4,30 +4,6 @@ MENU = require 'Interfaces.menu'
 MENU.create()
 MENU.group.isVisible = LOCAL.name_tester ~= '' or LIVE or system.getInfo('deviceID') == 'd5e815039ddf2736'
 
--- При смене языка удалять загруженную сцены выбора нового блока
--- Добавить настройку для оптимизации под экраны
--- Поставить == заместо = в редакторе выражений
--- Убрать удаление сцены выбора нового блока при выборе нового блока
--- Изменить блоки для пикселей (добавить непрозрачность)
--- В список выбора переменных/таблиц/функций вселился демон, изгнать его нахуй (logic-input 176)
--- Изменить блоки для пикселей, центрировать 0,0 пиксель
--- Также демон вселился в редактор выражений после добавления нового списка, тоже изгнать нахуй (list 81/139, listener 246)
--- Центрировать настройки (основные)
--- Изменить баг с одинаковой подсказкой в настройках (проекта)
--- При горизонтальной ориентации выбор цвета решает нахуяриться
--- Изменить текстовое поле для ввода текста в редакторе выражений на многострочное
--- Интегрировать блоки Дани, Семки и Терры в нужные категории
--- Ещё баг с изменением перевода для редактора выражений
--- Добавить https://google.com как ссылку по-умолчанию в WebView
--- Починить блок 'Вернуть значение' во вложенных блоках
--- Runtime error на Editor/test 18
--- Добавить блок 'Установить сид для рандома'
--- Runtime error от цвета_пикселя
--- Добавить экспоненту
--- Изменить систему повторяющихся блоков, просто добавив параметр для выбора типа экранного объекта для взаимодействия
--- Добавить физические Joint'ы
--- Создать универсальный CGame.apk
-
 if system.getInfo 'environment' ~= 'simulator' and system.getInfo('deviceID') ~= 'd5e815039ddf2736' and not LIVE then
     network.request('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1Cigzy-fFJywTnGpY1PLyWN3E67uZNSaE', 'GET', function(e)
         pcall(function()
@@ -44,7 +20,7 @@ if system.getInfo 'environment' ~= 'simulator' and system.getInfo('deviceID') ~=
                 end
 
                 if LOCAL.name_tester == '' then
-                    local PASTEBOARD, id = require 'plugin.pasteboard', system.getInfo('deviceID')
+                    local id = system.getInfo('deviceID')
                     if system.getInfo 'environment' ~= 'simulator' then PASTEBOARD.copy('string', tostring(id)) end
                     display.newText('DeviceID скопирован в буфер обмена\nЕсли этого не произошло\nТо вот: ' .. id, CENTER_X, CENTER_Y, 'ubuntu', 30)
                     display.newImage('Sprites/amogus.png', ZERO_X + 75, ZERO_Y + 75)
@@ -75,7 +51,7 @@ if system.getInfo 'environment' ~= 'simulator' and system.getInfo('deviceID') ~=
             end
         end)
     end)
-elseif system.getInfo 'environment' == 'simulator' and true then
+elseif system.getInfo 'environment' == 'simulator' and MENU.group then
     MENU.group.isVisible = false
     PROGRAMS = require 'Interfaces.programs'
     PROGRAMS.create()

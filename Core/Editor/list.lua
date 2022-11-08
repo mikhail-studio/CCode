@@ -2,8 +2,6 @@ local LISTENER = require 'Core.Editor.listener'
 local DATA = require 'Core.Editor.data'
 local TEXT = require 'Core.Editor.text'
 local listeners = {}
-local dataButtons = {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}
-local dataButtonsFuns = {STR['editor.list.script'], STR['editor.list.project']}
 
 listeners.listener = function(e)
     if e.phase == 'began' and ALERT then
@@ -211,15 +209,15 @@ listeners.fun = function(target)
 end
 
 listeners.var = function(target)
-    listeners.set(target, dataButtons, true)
+    listeners.set(target, {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}, true)
 end
 
 listeners.table = function(target)
-    listeners.set(target, dataButtons, true)
+    listeners.set(target, {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}, true)
 end
 
 listeners.funs = function(target)
-    listeners.set(target, dataButtonsFuns, true)
+    listeners.set(target, {STR['editor.list.script'], STR['editor.list.project']}, true)
 end
 
 return listeners

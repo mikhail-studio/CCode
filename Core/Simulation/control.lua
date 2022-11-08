@@ -24,7 +24,7 @@ end
 
 M['requestExit'] = function(params)
     if CURRENT_LINK ~= 'App' then
-        GAME.lua = GAME.lua .. ' pcall(function() EXITS.game() end) if coroutine.status(GAME.CO) == \'running\' then coroutine.yield() end'
+        GAME.lua = GAME.lua .. ' pcall(function() if GAME.isStarted then EXITS.game() end end)'
     else
         GAME.lua = GAME.lua .. ' pcall(function() native.requestExit() end)'
     end
@@ -87,7 +87,7 @@ M['timerEnd'] = function(params)
 end
 
 M['if'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() if (' .. CALC(params[1]) .. ') then'
+    GAME.lua = GAME.lua .. ' if (' .. CALC(params[1]) .. ') then'
 end
 
 M['ifElse'] = function(params)
@@ -95,7 +95,7 @@ M['ifElse'] = function(params)
 end
 
 M['ifEnd'] = function(params)
-    GAME.lua = GAME.lua .. ' end end)'
+    GAME.lua = GAME.lua .. ' end'
 end
 
 M['forever'] = function(params)
@@ -110,19 +110,19 @@ M['for'] = function(params)
     local type = (params[3][1] and params[3][1][2]) == 'vE' and 'varsE' or (params[3][1] and params[3][1][2]) == 'vS' and 'varsS' or 'varsP'
     local name, from, to, step = params[3][1] and params[3][1][1] or '', CALC(params[1]), CALC(params[2]), CALC(params[4], '1')
 
-    GAME.lua = GAME.lua .. ' pcall(function() for i = ' .. from .. ', ' .. to .. ', ' .. step .. ' do ' .. type .. '[\'' .. name .. '\'] = i'
+    GAME.lua = GAME.lua .. ' for i = ' .. from .. ', ' .. to .. ', ' .. step .. ' do ' .. type .. '[\'' .. name .. '\'] = i'
 end
 
 M['forEnd'] = function(params)
-    GAME.lua = GAME.lua .. ' end end)'
+    GAME.lua = GAME.lua .. ' end'
 end
 
 M['repeat'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() for i = 1, ' .. CALC(params[1]) .. ' do'
+    GAME.lua = GAME.lua .. ' for i = 1, ' .. CALC(params[1]) .. ' do'
 end
 
 M['repeatEnd'] = function(params)
-    GAME.lua = GAME.lua .. ' end end)'
+    GAME.lua = GAME.lua .. ' end'
 end
 
 return M

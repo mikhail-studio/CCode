@@ -114,7 +114,7 @@ listeners.lis = function(event)
             listeners.new_block()
         elseif EDITOR and EDITOR.group and EDITOR.group.isVisible then
             listeners.editor()
-        elseif GAME and GAME.group and GAME.group.isVisible then
+        elseif GAME and GAME.isStarted and GAME.group and GAME.group.isVisible then
             listeners.game()
         end
     elseif (event.keyName == 'back' or event.keyName == 'escape') and event.phase == 'up' then

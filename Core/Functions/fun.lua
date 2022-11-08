@@ -65,11 +65,15 @@ M['match'] = function(str, pattern, i)
 end
 
 M['color_pixel'] = function(x, y)
-    local colors = {0, 0, 0}
+    local x = x or 0
+    local y = y or 0
+    local colors = {0, 0, 0, 0}
 
-    display.colorSample(CENTER_X + x, CENTER_Y - y, function(e)
-        colors = {math.round(e.r * 255), math.round(e.g * 255), math.round(e.b * 255)}
-    end)
+    if coroutine.status(GAME.CO) ~= 'running' then
+        display.colorSample(CENTER_X + x, CENTER_Y - y, function(e)
+            colors = {math.round(e.r * 255), math.round(e.g * 255), math.round(e.b * 255), math.round(e.a * 255)}
+        end)
+    end
 
     return colors
 end

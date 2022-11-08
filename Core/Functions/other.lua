@@ -1,5 +1,27 @@
 local M = {}
 
+M.getBitmapTexture = function(link, name)
+    local data, width, height = IMPACK.image.load(link, system.DocumentsDirectory, {req_comp = 3})
+    local x, y, size = 1, 1, width * height
+
+    GAME.group.bitmaps[name] = BITMAP.newTexture({width = width, height = height})
+
+    for i = 1, size do
+        local args = {data:byte(i * 3 - 2, i * 3)}
+
+        GAME.group.bitmaps[name]:setPixel(x, y,
+                args[1] / 255,
+                args[2] / 255,
+                args[3] / 255
+            )
+
+        x = x == width and 1 or x + 1
+        y = x == 1 and y + 1 or y
+    end
+
+    GAME.group.bitmaps[name]:invalidate()
+end
+
 M.getPhysicsParams = function(friction, bounce, density, hitbox)
     local params = {friction = friction, bounce = bounce, density = density}
 

@@ -29,11 +29,11 @@ M['left_point_screen'] = function()
 end
 
 M['height_top'] = function()
-    return CURRENT_ORIENTATION == 'portrait' and TOP_HEIGHT or TOP_WIDTH
+    return TOP_HEIGHT
 end
 
 M['height_bottom'] = function()
-    return CURRENT_ORIENTATION == 'portrait' and BOTTOM_HEIGHT or BOTTOM_WIDTH
+    return BOTTOM_HEIGHT
 end
 
 M['finger_touching_screen'] = function()

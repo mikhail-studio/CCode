@@ -17,7 +17,7 @@ M['newRect'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = 1 GAME.group.objects[' .. name .. ']._bounce = 0'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._friction = 0 GAME.group.objects[' .. name .. ']._gravity = 1'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = link GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
 end
@@ -36,7 +36,7 @@ M['newRoundedRect'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = 1 GAME.group.objects[' .. name .. ']._bounce = 0'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._friction = 0 GAME.group.objects[' .. name .. ']._gravity = 1'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = link GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
 end
@@ -53,7 +53,7 @@ M['newCircle'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = 1 GAME.group.objects[' .. name .. ']._bounce = 0'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._friction = 0 GAME.group.objects[' .. name .. ']._gravity = 1'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = link GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
 end
@@ -70,16 +70,16 @@ M['newBitmap'] = function(params)
 end
 
 M['setPixel'] = function(params)
-    local name, colors = CALC(params[1]), CALC(params[4], '{255}')
-    local posX, posY = CALC(params[2]), CALC(params[3])
+    local name, colors, posX = CALC(params[1]), CALC(params[4], '{255}'), CALC(params[2])
+    local posY = 'GAME.group.bitmaps[' .. name .. '].height + 1 - ' .. CALC(params[3])
 
     GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. colors .. ' GAME.group.bitmaps[' .. name .. ']:setPixel('
     GAME.lua = GAME.lua .. posX .. ', ' .. posY .. ', colors[1]/255, colors[2]/255, colors[3]/255) end)'
 end
 
 M['setPixelRGB'] = function(params)
-    local name = CALC(params[1])
-    local posX, posY = CALC(params[2]), CALC(params[3])
+    local name, posX = CALC(params[1]), CALC(params[2])
+    local posY = 'GAME.group.bitmaps[' .. name .. '].height + 1 - ' .. CALC(params[3])
     local r, g, b = CALC(params[4], '255'), CALC(params[5], '255'), CALC(params[6], '255')
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.bitmaps[' .. name .. ']:setPixel('
@@ -103,6 +103,45 @@ M['setBitmapSprite'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].fill = {type = \'image\','
     GAME.lua = GAME.lua .. ' filename = GAME.group.bitmaps[' .. link .. '].filename,'
     GAME.lua = GAME.lua .. ' baseDir = GAME.group.bitmaps[' .. link .. '].baseDir} image:removeSelf() image = nil end)'
+end
+
+M['getBitmapSprite'] = function(params)
+    local link, name = CALC(params[1]), CALC(params[2])
+
+    GAME.lua = GAME.lua .. ' pcall(function() local link, filter = other.getImage(' .. link .. ')'
+    GAME.lua = GAME.lua .. ' display.setDefault(\'magTextureFilter\', filter)'
+    GAME.lua = GAME.lua .. ' display.setDefault(\'minTextureFilter\', filter)'
+    GAME.lua = GAME.lua .. ' other.getBitmapTexture(link, ' .. name .. ') end)'
+end
+
+M['setGradientPaint'] = function(params)
+    local name = CALC(params[1])
+    local colors1, colors2 = CALC(params[2], '{255}'), CALC(params[3], '{255}')
+    local alpha1, alpha2 = CALC(params[4], '100'), CALC(params[5], '100')
+
+    GAME.lua = GAME.lua .. ' pcall(function() local colors1, colors2 = ' .. colors1 .. ', ' .. colors2
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].fill = {type = \'gradient\','
+    GAME.lua = GAME.lua .. ' color1 = {colors1[1]/255, colors1[2]/255, colors1[3]/255, ' .. alpha1 .. '/100},'
+    GAME.lua = GAME.lua .. ' color2 = {colors2[1]/255, colors2[2]/255, colors2[3]/255, ' .. alpha2 .. '/100}} end)'
+end
+
+M['setStrokeWidth'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].strokeWidth =' .. CALC(params[2]) .. ' end)'
+end
+
+M['updStrokeWidth'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].strokeWidth ='
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. CALC(params[1]) .. '].strokeWidth + ' .. CALC(params[2]) .. ' end)'
+end
+
+M['setStrokeColor'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. CALC(params[2], '{255}')
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. CALC(params[1]) .. '].stroke = {colors[1]/255, colors[2]/255, colors[3]/255} end)'
+end
+
+M['setStrokeRGB'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].stroke ='
+    GAME.lua = GAME.lua .. ' {' .. CALC(params[2]) .. '/255, ' .. CALC(params[3]) .. '/255, ' .. CALC(params[4]) .. '/255} end)'
 end
 
 return M

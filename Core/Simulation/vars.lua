@@ -151,4 +151,11 @@ M['saveValue'] = function(params)
     GAME.lua = GAME.lua .. ' data[tostring(' .. key .. ')] = ' .. value .. ' SET_GAME_SAVE(CURRENT_LINK, data) end)'
 end
 
+M['setRandomSeed'] = function(params)
+    local seed = CALC(params[1])
+
+    GAME.lua = GAME.lua .. ' pcall(function() math.randomseed(math.sum(UTF8.byte(tostring(' .. seed .. '), 1,'
+    GAME.lua = GAME.lua .. ' UTF8.len(tostring(' .. seed .. '))))) end)'
+end
+
 return M

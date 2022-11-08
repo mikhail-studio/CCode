@@ -31,7 +31,7 @@ return {
         local package = GAME.data.settings.package
 
         GAME = nil
-        GANIN.compress(DOC_DIR .. '/Build', DOC_DIR .. '/game.cc', 'cc.ode_?-?.cc_ode', function()
+        GANIN.compress(DOC_DIR .. '/Build', DOC_DIR .. '/game.cc', SOLAR .. _G.A .. _G.C, function()
             OS_REMOVE(DOC_DIR .. '/game.lua')
             OS_REMOVE(DOC_DIR .. '/list.json')
             OS_REMOVE(DOC_DIR .. '/Build', true)

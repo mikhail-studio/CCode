@@ -12,7 +12,7 @@ M.listType = {
     'groups',
     'shapes',
     'widgets',
-    'none',
+    'widgets2',
     'none',
     'none',
     'none'
@@ -45,7 +45,8 @@ M.listBlock = {
         'updTextPosY',
         'updTextRotation',
         'updTextAlpha',
-        'saveValue'
+        'saveValue',
+        'setRandomSeed'
     },
 
     ['objects'] = {
@@ -95,10 +96,17 @@ M.listBlock = {
         'newRoundedRect',
         'newRect',
         'newBitmap',
-        'setBitmapSprite',
         'updBitmap',
         'setPixel',
-        'setPixelRGB'
+        'setPixelRGB',
+        'setBitmapSprite',
+        'getBitmapSprite',
+        'setColor',
+        'setGradientPaint',
+        'setStrokeWidth',
+        'updStrokeWidth',
+        'setStrokeColor',
+        'setStrokeRGB'
     },
 
     ['objects2'] = {
@@ -110,7 +118,6 @@ M.listBlock = {
         'newParAnimation',
         'playAnimation',
         'pauseAnimation',
-        'setColor',
         'newMask',
         'addMaskToObject',
         'setMaskPos',
@@ -182,7 +189,23 @@ M.listBlock = {
         'setWebViewSize',
         'setWebViewFront',
         'setWebViewBack',
-        'setWebViewLink'
+        'setWebViewLink',
+        'newHSlider',
+        'newVSlider',
+        'removeSlider',
+        'setSliderPos',
+        'setSliderValue',
+        'getSliderValue'
+    },
+
+    ['widgets2'] = {
+        'newField',
+        'newBox',
+        'setFieldText',
+        'setFieldPos',
+        'setFieldSize',
+        'setFieldRule',
+        'removeField'
     }
 }
 
@@ -213,6 +236,7 @@ M.listName = {
         ['updTextRotation'] = {'vars', 'value', 'value'},
         ['updTextAlpha'] = {'vars', 'value', 'value'},
         ['saveValue'] = {'vars', 'value', 'value'},
+        ['setRandomSeed'] = {'vars', 'value'},
 
     -- objects
     ['newObject'] = {'objects', 'value', 'value', 'value', 'value'},
@@ -259,10 +283,17 @@ M.listName = {
         ['newRoundedRect'] = {'shapes', 'value', 'value', 'value', 'value', 'value', 'value'},
         ['newCircle'] = {'shapes', 'value', 'value', 'value', 'value'},
         ['newBitmap'] = {'shapes', 'value', 'value', 'value'},
-        ['setBitmapSprite'] = {'shapes', 'value', 'value'},
         ['updBitmap'] = {'shapes', 'value'},
         ['setPixel'] = {'shapes', 'value', 'value', 'value', 'color'},
         ['setPixelRGB'] = {'shapes', 'value', 'value', 'value', 'value', 'value', 'value'},
+        ['setBitmapSprite'] = {'shapes', 'value', 'value'},
+        ['getBitmapSprite'] = {'shapes', 'value', 'value'},
+        ['setColor'] = {'shapes', 'value', 'color'},
+        ['setGradientPaint'] = {'shapes', 'value', 'color', 'color', 'value', 'value'},
+        ['setStrokeWidth'] = {'shapes', 'value', 'value'},
+        ['updStrokeWidth'] = {'shapes', 'value', 'value'},
+        ['setStrokeColor'] = {'shapes','value', 'color'},
+        ['setStrokeRGB'] = {'shapes','value','value','value','value'},
 
     -- objects2
     ['setSprite'] = {'objects2', 'value', 'value'},
@@ -273,7 +304,6 @@ M.listName = {
         ['newParAnimation'] = {'objects2', 'value', 'value', 'animation', 'value', 'value'},
         ['playAnimation'] = {'objects2', 'value', 'value'},
         ['pauseAnimation'] = {'objects2', 'value', 'value'},
-        ['setColor'] = {'objects2', 'value', 'color'},
         ['newMask'] = {'objects2', 'value', 'value'},
         ['addMaskToObject'] = {'objects2', 'value', 'value'},
         ['setMaskPos'] = {'objects2', 'value', 'value', 'value'},
@@ -341,7 +371,22 @@ M.listName = {
         ['setWebViewSize'] = {'widgets', 'value', 'value', 'value'},
         ['setWebViewFront'] = {'widgets', 'value'},
         ['setWebViewBack'] = {'widgets', 'value'},
-        ['setWebViewLink'] = {'widgets', 'value', 'value'}
+        ['setWebViewLink'] = {'widgets', 'value', 'value'},
+        ['newHSlider'] = {'widgets', 'value', 'value', 'value', 'value'},
+        ['newVSlider'] = {'widgets', 'value', 'value', 'value', 'value'},
+        ['removeSlider'] = {'widgets', 'value'},
+        ['setSliderPos'] = {'widgets', 'value', 'value', 'value'},
+        ['setSliderValue'] = {'widgets', 'value', 'value'},
+        ['getSliderValue'] = {'widgets', 'value', 'var'},
+
+    -- widgets2
+    ['newField'] = {'widgets2', 'value', 'value', 'inputType', 'color', 'value', 'isBackground', 'textAlign', 'value'},
+        ['newBox'] = {'widgets2', 'value', 'value', 'color', 'value', 'isBackground', 'textAlign', 'value'},
+        ['removeField'] = {'widgets2', 'value'},
+        ['setFieldPos'] = {'widgets2', 'value', 'value', 'value'},
+        ['setFieldSize'] = {'widgets2', 'value', 'value', 'value'},
+        ['setFieldRule'] = {'widgets2', 'value', 'rule'},
+        ['setFieldText'] = {'widgets2', 'value', 'value'}
 }
 
 M.listNested = {
@@ -398,6 +443,8 @@ M.getBlockColor = function(name, comment, type)
         return 0.6, 0.55, 0.4
     elseif type == 'widgets' then
         return 0.4, 0.45, 0.6
+    elseif type == 'widgets2' then
+        return 0.7, 0.5, 0.5
     elseif type == 'everyone' then
         return 0.15, 0.55, 0.4
     end

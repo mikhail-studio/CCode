@@ -24,7 +24,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     M.restart = {blockName, blockIndex, M.data, paramsIndex}
     BLOCKS.group.isVisible = false
 
-    local data = GET_GAME_CODE(CURRENT_LINK)
+    local data = GET_GAME_CODE(CURRENT_LINK) DATA.new()
         M.vars = {project = data.vars, script = data.scripts[CURRENT_SCRIPT].vars, event = {}}
         M.tables = {project = data.tables, script = data.scripts[CURRENT_SCRIPT].tables, event = {}}
         M.funs = {project = data.funs, script = data.scripts[CURRENT_SCRIPT].funs}
@@ -40,7 +40,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
 
     local buttonsText = {
         STR['editor.button.text'], STR['editor.button.hide'],
-        '[', ']', '=', STR['editor.button.local'], '(', ')',
+        '[', ']', '==', STR['editor.button.local'], '(', ')',
         1, 2, 3, '+', 4, 5, 6, '-', 7, 8, 9, '*',
         '.', 0, ',', '/', 'C', '<-', '->', STR['button.okay']
     }

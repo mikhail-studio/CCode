@@ -11,60 +11,77 @@ M.create = function()
         bg.rotation = CENTER_X == 640 and 90 or 0
     M.group:insert(bg)
 
+    -- local lineH = display.newRect(MAX_X - 250, CENTER_Y, 10, DISPLAY_HEIGHT)
+    -- M.group:insert(lineH)
+
+    local lMaxWidth = MAX_X - ZERO_X - 250
+    local rCenterX = (lMaxWidth + MAX_X + 20) / 2
+    local rMaxWidth = 200
+
     local title = display.newText(STR['menu.settings'], ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)
         title.anchorX = 0
         title.anchorY = 0
     M.group:insert(title)
 
-    local lang_text = display.newText(STR['settings.applang'], 20, title.y + 120, 'ubuntu', 30)
-        lang_text.anchorX = 0
+    local lang_text = display.newText({
+            text = STR['settings.applang'], x = 20, y = title.y + 120,
+            font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
+        }) lang_text.anchorX = 0
     M.group:insert(lang_text)
 
-    local lang_button = display.newRect((lang_text.width + MAX_X) / 2 + 10, lang_text.y, MAX_X - lang_text.width - 100, 60)
+    local lang_button = display.newRect(rCenterX, lang_text.y, rMaxWidth, 60)
         lang_button:setFillColor(0, 0, 0, 0.005)
         lang_button.text = display.newText(STR['lang.' .. LOCAL.lang], lang_button.x, lang_button.y, 'ubuntu', 30)
     M.group:insert(lang_button)
     M.group:insert(lang_button.text)
 
-    local confirm_text = display.newText(STR['settings.confirmdelete'], 20, lang_text.y + 70, 'ubuntu', 30)
-        confirm_text.anchorX = 0
+    local confirm_text = display.newText({
+            text = STR['settings.confirmdelete'], x = 20, y = lang_text.y + 70,
+            font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
+        }) confirm_text.anchorX = 0
     M.group:insert(confirm_text)
 
-    local confirm_button = display.newRect((confirm_text.width + MAX_X) / 2 + 10, confirm_text.y, MAX_X - confirm_text.width - 100, 60)
+    local confirm_button = display.newRect(rCenterX, confirm_text.y, rMaxWidth, 60)
         confirm_button:setFillColor(0, 0, 0, 0.005)
         confirm_button.text = display.newText('', confirm_button.x, confirm_button.y, 'ubuntu', 30)
         confirm_button.text.text = LOCAL.confirm and STR['button.yes'] or STR['button.no']
     M.group:insert(confirm_button)
     M.group:insert(confirm_button.text)
 
-    local show_ads_text = display.newText(STR['settings.showads'], 20, confirm_button.y + 70, 'ubuntu', 30)
-        show_ads_text.anchorX = 0
+    local show_ads_text = display.newText({
+            text = STR['settings.showads'], x = 20, y = confirm_button.y + 70,
+            font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
+        }) show_ads_text.anchorX = 0
     M.group:insert(show_ads_text)
 
-    local show_ads_button = display.newRect((show_ads_text.width + MAX_X) / 2 + 10, show_ads_text.y, MAX_X - show_ads_text.width - 100, 60)
+    local show_ads_button = display.newRect(rCenterX, show_ads_text.y, rMaxWidth, 60)
         show_ads_button:setFillColor(0, 0, 0, 0.005)
         show_ads_button.text = display.newText('', show_ads_button.x, show_ads_button.y, 'ubuntu', 30)
         show_ads_button.text.text = LOCAL.show_ads and STR['button.yes'] or STR['button.no']
     M.group:insert(show_ads_button)
     M.group:insert(show_ads_button.text)
 
-    local pos_top_ads_text = display.newText(STR['settings.posads'], 20, show_ads_button.y + 70, 'ubuntu', 30)
-        pos_top_ads_text.anchorX = 0
+    local pos_top_ads_text = display.newText({
+            text = STR['settings.posads'], x = 20, y = show_ads_button.y + 70,
+            font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
+        }) pos_top_ads_text.anchorX = 0
     M.group:insert(pos_top_ads_text)
 
-    local pos_top_ads_button = display.newRect((pos_top_ads_text.width + MAX_X) / 2 + 10, pos_top_ads_text.y, MAX_X - pos_top_ads_text.width - 100, 60)
+    local pos_top_ads_button = display.newRect(rCenterX, pos_top_ads_text.y, rMaxWidth, 60)
         pos_top_ads_button:setFillColor(0, 0, 0, 0.005)
         pos_top_ads_button.text = display.newText('', pos_top_ads_button.x, pos_top_ads_button.y, 'ubuntu', 30)
         pos_top_ads_button.text.text = LOCAL.pos_top_ads and STR['settings.topads'] or STR['settings.bottomads']
     M.group:insert(pos_top_ads_button)
     M.group:insert(pos_top_ads_button.text)
 
-    local orientation_text = display.newText(STR['settings.orientation'], 20, pos_top_ads_button.y + 120, 'ubuntu', 30)
-        orientation_text.anchorX = 0
+    local orientation_text = display.newText({
+            text = STR['settings.orientation'], x = 20, y = pos_top_ads_button.y + 120,
+            font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
+        }) orientation_text.anchorX = 0
     M.group:insert(orientation_text)
 
     local orientation_group = display.newGroup()
-        orientation_group.x = MAX_X - 150
+        orientation_group.x = rCenterX
         orientation_group.y = orientation_text.y
         orientation_group.rotation = LOCAL.orientation == 'portrait' and 90 or 0
     M.group:insert(orientation_group)
@@ -76,11 +93,11 @@ M.create = function()
         orientation_icon.rotation = 90
     orientation_group:insert(orientation_icon)
 
-    local orientation_icon_left = display.newRect(0, 15 - orientation_icon.height / 2, 30, 1.5)
+    local orientation_icon_left = display.newRect(0, 15 - orientation_icon.height / 2, 30, 1.6)
         orientation_icon_left:setFillColor(1)
     orientation_group:insert(orientation_icon_left)
 
-    local orientation_icon_right = display.newRect(0, orientation_icon.height / 2 - 15, 30, 1.5)
+    local orientation_icon_right = display.newRect(0, orientation_icon.height / 2 - 15, 30, 1.6)
         orientation_icon_right:setFillColor(1)
     orientation_group:insert(orientation_icon_right)
 
@@ -92,12 +109,23 @@ M.create = function()
         M.group:insert(splash)
     end
 
+    show_ads_button.text.isVisible = false
+    show_ads_button.isVisible = false
+    show_ads_text.isVisible = false
+    pos_top_ads_button.text.isVisible = false
+    pos_top_ads_button.isVisible = false
+    pos_top_ads_text.isVisible = false
+    orientation_group.isVisible = false
+    orientation_text.isVisible = false
+    -- orientation_text.y = confirm_button.y + 120
+    -- orientation_group.y = orientation_text.y
+
     title:addEventListener('touch', function(e) LISTENER(e, 'title') end)
     lang_button:addEventListener('touch', function(e) LISTENER(e, 'lang') end)
     confirm_button:addEventListener('touch', function(e) LISTENER(e, 'confirm') end)
-    show_ads_button:addEventListener('touch', function(e) LISTENER(e, 'show') end)
-    pos_top_ads_button:addEventListener('touch', function(e) LISTENER(e, 'pos') end)
-    orientation_group:addEventListener('touch', function(e) LISTENER(e, 'orientation') end)
+    -- show_ads_button:addEventListener('touch', function(e) LISTENER(e, 'show') end)
+    -- pos_top_ads_button:addEventListener('touch', function(e) LISTENER(e, 'pos') end)
+    -- orientation_group:addEventListener('touch', function(e) LISTENER(e, 'orientation') end)
 end
 
 return M

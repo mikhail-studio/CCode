@@ -5,7 +5,7 @@ listeners.title = function(target)
 end
 
 listeners.build_button = function(target)
-    INPUT.new(STR['psettings.enterpackage'], function(event)
+    INPUT.new(STR['psettings.enterbuild'], function(event)
         if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
             INPUT.remove(true, event.target.text)
         end
@@ -24,7 +24,7 @@ listeners.build_button = function(target)
 end
 
 listeners.version_button = function(target)
-    INPUT.new(STR['psettings.enterpackage'], function(event)
+    INPUT.new(STR['psettings.enterversion'], function(event)
         if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
             INPUT.remove(true, event.target.text)
         end

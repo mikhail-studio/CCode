@@ -83,9 +83,7 @@ listeners.lang = function(e)
             MENU.create()
 
             pcall(function()
-                NEW_BLOCK.group[4]:removeSelf()
-                NEW_BLOCK.group:removeSelf()
-                NEW_BLOCK.group = nil
+                NEW_BLOCK.remove()
             end)
 
             SETTINGS.group:removeSelf()

@@ -1,5 +1,6 @@
 LANG, STR, MAIN = {}, {}, display.newGroup()
 
+PARTICLE = require 'Emitter.particleDesigner'
 RESIZE = require 'Core.Modules.app-resize'
 INPUT = require 'Core.Modules.interface-input'
 WINDOW = require 'Core.Modules.interface-window'
@@ -7,8 +8,10 @@ EXITS = require 'Core.Interfaces.exits'
 BITMAP = require 'plugin.memoryBitmap'
 FILE = require 'plugin.cnkFileManager'
 EXPORT = require 'plugin.exportFile'
+PASTEBOARD = require 'plugin.pasteboard'
 ORIENTATION = require 'plugin.orientation'
 -- ADMOB = require 'plugin.admob'
+IMPACK = require 'plugin.impack'
 SVG = require 'plugin.nanosvg'
 UTF8 = require 'plugin.utf8'
 ZIP = require 'plugin.zip'
@@ -36,10 +39,8 @@ if system.getInfo('deviceID') == '439ab4d7b739941c' then
 end
 
 LIVE = false
-BUILD = 1169
+BUILD = 1170
 ALERT = true
-CENTER_Z = 0
-TOP_WIDTH = 0
 INDEX_LIST = 0
 MORE_LIST = true
 ADMOB_HEIGHT = 0
@@ -57,14 +58,14 @@ DISPLAY_HEIGHT = display.actualContentHeight
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
-TOP_HEIGHT = system.getInfo 'environment' ~= 'simulator' and display.topStatusBarContentHeight or 0
-BOTTOM_HEIGHT = DISPLAY_HEIGHT - display.safeActualContentHeight
-BOTTOM_WIDTH = DISPLAY_WIDTH - display.safeActualContentWidth
-ZERO_X = CENTER_X - DISPLAY_WIDTH / 2
+TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
+if system.getInfo('deviceID') == 'd5e815039ddf2736' then BOTTOM_HEIGHT = 100 end
+ZERO_X = CENTER_X - DISPLAY_WIDTH / 2 + LEFT_HEIGHT
 ZERO_Y = CENTER_Y - DISPLAY_HEIGHT / 2 + TOP_HEIGHT
-MAX_X = CENTER_X + DISPLAY_WIDTH / 2
+MAX_X = CENTER_X + DISPLAY_WIDTH / 2 - RIGHT_HEIGHT
 MAX_Y = CENTER_Y + DISPLAY_HEIGHT / 2 - BOTTOM_HEIGHT
 MASK = graphics.newMask('Sprites/mask.png')
+SOLAR = _G.B .. _G.D .. _G.A .. _G.C
 
 for k, v in pairs(LANG.ru) do
     if not STR[k] then
@@ -349,33 +350,42 @@ display.setStatusBar(display.HiddenStatusBar) math.randomseed(os.time())
 DEVELOPERS = JSON.decode(READ_FILE(system.pathForFile('Emitter/developers.json')))
 
 math.factorial = function(num) if num == 0 then return 1 else return num * math.factorial(num - 1) end end
-math.round = function(num) return tonumber(string.match(tostring(num), '(.*)%.')) or num end
 math.hex = function(hex) local r, g, b = hex:match('(..)(..)(..)') return {tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)} end
 UTF8.trim = function(s) return UTF8.gsub(UTF8.gsub(s, '^%s+', ''), '%s+$', '') end
 UTF8.trimLeft = function(s) return UTF8.gsub(s, '^%s+', '') end
 UTF8.trimRight = function(s) return UTF8.gsub(s, '%s+$', '') end
+UTF8.trimFull = function(s) return UTF8.trim(UTF8.gsub(s, '%s+', ' ')) end
 timer.new = function(sec, rep, lis) return timer.performWithDelay(sec, lis, rep) end
+math.sum = function(...) local args, num = {...}, 0 for i = 1, #args do num = num + args[i] end return num end
+math.round = function(num, exp)
+    if not exp then
+        return tonumber(string.match(tostring(num), '(.*)%.')) or num
+    else
+        if not tonumber(num) then return 0 end if not tonumber(exp) then exp = 0 end
+        return tonumber(string.format('%.' .. exp .. 'f', tonumber(num)))
+    end
+end
 
 if system.getInfo 'environment' == 'simulator' then JSON.encode, JSON.encode2 = JSON.prettify, JSON.encode
 -- else ADMOB.init(adListener, {appId="ca-app-pub-3712284233366817~8085200542", testMode = true})
 end if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'}) end
--- Runtime:addEventListener('unhandledError', function(event) return true end)
+-- Runtime:addEventListener('unhandledError', function(event) print('Error: ', event.errorMessage) return true end)
 
 GET_GLOBAL_TABLE = function()
     return {
         sendLaunchAnalytics = _G.sendLaunchAnalytics, transition = _G.transition, tostring = _G.tostring,
         tonumber = _G.tonumber, gcinfo = _G.gcinfo, assert = _G.assert, debug = _G.debug, GAME = _G.GAME,
         io = _G.io, os = _G.os, display = _G.display, load = _G.load, module = _G.module, media = _G.media,
-        native = _G.native, coroutine = _G.coroutine, CENTER_X = _G.CENTER_X, CENTER_Y = _G.CENTER_Y, CENTER_Z = _G.CENTER_Z,
+        native = _G.native, coroutine = _G.coroutine, CENTER_X = _G.CENTER_X, CENTER_Y = _G.CENTER_Y, ipairs = _G.ipairs,
         TOP_HEIGHT = _G.TOP_HEIGHT, network = _G.network, LFS = _G.lfs, _network_pathForFile = _G._network_pathForFile,
         pcall = _G.pcall, BUILD = _G.BUILD, MAX_Y = _G.MAX_Y, MAX_X = _G.MAX_X, string = _G.string,
         xpcall = _G.xpcall, ZERO_Y = _G.ZERO_Y, ZERO_X = _G.ZERO_X, package = _G.package, print = _G.print,
         table = _G.table, lpeg = _G.lpeg, COPY_TABLE = _G.COPY_TABLE, DISPLAY_HEIGHT = _G.DISPLAY_HEIGHT,
         unpack = _G.unpack, require = _G.require, setmetatable = _G.setmetatable, next = _G.next,
-        graphics = _G.graphics, ipairs = _G.ipairs, system = _G.system, rawequal = _G.rawequal,
+        RIGHT_HEIGHT = _G.RIGHT_HEIGHT, graphics = _G.graphics, system = _G.system, rawequal = _G.rawequal,
         timer = _G.timer, BOTTOM_HEIGHT = _G.BOTTOM_HEIGHT, newproxy = _G.newproxy, metatable = _G.metatable,
         al = _G.al, rawset = _G.rawset, easing = _G.easing, coronabaselib = _G.coronabaselib, math = _G.math,
-        BOTTOM_WIDTH = _G.BOTTOM_WIDTH, cloneArray = _G.cloneArray, DISPLAY_WIDTH = _G.DISPLAY_WIDTH, type = _G.type,
+        LEFT_HEIGHT = _G.LEFT_HEIGHT, cloneArray = _G.cloneArray, DISPLAY_WIDTH = _G.DISPLAY_WIDTH, type = _G.type,
         audio = _G.audio, pairs = _G.pairs, select = _G.select, rawget = _G.rawget, Runtime = _G.Runtime,
         collectgarbage = _G.collectgarbage, getmetatable = _G.getmetatable, error = _G.error, MAIN = _G.MAIN
     }

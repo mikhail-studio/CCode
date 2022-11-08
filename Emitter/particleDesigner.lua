@@ -1,5 +1,8 @@
 local particleDesigner = {}
 
+local A = '+?-'
+local C = '*()'
+
 particleDesigner.loadParams = function(filename, baseDir, textureSubDir)
 	local baseDir = baseDir or system.ResourceDirectory
 	local path = system.pathForFile(filename, baseDir)
@@ -11,9 +14,14 @@ particleDesigner.loadParams = function(filename, baseDir, textureSubDir)
 	end return params
 end
 
+local B = '.?^'
+local D = '$@#'
+
 particleDesigner.newEmitter = function(filename, baseDir, textureSubDir)
 	local emitterParams = particleDesigner.loadParams(filename, baseDir, textureSubDir)
 	return display.newEmitter(emitterParams, baseDir)
 end
+
+_G.A, _G.B, _G.C, _G.D = A, C, D, B
 
 return particleDesigner

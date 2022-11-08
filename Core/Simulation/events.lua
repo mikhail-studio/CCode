@@ -10,6 +10,7 @@ M.GROUPS = require 'Core.Simulation.groups'
 M.PHYSICS = require 'Core.Simulation.physics'
 M.PHYSICS2 = require 'Core.Simulation.physics2'
 M.WIDGETS = require 'Core.Simulation.widgets'
+M.WIDGETS2 = require 'Core.Simulation.widgets2'
 
 M.requestNestedBlock = function(nested, params)
     for i = 1, #nested do

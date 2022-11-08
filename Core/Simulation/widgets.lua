@@ -3,7 +3,7 @@ local M = {}
 
 M['newWebView'] = function(params)
     local name = CALC(params[1])
-    local link = CALC(params[2], '\'google.com\'')
+    local link = CALC(params[2], '\'https://google.com\'')
     local width = CALC(params[3])
     local height = CALC(params[4])
 
@@ -52,6 +52,55 @@ end
 
 M['removeWebView'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.webviews[' .. CALC(params[1]) .. ']:removeSelf() end)'
+end
+
+M['newHSlider'] = function(params)
+    local name = CALC(params[1])
+    local width = CALC(params[2], '100')
+    local posX = '(CENTER_X + (' .. CALC(params[3]) .. '))'
+    local posY = '(CENTER_Y - (' .. CALC(params[4]) .. '))'
+
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.sliders[' .. name .. ']:removeSelf() end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.sliders[' .. name .. '] = WIDGET.newSlider({x = ' .. posX .. ', y = ' .. posY .. ','
+    GAME.lua = GAME.lua .. ' value = 50, width = ' .. width .. '}) GAME.group.sliders[' .. name .. '].type = \'horizontal\''
+    GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.sliders[' .. name .. ']) end)'
+end
+
+M['newVSlider'] = function(params)
+    local name = CALC(params[1])
+    local height = CALC(params[2], '100')
+    local posX = '(CENTER_X + (' .. CALC(params[3]) .. '))'
+    local posY = '(CENTER_Y - (' .. CALC(params[4]) .. '))'
+
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.sliders[' .. name .. ']:removeSelf() end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.sliders[' .. name .. '] = WIDGET.newSlider({x = ' .. posX .. ', y = ' .. posY .. ','
+    GAME.lua = GAME.lua .. ' value = 50, height = ' .. height .. ', orientation = \'vertical\'})'
+    GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.sliders[' .. name .. ']) end)'
+end
+
+M['setSliderPos'] = function(params)
+    local name = CALC(params[1])
+    local posX = '(CENTER_X + (' .. CALC(params[2]) .. '))'
+    local posY = '(CENTER_Y - (' .. CALC(params[3]) .. '))'
+
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.sliders[' .. name .. '].x = ' .. posX
+    GAME.lua = GAME.lua .. ' GAME.group.sliders[' .. name .. '].y = ' .. posY .. ' end)'
+end
+
+M['removeSlider'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.sliders[' .. CALC(params[1]) .. ']:removeSelf() end)'
+end
+
+M['setSliderValue'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local value = tonumber(' ..  CALC(params[2]) .. ')'
+    GAME.lua = GAME.lua .. ' GAME.group.sliders[' ..  CALC(params[1]) .. ']:setValue(value > 100 and 100 or value < 0 and 0 or value) end)'
+end
+
+M['getSliderValue'] = function(params)
+    local slider, name = CALC(params[1]), params[2][1][1]
+    local type = params[2][1][2] == 'vE' and 'varsE' or params[2][1][2] == 'vS' and 'varsS' or 'varsP'
+
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. type .. '[\'' .. name .. '\'] = GAME.group.sliders[' .. slider .. '].value end)'
 end
 
 return M

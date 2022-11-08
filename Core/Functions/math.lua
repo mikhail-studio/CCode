@@ -8,12 +8,15 @@ local acos = math.acos
 local atan = math.atan
 local atan2 = math.atan2
 
+M.randomseed = math.randomseed
 M.factorial = math.factorial
 M.random = math.random
 M.radical = math.sqrt
 M.log10 = math.log10
 M.module = math.abs
 M.power = math.pow
+M.exp = math.exp
+M.sum = math.sum
 M.log = math.log
 M.max = math.max
 M.min = math.min

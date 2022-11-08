@@ -142,6 +142,8 @@ return {
         ['blocks.updTextAlpha.params'] = {'Text name:', 'Opacity (0-100):'},
         ['blocks.saveValue'] = 'Save value',
         ['blocks.saveValue.params'] = {'Key \'K\':', 'Value:'},
+        ['blocks.setRandomSeed'] = 'Set random seed',
+        ['blocks.setRandomSeed.params'] = {'Seed:'},
 
     ['blocks.objects'] = 'Objects (1)',
         ['blocks.newObject'] = 'Create object',
@@ -229,6 +231,8 @@ return {
         ['blocks.updBitmap.params'] = {'Bitmap name:'},
         ['blocks.setBitmapSprite'] = 'Set bitmap texture of object',
         ['blocks.setBitmapSprite.params'] = {'Object name:', 'Bitmap name:'},
+        ['blocks.getBitmapSprite'] = 'Get bitmap texture of sprite',
+        ['blocks.getBitmapSprite.params'] = {'Sprite name:', 'Bitmap name:'},
 
     ['blocks.objects2'] = 'Objects (2)',
         ['blocks.setSprite'] = 'Set object sprite',
@@ -420,6 +424,7 @@ return {
         ['editor.list.math.tan'] = 'tan',
         ['editor.list.math.ctan'] = 'ctan',
         ['editor.list.math.pi'] = 'pi',
+        ['editor.list.math.exp'] = 'exponent',
         ['editor.list.math.factorial'] = 'factorial',
         ['editor.list.math.log'] = 'log',
         ['editor.list.math.log10'] = 'log10',

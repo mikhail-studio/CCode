@@ -14,7 +14,6 @@ return function(params, default)
             result = result .. ' {}'
         elseif params[i][2] == 'l' then
             result = result .. ' ' .. params[i][1]
-            if params[i][1] == '=' then result = result .. '=' end
         elseif params[i][2] == 'f' then
             result = result .. ' fun[\'' .. params[i][1] .. '\']'
             if params[i][1] == 'unix_time' then result = result .. '()' end

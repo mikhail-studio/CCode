@@ -6,16 +6,20 @@ M.check = function(data)
 end
 
 M.create = function(text, scroll)
-    M.text = display.newText({text = text, width = scroll.width - 30, x = 15, y = 15, font = 'ubuntu', fontSize = 40})
-        M.text.anchorX = 0
-        M.text.anchorY = 0
-    scroll:insert(M.text)
-    scroll:setScrollHeight(M.text.height + 30)
+    pcall(function()
+        M.text = display.newText({text = text, width = scroll.width - 30, x = 15, y = 15, font = 'ubuntu', fontSize = 40})
+            M.text.anchorX = 0
+            M.text.anchorY = 0
+        scroll:insert(M.text)
+        scroll:setScrollHeight(M.text.height + 30)
+    end)
 end
 
 M.set = function(text, scroll)
-    M.text.text = text
-    scroll:setScrollHeight(M.text.height + 30)
+    pcall(function()
+        M.text.text = text
+        scroll:setScrollHeight(M.text.height + 30)
+    end)
 end
 
 M.number = function(data, to)

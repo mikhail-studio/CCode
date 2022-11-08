@@ -116,11 +116,42 @@ M.new = function(rgb, listener)
         M.group:insert(blueMinus)
         M.group:insert(blueMinus.line1)
 
-        local colorHexRect = display.newRect(CENTER_X, CENTER_Y + 60, 300, 50)
+        -- local alpha = display.newText(STR['blocks.color.alpha'], CENTER_X - 120, CENTER_Y + 50, 'ubuntu', 26)
+        --     alpha:setFillColor(0.9)
+        --     alpha.anchorX = 1
+        -- M.group:insert(alpha)
+        --
+        -- local alphaSlider = WIDGET.newSlider({
+        --         x = 425, y = CENTER_Y + 50,
+        --         width = 250, value = math.round(rgb[4] / 2.55), listener = function(event)
+        --             if event.value then
+        --                 rgb[4] = math.round(event.value * 2.55)
+        --                 colorText.text = getTextColor(rgb)
+        --                 block:setFillColor(rgb[1]/255, rgb[2]/255, rgb[3]/255, rgb[4]/255)
+        --             end
+        --         end
+        --     })
+        -- M.group:insert(alphaSlider)
+        --
+        -- local alphaPlus = display.newRoundedRect(580, CENTER_Y + 50, 30, 30, 3)
+        --     alphaPlus:setFillColor(0.18, 0.18, 0.2)
+        --     alphaPlus.line1 = display.newRect(580, CENTER_Y + 50, 20, 3)
+        --     alphaPlus.line2 = display.newRect(580, CENTER_Y + 50, 3, 20)
+        -- M.group:insert(alphaPlus)
+        -- M.group:insert(alphaPlus.line1)
+        -- M.group:insert(alphaPlus.line2)
+        --
+        -- local alphaMinus = display.newRoundedRect(270, CENTER_Y + 50, 30, 30, 3)
+        --     alphaMinus:setFillColor(0.18, 0.18, 0.2)
+        --     alphaMinus.line1 = display.newRect(270, CENTER_Y + 50, 20, 3)
+        -- M.group:insert(alphaMinus)
+        -- M.group:insert(alphaMinus.line1)
+
+        local colorHexRect = display.newRect(CENTER_X, CENTER_Y + 120 - 50, 300, 50)
             colorHexRect:setFillColor(0.18, 0.18, 0.2)
         M.group:insert(colorHexRect)
 
-        local colorHex = display.newText('HEX', CENTER_X, CENTER_Y + 60, 'ubuntu', 26)
+        local colorHex = display.newText('HEX', CENTER_X, CENTER_Y + 120 - 50, 'ubuntu', 26)
             colorHex:toFront()
         M.group:insert(colorHex)
 
@@ -146,6 +177,7 @@ M.new = function(rgb, listener)
                         if e.input then
                             e.text = UTF8.trim(e.text)
                             if UTF8.sub(e.text, 1, 1) == '#' then e.text = UTF8.sub(e.text, 2, 7) end
+                            -- if UTF8.len(e.text) == 6 then e.text = e.text .. 'FF' end
                             if UTF8.len(e.text) ~= 6 then e.text = 'FFFFFF' end local errorHex = false
                             local filterHex = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'}
                             for indexHex = 1, 6 do local symHex = UTF8.upper(UTF8.sub(e.text, indexHex, indexHex))
@@ -156,6 +188,7 @@ M.new = function(rgb, listener)
                             redSlider:setValue(math.round(rgb[1] / 2.55))
                             greenSlider:setValue(math.round(rgb[2] / 2.55))
                             blueSlider:setValue(math.round(rgb[3] / 2.55))
+                            -- alphaSlider:setValue(math.round(rgb[4] / 2.55))
                             block:setFillColor(rgb[1]/255, rgb[2]/255, rgb[3]/255)
                         end ALERT = false timer.performWithDelay(1, function() EXITS.add(M.remove, false) end)
                     end) native.setKeyboardFocus(INPUT.box)
@@ -163,13 +196,13 @@ M.new = function(rgb, listener)
             end return true
         end)
 
-        local colorButton = display.newRect(CENTER_X + 120, CENTER_Y + 160, 248, 101.6)
+        local colorButton = display.newRect(CENTER_X + 120, CENTER_Y + 210 - 50, 248, 101.6)
             colorButton:setFillColor(0.18, 0.18, 0.2)
         M.group:insert(colorButton)
 
         local colorButtonText = display.newText({
                 font = 'ubuntu.ttf', width = 180, height = 80, text = STR['button.okay'],
-                x = CENTER_X + 120, y = CENTER_Y + 180, fontSize = 26, align = 'center'
+                x = CENTER_X + 120, y = CENTER_Y + 232 - 50, fontSize = 26, align = 'center'
             })
         M.group:insert(colorButtonText)
 
@@ -215,6 +248,9 @@ M.new = function(rgb, listener)
                     elseif colorName == 'blue' then
                         rgb[3] = rgb[3] < 255 and rgb[3] + 1 or 255
                         blueSlider:setValue(math.round(rgb[3] / 2.55))
+                    -- elseif colorName == 'alpha' then
+                    --     rgb[4] = rgb[4] < 255 and rgb[4] + 1 or 255
+                    --     blueSlider:setValue(math.round(rgb[4] / 2.55))
                     end colorText.text = getTextColor(rgb)
                     block:setFillColor(rgb[1]/255, rgb[2]/255, rgb[3]/255)
                 end
@@ -244,6 +280,9 @@ M.new = function(rgb, listener)
                     elseif colorName == 'blue' then
                         rgb[3] = rgb[3] > 0 and rgb[3] - 1 or 0
                         blueSlider:setValue(math.round(rgb[3] / 2.55))
+                    -- elseif colorName == 'alpha' then
+                    --     rgb[4] = rgb[4] > 0 and rgb[4] - 1 or 0
+                    --     blueSlider:setValue(math.round(rgb[4] / 2.55))
                     end colorText.text = getTextColor(rgb)
                     block:setFillColor(rgb[1]/255, rgb[2]/255, rgb[3]/255)
                 end
@@ -257,6 +296,8 @@ M.new = function(rgb, listener)
         greenMinus:addEventListener('touch', function(e) colorMinus(e, 'green') return true end)
         bluePlus:addEventListener('touch', function(e) colorPlus(e, 'blue') return true end)
         blueMinus:addEventListener('touch', function(e) colorMinus(e, 'blue') return true end)
+        -- alphaPlus:addEventListener('touch', function(e) colorPlus(e, 'alpha') return true end)
+        -- alphaMinus:addEventListener('touch', function(e) colorMinus(e, 'alpha') return true end)
     end
 end
 

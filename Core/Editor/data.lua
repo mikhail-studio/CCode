@@ -13,7 +13,7 @@ M.math = {
     keys = {
         'random', 'radical', 'power', 'round', 'remainder',
         'module', 'max', 'min', 'sin', 'cos', 'tan', 'ctan', 'pi',
-        'factorial', 'log', 'log10', 'asin', 'acos', 'atan', 'atan2'
+        'exp', 'factorial', 'log', 'log10', 'asin', 'acos', 'atan', 'atan2'
     }
 }
 
@@ -39,7 +39,8 @@ M.device = {
 }
 
 M.set = function(key, name)
-    if (key == 'fS' or key == 'fP' or key == 'f' or key == 'm' or key == 'p'
+    if (not (EDITOR.data[EDITOR.cursor[1] + 1] and EDITOR.data[EDITOR.cursor[1] + 1][1] == '(' and EDITOR.data[EDITOR.cursor[1] + 1][2] == 's'))
+    and (key == 'fS' or key == 'fP' or key == 'f' or key == 'm' or key == 'p'
     --[[or name == 'finger_touching_screen_x' or name == 'finger_touching_screen_y']]) and name ~= 'unix_time' and name ~= 'pi' then
         EDITOR.cursor[1] = EDITOR.cursor[1] + 1
         table.remove(EDITOR.data, EDITOR.cursor[1] - 1)
@@ -57,24 +58,26 @@ M.set = function(key, name)
     end
 end
 
-for i = 1, #M.fun.keys do
-    M.fun.names[i] = STR['editor.list.fun.' .. M.fun.keys[i]]
-end
+M.new = function()
+    for i = 1, #M.fun.keys do
+        M.fun.names[i] = STR['editor.list.fun.' .. M.fun.keys[i]]
+    end
 
-for i = 1, #M.math.keys do
-    M.math.names[i] = STR['editor.list.math.' .. M.math.keys[i]]
-end
+    for i = 1, #M.math.keys do
+        M.math.names[i] = STR['editor.list.math.' .. M.math.keys[i]]
+    end
 
-for i = 1, #M.prop.keys do
-    M.prop.names[i] = STR['editor.list.prop.' .. M.prop.keys[i]]
-end
+    for i = 1, #M.prop.keys do
+        M.prop.names[i] = STR['editor.list.prop.' .. M.prop.keys[i]]
+    end
 
-for i = 1, #M.log.keys do
-    M.log.names[i] = STR['editor.list.log.' .. M.log.keys[i]]
-end
+    for i = 1, #M.log.keys do
+        M.log.names[i] = STR['editor.list.log.' .. M.log.keys[i]]
+    end
 
-for i = 1, #M.device.keys do
-    M.device.names[i] = STR['editor.list.device.' .. M.device.keys[i]]
+    for i = 1, #M.device.keys do
+        M.device.names[i] = STR['editor.list.device.' .. M.device.keys[i]]
+    end
 end
 
 return M

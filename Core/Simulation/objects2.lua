@@ -8,12 +8,12 @@ M['setSprite'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local link, filter = other.getImage(' .. link .. ')'
     GAME.lua = GAME.lua .. ' display.setDefault(\'magTextureFilter\', filter)'
     GAME.lua = GAME.lua .. ' display.setDefault(\'minTextureFilter\', filter)'
-    GAME.lua = GAME.lua .. ' local image = display.newImage(link, system.DocumentsDirectory)'
+    GAME.lua = GAME.lua .. ' local image = display.newImage(tostring(link), system.DocumentsDirectory)'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._width = image.width'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._height = image.height'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = link'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = tostring(link)'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._name = ' .. link
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].fill = {type = \'image\', filename = link,'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].fill = {type = \'image\', filename = tostring(link),'
     GAME.lua = GAME.lua .. ' baseDir = system.DocumentsDirectory} image:removeSelf() image = nil end)'
 end
 

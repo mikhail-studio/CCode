@@ -2,19 +2,26 @@ local WINDOW = require 'Core.Modules.interface-window'
 local EVENTS = require 'Core.Simulation.events'
 local M = {}
 
-local function getStartLua()
-    local funs3 = ' local math, prop = require \'Core.Functions.math\', require \'Core.Functions.prop\''
+local function getStartLua(linkBuild)
     local funs1 = ' local fun, device = require \'Core.Functions.fun\', require \'Core.Functions.device\''
     local funs2 = ' local other, select = require \'Core.Functions.other\', require \'Core.Functions.select\''
+    local funs3 = ' local math, prop = require \'Core.Functions.math\', require \'Core.Functions.prop\''
     local code1 = ' GAME.orientation = CURRENT_ORIENTATION display.setDefault(\'background\', 0)'
     local code2 = ' GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {} GAME.group.webviews = {}'
-    local code3 = ' GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {} GAME.group.animations = {}'
-    local code4 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} device.start()'
-    local code5 = ' GAME.group.const.touch_fun = function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
-    local code6 = ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y return true end'
-    local code7 = ' Runtime:addEventListener(\'touch\', GAME.group.const.touch_fun) PHYSICS.start()'
-    return 'GAME.CO = coroutine.create(function() local varsP, tablesP, funsP = {}, {}, {}'
-    .. funs1 .. funs2 .. funs3 .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7
+    local code3 = ' GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {}'
+    local code4 = ' GAME.group.sliders = {} GAME.group.animations = {} GAME.group.fields = {}'
+    local code5 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} device.start()'
+    local code6 = ' GAME.group.const.touch_fun = function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
+    local code7 = ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y return true end'
+    local code8 = ' Runtime:addEventListener(\'touch\', GAME.group.const.touch_fun) PHYSICS.start()'
+
+    if linkBuild then
+        return 'pcall(function() local varsP, tablesP, funsP = {}, {}, {}'
+            .. require 'Data.build' .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8
+    else
+        return 'pcall(function() local varsP, tablesP, funsP = {}, {}, {}'
+            .. funs1 .. funs2 .. funs3 .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8
+    end
 end
 
 M.remove = function()
@@ -23,17 +30,16 @@ M.remove = function()
     pcall(function() MAIN:removeSelf() MAIN = display.newGroup() end)
     pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
     pcall(function() for _,v in pairs(M.group.bitmaps) do v:releaseSelf() end end)
-    pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil
+    pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil math.randomseed(os.time())
     if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true}) end
 end
 
 M.new = function(linkBuild)
-    M.lua = getStartLua()
+    M.lua = getStartLua(linkBuild)
     M.group = display.newGroup()
     M.orientation = CURRENT_ORIENTATION
     M.data = GET_FULL_DATA(GET_GAME_CODE(linkBuild or CURRENT_LINK))
     M.lua = M.lua .. ' GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'
-    display.setDefault('background', 0)
 
     if M.data.settings.orientation == 'portrait' and CURRENT_ORIENTATION ~= 'portrait' then
         M.lua = M.lua .. ' setOrientationApp({type = \'portrait\', sim = true})'
@@ -97,7 +103,7 @@ M.new = function(linkBuild)
 
     for i = 1, onStartCount do
         M.lua = M.lua .. ' onStart' .. i .. '()'
-    end M.lua = M.lua .. ' end) coroutine.resume(GAME.CO)'
+    end M.lua = M.lua .. ' end) GAME.isStarted = true'
 
     if linkBuild then
         M.remove()

@@ -42,7 +42,7 @@ local listener = function(e, scroll, group, type)
 
             if not e.target.checkbox.isVisible then
                 if type == 'programs' and ALERT then
-                    if tonumber(GET_GAME_CODE(e.target.link).build) > 1160 then 
+                    if tonumber(GET_GAME_CODE(e.target.link).build) > 1160 then
                         group.isVisible = false
                         PROGRAM = require 'Interfaces.program'
                         PROGRAM.create(e.target.text.text)
@@ -340,7 +340,7 @@ M.new = function(text, scroll, group, type, index, filter, link)
         group.data[i - 1].y = group.blocks[i].y
     end
 
-    group.blocks[index] = display.newRoundedRect(scroll.width / 2, y, scroll.width - BOTTOM_WIDTH - 100, 125, 20)
+    group.blocks[index] = display.newRoundedRect(scroll.width / 2, y, scroll.width - RIGHT_HEIGHT - 100, 125, 20)
         group.blocks[index].alpha = 0.9
         group.blocks[index].index = #group.data + 1
         group.blocks[index]:setFillColor(25/255, 26/255, 32/255)

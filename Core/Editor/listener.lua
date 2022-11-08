@@ -6,7 +6,6 @@ local LOGIC = require 'Core.Modules.logic-input'
 local TEXT = require 'Core.Editor.text'
 local INFO = require 'Data.info'
 local M = {}
-local dataButtons = {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}
 
 M.find = function(data)
     for i = 1, #data do
@@ -54,7 +53,7 @@ M.rect = function(target, restart, data)
         EDITOR.group[9]:setIsLocked(true, 'vertical')
         EDITOR.group[66]:setIsLocked(true, 'vertical')
 
-        COLOR.new(COPY_TABLE((paramsData[1] and paramsData[1][1]) and JSON.decode(paramsData[1][1]) or {255, 255, 255}), function(e)
+        COLOR.new(COPY_TABLE((paramsData[1] and paramsData[1][1]) and JSON.decode(paramsData[1][1]) or {255, 255, 255, 255}), function(e)
             if e.input then
                 data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex][1] = {e.rgb, 'c'}
                 BLOCKS.group.blocks[blockIndex].data.params[paramsIndex][1] = {e.rgb, 'c'}
@@ -67,12 +66,12 @@ M.rect = function(target, restart, data)
             EDITOR.create(unpack(restart))
             EDITOR.group.isVisible = true
         end)
-    elseif (type == 'body' or type == 'animation') and ALERT then
+    elseif (type == 'body' or type == 'animation' or type == 'isBackground' or type == 'textAlign' or type == 'inputType' or type == 'rule') and ALERT then
         local data = GET_GAME_CODE(CURRENT_LINK)
         local blockIndex, paramsIndex = restart[2], index
         local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
         local listX = target.parent.parent.x + target.x + target.width / 2
-        local listY = target.parent.parent.y + target.y - target.height
+        local listY = target.parent.parent.y + target.y - target.height - 10
 
         EDITOR.group[9]:setIsLocked(true, 'vertical')
         EDITOR.group[66]:setIsLocked(true, 'vertical')
@@ -90,16 +89,17 @@ M.rect = function(target, restart, data)
             EDITOR.create(unpack(restart))
             EDITOR.group.isVisible = true
         end)
-    elseif (type == 'var' or type == 'table' or type == 'fun') and ALERT then
+    elseif (type == 'var' or type == 'table' or type == 'fun' or type == 'localvar' or type == 'localtable') and ALERT then
         local data = GET_GAME_CODE(CURRENT_LINK)
         local blockIndex, paramsIndex = restart[2], index
         local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
+        local paramsType = type == 'localvar' and 'vars' or type == 'localtable' and 'tables' or type .. 's'
 
         EDITOR.group[9]:setIsLocked(true, 'vertical')
         EDITOR.group[66]:setIsLocked(true, 'vertical')
 
         table.remove(restart[3], M.find(restart[3]))
-        LOGIC.new(type .. 's', blockIndex, paramsIndex, COPY_TABLE(paramsData), nil, restart)
+        LOGIC.new(paramsType, blockIndex, paramsIndex, COPY_TABLE(paramsData), (type == 'localvar' or type == 'localtable'), restart)
     end
 end
 
@@ -242,11 +242,12 @@ M['Hide'] = function(data, cursor, backup)
     local list = require 'Core.Editor.list'
     EDITOR.group[66]:scrollToPosition({y = 0, time = 0})
 
-    for i = 1, 7 do
+    for i = 1, 8 do
         if EDITOR.group[66].buttons[i].isOpen then
-            local buttons = i < 3 and dataButtons or i == 3 and EDITOR.fun or i == 4 and EDITOR.math
-            or i == 5 and EDITOR.prop or i == 6 and EDITOR.log or EDITOR.device
-            list.set(EDITOR.group[66].buttons[i], buttons, i < 3, i > 2)
+            local buttons = i < 3 and {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}
+            or i == 3 and {STR['editor.list.script'], STR['editor.list.project']} or i == 4 and EDITOR.fun
+            or i == 5 and EDITOR.math or i == 6 and EDITOR.prop or i == 7 and EDITOR.log or EDITOR.device
+            list.set(EDITOR.group[66].buttons[i], buttons, i < 4, i > 3)
         end
     end
 
@@ -278,7 +279,7 @@ M['Ok'] = function(data, cursor, backup)
     end
 end
 
-local syms = {'+', '-', '*', '/', '.', ',', '(', ')', '[', ']', '='}
+local syms = {'+', '-', '*', '/', '.', ',', '(', ')', '[', ']', '=='}
 
 for i = 1, #syms do
     M[syms[i]] = function(data, cursor, backup)

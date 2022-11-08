@@ -40,8 +40,7 @@ local function newBlockListener(event)
             display.getCurrentStage():setFocus(nil)
             if event.target.click then
                 event.target.click = false
-                M.group:removeSelf() M.group = nil
-                BLOCKS.group.isVisible = true
+                EXITS.new_block()
 
                 local data = GET_GAME_CODE(CURRENT_LINK)
                 local scrollY = select(2, BLOCKS.group[8]:getContentPosition())
@@ -118,7 +117,7 @@ local function textListener(event)
             if UTF8.find(UTF8.lower(STR['blocks.' .. INFO.listBlock.everyone[j]]), UTF8.lower(event.target.text), 1, true) then
                 local event = INFO.getType(INFO.listBlock.everyone[j]) == 'events'
 
-                M.group.types[1].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(event, DISPLAY_WIDTH - BOTTOM_WIDTH - 60, event and 102 or 116))
+                M.group.types[1].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(event, DISPLAY_WIDTH - RIGHT_HEIGHT - 60, event and 102 or 116))
                     M.group.types[1].blocks[j].x = DISPLAY_WIDTH / 2
                     M.group.types[1].blocks[j].y = lastY
                     M.group.types[1].blocks[j]:setFillColor(INFO.getBlockColor(INFO.listBlock.everyone[j]))
@@ -143,6 +142,12 @@ local function textListener(event)
 
         M.group.types[1].scroll:setScrollHeight(scrollHeight)
     end
+end
+
+M.remove = function()
+    M.group[4]:removeSelf()
+    M.group:removeSelf()
+    M.group = nil
 end
 
 M.create = function()
@@ -176,11 +181,11 @@ M.create = function()
             line:setFillColor(0.45)
         M.group:insert(line)
 
-        local find = display.newRect(CENTER_X, ZERO_Y + 80, DISPLAY_WIDTH - BOTTOM_WIDTH - 60, 2)
+        local find = display.newRect(CENTER_X, ZERO_Y + 80, DISPLAY_WIDTH - RIGHT_HEIGHT - 60, 2)
             find:setFillColor(0.9)
         M.group:insert(find)
 
-        local box = native.newTextField(5000, ZERO_Y + 50, DISPLAY_WIDTH - BOTTOM_WIDTH - 70, system.getInfo 'environment' ~= 'simulator' and 28 or 56)
+        local box = native.newTextField(5000, ZERO_Y + 50, DISPLAY_WIDTH - RIGHT_HEIGHT - 70, system.getInfo 'environment' ~= 'simulator' and 28 or 56)
             timer.performWithDelay(0, function()
                 if M.group and M.group.isVisible and box then
                     box.x = CENTER_X
@@ -242,7 +247,7 @@ M.create = function()
                     if UTF8.sub(name, UTF8.len(name) - 2, UTF8.len(name)) ~= 'End' and name ~= 'ifElse' then
                         local event = INFO.getType(INFO.listBlock[INFO.listType[i]][j]) == 'events'
 
-                        M.group.types[i].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(event, DISPLAY_WIDTH - BOTTOM_WIDTH - TOP_WIDTH - 60, event and 102 or 116))
+                        M.group.types[i].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(event, DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60, event and 102 or 116))
                             M.group.types[i].blocks[j].x = DISPLAY_WIDTH / 2
                             M.group.types[i].blocks[j].y = lastY
                             M.group.types[i].blocks[j]:setFillColor(INFO.getBlockColor(name))

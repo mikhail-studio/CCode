@@ -113,8 +113,8 @@ end
 
 M.renameProject = function(data, text, name, type)
     local data, nestedInfo = GET_FULL_DATA(data)
-    local t = type == 'fP' and data.funs or data.vars
-    if type == 'tP' then t = data.tables end
+    local t = COPY_TABLE(type == 'fP' and data.funs or data.vars)
+    if type == 'tP' then t = COPY_TABLE(data.tables) end
 
     local function renameForAllParams(i)
         for j = 1, #data.scripts do
@@ -137,7 +137,15 @@ M.renameProject = function(data, text, name, type)
                         end
                     end
                 end
-            end if name == '' then table.remove(t, i) elseif i then t[i] = name end
+            end
+        end if name == '' and i then table.remove(t, i) elseif i then t[i] = name end
+
+        if type == 'vP' then
+            data.vars = COPY_TABLE(t)
+        elseif type == 'tP' then
+            data.tables = COPY_TABLE(t)
+        elseif type == 'fP' then
+            data.funs = COPY_TABLE(t)
         end
 
         data = GET_NESTED_DATA(data, nestedInfo, INFO)
@@ -168,12 +176,14 @@ M.renameProject = function(data, text, name, type)
 
     M.data = COPY_TABLE(data)
     SET_GAME_CODE(CURRENT_LINK, M.data)
+
+    return true
 end
 
 M.renameScript = function(data, text, name, type)
     local data, nestedInfo = GET_FULL_DATA(data)
-    local t = type == 'fS' and data.scripts[CURRENT_SCRIPT].funs or data.scripts[CURRENT_SCRIPT].vars
-    if type == 'tS' then t = data.scripts[CURRENT_SCRIPT].params[eventIndex].tables end
+    local t = COPY_TABLE(type == 'fS' and data.scripts[CURRENT_SCRIPT].funs or data.scripts[CURRENT_SCRIPT].vars)
+    if type == 'tS' then t = COPY_TABLE(data.scripts[CURRENT_SCRIPT].tables) end
 
     local function renameForAllParams(i)
         for k = 1, #data.scripts[CURRENT_SCRIPT].params do
@@ -195,7 +205,15 @@ M.renameScript = function(data, text, name, type)
                     end
                 end
             end
-        end if name == '' then table.remove(t, i) elseif i then t[i] = name end
+        end if name == '' and i then table.remove(t, i) elseif i then t[i] = name end
+
+        if type == 'vS' then
+            data.scripts[CURRENT_SCRIPT].vars = COPY_TABLE(t)
+        elseif type == 'tS' then
+            data.scripts[CURRENT_SCRIPT].tables = COPY_TABLE(t)
+        elseif type == 'fS' then
+            data.scripts[CURRENT_SCRIPT].funs = COPY_TABLE(t)
+        end
 
         data = GET_NESTED_DATA(data, nestedInfo, INFO)
 
@@ -225,13 +243,15 @@ M.renameScript = function(data, text, name, type)
 
     M.data = COPY_TABLE(data)
     SET_GAME_CODE(CURRENT_LINK, M.data)
+
+    return true
 end
 
 M.renameEvent = function(data, text, name, type, eventIndex)
     local data, nestedInfo = GET_FULL_DATA(data)
     local eventIndex = M.getEventIndex(data, eventIndex)
-    local t = data.scripts[CURRENT_SCRIPT].params[eventIndex].vars
-    if type == 'tE' then t = data.scripts[CURRENT_SCRIPT].params[eventIndex].tables end
+    local t = COPY_TABLE(data.scripts[CURRENT_SCRIPT].params[eventIndex].vars)
+    if type == 'tE' then t = COPY_TABLE(data.scripts[CURRENT_SCRIPT].params[eventIndex].tables) end
 
     local function renameForAllParams(i)
         for k = eventIndex, #data.scripts[CURRENT_SCRIPT].params do
@@ -254,6 +274,12 @@ M.renameEvent = function(data, text, name, type, eventIndex)
                 end
             end
         end if name == '' and i then table.remove(t, i) elseif i then t[i] = name end
+
+        if type == 'vE' then
+            data.scripts[CURRENT_SCRIPT].params[eventIndex].vars = COPY_TABLE(t)
+        elseif type == 'tE' then
+            data.scripts[CURRENT_SCRIPT].params[eventIndex].tables = COPY_TABLE(t)
+        end
 
         data = GET_NESTED_DATA(data, nestedInfo, INFO)
 
@@ -284,15 +310,22 @@ M.renameEvent = function(data, text, name, type, eventIndex)
 
     M.data = COPY_TABLE(data)
     SET_GAME_CODE(CURRENT_LINK, M.data)
+
+    return true
 end
 
 M.rename = function(target, name)
+    local renameSuccessfully = false
+
     if M.active == 'project' then
-        M.renameProject(M.data, target.text, name, M.params[1] == 'funs' and 'fP' or (M.params[1] == 'tables' and 'tP' or 'vP'))
+        renameSuccessfully =
+            M.renameProject(M.data, target.text, name, M.params[1] == 'funs' and 'fP' or (M.params[1] == 'tables' and 'tP' or 'vP'))
     elseif M.active == 'script' then
-        M.renameScript(M.data, target.text, name, M.params[1] == 'funs' and 'fS' or (M.params[1] == 'tables' and 'tS' or 'vS'))
+        renameSuccessfully =
+            M.renameScript(M.data, target.text, name, M.params[1] == 'funs' and 'fS' or (M.params[1] == 'tables' and 'tS' or 'vS'))
     elseif M.active == 'event' then
-        M.renameEvent(M.data, target.text, name, M.params[1] == 'tables' and 'tE' or 'vE', M.vars.index)
+        renameSuccessfully =
+            M.renameEvent(M.data, target.text, name, M.params[1] == 'tables' and 'tE' or 'vE', M.vars.index)
     end
 
     M.vars = {project = M.data.vars, script = M.data.scripts[CURRENT_SCRIPT].vars, event = {}, index = M.vars.index}
@@ -301,7 +334,7 @@ M.rename = function(target, name)
     M.vars.event = M.data.scripts[CURRENT_SCRIPT].params[M.tables.index].vars
     M.tables.event = M.data.scripts[CURRENT_SCRIPT].params[M.tables.index].tables
 
-    target.newName(name)
+    if renameSuccessfully then target.newName(name) end
 end
 
 M.remove = function(x, y, width, height)
