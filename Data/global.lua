@@ -39,7 +39,7 @@ if system.getInfo('deviceID') == '439ab4d7b739941c' then
 end
 
 LIVE = false
-BUILD = 1171
+BUILD = 1172
 ALERT = true
 INDEX_LIST = 0
 MORE_LIST = true
