@@ -83,7 +83,7 @@ elseif system.getInfo 'environment' == 'simulator' and MENU.group then
     -- SETTINGS.group.isVisible = true
 
     -- EDITOR = require 'Core.Editor.interface'
-    -- EDITOR.create('newText', 4, {}, 2)
+    -- EDITOR.create('newText', 3, {{'hello world', 't'}}, 2)
 
     -- NEW_BLOCK = require 'Interfaces.new-block'
     -- NEW_BLOCK.create()
