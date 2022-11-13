@@ -39,7 +39,7 @@ if system.getInfo('deviceID') == '439ab4d7b739941c' then
 end
 
 LIVE = false
-BUILD = 1170
+BUILD = 1171
 ALERT = true
 INDEX_LIST = 0
 MORE_LIST = true
@@ -204,7 +204,7 @@ COPY_TABLE = function(t)
 
     pcall(function() if t then
         for key, value in pairs(t) do
-            if type(value) == 'table' then
+            if type(value) == 'table' and key ~= '_class' then
                 result[key] = COPY_TABLE(value)
             else
                 result[key] = value

@@ -71,8 +71,6 @@ M.listBlock = {
 
     ['control'] = {
         'setListener',
-        'setListener2',
-        'setListener3',
         'requestFun',
         'requestFunParams',
         'returnValue',
@@ -263,8 +261,6 @@ M.listName = {
         ['requestFunParams'] = {'control', 'fun', 'value'},
         ['returnValue'] = {'control', 'value'},
         ['setListener'] = {'control', 'value', 'fun'},
-        ['setListener2'] = {'control', 'value', 'fun', 'fun'},
-        ['setListener3'] = {'control', 'value', 'fun', 'fun', 'fun'},
         ['timer'] = {'control', 'value', 'value'},
         ['timerEnd'] = {'control'},
         ['if'] = {'control', 'value'},
