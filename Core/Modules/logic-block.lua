@@ -64,7 +64,7 @@ M.getParamsValueText = function(params, i)
         for _, value in pairs(params[i]) do
             if value[2] == 't' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
-                result = result .. '\'' .. UTF8.gsub(value[1], '\n', '\\n') .. '\''
+                result = result .. '\'' .. value[1]:gsub('\n', ' '):gsub('\r', '') .. '\''
             elseif value[2] == 'n' or value[2] == 'u' or value[2] == 'c' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
                 result = result .. value[1]

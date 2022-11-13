@@ -1,7 +1,7 @@
 GLOBAL = require 'Data.global'
 MENU = require 'Interfaces.menu'
 
-MENU.create() 
+MENU.create()
 MENU.group.isVisible = LOCAL.name_tester ~= '' or LIVE or system.getInfo('deviceID') == 'd5e815039ddf2736'
 
 if system.getInfo 'environment' ~= 'simulator' and system.getInfo('deviceID') ~= 'd5e815039ddf2736' and not LIVE then

@@ -36,7 +36,7 @@ return function(params, default)
                 end
             end
         elseif params[i][2] == 't' then
-            params[i][1] = UTF8.gsub(params[i][1], '\'', '\"')
+            params[i][1] = params[i][1]:gsub('\n', '\\n'):gsub('\r', ''):gsub('\'', '\"')
             result = result .. ' \'' .. params[i][1] .. '\''
         elseif params[i][2] == 'tE' then
             result = result .. ' tablesE[\'' .. params[i][1] .. '\']'

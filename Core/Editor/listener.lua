@@ -202,11 +202,7 @@ M['Text'] = function(data, cursor, backup)
     EDITOR.group[9]:setIsLocked(true, 'vertical')
     EDITOR.group[66]:setIsLocked(true, 'vertical')
 
-    INPUT.new(STR['blocks.entertext'], function(event)
-        if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
-            INPUT.remove(true, event.target.text)
-        end
-    end, function(e)
+    INPUT.new(STR['blocks.entertext'], function(event) end, function(e)
         EDITOR.group[9]:setIsLocked(false, 'vertical')
         EDITOR.group[66]:setIsLocked(false, 'vertical')
 
@@ -222,7 +218,7 @@ M['Text'] = function(data, cursor, backup)
 
             TEXT.set(TEXT.gen(data, cursor[2]), EDITOR.group[9])
         end
-    end, cursor[2] == 'r' and data[cursor[1] - 1][1] or '') native.setKeyboardFocus(INPUT.box)
+    end, cursor[2] == 'r' and data[cursor[1] - 1][1] or '', nil, true) native.setKeyboardFocus(INPUT.box)
 
     return data, cursor, backup
 end
