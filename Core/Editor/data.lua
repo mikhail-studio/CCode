@@ -18,10 +18,22 @@ M.math = {
 }
 
 M.prop = {
-    names = {},
-    keys = {
-        'touch', 'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation',
-        'alpha', 'name_texture', 'velocity_x', 'velocity_y', 'angular_velocity'
+    obj = {
+        names = {},
+        keys = {
+            'touch', 'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation',
+            'alpha', 'name_texture', 'velocity_x', 'velocity_y', 'angular_velocity'
+        }
+    },
+
+    text = {
+        names = {},
+        keys = {'pos_x', 'pos_y'}
+    },
+
+    group = {
+        names = {},
+        keys = {'pos_x', 'pos_y'}
     }
 }
 
@@ -59,16 +71,24 @@ M.set = function(key, name)
 end
 
 M.new = function()
+    for i = 1, #M.prop.text.keys do
+        M.prop.text.names[i] = STR['editor.list.prop.text.' .. M.prop.text.keys[i]]
+    end
+
+    for i = 1, #M.prop.group.keys do
+        M.prop.group.names[i] = STR['editor.list.prop.group.' .. M.prop.group.keys[i]]
+    end
+
+    for i = 1, #M.prop.obj.keys do
+        M.prop.obj.names[i] = STR['editor.list.prop.obj.' .. M.prop.obj.keys[i]]
+    end
+
     for i = 1, #M.fun.keys do
         M.fun.names[i] = STR['editor.list.fun.' .. M.fun.keys[i]]
     end
 
     for i = 1, #M.math.keys do
         M.math.names[i] = STR['editor.list.math.' .. M.math.keys[i]]
-    end
-
-    for i = 1, #M.prop.keys do
-        M.prop.names[i] = STR['editor.list.prop.' .. M.prop.keys[i]]
     end
 
     for i = 1, #M.log.keys do

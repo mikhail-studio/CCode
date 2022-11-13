@@ -21,7 +21,6 @@ listeners.listener = function(e)
                     local thisData = UTF8.sub(e.target.text.id, 1, 1) == '/'
                     local type = e.target.text.ID == 'fun' and 'f' or
                     e.target.text.ID == 'math' and 'm' or
-                    e.target.text.ID == 'prop' and 'p' or
                     e.target.text.ID == 'log' and 'l' or
                     e.target.text.ID == 'device' and 'd' or
                     e.target.text.id == '/fscript' and 'fS' or
@@ -31,11 +30,15 @@ listeners.listener = function(e)
                     e.target.text.id == '/project' and 'vP' or
                     e.target.text.id == '/tevent' and 'tE' or
                     e.target.text.id == '/tscript' and 'tS' or
-                    e.target.text.id == '/tproject' and 'tP' or 't'
+                    e.target.text.id == '/tproject' and 'tP' or
+                    e.target.text.id == '/pobj' and 'p' or
+                    e.target.text.id == '/ptext' and 'p' or
+                    e.target.text.id == '/pgroup' and 'p' or 't'
 
                     EDITOR.cursor[1] = EDITOR.cursor[1] + 1
-                    table.insert(EDITOR.data, EDITOR.cursor[1] - 1, {thisData and e.target.text.text or e.target.text.id, type})
-                    DATA.set(type, e.target.text.id)
+                    table.insert(EDITOR.data, EDITOR.cursor[1] - 1, {
+                        thisData and (type == 'p' and e.target.text.ID or e.target.text.text) or e.target.text.id, type
+                    }) DATA.set(type, e.target.text.id)
                     EDITOR.backup = LISTENER.backup(EDITOR.backup, 'add', EDITOR.data)
 
                     TEXT.set(TEXT.gen(EDITOR.data, EDITOR.cursor[2]), EDITOR.group[9])
@@ -74,7 +77,7 @@ local getFontSize getFontSize = function(width, text, size, isData)
 end
 
 listeners.set = function(target, buttons, isData, isList)
-    if buttons and (isList and #buttons.names > 0 or #buttons > 0) then
+    if buttons and (isList and #buttons.names > 0 or (#buttons > 0 or #buttons.names > 0)) then
         target.isOpen = not target.isOpen
         target.polygon.yScale = target.isOpen and -1 or 1
         buttons = buttons.names and buttons or {names = COPY_TABLE(buttons)}
@@ -94,6 +97,7 @@ listeners.set = function(target, buttons, isData, isList)
                         listScroll.buttons[i]:setFillColor(0.14, 0.14, 0.16)
                     elseif target.text.id == 'event' or target.text.id == 'script' or target.text.id == 'project'
                     or target.text.id == 'tevent' or target.text.id == 'tscript' or target.text.id == 'tproject'
+                    or target.text.id == 'pobj' or target.text.id == 'ptext' or target.text.id == 'pgroup'
                     or target.text.id == 'fscript' or target.text.id == 'fproject' then
                         listScroll.buttons[i]:setFillColor(0.17, 0.17, 0.19)
                     else
@@ -104,12 +108,16 @@ listeners.set = function(target, buttons, isData, isList)
                 listScroll.buttons[i].text = display.newText(text, 20, listButtonsY, 'ubuntu', getFontSize(listScroll.width, text, 24, isData))
                     if isData then local id = getId(target.y)
                         listScroll.buttons[i].text.id = id == 1 and (j == 1 and 'event' or j == 2 and 'script' or 'project')
-                        or (id == 2 and (j == 1 and 'tevent' or j == 2 and 'tscript' or 'tproject') or (j == 1 and 'fscript' or 'fproject'))
+                        or (id == 2 and (j == 1 and 'tevent' or j == 2 and 'tscript' or 'tproject')
+                        or (id == 3 and (j == 1 and 'fscript' or 'fproject') or (j == 1 and 'pobj' or j == 2 and 'ptext' or 'pgroup')))
                     elseif isList then
                         listScroll.buttons[i].text.id = buttons.keys[j]
                         listScroll.buttons[i].text.ID = target.text.id
                     else
                         listScroll.buttons[i].text.id = '/' .. target.text.id
+                        listScroll.buttons[i].text.ID = target.text.id == 'pobj' and 'obj.' .. buttons.keys[j]
+                        or target.text.id == 'ptext' and 'text.' .. buttons.keys[j]
+                        or target.text.id == 'pgroup' and 'group.' .. buttons.keys[j] or nil
                     end
                     listScroll.buttons[i].text.anchorX = 0
                 listScroll:insert(listScroll.buttons[i].text)
@@ -156,6 +164,18 @@ listeners.set = function(target, buttons, isData, isList)
     end
 end
 
+listeners.pobj = function(target)
+    listeners.set(target, EDITOR.prop.obj)
+end
+
+listeners.ptext = function(target)
+    listeners.set(target, EDITOR.prop.text)
+end
+
+listeners.pgroup = function(target)
+    listeners.set(target, EDITOR.prop.group)
+end
+
 listeners.fproject = function(target)
     listeners.set(target, EDITOR.funs.project)
 end
@@ -196,10 +216,6 @@ listeners.log = function(target)
     listeners.set(target, EDITOR.log, nil, true)
 end
 
-listeners.prop = function(target)
-    listeners.set(target, EDITOR.prop, nil, true)
-end
-
 listeners.math = function(target)
     listeners.set(target, EDITOR.math, nil, true)
 end
@@ -218,6 +234,10 @@ end
 
 listeners.funs = function(target)
     listeners.set(target, {STR['editor.list.script'], STR['editor.list.project']}, true)
+end
+
+listeners.prop = function(target)
+    listeners.set(target, {STR['editor.list.prop.obj'], STR['editor.list.prop.text'], STR['editor.list.prop.group']}, true)
 end
 
 return listeners

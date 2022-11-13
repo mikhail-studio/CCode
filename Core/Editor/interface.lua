@@ -28,7 +28,8 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         M.vars = {project = data.vars, script = data.scripts[CURRENT_SCRIPT].vars, event = {}}
         M.tables = {project = data.tables, script = data.scripts[CURRENT_SCRIPT].tables, event = {}}
         M.funs = {project = data.funs, script = data.scripts[CURRENT_SCRIPT].funs}
-        M.fun, M.math, M.prop, M.log, M.device = DATA.fun, DATA.math, DATA.prop, DATA.log, DATA.device
+        M.prop = {obj = DATA.prop.obj, text = DATA.prop.text, group = DATA.prop.group}
+        M.fun, M.math, M.log, M.device = DATA.fun, DATA.math, DATA.log, DATA.device
 
     for i = blockIndex, 1, -1 do
         if data.scripts[CURRENT_SCRIPT].params[i].event then
@@ -251,7 +252,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     listScroll.buttons = {}
     local listButtonsX = listScroll.width / 2
     local listButtonsY = 35
-    local listButtonsText = {'var', 'table', 'funs', 'fun', 'math', 'prop', 'log', 'device'}
+    local listButtonsText = {'var', 'table', 'funs', 'prop', 'fun', 'math', 'log', 'device'}
 
     for i = 1, 8 do
         listScroll.buttons[i] = display.newRect(listButtonsX, listButtonsY, listScroll.width, 70)
