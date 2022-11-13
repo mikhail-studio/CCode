@@ -19,7 +19,7 @@ local function getStartLua(linkBuild)
         return 'pcall(function() local varsP, tablesP, funsP = {}, {}, {}'
             .. require 'Data.build' .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8
     else
-        return 'print(pcall(function() local varsP, tablesP, funsP = {}, {}, {}'
+        return 'pcall(function() local varsP, tablesP, funsP = {}, {}, {}'
             .. funs1 .. funs2 .. funs3 .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8
     end
 end
@@ -103,7 +103,7 @@ M.new = function(linkBuild)
 
     for i = 1, onStartCount do
         M.lua = M.lua .. ' onStart' .. i .. '()'
-    end M.lua = M.lua .. ' end)) GAME.isStarted = true'
+    end M.lua = M.lua .. ' end) GAME.isStarted = true'
 
     if linkBuild then
         M.remove()
