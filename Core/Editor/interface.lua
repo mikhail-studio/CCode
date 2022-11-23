@@ -4,7 +4,7 @@ local LIST = require 'Core.Modules.logic-list'
 local DATA = require 'Core.Editor.data'
 local TEXT = require 'Core.Editor.text'
 local INFO = require 'Data.info'
-local M = {}
+local M = {rScrollParams = {}}
 
 local getFontSize = function(i)
     if CENTER_X == 360 then
@@ -269,6 +269,14 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
 
         listScroll.scrollHeight = listScroll.scrollHeight + 70
         listScroll.buttons[i]:addEventListener('touch', require('Core.Editor.list').listener)
+    end
+
+    for i = 1, #M.rScrollParams - 1 do
+        local index = M.rScrollParams[i]
+        listScroll.buttons[index].click = true
+        require('Core.Editor.list').listener({
+            phase = 'ended', target = listScroll.buttons[index],
+        }) listScroll:scrollToPosition({y = M.rScrollParams[#M.rScrollParams], time = 0})
     end
 
     local toolbarListener = function(e)

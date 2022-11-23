@@ -26,13 +26,21 @@ M.rect = function(target, restart, data)
             local blockIndex, paramsIndex = restart[2], restart[4]
             local params = data.scripts[CURRENT_SCRIPT].params[blockIndex].params
 
+            EDITOR.rScrollParams = {}
             params[paramsIndex] = COPY_TABLE(param)
             BLOCKS.group.blocks[blockIndex].data.params = COPY_TABLE(params)
             BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(params, paramsIndex)
             SET_GAME_CODE(CURRENT_LINK, data)
 
+            for i = #EDITOR.group[66].buttons, 1, -1 do
+                if EDITOR.group[66].buttons[i].isOpen then
+                    table.insert(EDITOR.rScrollParams, 1, i)
+                end
+            end
+
             restart[5], restart[4] = true, index
             restart[3] = COPY_TABLE(data.scripts[CURRENT_SCRIPT].params[restart[2]].params[restart[4]])
+            table.insert(EDITOR.rScrollParams, select(2, EDITOR.group[66]:getContentPosition()))
             EDITOR.group:removeSelf() EDITOR.group = nil
             EDITOR.create(unpack(restart))
             EDITOR.group.isVisible = true

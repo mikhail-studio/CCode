@@ -595,6 +595,12 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor)
                     buttonProject.x = CENTER_X + bg.width / 4
                     textProject.x = buttonProject.x
                 end
+            elseif isLocal then
+                delimiter1:removeSelf()
+                delimiter2:removeSelf()
+                buttonEvent.width = bg.width
+                buttonEvent.x = CENTER_X
+                textEvent.x = CENTER_X
             elseif BLOCKS.custom then
                 delimiter1:removeSelf()
                 delimiter2.x = CENTER_X
@@ -604,12 +610,6 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor)
                 buttonScript.x = CENTER_X + bg.width / 4
                 textEvent.x = buttonEvent.x
                 textScript.x = buttonScript.x
-            elseif isLocal then
-                delimiter1:removeSelf()
-                delimiter2:removeSelf()
-                buttonEvent.width = bg.width
-                buttonEvent.x = CENTER_X
-                textEvent.x = CENTER_X
             end
 
             M.clear()

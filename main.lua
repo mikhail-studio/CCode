@@ -76,14 +76,14 @@ elseif IS_SIM and MENU and MENU.group then
     CURRENT_SCRIPT = 1
     BLOCKS = require 'Interfaces.blocks'
     BLOCKS.create()
-    BLOCKS.group.isVisible = true
+    -- BLOCKS.group.isVisible = true
 
     -- SETTINGS = require 'Interfaces.settings'
     -- SETTINGS.create()
     -- SETTINGS.group.isVisible = true
 
-    -- EDITOR = require 'Core.Editor.interface'
-    -- EDITOR.create('newText', 3, {{'hello world', 't'}}, 2)
+    EDITOR = require 'Core.Editor.interface'
+    EDITOR.create('newText', 4, {{'400', 'n'}}, 2)
 
     -- NEW_BLOCK = require 'Interfaces.new-block'
     -- NEW_BLOCK.create()

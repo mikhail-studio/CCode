@@ -517,11 +517,21 @@ return {
             ['editor.list.prop.obj.velocity_y'] = 'скорость_y',
             ['editor.list.prop.obj.angular_velocity'] = 'скорость_вращения',
 
-        ['editor.list.prop.text.pos_x'] = 'позиция_текста_x',
+        ['editor.list.prop.text.tag'] = 'тег_текста',
+            ['editor.list.prop.text.pos_x'] = 'позиция_текста_x',
             ['editor.list.prop.text.pos_y'] = 'позиция_текста_y',
+            ['editor.list.prop.text.width'] = 'ширина_текста',
+            ['editor.list.prop.text.height'] = 'высота_текста',
+            ['editor.list.prop.text.rotation'] = 'вращение_текста',
+            ['editor.list.prop.text.alpha'] = 'непрозрачность_текста',
 
-        ['editor.list.prop.group.pos_x'] = 'позиция_группы_x',
+        ['editor.list.prop.group.tag'] = 'тег_группы',
+            ['editor.list.prop.group.pos_x'] = 'позиция_группы_x',
             ['editor.list.prop.group.pos_y'] = 'позиция_группы_y',
+            ['editor.list.prop.group.width'] = 'ширина_группы',
+            ['editor.list.prop.group.height'] = 'высота_группы',
+            ['editor.list.prop.group.rotation'] = 'вращение_группы',
+            ['editor.list.prop.group.alpha'] = 'непрозрачность_группы',
 
     ['editor.list.log.true'] = 'истина',
         ['editor.list.log.false'] = 'ложь',

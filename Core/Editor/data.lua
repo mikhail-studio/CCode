@@ -28,12 +28,16 @@ M.prop = {
 
     text = {
         names = {},
-        keys = {'pos_x', 'pos_y'}
+        keys = {
+            'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation', 'alpha'
+        }
     },
 
     group = {
         names = {},
-        keys = {'pos_x', 'pos_y'}
+        keys = {
+            'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation', 'alpha'
+        }
     }
 }
 
