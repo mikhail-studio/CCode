@@ -85,14 +85,11 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
 
     local target = BLOCKS.group.blocks[blockIndex]
     local length = #INFO.listName[target.data.name] - 1
-    local twidth, size = CENTER_X == 640 and (MAX_X - ZERO_X - 844) * 1.5 or target.block.width, CENTER_X == 640 and 1.5 or 1.0
-    local polygon = BLOCK.getPolygonParams(target.data.event, twidth, target.data.event and 102 or target.block.height)
+    local twidth, size = CENTER_X == 640 and (MAX_X - ZERO_X - 844) * 1.5 or target.block.width * 1.0, CENTER_X == 640 and 1.5 or 1.0
     local comment, params, name = target.data.comment, target.data.params, target.data.name
-    local height = target.data.event and target.block.height / size + 340 or target.block.height / size + 264
-    local width = target.block.width / size + 20 for i = 1, #polygon do polygon[i] = polygon[i] / size end
 
-    local block = LIST.create(target, polygon, length, size, height, width, comment, params, name, twidth)
-        block.y = title.y + title.height + 20 + block.height / 2
+    local block = LIST.create(target.data, size, twidth, 1.0)
+        block.y = title.y + title.height + 30 + block.height / 2
         block.x = CENTER_X == 640 and (ZERO_X + 799 + MAX_X) / 2 or block.x
     M.group:insert(block)
 
@@ -132,8 +129,8 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         for i = 8, 1, -1 do table.remove(buttonsText, 1) end
     end
 
-    local scrollY = (buttonsY - 55 + block.y + block.height / 2 + 30) / 2
-    local scrollHeight = buttonsY - 55 - block.y - block.height / 2 - 30
+    local scrollY = (buttonsY - 55 + block.y + block.height / 2 + 10) / 2
+    local scrollHeight = buttonsY - 55 - block.y - block.height / 2 - 20
     local scrollWidth, scrollX = DISPLAY_WIDTH, CENTER_X
 
     if CENTER_X == 640 then

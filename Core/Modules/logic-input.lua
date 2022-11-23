@@ -549,22 +549,24 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor)
                     buttonScript.id = 'script'
                 M.group:insert(textScript)
 
-                buttonProject = display.newRect(bg.x + width, y, width, 70)
-                    buttonProject:addEventListener('touch', M.select)
-                M.group:insert(buttonProject)
+                if not BLOCKS.custom then
+                    buttonProject = display.newRect(bg.x + width, y, width, 70)
+                        buttonProject:addEventListener('touch', M.select)
+                    M.group:insert(buttonProject)
 
-                textProject = display.newText(STR['editor.list.project'], buttonProject.x, buttonProject.y, 'ubuntu', 26)
-                    buttonProject.id = 'project'
-                M.group:insert(textProject)
+                    textProject = display.newText(STR['editor.list.project'], buttonProject.x, buttonProject.y, 'ubuntu', 26)
+                        buttonProject.id = 'project'
+                    M.group:insert(textProject)
+                end
             end
 
             M.clear = function()
                 if mode ~= 'funs' then buttonEvent:setFillColor(0.26, 0.26, 0.28) end
                 if not isLocal then buttonScript:setFillColor(0.26, 0.26, 0.28) end
-                if not isLocal then buttonProject:setFillColor(0.26, 0.26, 0.28) end
+                if not isLocal and not BLOCKS.custom then buttonProject:setFillColor(0.26, 0.26, 0.28) end
                 if M.active == 'event' and mode ~= 'funs' then buttonEvent:setFillColor(0.2, 0.2, 0.22) end
                 if M.active == 'script' and not isLocal then buttonScript:setFillColor(0.2, 0.2, 0.22) end
-                if M.active == 'project' and not isLocal then buttonProject:setFillColor(0.2, 0.2, 0.22) end
+                if M.active == 'project' and not isLocal and not BLOCKS.custom then buttonProject:setFillColor(0.2, 0.2, 0.22) end
             end
 
             local delimiter1 = display.newRect(bg.x - width / 2, y, 3, 70)
@@ -582,12 +584,26 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor)
             if mode == 'funs' then
                 delimiter1:removeSelf()
                 delimiter2.x = CENTER_X
-                buttonScript.width = bg.width / 2
-                buttonProject.width = bg.width / 2
-                buttonScript.x = CENTER_X - bg.width / 4
-                buttonProject.x = CENTER_X + bg.width / 4
+                buttonScript.width = BLOCKS.custom and bg.width or bg.width / 2
+                buttonScript.x = BLOCKS.custom and CENTER_X or CENTER_X - bg.width / 4
                 textScript.x = buttonScript.x
-                textProject.x = buttonProject.x
+
+                if BLOCKS.custom then
+                    delimiter2:removeSelf()
+                else
+                    buttonProject.width = bg.width / 2
+                    buttonProject.x = CENTER_X + bg.width / 4
+                    textProject.x = buttonProject.x
+                end
+            elseif BLOCKS.custom then
+                delimiter1:removeSelf()
+                delimiter2.x = CENTER_X
+                buttonEvent.width = bg.width / 2
+                buttonScript.width = bg.width / 2
+                buttonEvent.x = CENTER_X - bg.width / 4
+                buttonScript.x = CENTER_X + bg.width / 4
+                textEvent.x = buttonEvent.x
+                textScript.x = buttonScript.x
             elseif isLocal then
                 delimiter1:removeSelf()
                 delimiter2:removeSelf()

@@ -78,6 +78,12 @@ listeners.lang = function(e)
             LOCAL.lang = list[2][e.index]
             STR = LANG[LOCAL.lang]
 
+            for k, v in pairs(LANG.ru) do
+                if not STR[k] then
+                    STR[k] = v
+                end
+            end
+
             MENU.group:removeSelf()
             MENU.group = nil
             MENU.create()

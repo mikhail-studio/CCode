@@ -42,7 +42,14 @@ local listener = function(e, scroll, group, type)
 
             if not e.target.checkbox.isVisible then
                 if type == 'programs' and ALERT then
-                    if tonumber(GET_GAME_CODE(e.target.link).build) > 1160 then
+                    local data = GET_GAME_CODE(e.target.link)
+
+                    if tonumber(data.build) > 1160 then
+                        if data.scripts[1] and data.scripts[1].custom then
+                            table.remove(data.scripts, 1)
+                            SET_GAME_CODE(e.target.link, data)
+                        end
+
                         group.isVisible = false
                         PROGRAM = require 'Interfaces.program'
                         PROGRAM.create(e.target.text.text)

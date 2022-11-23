@@ -77,7 +77,7 @@ local getFontSize getFontSize = function(width, text, size, isData)
 end
 
 listeners.set = function(target, buttons, isData, isList)
-    if buttons and (isList and #buttons.names > 0 or (#buttons > 0 or #buttons.names > 0)) then
+    if buttons and (buttons.names and #buttons.names > 0 or #buttons > 0) then
         target.isOpen = not target.isOpen
         target.polygon.yScale = target.isOpen and -1 or 1
         buttons = buttons.names and buttons or {names = COPY_TABLE(buttons)}

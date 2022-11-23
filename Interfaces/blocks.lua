@@ -1,22 +1,29 @@
 local BLOCK = require 'Core.Modules.logic-block'
+local INFO = require 'Data.info'
 local M = {}
 
 local genBlocks = function(data)
     for i = 1, #data.scripts[CURRENT_SCRIPT].params do
         local params = data.scripts[CURRENT_SCRIPT].params[i]
-        M.new(params.name, i, params.event, params.params, params.comment, params.nested, params.vars, params.tables)
+
+        if INFO.listName[params.name] then
+            M.new(params.name, i, params.event, params.params, params.comment, params.nested, params.vars, params.tables)
+        else
+            M.new('comment', i, false, {{{STR['blocks.not.exist'], 't'}}}, false)
+        end
     end
 end
 
-M.new = function(name, index, event, params, comment, nested, vars, tables, funs)
+M.new = function(name, index, event, params, comment, nested, vars, tables)
     BLOCK.new(name, M.scroll, M.group, index, event, params, comment, nested, vars, tables)
 end
 
-M.create = function()
+M.create = function(custom)
     M.group = display.newGroup()
     M.group.isVisible = false
     M.group.blocks = {}
     M.group.scrollHeight = 10
+    M.custom = custom and COPY_TABLE(custom) or nil
 
     local bg = display.newImage('Sprites/bg.png', CENTER_X, CENTER_Y)
         bg.width = CENTER_X == 640 and DISPLAY_HEIGHT or DISPLAY_WIDTH

@@ -1,6 +1,21 @@
-local WINDOW = require 'Core.Modules.interface-window'
 local EVENTS = require 'Core.Simulation.events'
+local CALC = require 'Core.Simulation.calc'
 local M = {}
+
+local function setCustom(name)
+    EVENTS.CUSTOM[name] = function(params)
+        M.lua = M.lua .. ' pcall(function() funsC[\'' .. name .. '\'](' for i = 1, #params do
+        M.lua = M.lua .. CALC(params[i]) .. (i == #params and '' or ', ') end
+        M.lua = M.lua .. ') end)'
+    end
+
+    EVENTS['_' .. name] = function(nested, params)
+        M.lua = M.lua .. ' pcall(function() funsC[\'' .. name .. '\'] = function(...)'
+        M.lua = M.lua .. ' local varsE, tablesE, args = {}, {}, {...}' for i = 1, #params do if params[i][1] then
+        M.lua = M.lua .. ' varsE[\'' .. params[i][1][1] .. '\'] = args[' .. i .. ']' end end
+        EVENTS.requestNestedBlock(nested) M.lua = M.lua .. ' end end)'
+    end
+end
 
 local function getStartLua(linkBuild)
     local funs1 = ' local fun, device = require \'Core.Functions.fun\', require \'Core.Functions.device\''
@@ -8,38 +23,39 @@ local function getStartLua(linkBuild)
     local funs3 = ' local math, prop = require \'Core.Functions.math\', require \'Core.Functions.prop\''
     local code1 = ' GAME.orientation = CURRENT_ORIENTATION display.setDefault(\'background\', 0)'
     local code2 = ' GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {} GAME.group.webviews = {}'
-    local code3 = ' GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {}'
+    local code3 = ' GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {} GAME.currentStage = {}'
     local code4 = ' GAME.group.sliders = {} GAME.group.animations = {} GAME.group.fields = {}'
     local code5 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} device.start()'
     local code6 = ' GAME.group.const.touch_fun = function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
     local code7 = ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y return true end'
     local code8 = ' Runtime:addEventListener(\'touch\', GAME.group.const.touch_fun) PHYSICS.start()'
+    local code9 = ' for child = 1, display.currentStage.numChildren do GAME.currentStage[display.currentStage[child]] = true end'
 
     if linkBuild then
-        return 'pcall(function() local varsP, tablesP, funsP = {}, {}, {}'
-            .. require 'Data.build' .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8
+        return 'pcall(function() local varsP, tablesP, funsP, funsC = {}, {}, {}, {}'
+            .. require 'Data.build' .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
     else
-        return 'pcall(function() local varsP, tablesP, funsP = {}, {}, {}'
-            .. funs1 .. funs2 .. funs3 .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8
+        return 'pcall(function() local varsP, tablesP, funsP, funsC = {}, {}, {}, {}'
+            .. funs1 .. funs2 .. funs3 .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
     end
 end
 
 M.remove = function()
     display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll()
     pcall(function() Runtime:removeEventListener('touch', M.group.const.touch_fun) end)
-    pcall(function() MAIN:removeSelf() MAIN = display.newGroup() end)
     pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
     pcall(function() for _,v in pairs(M.group.bitmaps) do v:releaseSelf() end end)
     pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil math.randomseed(os.time())
+    pcall(function() for child = display.currentStage.numChildren, 1, -1 do if not M.currentStage[display.currentStage[child]]
+        then display.currentStage[child]:removeSelf() end end end)
     if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true}) end
 end
 
 M.new = function(linkBuild)
-    M.lua = getStartLua(linkBuild)
     M.group = display.newGroup()
-    M.orientation = CURRENT_ORIENTATION
+    M.orientation, EVENTS.CUSTOM = CURRENT_ORIENTATION, {}
     M.data = GET_FULL_DATA(GET_GAME_CODE(linkBuild or CURRENT_LINK))
-    M.lua = M.lua .. ' GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'
+    M.lua = getStartLua(linkBuild) .. ' GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'
 
     if M.data.settings.orientation == 'portrait' and CURRENT_ORIENTATION ~= 'portrait' then
         M.lua = M.lua .. ' setOrientationApp({type = \'portrait\', sim = true})'
@@ -52,7 +68,55 @@ M.new = function(linkBuild)
     local nestedEvent = {}
     local nestedScript = {}
     local dataEvent = {}
+    local dataCustom = {}
     local eventComment = false
+    local custom = GET_GAME_CUSTOM()
+
+    for i = 1, #M.data.scripts do
+        for j = 1, #M.data.scripts[i].params do
+            local name = M.data.scripts[i].params[j].name
+            if UTF8.sub(name, 1, 6) == 'custom' then
+                dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = true
+            end
+        end
+    end
+
+    if BLOCKS.custom then
+        local name = 'custom' .. BLOCKS.custom.index
+
+        for i = 1, #M.data.scripts[1].params do
+            if M.data.scripts[1].params[i].name == '_custom' then
+                M.data.scripts[1].params[i].name = '_custom' .. BLOCKS.custom.index break
+            end
+        end
+
+        M.data.scripts = {COPY_TABLE(M.data.scripts[1])}
+        setCustom(name)
+    else
+        for index, block in pairs(custom) do
+            if dataCustom[index] then
+                local name = 'custom' .. index
+                local logic = custom[index][3]
+
+                if type(logic) == 'string' then
+                    EVENTS.CUSTOM[name] = function(params)
+                        EVENTS.CONTROL.requestApi({{{logic}}}, params)
+                    end
+                elseif type(logic) == 'table' then
+                    for i = 1, #logic.params do
+                        if logic.params[i].name == '_custom' then
+                            logic.params[i].name = '_custom' .. index
+                        elseif logic.params[i].name == 'onStart' then
+                            logic.params[i].comment = true
+                        end
+                    end
+
+                    table.insert(M.data.scripts, 1, logic)
+                    setCustom(name)
+                end
+            end
+        end
+    end
 
     for i = 1, #M.data.scripts do
         for j = 1, #M.data.scripts[i].params do
@@ -82,11 +146,10 @@ M.new = function(linkBuild)
 
             for j = i, #nestedEvent do
                 local isFunBlock = dataEvent[j].name == 'onFun' or dataEvent[j].name == 'onFunParams'
-                or dataEvent[j].name == 'onTouchBegan' or dataEvent[j].name == 'onTouchEnded' or dataEvent[j].name == 'onTouchMoved'
-                local isFunProject = dataEvent[j].params[1][1] and dataEvent[j].params[1][1][2] == 'fP'
-                local isFunScript = dataEvent[j].params[1][1] and dataEvent[j].params[1][1][2] == 'fS'
+                or UTF8.sub(dataEvent[j].name, 1, 7) == '_custom' or dataEvent[j].name == 'onTouchBegan'
+                or dataEvent[j].name == 'onTouchEnded' or dataEvent[j].name == 'onTouchMoved'
 
-                if nestedScript[dataEvent[j].script] and not dataEvent[j].comment and isFunBlock and (isFunScript or isFunProject) then
+                if nestedScript[dataEvent[j].script] and not dataEvent[j].comment and isFunBlock then
                     pcall(function() EVENTS[dataEvent[j].name](nestedEvent[j], dataEvent[j].params) end)
                 end
             end
@@ -96,10 +159,11 @@ M.new = function(linkBuild)
         end
 
         if not dataEvent[i].comment and dataEvent[i].name ~= 'onFun' and dataEvent[i].name ~= 'onFunParams'
-        and dataEvent[i].name ~= 'onTouchBegan' and dataEvent[i].name ~= 'onTouchEnded' and dataEvent[i].name ~= 'onTouchMoved' then
+        and UTF8.sub(dataEvent[i].name, 1, 7) ~= '_custom' and dataEvent[i].name ~= 'onTouchBegan'
+        and dataEvent[i].name ~= 'onTouchEnded' and dataEvent[i].name ~= 'onTouchMoved' then
             pcall(function() EVENTS[dataEvent[i].name](nestedEvent[i], dataEvent[i].params) end)
         end
-    end M.lua = M.lua .. ' end end script()'
+    end if #nestedEvent > 0 then M.lua = M.lua .. ' end end script()' end
 
     for i = 1, onStartCount do
         M.lua = M.lua .. ' onStart' .. i .. '()'
@@ -110,7 +174,7 @@ M.new = function(linkBuild)
         return M.lua
     else
         pcall(function()
-            print(M.lua)
+            -- print(M.lua)
             loadstring(M.lua)()
         end)
     end

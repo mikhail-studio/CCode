@@ -8,14 +8,14 @@ listeners.but_title = function(target)
 end
 
 listeners.but_add = function(target)
-    -- if CENTER_X == 640 and system.getInfo 'environment' ~= 'simulator' then ADMOB.hide() end
+    -- if CENTER_X == 640 and not IS_SIM then ADMOB.hide() end
     BLOCKS.group.isVisible = false
     NEW_BLOCK = require 'Interfaces.new-block'
     NEW_BLOCK.create()
 end
 
 listeners.but_play = function(target)
-    -- if system.getInfo 'environment' ~= 'simulator' then ADMOB.hide() end
+    -- if not IS_SIM then ADMOB.hide() end
     GAME_GROUP_OPEN = BLOCKS
     BLOCKS.group.isVisible = false
     GAME = require 'Core.Simulation.start'
@@ -132,7 +132,13 @@ listeners.but_okay = function(target)
     if INDEX_LIST == 1 then
         for i = 1, #BLOCKS.group.blocks do
             if BLOCKS.group.blocks[i].checkbox.isOn then
-                break
+                if BLOCKS.group.blocks[i].data.name == '_custom' then
+                    for j = 1, #BLOCKS.group.blocks do
+                        if BLOCKS.group.blocks[j].checkbox.isOn then
+                            BLOCKS.group.blocks[j].checkbox:setState({isOn = false})
+                        end
+                    end return
+                end break
             elseif i == #BLOCKS.group.blocks then
                 return
             end
@@ -151,7 +157,8 @@ listeners.but_okay = function(target)
 
             for i = 1, #BLOCKS.group.blocks do
                 local y = i == 1 and 50 or BLOCKS.group.blocks[i - 1].y + BLOCKS.group.blocks[i - 1].block.height / 2 + BLOCKS.group.blocks[i].height / 2 - 4
-                if BLOCKS.group.blocks[i].data.event then y = y + 24 end BLOCKS.group.blocks[i].y = y
+                local addY = i == 1 and 24 + (BLOCKS.group.blocks[i].height - 120) / 2 or 24
+                if BLOCKS.group.blocks[i].data.event then y = y + addY end BLOCKS.group.blocks[i].y = y
             end
 
             SET_GAME_CODE(CURRENT_LINK, data)
@@ -180,6 +187,14 @@ listeners.but_okay = function(target)
         for i = 1, #BLOCKS.group.blocks do
             if BLOCKS.group.blocks[i].checkbox.isOn then
                 BLOCKS.group.blocks[i].checkbox:setState({isOn = false})
+
+                if BLOCKS.group.blocks[i].data.name == '_custom' then
+                    for j = 1, #BLOCKS.group.blocks do
+                        if BLOCKS.group.blocks[j].checkbox.isOn then
+                            BLOCKS.group.blocks[j].checkbox:setState({isOn = false})
+                        end
+                    end return
+                end
 
                 local scrollY = select(2, BLOCKS.group[8]:getContentPosition())
                 local diffY = BLOCKS.group[8].y - BLOCKS.group[8].height / 2
@@ -363,7 +378,8 @@ listeners.but_okay = function(target)
 
                     for i = 1, #BLOCKS.group.blocks do
                         local y = i == 1 and 50 or BLOCKS.group.blocks[i - 1].y + BLOCKS.group.blocks[i - 1].block.height / 2 + BLOCKS.group.blocks[i].height / 2 - 4
-                        if BLOCKS.group.blocks[i].data.event then y = y + 24 end BLOCKS.group.blocks[i].y = y
+                        local addY = i == 1 and 24 + (BLOCKS.group.blocks[i].height - 120) / 2 or 24
+                        if BLOCKS.group.blocks[i].data.event then y = y + addY end BLOCKS.group.blocks[i].y = y
                     end
 
                     BLOCKS.group.blocks[i].polygon.yScale = 1

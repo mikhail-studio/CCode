@@ -44,6 +44,7 @@ settings = {
 		['plugin.memoryBitmap'] = {publisherId = 'com.coronalabs'},
 		['plugin.zeroconf'] = {publisherId = 'com.coronalabs'},
 		['plugin.impack'] = {publisherId = 'com.xibalbastudios'},
+		['plugin.tinyfiledialogs'] = {publisherId = 'com.xibalbastudios'},
 		-- ['plugin.admob'] = {publisherId = 'com.coronalabs'}
 	},
 

@@ -16,50 +16,75 @@ M.remove = function()
     BLOCKS.group[8]:setIsLocked(false, 'vertical')
 end
 
-M.create = function(target, polygon, length, size, height, width, comment, params, name, twidth)
+M.create = function(data, size, twidth, tsize)
     local block = display.newGroup()
-        block.y = CENTER_Y - height / 2 + 10 + target.block.height / 2 / size
-        block.x, block.params = CENTER_X, {}
+        block.x = CENTER_X
+        block.y = CENTER_Y
+        block.params = {}
+    local tsize = tsize or 1.0
+
+    local blockWidth = DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60
+    local lengthParams = #data.params if blockWidth / 116 > 15 then blockWidth = 116 * 15 end
+    local blockHeight = 116 + 60 * math.round((lengthParams - 2 < 0 and 0 or lengthParams - 2) / 2, 0)
+
+    local polygon = BLOCK.getPolygonParams(data.event, blockWidth, data.event and blockHeight - 14 or blockHeight)
+    local _polygon = display.newPolygon(0, 0, polygon) _polygon.strokeWidth = 4
+    local pwidth = (twidth and type(twidth) == 'number') and twidth or _polygon.width _polygon:removeSelf()
+    for i = 1, #polygon do polygon[i] = i % 2 == 0 and polygon[i] / size or  polygon[i] / size * tsize end
 
     block.block = display.newPolygon(0, 0, polygon)
-        block.block:setFillColor(INFO.getBlockColor(name, comment))
+        block.block:setFillColor(INFO.getBlockColor(data.name, data.comment))
         block.block:setStrokeColor(0.3)
         block.block.strokeWidth = 4
     block:insert(block.block)
 
     block.text = display.newText({
-            text = STR['blocks.' .. name], width = block.block.width - 20, height = 38 / size, fontSize = 30 / size,
-            align = 'left', x = 10 / size, y = target.text.y / size, font = 'ubuntu'
+            text = STR['blocks.' .. data.name], width = block.block.width - 20, height = 38 / size, fontSize = 30 / size,
+            align = 'left', x = 10 / size, y = BLOCK.getTextY(lengthParams) / size, font = 'ubuntu'
         })
     block:insert(block.text)
 
     block.rects = display.newGroup()
     block:insert(block.rects)
 
-    if twidth then
-        for i = 1, length do
-            local nameY = BLOCK.getParamsNameY(length)[i]
-            local width = twidth
+    for i = 1, lengthParams do
+        local name = STR['blocks.' .. data.name .. '.params']
+            and STR['blocks.' .. data.name .. '.params'][i]
+            or STR['blocks.params'] .. (i - 1) .. ':'
+        local nameX = BLOCK.getParamsNameX(lengthParams, pwidth)[i]
+        local nameY = BLOCK.getParamsNameY(lengthParams)[i]
 
-            block.params[i] = {}
-            block.params[i].name = display.newText({
-                    text = STR['blocks.' .. name .. '.params'][i], align = 'left', height = target.params[i].name.height / size, fontSize = 22 / size,
-                    x = BLOCK.getParamsNameX(length, width)[i] / size, y = nameY / size, font = 'ubuntu', width = 142 / size
-                })
-            block:insert(block.params[i].name)
+        local lineWidth = BLOCK.getParamsLineWidth(lengthParams, pwidth)[i]
+        local lineX = BLOCK.getParamsLineX(lengthParams, pwidth)[i]
+        local lineY = nameY + 20
 
-            block.params[i].line = display.newRect(BLOCK.getParamsLineX(length, width)[i] / size, (nameY + 20) / size, BLOCK.getParamsLineWidth(length, width)[i] / size, 3 / size)
-                block.params[i].line:setFillColor(0.3)
-                block.params[i].line.anchorX = 0
-            block:insert(block.params[i].line)
+        local textGetHeight = display.newText({
+                text = name, align = 'left',
+                fontSize = 22, x = 0, y = 5000,
+                font = 'ubuntu', width = 142
+            })
+        if textGetHeight.height > 53 then textGetHeight.height = 53 end
 
-            block.params[i].value = display.newText({
-                    text = target.params[i].value.text, height = 26 / size, width = (BLOCK.getParamsLineWidth(length, width)[i] - 5) / size,
-                    x = BLOCK.getParamsLineX(length, width)[i] / size, y = (nameY + 5) / size, font = 'ubuntu', fontSize = 20 / size, align = 'center'
-                }) block.params[i].value.anchorX = 0
-            block:insert(block.params[i].value)
+        block.params[i] = {}
+        block.params[i].name = display.newText({
+                text = name, align = 'left', height = textGetHeight.height / size, width = 142 / size,
+                fontSize = 22 / size, x = nameX / size, y = nameY / size, font = 'ubuntu'
+            }) textGetHeight:removeSelf()
+        block:insert(block.params[i].name)
 
-            block.params[i].rect = display.newRect(BLOCK.getParamsLineX(length, width)[i] / size, (nameY + 20) / size, BLOCK.getParamsLineWidth(length, width)[i] / size, 40 / size)
+        block.params[i].line = display.newRect(lineX / size, lineY / size, lineWidth / size, 3 / size)
+            block.params[i].line:setFillColor(0.3)
+            block.params[i].line.anchorX = 0
+        block:insert(block.params[i].line)
+
+        block.params[i].value = display.newText({
+                text = BLOCK.getParamsValueText(data.params, i), width = (lineWidth - 5) / size, height = 26 / size,
+                y = (lineY - 15) / size, x = lineX / size, font = 'ubuntu', fontSize = 20 / size, align = 'center'
+            }) block.params[i].value.anchorX = 0
+        block:insert(block.params[i].value)
+
+        if twidth then
+            block.params[i].rect = display.newRect(lineX / size, lineY / size, lineWidth / size, 40 / size)
                 block.params[i].rect:setFillColor(1)
                 block.params[i].rect.alpha = 0.005
                 block.params[i].rect.anchorX = 0
@@ -67,28 +92,6 @@ M.create = function(target, polygon, length, size, height, width, comment, param
                 block.params[i].rect.index = i
             block.rects:insert(block.params[i].rect)
         end
-
-        return block
-    end
-
-    for i = 1, length do
-        block.params[i] = {}
-        block.params[i].name = display.newText({
-                text = STR['blocks.' .. name .. '.params'][i], align = 'left', height = target.params[i].name.height / size, fontSize = 22 / size,
-                x = target.params[i].name.x / size, y = target.params[i].name.y / size, font = 'ubuntu', width = 142 / size
-            })
-        block:insert(block.params[i].name)
-
-        block.params[i].line = display.newRect(target.params[i].line.x / size, target.params[i].line.y / size, target.params[i].line.width / size, 3 / size)
-            block.params[i].line:setFillColor(0.3)
-            block.params[i].line.anchorX = 0
-        block:insert(block.params[i].line)
-
-        block.params[i].value = display.newText({
-                text = target.params[i].value.text, height = 26 / size, width = target.params[i].value.width / size,
-                x = target.params[i].value.x / size, y = target.params[i].value.y / size, font = 'ubuntu', fontSize = 20 / size, align = 'center'
-            }) block.params[i].value.anchorX = 0
-        block:insert(block.params[i].value)
     end
 
     return block
@@ -99,13 +102,11 @@ M.new = function(target)
         M.group, ALERT = display.newGroup(), false
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
 
-        local polygon = BLOCK.getPolygonParams(target.data.event, target.block.width, target.data.event and 102 or target.block.height)
-        local length, size, nested = #INFO.listName[target.data.name] - 1, 1.6, target.data.nested
+        local size, nested = 1.6, target.data.nested
         local height = nested and target.block.height / size + 340 or target.block.height / size + 264
-        local width = target.block.width / size + 20 for i = 1, #polygon do polygon[i] = polygon[i] / size end
-        if target.data.name == 'if' then height = height + 76 end
+        local width = target.block.width / size + 20 if target.data.name == 'if' then height = height + 76 end
 
-        local bg = display.newRect(CENTER_X, CENTER_Y, DISPLAY_WIDTH, DISPLAY_HEIGHT)
+        local bg = display.newRect(CENTER_X, CENTER_Y, DISPLAY_WIDTH * 2, DISPLAY_HEIGHT * 2)
             bg:setFillColor(1, 0.005)
         M.group:insert(bg)
 
@@ -113,14 +114,14 @@ M.new = function(target)
             rect:setFillColor(0.2, 0.2, 0.22)
         M.group:insert(rect)
 
-        local index = target.getIndex(target)
         local comment = target.data.comment
-        local params = target.data.params
-        local event = target.data.event
         local name = target.data.name
 
-        local block = M.create(target, polygon, length, size, height, width, comment, params, name)
-        local y = block.y + block.block.height / 2 + 50 M.group:insert(block)
+        local block = M.create(target.data, size)
+            block.y = block.y - height / 2 + 10 + target.block.height / 2 / size
+            local y = block.y + block.block.height / 2 + 50
+        M.group:insert(block)
+
 
         for i = 1, #getButtonText(comment, nested, name) do
             local button = display.newRect(CENTER_X, y, width - 25, 66)

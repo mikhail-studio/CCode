@@ -12,7 +12,7 @@ M.PHYSICS2 = require 'Core.Simulation.physics2'
 M.WIDGETS = require 'Core.Simulation.widgets'
 M.WIDGETS2 = require 'Core.Simulation.widgets2'
 
-M.requestNestedBlock = function(nested, params)
+M.requestNestedBlock = function(nested)
     for i = 1, #nested do
         local name = nested[i].name
         local params = nested[i].params
@@ -23,7 +23,7 @@ end
 
 M['onStart'] = function(nested, params)
     GAME.lua = GAME.lua .. ' pcall(function() local function event() local varsE, tablesE = {}, {}'
-    M.requestNestedBlock(nested, params) GAME.lua = GAME.lua .. ' end event() end)'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end event() end)'
 end
 
 M['onFun'] = function(nested, params)
@@ -31,7 +31,7 @@ M['onFun'] = function(nested, params)
     local type = params[1][1][2] == 'fS' and 'funsS' or 'funsP'
 
     GAME.lua = GAME.lua .. ' pcall(function() ' .. type .. '[\'' .. name .. '\'] = function() local varsE, tablesE = {}, {}'
-    M.requestNestedBlock(nested, params) GAME.lua = GAME.lua .. ' end end)'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end)'
 end
 
 M['onFunParams'] = function(nested, params)
@@ -41,7 +41,7 @@ M['onFunParams'] = function(nested, params)
 
     GAME.lua = GAME.lua .. ' pcall(function() ' .. typeFun .. '[\'' .. nameFun .. '\'] = function(...) local varsE, tablesE = {},'
     GAME.lua = GAME.lua .. ' {[\'' .. nameTable .. '\'] = COPY_TABLE_FP({...})}'
-    M.requestNestedBlock(nested, params) GAME.lua = GAME.lua .. ' end end)'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end)'
 end
 
 M['onTouchBegan'] = function(nested, params)
@@ -51,7 +51,7 @@ M['onTouchBegan'] = function(nested, params)
 
     GAME.lua = GAME.lua .. ' pcall(function() ' .. typeFun .. '[\'' .. nameFun .. '\'] = function(p) if p.phase == \'began\' then local varsE, tablesE, p = {},'
     GAME.lua = GAME.lua .. ' {}, COPY_TABLE(p) tablesE[\'' .. nameTable .. '\'] = {name = p.target.name, x = p.x, y = p.y, xStart = p.xStart, yStart = p.yStart}'
-    M.requestNestedBlock(nested, params) GAME.lua = GAME.lua .. ' end end end)'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 
 M['onTouchEnded'] = function(nested, params)
@@ -61,7 +61,7 @@ M['onTouchEnded'] = function(nested, params)
 
     GAME.lua = GAME.lua .. ' pcall(function() ' .. typeFun .. '[\'' .. nameFun .. '\'] = function(p) if p.phase == \'ended\' then local varsE, tablesE, p = {},'
     GAME.lua = GAME.lua .. ' {}, COPY_TABLE(p) tablesE[\'' .. nameTable .. '\'] = {name = p.target.name, x = p.x, y = p.y, xStart = p.xStart, yStart = p.yStart}'
-    M.requestNestedBlock(nested, params) GAME.lua = GAME.lua .. ' end end end)'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 
 M['onTouchMoved'] = function(nested, params)
@@ -71,7 +71,7 @@ M['onTouchMoved'] = function(nested, params)
 
     GAME.lua = GAME.lua .. ' pcall(function() ' .. typeFun .. '[\'' .. nameFun .. '\'] = function(p) if p.phase == \'moved\' then local varsE, tablesE, p = {},'
     GAME.lua = GAME.lua .. ' {}, COPY_TABLE(p) tablesE[\'' .. nameTable .. '\'] = {name = p.target.name, x = p.x, y = p.y, xStart = p.xStart, yStart = p.yStart}'
-    M.requestNestedBlock(nested, params) GAME.lua = GAME.lua .. ' end end end)'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 
 return M

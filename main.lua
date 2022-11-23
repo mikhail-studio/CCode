@@ -4,7 +4,7 @@ MENU = require 'Interfaces.menu'
 MENU.create()
 MENU.group.isVisible = LOCAL.name_tester ~= '' or LIVE or system.getInfo('deviceID') == 'd5e815039ddf2736'
 
-if system.getInfo 'environment' ~= 'simulator' and system.getInfo('deviceID') ~= 'd5e815039ddf2736' and not LIVE then
+if not IS_SIM and system.getInfo('deviceID') ~= 'd5e815039ddf2736' and not LIVE then
     network.request('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1Cigzy-fFJywTnGpY1PLyWN3E67uZNSaE', 'GET', function(e)
         pcall(function()
             if e.phase == 'ended' and not e.isError then
@@ -21,7 +21,7 @@ if system.getInfo 'environment' ~= 'simulator' and system.getInfo('deviceID') ~=
 
                 if LOCAL.name_tester == '' then
                     local id = system.getInfo('deviceID')
-                    if system.getInfo 'environment' ~= 'simulator' then PASTEBOARD.copy('string', tostring(id)) end
+                    if not IS_SIM then PASTEBOARD.copy('string', tostring(id)) end
                     display.newText('DeviceID скопирован в буфер обмена\nЕсли этого не произошло\nТо вот: ' .. id, CENTER_X, CENTER_Y, 'ubuntu', 30)
                     display.newImage('Sprites/amogus.png', ZERO_X + 75, ZERO_Y + 75)
                 elseif version > BUILD then
@@ -51,7 +51,7 @@ if system.getInfo 'environment' ~= 'simulator' and system.getInfo('deviceID') ~=
             end
         end)
     end)
-elseif system.getInfo 'environment' == 'simulator' and MENU.group then
+elseif IS_SIM and MENU and MENU.group then
     MENU.group.isVisible = false
     PROGRAMS = require 'Interfaces.programs'
     PROGRAMS.create()
@@ -87,4 +87,19 @@ elseif system.getInfo 'environment' == 'simulator' and MENU.group then
 
     -- NEW_BLOCK = require 'Interfaces.new-block'
     -- NEW_BLOCK.create()
+    --
+    -- NEW_BLOCK.group.types[15].scroll.isVisible = true
+    -- NEW_BLOCK.group.types[1].scroll.isVisible = false
+    -- NEW_BLOCK.group[4].isVisible = false
+    -- for i = 5, 10 do NEW_BLOCK.group[i].isVisible = true end
+    -- NEW_BLOCK.group.currentIndex = 15
+
+    -- local CUSTOM_BLOCK = require('Core.Modules.custom-block')
+    --     CUSTOM_BLOCK.newBlock('Поставить для текста позицию Y', {
+    --         {{'hello world', 't'}},
+    --         {{'hello world', 't'}}
+    --     }, {
+    --         'Имя текста:', 'Позиция Y:'
+    --     })
+    -- timer.performWithDelay(0, function() CUSTOM_BLOCK.addBlock({}) end)
 end

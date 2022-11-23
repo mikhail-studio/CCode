@@ -3,57 +3,47 @@ local INFO = require 'Data.info'
 local M  = {}
 
 M.getTextY = function(count)
-    return count < 3 and -32 or count < 5 and -62 or count < 7 and -92 or count < 9 and -122 or -152
+    return -32 - 30 * math.round((count - 2 < 0 and 0 or count - 2) / 2, 0)
 end
 
 M.getParamsNameX = function(count, width)
-    return count < 3 and {90 - width / 2, 80}
-    or count == 3 and {90 - width / 2, 90 - width / 2, 80}
-    or count == 4 and {90 - width / 2, 80, 90 - width / 2, 80}
-    or count == 5 and {90 - width / 2, 90 - width / 2, 80, 90 - width / 2, 80}
-    or count == 6 and {90 - width / 2, 80, 90 - width / 2, 80, 90 - width / 2, 80}
-    or count == 7 and {90 - width / 2, 90 - width / 2, 80, 90 - width / 2, 80, 90 - width / 2, 80}
-    or count == 8 and {90 - width / 2, 80, 90 - width / 2, 80, 90 - width / 2, 80, 90 - width / 2, 80}
-    or count == 9 and {90 - width / 2, 90 - width / 2, 80, 90 - width / 2, 80, 90 - width / 2, 80, 90 - width / 2, 80}
-    or {90 - width / 2, 80, 90 - width / 2, 80, 90 - width / 2, 80, 90 - width / 2, 80, 90 - width / 2, 80}
+    local result = {90 - width / 2}
+
+    for i = 2, count do
+        result[i] = count % 2 == 0 and (i % 2 == 0 and 80 or 90 - width / 2) or (i % 2 == 0 and 90 - width / 2 or 80)
+    end
+
+    return result
 end
 
 M.getParamsLineX = function(count, width)
-    return count == 1 and {175 - width / 2}
-    or count == 2 and {175 - width / 2, 160}
-    or count == 3 and {175 - width / 2, 175 - width / 2, 160}
-    or count == 4 and {175 - width / 2, 160, 175 - width / 2, 160}
-    or count == 5 and {175 - width / 2, 175 - width / 2, 160, 175 - width / 2, 160}
-    or count == 6 and {175 - width / 2, 160, 175 - width / 2, 160, 175 - width / 2, 160}
-    or count == 7 and {175 - width / 2, 175 - width / 2, 160, 175 - width / 2, 160, 175 - width / 2, 160}
-    or count == 8 and {175 - width / 2, 160, 175 - width / 2, 160, 175 - width / 2, 160, 175 - width / 2, 160}
-    or count == 9 and {175 - width / 2, 175 - width / 2, 160, 175 - width / 2, 160, 175 - width / 2, 160, 175 - width / 2, 160}
-    or {175 - width / 2, 160, 175 - width / 2, 160, 175 - width / 2, 160, 175 - width / 2, 160, 175 - width / 2, 160}
+    local result = {175 - width / 2}
+
+    for i = 2, count do
+        result[i] = count % 2 == 0 and (i % 2 == 0 and 160 or 175 - width / 2) or (i % 2 == 0 and 175 - width / 2 or 160)
+    end
+
+    return result
 end
 
 M.getParamsNameY = function(count)
-    return count < 3 and {22, 22}
-    or count == 3 and {-8, 52, 52}
-    or count == 4 and {-8, -8, 52, 52}
-    or count == 5 and {-38, 22, 22, 82, 82}
-    or count == 6 and {-38, -38, 22, 22, 82, 82}
-    or count == 7 and {-68, -8, -8, 52, 52, 112, 112}
-    or count == 8 and {-68, -68, -8, -8, 52, 52, 112, 112}
-    or count == 9 and {-98, -38, -38, 22, 22, 82, 82, 142, 142}
-    or {-98, -98, -38, -38, 22, 22, 82, 82, 142, 142}
+    local result = {22 - 30 * math.round((count - 2 < 0 and 0 or count - 2) / 2, 0)}
+
+    for i = 2, count do
+        result[i] = count % 2 == 0 and (i % 2 == 0 and result[i-1] or result[i-1] + 60) or (i % 2 == 0 and result[i-1] + 60 or result[i-1])
+    end
+
+    return result
 end
 
 M.getParamsLineWidth = function(count, width)
-    return count == 1 and {width - 200}
-    or count == 2 and {width / 2 - 185, width / 2 - 185}
-    or count == 3 and {width - 200, width / 2 - 185, width / 2 - 185}
-    or count == 4 and {width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185}
-    or count == 5 and {width - 200, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185}
-    or count == 6 and {width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185}
-    or count == 7 and {width - 200, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185}
-    or count == 8 and {width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185}
-    or count == 9 and {width - 200, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185}
-    or {width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185, width / 2 - 185}
+    local result = {count % 2 == 0 and width / 2 - 185 or width - 200}
+
+    for i = 2, count do
+        result[i] = width / 2 - 185
+    end
+
+    return result
 end
 
 M.getParamsValueText = function(params, i)
@@ -144,13 +134,14 @@ M.getPolygonParams = function(event, blockWidth, blockHeight)
 end
 
 M.new = function(name, scroll, group, index, event, params, comment, nested, vars, tables)
-    local blockHeight, blockWidth, blockParams, lengthParams = 116, DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60, {}, #INFO.listName[name] - 1
-    if not event then blockHeight = lengthParams < 3 and 116 or (lengthParams < 5 and 176 or (lengthParams < 7 and 236 or (lengthParams < 9 and 296 or 356))) end
-    if blockWidth / 116 > 15 then blockWidth = 116 * 15 end
-    blockParams = M.getPolygonParams(event, blockWidth, event and 102 or blockHeight)
+    local blockWidth = DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60
+    local lengthParams = #INFO.listName[name] - 1 if blockWidth / 116 > 15 then blockWidth = 116 * 15 end
+    local blockHeight = 116 + 60 * math.round((lengthParams - 2 < 0 and 0 or lengthParams - 2) / 2, 0)
+    local blockParams = M.getPolygonParams(event, blockWidth, event and blockHeight - 14 or blockHeight)
 
     local y = index == 1 and 50 or group.blocks[index - 1].y + group.blocks[index - 1].block.height / 2 + (blockHeight + 4) / 2 - 4
-    if event then y = y + 24 end table.insert(group.blocks, index, display.newGroup())
+    local addY = index == 1 and 24 + (blockHeight - 116) / 2 or 24
+    if event then y = y + addY end table.insert(group.blocks, index, display.newGroup())
 
     group.blocks[index].data = {event = event, comment = comment, name = name, params = params, nested = nested, vars = vars, tables = tables}
     group.blocks[index].x, group.blocks[index].y = scroll.width / 2, y

@@ -15,7 +15,7 @@ M.listType = {
     'widgets2',
     'none',
     'none',
-    'none'
+    'custom'
 }
 
 M.listBlock = {
@@ -85,6 +85,7 @@ M.listBlock = {
         'repeat',
         'forEnd',
         'for',
+        'comment',
         'requestApi',
         'requestExit'
     },
@@ -204,7 +205,9 @@ M.listBlock = {
         'setFieldSize',
         'setFieldRule',
         'removeField'
-    }
+    },
+
+    ['custom'] = {}
 }
 
 M.listName = {
@@ -272,6 +275,7 @@ M.listName = {
         ['repeatEnd'] = {'control'},
         ['for'] = {'control', 'value', 'value', 'localvar', 'value'},
         ['forEnd'] = {'control'},
+        ['comment'] = {'control', 'value'},
         ['requestExit'] = {'control'},
 
     -- shapes
@@ -382,7 +386,10 @@ M.listName = {
         ['setFieldPos'] = {'widgets2', 'value', 'value', 'value'},
         ['setFieldSize'] = {'widgets2', 'value', 'value', 'value'},
         ['setFieldRule'] = {'widgets2', 'value', 'rule'},
-        ['setFieldText'] = {'widgets2', 'value', 'value'}
+        ['setFieldText'] = {'widgets2', 'value', 'value'},
+
+    -- custom
+    ['_custom'] = {'custom'}
 }
 
 M.listNested = {
@@ -408,7 +415,7 @@ for i = 1, #M.listType do
 end
 
 M.getType = function(name)
-    return M.listName[name][1]
+    return M.listName[name] and M.listName[name][1] or 'custom'
 end
 
 -- math.randomseed(os.time())
@@ -443,6 +450,8 @@ M.getBlockColor = function(name, comment, type)
         return 0.7, 0.5, 0.5
     elseif type == 'everyone' then
         return 0.15, 0.55, 0.4
+    elseif type == 'custom' then
+        return 0.36, 0.47, 0.5
     end
 end
 

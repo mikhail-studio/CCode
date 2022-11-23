@@ -1,4 +1,4 @@
-LANG, STR, MAIN = {}, {}, display.newGroup()
+LANG, STR = {}, {}
 
 PARTICLE = require 'Emitter.particleDesigner'
 RESIZE = require 'Core.Modules.app-resize'
@@ -39,7 +39,7 @@ if system.getInfo('deviceID') == '439ab4d7b739941c' then
 end
 
 LIVE = false
-BUILD = 1172
+BUILD = 1173
 ALERT = true
 INDEX_LIST = 0
 MORE_LIST = true
@@ -50,11 +50,14 @@ CURRENT_SCRIPT = 0
 GAME_GROUP_OPEN = ''
 CURRENT_LINK = 'App1'
 STR = LANG[LOCAL.lang]
+LAST_CURRENT_SCRIPT = 0
 CURRENT_ORIENTATION = 'portrait'
 CENTER_X = display.contentCenterX
 CENTER_Y = display.contentCenterY
 DISPLAY_WIDTH = display.actualContentWidth
 DISPLAY_HEIGHT = display.actualContentHeight
+IS_WIN = system.getInfo 'platform' ~= 'android'
+IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
@@ -66,6 +69,11 @@ MAX_X = CENTER_X + DISPLAY_WIDTH / 2 - RIGHT_HEIGHT
 MAX_Y = CENTER_Y + DISPLAY_HEIGHT / 2 - BOTTOM_HEIGHT
 MASK = graphics.newMask('Sprites/mask.png')
 SOLAR = _G.B .. _G.D .. _G.A .. _G.C
+KEYORDER = {
+    'build', 'version', 'package', 'orientation', 'title', 'link', 'resources', 'scripts',
+    'settings', 'fonts', 'videos', 'sounds', 'images', 'funs', 'tables', 'len',
+    'vars', 'name', 'custom', 'event', 'nested', 'comment', 'params'
+} for i = 10000, 1, -1 do table.insert(KEYORDER, 1, tostring(i)) end
 
 for k, v in pairs(LANG.ru) do
     if not STR[k] then
@@ -74,7 +82,27 @@ for k, v in pairs(LANG.ru) do
 end
 
 pcall(function()
-    if system.getInfo 'environment' ~= 'simulator' then
+    if IS_SIM or IS_WIN then
+        FILEPICKER = require 'plugin.tinyfiledialogs'
+
+        FILE.pickFile = function(path, listener, file, p1, mime)
+            local filter_patterns = mime == 'image/*' and {'*.png', '*.jpg', '*.jpeg'} or mime == 'audio/*' and {'*.wav', '*.mp3', '*.ogg'}
+            or mime == 'ccode/*' and {'*.ccode', '*.zip'} or mime == 'text/x-lua' and {'*.lua', '*.txt'}
+            or mime == 'video/*' and {'*.mov', '*.mp4', '*.m4v', '*.3gp'} or nil
+            local pathToFile, path = path .. '/' .. file, FILEPICKER.openFileDialog({filter_patterns = filter_patterns})
+            if path then OS_COPY(path, pathToFile) end listener({done = path and 'ok' or 'error'})
+        end
+
+        EXPORT.export = function(config)
+            local path, listener, name = config.path, config.listener, config.name
+            local pathToFile = FILEPICKER.saveFileDialog({filter_patterns = {'*.ccode'}})
+            if path then OS_COPY(path, pathToFile) end listener()
+        end
+    end
+end)
+
+pcall(function()
+    if not IS_SIM then
         require('Core.Share.build').reset()
         GANIN = require 'plugin.ganin'
     end
@@ -230,57 +258,35 @@ COPY_TABLE_FP = function(t)
 end
 
 NEW_DATA = function()
-    local file = io.open(system.pathForFile('local.json', system.DocumentsDirectory), 'w')
-    file:write(JSON.encode(LOCAL))
-    io.close(file)
+    WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), JSON.encode(LOCAL))
 end
 
 GET_GAME_CODE = function(link)
-    local path = DOC_DIR .. '/' .. link .. '/game.json'
-    local file, data = io.open(path, 'r'), {}
-
-    if file then
-        data = JSON.decode(file:read('*a'))
-        io.close(file)
-    end
-
-    return data
+    return JSON.decode(READ_FILE(DOC_DIR .. '/' .. link .. '/game.json'))
 end
 
 SET_GAME_CODE = function(link, data)
-    local path = DOC_DIR .. '/' .. link .. '/game.json'
-    local file = io.open(path, 'w')
+    WRITE_FILE(DOC_DIR .. '/' .. link .. '/game.json', JSON.encode3(data, {keyorder = KEYORDER}))
+end
 
-    if file then
-        file:write(JSON.encode(data))
-        io.close(file)
-    end
+GET_GAME_CUSTOM = function()
+    return JSON.decode(READ_FILE(DOC_DIR .. '/custom.json'))
+end
+
+SET_GAME_CUSTOM = function(data)
+    WRITE_FILE(DOC_DIR .. '/custom.json', JSON.encode3(data, {keyorder = KEYORDER}))
 end
 
 GET_GAME_SAVE = function(link)
-    local path = DOC_DIR .. '/' .. link .. '/save.json'
-    local file, data = io.open(path, 'r'), {}
-
-    if file then
-        data = JSON.decode(file:read('*a'))
-        io.close(file)
-    end
-
-    return data
+    return JSON.decode(READ_FILE(DOC_DIR .. '/' .. link .. '/save.json'))
 end
 
 SET_GAME_SAVE = function(link, data)
-    local path = DOC_DIR .. '/' .. link .. '/save.json'
-    local file = io.open(path, 'w')
-
-    if file then
-        file:write(JSON.encode(data))
-        io.close(file)
-    end
+    WRITE_FILE(DOC_DIR .. '/' .. link .. '/save.json', JSON.encode(data))
 end
 
 OS_REMOVE = function(link, recur)
-    if system.getInfo 'environment' == 'simulator' then
+    if IS_SIM or IS_WIN then
         link = UTF8.gsub(link, '/', '\\')
         if recur then os.execute('rd /s /q "' .. link .. '"')
         else os.execute('del /q "' .. link .. '"') end
@@ -290,7 +296,7 @@ OS_REMOVE = function(link, recur)
 end
 
 OS_MOVE = function(link, link2)
-    if system.getInfo 'environment' == 'simulator' then
+    if IS_SIM or IS_WIN then
         link = UTF8.gsub(link, '/', '\\')
         link2 = UTF8.gsub(link2, '/', '\\')
         os.execute('move /y "' .. link .. '" "' .. link2 .. '"')
@@ -300,7 +306,7 @@ OS_MOVE = function(link, link2)
 end
 
 OS_COPY = function(link, link2)
-    if system.getInfo 'environment' == 'simulator' then
+    if IS_SIM or IS_WIN then
         link = UTF8.gsub(link, '/', '\\')
         link2 = UTF8.gsub(link2, '/', '\\')
         os.execute('copy /y "' .. link .. '" "' .. link2 .. '"')
@@ -347,8 +353,10 @@ end
 WIDGET.setTheme('widget_theme_android_holo_dark')
 display.setDefault('background', 0.15, 0.15, 0.17)
 display.setStatusBar(display.HiddenStatusBar) math.randomseed(os.time())
-DEVELOPERS = JSON.decode(READ_FILE(system.pathForFile('Emitter/developers.json')))
+DEVELOPERS = {['Ganin'] = true, ['Danil Nik'] = true, ['Terra'] = true}
 
+JSON.encode3 = require('Data.json').encode
+JSON.decode2, JSON.decode = JSON.decode, function(str) return type(str) == 'string' and JSON.decode2(str) or nil end
 math.factorial = function(num) if num == 0 then return 1 else return num * math.factorial(num - 1) end end
 math.hex = function(hex) local r, g, b = hex:match('(..)(..)(..)') return {tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)} end
 UTF8.trim = function(s) return UTF8.gsub(UTF8.gsub(s, '^%s+', ''), '%s+$', '') end
@@ -366,9 +374,15 @@ math.round = function(num, exp)
     end
 end
 
-if system.getInfo 'environment' == 'simulator' then JSON.encode, JSON.encode2 = JSON.prettify, JSON.encode
--- else ADMOB.init(adListener, {appId="ca-app-pub-3712284233366817~8085200542", testMode = true})
-end if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'}) end
+if IS_SIM then
+    JSON.encode, JSON.encode2, JSON.encode4 = JSON.prettify, JSON.encode, JSON.encode3
+    JSON.encode3 = function(s, opt) local opt = opt or {} opt.indent = opt.indent == nil and true or opt.indent return JSON.encode4(s, opt) end
+else
+    -- ADMOB.init(adListener, {appId="ca-app-pub-3712284233366817~8085200542", testMode = true})
+end
+
+require('Core.Modules.custom-block').getBlocks()
+if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'}) end
 -- Runtime:addEventListener('unhandledError', function(event) print('Error: ', event.errorMessage) return true end)
 
 GET_GLOBAL_TABLE = function()
@@ -387,6 +401,6 @@ GET_GLOBAL_TABLE = function()
         al = _G.al, rawset = _G.rawset, easing = _G.easing, coronabaselib = _G.coronabaselib, math = _G.math,
         LEFT_HEIGHT = _G.LEFT_HEIGHT, cloneArray = _G.cloneArray, DISPLAY_WIDTH = _G.DISPLAY_WIDTH, type = _G.type,
         audio = _G.audio, pairs = _G.pairs, select = _G.select, rawget = _G.rawget, Runtime = _G.Runtime,
-        collectgarbage = _G.collectgarbage, getmetatable = _G.getmetatable, error = _G.error, MAIN = _G.MAIN
+        collectgarbage = _G.collectgarbage, getmetatable = _G.getmetatable, error = _G.error
     }
 end

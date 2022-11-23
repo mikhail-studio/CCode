@@ -156,7 +156,7 @@ return ' ' .. UTF8.trimFull([[
                 al = _G.al, rawset = _G.rawset, easing = _G.easing, coronabaselib = _G.coronabaselib, math = _G.math,
                 LEFT_HEIGHT = _G.LEFT_HEIGHT, cloneArray = _G.cloneArray, DISPLAY_WIDTH = _G.DISPLAY_WIDTH, type = _G.type,
                 audio = _G.audio, pairs = _G.pairs, select = _G.select, rawget = _G.rawget, Runtime = _G.Runtime,
-                collectgarbage = _G.collectgarbage, getmetatable = _G.getmetatable, error = _G.error, MAIN = _G.MAIN
+                collectgarbage = _G.collectgarbage, getmetatable = _G.getmetatable, error = _G.error
             }
         end
     end getGlobal()

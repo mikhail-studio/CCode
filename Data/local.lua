@@ -5,11 +5,8 @@ if file then
     data = JSON.decode(file:read('*a'))
     io.close(file)
 else
-    local file = io.open(system.pathForFile('local.json', system.DocumentsDirectory), 'w')
-    local language = system.getPreference('locale', 'language')
-
-    data = {
-        lang = language,
+    data, custom = {
+        lang = system.getPreference('locale', 'language'),
         last = '',
         last_link = '',
         orientation = 'portrait',
@@ -21,10 +18,10 @@ else
         apps = {},
         repository = {},
         name_tester = ''
-    }
+    }, {len = 0}
 
-    file:write(JSON.encode(data))
-    io.close(file)
+    SET_GAME_CUSTOM(custom)
+    WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), JSON.encode(data))
 end
 
 return data

@@ -326,7 +326,8 @@ end
 local function stopMoveLogicBlock(e, group, scroll)
     if #group.blocks > 1 then
         local y = M.index == 1 and 50 or group.blocks[M.index - 1].y + group.blocks[M.index - 1].block.height / 2 + e.target.block.height / 2 - 4
-        e.target.x, e.target.y = e.target.x - 40, e.target.data.event and y + 24 or y
+        local addY = M.index == 1 and 24 + (e.target.block.height - 120) / 2 or 24
+        e.target.x, e.target.y = e.target.x - 40, e.target.data.event and y + addY or y
         M.stopY, M.stopY2, M.stopT, M.stopT2, M.stopI, M.stopI2 = nil, nil, nil, nil, nil, nil
 
         if e.target.data.nested and #M.nestedBlocks > 0 then

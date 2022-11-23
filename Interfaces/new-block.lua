@@ -1,3 +1,4 @@
+local CUSTOM = require 'Core.Modules.custom-block'
 local BLOCK = require 'Core.Modules.logic-block'
 local INFO = require 'Data.info'
 local M = {}
@@ -17,8 +18,9 @@ local function showTypeScroll(event)
             event.target.click = false
             M.group.types[event.target.index].scroll.isVisible = true
             M.group.types[M.group.currentIndex].scroll.isVisible = false
-            M.group[3].isVisible = event.target.index == 1
+            M.group[3].isVisible = event.target.index == 1 or event.target.index == 15
             M.group[4].isVisible = event.target.index == 1
+            for i = 5, 10 do M.group[i].isVisible = event.target.index == 15 end
             M.group.currentIndex = event.target.index
         end
     end
@@ -40,56 +42,89 @@ local function newBlockListener(event)
             display.getCurrentStage():setFocus(nil)
             if event.target.click then
                 event.target.click = false
-                EXITS.new_block()
+                if M.group[7].isOn and event.target.index[1] == 15 then
+                    local custom, name = GET_GAME_CUSTOM(), INFO.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
+                    local params = (function() local t = {} for i = 1, #INFO.listName[name] - 1 do t[i] = {} end return t end)()
 
-                local data = GET_GAME_CODE(CURRENT_LINK)
-                local scrollY = select(2, BLOCKS.group[8]:getContentPosition())
-                local diffY = BLOCKS.group[8].y - BLOCKS.group[8].height / 2
-                local targetY = math.abs(scrollY) + diffY + CENTER_Y - 150
-                local blockName = INFO.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
-                local blockEvent = INFO.getType(blockName) == 'events'
-                local blockIndex = #BLOCKS.group.blocks + 1
-                local blockParams = {
-                    name = blockName, params = {}, event = blockEvent, comment = false,
-                    nested = blockEvent and {} or nil, vars = blockEvent and {} or nil, tables = blockEvent and {} or nil
-                }
-
-                for i = 1, #INFO.listName[blockName] - 1 do
-                    blockParams.params[i] = {}
-                end
-
-                for i = 1, #BLOCKS.group.blocks do
-                    if BLOCKS.group.blocks[i].y > targetY then
-                        blockIndex = i break
+                    for index, block in pairs(custom) do
+                        if 'custom' .. index == name then
+                            CUSTOM.newBlock(block[1], params, block[2], index) break
+                        end
                     end
-                end
+                elseif M.group[9].isOn and event.target.index[1] == 15 then
+                    local custom, name = GET_GAME_CUSTOM(), INFO.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
 
-                if not blockEvent and #BLOCKS.group.blocks == 0 then
-                    table.insert(data.scripts[CURRENT_SCRIPT].params, 1, {
-                        name = 'onStart', params = {{}}, event = true, comment = false,
-                        nested = {}, vars = {}, tables = {}
-                    }) BLOCKS.new('onStart', 1, true, {{}}, false, {}) blockIndex = 2
-                end
+                    for index, block in pairs(custom) do
+                        if 'custom' .. index == name then
+                            for i = 1, #INFO.listBlock.custom do
+                                if INFO.listBlock.custom[i] == name then table.remove(INFO.listBlock.custom, i) break end
+                            end
 
-                if INFO.listNested[blockName] then
-                    blockParams.nested = {}
-                    for i = 1, #INFO.listNested[blockName] do
-                        table.insert(data.scripts[CURRENT_SCRIPT].params, blockIndex, {
-                            name = INFO.listNested[blockName][i], params = {{}}, event = false, comment = false
-                        }) BLOCKS.new(INFO.listNested[blockName][i], blockIndex, false, {{}}, false)
+                            for i = 1, #INFO.listBlock.everyone do
+                                if INFO.listBlock.everyone[i] == name then table.remove(INFO.listBlock.everyone, i) break end
+                            end
+
+                            custom[index] = nil custom.len = custom.len - 1
+                            SET_GAME_CUSTOM(custom) NEW_BLOCK.remove() NEW_BLOCK.create()
+                            NEW_BLOCK.group.types[15].scroll.isVisible = true
+                            NEW_BLOCK.group.types[1].scroll.isVisible = false
+                            NEW_BLOCK.group[4].isVisible = false
+                            for i = 5, 10 do NEW_BLOCK.group[i].isVisible = true end
+                            NEW_BLOCK.group.currentIndex = 15 break
+                        end
                     end
-                end
+                else
+                    EXITS.new_block()
 
-                native.setKeyboardFocus(nil)
-                table.insert(data.scripts[CURRENT_SCRIPT].params, blockIndex, blockParams)
-                SET_GAME_CODE(CURRENT_LINK, data)
-                BLOCKS.new(blockName, blockIndex, blockEvent, COPY_TABLE(blockParams.params), false, blockParams.nested)
+                    local data = GET_GAME_CODE(CURRENT_LINK)
+                    local scrollY = select(2, BLOCKS.group[8]:getContentPosition())
+                    local diffY = BLOCKS.group[8].y - BLOCKS.group[8].height / 2
+                    local targetY = math.abs(scrollY) + diffY + CENTER_Y - 150
+                    local blockName = INFO.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
+                    local blockEvent = M.group.currentIndex == 2 or INFO.getType(blockName) == 'events'
+                    local blockIndex = #BLOCKS.group.blocks + 1
+                    local blockParams = {
+                        name = blockName, params = {}, event = blockEvent, comment = false,
+                        nested = blockEvent and {} or nil, vars = blockEvent and {} or nil, tables = blockEvent and {} or nil
+                    }
 
-                if #BLOCKS.group.blocks > 2 then
-                    display.getCurrentStage():setFocus(BLOCKS.group.blocks[blockIndex])
-                    BLOCKS.group.blocks[blockIndex].click = true
-                    BLOCKS.group.blocks[blockIndex].move = true
-                    newMoveLogicBlock({target = BLOCKS.group.blocks[blockIndex]}, BLOCKS.group, BLOCKS.group[8], true)
+                    for i = 1, #INFO.listName[blockName] - 1 do
+                        blockParams.params[i] = {}
+                    end
+
+                    for i = 1, #BLOCKS.group.blocks do
+                        if BLOCKS.group.blocks[i].y > targetY then
+                            blockIndex = i break
+                        end
+                    end
+
+                    if not blockEvent and #BLOCKS.group.blocks == 0 then
+                        table.insert(data.scripts[CURRENT_SCRIPT].params, 1, {
+                            name = 'onStart', params = {{}}, event = true, comment = false,
+                            nested = {}, vars = {}, tables = {}
+                        }) BLOCKS.new('onStart', 1, true, {{}}, false, {}) blockIndex = 2
+                    end
+
+                    if INFO.listNested[blockName] then
+                        blockParams.nested = {}
+                        for i = 1, #INFO.listNested[blockName] do
+                            table.insert(data.scripts[CURRENT_SCRIPT].params, blockIndex, {
+                                name = INFO.listNested[blockName][i], params = {{}}, event = false, comment = false
+                            }) BLOCKS.new(INFO.listNested[blockName][i], blockIndex, false, {{}}, false)
+                        end
+                    end
+
+                    native.setKeyboardFocus(nil)
+                    table.insert(data.scripts[CURRENT_SCRIPT].params, blockIndex, blockParams)
+                    SET_GAME_CODE(CURRENT_LINK, data)
+                    BLOCKS.new(blockName, blockIndex, blockEvent, COPY_TABLE(blockParams.params), false, blockParams.nested)
+
+                    if #BLOCKS.group.blocks > 2 then
+                        display.getCurrentStage():setFocus(BLOCKS.group.blocks[blockIndex])
+                        BLOCKS.group.blocks[blockIndex].click = true
+                        BLOCKS.group.blocks[blockIndex].move = true
+                        newMoveLogicBlock({target = BLOCKS.group.blocks[blockIndex]}, BLOCKS.group, BLOCKS.group[8], true)
+                    end
                 end
             end
         end
@@ -101,7 +136,6 @@ end
 local function textListener(event)
     if event.phase == 'editing' then
         M.group.types[1].scroll:removeSelf()
-        M.group.types[1].scroll = nil
         M.group.types[1].scroll = WIDGET.newScrollView({
                 x = CENTER_X, y = (M.group[3].y + 2 + M.group[2].y) / 2,
                 width = DISPLAY_WIDTH, height = M.group[2].y - M.group[3].y + 2,
@@ -114,7 +148,9 @@ local function textListener(event)
         local scrollHeight = 50
 
         for j = 1, #INFO.listBlock.everyone do
-            if UTF8.find(UTF8.lower(STR['blocks.' .. INFO.listBlock.everyone[j]]), UTF8.lower(event.target.text), 1, true) then
+            local notCustom = not (BLOCKS.custom and INFO.getType(INFO.listBlock.everyone[j]) == 'custom' and j ~= 1)
+
+            if UTF8.find(UTF8.lower(STR['blocks.' .. INFO.listBlock.everyone[j]]), UTF8.lower(event.target.text), 1, true) and notCustom then
                 local event = INFO.getType(INFO.listBlock.everyone[j]) == 'events'
 
                 M.group.types[1].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(event, DISPLAY_WIDTH - RIGHT_HEIGHT - 60, event and 102 or 116))
@@ -145,26 +181,27 @@ local function textListener(event)
 end
 
 M.remove = function()
-    M.group[4]:removeSelf()
-    M.group:removeSelf()
-    M.group = nil
+    pcall(function()
+        M.group[4]:removeSelf()
+        M.group:removeSelf()
+        M.group = nil
+    end)
 end
 
 M.create = function()
     if M.group then
         M.group.isVisible = true
-        M.group[3].isVisible = true
-        M.group[4].isVisible = true
 
-        if M.group[4].text ~= '' then
+        M.group.types[M.group.currentIndex].scroll.isVisible = true
+        M.group[3].isVisible = M.group.currentIndex == 1 or M.group.currentIndex == 15
+        M.group[4].isVisible, M.group[5].alpha = M.group.currentIndex == 1, 0.1
+        M.group[7].alpha, M.group[7].isOn = 0.1, false
+        M.group[9].alpha, M.group[9].isOn = 0.1, false
+        for i = 5, 10 do M.group[i].isVisible = M.group.currentIndex == 15 end
+
+        if M.group.currentIndex == 1 and M.group[4].text ~= '' then
             M.group[4].text = ''
             textListener({phase = 'editing', target = M.group[4]})
-        end
-
-        if M.group.currentIndex ~= 1 then
-            M.group.types[1].scroll.isVisible = true
-            M.group.types[M.group.currentIndex].scroll.isVisible = false
-            M.group.currentIndex = 1
         end
     else
         M.group = display.newGroup()
@@ -185,7 +222,7 @@ M.create = function()
             find:setFillColor(0.9)
         M.group:insert(find)
 
-        local box = native.newTextField(5000, ZERO_Y + 50, DISPLAY_WIDTH - RIGHT_HEIGHT - 70, system.getInfo 'environment' ~= 'simulator' and 28 or 56)
+        local box = native.newTextField(5000, ZERO_Y + 50, DISPLAY_WIDTH - RIGHT_HEIGHT - 70, not IS_SIM and 28 or 56)
             timer.performWithDelay(0, function()
                 if M.group and M.group.isVisible and box then
                     box.x = CENTER_X
@@ -194,7 +231,7 @@ M.create = function()
                     box.placeholder = STR['button.block.find']
                     box.font = native.newFont('ubuntu', 28)
 
-                    pcall(function() if system.getInfo 'platform' == 'android' and system.getInfo 'environment' ~= 'simulator' and box then
+                    pcall(function() if system.getInfo 'platform' == 'android' and not IS_SIM and box then
                         box:setTextColor(0.9)
                     else
                         box:setTextColor(0.1)
@@ -203,10 +240,85 @@ M.create = function()
             end) box:addEventListener('userInput', textListener)
         M.group:insert(box)
 
+        local buttonListeners = function(e)
+            if M.group and M.group.isVisible then
+                if e.phase == 'began' then
+                    display.getCurrentStage():setFocus(e.target)
+                    e.target.alpha = 0.2
+                    e.target.click = true
+                elseif e.phase == 'moved' and (math.abs(e.xDelta) > 30 or math.abs(e.yDelta) > 30) then
+                    display.getCurrentStage():setFocus(nil)
+                    e.target.alpha = ((e.target.tag == 'change' or e.target.tag == 'remove') and e.target.isOn) and 0.3 or 0.1
+                    e.target.click = false
+                elseif e.phase == 'ended' or e.phase == 'cancelled' then
+                    display.getCurrentStage():setFocus(nil)
+                    if e.target.click then
+                        e.target.click = false
+                        e.target.alpha = 0.1
+                        if e.target.tag == 'create' then
+                            CUSTOM.newBlock()
+                        elseif e.target.tag == 'change' then
+                            e.target.alpha = e.target.isOn and 0.1 or 0.3
+                            e.target.isOn = not e.target.isOn
+                            M.group[9].alpha = e.target.isOn and 0.1 or M.group[9].alpha
+                            M.group[9].isOn = (function() if e.target.isOn then return false else return M.group[9].isOn end end)()
+                        elseif e.target.tag == 'remove' then
+                            e.target.alpha = e.target.isOn and 0.1 or 0.3
+                            e.target.isOn = not e.target.isOn
+                            M.group[7].alpha = e.target.isOn and 0.1 or M.group[7].alpha
+                            M.group[7].isOn = (function() if e.target.isOn then return false else return M.group[7].isOn end end)()
+                        end
+                    end
+                end
+            else
+                display.getCurrentStage():setFocus(nil)
+            end
+
+            return true
+        end
+
+        local width = (DISPLAY_WIDTH - RIGHT_HEIGHT - 60) * 0.4
+        local width2 = (DISPLAY_WIDTH - RIGHT_HEIGHT - 60) * 0.3
+
+        local button = display.newRect(find.x - find.width / 2 + width / 2, ZERO_Y + 50, width, 56)
+            button.alpha = 0.1
+            button.tag = 'create'
+            button:addEventListener('touch', buttonListeners)
+        M.group:insert(button)
+
+        local buttonText = display.newText(STR['blocks.create.block'], button.x, button.y, 'ubuntu', 28)
+            button.isVisible = false
+            buttonText.isVisible = false
+        M.group:insert(buttonText)
+
+        local button2 = display.newRect(button.x + width / 2 + width2 / 2, ZERO_Y + 50, width2, 56)
+            button2.alpha = 0.1
+            button2.isOn = false
+            button2.tag = 'change'
+            button2:addEventListener('touch', buttonListeners)
+        M.group:insert(button2)
+
+        local button2Text = display.newText(STR['button.change'], button2.x, button2.y, 'ubuntu', 28)
+            button2.isVisible = false
+            button2Text.isVisible = false
+        M.group:insert(button2Text)
+
+        local button3 = display.newRect(button2.x + width2, ZERO_Y + 50, width2, 56)
+            button3.alpha = 0.1
+            button3.isOn = false
+            button3.tag = 'remove'
+            button3:addEventListener('touch', buttonListeners)
+        M.group:insert(button3)
+
+        local button3Text = display.newText(STR['button.remove'], button3.x, button3.y, 'ubuntu', 28)
+            button3.isVisible = false
+            button3Text.isVisible = false
+        M.group:insert(button3Text)
+
         local width = CENTER_X == 360 and DISPLAY_WIDTH / 5 - 24 or DISPLAY_WIDTH / 6
         local x, y = ZERO_X + 20, MAX_Y - 220
 
-        for i = 1, #INFO.listType do
+        for i = 1, BLOCKS.custom and #INFO.listType - 1 or #INFO.listType do
             M.group.types[i] = display.newRoundedRect(x, y, width, 62, 11)
                 M.group.types[i].index = i
                 M.group.types[i].blocks = {}
@@ -217,19 +329,19 @@ M.create = function()
 
             local text = display.newText({
                 text = STR['blocks.' .. INFO.listType[i]],
-                x = 0, y = 0, width = width - 2, font = 'sans.ttf', fontSize = 19
-            }) local textheight = text.height > 55 and 55 or text.height text:removeSelf()
+                x = 0, y = 0, width = width - 5, font = 'sans.ttf', fontSize = 19
+            }) local textheight = text.height > 48 and 48 or text.height text:removeSelf()
 
             M.group.types[i].text = display.newText({
                     text = STR['blocks.' .. INFO.listType[i]],
-                    x = x, y = y, width = width - 2, height = textheight,
+                    x = x + width / 2, y = y, width = width - 5, height = textheight,
                     font = 'ubuntu', fontSize = 19, align = 'center'
-                }) M.group.types[i].text.anchorX = 0
+                })
             M.group:insert(M.group.types[i].text)
 
             M.group.types[i].scroll = WIDGET.newScrollView({
-                    x = CENTER_X, y = ((i == 1 and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
-                    width = DISPLAY_WIDTH, height = line.y - (i == 1 and find.y + 2 or ZERO_Y + 1),
+                    x = CENTER_X, y = (((i == 1 or i == 15) and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
+                    width = DISPLAY_WIDTH, height = line.y - ((i == 1 or i == 15) and find.y + 2 or ZERO_Y + 1),
                     hideBackground = true, hideScrollBar = false,
                     horizontalScrollDisabled = true, isBounceEnabled = true,
                 })
@@ -244,8 +356,10 @@ M.create = function()
             if INFO.listType[i] ~= 'none' then
                 for j = 1, #INFO.listBlock[INFO.listType[i]] do
                     local name = INFO.listBlock[INFO.listType[i]][j]
-                    if UTF8.sub(name, UTF8.len(name) - 2, UTF8.len(name)) ~= 'End' and name ~= 'ifElse' then
-                        local event = INFO.getType(INFO.listBlock[INFO.listType[i]][j]) == 'events'
+                    local notCustom = not (BLOCKS.custom and INFO.getType(name) == 'custom' and j ~= 1)
+
+                    if UTF8.sub(name, UTF8.len(name) - 2, UTF8.len(name)) ~= 'End' and name ~= 'ifElse' and notCustom then
+                        local event = INFO.listType[i] == 'events' or INFO.getType(name) == 'events'
 
                         M.group.types[i].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(event, DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60, event and 102 or 116))
                             M.group.types[i].blocks[j].x = DISPLAY_WIDTH / 2

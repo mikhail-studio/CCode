@@ -55,9 +55,51 @@ listeners.settings = function()
 end
 
 listeners.blocks = function()
-    BLOCKS.group:removeSelf()
-    BLOCKS.group = nil
-    SCRIPTS.group.isVisible = true
+    if BLOCKS.custom then
+        local INFO = require 'Data.info'
+        local data = GET_GAME_CODE(CURRENT_LINK)
+
+        WINDOW.new(STR['scripts.sandbox.exit'], {STR['scripts.sandbox.not.save'], STR['scripts.sandbox.save']}, function(e)
+            if e.index == 2 then
+                local custom = GET_GAME_CUSTOM() custom[BLOCKS.custom.index] = {
+                    BLOCKS.custom.name, COPY_TABLE(BLOCKS.custom.params), COPY_TABLE(data.scripts[1]), os.time()
+                } custom.len = custom.len + (BLOCKS.custom.isChange and 0 or 1) SET_GAME_CUSTOM(custom)
+
+                if BLOCKS.custom.isChange then
+                    for id, type in ipairs(INFO.listBlock.custom) do
+                        if type == 'custom' .. BLOCKS.custom.index then
+                            table.remove(INFO.listBlock.custom, id)
+                            table.insert(INFO.listBlock.custom, 1, 'custom' .. BLOCKS.custom.index)
+                            break
+                        end
+                    end
+                else
+                    table.insert(INFO.listBlock.custom, 'custom' .. BLOCKS.custom.index)
+                end
+            else
+                table.remove(INFO.listBlock.everyone, 1)
+            end
+
+            if e.index ~= 0 then
+                table.remove(data.scripts, 1)
+                SET_GAME_CODE(CURRENT_LINK, data)
+                CURRENT_SCRIPT = LAST_CURRENT_SCRIPT
+                BLOCKS.group:removeSelf() BLOCKS.group = nil
+                BLOCKS.create() BLOCKS.custom = nil
+
+                NEW_BLOCK.remove() NEW_BLOCK.create()
+                NEW_BLOCK.group.types[15].scroll.isVisible = true
+                NEW_BLOCK.group.types[1].scroll.isVisible = false
+                NEW_BLOCK.group[4].isVisible = false
+                for i = 5, 10 do NEW_BLOCK.group[i].isVisible = true end
+                NEW_BLOCK.group.currentIndex = 15
+            end
+        end, 4)
+    else
+        BLOCKS.group:removeSelf()
+        BLOCKS.group = nil
+        SCRIPTS.group.isVisible = true
+    end
 end
 
 listeners.new_block = function()

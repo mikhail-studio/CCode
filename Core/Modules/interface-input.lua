@@ -14,9 +14,9 @@ M.new = function(title, textListener, inputListener, oldText, textCheckbox, isTe
         M.group:insert(M.bg)
 
         if isTextEditor then
-            M.box = native.newTextBox(5000, CENTER_Y - 110, DISPLAY_WIDTH - 150, system.getInfo 'environment' ~= 'simulator' and 36 or 72)
+            M.box = native.newTextBox(5000, CENTER_Y - 110, DISPLAY_WIDTH - 150, not IS_SIM and 36 or 72)
         else
-            M.box = native.newTextField(5000, CENTER_Y - 110, DISPLAY_WIDTH - 150, system.getInfo 'environment' ~= 'simulator' and 36 or 72)
+            M.box = native.newTextField(5000, CENTER_Y - 110, DISPLAY_WIDTH - 150, not IS_SIM and 36 or 72)
         end
 
         timer.performWithDelay(0, function()
@@ -28,7 +28,7 @@ M.new = function(title, textListener, inputListener, oldText, textCheckbox, isTe
                 M.box.font = native.newFont('ubuntu.ttf', 36)
                 M.box.text = type(oldText) == 'string' and oldText or ''
 
-                if system.getInfo 'platform' == 'android' and system.getInfo 'environment' ~= 'simulator' then
+                if system.getInfo 'platform' == 'android' and not IS_SIM then
                     M.box:setTextColor(0.9)
                 else
                     M.box:setTextColor(0.1)

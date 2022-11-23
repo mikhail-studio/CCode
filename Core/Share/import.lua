@@ -1,3 +1,7 @@
+-- а для импорта куда сложнее всё, там надо при распаковке получить файл с кастомными блоками,
+-- потом пройтись по существующим польз. блокам и проверить на повторки, чтобы не было два одинаковых блока,
+-- также перезаписать айдишки блоков под доступные, и с помощью цикла по всему проекту также заменить айдишки
+
 return {
     new = function(listener)
         local completeImportProject = function(import)
@@ -11,10 +15,54 @@ return {
                     else
                         local link = 'App' .. numApp
                         GANIN.uncompress(DOC_DIR .. '/import.ccode', DOC_DIR .. '/' .. link, function()
-                            local hash = READ_FILE(DOC_DIR .. '/' .. link .. '/hash.txt')
-                            local data = READ_FILE(DOC_DIR .. '/' .. link .. '/game.json')
-                            local current_hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, data, '?.cc_ode'), 'cc.ode_?')
-                            local data = JSON.decode(data) local title = data.title
+                            local data, hash = GET_GAME_CODE(link), READ_FILE(DOC_DIR .. '/' .. link .. '/hash.txt')
+                            local new_custom = JSON.decode(READ_FILE(DOC_DIR .. '/' .. link .. '/custom.json'))
+                            local code, custom, dataCustom = JSON.encode3(data, {keyorder = KEYORDER}), GET_GAME_CUSTOM(), {}
+                            local current_hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, code, '?.cc_ode'), 'cc.ode_?')
+
+                            for index, block in pairs(new_custom) do
+                                if tonumber(index) then
+                                    local new_index = tostring(custom.len + 1)
+
+                                    for i = 1, custom.len do
+                                        if not custom[tostring(i)] then
+                                            new_index = tostring(i) break
+                                        end
+                                    end
+
+                                    for _index, _block in pairs(custom) do
+                                        if tonumber(_index) and _block[1] == block[1] then
+                                            local t1 = JSON.encode3(_block[3], {keyorder = KEYORDER})
+                                            local t2 = JSON.encode3(block[3], {keyorder = KEYORDER})
+
+                                            if t1 == t2 then
+                                                if _block[4] < block[4] then
+                                                    custom[_index] = COPY_TABLE(block)
+                                                    custom[_index][4] = os.time()
+                                                    dataCustom[index] = _index
+                                                end
+
+                                                break
+                                            end
+                                        elseif tonumber(_index) == custom.len then
+                                            custom.len = custom.len + 1
+                                            custom[new_index] = block
+                                            custom[new_index][4] = os.time()
+                                            dataCustom[index] = new_index
+                                        end
+                                    end
+                                end
+                            end
+
+                            for i = 1, #data.scripts do
+                                for j = 1, #data.scripts[i].params do
+                                    local name = data.scripts[i].params[j].name
+                                    if UTF8.sub(name, 1, 6) == 'custom' then
+                                        local index = UTF8.sub(name, 7, UTF8.len(name))
+                                        data.scripts[i].params[j].name = dataCustom[index] and 'custom' .. dataCustom[index] or name
+                                    end
+                                end
+                            end
 
                             if current_hash == hash then
                                 LOCAL.apps[#LOCAL.apps + 1], data.link = link, link
@@ -22,11 +70,13 @@ return {
                                 LFS.mkdir(DOC_DIR .. '/' .. link .. '/Temps')
 
                                 NEW_DATA()
+                                SET_GAME_CUSTOM()
                                 SET_GAME_SAVE(link, {})
                                 SET_GAME_CODE(link, data)
-                                PROGRAMS.new(title, link)
+                                PROGRAMS.new(data.title, link)
 
                                 OS_REMOVE(DOC_DIR .. '/' .. link .. '/hash.txt')
+                                OS_REMOVE(DOC_DIR .. '/' .. link .. '/custom.json')
                                 OS_REMOVE(DOC_DIR .. '/import.ccode')
                                 listener({isError = false})
                             else
@@ -42,10 +92,7 @@ return {
             end
         end
 
-        if system.getInfo 'environment' ~= 'simulator' then
-            FILE.pickFile(DOC_DIR, completeImportProject, 'import.ccode', '', '*/*', nil, nil, nil)
-        else
-            completeImportProject({done = 'ok'})
-        end
+
+        FILE.pickFile(DOC_DIR, completeImportProject, 'import.ccode', '', (IS_SIM or IS_WIN) and 'ccode/*' or '*/*', nil, nil, nil)
     end
 }
