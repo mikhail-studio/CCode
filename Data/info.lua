@@ -186,30 +186,25 @@ M.listBlock = {
 
     ['widgets'] = {
         'newWebView',
-        'updWebViewSite',
-        'removeWebView',
-        'setWebViewPos',
-        'setWebViewSize',
-        'setWebViewFront',
-        'setWebViewBack',
-        'setWebViewLink',
         'newHSlider',
         'newVSlider',
-        'removeSlider',
-        'setSliderPos',
-        'setSliderValue'
-    },
-
-    ['widgets2'] = {
         'newField',
         'newBox',
+        'removeWidget',
+        'setWidgetPos',
+        'setWidgetSize',
+        'updWebViewSite',
+        'setWebViewLink',
+        'setWebViewFront',
+        'setWebViewBack',
+        'setSliderValue',
+        'setFieldSecure',
+        'removeFieldSecure',
         'setFieldText',
-        'setFieldPos',
-        'setFieldSize',
-        'setFieldRule',
-        'removeField'
+        'setFieldRule'
     },
 
+    ['widgets2'] = {},
     ['custom'] = {}
 }
 
@@ -372,27 +367,22 @@ M.listName = {
 
     -- widgets
     ['newWebView'] = {'widgets', 'value', 'value', 'value', 'value'},
-        ['updWebViewSite'] = {'widgets', 'value'},
-        ['removeWebView'] = {'widgets', 'value'},
-        ['setWebViewPos'] = {'widgets', 'value', 'value', 'value'},
-        ['setWebViewSize'] = {'widgets', 'value', 'value', 'value'},
-        ['setWebViewFront'] = {'widgets', 'value'},
-        ['setWebViewBack'] = {'widgets', 'value'},
-        ['setWebViewLink'] = {'widgets', 'value', 'value'},
         ['newHSlider'] = {'widgets', 'value', 'value', 'value', 'value'},
         ['newVSlider'] = {'widgets', 'value', 'value', 'value', 'value'},
-        ['removeSlider'] = {'widgets', 'value'},
-        ['setSliderPos'] = {'widgets', 'value', 'value', 'value'},
+        ['newField'] = {'widgets', 'value', 'value', 'inputType', 'color', 'value', 'isBackground', 'textAlign', 'value', 'value', 'value', 'value', 'value'},
+        ['newBox'] = {'widgets', 'value', 'value', 'color', 'value', 'isBackground', 'textAlign', 'value', 'value', 'value', 'value', 'value'},
+        ['removeWidget'] = {'widgets', 'value'},
+        ['setWidgetPos'] = {'widgets', 'value', 'value', 'value'},
+        ['setWidgetSize'] = {'widgets', 'value', 'value', 'value'},
+        ['updWebViewSite'] = {'widgets', 'value'},
+        ['setWebViewLink'] = {'widgets', 'value', 'value'},
+        ['setWebViewFront'] = {'widgets', 'value'},
+        ['setWebViewBack'] = {'widgets', 'value'},
         ['setSliderValue'] = {'widgets', 'value', 'value'},
-
-    -- widgets2
-    ['newField'] = {'widgets2', 'value', 'value', 'inputType', 'color', 'value', 'isBackground', 'textAlign', 'value'},
-        ['newBox'] = {'widgets2', 'value', 'value', 'color', 'value', 'isBackground', 'textAlign', 'value'},
-        ['removeField'] = {'widgets2', 'value'},
-        ['setFieldPos'] = {'widgets2', 'value', 'value', 'value'},
-        ['setFieldSize'] = {'widgets2', 'value', 'value', 'value'},
-        ['setFieldRule'] = {'widgets2', 'value', 'rule'},
-        ['setFieldText'] = {'widgets2', 'value', 'value'},
+        ['setFieldSecure'] = {'widgets', 'value'},
+        ['removeFieldSecure'] = {'widgets', 'value'},
+        ['setFieldText'] = {'widgets', 'value', 'value'},
+        ['setFieldRule'] = {'widgets', 'value', 'rule'},
 
     -- custom
     ['_custom'] = {'custom'}
