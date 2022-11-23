@@ -38,6 +38,13 @@ M.prop = {
         keys = {
             'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation', 'alpha'
         }
+    },
+
+    widget = {
+        names = {},
+        keys = {
+            'tag', 'pos_x', 'pos_y', 'value', 'link'
+        }
     }
 }
 
@@ -81,6 +88,10 @@ M.new = function()
 
     for i = 1, #M.prop.group.keys do
         M.prop.group.names[i] = STR['editor.list.prop.group.' .. M.prop.group.keys[i]]
+    end
+
+    for i = 1, #M.prop.widget.keys do
+        M.prop.widget.names[i] = STR['editor.list.prop.widget.' .. M.prop.widget.keys[i]]
     end
 
     for i = 1, #M.prop.obj.keys do

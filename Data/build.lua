@@ -123,6 +123,7 @@ return ' ' .. UTF8.trimFull([[
 
         WIDGET.setTheme('widget_theme_android_holo_dark')
         display.setStatusBar(display.HiddenStatusBar) math.randomseed(os.time())
+        JSON.decode2, JSON.decode = JSON.decode, function(str) return type(str) == 'string' and JSON.decode2(str) or nil end
         math.factorial = function(num) if num == 0 then return 1 else return num * math.factorial(num - 1) end end
         math.hex = function(hex) local r, g, b = hex:match('(..)(..)(..)') return {tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)} end
         UTF8.trim = function(s) return UTF8.gsub(UTF8.gsub(s, '^%s+', ''), '%s+$', '') end
@@ -131,13 +132,14 @@ return ' ' .. UTF8.trimFull([[
         UTF8.trimFull = function(s) return UTF8.trim(UTF8.gsub(s, '%s+', ' ')) end
         timer.new = function(sec, rep, lis) return timer.performWithDelay(sec, lis, rep) end
         math.sum = function(...) local args, num = {...}, 0 for i = 1, #args do num = num + args[i] end return num end
+        table.len = function(t)
+            return type(t) == 'table' and ((type(#t) == 'number' and #t > 0) and #t
+            or (function() local i = 0 for k in pairs(t) do i = i + 1 end return i end)()) or 0
+        end
         math.round = function(num, exp)
-            if not exp then
-                return tonumber(string.match(tostring(num), '(.*)%.')) or num
-            else
-                if not tonumber(num) then return 0 end if not tonumber(exp) then exp = 0 end
-                return tonumber(string.format('%.' .. exp .. 'f', tonumber(num)))
-            end
+            if not exp then return tonumber(string.match(tostring(num), '(.*)%.')) or num else
+            if not tonumber(num) then return 0 end if not tonumber(exp) then exp = 0 end
+            return tonumber(string.format('%.' .. exp .. 'f', tonumber(num))) end
         end
 
         GET_GLOBAL_TABLE = function()
@@ -381,73 +383,137 @@ return ' ' .. UTF8.trimFull([[
     end
 
     local function getProp()
-        local M = {}
+        if 'Объект' then
+            M['obj.touch'] = function(name)
+                return GAME.group.objects[name]._touch
+            end
 
-        M['obj.touch'] = function(name)
-            return GAME.group.objects[name]._touch
+            M['obj.tag'] = function(name)
+                return GAME.group.objects[name]._tag
+            end
+
+            M['obj.pos_x'] = function(name)
+                return select(1, GAME.group.objects[name]:localToContent(-CENTER_X, -CENTER_Y))
+            end
+
+            M['obj.pos_y'] = function(name)
+                return 0 - select(2, GAME.group.objects[name]:localToContent(-CENTER_X, -CENTER_Y))
+            end
+
+            M['obj.width'] = function(name)
+                return GAME.group.objects[name]._radius and GAME.group.objects[name].radius or GAME.group.objects[name].width
+            end
+
+            M['obj.height'] = function(name)
+                return GAME.group.objects[name]._radius and GAME.group.objects[name].radius or GAME.group.objects[name].height
+            end
+
+            M['obj.rotation'] = function(name)
+                return GAME.group.objects[name].rotation
+            end
+
+            M['obj.alpha'] = function(name)
+                return GAME.group.objects[name].alpha * 100
+            end
+
+            M['obj.name_texture'] = function(name)
+                return GAME.group.objects[name]._name
+            end
+
+            M['obj.velocity_x'] = function(name)
+                return GAME.group.objects[name]._body ~= '' and select(1, GAME.group.objects[name]:getLinearVelocity()) or 0
+            end
+
+            M['obj.velocity_y'] = function(name)
+                return GAME.group.objects[name]._body ~= '' and 0 - select(2, GAME.group.objects[name]:getLinearVelocity()) or 0
+            end
+
+            M['obj.angular_velocity'] = function(name)
+                return GAME.group.objects[name]._body ~= '' and GAME.group.objects[name].angularVelocity or 0
+            end
         end
 
-        M['obj.tag'] = function(name)
-            return GAME.group.objects[name]._tag
+        if 'Текст' then
+            M['text.tag'] = function(name)
+                return GAME.group.texts[name]._tag
+            end
+
+            M['text.pos_x'] = function(name)
+                return select(1, GAME.group.texts[name]:localToContent(-CENTER_X, -CENTER_Y))
+            end
+
+            M['text.pos_y'] = function(name)
+                return 0 - select(2, GAME.group.texts[name]:localToContent(-CENTER_X, -CENTER_Y))
+            end
+
+            M['text.width'] = function(name)
+                return GAME.group.texts[name].width
+            end
+
+            M['text.height'] = function(name)
+                return GAME.group.texts[name].height
+            end
+
+            M['text.rotation'] = function(name)
+                return GAME.group.texts[name].rotation
+            end
+
+            M['text.alpha'] = function(name)
+                return GAME.group.texts[name].alpha * 100
+            end
         end
 
-        M['obj.pos_x'] = function(name)
-            return select(1, GAME.group.objects[name]:localToContent(-CENTER_X, -CENTER_Y))
+        if 'Группа' then
+            M['group.tag'] = function(name)
+                return GAME.group.groups[name]._tag
+            end
+
+            M['group.pos_x'] = function(name)
+                return select(1, GAME.group.groups[name]:localToContent(-CENTER_X, -CENTER_Y))
+            end
+
+            M['group.pos_y'] = function(name)
+                return 0 - select(2, GAME.group.groups[name]:localToContent(-CENTER_X, -CENTER_Y))
+            end
+
+            M['group.width'] = function(name)
+                return GAME.group.groups[name].width
+            end
+
+            M['group.height'] = function(name)
+                return GAME.group.groups[name].height
+            end
+
+            M['group.rotation'] = function(name)
+                return GAME.group.groups[name].rotation
+            end
+
+            M['group.alpha'] = function(name)
+                return GAME.group.groups[name].alpha * 100
+            end
         end
 
-        M['obj.pos_y'] = function(name)
-            return 0 - select(2, GAME.group.objects[name]:localToContent(-CENTER_X, -CENTER_Y))
-        end
+        if 'Виджет' then
+            M['widget.tag'] = function(name)
+                return GAME.group.widgets[name]._tag
+            end
 
-        M['obj.width'] = function(name)
-            return GAME.group.objects[name]._radius and GAME.group.objects[name].radius or GAME.group.objects[name].width
-        end
+            M['widget.pos_x'] = function(name)
+                return select(1, GAME.group.widgets[name]:localToContent(-CENTER_X, -CENTER_Y))
+            end
 
-        M['obj.height'] = function(name)
-            return GAME.group.objects[name]._radius and GAME.group.objects[name].radius or GAME.group.objects[name].height
-        end
+            M['widget.pos_y'] = function(name)
+                return 0 - select(2, GAME.group.widgets[name]:localToContent(-CENTER_X, -CENTER_Y))
+            end
 
-        M['obj.rotation'] = function(name)
-            return GAME.group.objects[name].rotation
-        end
+            M['widget.value'] = function(name)
+                return GAME.group.widgets[name]._type == 'slider' and GAME.group.widgets[name].value or 0
+            end
 
-        M['obj.alpha'] = function(name)
-            return GAME.group.objects[name].alpha * 100
+            M['widget.link'] = function(name)
+                return GAME.group.widgets[name]._type == 'webview' and GAME.group.widgets[name].url or ''
+            end
         end
-
-        M['obj.name_texture'] = function(name)
-            return GAME.group.objects[name]._name
-        end
-
-        M['obj.velocity_x'] = function(name)
-            return GAME.group.objects[name]._body ~= '' and select(1, GAME.group.objects[name]:getLinearVelocity()) or 0
-        end
-
-        M['obj.velocity_y'] = function(name)
-            return GAME.group.objects[name]._body ~= '' and 0 - select(2, GAME.group.objects[name]:getLinearVelocity()) or 0
-        end
-
-        M['obj.angular_velocity'] = function(name)
-            return GAME.group.objects[name]._body ~= '' and GAME.group.objects[name].angularVelocity or 0
-        end
-
-        M['text.pos_x'] = function(name)
-            return select(1, GAME.group.texts[name]:localToContent(-CENTER_X, -CENTER_Y))
-        end
-
-        M['text.pos_y'] = function(name)
-            return 0 - select(2, GAME.group.texts[name]:localToContent(-CENTER_X, -CENTER_Y))
-        end
-
-        M['group.pos_x'] = function(name)
-            return select(1, GAME.group.groups[name]:localToContent(-CENTER_X, -CENTER_Y))
-        end
-
-        M['group.pos_y'] = function(name)
-            return 0 - select(2, GAME.group.groups[name]:localToContent(-CENTER_X, -CENTER_Y))
-        end
-
-        return M
     end
 
     local function getSelect()

@@ -232,6 +232,12 @@ return {
         ['blocks.for.params'] = {'От:', 'До:', 'Имя переменной:', 'Шаг:'},
         ['blocks.setListener'] = 'Установить функцию касания объекта',
         ['blocks.setListener.params'] = {'Имя объекта:', 'Имя функции:'},
+        ['blocks.setFocus'] = 'Установить фокус касания',
+        ['blocks.setFocus.params'] = {'Имя объекта:'},
+        ['blocks.setFocusMultitouch'] = 'Установить фокус мультикасания',
+        ['blocks.setFocusMultitouch.params'] = {'Имя объекта:', 'Уникальный индекс:'},
+        ['blocks.activateMultitouch'] = 'Активировать мультикасания',
+        ['blocks.deactivateMultitouch'] = 'Деактивировать мультикасания',
         ['blocks.requestFun'] = 'Вызвать функцию',
         ['blocks.requestFun.params'] = {'Имя функции:'},
         ['blocks.requestFunParams'] = 'Вызвать функцию с параметрами',
@@ -427,8 +433,6 @@ return {
         ['blocks.setSliderPos.params'] = {'Имя слайдера:', 'Позиция (X):', 'Позиция (Y):'},
         ['blocks.setSliderValue'] = 'Установить значение в слайдер',
         ['blocks.setSliderValue.params'] = {'Имя слайдера:', 'Значение (0-100):'},
-        ['blocks.getSliderValue'] = 'Получить значение из слайдера',
-        ['blocks.getSliderValue.params'] = {'Имя слайдера:', 'Имя переменной:'},
 
     ['blocks.widgets2'] = 'Виджеты (2)',
         ['blocks.newField'] = 'Создать однострочное текстовое поле',
@@ -465,6 +469,7 @@ return {
         ['editor.list.prop.obj'] = 'Объект',
         ['editor.list.prop.text'] = 'Текст',
         ['editor.list.prop.group'] = 'Группа',
+        ['editor.list.prop.widget'] = 'Виджет',
 
     ['editor.list.fun.get_text'] = 'получить_текст',
         ['editor.list.fun.read_save'] = 'прочитать_сохранение',
@@ -532,6 +537,12 @@ return {
             ['editor.list.prop.group.height'] = 'высота_группы',
             ['editor.list.prop.group.rotation'] = 'вращение_группы',
             ['editor.list.prop.group.alpha'] = 'непрозрачность_группы',
+
+        ['editor.list.prop.widget.tag'] = 'тег_виджета',
+            ['editor.list.prop.widget.pos_x'] = 'позиция_виджета_x',
+            ['editor.list.prop.widget.pos_y'] = 'позиция_виджета_y',
+            ['editor.list.prop.widget.value'] = 'значение_слайдера',
+            ['editor.list.prop.widget.link'] = 'ссылка_из_webview',
 
     ['editor.list.log.true'] = 'истина',
         ['editor.list.log.false'] = 'ложь',

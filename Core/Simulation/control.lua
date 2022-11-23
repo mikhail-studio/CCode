@@ -21,8 +21,24 @@ M['requestFun'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() ' .. type .. '[\'' .. name .. '\']() end)'
 end
 
+M['setFocus'] = function(params)
+    GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(' .. CALC(params[1], 'nil') .. ')'
+end
+
+M['setFocusMultitouch'] = function(params)
+    GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(' .. CALC(params[1], 'nil') .. ', ' .. CALC(params[2], 'nil') .. ')'
+end
+
+M['activateMultitouch'] = function(params)
+    GAME.lua = GAME.lua .. ' system.activate(\'multitouch\')'
+end
+
+M['deactivateMultitouch'] = function(params)
+    GAME.lua = GAME.lua .. ' system.deactivate(\'multitouch\')'
+end
+
 M['returnValue'] = function(params)
-    GAME.lua = GAME.lua .. ' return (' .. CALC(params[1]) .. ')'
+    GAME.lua = GAME.lua .. ' return ' .. CALC(params[1])
 end
 
 M['requestExit'] = function(params)

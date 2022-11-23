@@ -51,7 +51,7 @@ if not IS_SIM and system.getInfo('deviceID') ~= 'd5e815039ddf2736' and not LIVE 
             end
         end)
     end)
-elseif IS_SIM and MENU and MENU.group then
+elseif IS_SIM and MENU and MENU.group and false then
     MENU.group.isVisible = false
     PROGRAMS = require 'Interfaces.programs'
     PROGRAMS.create()
@@ -76,14 +76,14 @@ elseif IS_SIM and MENU and MENU.group then
     CURRENT_SCRIPT = 1
     BLOCKS = require 'Interfaces.blocks'
     BLOCKS.create()
-    -- BLOCKS.group.isVisible = true
+    BLOCKS.group.isVisible = true
 
     -- SETTINGS = require 'Interfaces.settings'
     -- SETTINGS.create()
     -- SETTINGS.group.isVisible = true
 
-    EDITOR = require 'Core.Editor.interface'
-    EDITOR.create('newText', 4, {{'400', 'n'}}, 2)
+    -- EDITOR = require 'Core.Editor.interface'
+    -- EDITOR.create('newText', 4, {{'400', 'n'}}, 2)
 
     -- NEW_BLOCK = require 'Interfaces.new-block'
     -- NEW_BLOCK.create()

@@ -85,6 +85,10 @@ M.listBlock = {
         'repeat',
         'forEnd',
         'for',
+        'setFocus',
+        'setFocusMultitouch',
+        'activateMultitouch',
+        'deactivateMultitouch',
         'comment',
         'requestApi',
         'requestExit'
@@ -193,8 +197,7 @@ M.listBlock = {
         'newVSlider',
         'removeSlider',
         'setSliderPos',
-        'setSliderValue',
-        'getSliderValue'
+        'setSliderValue'
     },
 
     ['widgets2'] = {
@@ -277,6 +280,10 @@ M.listName = {
         ['forEnd'] = {'control'},
         ['comment'] = {'control', 'value'},
         ['requestExit'] = {'control'},
+        ['setFocus'] = {'control', 'value'},
+        ['setFocusMultitouch'] = {'control', 'value', 'value'},
+        ['activateMultitouch'] = {'control'},
+        ['deactivateMultitouch'] = {'control'},
 
     -- shapes
     ['newRect'] = {'shapes', 'value', 'color', 'value', 'value', 'value', 'value'},
@@ -377,7 +384,6 @@ M.listName = {
         ['removeSlider'] = {'widgets', 'value'},
         ['setSliderPos'] = {'widgets', 'value', 'value', 'value'},
         ['setSliderValue'] = {'widgets', 'value', 'value'},
-        ['getSliderValue'] = {'widgets', 'value', 'var'},
 
     -- widgets2
     ['newField'] = {'widgets2', 'value', 'value', 'inputType', 'color', 'value', 'isBackground', 'textAlign', 'value'},

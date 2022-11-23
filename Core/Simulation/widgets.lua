@@ -10,7 +10,8 @@ M['newWebView'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.webviews[' .. name .. ']:removeSelf() end)'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.webviews[' .. name .. '] = native.newWebView(CENTER_X, CENTER_Y, '
     GAME.lua = GAME.lua .. width .. ', ' .. height .. ') GAME.group.webviews[' .. name .. ']:request(' .. link .. ')'
-    GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.webviews[' .. name .. ']) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.webviews[' .. name .. ']:addEventListener(\'urlRequest\', function(e) GAME.group.webviews.url = e.url'
+    GAME.lua = GAME.lua .. ' end) end) GAME.group:insert(GAME.group.webviews[' .. name .. ']) end)'
 end
 
 M['setWebViewPos'] = function(params)
@@ -94,13 +95,6 @@ end
 M['setSliderValue'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local value = tonumber(' ..  CALC(params[2]) .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.sliders[' ..  CALC(params[1]) .. ']:setValue(value > 100 and 100 or value < 0 and 0 or value) end)'
-end
-
-M['getSliderValue'] = function(params)
-    local slider, name = CALC(params[1]), params[2][1][1]
-    local type = params[2][1][2] == 'vE' and 'varsE' or params[2][1][2] == 'vS' and 'varsS' or 'varsP'
-
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. type .. '[\'' .. name .. '\'] = GAME.group.sliders[' .. slider .. '].value end)'
 end
 
 return M

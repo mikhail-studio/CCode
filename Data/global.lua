@@ -131,7 +131,8 @@ GET_NESTED_DATA = function(data, nestedInfo, INFO)
             for j = fixIndex, #data.scripts[current_script].params do
                 if not data.scripts[current_script].params[fixIndex].event then
                     local name = data.scripts[current_script].params[fixIndex].name
-                    local notNested = not (data.scripts[current_script].params[fixIndex].nested and #data.scripts[current_script].params[fixIndex].nested > 0)
+                    local notNested = not (data.scripts[current_script].params[fixIndex].nested
+                    and #data.scripts[current_script].params[fixIndex].nested > 0)
                     table.insert(data.scripts[current_script].params[current_params].nested, data.scripts[current_script].params[fixIndex])
                     table.remove(data.scripts[current_script].params, fixIndex)
 
@@ -365,13 +366,14 @@ UTF8.trimRight = function(s) return UTF8.gsub(s, '%s+$', '') end
 UTF8.trimFull = function(s) return UTF8.trim(UTF8.gsub(s, '%s+', ' ')) end
 timer.new = function(sec, rep, lis) return timer.performWithDelay(sec, lis, rep) end
 math.sum = function(...) local args, num = {...}, 0 for i = 1, #args do num = num + args[i] end return num end
+table.len = function(t)
+    return type(t) == 'table' and ((type(#t) == 'number' and #t > 0) and #t
+    or (function() local i = 0 for k in pairs(t) do i = i + 1 end return i end)()) or 0
+end
 math.round = function(num, exp)
-    if not exp then
-        return tonumber(string.match(tostring(num), '(.*)%.')) or num
-    else
-        if not tonumber(num) then return 0 end if not tonumber(exp) then exp = 0 end
-        return tonumber(string.format('%.' .. exp .. 'f', tonumber(num)))
-    end
+    if not exp then return tonumber(string.match(tostring(num), '(.*)%.')) or num else
+    if not tonumber(num) then return 0 end if not tonumber(exp) then exp = 0 end
+    return tonumber(string.format('%.' .. exp .. 'f', tonumber(num))) end
 end
 
 if IS_SIM then
@@ -387,20 +389,19 @@ if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'})
 
 GET_GLOBAL_TABLE = function()
     return {
-        sendLaunchAnalytics = _G.sendLaunchAnalytics, transition = _G.transition, tostring = _G.tostring,
-        tonumber = _G.tonumber, gcinfo = _G.gcinfo, assert = _G.assert, debug = _G.debug, GAME = _G.GAME,
+        sendLaunchAnalytics = _G.sendLaunchAnalytics, transition = _G.transition, tostring = _G.tostring, tonumber = _G.tonumber,
+        gcinfo = _G.gcinfo, assert = _G.assert, debug = _G.debug, GAME = _G.GAME, collectgarbage = _G.collectgarbage,
         io = _G.io, os = _G.os, display = _G.display, load = _G.load, module = _G.module, media = _G.media,
         native = _G.native, coroutine = _G.coroutine, CENTER_X = _G.CENTER_X, CENTER_Y = _G.CENTER_Y, ipairs = _G.ipairs,
         TOP_HEIGHT = _G.TOP_HEIGHT, network = _G.network, LFS = _G.lfs, _network_pathForFile = _G._network_pathForFile,
         pcall = _G.pcall, BUILD = _G.BUILD, MAX_Y = _G.MAX_Y, MAX_X = _G.MAX_X, string = _G.string,
         xpcall = _G.xpcall, ZERO_Y = _G.ZERO_Y, ZERO_X = _G.ZERO_X, package = _G.package, print = _G.print,
         table = _G.table, lpeg = _G.lpeg, COPY_TABLE = _G.COPY_TABLE, DISPLAY_HEIGHT = _G.DISPLAY_HEIGHT,
-        unpack = _G.unpack, require = _G.require, setmetatable = _G.setmetatable, next = _G.next,
-        RIGHT_HEIGHT = _G.RIGHT_HEIGHT, graphics = _G.graphics, system = _G.system, rawequal = _G.rawequal,
+        unpack = _G.unpack, require = _G.require, setmetatable = _G.setmetatable, next = _G.next, RIGHT_HEIGHT = _G.RIGHT_HEIGHT,
+        graphics = _G.graphics, system = _G.system, rawequal = _G.rawequal,  getmetatable = _G.getmetatable,
         timer = _G.timer, BOTTOM_HEIGHT = _G.BOTTOM_HEIGHT, newproxy = _G.newproxy, metatable = _G.metatable,
         al = _G.al, rawset = _G.rawset, easing = _G.easing, coronabaselib = _G.coronabaselib, math = _G.math,
         LEFT_HEIGHT = _G.LEFT_HEIGHT, cloneArray = _G.cloneArray, DISPLAY_WIDTH = _G.DISPLAY_WIDTH, type = _G.type,
-        audio = _G.audio, pairs = _G.pairs, select = _G.select, rawget = _G.rawget, Runtime = _G.Runtime,
-        collectgarbage = _G.collectgarbage, getmetatable = _G.getmetatable, error = _G.error
+        audio = _G.audio, pairs = _G.pairs, select = _G.select, rawget = _G.rawget, Runtime = _G.Runtime, error = _G.error
     }
 end
