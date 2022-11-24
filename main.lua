@@ -51,7 +51,7 @@ if not IS_SIM and system.getInfo('deviceID') ~= 'd5e815039ddf2736' and not LIVE 
             end
         end)
     end)
-elseif IS_SIM and MENU and MENU.group and false then
+elseif IS_SIM and MENU and MENU.group then
     MENU.group.isVisible = false
     PROGRAMS = require 'Interfaces.programs'
     PROGRAMS.create()
@@ -88,11 +88,11 @@ elseif IS_SIM and MENU and MENU.group and false then
     -- NEW_BLOCK = require 'Interfaces.new-block'
     -- NEW_BLOCK.create()
     --
-    -- NEW_BLOCK.group.types[15].scroll.isVisible = true
+    -- NEW_BLOCK.group.types[9].scroll.isVisible = true
     -- NEW_BLOCK.group.types[1].scroll.isVisible = false
     -- NEW_BLOCK.group[4].isVisible = false
-    -- for i = 5, 10 do NEW_BLOCK.group[i].isVisible = true end
-    -- NEW_BLOCK.group.currentIndex = 15
+    -- for i = 11, 14 do NEW_BLOCK.group[i].isVisible = true end
+    -- NEW_BLOCK.group.currentIndex = 9
 
     -- local CUSTOM_BLOCK = require('Core.Modules.custom-block')
     --     CUSTOM_BLOCK.newBlock('Поставить для текста позицию Y', {

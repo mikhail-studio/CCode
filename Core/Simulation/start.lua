@@ -24,7 +24,7 @@ local function getStartLua(linkBuild)
     local code1 = ' GAME.orientation = CURRENT_ORIENTATION display.setDefault(\'background\', 0)'
     local code2 = ' GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {}'
     local code3 = ' GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {} GAME.currentStage = {}'
-    local code4 = ' GAME.group.animations = {} GAME.group.widgets = {}'
+    local code4 = ' GAME.group.animations = {} GAME.group.widgets = {} GAME.group.tags = {TAG = {}}'
     local code5 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} device.start()'
     local code6 = ' GAME.group.const.touch_fun = function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
     local code7 = ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y return true end'
@@ -46,8 +46,8 @@ M.remove = function()
     pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
     pcall(function() for _,v in pairs(M.group.bitmaps) do v:releaseSelf() end end)
     pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil math.randomseed(os.time())
-    pcall(function() for child = display.currentStage.numChildren, 1, -1 do if not M.currentStage[display.currentStage[child]]
-        then display.currentStage[child]:removeSelf() end end end)
+    pcall(function() for child = display.currentStage.numChildren, 1, -1 do
+    if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
     if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true}) end
 end
 
@@ -174,7 +174,7 @@ M.new = function(linkBuild)
         return M.lua
     else
         pcall(function()
-            -- print(M.lua)
+            print(M.lua)
             loadstring(M.lua)()
         end)
     end

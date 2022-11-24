@@ -385,7 +385,7 @@ end
 
 require('Core.Modules.custom-block').getBlocks()
 if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'}) end
--- Runtime:addEventListener('unhandledError', function(event) print('Error: ', event.errorMessage) return true end)
+-- Runtime:addEventListener('unhandledError', function(event) return true end)
 
 GET_GLOBAL_TABLE = function()
     return {
