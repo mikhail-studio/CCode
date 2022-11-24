@@ -61,13 +61,13 @@ M.create = function(data, size, twidth, tsize)
         local textGetHeight = display.newText({
                 text = name, align = 'left',
                 fontSize = 22, x = 0, y = 5000,
-                font = 'ubuntu', width = 142
+                font = 'ubuntu', width = 143
             })
         if textGetHeight.height > 53 then textGetHeight.height = 53 end
 
         block.params[i] = {}
         block.params[i].name = display.newText({
-                text = name, align = 'left', height = textGetHeight.height / size, width = 142 / size,
+                text = name, align = 'left', height = textGetHeight.height / size, width = 143 / size,
                 fontSize = 22 / size, x = nameX / size, y = nameY / size, font = 'ubuntu'
             }) textGetHeight:removeSelf()
         block:insert(block.params[i].name)

@@ -17,7 +17,7 @@ M['newText'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._density = 1 GAME.group.texts[' .. name .. ']._bounce = 0'
     GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._friction = 0 GAME.group.texts[' .. name .. ']._gravity = 1'
     GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._body = \'\' GAME.group.texts[' .. name .. ']._hitbox = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._touch = \'\' GAME.group.texts[' .. name .. ']._tag = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._touch = \'\' GAME.group.texts[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '].name = ' .. name .. ' end)'
 end
 
@@ -38,7 +38,7 @@ M['newText2'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._density = 1 GAME.group.texts[' .. name .. ']._bounce = 0'
     GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._friction = 0 GAME.group.texts[' .. name .. ']._gravity = 1'
     GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._body = \'\' GAME.group.texts[' .. name .. ']._hitbox = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._touch = \'\' GAME.group.texts[' .. name .. ']._tag = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._touch = \'\' GAME.group.texts[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '].name = ' .. name .. ' end)'
 end
 
@@ -51,9 +51,9 @@ end
 
 M['updVar'] = function(params)
     local type = params[1][1][2] == 'vE' and 'varsE' or params[1][1][2] == 'vS' and 'varsS' or 'varsP'
-    local name, value = params[1][1][1], CALC(params[2])
+    local name, value = params[1][1][1], '(' .. CALC(params[2]) .. ')'
 
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. type .. '[\'' .. name .. '\'] = ' .. type .. '[\'' .. name .. '\'] + (' .. value .. ') end)'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. type .. '[\'' .. name .. '\'] = ' .. type .. '[\'' .. name .. '\'] + ' .. value .. ' end)'
 end
 
 M['addTable'] = function(params)

@@ -1,22 +1,6 @@
 local CALC = require 'Core.Simulation.calc'
 local M = {}
 
-M['setSprite'] = function(params)
-    local name = CALC(params[1])
-    local link = CALC(params[2])
-
-    GAME.lua = GAME.lua .. ' pcall(function() local link, filter = other.getImage(' .. link .. ')'
-    GAME.lua = GAME.lua .. ' display.setDefault(\'magTextureFilter\', filter)'
-    GAME.lua = GAME.lua .. ' display.setDefault(\'minTextureFilter\', filter)'
-    GAME.lua = GAME.lua .. ' local image = display.newImage(tostring(link), system.DocumentsDirectory)'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._width = image.width'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._height = image.height'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = tostring(link)'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._name = ' .. link
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].fill = {type = \'image\', filename = tostring(link),'
-    GAME.lua = GAME.lua .. ' baseDir = system.DocumentsDirectory} image:removeSelf() image = nil end)'
-end
-
 M['setScale'] = function(params)
     local nameObject = CALC(params[1])
     local scale = '((' .. CALC(params[2]) .. ') / 100)'

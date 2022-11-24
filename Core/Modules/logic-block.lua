@@ -189,7 +189,7 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
     for i = 1, lengthParams do
         local textGetHeight = display.newText({
             text = STR['blocks.' .. name .. '.params'][i], align = 'left',
-            fontSize = 22, x = 0, y = 5000, font = 'ubuntu', width = 142
+            fontSize = 22, x = 0, y = 5000, font = 'ubuntu', width = 143
         }) if textGetHeight.height > 53 then textGetHeight.height = 53 end
 
         local nameY = M.getParamsNameY(lengthParams)[i]
@@ -198,7 +198,7 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
         group.blocks[index].params[i] = {}
         group.blocks[index].params[i].name = display.newText({
                 text = STR['blocks.' .. name .. '.params'][i], align = 'left', height = textGetHeight.height, fontSize = 22,
-                x = M.getParamsNameX(lengthParams, width)[i], y = nameY, font = 'ubuntu', width = 142
+                x = M.getParamsNameX(lengthParams, width)[i], y = nameY, font = 'ubuntu', width = 143
             }) textGetHeight:removeSelf()
         group.blocks[index]:insert(group.blocks[index].params[i].name)
 

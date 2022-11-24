@@ -43,7 +43,7 @@ M['newWebView'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. '] = native.newWebView(CENTER_X, CENTER_Y, '
     GAME.lua = GAME.lua .. width .. ', ' .. height .. ') GAME.group.widgets[' .. name .. ']:request(' .. link .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']:addEventListener(\'urlRequest\', function(e)'
-    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].url = e.url end)'
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].url = e.url end) GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._type = \'webview\' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
 end
 
@@ -57,6 +57,7 @@ M['newHSlider'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. '] = WIDGET.newSlider({x = ' .. posX .. ', y = ' .. posY .. ','
     GAME.lua = GAME.lua .. ' value = 50, width = ' .. width .. '}) GAME.group.widgets[' .. name .. '].type = \'horizontal\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._x, GAME.group.widgets[' .. name .. ']._y = ' .. posX .. ', ' .. posY
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._type = \'slider\' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
 end
 
@@ -70,6 +71,7 @@ M['newVSlider'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. '] = WIDGET.newSlider({x = ' .. posX .. ', y = ' .. posY .. ','
     GAME.lua = GAME.lua .. ' value = 50, height = ' .. height .. ', orientation = \'vertical\'})'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._x, GAME.group.widgets[' .. name .. ']._y = ' .. posX .. ', ' .. posY
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._type = \'slider\' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
 end
 
@@ -92,6 +94,7 @@ M['newField'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].font = native.newFont(other.getFont(' .. font .. '), ' .. fontSize .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].align = ' .. align .. ' GAME.group.widgets[' .. name .. ']._type = \'field\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].inputType = ' .. type .. ' local colors = ' .. color
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].hasBackground = ' .. isBackground .. ' pcall(function()'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']:setTextColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
     GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
@@ -114,6 +117,7 @@ M['newBox'] = function(params)
     GAME.lua = GAME.lua .. ' ' .. width .. ', ' .. height .. ') GAME.group.widgets[' .. name .. '].placeholder = ' .. placeholder
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].font = native.newFont(other.getFont(' .. font .. '), ' .. fontSize .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].align = ' .. align .. ' local colors = ' .. colors
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._type = \'field\' GAME.group.widgets[' .. name .. '].isEditable = true'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].hasBackground = ' .. isBackground .. ' pcall(function()'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']:setTextColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
