@@ -2,6 +2,12 @@ GLOBAL = require 'Data.global'
 MENU = require 'Interfaces.menu'
 
 MENU.create()
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+MENU.group.isVisible = true
+=======
+>>>>>>> c6de0c7f3bb3340c306a1adb9b51aa36ae09426a
 MENU.group.isVisible = LOCAL.name_tester ~= '' or LIVE or system.getInfo('deviceID') == 'd5e815039ddf2736'
 
 if not IS_SIM and system.getInfo('deviceID') ~= 'd5e815039ddf2736' and not LIVE then
@@ -103,3 +109,7 @@ elseif IS_SIM and MENU and MENU.group then
     --     })
     -- timer.performWithDelay(0, function() CUSTOM_BLOCK.addBlock({}) end)
 end
+<<<<<<< HEAD
+=======
+>>>>>>> bf58d4d5fbfacf2e025197c70128ad00b92a0961
+>>>>>>> c6de0c7f3bb3340c306a1adb9b51aa36ae09426a
