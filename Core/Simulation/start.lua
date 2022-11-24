@@ -81,7 +81,7 @@ M.new = function(linkBuild)
         end
     end
 
-    if BLOCKS.custom then
+    if BLOCKS and BLOCKS.custom then
         local name = 'custom' .. BLOCKS.custom.index
 
         for i = 1, #M.data.scripts[1].params do

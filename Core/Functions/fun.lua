@@ -40,6 +40,10 @@ M['totable'] = function(str)
     return JSON.decode(str)
 end
 
+M['len_table'] = function(t)
+    return table.len(t)
+end
+
 M['encode'] = function(t, prettify)
     return JSON[prettify and 'prettify' or 'encode'](t)
 end

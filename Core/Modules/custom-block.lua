@@ -132,6 +132,7 @@ M.addBlock = function(params, _index)
 
         SET_GAME_CUSTOM(custom) ALERT = true
         M.scroll:removeSelf() M.group:removeSelf()
+        STR['blocks..params'] = {} STR['blocks.'] = STR['blocks.default']
 
         NEW_BLOCK.remove() NEW_BLOCK.create()
         NEW_BLOCK.group.types[15].scroll.isVisible = true
@@ -166,6 +167,7 @@ M.addBlock = function(params, _index)
         table.insert(data.scripts, 1, sandboxScript)
         SET_GAME_CODE(CURRENT_LINK, data)
 
+        STR['blocks..params'] = {} STR['blocks.'] = STR['blocks.default']
         ALERT = true M.scroll:removeSelf() M.group:removeSelf() NEW_BLOCK.remove()
         BLOCKS.group:removeSelf() BLOCKS.group = nil LAST_CURRENT_SCRIPT, CURRENT_SCRIPT = CURRENT_SCRIPT, 1
         BLOCKS.create({name = block[1], params = COPY_TABLE(block[2]), index = index, isChange = _index})
@@ -199,6 +201,7 @@ M.newBlock = function(name, params, str, index)
     local params = params or {}
         for i = 1, str and #str or 0 do
             STR['blocks..params'][i] = str[i]
+            params[i] = {{'hello world', 't'}}
         end
     genBlock(params)
 
@@ -261,6 +264,8 @@ M.newBlock = function(name, params, str, index)
                         ALERT = true
                         M.scroll:removeSelf()
                         M.group:removeSelf()
+                        STR['blocks..params'] = {}
+                        STR['blocks.'] = STR['blocks.default']
                     elseif e.target.tag == 'lua' then
                         M.scroll:setIsLocked(true, 'vertical') M.alert = false
                         WINDOW.new(STR['blocks.create.block.save.lua.title'],

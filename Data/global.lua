@@ -21,25 +21,12 @@ LFS = require 'lfs'
 WIDGET = require 'widget'
 CRYPTO = require 'crypto'
 
-LOCAL = require 'Data.local'
-LANG.en = require 'Strings.en'
-LANG.ru = require 'Strings.ru'
-LANGS = {'en', 'ru'}
-
-for i = 1, #LANGS do
-    if LANGS[i] == LOCAL.lang then
-        break
-    elseif i == #LANGS then
-        LOCAL.lang = 'en'
-    end
-end
-
 if system.getInfo('deviceID') == '439ab4d7b739941c' then
     display.safeActualContentHeight = display.actualContentHeight - 90
 end
 
 LIVE = false
-BUILD = 1173
+BUILD = 1182
 ALERT = true
 INDEX_LIST = 0
 MORE_LIST = true
@@ -49,7 +36,6 @@ ORIENTATION.init()
 CURRENT_SCRIPT = 0
 GAME_GROUP_OPEN = ''
 CURRENT_LINK = 'App1'
-STR = LANG[LOCAL.lang]
 LAST_CURRENT_SCRIPT = 0
 CURRENT_ORIENTATION = 'portrait'
 CENTER_X = display.contentCenterX
@@ -74,12 +60,6 @@ KEYORDER = {
     'settings', 'fonts', 'videos', 'sounds', 'images', 'funs', 'tables', 'len',
     'vars', 'name', 'custom', 'event', 'nested', 'comment', 'params'
 } for i = 10000, 1, -1 do table.insert(KEYORDER, 1, tostring(i)) end
-
-for k, v in pairs(LANG.ru) do
-    if not STR[k] then
-        STR[k] = v
-    end
-end
 
 pcall(function()
     if IS_SIM or IS_WIN then
@@ -366,15 +346,23 @@ UTF8.trimRight = function(s) return UTF8.gsub(s, '%s+$', '') end
 UTF8.trimFull = function(s) return UTF8.trim(UTF8.gsub(s, '%s+', ' ')) end
 timer.new = function(sec, rep, lis) return timer.performWithDelay(sec, lis, rep) end
 math.sum = function(...) local args, num = {...}, 0 for i = 1, #args do num = num + args[i] end return num end
-table.len = function(t)
+table.len, math.round = function(t)
     return type(t) == 'table' and ((type(#t) == 'number' and #t > 0) and #t
     or (function() local i = 0 for k in pairs(t) do i = i + 1 end return i end)()) or 0
+end, function(num, exp)
+    if not exp then return tonumber(string.match(tostring(num), '(.*)%.')) or num
+    else local exps = string.match(tostring(num), '%.(.*)') num = tonumber(num) and num + 0.5 or 0
+    num = string.match(tostring(num), '(.*)%.') or tostring(num) exp = (exps and tonumber(exp) and tonumber(exp) > 0)
+    and exps:sub(1, tonumber(exp)) or '0' return tonumber(num .. '.' .. exp) end
 end
-math.round = function(num, exp)
-    if not exp then return tonumber(string.match(tostring(num), '(.*)%.')) or num else
-    if not tonumber(num) then return 0 end if not tonumber(exp) then exp = 0 end
-    return tonumber(string.format('%.' .. exp .. 'f', tonumber(num))) end
-end
+
+LOCAL = require 'Data.local'
+LANG.en = require 'Strings.en'
+LANG.ru = require 'Strings.ru'
+LANGS = {'en', 'ru'}
+
+for i = 1, #LANGS do if LANGS[i] == LOCAL.lang then break elseif i == #LANGS then LOCAL.lang = 'en' end end
+STR = LANG[LOCAL.lang] for k, v in pairs(LANG.ru) do if not STR[k] then STR[k] = v end end
 
 if IS_SIM then
     JSON.encode, JSON.encode2, JSON.encode4 = JSON.prettify, JSON.encode, JSON.encode3

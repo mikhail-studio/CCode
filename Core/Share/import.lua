@@ -70,7 +70,7 @@ return {
                                 LFS.mkdir(DOC_DIR .. '/' .. link .. '/Temps')
 
                                 NEW_DATA()
-                                SET_GAME_CUSTOM()
+                                SET_GAME_CUSTOM(custom)
                                 SET_GAME_SAVE(link, {})
                                 SET_GAME_CODE(link, data)
                                 PROGRAMS.new(data.title, link)

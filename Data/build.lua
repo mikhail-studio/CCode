@@ -132,14 +132,14 @@ return ' ' .. UTF8.trimFull([[
         UTF8.trimFull = function(s) return UTF8.trim(UTF8.gsub(s, '%s+', ' ')) end
         timer.new = function(sec, rep, lis) return timer.performWithDelay(sec, lis, rep) end
         math.sum = function(...) local args, num = {...}, 0 for i = 1, #args do num = num + args[i] end return num end
-        table.len = function(t)
+        table.len, math.round = function(t)
             return type(t) == 'table' and ((type(#t) == 'number' and #t > 0) and #t
             or (function() local i = 0 for k in pairs(t) do i = i + 1 end return i end)()) or 0
-        end
-        math.round = function(num, exp)
-            if not exp then return tonumber(string.match(tostring(num), '(.*)%.')) or num else
-            if not tonumber(num) then return 0 end if not tonumber(exp) then exp = 0 end
-            return tonumber(string.format('%.' .. exp .. 'f', tonumber(num))) end
+        end, function(num, exp)
+            if not exp then return tonumber(string.match(tostring(num), '(.*)%.')) or num
+            else local exps = string.match(tostring(num), '%.(.*)') num = tonumber(num) and num + 0.5 or 0
+            num = string.match(tostring(num), '(.*)%.') or tostring(num) exp = (exps and tonumber(exp) and tonumber(exp) > 0)
+            and exps:sub(1, tonumber(exp)) or '0' return tonumber(num .. '.' .. exp) end
         end
 
         GET_GLOBAL_TABLE = function()
@@ -269,6 +269,10 @@ return ' ' .. UTF8.trimFull([[
             return JSON.decode(str)
         end
 
+        M['len_table'] = function(t)
+            return table.len(t)
+        end
+
         M['encode'] = function(t, prettify)
             return JSON[prettify and 'prettify' or 'encode'](t)
         end
@@ -383,6 +387,8 @@ return ' ' .. UTF8.trimFull([[
     end
 
     local function getProp()
+        local M = {}
+
         if 'Объект' then
             M['obj.touch'] = function(name)
                 return GAME.group.objects[name]._touch
@@ -514,6 +520,8 @@ return ' ' .. UTF8.trimFull([[
                 return GAME.group.widgets[name]._type == 'webview' and GAME.group.widgets[name].url or ''
             end
         end
+
+        return M
     end
 
     local function getSelect()

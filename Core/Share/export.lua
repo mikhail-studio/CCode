@@ -3,6 +3,7 @@ local function export(name, link)
         path = DOC_DIR .. '/export.zip', name = name .. '.ccode',
         listener = function(event)
             OS_REMOVE(DOC_DIR .. '/' .. link .. '/hash.txt')
+            OS_REMOVE(DOC_DIR .. '/' .. link .. '/custom.json')
             OS_REMOVE(DOC_DIR .. '/export.zip') WINDOW.remove()
         end
     })

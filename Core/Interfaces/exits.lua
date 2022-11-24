@@ -75,12 +75,12 @@ listeners.blocks = function()
                     end
                 else
                     table.insert(INFO.listBlock.custom, 'custom' .. BLOCKS.custom.index)
+                    table.insert(INFO.listBlock.everyone, 'custom' .. BLOCKS.custom.index)
                 end
-            else
-                table.remove(INFO.listBlock.everyone, 1)
             end
 
             if e.index ~= 0 then
+                table.remove(INFO.listBlock.everyone, 1)
                 table.remove(data.scripts, 1)
                 SET_GAME_CODE(CURRENT_LINK, data)
                 CURRENT_SCRIPT = LAST_CURRENT_SCRIPT

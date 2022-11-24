@@ -1,4 +1,4 @@
-local data = {}
+local data, custom = {}, {}
 local file = io.open(system.pathForFile('local.json', system.DocumentsDirectory), 'r')
 
 if file then

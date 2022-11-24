@@ -44,7 +44,7 @@ local listener = function(e, scroll, group, type)
                 if type == 'programs' and ALERT then
                     local data = GET_GAME_CODE(e.target.link)
 
-                    if tonumber(data.build) > 1160 then
+                    if tonumber(data.build) > 1170 then
                         if data.scripts[1] and data.scripts[1].custom then
                             table.remove(data.scripts, 1)
                             SET_GAME_CODE(e.target.link, data)

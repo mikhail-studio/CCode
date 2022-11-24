@@ -116,6 +116,22 @@ M.new = function(target)
 
         local comment = target.data.comment
         local name = target.data.name
+        local length = #INFO.listName[name] - 1
+        local _length = #target.data.params
+
+        if _length > length then
+            for i = 1, _length do
+                if i > length then
+                    target.data.params[i] = nil
+                end
+            end
+        elseif length > _length then
+            for i = 1, length do
+                if i > _length then
+                    target.data.params[i] = {}
+                end
+            end
+        end
 
         local block = M.create(target.data, size)
             block.y = block.y - height / 2 + 10 + target.block.height / 2 / size

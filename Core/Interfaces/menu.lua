@@ -14,15 +14,24 @@ listeners.but_continue = function(target)
         PROGRAMS.create()
         PROGRAMS.group.isVisible = true
     else
-        MENU.group.isVisible = false
-        PROGRAMS = require 'Interfaces.programs'
-        PROGRAMS.create()
-        CURRENT_LINK = LOCAL.last_link
+        local data = GET_GAME_CODE(LOCAL.last_link)
 
-        PROGRAMS.group.isVisible = false
-        PROGRAM = require 'Interfaces.program'
-        PROGRAM.create(LOCAL.last)
-        PROGRAM.group.isVisible = true
+        if tonumber(data.build) > 1170 then
+            if data.scripts[1] and data.scripts[1].custom then
+                table.remove(data.scripts, 1)
+                SET_GAME_CODE(LOCAL.last_link, data)
+            end
+
+            MENU.group.isVisible = false
+            PROGRAMS = require 'Interfaces.programs'
+            PROGRAMS.create()
+            CURRENT_LINK = LOCAL.last_link
+
+            PROGRAMS.group.isVisible = false
+            PROGRAM = require 'Interfaces.program'
+            PROGRAM.create(LOCAL.last)
+            PROGRAM.group.isVisible = true
+        end
     end
 end
 

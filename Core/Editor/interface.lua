@@ -84,9 +84,25 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     end
 
     local target = BLOCKS.group.blocks[blockIndex]
-    local length = #INFO.listName[target.data.name] - 1
+    local length, _length = #INFO.listName[target.data.name] - 1, #target.data.params
     local twidth, size = CENTER_X == 640 and (MAX_X - ZERO_X - 844) * 1.5 or target.block.width * 1.0, CENTER_X == 640 and 1.5 or 1.0
     local comment, params, name = target.data.comment, target.data.params, target.data.name
+
+    if _length > length then
+        for i = 1, _length do
+            if i > length then
+                BLOCKS.group.blocks[blockIndex].data.params[i] = nil
+                target.data.params[i] = nil
+            end
+        end
+    elseif length > _length then
+        for i = 1, length do
+            if i > _length then
+                BLOCKS.group.blocks[blockIndex].data.params[i] = {}
+                target.data.params[i] = {}
+            end
+        end
+    end
 
     local block = LIST.create(target.data, size, twidth, 1.0)
         block.y = title.y + title.height + 30 + block.height / 2
