@@ -43,22 +43,22 @@ M['newText2'] = function(params)
 end
 
 M['setVar'] = function(params)
-    local var = CALC(params[1], nil, true)
+    local var = CALC(params[1], 'a', true)
     local value = CALC(params[2])
 
     GAME.lua = GAME.lua .. ' pcall(function() ' .. var .. ' = ' .. value .. ' end)'
 end
 
 M['updVar'] = function(params)
-    local var = CALC(params[1], nil, true)
+    local var = CALC(params[1], 'a', true)
     local value = CALC(params[2])
 
     GAME.lua = GAME.lua .. ' pcall(function() ' .. var .. ' = ' .. var .. ' + ' .. value .. ' end)'
 end
 
 M['addTable'] = function(params)
-    local key = UTF8.sub(CALC(params[1], nil, true), 2)
-    local table = CALC(params[2], nil, true)
+    local key = UTF8.sub(CALC(params[1], '[\'KEY\']', true), 2)
+    local table = CALC(params[2], 'a', true)
     local value = CALC(params[3])
 
     GAME.lua = GAME.lua .. ' pcall(function() if ' .. table .. ' then ' .. table .. key .. ' = ' .. value
@@ -66,7 +66,7 @@ M['addTable'] = function(params)
 end
 
 M['resetTable'] = function(params)
-    local table = CALC(params[1], nil, true)
+    local table = CALC(params[1], 'a', true)
     local value = CALC(params[2], '[]')
 
     GAME.lua = GAME.lua .. ' pcall(function() ' .. table .. ' = JSON.decode(' .. value .. ') end)'

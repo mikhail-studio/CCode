@@ -26,13 +26,11 @@ M.listBlock = {
         'onTouchBegan',
         'onTouchEnded',
         'onTouchMoved',
-        'onSliderBegan',
         'onSliderMoved',
-        'onSliderEnded',
+        'onWebViewCallback',
         'onFieldBegan',
         'onFieldMoved',
-        'onFieldEnded',
-        'onWebViewCallback'
+        'onFieldEnded'
     },
 
     ['vars'] = {
@@ -249,9 +247,7 @@ M.listName = {
         ['onTouchBegan'] = {'events', 'fun', 'localtable'},
         ['onTouchEnded'] = {'events', 'fun', 'localtable'},
         ['onTouchMoved'] = {'events', 'fun', 'localtable'},
-        ['onSliderBegan'] = {'events', 'fun', 'localvar'},
         ['onSliderMoved'] = {'events', 'fun', 'localvar'},
-        ['onSliderEnded'] = {'events', 'fun', 'localvar'},
         ['onFieldBegan'] = {'events', 'fun', 'localtable'},
         ['onFieldMoved'] = {'events', 'fun', 'localtable'},
         ['onFieldEnded'] = {'events', 'fun', 'localtable'},

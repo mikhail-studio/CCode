@@ -175,7 +175,6 @@ READ_FILE = function(path, bin)
 end
 
 WRITE_FILE = function(path, data, bin)
-    print(path, data)
     local file = io.open(path, bin and 'wb' or 'w')
 
     if file then

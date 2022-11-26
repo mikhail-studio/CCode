@@ -32,10 +32,10 @@ local function getStartLua(linkBuild)
     local code9 = ' for child = 1, display.currentStage.numChildren do GAME.currentStage[display.currentStage[child]] = true end'
 
     if linkBuild then
-        return 'pcall(function() local varsP, tablesP, funsP, funsC = {}, {}, {}, {}'
+        return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}'
             .. require 'Data.build' .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
     else
-        return 'pcall(function() local varsP, tablesP, funsP, funsC = {}, {}, {}, {}'
+        return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}'
             .. funs1 .. funs2 .. funs3 .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
     end
 end

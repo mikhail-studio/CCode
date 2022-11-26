@@ -15,11 +15,11 @@ M['requestApi'] = function(params, custom)
 end
 
 M['requestFun'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], nil, true) .. '() end)'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. '() end)'
 end
 
 M['requestFunParams'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], nil, true) .. '(' .. CALC(params[2]) .. ') end)'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. '(' .. CALC(params[2]) .. ') end)'
 end
 
 M['setFocus'] = function(params)
@@ -54,7 +54,7 @@ M['setListener'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. ']:addEventListener(\'touch\','
     GAME.lua = GAME.lua .. ' function(e) GAME.group.const.touch = e.phase ~= \'ended\' and'
     GAME.lua = GAME.lua .. ' e.phase ~= \'cancelled\' GAME.group.const.touch_x, GAME.group.const.touch_y, e.target._touch = e.x, e.y,'
-    GAME.lua = GAME.lua .. ' GAME.group.const.touch return ' .. CALC(params[2], nil, true) .. '(e) end) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.const.touch return ' .. CALC(params[2], 'a', true) .. '(e) end) end)'
 end
 
 M['timer'] = function(params)
@@ -87,7 +87,7 @@ end
 
 M['for'] = function(params)
     local from, to = CALC(params[1]), CALC(params[2])
-    local var, step = CALC(params[3], nil, true), CALC(params[4], '1')
+    local var, step = CALC(params[3], 'a', true), CALC(params[4], '1')
 
     GAME.lua = GAME.lua .. ' for i = ' .. from .. ', ' .. to .. ', ' .. step .. ' do ' .. var .. ' = i'
 end

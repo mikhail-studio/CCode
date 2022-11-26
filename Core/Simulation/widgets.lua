@@ -50,13 +50,13 @@ end
 M['newHSlider'] = function(params)
     local name = CALC(params[1])
     local width = CALC(params[2], '100')
-    -- local width = CALC(params[3], '100')
+    local listener = CALC(params[3], 'a', true)
     local posX = '(CENTER_X + (' .. CALC(params[4]) .. '))'
     local posY = '(CENTER_Y - (' .. CALC(params[5]) .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. ']:removeSelf() end)'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. '] = WIDGET.newSlider({x = ' .. posX .. ', y = ' .. posY .. ','
-    GAME.lua = GAME.lua .. ' value = 50, width = ' .. width .. ', listener = function(e) pcall(function()'
+    GAME.lua = GAME.lua .. ' value = 50, width = ' .. width .. ', listener = function(e) pcall(function() ' .. listener .. '(e.value)'
     GAME.lua = GAME.lua .. ' end) end}) GAME.group.widgets[' .. name .. '].type = \'horizontal\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._x, GAME.group.widgets[' .. name .. ']._y = ' .. posX .. ', ' .. posY
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._tag = \'TAG\''

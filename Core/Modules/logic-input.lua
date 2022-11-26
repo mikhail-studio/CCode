@@ -126,7 +126,9 @@ M.renameProject = function(data, text, name, type)
                             if name == '' then
                                 if INFO.listName[data.scripts[j].params[k].name][u + 1] == 'var'
                                 or INFO.listName[data.scripts[j].params[k].name][u + 1] == 'fun'
-                                or INFO.listName[data.scripts[j].params[k].name][u + 1] == 'table' then
+                                or INFO.listName[data.scripts[j].params[k].name][u + 1] == 'table' 
+                                or INFO.listName[data.scripts[j].params[k].name][u + 1] == 'localvar'
+                                or INFO.listName[data.scripts[j].params[k].name][u + 1] == 'localtable' then
                                     table.remove(data.scripts[j].params[k].params[u], o)
                                 else
                                     data.scripts[j].params[k].params[u][o] = {'0', 'n'}
@@ -194,7 +196,9 @@ M.renameScript = function(data, text, name, type)
                         if name == '' then
                             if INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'var'
                             or INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'fun'
-                            or INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'table' then
+                            or INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'table'
+                            or INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'localvar'
+                            or INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'localtable' then
                                 table.remove(data.scripts[CURRENT_SCRIPT].params[k].params[u], o)
                             else
                                 data.scripts[CURRENT_SCRIPT].params[k].params[u][o] = {'0', 'n'}
@@ -262,7 +266,9 @@ M.renameEvent = function(data, text, name, type, eventIndex)
                     and data.scripts[CURRENT_SCRIPT].params[k].params[u][o][1] == text then
                         if name == '' then
                             if INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'var'
-                            or INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'table' then
+                            or INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'table'
+                            or INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'localvar'
+                            or INFO.listName[data.scripts[CURRENT_SCRIPT].params[k].name][u + 1] == 'localtable' then
                                 table.remove(data.scripts[CURRENT_SCRIPT].params[k].params[u], o)
                             else
                                 data.scripts[CURRENT_SCRIPT].params[k].params[u][o] = {'0', 'n'}
