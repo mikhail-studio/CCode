@@ -137,10 +137,14 @@ M.getPolygonParams = function(event, blockWidth, blockHeight)
 end
 
 M.new = function(name, scroll, group, index, event, params, comment, nested, vars, tables)
-    local blockWidth = DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60
+    local blockWidth, size = DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60, SIZE
     local lengthParams = #INFO.listName[name] - 1 if blockWidth / 116 > 15 then blockWidth = 116 * 15 end
     local blockHeight = 116 + 60 * math.round((lengthParams - 2 < 0 and 0 or lengthParams - 2) / 2, 0)
     local blockParams = M.getPolygonParams(event, blockWidth, event and blockHeight - 14 or blockHeight)
+
+    local blockHeight, blockWidth = blockHeight / size, blockWidth / size
+    local _polygon = display.newPolygon(0, 0, blockParams) _polygon.strokeWidth = 4
+    local pwidth = _polygon.width _polygon:removeSelf() for i = 1, #blockParams do blockParams[i] = blockParams[i] / size end
 
     local y = index == 1 and 50 or group.blocks[index - 1].y + group.blocks[index - 1].block.height / 2 + (blockHeight + 4) / 2 - 4
     local addY = index == 1 and 24 + (blockHeight - 116) / 2 or 24
@@ -161,8 +165,8 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
     end
 
     group.blocks[index].text = display.newText({
-            text = STR['blocks.' .. name], width = blockWidth - 20, height = 38, fontSize = 30,
-            align = 'left', x = 10, y = M.getTextY(lengthParams), font = 'ubuntu'
+            text = STR['blocks.' .. name], width = blockWidth - 20, height = 38 / size, fontSize = 30 / size,
+            align = 'left', x = 10 / size, y = M.getTextY(lengthParams) / size, font = 'ubuntu'
         })
     group.blocks[index]:insert(group.blocks[index].text)
 
@@ -170,7 +174,7 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
         local polygonX = group.blocks[index].block.x + group.blocks[index].block.width / 2 - 25
         local polygonY = group.blocks[index].block.y - group.blocks[index].block.height / 2 + 20
 
-        group.blocks[index].polygon = display.newPolygon(polygonX, polygonY, {0, 0, 10, 10, -10, 10})
+        group.blocks[index].polygon = display.newPolygon(polygonX, polygonY, {0, 0, 10 / size, 10 / size, -10 / size, 10 / size})
             group.blocks[index].polygon.yScale = #nested > 0 and 1 or -1
             group.blocks[index].polygon:setFillColor(#nested > 0 and 0.25 or 1)
         group.blocks[index]:insert(group.blocks[index].polygon)
@@ -192,31 +196,31 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
     for i = 1, lengthParams do
         local textGetHeight = display.newText({
             text = STR['blocks.' .. name .. '.params'][i], align = 'left',
-            fontSize = 22, x = 0, y = 5000, font = 'ubuntu', width = 143
-        }) if textGetHeight.height > 53 then textGetHeight.height = 53 end
+            fontSize = 22 / size, x = 0, y = 5000, font = 'ubuntu', width = 143 / size
+        }) if textGetHeight.height / size > 53 / size then textGetHeight.height = 53 / size end
 
         local nameY = M.getParamsNameY(lengthParams)[i]
-        local width = group.blocks[index].block.width
+        local width = pwidth
 
         group.blocks[index].params[i] = {}
         group.blocks[index].params[i].name = display.newText({
-                text = STR['blocks.' .. name .. '.params'][i], align = 'left', height = textGetHeight.height, fontSize = 22,
-                x = M.getParamsNameX(lengthParams, width)[i], y = nameY, font = 'ubuntu', width = 143
+                text = STR['blocks.' .. name .. '.params'][i], align = 'left', height = textGetHeight.height, fontSize = 22 / size,
+                x = M.getParamsNameX(lengthParams, width)[i] / size, y = nameY / size, font = 'ubuntu', width = 143 / size
             }) textGetHeight:removeSelf()
         group.blocks[index]:insert(group.blocks[index].params[i].name)
 
-        group.blocks[index].params[i].line = display.newRect(M.getParamsLineX(lengthParams, width)[i], nameY + 20, M.getParamsLineWidth(lengthParams, width)[i], 3)
+        group.blocks[index].params[i].line = display.newRect(M.getParamsLineX(lengthParams, width)[i] / size, (nameY + 20) / size, M.getParamsLineWidth(lengthParams, width)[i] / size, 3 / size)
             group.blocks[index].params[i].line:setFillColor(0.3)
             group.blocks[index].params[i].line.anchorX = 0
         group.blocks[index]:insert(group.blocks[index].params[i].line)
 
         group.blocks[index].params[i].value = display.newText({
-                text = M.getParamsValueText(params, i), height = 26, width = M.getParamsLineWidth(lengthParams, width)[i] - 5,
-                x = M.getParamsLineX(lengthParams, width)[i], y = nameY + 5, font = 'ubuntu', fontSize = 20, align = 'center'
+                text = M.getParamsValueText(params, i), height = 26 / size, width = (M.getParamsLineWidth(lengthParams, width)[i] - 5) / size,
+                x = M.getParamsLineX(lengthParams, width)[i] / size, y = (nameY + 5) / size, font = 'ubuntu', fontSize = 20 / size, align = 'center'
             }) group.blocks[index].params[i].value.anchorX = 0
         group.blocks[index]:insert(group.blocks[index].params[i].value)
 
-        group.blocks[index].params[i].rect = display.newRect(M.getParamsLineX(lengthParams, width)[i], nameY + 20, M.getParamsLineWidth(lengthParams, width)[i], 40)
+        group.blocks[index].params[i].rect = display.newRect(M.getParamsLineX(lengthParams, width)[i] / size, (nameY + 20) / size, M.getParamsLineWidth(lengthParams, width)[i] / size, 40 / size)
             group.blocks[index].params[i].rect:setFillColor(1)
             group.blocks[index].params[i].rect.alpha = 0.005
             group.blocks[index].params[i].rect.anchorX = 0

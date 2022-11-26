@@ -21,8 +21,9 @@ LFS = require 'lfs'
 WIDGET = require 'widget'
 CRYPTO = require 'crypto'
 
+SIZE = 1.0
 LIVE = false
-BUILD = 1187
+BUILD = 1188
 ALERT = true
 INDEX_LIST = 0
 MORE_LIST = true
@@ -174,6 +175,7 @@ READ_FILE = function(path, bin)
 end
 
 WRITE_FILE = function(path, data, bin)
+    print(path, data)
     local file = io.open(path, bin and 'wb' or 'w')
 
     if file then
@@ -376,19 +378,19 @@ if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'})
 
 GET_GLOBAL_TABLE = function()
     return {
-        sendLaunchAnalytics = _G.sendLaunchAnalytics, transition = _G.transition, tostring = _G.tostring, tonumber = _G.tonumber,
-        gcinfo = _G.gcinfo, assert = _G.assert, debug = _G.debug, GAME = _G.GAME, collectgarbage = _G.collectgarbage,
-        io = _G.io, os = _G.os, display = _G.display, load = _G.load, module = _G.module, media = _G.media,
-        native = _G.native, coroutine = _G.coroutine, CENTER_X = _G.CENTER_X, CENTER_Y = _G.CENTER_Y, ipairs = _G.ipairs,
-        TOP_HEIGHT = _G.TOP_HEIGHT, network = _G.network, LFS = _G.lfs, _network_pathForFile = _G._network_pathForFile,
-        pcall = _G.pcall, BUILD = _G.BUILD, MAX_Y = _G.MAX_Y, MAX_X = _G.MAX_X, string = _G.string,
-        xpcall = _G.xpcall, ZERO_Y = _G.ZERO_Y, ZERO_X = _G.ZERO_X, package = _G.package, print = _G.print,
-        table = _G.table, lpeg = _G.lpeg, COPY_TABLE = _G.COPY_TABLE, DISPLAY_HEIGHT = _G.DISPLAY_HEIGHT,
-        unpack = _G.unpack, require = _G.require, setmetatable = _G.setmetatable, next = _G.next, RIGHT_HEIGHT = _G.RIGHT_HEIGHT,
-        graphics = _G.graphics, system = _G.system, rawequal = _G.rawequal,  getmetatable = _G.getmetatable,
-        timer = _G.timer, BOTTOM_HEIGHT = _G.BOTTOM_HEIGHT, newproxy = _G.newproxy, metatable = _G.metatable,
-        al = _G.al, rawset = _G.rawset, easing = _G.easing, coronabaselib = _G.coronabaselib, math = _G.math,
-        LEFT_HEIGHT = _G.LEFT_HEIGHT, cloneArray = _G.cloneArray, DISPLAY_WIDTH = _G.DISPLAY_WIDTH, type = _G.type,
-        audio = _G.audio, pairs = _G.pairs, select = _G.select, rawget = _G.rawget, Runtime = _G.Runtime, error = _G.error
+        sendLaunchAnalytics = sendLaunchAnalytics, transition = transition, tostring = tostring, tonumber = tonumber,
+        gcinfo = gcinfo, assert = assert, debug = debug, GAME = GAME, collectgarbage = collectgarbage,
+        io = io, os = os, display = display, dofile = dofile, module = module, media = media, OS_REMOVE = OS_REMOVE,
+        native = native, coroutine = coroutine, CENTER_X = CENTER_X, CENTER_Y = CENTER_Y, ipairs = ipairs,
+        TOP_HEIGHT = TOP_HEIGHT, network = network, LFS = lfs, _network_pathForFile = _network_pathForFile,
+        pcall = pcall, BUILD = BUILD, MAX_Y = MAX_Y, MAX_X = MAX_X, string = string, SIZE = SIZE, READ_FILE = READ_FILE,
+        xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, print = print, OS_MOVE = OS_MOVE,
+        table = table, lpeg = lpeg, COPY_TABLE = COPY_TABLE, DISPLAY_HEIGHT = DISPLAY_HEIGHT, OS_COPY = OS_COPY,
+        unpack = unpack, require = require, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
+        graphics = graphics, system = system, rawequal = rawequal,  getmetatable = getmetatable, WRITE_FILE = WRITE_FILE,
+        timer = timer, BOTTOM_HEIGHT = BOTTOM_HEIGHT, newproxy = newproxy, metatable = metatable,
+        al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, math = math, DOC_DIR = DOC_DIR,
+        LEFT_HEIGHT = LEFT_HEIGHT, cloneArray = cloneArray, DISPLAY_WIDTH = DISPLAY_WIDTH, type = type,
+        audio = audio, pairs = pairs, select = select, rawget = rawget, Runtime = Runtime, error = error
     }
 end
