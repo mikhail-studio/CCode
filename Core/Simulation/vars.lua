@@ -43,32 +43,33 @@ M['newText2'] = function(params)
 end
 
 M['setVar'] = function(params)
-    local type = params[1][1][2] == 'vE' and 'varsE' or params[1][1][2] == 'vS' and 'varsS' or 'varsP'
-    local name, value = params[1][1][1], CALC(params[2])
+    local var = CALC(params[1], nil, true)
+    local value = CALC(params[2])
 
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. type .. '[\'' .. name .. '\'] = ' .. value .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. var .. ' = ' .. value .. ' end)'
 end
 
 M['updVar'] = function(params)
-    local type = params[1][1][2] == 'vE' and 'varsE' or params[1][1][2] == 'vS' and 'varsS' or 'varsP'
-    local name, value = params[1][1][1], '(' .. CALC(params[2]) .. ')'
+    local var = CALC(params[1], nil, true)
+    local value = CALC(params[2])
 
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. type .. '[\'' .. name .. '\'] = ' .. type .. '[\'' .. name .. '\'] + ' .. value .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. var .. ' = ' .. var .. ' + ' .. value .. ' end)'
 end
 
 M['addTable'] = function(params)
-    local type = params[2][1][2] == 'tE' and 'tablesE' or params[2][1][2] == 'tS' and 'tablesS' or 'tablesP'
-    local name, value, key = params[2][1][1], CALC(params[3]), UTF8.sub(CALC(params[1]), 2)
+    local key = UTF8.sub(CALC(params[1], nil, true), 2)
+    local table = CALC(params[2], nil, true)
+    local value = CALC(params[3])
 
-    GAME.lua = GAME.lua .. ' pcall(function() if ' .. type .. '[\'' .. name .. '\'] then ' .. type .. '[\'' .. name .. '\']' .. key .. ' = ' .. value
-    GAME.lua = GAME.lua .. ' else ' .. type .. '[\'' .. name .. '\'] = {} ' .. type .. '[\'' .. name .. '\']' .. key .. ' = ' .. value .. ' end end)'
+    GAME.lua = GAME.lua .. ' pcall(function() if ' .. table .. ' then ' .. table .. key .. ' = ' .. value
+    GAME.lua = GAME.lua .. ' else ' .. table .. ' = {' .. key .. ' = ' .. value .. '} end end)'
 end
 
 M['resetTable'] = function(params)
-    local type = params[1][1][2] == 'tE' and 'tablesE' or params[1][1][2] == 'tS' and 'tablesS' or 'tablesP'
-    local name, value = params[1][1][1], CALC(params[2], '[]')
+    local table = CALC(params[1], nil, true)
+    local value = CALC(params[2], '[]')
 
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. type .. '[\'' .. name .. '\'] = JSON.decode(' .. value .. ') end)'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. table .. ' = JSON.decode(' .. value .. ') end)'
 end
 
 M['setText'] = function(params)

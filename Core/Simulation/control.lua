@@ -15,10 +15,11 @@ M['requestApi'] = function(params, custom)
 end
 
 M['requestFun'] = function(params)
-    local name = params[1][1][1]
-    local type = params[1][1][2] == 'fS' and 'funsS' or 'funsP'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], nil, true) .. '() end)'
+end
 
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. type .. '[\'' .. name .. '\']() end)'
+M['requestFunParams'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], nil, true) .. '(' .. CALC(params[2]) .. ') end)'
 end
 
 M['setFocus'] = function(params)
@@ -49,22 +50,11 @@ M['requestExit'] = function(params)
     end
 end
 
-M['requestFunParams'] = function(params)
-    local nameFun, value = params[1][1][1], CALC(params[2])
-    local typeFun = params[1][1][2] == 'fS' and 'funsS' or 'funsP'
-
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. typeFun .. '[\'' .. nameFun .. '\'](' .. value .. ') end)'
-end
-
 M['setListener'] = function(params)
-    local nameObj = CALC(params[1])
-    local nameFun = params[2][1] and params[2][1][1] or ''
-    local typeFun = (params[2][1] and params[2][1][2]) == 'fS' and 'funsS' or 'funsP'
-
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. nameObj .. ']:addEventListener(\'touch\','
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. ']:addEventListener(\'touch\','
     GAME.lua = GAME.lua .. ' function(e) GAME.group.const.touch = e.phase ~= \'ended\' and'
     GAME.lua = GAME.lua .. ' e.phase ~= \'cancelled\' GAME.group.const.touch_x, GAME.group.const.touch_y, e.target._touch = e.x, e.y,'
-    GAME.lua = GAME.lua .. ' GAME.group.const.touch return ' .. typeFun .. '[\'' .. nameFun .. '\'](e) end) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.const.touch return ' .. CALC(params[2], nil, true) .. '(e) end) end)'
 end
 
 M['timer'] = function(params)
@@ -96,10 +86,10 @@ M['foreverEnd'] = function(params)
 end
 
 M['for'] = function(params)
-    local type = (params[3][1] and params[3][1][2]) == 'vE' and 'varsE' or (params[3][1] and params[3][1][2]) == 'vS' and 'varsS' or 'varsP'
-    local name, from, to, step = params[3][1] and params[3][1][1] or '', CALC(params[1]), CALC(params[2]), CALC(params[4], '1')
+    local from, to = CALC(params[1]), CALC(params[2])
+    local var, step = CALC(params[3], nil, true), CALC(params[4], '1')
 
-    GAME.lua = GAME.lua .. ' for i = ' .. from .. ', ' .. to .. ', ' .. step .. ' do ' .. type .. '[\'' .. name .. '\'] = i'
+    GAME.lua = GAME.lua .. ' for i = ' .. from .. ', ' .. to .. ', ' .. step .. ' do ' .. var .. ' = i'
 end
 
 M['forEnd'] = function(params)

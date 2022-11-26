@@ -1,4 +1,4 @@
-return function(params, default)
+return function(params, default, withoutBrackets)
     local result, index = #params == 0 and ' 0' or ''
 
     for i = 1, #params do
@@ -64,5 +64,6 @@ return function(params, default)
     end
 
     return (#params == 0 and default) and default or UTF8.sub(result, 1, 1) == ' '
-    and '(' .. UTF8.sub(result, 2, UTF8.len(result)) .. ')' or '(t' .. result .. ')'
+    and (withoutBrackets and UTF8.sub(result, 2, UTF8.len(result)) or '(' .. UTF8.sub(result, 2, UTF8.len(result)) .. ')')
+    or (withoutBrackets and 't' .. result .. '' or '(t' .. result .. ')')
 end

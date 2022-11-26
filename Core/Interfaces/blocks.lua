@@ -293,7 +293,7 @@ listeners.but_okay = function(target)
                         end
                     end
 
-                    if #BLOCKS.group.blocks[i].data.nested == 0 then
+                    if #BLOCKS.group.blocks[i].data.nested == 0 and not BLOCKS.group.blocks[i].data.event then
                         for j = i + 1, #BLOCKS.group.blocks do
                             local name = BLOCKS.group.blocks[j].data.name
                             local isNested = BLOCKS.group.blocks[j].data.nested and #BLOCKS.group.blocks[j].data.nested > 0

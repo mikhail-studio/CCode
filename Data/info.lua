@@ -25,7 +25,14 @@ M.listBlock = {
         'onFunParams',
         'onTouchBegan',
         'onTouchEnded',
-        'onTouchMoved'
+        'onTouchMoved',
+        'onSliderBegan',
+        'onSliderMoved',
+        'onSliderEnded',
+        'onFieldBegan',
+        'onFieldMoved',
+        'onFieldEnded',
+        'onWebViewCallback'
     },
 
     ['vars'] = {
@@ -242,6 +249,13 @@ M.listName = {
         ['onTouchBegan'] = {'events', 'fun', 'localtable'},
         ['onTouchEnded'] = {'events', 'fun', 'localtable'},
         ['onTouchMoved'] = {'events', 'fun', 'localtable'},
+        ['onSliderBegan'] = {'events', 'fun', 'localvar'},
+        ['onSliderMoved'] = {'events', 'fun', 'localvar'},
+        ['onSliderEnded'] = {'events', 'fun', 'localvar'},
+        ['onFieldBegan'] = {'events', 'fun', 'localtable'},
+        ['onFieldMoved'] = {'events', 'fun', 'localtable'},
+        ['onFieldEnded'] = {'events', 'fun', 'localtable'},
+        ['onWebViewCallback'] = {'events', 'fun', 'localtable'},
 
     -- vars
     ['setVar'] = {'vars', 'var', 'value'},
@@ -417,8 +431,8 @@ M.listName = {
 
     -- widgets
     ['newWebView'] = {'widgets', 'value', 'value', 'value', 'value'},
-        ['newHSlider'] = {'widgets', 'value', 'value', 'value', 'value'},
-        ['newVSlider'] = {'widgets', 'value', 'value', 'value', 'value'},
+        ['newHSlider'] = {'widgets', 'value', 'value', 'fun', 'value', 'value'},
+        ['newVSlider'] = {'widgets', 'value', 'value', 'fun', 'value', 'value'},
         ['newField'] = {'widgets', 'value', 'value', 'inputType', 'color', 'value', 'isBackground', 'textAlign', 'value', 'value', 'value', 'value', 'value'},
         ['newBox'] = {'widgets', 'value', 'value', 'color', 'value', 'isBackground', 'textAlign', 'value', 'value', 'value', 'value', 'value'},
         ['removeWidget'] = {'widgets', 'value'},

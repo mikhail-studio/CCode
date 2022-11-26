@@ -181,7 +181,7 @@ M.new = function(linkBuild)
         return M.lua
     else
         pcall(function()
-            print(M.lua)
+            -- print(M.lua)
             loadstring(M.lua)()
         end)
     end

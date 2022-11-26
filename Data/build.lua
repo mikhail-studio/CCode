@@ -75,7 +75,7 @@ return ' ' .. UTF8.trimFull([[
             return result
         end
 
-        COPY_TABLE_FP = function(t)
+        COPY_TABLE_P = function(t)
             local result = {}
 
             pcall(function()
