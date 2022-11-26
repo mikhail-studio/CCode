@@ -16,8 +16,19 @@ local function showTypeScroll(event)
         display.getCurrentStage():setFocus(nil)
         if event.target.click and M.group.currentIndex ~= event.target.index then
             event.target.click = false
-            M.group.types[event.target.index].scroll.isVisible = true
-            M.group.types[M.group.currentIndex].scroll.isVisible = false
+
+            if M.group.types[event.target.index].currentScroll == 2 then
+                M.group.types[event.target.index].scroll2.isVisible = true
+            else
+                M.group.types[event.target.index].scroll.isVisible = true
+            end
+
+            if M.group.types[M.group.currentIndex].currentScroll == 2 then
+                M.group.types[M.group.currentIndex].scroll2.isVisible = false
+            else
+                M.group.types[M.group.currentIndex].scroll.isVisible = false
+            end
+
             M.group[3].isVisible = event.target.index == 1 or event.target.index == 15 or event.target.index == 9
             M.group[4].isVisible = event.target.index == 1
             for i = 5, 10 do M.group[i].isVisible = event.target.index == 15 end
@@ -36,7 +47,11 @@ local function newBlockListener(event)
             event.target.click = true
         elseif event.phase == 'moved' then
             if math.abs(event.x - event.xStart) > 30 or math.abs(event.y - event.yStart) > 30 then
-                M.group.types[event.target.index[1]].scroll:takeFocus(event)
+                if M.group.types[event.target.index[1]].currentScroll == 2 then
+                    M.group.types[event.target.index[1]].scroll2:takeFocus(event)
+                else
+                    M.group.types[event.target.index[1]].scroll:takeFocus(event)
+                end
                 event.target.click = false
             end
         elseif event.phase == 'ended' or event.phase == 'cancelled' then
@@ -194,7 +209,12 @@ M.create = function()
     if M.group then
         M.group.isVisible = true
 
-        M.group.types[M.group.currentIndex].scroll.isVisible = true
+        if M.group.types[M.group.currentIndex].currentScroll == 2 then
+            M.group.types[M.group.currentIndex].scroll2.isVisible = true
+        else
+            M.group.types[M.group.currentIndex].scroll.isVisible = true
+        end
+
         M.group[3].isVisible = M.group.currentIndex == 1 or M.group.currentIndex == 15 or M.group.currentIndex == 9
         M.group[4].isVisible, M.group[5].alpha = M.group.currentIndex == 1, 0.1
         M.group[7].alpha, M.group[7].isOn = 0.1, false
@@ -272,30 +292,21 @@ M.create = function()
                             M.group[7].alpha = e.target.isOn and 0.1 or M.group[7].alpha
                             M.group[7].isOn = (function() if e.target.isOn then return false else return M.group[7].isOn end end)()
                         elseif e.target.tag == 'tags' and not e.target.isOn then
-                            for i = 1, #INFO.listBlock.groups do
-                                if INFO.listBlock.groups[i] == 'addGroupTag' then
-                                    INFO.listBlock.groups[i] = 'addTagGroup'
-                                else
-                                    INFO.listBlock.groups[i] = INFO.listBlock.groups[i]:gsub('Group', 'Tag')
-                                end
-                            end
+                            e.target.isOn = true
+                            e.target.alpha = 0.3
+                            M.group[11].isOn = false
+                            M.group[11].alpha = 0.1
+                            M.group.types[9].scroll.isVisible = false
+                            M.group.types[9].scroll2.isVisible = true
+                            M.group.types[9].currentScroll = 2
                         elseif e.target.tag == 'groups' and not e.target.isOn then
-                            for i = 1, #INFO.listBlock.groups do
-                                if INFO.listBlock.groups[i] == 'addTagGroup' then
-                                    INFO.listBlock.groups[i] = 'addGroupTag'
-                                else
-                                    INFO.listBlock.groups[i] = INFO.listBlock.groups[i]:gsub('Tag', 'Group')
-                                end
-                            end
-                        end
-
-                        if (e.target.tag == 'groups' or e.target.tag == 'tags') and not e.target.isOn then
-                            M.remove() M.create()
-                            M.group.currentIndex = 9
-                            M.group[4].isVisible = false
-                            M.group.types[1].scroll.isVisible = false
+                            e.target.isOn = true
+                            e.target.alpha = 0.3
+                            M.group[13].isOn = false
+                            M.group[13].alpha = 0.1
                             M.group.types[9].scroll.isVisible = true
-                            for i = 11, 14 do M.group[i].isVisible = true end
+                            M.group.types[9].scroll2.isVisible = false
+                            M.group.types[9].currentScroll = 1
                         end
                     end
                 end
@@ -346,8 +357,8 @@ M.create = function()
         M.group:insert(button3Text)
 
         local buttonGroup = display.newRect(find.x - find.width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
-            buttonGroup.isOn = INFO.listBlock.groups[1] == 'newGroup'
-            buttonGroup.alpha = buttonGroup.isOn and 0.3 or 0.1
+            buttonGroup.isOn = true
+            buttonGroup.alpha = 0.3
             buttonGroup.tag = 'groups'
             buttonGroup:addEventListener('touch', buttonListeners)
         M.group:insert(buttonGroup)
@@ -358,8 +369,8 @@ M.create = function()
         M.group:insert(buttonGroupText)
 
         local buttonTag = display.newRect(buttonGroup.x + width3, ZERO_Y + 50, width3, 56)
-            buttonTag.isOn = INFO.listBlock.groups[1] == 'newTag'
-            buttonTag.alpha = buttonTag.isOn and 0.3 or 0.1
+            buttonTag.isOn = false
+            buttonTag.alpha = 0.1
             buttonTag.tag = 'tags'
             buttonTag:addEventListener('touch', buttonListeners)
         M.group:insert(buttonTag)
@@ -397,20 +408,37 @@ M.create = function()
                     x = CENTER_X, y = (((i == 1 or i == 15 or i == 9) and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
                     width = DISPLAY_WIDTH, height = line.y - ((i == 1 or i == 15 or i == 9) and find.y + 2 or ZERO_Y + 1),
                     hideBackground = true, hideScrollBar = false,
-                    horizontalScrollDisabled = true, isBounceEnabled = true,
-                })
+                    horizontalScrollDisabled = true, isBounceEnabled = true
+                }) M.group.types[i].currentScroll = 1
             M.group:insert(M.group.types[i].scroll)
+
+            if INFO.listDelimiter[INFO.listType[i]] then
+                M.group.types[i].scroll2 = WIDGET.newScrollView({
+                        x = CENTER_X, y = (((i == 1 or i == 15 or i == 9) and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
+                        width = DISPLAY_WIDTH, height = line.y - ((i == 1 or i == 15 or i == 9) and find.y + 2 or ZERO_Y + 1),
+                        hideBackground = true, hideScrollBar = false,
+                        horizontalScrollDisabled = true, isBounceEnabled = true
+                    }) M.group.types[i].scroll2.isVisible = false
+                M.group:insert(M.group.types[i].scroll2)
+            end
 
             if i ~= 1 then M.group.types[i].scroll.isVisible = false end
             if i % 5 == 0 then y, x = y + 85, ZERO_X + 20 else x = x + width + 20 end
 
             local lastY = 90
             local scrollHeight = 50
+            local scroll2Height = 50
+            local startDelimiter = false
 
             if INFO.listType[i] ~= 'none' then
                 for j = 1, #INFO.listBlock[INFO.listType[i]] do
                     local name = INFO.listBlock[INFO.listType[i]][j]
                     local notCustom = not (BLOCKS.custom and INFO.getType(name) == 'custom' and j ~= 1)
+
+                    if INFO.listDelimiter[INFO.listType[i]] and name == INFO.listDelimiter[INFO.listType[i]][1] and not startDelimiter then
+                        startDelimiter = true
+                        lastY = 90
+                    end
 
                     if UTF8.sub(name, UTF8.len(name) - 2, UTF8.len(name)) ~= 'End' and name ~= 'ifElse' and notCustom then
                         local event = INFO.listType[i] == 'events' or INFO.getType(name) == 'events'
@@ -422,24 +450,38 @@ M.create = function()
                             M.group.types[i].blocks[j]:setStrokeColor(0.3)
                             M.group.types[i].blocks[j].strokeWidth = 4
                             M.group.types[i].blocks[j].index = {i, j}
-                            M.group.types[i].blocks[j]:addEventListener('touch', newBlockListener)
-                        M.group.types[i].scroll:insert(M.group.types[i].blocks[j])
+                        M.group.types[i].blocks[j]:addEventListener('touch', newBlockListener)
+
+                        if startDelimiter then
+                            M.group.types[i].scroll2:insert(M.group.types[i].blocks[j])
+                        else
+                            M.group.types[i].scroll:insert(M.group.types[i].blocks[j])
+                        end
 
                         M.group.types[i].blocks[j].text = display.newText({
                                 text = STR['blocks.' .. name],
                                 x = DISPLAY_WIDTH / 2 - M.group.types[i].blocks[j].width / 2 + 20,
                                 y = lastY, width = M.group.types[i].blocks[j].width - 40,
                                 height = 40, font = 'ubuntu', fontSize = 32, align = 'left'
-                            }) M.group.types[i].blocks[j].text.anchorX = 0
-                        M.group.types[i].scroll:insert(M.group.types[i].blocks[j].text)
+                            })
+                        M.group.types[i].blocks[j].text.anchorX = 0
+
+                        if startDelimiter then
+                            M.group.types[i].scroll2:insert(M.group.types[i].blocks[j].text)
+                        else
+                            M.group.types[i].scroll:insert(M.group.types[i].blocks[j].text)
+                        end
 
                         lastY = lastY + 140
-                        scrollHeight = scrollHeight + 140
+                        scrollHeight = startDelimiter and scrollHeight or scrollHeight + 140
+                        scroll2Height = startDelimiter and scroll2Height + 140 or scroll2Height
                     end
                 end
             end
 
-            M.group.types[i].scroll:setScrollHeight(scrollHeight)
+            if startDelimiter then
+                M.group.types[i].scroll2:setScrollHeight(scroll2Height)
+            end M.group.types[i].scroll:setScrollHeight(scrollHeight)
         end
     end
 end

@@ -3,7 +3,7 @@ local CALC = require 'Core.Simulation.calc'
 local M = {}
 
 local function setCustom(name)
-    EVENTS.CUSTOM[name] = function(params)
+    EVENTS.BLOCKS[name] = function(params)
         M.lua = M.lua .. ' pcall(function() funsC[\'' .. name .. '\'](' for i = 1, #params do
         M.lua = M.lua .. CALC(params[i]) .. (i == #params and '' or ', ') end
         M.lua = M.lua .. ') end)'
@@ -44,7 +44,7 @@ M.remove = function()
     display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll()
     pcall(function() Runtime:removeEventListener('touch', M.group.const.touch_fun) end)
     pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
-    pcall(function() for _,v in pairs(M.group.bitmaps) do v:releaseSelf() end end)
+    pcall(function() for _,v in pairs(M.group.bitmaps) do v:releaseSelf() end end) M.isStarted = nil
     pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil math.randomseed(os.time())
     pcall(function() for child = display.currentStage.numChildren, 1, -1 do
     if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
@@ -75,8 +75,15 @@ M.new = function(linkBuild)
     for i = 1, #M.data.scripts do
         for j = 1, #M.data.scripts[i].params do
             local name = M.data.scripts[i].params[j].name
-            if UTF8.sub(name, 1, 6) == 'custom' then
-                dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = true
+            dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = UTF8.sub(name, 1, 6) == 'custom'
+
+            for u = 1, #M.data.scripts[i].params[j].params do
+                for o = #M.data.scripts[i].params[j].params[u], 1, -1 do
+                    if M.data.scripts[i].params[j].params[u][o][2] == 'fC' then
+                        local name = M.data.scripts[i].params[j].params[u][o][1]
+                        dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = true
+                    end
+                end
             end
         end
     end

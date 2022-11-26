@@ -79,21 +79,21 @@ M['newField'] = function(params)
     local name = CALC(params[1])
     local placeholder = CALC(params[2])
     local type = CALC(params[3], '\'default\'')
-    local color = CALC(params[4], '{255}')
+    local colors = CALC(params[4], '{255}')
     local fontSize = CALC(params[5], '25')
     local isBackground = CALC(params[6], 'true')
     local align = CALC(params[7], '\'left\'')
     local font = CALC(params[8], '\'ubuntu\'')
     local posX = '(CENTER_X + (' .. CALC(params[11]) .. '))'
     local posY = '(CENTER_Y - (' .. CALC(params[12]) .. '))'
-    local width, height = CALC(params[9]), CALC(params[10])
+    local width, height = CALC(params[9], '400'), CALC(params[10], '80')
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. ']:removeSelf() end) pcall(function()'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '] = native.newTextField(' .. posX .. ', ' .. posY .. ', ' .. width .. ','
     GAME.lua = GAME.lua .. ' ' .. height .. ') GAME.group.widgets[' .. name .. '].placeholder = tostring(' .. placeholder .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].font = native.newFont(other.getFont(' .. font .. '), ' .. fontSize .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].align = ' .. align .. ' GAME.group.widgets[' .. name .. ']._type = \'field\''
-    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].inputType = ' .. type .. ' local colors = ' .. color
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].inputType = ' .. type .. ' local colors = ' .. colors
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].hasBackground = ' .. isBackground .. ' pcall(function()'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']:setTextColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
@@ -103,14 +103,14 @@ end
 M['newBox'] = function(params)
     local name = CALC(params[1])
     local placeholder = CALC(params[2])
-    local color = CALC(params[3], '{255}')
+    local colors = CALC(params[3], '{255}')
     local fontSize = CALC(params[4], '25')
     local isBackground = CALC(params[5], 'true')
     local align = CALC(params[6], '\'left\'')
     local font = CALC(params[7], '\'ubuntu\'')
     local posX = '(CENTER_X + (' .. CALC(params[10]) .. '))'
     local posY = '(CENTER_Y - (' .. CALC(params[11]) .. '))'
-    local width, height = CALC(params[8]), CALC(params[9])
+    local width, height = CALC(params[8], '400'), CALC(params[9], '80')
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. ']:removeSelf() end)'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. '] = native.newTextBox(' .. posX .. ', ' .. posY .. ','

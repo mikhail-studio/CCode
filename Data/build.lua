@@ -167,7 +167,7 @@ return ' ' .. UTF8.trimFull([[
         local M = {}
 
         M['device_id'] = function()
-            return system.getInfo('deviceID')
+            return DEVICE_ID
         end
 
         M['width_screen'] = function()
@@ -514,6 +514,10 @@ return ' ' .. UTF8.trimFull([[
 
             M['widget.value'] = function(name)
                 return GAME.group.widgets[name]._type == 'slider' and GAME.group.widgets[name].value or 0
+            end
+
+            M['widget.text'] = function(name)
+                return GAME.group.widgets[name]._type == 'field' and GAME.group.widgets[name].text or ''
             end
 
             M['widget.link'] = function(name)

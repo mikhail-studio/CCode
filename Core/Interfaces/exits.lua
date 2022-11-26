@@ -74,7 +74,7 @@ listeners.blocks = function()
                         end
                     end
                 else
-                    table.insert(INFO.listBlock.custom, 'custom' .. BLOCKS.custom.index)
+                    table.insert(INFO.listBlock.custom, 1, 'custom' .. BLOCKS.custom.index)
                     table.insert(INFO.listBlock.everyone, 'custom' .. BLOCKS.custom.index)
                 end
             end
@@ -123,10 +123,10 @@ listeners.game = function()
 end
 
 listeners.add = function(listener, arg)
-    listeners.listener = function() listener(arg) end
+    listeners.listener = function() listeners.listener = nil listener(arg) end
 end
 
-listeners.remove = function(listener, arg)
+listeners.remove = function()
     listeners.listener = nil
 end
 
@@ -134,6 +134,8 @@ listeners.lis = function(event)
     if (event.keyName == 'back' or event.keyName == 'escape') and event.phase == 'up' and ALERT then
         if PROGRAMS and PROGRAMS.group and PROGRAMS.group.isVisible then
             listeners.programs()
+        elseif GAME and GAME.isStarted and GAME.group and GAME.group.isVisible then
+            listeners.game()
         elseif PROGRAM and PROGRAM.group and PROGRAM.group.isVisible then
             listeners.program()
         elseif SCRIPTS and SCRIPTS.group and SCRIPTS.group.isVisible then
@@ -156,11 +158,9 @@ listeners.lis = function(event)
             listeners.new_block()
         elseif EDITOR and EDITOR.group and EDITOR.group.isVisible then
             listeners.editor()
-        elseif GAME and GAME.isStarted and GAME.group and GAME.group.isVisible then
-            listeners.game()
         end
     elseif (event.keyName == 'back' or event.keyName == 'escape') and event.phase == 'up' then
-        if listeners.listener then listeners.listener() listeners.listener = nil end
+        if listeners.listener then listeners.listener() end
     end
 
     if (event.keyName == 'back' or event.keyName == 'escape') and event.phase == 'up' then

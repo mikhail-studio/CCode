@@ -16,7 +16,7 @@ M.remove = function()
     BLOCKS.group[8]:setIsLocked(false, 'vertical')
 end
 
-M.create = function(data, size, twidth, tsize)
+M.create = function(data, size, twidth, tsize, needParams)
     local block = display.newGroup()
         block.x = CENTER_X
         block.y = CENTER_Y
@@ -24,7 +24,7 @@ M.create = function(data, size, twidth, tsize)
     local tsize = tsize or 1.0
 
     local blockWidth = DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60
-    local lengthParams = #data.params if blockWidth / 116 > 15 then blockWidth = 116 * 15 end
+    local lengthParams = needParams or #data.params if blockWidth / 116 > 15 then blockWidth = 116 * 15 end
     local blockHeight = 116 + 60 * math.round((lengthParams - 2 < 0 and 0 or lengthParams - 2) / 2, 0)
 
     local polygon = BLOCK.getPolygonParams(data.event, blockWidth, data.event and blockHeight - 14 or blockHeight)
@@ -103,7 +103,9 @@ M.new = function(target)
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
 
         local size, nested = 1.6, target.data.nested
-        local height = nested and target.block.height / size + 340 or target.block.height / size + 264
+        local needParams = #target.data.params > 12 and 12 or #target.data.params
+        local theight = 120 + 60 * math.round((needParams - 2 < 0 and 0 or needParams - 2) / 2, 0)
+        local height = nested and theight / size + 340 or theight / size + 264
         local width = target.block.width / size + 20 if target.data.name == 'if' then height = height + 76 end
 
         local bg = display.newRect(CENTER_X, CENTER_Y, DISPLAY_WIDTH * 2, DISPLAY_HEIGHT * 2)
@@ -133,11 +135,10 @@ M.new = function(target)
             end
         end
 
-        local block = M.create(target.data, size)
-            block.y = block.y - height / 2 + 10 + target.block.height / 2 / size
+        local block = M.create(target.data, size, nil, nil, needParams)
+            block.y = block.y - height / 2 + 10 + theight / 2 / size
             local y = block.y + block.block.height / 2 + 50
         M.group:insert(block)
-
 
         for i = 1, #getButtonText(comment, nested, name) do
             local button = display.newRect(CENTER_X, y, width - 25, 66)

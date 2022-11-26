@@ -74,6 +74,14 @@ M['newCircle'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
 end
 
+M['setColor'] = function(params)
+    local name = CALC(params[1])
+    local colors = CALC(params[2], '{255}')
+
+    GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. colors
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
+end
+
 M['newBitmap'] = function(params)
     local name = CALC(params[1])
     local width = CALC(params[2])

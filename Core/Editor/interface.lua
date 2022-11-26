@@ -24,10 +24,11 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     M.restart = {blockName, blockIndex, M.data, paramsIndex}
     BLOCKS.group.isVisible = false
 
+    local custom, ids = GET_GAME_CUSTOM(), {}
     local data = GET_GAME_CODE(CURRENT_LINK) DATA.new()
         M.vars = {project = data.vars, script = data.scripts[CURRENT_SCRIPT].vars, event = {}}
         M.tables = {project = data.tables, script = data.scripts[CURRENT_SCRIPT].tables, event = {}}
-        M.funs = {project = data.funs, script = data.scripts[CURRENT_SCRIPT].funs}
+        M.funs = {project = data.funs, script = data.scripts[CURRENT_SCRIPT].funs, custom = {}, _custom = {}}
         M.prop = {obj = DATA.prop.obj, text = DATA.prop.text, group = DATA.prop.group, widget = DATA.prop.widget}
         M.fun, M.math, M.log, M.device = DATA.fun, DATA.math, DATA.log, DATA.device
 
@@ -37,6 +38,17 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
             M.tables.event = data.scripts[CURRENT_SCRIPT].params[i].tables
             break
         end
+    end
+
+    for index, block in pairs(custom) do
+        if tonumber(index) then
+            table.insert(ids, {block[4], tonumber(index)})
+        end
+    end table.sort(ids, function(a, b) return (a[1] == b[1]) and (a[2] > b[2]) or (a[1] > b[1]) end)
+
+    for _, index in ipairs(ids) do
+        table.insert(M.funs.custom, STR['blocks.custom' .. index[2]])
+        table.insert(M.funs._custom, 'custom' .. index[2])
     end
 
     local buttonsText = {
@@ -104,10 +116,21 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         end
     end
 
+    local blockScroll = WIDGET.newScrollView({
+            x = CENTER_X, y = title.y + title.height + 155,
+            width = DISPLAY_WIDTH, height = 250,
+            hideScrollBar = false, horizontalScrollDisabled = true,
+            isBounceEnabled = true, hideBackground = true
+        })
+    M.group:insert(blockScroll)
+
     local block = LIST.create(target.data, size, twidth, 1.0)
-        block.y = title.y + title.height + 30 + block.height / 2
-        block.x = CENTER_X == 640 and (ZERO_X + 799 + MAX_X) / 2 or block.x
-    M.group:insert(block)
+        block.x = blockScroll.width / 2
+        block.y = block.height / 2 + 12
+    blockScroll:insert(block)
+
+    block.y = block.y < blockScroll.height / 2 and blockScroll.height / 2 or block.y
+    blockScroll:setScrollHeight(block.height + 24)
 
     for i = 1, length do
         block.params[i].rect:addEventListener('touch', function(e)
@@ -117,7 +140,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
                 e.target:setFillColor(0.8, 0.8, 1)
                 e.target.alpha = 0.2
             elseif e.phase == 'moved' and (math.abs(e.y - e.yStart) > 20 or math.abs(e.x - e.xStart) > 20) then
-                display.getCurrentStage():setFocus(nil)
+                blockScroll:takeFocus(e)
                 e.target.click = false
                 e.target:setFillColor(1)
                 e.target.alpha = 0.005
@@ -145,14 +168,14 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         for i = 8, 1, -1 do table.remove(buttonsText, 1) end
     end
 
-    local scrollY = (buttonsY - 55 + block.y + block.height / 2 + 10) / 2
-    local scrollHeight = buttonsY - 55 - block.y - block.height / 2 - 20
+    local scrollY = (buttonsY - 45 + blockScroll.y + 130) / 2
+    local scrollHeight = buttonsY - 45 - blockScroll.y - 160
     local scrollWidth, scrollX = DISPLAY_WIDTH, CENTER_X
 
     if CENTER_X == 640 then
         scrollHeight = buttonsY - 95 - title.y - title.height
         scrollY = (title.y + title.height + buttonsY - 35) / 2
-        scrollWidth, scrollX, block.y = 745, ZERO_X + 404, scrollY
+        scrollWidth, scrollX, blockScroll.y = 745, ZERO_X + 404, scrollY
     end
 
     local scroll = WIDGET.newScrollView({
@@ -293,7 +316,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         require('Core.Editor.list').listener({
             phase = 'ended', target = listScroll.buttons[index],
         }) listScroll:scrollToPosition({y = M.rScrollParams[#M.rScrollParams], time = 0})
-    end
+    end M.rScrollParams = {}
 
     local toolbarListener = function(e)
         if e.phase == 'began' and ALERT then

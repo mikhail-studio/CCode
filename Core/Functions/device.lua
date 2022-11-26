@@ -1,7 +1,7 @@
 local M = {}
 
 M['device_id'] = function()
-    return system.getInfo('deviceID')
+    return DEVICE_ID
 end
 
 M['width_screen'] = function()

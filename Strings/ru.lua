@@ -46,7 +46,7 @@ return {
         ['scripts.entername'] = 'Введите имя скрипта',
         ['scripts.changename'] = 'Измените имя скрипта',
         ['scripts.sandbox'] = 'Песочница',
-        ['scripts.sandbox.exit'] = 'Вы выходите из песочницы, выберите необходимое действие',
+        ['scripts.sandbox.exit'] = 'Выберите необходимое действие',
         ['scripts.sandbox.save'] = 'Сохранить',
         ['scripts.sandbox.not.save'] = 'Не сохранять',
         ['images.entername'] = 'Введите имя спрайта',
@@ -452,8 +452,6 @@ return {
         ['blocks.setLinearImpulse.params'] = {'Имя объекта:', 'Сила (X):', 'Сила (Y):', 'Смещение (X):', 'Смещение (Y):'},
         ['blocks.setAngularImpulse'] = 'Применить угловой импульс',
         ['blocks.setAngularImpulse.params'] = {'Имя объекта:', 'Сила:'},
-
-    ['blocks.physics2'] = 'Физика (2)',
         ['blocks.setHitboxVisible'] = 'Показать хитбоксы',
         ['blocks.removeHitboxVisible'] = 'Скрыть хитбоксы',
         ['blocks.startPhysics'] = 'Включить физический движок',
@@ -497,7 +495,13 @@ return {
         ['blocks.setFieldText'] = 'Установить текст в текстовом поле',
         ['blocks.setFieldText.params'] = {'Имя виджета:', 'Текст:'},
 
-    ['blocks.widgets2'] = 'Виджеты (2)',
+    ['blocks.media'] = 'Медиа',
+
+    ['blocks.snapshot'] = 'Снапшоты\n& Снимки',
+
+    ['blocks.network'] = 'Интернет',
+
+    ['blocks.transition'] = 'Плавные переходы',
 
     ['editor.window.error'] = 'Ошибка в выражении',
         ['editor.button.error'] = 'Исправить',
@@ -512,6 +516,7 @@ return {
         ['editor.list.prop'] = 'Свойства',
         ['editor.list.log'] = 'Логика',
         ['editor.list.device'] = 'Устройство',
+        ['editor.list.custom'] = 'Свои',
         ['editor.list.event'] = 'Событие',
         ['editor.list.script'] = 'Скрипт',
         ['editor.list.project'] = 'Проект',
@@ -592,6 +597,7 @@ return {
             ['editor.list.prop.widget.pos_x'] = 'позиция_виджета_x',
             ['editor.list.prop.widget.pos_y'] = 'позиция_виджета_y',
             ['editor.list.prop.widget.value'] = 'значение_слайдера',
+            ['editor.list.prop.widget.text'] = 'текст_из_поля',
             ['editor.list.prop.widget.link'] = 'ссылка_из_веб_просмотра',
 
     ['editor.list.log.true'] = 'истина',

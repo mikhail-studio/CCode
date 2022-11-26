@@ -61,6 +61,9 @@ M.getParamsValueText = function(params, i)
             elseif value[2] == 'fP' or value[2] == 'fS' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
                 result = result .. '$' .. value[1]
+            elseif value[2] == 'fC' then
+                if UTF8.len(result) > 0 then result = result .. ' ' end
+                result = result .. '$' .. STR['blocks.' .. value[1]]
             elseif value[2] == 'tP' or value[2] == 'tS' or value[2] == 'tE' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
                 result = result .. '{' .. value[1] .. '}'

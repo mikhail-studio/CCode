@@ -1,23 +1,15 @@
 local INFO = require 'Data.info'
-local M = {}
+local M = {BLOCKS = {}}
 
-M.CONTROL = require 'Core.Simulation.control'
-M.VARS = require 'Core.Simulation.vars'
-M.OBJECTS = require 'Core.Simulation.objects'
-M.OBJECTS2 = require 'Core.Simulation.objects2'
-M.SHAPES = require 'Core.Simulation.shapes'
-M.GROUPS = require 'Core.Simulation.groups'
-M.PHYSICS = require 'Core.Simulation.physics'
-M.PHYSICS2 = require 'Core.Simulation.physics2'
-M.WIDGETS = require 'Core.Simulation.widgets'
-M.WIDGETS2 = require 'Core.Simulation.widgets2'
+for i = 3, #INFO.listType - 3 do
+    M.BLOCKS = table.merge(M.BLOCKS, require('Core.Simulation.' .. INFO.listType[i]))
+end
 
 M.requestNestedBlock = function(nested)
     for i = 1, #nested do
         local name = nested[i].name
         local params = nested[i].params
-        local type = UTF8.upper(INFO.getType(name))
-        pcall(function() M[type][name](params) end)
+        pcall(function() M.BLOCKS[name](params) end)
     end
 end
 

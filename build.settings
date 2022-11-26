@@ -12,7 +12,8 @@ settings = {
 			'android.permission.READ_EXTERNAL_STORAGE',
 			'android.permission.WRITE_EXTERNAL_STORAGE',
 			'android.permission.RECEIVE_BOOT_COMPLETED',
-			'android.permission.VIBRATE'
+			'android.permission.VIBRATE',
+			'android.permission.READ_PHONE_STATE'
 		},
 
 		applicationChildElements = {

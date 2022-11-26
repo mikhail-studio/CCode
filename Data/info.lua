@@ -8,13 +8,13 @@ M.listType = {
     'objects2',
     'control',
     'physics',
-    'physics2',
+    'transition',
     'groups',
     'shapes',
     'widgets',
-    'widgets2',
-    'none',
-    'none',
+    'snapshot',
+    'network',
+    'media',
     'custom'
 }
 
@@ -150,11 +150,31 @@ M.listBlock = {
         'updGroupWidth',
         'updGroupHeight',
         'updGroupRotation',
-        'updGroupAlpha'
+        'updGroupAlpha',
+        'newTag',
+        'removeTag',
+        'showTag',
+        'hideTag',
+        'addTagObject',
+        'addTagText',
+        'addTagWidget',
+        'addTagGroup',
+        'addTagTag',
+        'setTagPos',
+        'setTagSize',
+        'setTagRotation',
+        'setTagAlpha',
+        'updTagPosX',
+        'updTagPosY',
+        'updTagWidth',
+        'updTagHeight',
+        'updTagRotation',
+        'updTagAlpha'
     },
 
     ['physics'] = {
         'setBody',
+        'setTextBody',
         'removeBody',
         'setBodyType',
         'setHitboxBox',
@@ -180,15 +200,11 @@ M.listBlock = {
         'setForce',
         'setTorque',
         'setLinearImpulse',
-        'setAngularImpulse'
-    },
-
-    ['physics2'] = {
+        'setAngularImpulse',
         'setHitboxVisible',
         'removeHitboxVisible',
         'startPhysics',
-        'stopPhysics',
-        'setTextBody'
+        'stopPhysics'
     },
 
     ['widgets'] = {
@@ -211,8 +227,11 @@ M.listBlock = {
         'setFieldRule'
     },
 
-    ['widgets2'] = {},
-    ['custom'] = {}
+    ['transition'] = {},
+    ['snapshot'] = {},
+    ['network'] = {},
+    ['custom'] = {},
+    ['media'] = {}
 }
 
 M.listName = {
@@ -364,6 +383,7 @@ M.listName = {
 
     -- physics
     ['setBody'] = {'physics', 'value', 'body', 'value', 'value', 'value', 'value'},
+        ['setTextBody'] = {'physics', 'value', 'body', 'value', 'value', 'value', 'value'},
         ['removeBody'] = {'physics', 'value'},
         ['setBodyType'] = {'physics', 'value', 'body'},
         ['setHitboxBox'] = {'physics', 'value', 'value', 'value', 'value', 'value', 'value'},
@@ -390,13 +410,10 @@ M.listName = {
         ['setTorque'] = {'physics', 'value', 'value'},
         ['setLinearImpulse'] = {'physics', 'value', 'value', 'value', 'value', 'value'},
         ['setAngularImpulse'] = {'physics', 'value', 'value'},
-
-    -- physics2
-    ['setTextBody'] = {'physics2', 'value', 'body', 'value', 'value', 'value', 'value'},
-        ['setHitboxVisible'] = {'physics2'},
-        ['removeHitboxVisible'] = {'physics2'},
-        ['startPhysics'] = {'physics2'},
-        ['stopPhysics'] = {'physics2'},
+        ['setHitboxVisible'] = {'physics'},
+        ['removeHitboxVisible'] = {'physics'},
+        ['startPhysics'] = {'physics'},
+        ['stopPhysics'] = {'physics'},
 
     -- widgets
     ['newWebView'] = {'widgets', 'value', 'value', 'value', 'value'},
@@ -421,6 +438,10 @@ M.listName = {
     ['_custom'] = {'custom'}
 }
 
+M.listDelimiter = {
+    ['groups'] = {'newTag', 'blocks.create.groups', 'blocks.create.tags'}
+}
+
 M.listNested = {
     ['forever'] = {'foreverEnd'},
     ['timer'] = {'timerEnd'},
@@ -436,6 +457,7 @@ for i = 1, #M.listType do
     if M.listType[i] ~= 'none' and M.listType[i] ~= 'everyone' then
         for j = 1, #M.listBlock[M.listType[i]] do
             local k = M.listBlock[M.listType[i]][j]
+
             if UTF8.sub(k, UTF8.len(k) - 2, UTF8.len(k)) ~= 'End' and k ~= 'ifElse' and not UTF8.find(M.listBlock._everyone, k .. ', ') then
                 table.insert(M.listBlock.everyone, k)
             end
@@ -448,7 +470,7 @@ M.getType = function(name)
 end
 
 -- math.randomseed(os.time())
--- local r, g, b = math.random(0, 255) / 255, math.random(0, 255) / 255, math.random(0, 255) / 255
+-- local r, g, b = math.random(0, 200) / 255, math.random(0, 200) / 255, math.random(0, 200) / 255
 -- print(r .. ', ' .. g .. ', ' .. b)
 
 M.getBlockColor = function(name, comment, type)
@@ -468,15 +490,19 @@ M.getBlockColor = function(name, comment, type)
     elseif type == 'groups' then
         return 0.73, 0.4, 0.28
     elseif type == 'physics' then
-        return 0.6, 0.35, 0.8
-    elseif type == 'physics2' then
+        return 0.6, 0.35, 0.75
+    elseif type == 'transition' then
         return 0.65, 0.35, 0.5
     elseif type == 'control' then
         return 0.6, 0.55, 0.4
     elseif type == 'widgets' then
         return 0.4, 0.45, 0.6
-    elseif type == 'widgets2' then
+    elseif type == 'media' then
         return 0.7, 0.5, 0.5
+    elseif type == 'network' then
+        return 0.2, 0.4, 0.7
+    elseif type == 'snapshot' then
+        return 0.38, 0.52, 0.46
     elseif type == 'everyone' then
         return 0.15, 0.55, 0.4
     elseif type == 'custom' then

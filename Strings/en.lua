@@ -497,7 +497,7 @@ return {
         ['blocks.setFieldText'] = 'Set text in textfield',
         ['blocks.setFieldText.params'] = {'Widget name:', 'Text:'},
 
-    ['blocks.widgets2'] = 'Widgets (2)',
+    ['blocks.media'] = 'Multimedia',
 
     ['editor.window.error'] = 'Error in expression',
         ['editor.button.error'] = 'Fix',

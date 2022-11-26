@@ -2,7 +2,7 @@ local LOGIC = require 'Core.Modules.logic-list'
 local INFO = require 'Data.info'
 local M = {}
 
-local function genBlock(params)
+local function genBlock(params, index)
     M.block = LOGIC.create({name = '', params = params}, 1.0, true)
         M.block.y = M.scroll.height / 2 - M.block.height / 2 < 20 and 20 + M.block.height / 2 or M.scroll.height / 2
         M.block.x = M.scroll.width / 2
@@ -39,8 +39,9 @@ local function genBlock(params)
                             M.scroll:setIsLocked(false, 'vertical')
                             if event.input then
                                 STR['blocks..params'][i] = event.text .. ':'
-                                M.scroll:remove(M.block) M.block:removeSelf() genBlock(params)
-                            end
+                                M.scroll:remove(M.block) M.block:removeSelf()
+                                genBlock(params, index)
+                            end EXITS.add(M.removeOverlay, index)
                         end, UTF8.sub(M.block.params[i].name.text, 1, UTF8.len(M.block.params[i].name.text) - 1))
                         native.setKeyboardFocus(INPUT.box)
                     end
@@ -61,7 +62,7 @@ local function genBlock(params)
                 e.target:setFillColor(0.7)
                 e.target.click = true
             elseif e.phase == 'moved' and (math.abs(e.yDelta) > 30 or math.abs(e.xDelta) > 30) then
-                scroll:takeFocus(e)
+                M.scroll:takeFocus(e)
                 e.target:setFillColor(1)
                 e.target.click = false
             elseif e.phase == 'ended' or e.phase == 'cancelled' then
@@ -82,7 +83,7 @@ local function genBlock(params)
                         if event.input then
                             STR['blocks.'] = event.text
                             M.block.text.text = event.text
-                        end
+                        end EXITS.add(M.removeOverlay, index)
                     end, M.block.text.text)
                     native.setKeyboardFocus(INPUT.box)
                 end
@@ -175,6 +176,54 @@ M.addBlock = function(params, _index)
     end
 end
 
+M.removeOverlay = function(index)
+    if index then
+        WINDOW.new(STR['scripts.sandbox.exit'], {STR['scripts.sandbox.not.save'], STR['scripts.sandbox.save']}, function(e)
+            if e.index == 2 then
+                local custom = GET_GAME_CUSTOM()
+                    custom[index][1] = STR['blocks.']
+                    custom[index][2] = COPY_TABLE(STR['blocks..params'])
+                    custom[index][4] = os.time()
+                SET_GAME_CUSTOM(custom)
+
+                STR['blocks.custom' .. index] = STR['blocks.']
+                STR['blocks.custom' .. index .. '.params'] = COPY_TABLE(STR['blocks..params'])
+                LANG.ru['blocks.custom' .. index] = STR['blocks.']
+                LANG.ru['blocks.custom' .. index .. '.params'] = COPY_TABLE(STR['blocks..params'])
+
+                for id, type in ipairs(INFO.listBlock.custom) do
+                    if type == 'custom' .. index then
+                        table.remove(INFO.listBlock.custom, id)
+                        table.insert(INFO.listBlock.custom, 1, 'custom' .. index)
+                        break
+                    end
+                end
+            end
+
+            if e.index ~= 0 then
+                ALERT = true
+                M.group:removeSelf()
+                M.scroll:removeSelf()
+                STR['blocks..params'] = {}
+                STR['blocks.'] = STR['blocks.default']
+
+                NEW_BLOCK.remove() NEW_BLOCK.create()
+                NEW_BLOCK.group.types[15].scroll.isVisible = true
+                NEW_BLOCK.group.types[1].scroll.isVisible = false
+                NEW_BLOCK.group[4].isVisible = false
+                for i = 5, 10 do NEW_BLOCK.group[i].isVisible = true end
+                NEW_BLOCK.group.currentIndex = 15
+            end
+        end, 4)
+    else
+        ALERT = true
+        M.group:removeSelf()
+        M.scroll:removeSelf()
+        STR['blocks..params'] = {}
+        STR['blocks.'] = STR['blocks.default']
+    end
+end
+
 M.newBlock = function(name, params, str, index)
     M.group = display.newGroup()
         ALERT = false
@@ -203,7 +252,7 @@ M.newBlock = function(name, params, str, index)
             STR['blocks..params'][i] = str[i]
             params[i] = {{'hello world', 't'}}
         end
-    genBlock(params)
+    genBlock(params, index)
 
     if name then
         STR['blocks.'] = name
@@ -247,7 +296,7 @@ M.newBlock = function(name, params, str, index)
                     if e.target.tag == 'plus' and #params < 100 then
                         table.insert(params, {{'hello world', 't'}})
                         table.insert(STR['blocks..params'], STR['blocks.params'] .. (#params - 1) .. ':')
-                        M.scroll:remove(M.block) M.block:removeSelf() genBlock(params)
+                        M.scroll:remove(M.block) M.block:removeSelf() genBlock(params, index)
 
                         if M.block.y + M.block.height / 2 + 20 > M.scroll.height then
                             M.scroll:scrollToPosition({time = 200, y = -(M.block.y + M.block.height / 2 + 20 - M.scroll.height)})
@@ -255,17 +304,13 @@ M.newBlock = function(name, params, str, index)
                     elseif e.target.tag == 'minus' and #params > 0 then
                         table.remove(params, #params)
                         table.remove(STR['blocks..params'], #params + 1)
-                        M.scroll:remove(M.block) M.block:removeSelf() genBlock(params)
+                        M.scroll:remove(M.block) M.block:removeSelf() genBlock(params, index)
 
                         if M.block.y + M.block.height / 2 + 20 > M.scroll.height then
                             M.scroll:scrollToPosition({time = 200, y = -(M.block.y + M.block.height / 2 + 20 - M.scroll.height)})
                         end
                     elseif e.target.tag == 'exit' then
-                        ALERT = true
-                        M.scroll:removeSelf()
-                        M.group:removeSelf()
-                        STR['blocks..params'] = {}
-                        STR['blocks.'] = STR['blocks.default']
+                        M.removeOverlay(index)
                     elseif e.target.tag == 'lua' then
                         M.scroll:setIsLocked(true, 'vertical') M.alert = false
                         WINDOW.new(STR['blocks.create.block.save.lua.title'],
@@ -283,6 +328,8 @@ M.newBlock = function(name, params, str, index)
                                     M.alert = true
                                     M.scroll:setIsLocked(false, 'vertical')
                                 end
+
+                                EXITS.add(M.removeOverlay, index)
                         end, 4)
                     elseif e.target.tag == 'sandbox' then
                         M.addBlock({}, index)
@@ -335,7 +382,7 @@ M.newBlock = function(name, params, str, index)
         buttonSandbox:addEventListener('touch', buttonListeners)
     M.group:insert(textSandbox)
 
-    title.tag = 'exit'
+    title.tag = 'exit' EXITS.add(M.removeOverlay, index)
     title:addEventListener('touch', buttonListeners)
 end
 

@@ -21,12 +21,8 @@ LFS = require 'lfs'
 WIDGET = require 'widget'
 CRYPTO = require 'crypto'
 
-if system.getInfo('deviceID') == '439ab4d7b739941c' then
-    display.safeActualContentHeight = display.actualContentHeight - 90
-end
-
 LIVE = false
-BUILD = 1182
+BUILD = 1187
 ALERT = true
 INDEX_LIST = 0
 MORE_LIST = true
@@ -37,6 +33,7 @@ CURRENT_SCRIPT = 0
 GAME_GROUP_OPEN = ''
 CURRENT_LINK = 'App1'
 LAST_CURRENT_SCRIPT = 0
+DEVICE_ID = 'qwertyuiop12345'
 CURRENT_ORIENTATION = 'portrait'
 CENTER_X = display.contentCenterX
 CENTER_Y = display.contentCenterY
@@ -48,7 +45,6 @@ DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
-if system.getInfo('deviceID') == 'd5e815039ddf2736' then BOTTOM_HEIGHT = 100 end
 ZERO_X = CENTER_X - DISPLAY_WIDTH / 2 + LEFT_HEIGHT
 ZERO_Y = CENTER_Y - DISPLAY_HEIGHT / 2 + TOP_HEIGHT
 MAX_X = CENTER_X + DISPLAY_WIDTH / 2 - RIGHT_HEIGHT
@@ -346,7 +342,7 @@ UTF8.trimRight = function(s) return UTF8.gsub(s, '%s+$', '') end
 UTF8.trimFull = function(s) return UTF8.trim(UTF8.gsub(s, '%s+', ' ')) end
 timer.new = function(sec, rep, lis) return timer.performWithDelay(sec, lis, rep) end
 math.sum = function(...) local args, num = {...}, 0 for i = 1, #args do num = num + args[i] end return num end
-table.len, math.round = function(t)
+table.len, math.round, table.merge = function(t)
     return type(t) == 'table' and ((type(#t) == 'number' and #t > 0) and #t
     or (function() local i = 0 for k in pairs(t) do i = i + 1 end return i end)()) or 0
 end, function(num, exp)
@@ -354,6 +350,9 @@ end, function(num, exp)
     else local exps = string.match(tostring(num), '%.(.*)') num = tonumber(num) and num + 0.5 or 0
     num = string.match(tostring(num), '(.*)%.') or tostring(num) exp = (exps and tonumber(exp) and tonumber(exp) > 0)
     and exps:sub(1, tonumber(exp)) or '0' return tonumber(num .. '.' .. exp) end
+end, function(t1, t2)
+    for k, v in pairs(t2) do if (type(v) == 'table') and (type(t1[k] or false) == 'table')
+    then merge(t1[k], t2[k]) else t1[k] = v end end return t1
 end
 
 LOCAL = require 'Data.local'

@@ -25,6 +25,7 @@ listeners.listener = function(e)
                     e.target.text.ID == 'device' and 'd' or
                     e.target.text.id == '/fscript' and 'fS' or
                     e.target.text.id == '/fproject' and 'fP' or
+                    e.target.text.id == '/fcustom' and 'fC' or
                     e.target.text.id == '/event' and 'vE' or
                     e.target.text.id == '/script' and 'vS' or
                     e.target.text.id == '/project' and 'vP' or
@@ -38,7 +39,7 @@ listeners.listener = function(e)
 
                     EDITOR.cursor[1] = EDITOR.cursor[1] + 1
                     table.insert(EDITOR.data, EDITOR.cursor[1] - 1, {
-                        thisData and (type == 'p' and e.target.text.ID or e.target.text.text) or e.target.text.id, type
+                        thisData and ((type == 'p' or type == 'fC') and e.target.text.ID or e.target.text.text) or e.target.text.id, type
                     }) DATA.set(type, e.target.text.id)
                     EDITOR.backup = LISTENER.backup(EDITOR.backup, 'add', EDITOR.data)
 
@@ -99,7 +100,8 @@ listeners.set = function(target, buttons, isData, isList)
                     elseif target.text.id == 'event' or target.text.id == 'script' or target.text.id == 'project'
                     or target.text.id == 'tevent' or target.text.id == 'tscript' or target.text.id == 'tproject'
                     or target.text.id == 'pobj' or target.text.id == 'ptext' or target.text.id == 'pgroup'
-                    or target.text.id == 'pwidget' or target.text.id == 'fscript' or target.text.id == 'fproject' then
+                    or target.text.id == 'pwidget' or target.text.id == 'fcustom'
+                    or target.text.id == 'fscript' or target.text.id == 'fproject' then
                         listScroll.buttons[i]:setFillColor(0.17, 0.17, 0.19)
                     else
                         listScroll.buttons[i]:setFillColor(0.14, 0.14, 0.16)
@@ -110,7 +112,7 @@ listeners.set = function(target, buttons, isData, isList)
                     if isData then local id = getId(target.y)
                         listScroll.buttons[i].text.id = id == 1 and (j == 1 and 'event' or j == 2 and 'script' or 'project')
                         or (id == 2 and (j == 1 and 'tevent' or j == 2 and 'tscript' or 'tproject')
-                        or (id == 3 and (j == 1 and 'fscript' or 'fproject')
+                        or (id == 3 and (j == 1 and 'fcustom' or j == 2 and 'fscript' or 'fproject')
                         or (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup' or 'pwidget')))
                     elseif isList then
                         listScroll.buttons[i].text.id = buttons.keys[j]
@@ -118,6 +120,7 @@ listeners.set = function(target, buttons, isData, isList)
                     else
                         listScroll.buttons[i].text.id = '/' .. target.text.id
                         listScroll.buttons[i].text.ID = target.text.id == 'pobj' and 'obj.' .. buttons.keys[j]
+                        or target.text.id == 'fcustom' and EDITOR.funs._custom[j]
                         or target.text.id == 'ptext' and 'text.' .. buttons.keys[j]
                         or target.text.id == 'pgroup' and 'group.' .. buttons.keys[j]
                         or target.text.id == 'pwidget' and 'widget.' .. buttons.keys[j] or nil
@@ -191,6 +194,10 @@ listeners.fscript = function(target)
     listeners.set(target, EDITOR.funs.script)
 end
 
+listeners.fcustom = function(target)
+    listeners.set(target, EDITOR.funs.custom)
+end
+
 listeners.tproject = function(target)
     listeners.set(target, EDITOR.tables.project)
 end
@@ -240,7 +247,7 @@ listeners.table = function(target)
 end
 
 listeners.funs = function(target)
-    listeners.set(target, {STR['editor.list.script'], STR['editor.list.project']}, true)
+    listeners.set(target, {STR['editor.list.custom'], STR['editor.list.script'], STR['editor.list.project']}, true)
 end
 
 listeners.prop = function(target)

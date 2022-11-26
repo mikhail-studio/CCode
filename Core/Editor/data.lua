@@ -43,7 +43,7 @@ M.prop = {
     widget = {
         names = {},
         keys = {
-            'tag', 'pos_x', 'pos_y', 'value', 'link'
+            'tag', 'pos_x', 'pos_y', 'value', 'text', 'link'
         }
     }
 }
@@ -63,7 +63,7 @@ M.device = {
 
 M.set = function(key, name)
     if (not (EDITOR.data[EDITOR.cursor[1] + 1] and EDITOR.data[EDITOR.cursor[1] + 1][1] == '(' and EDITOR.data[EDITOR.cursor[1] + 1][2] == 's'))
-    and (key == 'fS' or key == 'fP' or key == 'f' or key == 'm' or key == 'p'
+    and (key == 'fC' or key == 'fS' or key == 'fP' or key == 'f' or key == 'm' or key == 'p'
     --[[or name == 'finger_touching_screen_x' or name == 'finger_touching_screen_y']]) and name ~= 'unix_time' and name ~= 'pi' then
         EDITOR.cursor[1] = EDITOR.cursor[1] + 1
         table.remove(EDITOR.data, EDITOR.cursor[1] - 1)

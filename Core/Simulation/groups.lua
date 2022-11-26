@@ -6,7 +6,7 @@ if 'Группы' then
         local name = CALC(params[1])
 
         GAME.lua = GAME.lua .. ' pcall(function() pcall(function() GAME.group.groups[' .. name .. ']:removeSelf() end)'
-        GAME.lua = GAME.lua .. ' GAME.group.groups[' .. name .. '] = display.newGroup() GAME.group.groups[' .. name .. '])._tag = \'TAG\''
+        GAME.lua = GAME.lua .. ' GAME.group.groups[' .. name .. '] = display.newGroup() GAME.group.groups[' .. name .. ']._tag = \'TAG\''
         GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.groups[' .. name .. ']) end)'
     end
 

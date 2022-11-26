@@ -250,7 +250,7 @@ M['Hide'] = function(data, cursor, backup)
         if EDITOR.group[66].buttons[i].isOpen then
             local buttons = i < 3 and {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}
             or i == 4 and {STR['editor.list.prop.obj'], STR['editor.list.prop.text'], STR['editor.list.prop.group'], STR['editor.list.prop.widget']}
-            or i == 3 and {STR['editor.list.script'], STR['editor.list.project']} or i == 5 and EDITOR.fun
+            or i == 3 and {STR['editor.list.custom'], STR['editor.list.script'], STR['editor.list.project']} or i == 5 and EDITOR.fun
             or i == 6 and EDITOR.math or i == 7 and EDITOR.log or EDITOR.device
             list.set(EDITOR.group[66].buttons[i], buttons, i < 5, i > 4)
         end

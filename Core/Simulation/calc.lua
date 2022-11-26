@@ -54,6 +54,8 @@ return function(params, default)
             result = result .. ' funsS[\'' .. params[i][1] .. '\']'
         elseif params[i][2] == 'fP' then
             result = result .. ' funsP[\'' .. params[i][1] .. '\']'
+        elseif params[i][2] == 'fC' then
+            result = result .. ' funsC[\'' .. params[i][1] .. '\']'
         end
 
         if index then
@@ -61,5 +63,6 @@ return function(params, default)
         end
     end
 
-    return (#params == 0 and default) and default or UTF8.sub(result, 1, 1) == ' ' and UTF8.sub(result, 2, UTF8.len(result)) or 't' .. result
+    return (#params == 0 and default) and default or UTF8.sub(result, 1, 1) == ' '
+    and '(' .. UTF8.sub(result, 2, UTF8.len(result)) .. ')' or '(t' .. result .. ')'
 end

@@ -281,45 +281,41 @@ listeners.but_okay = function(target)
                 end
 
                 if BLOCKS.group.blocks[i].data.nested then
-                    local nestedFun
-                    local endIndex = 1
                     local nestedEndIndex = 1
 
-                    if not BLOCKS.group.blocks[i].data.event then
-                        endIndex = #INFO.listNested[BLOCKS.group.blocks[i].data.name]
-                    end
+                    local function nestedFun(t, comment)
+                        for j = 1, #t do
+                            t[j].comment = comment
 
-                    nestedFun = function(t1, t2, comment)
-                        for j = 1, #t1 do
-                            t1[j].comment = comment
-                            t2[j].comment = comment
-
-                            if t2[j].nested and #t2[j].nested > 0 then
-                                nestedFun(t1[j].nested, t2[j].nested, comment)
+                            if t[j].nested and #t[j].nested > 0 then
+                                nestedFun(t[j].nested, comment)
                             end
                         end
                     end
 
-                    nestedFun(data.scripts[CURRENT_SCRIPT].params[i].nested, BLOCKS.group.blocks[i].data.nested, BLOCKS.group.blocks[i].data.comment)
-
-                    if #BLOCKS.group.blocks[i].data.nested == 0 or BLOCKS.group.blocks[i].data.event then
+                    if #BLOCKS.group.blocks[i].data.nested == 0 then
                         for j = i + 1, #BLOCKS.group.blocks do
                             local name = BLOCKS.group.blocks[j].data.name
-                            local notNested = not (BLOCKS.group.blocks[j].data.nested and #BLOCKS.group.blocks[j].data.nested > 0)
-                            if BLOCKS.group.blocks[i].data.event and BLOCKS.group.blocks[j].data.event then break end
+                            local isNested = BLOCKS.group.blocks[j].data.nested and #BLOCKS.group.blocks[j].data.nested > 0
+                            if BLOCKS.group.blocks[j].data.event then break end
+
                             data.scripts[CURRENT_SCRIPT].params[j].comment = BLOCKS.group.blocks[i].data.comment
                             BLOCKS.group.blocks[j].block:setFillColor(INFO.getBlockColor(BLOCKS.group.blocks[j].data.name, BLOCKS.group.blocks[i].data.comment))
                             BLOCKS.group.blocks[j].data.comment = BLOCKS.group.blocks[i].data.comment
 
-                            if not BLOCKS.group.blocks[i].data.event then
-                                if name == BLOCKS.group.blocks[i].data.name and notNested then
-                                    nestedEndIndex = nestedEndIndex + 1
-                                elseif name == INFO.listNested[BLOCKS.group.blocks[i].data.name][endIndex] then
-                                    nestedEndIndex = nestedEndIndex - 1
-                                    if nestedEndIndex == 0 then break end
-                                end
+                            if isNested then
+                                nestedFun(data.scripts[CURRENT_SCRIPT].params[j].nested, BLOCKS.group.blocks[j].data.comment)
+                            end
+
+                            if name == BLOCKS.group.blocks[i].data.name and not isNested then
+                                nestedEndIndex = nestedEndIndex + 1
+                            elseif name == INFO.listNested[BLOCKS.group.blocks[i].data.name][1] then
+                                nestedEndIndex = nestedEndIndex - 1
+                                if nestedEndIndex == 0 then break end
                             end
                         end
+                    else
+                        nestedFun(data.scripts[CURRENT_SCRIPT].params[i].nested, BLOCKS.group.blocks[i].data.comment)
                     end
                 end
             end
