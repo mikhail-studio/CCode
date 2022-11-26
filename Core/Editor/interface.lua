@@ -4,7 +4,7 @@ local LIST = require 'Core.Modules.logic-list'
 local DATA = require 'Core.Editor.data'
 local TEXT = require 'Core.Editor.text'
 local INFO = require 'Data.info'
-local M = {rScrollParams = {}}
+local M = {rScrollParams = {}, scrollY = 0}
 
 local getFontSize = function(i)
     if CENTER_X == 360 then
@@ -130,6 +130,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     blockScroll:insert(block)
 
     block.y = block.y < blockScroll.height / 2 and blockScroll.height / 2 or block.y
+    blockScroll:scrollToPosition({y = M.scrollY, time = 0}) M.scrollY = 0
     blockScroll:setScrollHeight(block.height + 24)
 
     for i = 1, length do

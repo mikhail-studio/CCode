@@ -41,6 +41,7 @@ M.rect = function(target, restart, data)
             restart[5], restart[4] = true, index
             restart[3] = COPY_TABLE(data.scripts[CURRENT_SCRIPT].params[restart[2]].params[restart[4]])
             table.insert(EDITOR.rScrollParams, select(2, EDITOR.group[66]:getContentPosition()))
+            EDITOR.scrollY = select(2, EDITOR.group[8]:getContentPosition())
             EDITOR.group:removeSelf() EDITOR.group = nil
             EDITOR.create(unpack(restart))
             EDITOR.group.isVisible = true
