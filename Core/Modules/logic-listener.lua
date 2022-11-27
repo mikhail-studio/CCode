@@ -325,6 +325,7 @@ end
 
 local function stopMoveLogicBlock(e, group, scroll)
     if #group.blocks > 1 then
+        local target = group.blocks[M.index]
         local y = M.index == 1 and 50 or group.blocks[M.index - 1].y + group.blocks[M.index - 1].block.height / 2 + e.target.block.height / 2 - 4
         local addY = M.index == 1 and 24 + (e.target.block.height - 120) / 2 or 24
         e.target.x, e.target.y = e.target.x - 40, e.target.data.event and y + addY or y
@@ -372,21 +373,26 @@ local function stopMoveLogicBlock(e, group, scroll)
         if M.countClose > 0 then
             local diffScrollY = scroll.y - e.target.y + e.target.height / 2
             scroll:scrollToPosition({y = diffScrollY > 0 and 0 or diffScrollY, time = 0})
+            for j = M.index, #group.blocks do if group.blocks[j] == target then M.index = j break end end
         end
 
         if e.target.data.nested then
             for j = M.index, #group.blocks do
                 if group.blocks[j].data.event and j ~= M.index then break end
                 for i = 2, #INFO.listName[group.blocks[j].data.name] do
-                    if INFO.listName[group.blocks[j].data.name][i] == 'var' or INFO.listName[group.blocks[j].data.name][i] == 'table' then
-                        LISTENER({blocks = group.blocks, bIndex = j, pIndex = i - 1})
+                    if INFO.listName[group.blocks[j].data.name][i] == 'localvar' or INFO.listName[group.blocks[j].data.name][i] == 'localtable'
+                    or INFO.listName[group.blocks[j].data.name][i] == 'var' or INFO.listName[group.blocks[j].data.name][i] == 'table'
+                    or INFO.listName[group.blocks[j].data.name][i] == 'value' then
+                        LISTENER({blocks = group.blocks, bIndex = j, pIndex = i - 1, pType = INFO.listName[group.blocks[j].data.name][i]})
                     end
                 end
             end
         else
             for i = 2, #INFO.listName[e.target.data.name] do
-                if INFO.listName[e.target.data.name][i] == 'var' or INFO.listName[e.target.data.name][i] == 'table' then
-                    LISTENER({blocks = group.blocks, bIndex = M.index, pIndex = i - 1})
+                if INFO.listName[e.target.data.name][i] == 'localvar' or INFO.listName[e.target.data.name][i] == 'localtable'
+                or INFO.listName[e.target.data.name][i] == 'var' or INFO.listName[e.target.data.name][i] == 'table'
+                or INFO.listName[e.target.data.name][i] == 'value' then
+                    LISTENER({blocks = group.blocks, bIndex = M.index, pIndex = i - 1, pType = INFO.listName[e.target.data.name][i]})
                 end
             end
         end

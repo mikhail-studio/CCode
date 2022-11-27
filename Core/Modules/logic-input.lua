@@ -126,7 +126,7 @@ M.renameProject = function(data, text, name, type)
                             if name == '' then
                                 if INFO.listName[data.scripts[j].params[k].name][u + 1] == 'var'
                                 or INFO.listName[data.scripts[j].params[k].name][u + 1] == 'fun'
-                                or INFO.listName[data.scripts[j].params[k].name][u + 1] == 'table' 
+                                or INFO.listName[data.scripts[j].params[k].name][u + 1] == 'table'
                                 or INFO.listName[data.scripts[j].params[k].name][u + 1] == 'localvar'
                                 or INFO.listName[data.scripts[j].params[k].name][u + 1] == 'localtable' then
                                     table.remove(data.scripts[j].params[k].params[u], o)
@@ -251,7 +251,7 @@ M.renameScript = function(data, text, name, type)
     return true
 end
 
-M.renameEvent = function(data, text, name, type, eventIndex)
+M.renameEvent = function(data, text, name, type, eventIndex, isCheck)
     local data, nestedInfo = GET_FULL_DATA(data)
     local eventIndex = M.getEventIndex(data, eventIndex)
     local t = COPY_TABLE(data.scripts[CURRENT_SCRIPT].params[eventIndex].vars)
@@ -302,7 +302,7 @@ M.renameEvent = function(data, text, name, type, eventIndex)
         end
     end
 
-    if #t == 0 then
+    if isCheck or #t == 0 then
         renameForAllParams()
     end
 

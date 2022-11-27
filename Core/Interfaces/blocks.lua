@@ -62,15 +62,15 @@ listeners.but_list = function(target)
     end
 end
 
-listeners.checkLocalData = function(blocks, bIndex, pIndex)
-    if blocks[bIndex].data.params[pIndex][1] then
+listeners.checkLocalData = function(blocks, bIndex, pIndex, pType)
+    if pType == 'value' or blocks[bIndex].data.params[pIndex][1] then
         local varsE = {}
         local tablesE = {}
         local data = GET_GAME_CODE(CURRENT_LINK)
-        local name = blocks[bIndex].data.params[pIndex][1][1]
-        local modify = blocks[bIndex].data.params[pIndex][1][2]
+        local name = pType ~= 'value' and blocks[bIndex].data.params[pIndex][1][1] or ''
+        local modify = pType ~= 'value' and blocks[bIndex].data.params[pIndex][1][2] or ''
 
-        if modify == 'vE' or modify == 'tE' then
+        if modify == 'vE' or modify == 'tE' or pType == 'value' then
             local countEvent = 0
             local lastIndexEvent = 1
 
@@ -85,10 +85,23 @@ listeners.checkLocalData = function(blocks, bIndex, pIndex)
             varsE = data.scripts[CURRENT_SCRIPT].params[lastIndexEvent].vars
             tablesE = data.scripts[CURRENT_SCRIPT].params[lastIndexEvent].tables
 
-            if (modify == 'vE' and not table.indexOf(varsE, name)) or (modify == 'tE' and not table.indexOf(tablesE, name)) then
-                LOGIC.renameEvent(data, name, '', modify, countEvent)
+            if pType == 'value' then
+                for o = #blocks[bIndex].data.params[pIndex], 1, -1 do
+                    local name = blocks[bIndex].data.params[pIndex][o][1]
+                    local modify = blocks[bIndex].data.params[pIndex][o][2]
+
+                    if (modify == 'vE' and not table.indexOf(varsE, name)) or (modify == 'tE' and not table.indexOf(tablesE, name)) then
+                        LOGIC.renameEvent(data, name, '', modify, countEvent, true)
+                    end
+                end
+            else
+                if (modify == 'vE' and not table.indexOf(varsE, name)) or (modify == 'tE' and not table.indexOf(tablesE, name)) then
+                    LOGIC.renameEvent(data, name, '', modify, countEvent, true)
+                end
             end
         end
+    else
+        return 'error'
     end
 end
 
@@ -416,7 +429,7 @@ end
 
 return function(e)
     if e.blocks then
-        listeners.checkLocalData(e.blocks, e.bIndex, e.pIndex)
+        return listeners.checkLocalData(e.blocks, e.bIndex, e.pIndex, e.pType)
     elseif BLOCKS.group.isVisible and (ALERT or e.target.button == 'but_okay') then
         if e.phase == 'began' then
             display.getCurrentStage():setFocus(e.target)
