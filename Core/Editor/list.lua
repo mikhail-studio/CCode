@@ -78,7 +78,7 @@ local getFontSize getFontSize = function(width, text, size, isData)
     end
 end
 
-listeners.set = function(target, buttons, isData, isList)
+listeners.set = function(target, buttons, isData, isList, buttonId)
     if buttons and (buttons.names and #buttons.names > 0 or #buttons > 0) then
         target.isOpen = not target.isOpen
         target.polygon.yScale = target.isOpen and -1 or 1
@@ -109,7 +109,7 @@ listeners.set = function(target, buttons, isData, isList)
                 listScroll:insert(listScroll.buttons[i])
 
                 listScroll.buttons[i].text = display.newText(text, 20, listButtonsY, 'ubuntu', getFontSize(listScroll.width, text, 24, isData))
-                    if isData then local id = getId(target.y)
+                    if isData then local id = buttonId or getId(target.y)
                         listScroll.buttons[i].text.id = id == 1 and (j == 1 and 'event' or j == 2 and 'script' or 'project')
                         or (id == 2 and (j == 1 and 'tevent' or j == 2 and 'tscript' or 'tproject')
                         or (id == 3 and (j == 1 and 'fcustom' or j == 2 and 'fscript' or 'fproject')
@@ -239,21 +239,21 @@ listeners.fun = function(target)
 end
 
 listeners.var = function(target)
-    listeners.set(target, {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}, true)
+    listeners.set(target, {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}, true, nil, 1)
 end
 
 listeners.table = function(target)
-    listeners.set(target, {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}, true)
+    listeners.set(target, {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}, true, nil, 2)
 end
 
 listeners.funs = function(target)
-    listeners.set(target, {STR['editor.list.custom'], STR['editor.list.script'], STR['editor.list.project']}, true)
+    listeners.set(target, {STR['editor.list.custom'], STR['editor.list.script'], STR['editor.list.project']}, true, nil, 3)
 end
 
 listeners.prop = function(target)
     listeners.set(target, {
         STR['editor.list.prop.obj'], STR['editor.list.prop.text'], STR['editor.list.prop.group'], STR['editor.list.prop.widget']
-    }, true)
+    }, true, nil, 4)
 end
 
 return listeners

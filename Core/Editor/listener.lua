@@ -63,6 +63,8 @@ M.rect = function(target, restart, data)
         EDITOR.group[66]:setIsLocked(true, 'vertical')
 
         COLOR.new(COPY_TABLE((paramsData[1] and paramsData[1][1]) and JSON.decode(paramsData[1][1]) or {255, 255, 255, 255}), function(e)
+            EDITOR.rScrollParams = {}
+
             if e.input then
                 data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex][1] = {e.rgb, 'c'}
                 BLOCKS.group.blocks[blockIndex].data.params[paramsIndex][1] = {e.rgb, 'c'}
@@ -70,6 +72,14 @@ M.rect = function(target, restart, data)
                 SET_GAME_CODE(CURRENT_LINK, data)
             end
 
+            for i = #EDITOR.group[66].buttons, 1, -1 do
+                if EDITOR.group[66].buttons[i].isOpen then
+                    table.insert(EDITOR.rScrollParams, 1, i)
+                end
+            end
+
+            table.insert(EDITOR.rScrollParams, select(2, EDITOR.group[66]:getContentPosition()))
+            EDITOR.scrollY = select(2, EDITOR.group[8]:getContentPosition())
             table.remove(restart[3], M.find(restart[3]))
             EDITOR.group:removeSelf() EDITOR.group = nil
             EDITOR.create(unpack(restart))
@@ -80,12 +90,14 @@ M.rect = function(target, restart, data)
         local blockIndex, paramsIndex = restart[2], index
         local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
         local listX = target.parent.parent.x + target.x + target.width / 2
-        local listY = target.parent.parent.y + target.y - target.height - 10
+        local listY = EDITOR.group[1].y + EDITOR.group[1].height + 295
 
         EDITOR.group[9]:setIsLocked(true, 'vertical')
         EDITOR.group[66]:setIsLocked(true, 'vertical')
 
         LIST.new(PARAMS.getListButtons(type), listX, listY, 'down', function(e)
+            EDITOR.rScrollParams = {}
+
             if e.index > 0 then
                 data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex][1] = {PARAMS.getListValue(type, e.text), 'sl'}
                 BLOCKS.group.blocks[blockIndex].data.params[paramsIndex][1] = {PARAMS.getListValue(type, e.text), 'sl'}
@@ -93,6 +105,14 @@ M.rect = function(target, restart, data)
                 SET_GAME_CODE(CURRENT_LINK, data)
             end
 
+            for i = #EDITOR.group[66].buttons, 1, -1 do
+                if EDITOR.group[66].buttons[i].isOpen then
+                    table.insert(EDITOR.rScrollParams, 1, i)
+                end
+            end
+
+            table.insert(EDITOR.rScrollParams, select(2, EDITOR.group[66]:getContentPosition()))
+            EDITOR.scrollY = select(2, EDITOR.group[8]:getContentPosition())
             table.remove(restart[3], M.find(restart[3]))
             EDITOR.group:removeSelf() EDITOR.group = nil
             EDITOR.create(unpack(restart))
@@ -104,9 +124,18 @@ M.rect = function(target, restart, data)
         local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
         local paramsType = type == 'localvar' and 'vars' or type == 'localtable' and 'tables' or type .. 's'
 
+        EDITOR.rScrollParams = {}
         EDITOR.group[9]:setIsLocked(true, 'vertical')
         EDITOR.group[66]:setIsLocked(true, 'vertical')
 
+        for i = #EDITOR.group[66].buttons, 1, -1 do
+            if EDITOR.group[66].buttons[i].isOpen then
+                table.insert(EDITOR.rScrollParams, 1, i)
+            end
+        end
+
+        table.insert(EDITOR.rScrollParams, select(2, EDITOR.group[66]:getContentPosition()))
+        EDITOR.scrollY = select(2, EDITOR.group[8]:getContentPosition())
         table.remove(restart[3], M.find(restart[3]))
         LOGIC.new(paramsType, blockIndex, paramsIndex, COPY_TABLE(paramsData), (type == 'localvar' or type == 'localtable'), restart)
     end
