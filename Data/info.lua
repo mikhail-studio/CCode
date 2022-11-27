@@ -29,7 +29,7 @@ M.listBlock = {
         'onSliderMoved',
         'onWebViewCallback',
         'onFieldBegan',
-        'onFieldMoved',
+        'onFieldEditing',
         'onFieldEnded'
     },
 
@@ -250,7 +250,7 @@ M.listName = {
         ['onTouchMoved'] = {'events', 'fun', 'localtable'},
         ['onSliderMoved'] = {'events', 'fun', 'localvar'},
         ['onFieldBegan'] = {'events', 'fun', 'localtable'},
-        ['onFieldMoved'] = {'events', 'fun', 'localtable'},
+        ['onFieldEditing'] = {'events', 'fun', 'localtable'},
         ['onFieldEnded'] = {'events', 'fun', 'localtable'},
         ['onWebViewCallback'] = {'events', 'fun', 'localtable'},
 

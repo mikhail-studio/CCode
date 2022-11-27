@@ -147,8 +147,8 @@ return {
         ['blocks.onSliderMoved.params'] = {'Имя функции:', 'Имя переменной:'},
         ['blocks.onFieldBegan'] = 'Началось редактирование поля',
         ['blocks.onFieldBegan.params'] = {'Имя функции:', 'Имя таблицы:'},
-        ['blocks.onFieldMoved'] = 'Пока текстовое поле редактируется',
-        ['blocks.onFieldMoved.params'] = {'Имя функции:', 'Имя таблицы:'},
+        ['blocks.onFieldEditing'] = 'Пока текстовое поле редактируется',
+        ['blocks.onFieldEditing.params'] = {'Имя функции:', 'Имя таблицы:'},
         ['blocks.onFieldEnded'] = 'Закончилось редактирование поля',
         ['blocks.onFieldEnded.params'] = {'Имя функции:', 'Имя таблицы:'},
 

@@ -35,7 +35,10 @@ M['setWidgetListener'] = function(params)
 
     GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.widgets[' .. name .. ']._type == \'webview\' then'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']:addEventListener(\'urlRequest\', function(e) pcall(function()'
-    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].url = e.url ' .. fun .. '(e, ' .. name .. ') end) end) end end)'
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].url = e.url ' .. fun .. '(e, ' .. name .. ') end) end)'
+    GAME.lua = GAME.lua .. ' elseif GAME.group.widgets[' .. name .. ']._type == \'field\' then'
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']:addEventListener(\'userInput\', function(e)'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. fun .. '(e, ' .. name .. ') end) end) end end)'
 end
 
 M['removeWidget'] = function(params)
