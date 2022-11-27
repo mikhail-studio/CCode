@@ -486,6 +486,8 @@ return {
         ['blocks.setWidgetPos.params'] = {'Имя виджета:', 'Позиция (X):', 'Позиция (Y):'},
         ['blocks.setWidgetSize'] = 'Установить размер виджета',
         ['blocks.setWidgetSize.params'] = {'Имя виджета:', 'Ширина:', 'Высота:'},
+        ['blocks.setWidgetListener'] = 'Установить слушатель изменений',
+        ['blocks.setWidgetListener.params'] = {'Имя виджета:', 'Имя функции:'},
         ['blocks.setWebViewFront'] = 'Перейти на сайт вперёд',
         ['blocks.setWebViewFront.params'] =  {'Имя виджета:'},
         ['blocks.setWebViewBack'] = 'Перейти на сайт назад',

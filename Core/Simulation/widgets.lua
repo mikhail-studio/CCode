@@ -29,6 +29,15 @@ M['setWidgetSize'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].height = ' .. height .. ' end end)'
 end
 
+M['setWidgetListener'] = function(params)
+    local name = CALC(params[1])
+    local fun = CALC(params[2], 'a', true)
+
+    GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.widgets[' .. name .. ']._type == \'webview\' then'
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']:addEventListener(\'urlRequest\', function(e) pcall(function()'
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].url = e.url ' .. fun .. '(e, ' .. name .. ') end) end) end end)'
+end
+
 M['removeWidget'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. CALC(params[1]) .. ']:removeSelf() end)'
 end

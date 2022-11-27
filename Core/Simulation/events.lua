@@ -60,4 +60,11 @@ M['onSliderMoved'] = function(nested, params)
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end)'
 end
 
+M['onWebViewCallback'] = function(nested, params)
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p, name)'
+    GAME.lua = GAME.lua .. ' local varsE, tablesE, p = {}, {}, COPY_TABLE(p) ' .. CALC(params[2], 'a', true)
+    GAME.lua = GAME.lua .. ' = {name = name, type = p.type, url = p.url, errorCode = p.errorCode, errorMessage = p.errorMessage}'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end)'
+end
+
 return M
