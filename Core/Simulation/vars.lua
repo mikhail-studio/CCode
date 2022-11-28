@@ -116,6 +116,37 @@ M['setTextAlpha'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].alpha = ' .. alpha .. ' end)'
 end
 
+M['setTextColor'] = function(params)
+    local name = CALC(params[1])
+    local colors = CALC(params[2], '{255}')
+
+    GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. colors
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
+end
+
+M['setTextRGB'] = function(params)
+    local name = CALC(params[1])
+    local r, g, b = CALC(params[2], '255'), CALC(params[3], '255'), CALC(params[4], '255')
+
+    GAME.lua = GAME.lua .. ' pcall(function() local r, g, b = ' .. r .. '/255, ' .. g .. '/255, ' .. b .. '/255'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']:setFillColor(r, g, b) end)'
+end
+
+M['setTextHEX'] = function(params)
+    local name = CALC(params[1])
+    local hex = CALC(params[2], '\'FFFFFF\'')
+
+    GAME.lua = GAME.lua .. ' pcall(function() local hex = UTF8.trim(tostring(' .. hex .. '))'
+    GAME.lua = GAME.lua .. ' if UTF8.sub(hex, 1, 1) == \'#\' then hex = UTF8.sub(hex, 2, 7) end'
+    GAME.lua = GAME.lua .. ' if UTF8.len(hex) ~= 6 then hex = \'FFFFFF\' end local errorHex = false'
+    GAME.lua = GAME.lua .. ' local filterHex = {\'0\', \'1\', \'2\', \'3\', \'4\', \'5\', \'6\','
+    GAME.lua = GAME.lua .. ' \'7\', \'8\', \'9\', \'A\', \'B\', \'C\', \'D\', \'E\', \'F\'}'
+    GAME.lua = GAME.lua .. ' for indexHex = 1, 6 do local symHex = UTF8.upper(UTF8.sub(hex, indexHex, indexHex))'
+    GAME.lua = GAME.lua .. ' for i = 1, #filterHex do if symHex == filterHex[i] then break elseif i == #filterHex then errorHex = true end end'
+    GAME.lua = GAME.lua .. ' end if errorHex then hex = \'FFFFFF\' end local r, g, b = unpack(math.hex(hex))'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']:setFillColor(r/255, g/255, b/255) end)'
+end
+
 M['updTextPosX'] = function(params)
     local name = CALC(params[1])
     local posX = '(' .. CALC(params[2]) .. ')'

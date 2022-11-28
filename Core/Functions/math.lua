@@ -15,6 +15,7 @@ M.radical = math.sqrt
 M.log10 = math.log10
 M.module = math.abs
 M.power = math.pow
+M.hex = math.hex
 M.exp = math.exp
 M.sum = math.sum
 M.log = math.log
