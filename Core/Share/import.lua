@@ -1,7 +1,3 @@
--- а для импорта куда сложнее всё, там надо при распаковке получить файл с кастомными блоками,
--- потом пройтись по существующим польз. блокам и проверить на повторки, чтобы не было два одинаковых блока,
--- также перезаписать айдишки блоков под доступные, и с помощью цикла по всему проекту также заменить айдишки
-
 return {
     new = function(listener)
         local completeImportProject = function(import)
@@ -28,6 +24,13 @@ return {
                                         if not custom[tostring(i)] then
                                             new_index = tostring(i) break
                                         end
+                                    end
+
+                                    if custom.len == 0 then
+                                        custom.len = 1
+                                        custom[new_index] = block
+                                        custom[new_index][4] = os.time()
+                                        dataCustom[index] = new_index
                                     end
 
                                     for _index, _block in pairs(custom) do
