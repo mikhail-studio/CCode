@@ -38,6 +38,14 @@ M['deactivateMultitouch'] = function(params)
     GAME.lua = GAME.lua .. ' system.deactivate(\'multitouch\')'
 end
 
+M['toastShort'] = function(params)
+    GAME.lua = GAME.lua .. ' GANIN.toast(' .. CALC(params[1], '\'\'') .. ', 0)'
+end
+
+M['toastLong'] = function(params)
+    GAME.lua = GAME.lua .. ' GANIN.toast(' .. CALC(params[1], '\'\'') .. ', 1)'
+end
+
 M['returnValue'] = function(params)
     GAME.lua = GAME.lua .. ' return ' .. CALC(params[1])
 end

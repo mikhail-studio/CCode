@@ -97,6 +97,8 @@ M.listBlock = {
         'setFocusMultitouch',
         'activateMultitouch',
         'deactivateMultitouch',
+        'toastShort',
+        'toastLong',
         'comment',
         'requestApi',
         'requestExit'
@@ -318,6 +320,8 @@ M.listName = {
         ['repeatEnd'] = {'control'},
         ['for'] = {'control', 'value', 'value', 'localvar', 'value'},
         ['forEnd'] = {'control'},
+        ['toastShort'] = {'control', 'value'},
+        ['toastLong'] = {'control', 'value'},
         ['comment'] = {'control', 'value'},
         ['requestExit'] = {'control'},
         ['setFocus'] = {'control', 'value'},

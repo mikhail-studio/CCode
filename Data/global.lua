@@ -23,7 +23,7 @@ CRYPTO = require 'crypto'
 
 SIZE = 1.0
 LIVE = false
-BUILD = 1188
+BUILD = 1190
 ALERT = true
 INDEX_LIST = 0
 MORE_LIST = true
@@ -378,7 +378,7 @@ if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'})
 GET_GLOBAL_TABLE = function()
     return {
         sendLaunchAnalytics = sendLaunchAnalytics, transition = transition, tostring = tostring, tonumber = tonumber,
-        gcinfo = gcinfo, assert = assert, debug = debug, GAME = GAME, collectgarbage = collectgarbage,
+        gcinfo = gcinfo, assert = assert, debug = debug, GAME = GAME, collectgarbage = collectgarbage, GANIN = GANIN,
         io = io, os = os, display = display, dofile = dofile, module = module, media = media, OS_REMOVE = OS_REMOVE,
         native = native, coroutine = coroutine, CENTER_X = CENTER_X, CENTER_Y = CENTER_Y, ipairs = ipairs,
         TOP_HEIGHT = TOP_HEIGHT, network = network, LFS = lfs, _network_pathForFile = _network_pathForFile,
