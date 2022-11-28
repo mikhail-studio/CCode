@@ -68,7 +68,16 @@ local function newBlockListener(event)
                         end
                     end
                 elseif M.group[9].isOn and event.target.index[1] == 15 then
-                    local custom, name = GET_GAME_CUSTOM(), INFO.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
+                    local name = INFO.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
+                    local custom, data = GET_GAME_CUSTOM(), GET_GAME_CODE(CURRENT_LINK)
+
+                    for i = 1, #data.scripts do
+                        for j = 1, #data.scripts[i].params do
+                            if data.scripts[i].params[j].name == 'custom' .. index then
+                                table.remove(data.scripts[i].params, j)
+                            end
+                        end
+                    end
 
                     for index, block in pairs(custom) do
                         if 'custom' .. index == name then
@@ -80,8 +89,14 @@ local function newBlockListener(event)
                                 if INFO.listBlock.everyone[i] == name then table.remove(INFO.listBlock.everyone, i) break end
                             end
 
+                            SET_GAME_CODE(CURRENT_LINK, data)
+                            BLOCKS.group:removeSelf() BLOCKS.group = nil
+                            BLOCKS.create() BLOCKS.custom = nil
+                            BLOCKS.group.isVisible = false
                             custom[index] = nil custom.len = custom.len - 1
-                            SET_GAME_CUSTOM(custom) M.remove() M.create()
+                            SET_GAME_CUSTOM(custom)
+
+                            M.remove() M.create()
                             M.group.types[1].scroll.isVisible = false
                             M.group.types[15].scroll.isVisible = true
                             M.group[3].isVisible = true

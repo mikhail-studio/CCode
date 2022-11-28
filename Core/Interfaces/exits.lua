@@ -73,6 +73,28 @@ listeners.blocks = function()
                             break
                         end
                     end
+
+                    for i = 1, #data.scripts do
+                        for j = 1, #data.scripts[i].params do
+                            if data.scripts[i].params[j].name == 'custom' .. BLOCKS.custom.index then
+                                local block = custom[BLOCKS.custom.index]
+                                local typeBlock = 'custom' .. BLOCKS.custom.index
+                                local blockParams = {} for i = 1, #block[2] do blockParams[i] = 'value' end
+
+                                INFO.listName[typeBlock] = {'custom', unpack(blockParams)}
+
+                                if #data.scripts[i].params[j].params >= #block[2] then
+                                    for k = #data.scripts[i].params[j].params, #block[2] + 1, -1 do
+                                        table.remove(data.scripts[i].params[j].params, k)
+                                    end
+                                else
+                                    for k = #data.scripts[i].params[j].params + 1, #block[2] do
+                                        data.scripts[i].params[j].params[k] = {}
+                                    end
+                                end
+                            end
+                        end
+                    end
                 else
                     table.insert(INFO.listBlock.custom, 1, 'custom' .. BLOCKS.custom.index)
                     table.insert(INFO.listBlock.everyone, 'custom' .. BLOCKS.custom.index)
@@ -86,6 +108,7 @@ listeners.blocks = function()
                 CURRENT_SCRIPT = LAST_CURRENT_SCRIPT
                 BLOCKS.group:removeSelf() BLOCKS.group = nil
                 BLOCKS.create() BLOCKS.custom = nil
+                BLOCKS.group.isVisible = false
 
                 NEW_BLOCK.remove() NEW_BLOCK.create()
                 NEW_BLOCK.group.types[15].scroll.isVisible = true

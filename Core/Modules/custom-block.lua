@@ -180,7 +180,7 @@ M.removeOverlay = function(index)
     if index then
         WINDOW.new(STR['scripts.sandbox.exit'], {STR['scripts.sandbox.not.save'], STR['scripts.sandbox.save']}, function(e)
             if e.index == 2 then
-                local custom = GET_GAME_CUSTOM()
+                local custom, data = GET_GAME_CUSTOM(), GET_GAME_CODE(CURRENT_LINK)
                     custom[index][1] = STR['blocks.']
                     custom[index][2] = COPY_TABLE(STR['blocks..params'])
                     custom[index][4] = os.time()
@@ -194,10 +194,37 @@ M.removeOverlay = function(index)
                 for id, type in ipairs(INFO.listBlock.custom) do
                     if type == 'custom' .. index then
                         table.remove(INFO.listBlock.custom, id)
-                        table.insert(INFO.listBlock.custom, 1, 'custom' .. index)
+                        table.insert(INFO.listBlock.custom, 1, type)
                         break
                     end
                 end
+
+                for i = 1, #data.scripts do
+                    for j = 1, #data.scripts[i].params do
+                        if data.scripts[i].params[j].name == 'custom' .. index then
+                            local block = custom[index]
+                            local typeBlock = 'custom' .. index
+                            local blockParams = {} for i = 1, #block[2] do blockParams[i] = 'value' end
+                            
+                            INFO.listName[typeBlock] = {'custom', unpack(blockParams)}
+
+                            if #data.scripts[i].params[j].params >= #block[2] then
+                                for k = #data.scripts[i].params[j].params, #block[2] + 1, -1 do
+                                    table.remove(data.scripts[i].params[j].params, k)
+                                end
+                            else
+                                for k = #data.scripts[i].params[j].params + 1, #block[2] do
+                                    data.scripts[i].params[j].params[k] = {}
+                                end
+                            end
+                        end
+                    end
+                end
+
+                SET_GAME_CODE(CURRENT_LINK, data)
+                BLOCKS.group:removeSelf() BLOCKS.group = nil
+                BLOCKS.create() BLOCKS.custom = nil
+                BLOCKS.group.isVisible = false
             end
 
             if e.index ~= 0 then
