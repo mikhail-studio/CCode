@@ -15,6 +15,7 @@ return {
         ['button.rename'] = 'Переименовать',
         ['button.copy'] = 'Копировать',
         ['button.paste'] = 'Вставить',
+        ['button.debug'] = 'Дебаг',
         ['button.alldelete'] = 'Удалить всё',
         ['button.find'] = 'Поиск',
         ['button.comment'] = 'Выключить',
@@ -81,6 +82,7 @@ return {
         ['build.start'] = 'Сборка APK началась, ожидайте',
         ['export.start'] = 'Экспорт начался, ожидайте',
         ['import.error'] = 'Ошибка импорта #',
+        ['game.debug'] = 'В буфер обмена сохранён lua код программы',
 
     ['blocks.create.var'] = 'Создать переменную',
         ['blocks.create.table'] = 'Создать таблицу',

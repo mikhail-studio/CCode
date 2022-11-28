@@ -51,7 +51,7 @@ M.remove = function()
     if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true}) end
 end
 
-M.new = function(linkBuild)
+M.new = function(linkBuild, isDebug)
     M.group = display.newGroup()
     M.orientation, EVENTS.CUSTOM = CURRENT_ORIENTATION, {}
     M.data = GET_FULL_DATA(GET_GAME_CODE(linkBuild or CURRENT_LINK))
@@ -176,12 +176,11 @@ M.new = function(linkBuild)
         M.lua = M.lua .. ' onStart' .. i .. '()'
     end M.lua = M.lua .. ' end) GAME.isStarted = true'
 
-    if linkBuild then
+    if linkBuild or isDebug then
         M.remove()
         return M.lua
     else
         pcall(function()
-            -- print(M.lua)
             loadstring(M.lua)()
         end)
     end

@@ -24,14 +24,21 @@ end
 
 listeners.but_list = function(target)
     if #BLOCKS.group.blocks ~= 0 then
-        local list = {STR['button.remove'], STR['button.copy'], STR['button.comment']}
+        local list = {STR['button.remove'], STR['button.copy'], STR['button.comment'], STR['button.debug']}
 
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
         if BLOCKS.group.isVisible then
             LIST.new(list, MAX_X, target.y - target.height / 2, 'down', function(e)
                 BLOCKS.group[8]:setIsLocked(false, 'vertical')
 
-                if e.index ~= 0 then
+                if e.index == 4 then
+                    BLOCKS.group.isVisible = false
+                    GAME = require 'Core.Simulation.start' local lua = GAME.new(nil, true)
+                    if not IS_SIM then PASTEBOARD.copy('string', lua) else print(lua) end
+                    WINDOW.new(STR['game.debug'], {STR['button.okay']}, function(e) BLOCKS.group.isVisible = true end, 1)
+                    WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                    WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                elseif e.index ~= 0 then
                     ALERT = false
                     INDEX_LIST = e.index
                     EXITS.add(listeners.but_okay_end)
@@ -100,8 +107,6 @@ listeners.checkLocalData = function(blocks, bIndex, pIndex, pType)
                 end
             end
         end
-    else
-        return 'error'
     end
 end
 
@@ -429,7 +434,7 @@ end
 
 return function(e)
     if e.blocks then
-        return listeners.checkLocalData(e.blocks, e.bIndex, e.pIndex, e.pType)
+        listeners.checkLocalData(e.blocks, e.bIndex, e.pIndex, e.pType)
     elseif BLOCKS.group.isVisible and (ALERT or e.target.button == 'but_okay') then
         if e.phase == 'began' then
             display.getCurrentStage():setFocus(e.target)
