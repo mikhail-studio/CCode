@@ -29,7 +29,7 @@ M['left_point_screen'] = function()
 end
 
 M['height_top'] = function()
-    return TOP_HEIGHT
+    return TOP_HEIGHT == 0 and display.topStatusBarContentHeight or TOP_HEIGHT
 end
 
 M['height_bottom'] = function()

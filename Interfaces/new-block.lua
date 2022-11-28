@@ -71,14 +71,6 @@ local function newBlockListener(event)
                     local name = INFO.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
                     local custom, data = GET_GAME_CUSTOM(), GET_GAME_CODE(CURRENT_LINK)
 
-                    for i = 1, #data.scripts do
-                        for j = 1, #data.scripts[i].params do
-                            if data.scripts[i].params[j].name == 'custom' .. index then
-                                table.remove(data.scripts[i].params, j)
-                            end
-                        end
-                    end
-
                     for index, block in pairs(custom) do
                         if 'custom' .. index == name then
                             for i = 1, #INFO.listBlock.custom do
@@ -87,6 +79,14 @@ local function newBlockListener(event)
 
                             for i = 1, #INFO.listBlock.everyone do
                                 if INFO.listBlock.everyone[i] == name then table.remove(INFO.listBlock.everyone, i) break end
+                            end
+
+                            for i = 1, #data.scripts do
+                                for j = 1, #data.scripts[i].params do
+                                    if data.scripts[i].params[j].name == 'custom' .. index then
+                                        table.remove(data.scripts[i].params, j)
+                                    end
+                                end
                             end
 
                             SET_GAME_CODE(CURRENT_LINK, data)

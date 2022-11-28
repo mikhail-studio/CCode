@@ -43,8 +43,8 @@ M['atan'] = function(num)
     return atan(num * M.pi / 180)
 end
 
-M['atan2'] = function(num)
-    return atan2(num * M.pi / 180)
+M['atan2'] = function(x, y)
+    return atan2(y * M.pi / 180, x * M.pi / 180)
 end
 
 M['sin'] = function(num)
