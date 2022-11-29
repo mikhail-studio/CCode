@@ -240,7 +240,18 @@ M.listBlock = {
         'setFieldRule'
     },
 
-    ['transition'] = {},
+    ['transition'] = {
+      'transitionXY',
+      'transitionWH',
+      'transitionRotation',
+      'transitionAlpha',
+      'transitionCancel',
+      'transitionCancelAll',
+      'transitionPause',
+      'transitionPauseAll',
+      'transitionResume',
+      'transitionResumeAll',
+    },
     ['snapshot'] = {},
     ['network'] = {},
     ['custom'] = {},
@@ -459,7 +470,17 @@ M.listName = {
         ['removeFieldSecure'] = {'widgets', 'value'},
         ['setFieldText'] = {'widgets', 'value', 'value'},
         ['setFieldRule'] = {'widgets', 'value', 'rule'},
-
+    -- transition
+    ['transitionXY'] = {'transition', 'value', 'transitName', 'value', 'value', 'value', 'value'},
+        ['transitionWH'] = {'transition', 'value', 'transitName', 'value', 'value', 'value', 'value'},
+        ['transitionRotation'] = {'transition', 'value', 'transitName', 'value', 'value', 'value'},
+        ['transitionAlpha'] = {'transition', 'value', 'transitName', 'value', 'value', 'value'},
+        ['transitionCancel'] = {'transition', 'value', 'transitName'},
+        ['transitionCancelAll'] = {'transition'},
+        ['transitionPause'] = {'transition', 'value', 'transitName'},
+        ['transitionPauseAll'] = {'transition'},
+        ['transitionResume'] = {'transition', 'value', 'transitName'},
+        ['transitionResumeAll'] = {'transition'},
     -- custom
     ['_custom'] = {'custom'}
 }
