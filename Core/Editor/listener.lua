@@ -85,7 +85,7 @@ M.rect = function(target, restart, data)
             EDITOR.create(unpack(restart))
             EDITOR.group.isVisible = true
         end)
-    elseif (type == 'body' or type == 'animation' or type == 'isBackground' or type == 'textAlign' or type == 'inputType' or type == 'rule') and ALERT then
+    elseif (type == 'body' or type == 'animation' or type == 'isBackground' or type == 'textAlign' or type == 'inputType' or type == 'rule' or type == 'transitName') and ALERT then
         local data = GET_GAME_CODE(CURRENT_LINK)
         local blockIndex, paramsIndex = restart[2], index
         local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
