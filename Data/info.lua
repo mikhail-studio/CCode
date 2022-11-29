@@ -240,11 +240,27 @@ M.listBlock = {
         'setFieldRule'
     },
 
+    ['media'] = {
+        'newVideo',
+        'newRemoteVideo',
+        'loadSound',
+        'loadStream',
+        'playSound',
+        'resumeMedia',
+        'pauseMedia',
+        'seekMedia',
+        'setVolume',
+        'fadeVolume',
+        'stopSound',
+        'stopTimerSound',
+        'disposeSound',
+        'removeVideo'
+    },
+
     ['transition'] = {},
     ['snapshot'] = {},
     ['network'] = {},
-    ['custom'] = {},
-    ['media'] = {}
+    ['custom'] = {}
 }
 
 M.listName = {
@@ -459,6 +475,22 @@ M.listName = {
         ['removeFieldSecure'] = {'widgets', 'value'},
         ['setFieldText'] = {'widgets', 'value', 'value'},
         ['setFieldRule'] = {'widgets', 'value', 'rule'},
+
+    -- media
+    ['newVideo'] = {'media', 'value', 'value', 'fun', 'value', 'value', 'value', 'value'},
+        ['newRemoteVideo'] = {'media', 'value', 'value', 'fun', 'value', 'value', 'value', 'value'},
+        ['loadSound'] = {'media', 'value', 'value'},
+        ['loadStream'] = {'media', 'value', 'value'},
+        ['playSound'] = {'media', 'value', 'value', 'fun', 'value', 'value'},
+        ['resumeMedia'] = {'media', 'value'},
+        ['pauseMedia'] = {'media', 'value'},
+        ['seekMedia'] = {'media', 'value', 'value'},
+        ['setVolume'] = {'media', 'value', 'value'},
+        ['fadeVolume'] = {'media', 'value', 'value', 'value'},
+        ['stopSound'] = {'media', 'value'},
+        ['stopTimerSound'] = {'media', 'value', 'value'},
+        ['disposeSound'] = {'media', 'value'},
+        ['removeVideo'] = {'media', 'value'},
 
     -- custom
     ['_custom'] = {'custom'}

@@ -653,6 +653,22 @@ return ' ' .. UTF8.trimFull([[
             return params
         end
 
+        M.getSound = function(link)
+            for i = 1, #GAME.RESOURCES.sounds do
+                if GAME.RESOURCES.sounds[i][1] == link then
+                    return CURRENT_LINK .. '/Sounds/' .. GAME.RESOURCES.sounds[i][2]
+                end
+            end
+        end
+
+        M.getVideo = function(link)
+            for i = 1, #GAME.RESOURCES.videos do
+                if GAME.RESOURCES.videos[i][1] == link then
+                    return CURRENT_LINK .. '/Videos/' .. GAME.RESOURCES.videos[i][2]
+                end
+            end
+        end
+
         M.getImage = function(link)
             for i = 1, #GAME.RESOURCES.images do
                 if GAME.RESOURCES.images[i][1] == link then

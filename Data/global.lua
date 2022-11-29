@@ -42,7 +42,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1193
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1194
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
@@ -58,32 +58,28 @@ KEYORDER = {
     'vars', 'name', 'custom', 'event', 'nested', 'comment', 'params'
 } for i = 10000, 1, -1 do table.insert(KEYORDER, 1, tostring(i)) end
 
-pcall(function()
-    if IS_SIM or IS_WIN then
-        FILEPICKER = require 'plugin.tinyfiledialogs'
+if IS_SIM or IS_WIN then
+    FILEPICKER = require 'plugin.tinyfiledialogs'
 
-        FILE.pickFile = function(path, listener, file, p1, mime)
-            local filter_patterns = mime == 'image/*' and {'*.png', '*.jpg', '*.jpeg'} or mime == 'audio/*' and {'*.wav', '*.mp3', '*.ogg'}
-            or mime == 'ccode/*' and {'*.ccode', '*.zip'} or mime == 'text/x-lua' and {'*.lua', '*.txt'}
-            or mime == 'video/*' and {'*.mov', '*.mp4', '*.m4v', '*.3gp'} or nil
-            local pathToFile, path = path .. '/' .. file, FILEPICKER.openFileDialog({filter_patterns = filter_patterns})
-            if path then OS_COPY(path, pathToFile) end listener({done = path and 'ok' or 'error'})
-        end
-
-        EXPORT.export = function(config)
-            local path, listener, name = config.path, config.listener, config.name
-            local pathToFile = FILEPICKER.saveFileDialog({filter_patterns = {'*.ccode'}})
-            if path then OS_COPY(path, pathToFile) end listener()
-        end
+    FILE.pickFile = function(path, listener, file, p1, mime)
+        local filter_patterns = mime == 'image/*' and {'*.png', '*.jpg', '*.jpeg'} or mime == 'audio/*' and {'*.wav', '*.mp3', '*.ogg'}
+        or mime == 'ccode/*' and {'*.ccode', '*.zip'} or mime == 'text/x-lua' and {'*.lua', '*.txt'}
+        or mime == 'video/*' and {'*.mov', '*.mp4', '*.m4v', '*.3gp'} or nil
+        local pathToFile, path = path .. '/' .. file, FILEPICKER.openFileDialog({filter_patterns = filter_patterns})
+        if path then OS_COPY(path, pathToFile) end listener({done = path and 'ok' or 'error'})
     end
-end)
 
-pcall(function()
-    if not IS_SIM then
-        require('Core.Share.build').reset()
-        GANIN = require 'plugin.ganin'
+    EXPORT.export = function(config)
+        local path, listener, name = config.path, config.listener, config.name
+        local pathToFile = FILEPICKER.saveFileDialog({filter_patterns = {'*.ccode'}})
+        if path then OS_COPY(path, pathToFile) end listener()
     end
-end)
+end
+
+if not IS_SIM then
+    GANIN = require 'plugin.ganin'
+    require('Core.Share.build').reset()
+end
 
 GET_NESTED_DATA = function(data, nestedInfo, INFO)
     local data = COPY_TABLE(data)

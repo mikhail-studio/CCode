@@ -311,10 +311,11 @@ listeners.but_okay = function(target)
                         end
                     end
 
-                    if #BLOCKS.group.blocks[i].data.nested == 0 and not BLOCKS.group.blocks[i].data.event then
+                    if #BLOCKS.group.blocks[i].data.nested == 0 then
                         for j = i + 1, #BLOCKS.group.blocks do
                             local name = BLOCKS.group.blocks[j].data.name
                             local isNested = BLOCKS.group.blocks[j].data.nested and #BLOCKS.group.blocks[j].data.nested > 0
+                            local notEvent = not BLOCKS.group.blocks[i].data.event
                             if BLOCKS.group.blocks[j].data.event then break end
 
                             data.scripts[CURRENT_SCRIPT].params[j].comment = BLOCKS.group.blocks[i].data.comment
@@ -325,9 +326,9 @@ listeners.but_okay = function(target)
                                 nestedFun(data.scripts[CURRENT_SCRIPT].params[j].nested, BLOCKS.group.blocks[j].data.comment)
                             end
 
-                            if name == BLOCKS.group.blocks[i].data.name and not isNested then
+                            if notEvent and name == BLOCKS.group.blocks[i].data.name and not isNested then
                                 nestedEndIndex = nestedEndIndex + 1
-                            elseif name == INFO.listNested[BLOCKS.group.blocks[i].data.name][1] then
+                            elseif notEvent and name == INFO.listNested[BLOCKS.group.blocks[i].data.name][1] then
                                 nestedEndIndex = nestedEndIndex - 1
                                 if nestedEndIndex == 0 then break end
                             end

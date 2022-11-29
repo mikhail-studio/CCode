@@ -22,7 +22,7 @@ local function getStartLua(linkBuild)
     local funs2 = ' local other, select = require \'Core.Functions.other\', require \'Core.Functions.select\''
     local funs3 = ' local math, prop = require \'Core.Functions.math\', require \'Core.Functions.prop\''
     local code1 = ' GAME.orientation = CURRENT_ORIENTATION display.setDefault(\'background\', 0)'
-    local code2 = ' GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {}'
+    local code2 = ' GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {} GAME.group.media = {}'
     local code3 = ' GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {} GAME.currentStage = {}'
     local code4 = ' GAME.group.animations = {} GAME.group.widgets = {} GAME.group.tags = {TAG = {}}'
     local code5 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} device.start()'

@@ -2,6 +2,7 @@ return {
     new = function(link)
         GAME = require 'Core.Simulation.start'
         CURRENT_LINK = 'App'
+        OS_REMOVE(DOC_DIR .. '/Build', true)
         LFS.mkdir(DOC_DIR .. '/Build')
         LFS.mkdir(DOC_DIR .. '/Build/Resources')
         LFS.mkdir(DOC_DIR .. '/Build/Images')
@@ -12,41 +13,44 @@ return {
         PROGRAMS.group[8]:setIsLocked(true, 'vertical')
         WINDOW.new(STR['build.start'], {}, function() PROGRAMS.group[8]:setIsLocked(false, 'vertical') end, 1)
 
-        local folders = {'Resources', 'Images', 'Sounds', 'Videos', 'Fonts'}
-        local icons = {'mipmap-hdpi-v4', 'mipmap-mdpi-v4', 'mipmap-xhdpi-v4', 'mipmap-xxhdpi-v4', 'mipmap-xxxhdpi-v4'}
+        timer.performWithDelay(1, function()
+            local folders = {'Resources', 'Images', 'Sounds', 'Videos', 'Fonts'}
+            local icons = {'mipmap-hdpi-v4', 'mipmap-mdpi-v4', 'mipmap-xhdpi-v4', 'mipmap-xxhdpi-v4', 'mipmap-xxxhdpi-v4'}
 
-        for i = 1, #folders do
-            for file in LFS.dir(DOC_DIR .. '/' .. link .. '/' .. folders[i]) do
-                if file ~= '.' and file ~= '..' then
-                    OS_COPY(DOC_DIR .. '/' .. link .. '/' .. folders[i] .. '/' .. file, DOC_DIR .. '/Build/' .. folders[i] .. '/' .. file)
+            for i = 1, #folders do
+                for file in LFS.dir(DOC_DIR .. '/' .. link .. '/' .. folders[i]) do
+                    if file ~= '.' and file ~= '..' then
+                        OS_COPY(DOC_DIR .. '/' .. link .. '/' .. folders[i] .. '/' .. file, DOC_DIR .. '/Build/' .. folders[i] .. '/' .. file)
+                    end
                 end
             end
-        end
 
-        WRITE_FILE(DOC_DIR .. '/Build/game.lua', GAME.new(link))
+            WRITE_FILE(DOC_DIR .. '/Build/game.lua', GAME.new(link))
 
-        local title = GAME.data.title
-        local build = GAME.data.settings.build
-        local version = GAME.data.settings.version
-        local package = GAME.data.settings.package
+            local title = GAME.data.title
+            local build = GAME.data.settings.build
+            local version = GAME.data.settings.version
+            local package = GAME.data.settings.package
 
-        GAME = nil
-        GANIN.compress(DOC_DIR .. '/Build', DOC_DIR .. '/game.cc', SOLAR .. _G.A .. _G.C, function()
-            OS_REMOVE(DOC_DIR .. '/game.lua')
-            OS_REMOVE(DOC_DIR .. '/list.json')
-            OS_REMOVE(DOC_DIR .. '/Build', true)
-            OS_MOVE(DOC_DIR .. '/game.cc', MY_PATH .. '/assets/Emitter/game.cc')
+            GAME = nil
+            GANIN.compress(DOC_DIR .. '/Build', DOC_DIR .. '/game.cc', SOLAR .. _G.A .. _G.C, function()
+                OS_REMOVE(DOC_DIR .. '/game.lua')
+                OS_REMOVE(DOC_DIR .. '/list.json')
+                OS_REMOVE(DOC_DIR .. '/Build', true)
+                OS_MOVE(DOC_DIR .. '/game.cc', MY_PATH .. '/assets/Emitter/game.cc')
 
-            for i = 1, #icons do
-                OS_COPY(DOC_DIR .. '/' .. link .. '/icon.png', MY_PATH .. '/res/' .. icons[i] .. '/ic_launcher.png')
-                OS_COPY(DOC_DIR .. '/' .. link .. '/icon.png', MY_PATH .. '/res/' .. icons[i] .. '/ic_launcher_foreground.png')
-            end
+                for i = 1, #icons do
+                    OS_COPY(DOC_DIR .. '/' .. link .. '/icon.png', MY_PATH .. '/res/' .. icons[i] .. '/ic_launcher.png')
+                    OS_COPY(DOC_DIR .. '/' .. link .. '/icon.png', MY_PATH .. '/res/' .. icons[i] .. '/ic_launcher_foreground.png')
+                end
 
-            GANIN.build(MY_PATH, package, title, build, version)
-        end, true)
+                GANIN.build(MY_PATH, package, title, build, version)
+            end, true)
+        end)
     end,
 
     reset = function()
+        OS_REMOVE(MY_PATH, true)
         LFS.mkdir(MY_PATH)
         LFS.mkdir(MY_PATH .. '/res')
         LFS.mkdir(MY_PATH .. '/assets')
