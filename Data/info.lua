@@ -257,7 +257,19 @@ M.listBlock = {
         'removeVideo'
     },
 
-    ['transition'] = {},
+    ['transition'] = {
+        'transitionXY',
+        'transitionWH',
+        'transitionRotation',
+        'transitionAlpha',
+        'transitionCancel',
+        'transitionCancelAll',
+        'transitionPause',
+        'transitionPauseAll',
+        'transitionResume',
+        'transitionResumeAll',
+    },
+
     ['snapshot'] = {},
     ['network'] = {},
     ['custom'] = {}
@@ -491,6 +503,18 @@ M.listName = {
         ['stopTimerSound'] = {'media', 'value', 'value'},
         ['disposeSound'] = {'media', 'value'},
         ['removeVideo'] = {'media', 'value'},
+
+    -- transition
+    ['transitionXY'] = {'transition', 'value', 'transitName', 'value', 'value', 'value', 'value'},
+        ['transitionWH'] = {'transition', 'value', 'transitName', 'value', 'value', 'value', 'value'},
+        ['transitionRotation'] = {'transition', 'value', 'transitName', 'value', 'value', 'value'},
+        ['transitionAlpha'] = {'transition', 'value', 'transitName', 'value', 'value', 'value'},
+        ['transitionCancel'] = {'transition', 'value', 'transitName'},
+        ['transitionCancelAll'] = {'transition'},
+        ['transitionPause'] = {'transition', 'value', 'transitName'},
+        ['transitionPauseAll'] = {'transition'},
+        ['transitionResume'] = {'transition', 'value', 'transitName'},
+        ['transitionResumeAll'] = {'transition'},
 
     -- custom
     ['_custom'] = {'custom'}
