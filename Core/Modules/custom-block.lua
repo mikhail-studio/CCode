@@ -145,7 +145,7 @@ M.addBlock = function(params, _index)
         local data = GET_GAME_CODE(CURRENT_LINK)
         local block = {STR['blocks.'], COPY_TABLE(STR['blocks..params'])}
         local blockParams = {} for i = 1, #block[2] do blockParams[i] = 'value' end
-        local eventParams = {} for i = 1, #block[2] do eventParams[i] = 'var' end
+        local eventParams = {} for i = 1, #block[2] do eventParams[i] = 'localvar' end
         local typeBlock, sandboxScript = 'custom' .. index, (_index and type(custom[index][3]) == 'table') and custom[index][3] or {
             vars = {}, funs = {}, tables = {}, title = STR['scripts.sandbox'], custom = true,
             params = {{vars = {}, tables = {}, nested = {}, name = '_custom', comment = false, event = true,
@@ -205,7 +205,7 @@ M.removeOverlay = function(index)
                             local block = custom[index]
                             local typeBlock = 'custom' .. index
                             local blockParams = {} for i = 1, #block[2] do blockParams[i] = 'value' end
-                            
+
                             INFO.listName[typeBlock] = {'custom', unpack(blockParams)}
 
                             if #data.scripts[i].params[j].params >= #block[2] then

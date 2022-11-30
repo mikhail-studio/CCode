@@ -25,7 +25,13 @@ M.getListButtons = function(type)
             STR['blocks.select.inputNoEmoji']
         }
     elseif type == 'transitName' then
-        return {STR['blocks.select.obj'], STR['blocks.select.text'], STR['blocks.select.group'], STR['blocks.select.teg'], STR['blocks.select.widget'], STR['blocks.select.newBitmap']}
+        return {
+            STR['blocks.select.obj'],
+            STR['blocks.select.text'],
+            STR['blocks.select.group'],
+            STR['blocks.select.tag'],
+            STR['blocks.select.widget']
+        }
     end
 end
 
@@ -52,10 +58,8 @@ M.getListValue = function(type, text)
         return text == STR['blocks.select.obj'] and 'obj'
             or text == STR['blocks.select.text'] and 'text'
             or text == STR['blocks.select.group'] and 'group'
-            or text == STR['blocks.select.teg'] and 'teg'
-            or text == STR['blocks.select.widget'] and 'widget'
-            or text == STR['blocks.select.newBitmap'] and 'newBitmap'
-
+            or text == STR['blocks.select.tag'] and 'tag'
+            or text == STR['blocks.select.widget'] and 'widget' or 'obj'
     end
 end
 
@@ -117,7 +121,8 @@ M.open = function(target)
                 SET_GAME_CODE(CURRENT_LINK, data)
             end BLOCKS.group[8]:setIsLocked(false, 'vertical')
         end)
-    elseif type == 'body' or type == 'animation' or type == 'isBackground' or type == 'textAlign' or type == 'inputType' or type == 'rule' or type == 'transitName' then
+    elseif type == 'body' or type == 'animation' or type == 'isBackground' or type == 'textAlign'
+    or type == 'inputType' or type == 'rule' or type == 'transitName' then
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
         LIST.new(M.getListButtons(type), listX, listY, listDirection, function(e)
             if e.index > 0 then

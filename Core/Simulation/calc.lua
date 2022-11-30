@@ -11,7 +11,7 @@ return function(params, default, withoutBrackets)
         elseif params[i][2] == 'c' then
             result = result .. ' JSON.decode(\'' .. params[i][1] .. '\')'
         elseif params[i][2] == 'u' then
-            result = result .. ' {}'
+            return '{}'
         elseif params[i][2] == 'l' then
             result = result .. ' ' .. params[i][1]
         elseif params[i][2] == 'f' then

@@ -62,7 +62,7 @@ M['addTable'] = function(params)
     local value = CALC(params[3])
 
     GAME.lua = GAME.lua .. ' pcall(function() if ' .. table .. ' then ' .. table .. key .. ' = ' .. value
-    GAME.lua = GAME.lua .. ' else ' .. table .. ' = {' .. key .. ' = ' .. value .. '} end end)'
+    GAME.lua = GAME.lua .. ' else ' .. table .. ' = {} ' .. table .. key .. ' = ' .. value .. ' end end)'
 end
 
 M['resetTable'] = function(params)

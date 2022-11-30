@@ -48,13 +48,15 @@ M.remove = function()
     pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil math.randomseed(os.time())
     pcall(function() for child = display.currentStage.numChildren, 1, -1 do
     if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
-    if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true}) end
+    if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true})
+    if GAME_GROUP_OPEN.scroll then GAME_GROUP_OPEN.scroll:scrollToPosition({y = M.scrollY, time = 0}) end end
 end
 
 M.new = function(linkBuild, isDebug)
     M.group = display.newGroup()
     M.orientation, EVENTS.CUSTOM = CURRENT_ORIENTATION, {}
     M.data = GET_FULL_DATA(GET_GAME_CODE(linkBuild or CURRENT_LINK))
+    M.scrollY = GAME_GROUP_OPEN.scroll and select(2, GAME_GROUP_OPEN.scroll:getContentPosition()) or 0
     M.lua = getStartLua(linkBuild) .. ' GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'
 
     if M.data.settings.orientation == 'portrait' and CURRENT_ORIENTATION ~= 'portrait' then
@@ -97,7 +99,7 @@ M.new = function(linkBuild, isDebug)
             end
         end
 
-        M.data.scripts = {COPY_TABLE(M.data.scripts[1])}
+        M.data.scripts = {GET_FULL_DATA({scripts = {M.data.scripts[1]}}).scripts[1]}
         setCustom(name)
     else
         for index, block in pairs(custom) do
@@ -118,7 +120,7 @@ M.new = function(linkBuild, isDebug)
                         end
                     end
 
-                    table.insert(M.data.scripts, 1, logic)
+                    table.insert(M.data.scripts, 1, GET_FULL_DATA({scripts = {logic}}).scripts[1])
                     setCustom(name)
                 end
             end
@@ -180,9 +182,17 @@ M.new = function(linkBuild, isDebug)
         M.remove()
         return M.lua
     else
-        pcall(function()
-            loadstring(M.lua)()
-        end)
+        if not pcall(function() loadstring(M.lua)() end) then
+            pcall(function() M.group:removeSelf() M.group, M.isStarted = nil, nil end)
+
+            WINDOW.new(STR['game.isbug'], {STR['button.close']}, function()
+                display.setDefault('background', 0.15, 0.15, 0.17)
+                GAME_GROUP_OPEN.group.isVisible = true
+            end, 5)
+
+            WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+            WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+        end
     end
 end
 

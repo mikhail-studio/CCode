@@ -170,6 +170,10 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
     end
 end
 
+listeners.fcustom = function(target)
+    if not BLOCKS.custom then listeners.set(target, EDITOR.funs.custom) end
+end
+
 listeners.pobj = function(target)
     listeners.set(target, EDITOR.prop.obj)
 end
@@ -192,10 +196,6 @@ end
 
 listeners.fscript = function(target)
     listeners.set(target, EDITOR.funs.script)
-end
-
-listeners.fcustom = function(target)
-    listeners.set(target, EDITOR.funs.custom)
 end
 
 listeners.tproject = function(target)

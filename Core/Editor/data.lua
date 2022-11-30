@@ -13,7 +13,7 @@ M.math = {
     keys = {
         'random', 'radical', 'power', 'round', 'remainder',
         'module', 'max', 'min', 'sin', 'cos', 'tan', 'ctan', 'pi',
-        'exp', 'factorial', 'log', 'log10', 'asin', 'acos', 'atan', 'atan2'
+        'exp', 'factorial', 'log0', 'log10', 'asin', 'acos', 'atan', 'atan2'
     }
 }
 

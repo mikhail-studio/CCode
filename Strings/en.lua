@@ -112,7 +112,7 @@ return {
         ['blocks.select.obj'] = 'Object',
         ['blocks.select.text'] = 'Text',
         ['blocks.select.group'] = 'Group',
-        ['blocks.select.teg'] = 'Tag',
+        ['blocks.select.tag'] = 'Tag',
         ['blocks.select.widget'] = 'Widget',
         ['blocks.select.newBitmap'] = 'Raster texture',
         ['blocks.color.red'] = 'Red',
