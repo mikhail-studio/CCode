@@ -45,6 +45,13 @@ M.prop = {
         keys = {
             'tag', 'pos_x', 'pos_y', 'value', 'text', 'link'
         }
+    },
+
+    media = {
+        names = {},
+        keys = {
+            'current_time', 'total_time', 'sound_volume', 'sound_total_time', 'sound_pause', 'sound_play'
+        }
     }
 }
 
@@ -88,6 +95,10 @@ M.new = function()
 
     for i = 1, #M.prop.group.keys do
         M.prop.group.names[i] = STR['editor.list.prop.group.' .. M.prop.group.keys[i]]
+    end
+
+    for i = 1, #M.prop.media.keys do
+        M.prop.media.names[i] = STR['editor.list.prop.media.' .. M.prop.media.keys[i]]
     end
 
     for i = 1, #M.prop.widget.keys do

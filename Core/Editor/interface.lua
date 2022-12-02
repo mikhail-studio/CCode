@@ -29,7 +29,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         M.vars = {project = data.vars, script = data.scripts[CURRENT_SCRIPT].vars, event = {}}
         M.tables = {project = data.tables, script = data.scripts[CURRENT_SCRIPT].tables, event = {}}
         M.funs = {project = data.funs, script = data.scripts[CURRENT_SCRIPT].funs, custom = {}, _custom = {}}
-        M.prop = {obj = DATA.prop.obj, text = DATA.prop.text, group = DATA.prop.group, widget = DATA.prop.widget}
+        M.prop = {obj = DATA.prop.obj, text = DATA.prop.text, group = DATA.prop.group, widget = DATA.prop.widget, media = DATA.prop.media}
         M.fun, M.math, M.log, M.device = DATA.fun, DATA.math, DATA.log, DATA.device
 
     for i = blockIndex, 1, -1 do

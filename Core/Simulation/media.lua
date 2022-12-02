@@ -7,10 +7,10 @@ M['newVideo'] = function(params)
     local posY = '(CENTER_Y - (' .. CALC(params[5]) .. '))'
     local width, height = CALC(params[6]), CALC(params[7])
 
-    GAME.lua = GAME.lua .. ' pcall(function() local link, n = other.getVideo(' .. link .. '), ' .. name .. ' GAME.group.media[name]'
+    GAME.lua = GAME.lua .. ' pcall(function() local link, name = other.getVideo(' .. link .. '), ' .. name .. ' GAME.group.media[name]'
     GAME.lua = GAME.lua .. ' = native.newVideo(' .. posX .. ', ' .. posY .. ', ' .. width .. ', ' .. height .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.media[name]:load(link, system.DocumentsDirectory)'
-    GAME.lua = GAME.lua .. ' GAME.group.media[name]:addEventListener(\'video\', function(e) pcall(function() ' .. fun .. '(e, n)'
+    GAME.lua = GAME.lua .. ' GAME.group.media[name]:addEventListener(\'video\', function(e) pcall(function() e.name = name ' .. fun .. '(e)'
     GAME.lua = GAME.lua .. ' end) end) GAME.group.media[name]:setNativeProperty(\'IgnoreErrors\', true) end)'
 end
 
@@ -23,7 +23,7 @@ M['newRemoteVideo'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local link, name = ' .. link .. ', ' .. name .. ' GAME.group.media[name]'
     GAME.lua = GAME.lua .. ' = native.newVideo(' .. posX .. ', ' .. posY .. ', ' .. width .. ', ' .. height .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.media[name]:load(link, media.RemoteSource)'
-    GAME.lua = GAME.lua .. ' GAME.group.media[name]:addEventListener(\'video\', function(e) pcall(function() ' .. fun .. '(e, name)'
+    GAME.lua = GAME.lua .. ' GAME.group.media[name]:addEventListener(\'video\', function(e) pcall(function() e.name = name ' .. fun .. '(e)'
     GAME.lua = GAME.lua .. ' end) end) GAME.group.media[name]:setNativeProperty(\'IgnoreErrors\', true) end)'
 end
 
@@ -47,7 +47,7 @@ M['playSound'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local name, loops = ' .. name .. ', ' .. loops .. ' - 1'
     GAME.lua = GAME.lua .. ' GAME.group.media[name][2] = audio.play(GAME.group.media[name][1], {channel = audio.findFreeChannel(),'
     GAME.lua = GAME.lua .. ' loops = loops, duration = ' .. duration .. ', fadein = ' .. fadein .. ', onComplete = function(e)'
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. fun .. '(e, name) end) end}) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() e.name = name ' .. fun .. '(e) end) end}) end)'
 end
 
 M['resumeMedia'] = function(params)
