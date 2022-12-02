@@ -36,7 +36,7 @@ M['newSprite'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local link, filter = other.getImage(' .. link .. ') local animations = {}'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end)'
     GAME.lua = GAME.lua .. ' pcall(function() local anims = ' .. animations
-    GAME.lua = GAME.lua .. ' if type(anims) == \'string\' then animations = GAME.group.animations[anims]'
+    GAME.lua = GAME.lua .. ' if type(anims) ~= \'table\' then animations = GAME.group.animations[anims]'
     GAME.lua = GAME.lua .. ' elseif #anims == 0 then animations = {name = \'\', frames = {1}}'
     GAME.lua = GAME.lua .. ' elseif #anims == 1 then animations = GAME.group.animations[anims[1]]'
     GAME.lua = GAME.lua .. ' else for _, v in ipairs(anims) do table.insert(animations, GAME.group.animations[v]) end end'

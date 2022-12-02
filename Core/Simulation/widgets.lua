@@ -42,7 +42,7 @@ M['setWidgetListener'] = function(params)
 end
 
 M['removeWidget'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. CALC(params[1]) .. ']:removeSelf() end)'
+    GAME.lua = GAME.lua .. ' pcall(function() timer.new(1, 1, function() GAME.group.widgets[' .. CALC(params[1]) .. ']:removeSelf() end) end)'
 end
 
 M['newWebView'] = function(params)
@@ -104,7 +104,7 @@ M['newField'] = function(params)
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. ']:removeSelf() end) pcall(function()'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '] = native.newTextField(' .. posX .. ', ' .. posY .. ', ' .. width .. ','
-    GAME.lua = GAME.lua .. ' ' .. height .. ') GAME.group.widgets[' .. name .. '].placeholder = tostring(' .. placeholder .. ')'
+    GAME.lua = GAME.lua .. ' ' .. height .. ') GAME.group.widgets[' .. name .. '].placeholder = tostring' .. placeholder
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].font = native.newFont(other.getFont(' .. font .. '), ' .. fontSize .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].align = ' .. align .. ' GAME.group.widgets[' .. name .. ']._type = \'field\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].inputType = ' .. type .. ' local colors = ' .. colors
@@ -128,7 +128,7 @@ M['newBox'] = function(params)
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. ']:removeSelf() end)'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. '] = native.newTextBox(' .. posX .. ', ' .. posY .. ','
-    GAME.lua = GAME.lua .. ' ' .. width .. ', ' .. height .. ') GAME.group.widgets[' .. name .. '].placeholder = ' .. placeholder
+    GAME.lua = GAME.lua .. ' ' .. width .. ', ' .. height .. ') GAME.group.widgets[' .. name .. '].placeholder = tostring' .. placeholder
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].font = native.newFont(other.getFont(' .. font .. '), ' .. fontSize .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].align = ' .. align .. ' local colors = ' .. colors
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._tag = \'TAG\''

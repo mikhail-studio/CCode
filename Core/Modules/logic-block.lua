@@ -84,7 +84,7 @@ M.getParamsValueText = function(params, i)
                 lastFun = true
             elseif value[2] == 'sl' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
-                result = result .. STR['blocks.select.' .. value[1]]
+                result = result .. (STR['blocks.select.' .. value[1]] or value[1])
             elseif value[2] == 'l' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
                 if STR['editor.list.log.' .. value[1]]

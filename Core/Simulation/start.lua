@@ -21,7 +21,7 @@ local function getStartLua(linkBuild)
     local funs1 = ' local fun, device = require \'Core.Functions.fun\', require \'Core.Functions.device\''
     local funs2 = ' local other, select = require \'Core.Functions.other\', require \'Core.Functions.select\''
     local funs3 = ' local math, prop = require \'Core.Functions.math\', require \'Core.Functions.prop\''
-    local code1 = ' GAME.orientation = CURRENT_ORIENTATION display.setDefault(\'background\', 0)'
+    local code1 = ' GAME.orientation = CURRENT_ORIENTATION display.setDefault(\'background\', 0) transition.ignoreEmptyReference = true'
     local code2 = ' GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {} GAME.group.media = {}'
     local code3 = ' GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {} GAME.currentStage = {}'
     local code4 = ' GAME.group.animations = {} GAME.group.widgets = {} GAME.group.tags = {TAG = {}}'
@@ -48,15 +48,15 @@ M.remove = function()
     pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil math.randomseed(os.time())
     pcall(function() for child = display.currentStage.numChildren, 1, -1 do
     if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
-    if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true})
-    if GAME_GROUP_OPEN.scroll then GAME_GROUP_OPEN.scroll:scrollToPosition({y = M.scrollY, time = 0}) end end
+    timer.performWithDelay(1, function() if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true})
+    GAME_GROUP_OPEN.scroll:scrollToPosition({y = M.scrollY, time = 0}) end end)
 end
 
 M.new = function(linkBuild, isDebug)
     M.group = display.newGroup()
     M.orientation, EVENTS.CUSTOM = CURRENT_ORIENTATION, {}
     M.data = GET_FULL_DATA(GET_GAME_CODE(linkBuild or CURRENT_LINK))
-    M.scrollY = GAME_GROUP_OPEN.scroll and select(2, GAME_GROUP_OPEN.scroll:getContentPosition()) or 0
+    M.scrollY = select(2, GAME_GROUP_OPEN.scroll:getContentPosition())
     M.lua = getStartLua(linkBuild) .. ' GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'
 
     if M.data.settings.orientation == 'portrait' and CURRENT_ORIENTATION ~= 'portrait' then
@@ -182,17 +182,20 @@ M.new = function(linkBuild, isDebug)
         M.remove()
         return M.lua
     else
-        if not pcall(function() loadstring(M.lua)() end) then
-            pcall(function() M.group:removeSelf() M.group, M.isStarted = nil, nil end)
+        display.setDefault('background', 0)
+        timer.performWithDelay(1, function()
+            if not pcall(function() loadstring(M.lua)() end) then
+                pcall(function() M.group:removeSelf() M.group, M.isStarted = nil, nil end)
 
-            WINDOW.new(STR['game.isbug'], {STR['button.close']}, function()
-                display.setDefault('background', 0.15, 0.15, 0.17)
-                GAME_GROUP_OPEN.group.isVisible = true
-            end, 5)
+                WINDOW.new(STR['game.isbug'], {STR['button.close']}, function()
+                    display.setDefault('background', 0.15, 0.15, 0.17)
+                    GAME_GROUP_OPEN.group.isVisible = true
+                end, 5)
 
-            WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
-            WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
-        end
+                WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+            end
+        end)
     end
 end
 

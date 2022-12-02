@@ -41,6 +41,8 @@ M.new = function(buttons, x, y, direction, listener, first, second, anchorX)
         end)
 
         local width = 0
+        local height = (70 * #buttons + 20) > 720 and 720 or 70 * #buttons + 20
+
         for i = 1, #buttons do
             local text = display.newText({
                     text = buttons[i], x = 5000, y = y,
@@ -52,16 +54,15 @@ M.new = function(buttons, x, y, direction, listener, first, second, anchorX)
             text:removeSelf()
         end
 
-        M.bg = display.newRoundedRect(x, y, width + 40, 70 * #buttons + 20, 12)
+        M.bg = display.newRoundedRect(x, y, width + 40, height, 12)
             M.bg:setFillColor(0.2, 0.2, 0.22)
             M.bg.anchorY = direction == 'up' and 1 or 0
             M.bg.anchorX = anchorX or 0.5
         M.group:insert(M.bg)
 
         M.scroll = WIDGET.newScrollView({
-                x = x, y = y,
-                width = width + 40, height = 70 * #buttons + 20,
                 hideBackground = true, hideScrollBar = true,
+                x = x, y = y, width = width + 40, height = height,
                 horizontalScrollDisabled = true, isBounceEnabled = true
             })
             M.scroll.anchorY = direction == 'up' and 1 or 0

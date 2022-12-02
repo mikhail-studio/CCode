@@ -32,6 +32,7 @@ listeners.but_list = function(target)
                 BLOCKS.group[8]:setIsLocked(false, 'vertical')
 
                 if e.index == 4 then
+                    GAME_GROUP_OPEN = BLOCKS
                     BLOCKS.group.isVisible = false
                     GAME = require 'Core.Simulation.start' local lua = GAME.new(nil, true)
                     if not IS_SIM then PASTEBOARD.copy('string', lua) else print(lua) end

@@ -86,7 +86,7 @@ M.rect = function(target, restart, data)
             EDITOR.group.isVisible = true
         end)
     elseif (type == 'body' or type == 'animation' or type == 'isBackground' or type == 'textAlign'
-    or type == 'inputType' or type == 'rule' or type == 'transitName') and ALERT then
+    or type == 'inputType' or type == 'rule' or type == 'transitName' or type == 'transitEasing') and ALERT then
         local data = GET_GAME_CODE(CURRENT_LINK)
         local blockIndex, paramsIndex = restart[2], index
         local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
@@ -118,7 +118,7 @@ M.rect = function(target, restart, data)
             EDITOR.group:removeSelf() EDITOR.group = nil
             EDITOR.create(unpack(restart))
             EDITOR.group.isVisible = true
-        end)
+        end, paramsData[1] and paramsData[1][1] or nil)
     elseif (type == 'var' or type == 'table' or type == 'fun' or type == 'localvar' or type == 'localtable') and ALERT then
         local data = GET_GAME_CODE(CURRENT_LINK)
         local blockIndex, paramsIndex = restart[2], index

@@ -72,4 +72,24 @@ M['inputNoEmoji'] = function()
     return 'noemoji'
 end
 
+M['obj'] = function()
+    return 'objects'
+end
+
+M['text'] = function()
+    return 'texts'
+end
+
+M['group'] = function()
+    return 'groups'
+end
+
+M['widget'] = function()
+    return 'widgets'
+end
+
+M['tag'] = function()
+    return 'tags'
+end
+
 return M

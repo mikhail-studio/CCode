@@ -67,7 +67,7 @@ end
 
 M['resetTable'] = function(params)
     local table = CALC(params[1], 'a', true)
-    local value = CALC(params[2], '[]')
+    local value = CALC(params[2], '\'{}\'')
 
     GAME.lua = GAME.lua .. ' pcall(function() ' .. table .. ' = JSON.decode(' .. value .. ') end)'
 end

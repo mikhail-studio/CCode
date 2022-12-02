@@ -356,14 +356,14 @@ end
 
 M.gen = function(mode, scroll)
     local vars = COPY_TABLE(mode == 'event' and M.vars.event or mode == 'script' and M.vars.script or M.vars.project)
-    local buttons, buttonsY = {}, 35 vars[#vars + 1] = STR['blocks.create.var']
+    local buttons, buttonsY = {}, 35 table.insert(vars, 1, STR['blocks.create.var'])
 
     if M.params[1] == 'funs' then
         vars = COPY_TABLE(mode == 'script' and M.funs.script or M.funs.project)
-        vars[#vars + 1] = STR['blocks.create.fun']
+        table.insert(vars, 1, STR['blocks.create.fun'])
     elseif M.params[1] == 'tables' then
         vars = COPY_TABLE(mode == 'event' and M.tables.event or mode == 'script' and M.tables.script or M.tables.project)
-        vars[#vars + 1] = STR['blocks.create.table']
+        table.insert(vars, 1, STR['blocks.create.table'])
     end
 
     for i = 1, #vars do
@@ -375,13 +375,13 @@ M.gen = function(mode, scroll)
         buttons[i].text = display.newText({
                 width = buttons[i].width - 70, x = buttons[i].width / 2 - 15, y = buttonsY + 2,
                 text = vars[i], font = 'ubuntu', fontSize = 26, height = 40
-            }) buttons[i].text.isNew = i == #vars
+            }) buttons[i].text.isNew = i == 1
         scroll:insert(buttons[i].text)
 
         buttons[i].plus = display.newRect(scroll.width - 35, buttonsY, 70, 70)
             buttons[i].plus.isList = true
             buttons[i].plus.text = vars[i]
-            buttons[i].plus.isNew = i == #vars
+            buttons[i].plus.isNew = i == 1
             buttons[i].plus:setFillColor(0.14, 0.14, 0.16)
             buttons[i].plus:addEventListener('touch', M.listener)
         scroll:insert(buttons[i].plus)
@@ -391,18 +391,18 @@ M.gen = function(mode, scroll)
         scroll:insert(buttons[i].plus1)
 
         if buttons[i].text.isNew then
-            buttons[#buttons].plus2 = display.newRect(scroll.width - 35, buttonsY, 3, 30)
-                buttons[#buttons].plus2:setFillColor(0.8)
-            scroll:insert(buttons[#buttons].plus2) break
+            buttons[i].plus2 = display.newRect(scroll.width - 35, buttonsY, 3, 30)
+                buttons[i].plus2:setFillColor(0.8)
+            scroll:insert(buttons[i].plus2)
+        else
+            buttons[i].plus2 = display.newRect(scroll.width - 35, buttonsY - 10, 30, 3)
+                buttons[i].plus2:setFillColor(0.8)
+            scroll:insert(buttons[i].plus2)
+
+            buttons[i].plus3 = display.newRect(scroll.width - 35, buttonsY + 10, 30, 3)
+                buttons[i].plus3:setFillColor(0.8)
+            scroll:insert(buttons[i].plus3)
         end
-
-        buttons[i].plus2 = display.newRect(scroll.width - 35, buttonsY - 10, 30, 3)
-            buttons[i].plus2:setFillColor(0.8)
-        scroll:insert(buttons[i].plus2)
-
-        buttons[i].plus3 = display.newRect(scroll.width - 35, buttonsY + 10, 30, 3)
-            buttons[i].plus3:setFillColor(0.8)
-        scroll:insert(buttons[i].plus3)
 
         buttonsY = buttonsY + 70
         buttons[i].plus.newName = function(name)

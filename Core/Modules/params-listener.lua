@@ -32,6 +32,13 @@ M.getListButtons = function(type)
             STR['blocks.select.tag'],
             STR['blocks.select.widget']
         }
+    elseif type == 'transitEasing' then
+        return {
+            'linear', 'loop', 'inQuad', 'outQuad', 'inOutQuad', 'outInQuad',
+            'inQuart', 'outQuart', 'inOutQuart', 'outInQuart', 'inExpo', 'outExpo', 'inOutExpo', 'outInExpo',
+            'inCirc', 'outCirc', 'inOutCirc', 'outInCirc', 'inBack', 'outBack', 'inOutBack', 'outInBack',
+            'inElastic', 'outElastic', 'inOutElastic', 'outInElastic', 'inBounce', 'outBounce', 'inOutBounce', 'outInBounce'
+        }
     end
 end
 
@@ -60,6 +67,8 @@ M.getListValue = function(type, text)
             or text == STR['blocks.select.group'] and 'group'
             or text == STR['blocks.select.tag'] and 'tag'
             or text == STR['blocks.select.widget'] and 'widget' or 'obj'
+    elseif type == 'transitEasing' then
+        return text
     end
 end
 
@@ -77,6 +86,7 @@ M.open = function(target)
     local listDirection = blockY + target.y + scrollY + diffScrollY > CENTER_Y and 'up' or 'down'
     local listY = blockY + scrollY + target.y + diffScrollY + (listDirection == 'up' and target.height or -target.height) - 10
     local listX, type = CENTER_X + target.x + target.width / 2, INFO.listName[blockName][paramsIndex + 1]
+    local paramsText = BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text
 
     if type == 'text' and ALERT then
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
@@ -122,7 +132,7 @@ M.open = function(target)
             end BLOCKS.group[8]:setIsLocked(false, 'vertical')
         end)
     elseif type == 'body' or type == 'animation' or type == 'isBackground' or type == 'textAlign'
-    or type == 'inputType' or type == 'rule' or type == 'transitName' then
+    or type == 'inputType' or type == 'rule' or type == 'transitName' or type == 'transitEasing' then
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
         LIST.new(M.getListButtons(type), listX, listY, listDirection, function(e)
             if e.index > 0 then
@@ -131,7 +141,7 @@ M.open = function(target)
                 target.parent.parent.params[paramsIndex].value.text = BLOCK.getParamsValueText(target.parent.parent.data.params, paramsIndex)
                 SET_GAME_CODE(CURRENT_LINK, data)
             end BLOCKS.group[8]:setIsLocked(false, 'vertical')
-        end)
+        end, paramsText)
     end
 end
 

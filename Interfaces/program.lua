@@ -12,9 +12,9 @@ local LOCAL_STR = {
 local BLOCK = require 'Core.Modules.interface-block'
 local M = {}
 
-local genBlocks = function(scroll)
+local genBlocks = function()
     for i = 1, #LOCAL_STR do
-        BLOCK.new(STR[LOCAL_STR[i]], scroll, M.group, 'program', #M.group.blocks + 1)
+        BLOCK.new(STR[LOCAL_STR[i]], M.scroll, M.group, 'program', #M.group.blocks + 1)
     end
 end
 
@@ -43,14 +43,14 @@ M.create = function(app)
         but_play:addEventListener('touch', require 'Core.Interfaces.program')
     M.group:insert(but_play)
 
-    local scroll = WIDGET.newScrollView({
+    M.scroll = WIDGET.newScrollView({
             x = CENTER_X, y = (but_play.y - but_play.height / 2 - 30 + (ZERO_Y + 62) + 72) / 2,
             width = DISPLAY_WIDTH, height = but_play.y - but_play.height / 2 - (ZERO_Y + 62) - 102,
             hideBackground = true, hideScrollBar = true, isBounceEnabled = true, horizontalScrollDisabled = true
         })
-    M.group:insert(scroll)
+    M.group:insert(M.scroll)
 
-    genBlocks(scroll)
+    genBlocks()
 end
 
 return M
