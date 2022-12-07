@@ -85,8 +85,7 @@ M.rect = function(target, restart, data)
             EDITOR.create(unpack(restart))
             EDITOR.group.isVisible = true
         end)
-    elseif (type == 'body' or type == 'animation' or type == 'isBackground' or type == 'textAlign'
-    or type == 'inputType' or type == 'rule' or type == 'transitName' or type == 'transitEasing') and ALERT then
+    elseif PARAMS.getListValue(type) and ALERT then
         local data = GET_GAME_CODE(CURRENT_LINK)
         local blockIndex, paramsIndex = restart[2], index
         local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
@@ -100,8 +99,8 @@ M.rect = function(target, restart, data)
             EDITOR.rScrollParams = {}
 
             if e.index > 0 then
-                data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex][1] = {PARAMS.getListValue(type, e.text), 'sl'}
-                BLOCKS.group.blocks[blockIndex].data.params[paramsIndex][1] = {PARAMS.getListValue(type, e.text), 'sl'}
+                data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex][1] = {M.getListValue(type, e.text), 'sl'}
+                BLOCKS.group.blocks[blockIndex].data.params[paramsIndex][1] = {M.getListValue(type, e.text), 'sl'}
                 BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[blockIndex].data.params, paramsIndex)
                 SET_GAME_CODE(CURRENT_LINK, data)
             end

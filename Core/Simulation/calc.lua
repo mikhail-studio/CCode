@@ -6,6 +6,10 @@ return function(params, default, withoutBrackets)
             index = UTF8.len(result)
         end
 
+        if params[i][2] ~= 's' then
+            params[i][1] = params[i][1]:gsub('\n', '\\n'):gsub('\r', ''):gsub('\'', '\\\'')
+        end
+
         if params[i][2] == 'n' then
             result = result .. ' ' .. params[i][1]
         elseif params[i][2] == 'c' then
@@ -36,7 +40,6 @@ return function(params, default, withoutBrackets)
                 end
             end
         elseif params[i][2] == 't' then
-            params[i][1] = params[i][1]:gsub('\n', '\\n'):gsub('\r', ''):gsub('\'', '\\\'')
             result = result .. ' \'' .. params[i][1] .. '\''
         elseif params[i][2] == 'tE' then
             result = result .. ' tablesE[\'' .. params[i][1] .. '\']'

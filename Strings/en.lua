@@ -153,7 +153,7 @@ return {
         ['blocks.setVar.params'] = {'Variable name:', 'Value:'},
         ['blocks.updVar'] = 'Add value to variable',
         ['blocks.updVar.params'] = {'Variable name:', 'Value:'},
-        ['blocks.addTable'] = 'Add value to table',
+        ['blocks.addTable'] = 'Set value to table',
         ['blocks.addTable.params'] = {'Key [K]:', 'Table name:', 'Value:'},
         ['blocks.resetTable'] = 'Overwrite table',
         ['blocks.resetTable.params'] = {'Table name:', 'Json code:'},

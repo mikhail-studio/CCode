@@ -12,16 +12,8 @@ settings = {
 			'android.permission.READ_EXTERNAL_STORAGE',
 			'android.permission.WRITE_EXTERNAL_STORAGE',
 			'android.permission.RECEIVE_BOOT_COMPLETED',
-			'android.permission.VIBRATE',
-			-- 'android.permission.READ_PHONE_STATE'
-		},
-
-		applicationChildElements = {
-            [[
-                <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID"
-                    android:value="ca-app-pub-3712284233366817~8085200542"/>
-            ]]
-        }
+			'android.permission.VIBRATE'
+		}
 	},
 
 	window = {
@@ -45,8 +37,7 @@ settings = {
 		['plugin.memoryBitmap'] = {publisherId = 'com.coronalabs'},
 		['plugin.zeroconf'] = {publisherId = 'com.coronalabs'},
 		['plugin.impack'] = {publisherId = 'com.xibalbastudios'},
-		['plugin.tinyfiledialogs'] = {publisherId = 'com.xibalbastudios'},
-		-- ['plugin.admob'] = {publisherId = 'com.coronalabs'}
+		['plugin.tinyfiledialogs'] = {publisherId = 'com.xibalbastudios'}
 	},
 
 	excludeFiles = {

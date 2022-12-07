@@ -1,19 +1,21 @@
 local M = {}
 
 M.new = function(e, scroll, group, type)
-    if #group.blocks > 1 then
-        ALERT = false
-        scroll:setIsLocked(true, 'vertical')
-        M.index = e.target.getIndex(e.target)
-        M.data = GET_GAME_CODE(CURRENT_LINK)
-        M.diffY = scroll.y - scroll.height / 2
+    pcall(function()
+        if #group.blocks > 1 then
+            ALERT = false
+            scroll:setIsLocked(true, 'vertical')
+            M.index = e.target.getIndex(e.target)
+            M.data = GET_GAME_CODE(CURRENT_LINK)
+            M.diffY = scroll.y - scroll.height / 2
 
-        e.target.alpha = 1
-        e.target.x = e.target.x + 40
-        e.target.text.x = e.target.text.x + 40
-        e.target.container.x = e.target.container.x + 40
-        e.target.checkbox.x = e.target.checkbox.x + 40
-    end
+            e.target.alpha = 1
+            e.target.x = e.target.x + 40
+            e.target.text.x = e.target.text.x + 40
+            e.target.container.x = e.target.container.x + 40
+            e.target.checkbox.x = e.target.checkbox.x + 40
+        end
+    end)
 end
 
 M.upd = function(e, scroll, group, type)

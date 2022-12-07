@@ -11,9 +11,11 @@ local function getButtonText(comment, nested, name)
 end
 
 M.remove = function()
-    M.group:removeSelf()
-    M.group, ALERT = nil, true
-    BLOCKS.group[8]:setIsLocked(false, 'vertical')
+    pcall(function()
+        M.group:removeSelf()
+        M.group, ALERT = nil, true
+        BLOCKS.group[8]:setIsLocked(false, 'vertical')
+    end)
 end
 
 M.create = function(data, size, twidth, tsize, needParams)

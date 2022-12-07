@@ -2,7 +2,7 @@ local CALC = require 'Core.Simulation.calc'
 local INFO = require 'Data.info'
 local M = {BLOCKS = {}}
 
-for i = 3, #INFO.listType - 3 do
+for i = 3, 14 do
     M.BLOCKS = table.merge(M.BLOCKS, require('Core.Simulation.' .. INFO.listType[i]))
 end
 

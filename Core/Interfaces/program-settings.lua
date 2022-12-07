@@ -87,7 +87,7 @@ listeners.icon = function(target)
         if import.done and import.done == 'ok' then
             local container = target.parent target:removeSelf()
 
-            timer.performWithDelay(20, function()
+            timer.performWithDelay(100, function()
                 local icon = display.newImage(CURRENT_LINK .. '/icon.png', system.DocumentsDirectory)
                     local diffSize = icon.height / icon.width
                     if icon.height > icon.width then

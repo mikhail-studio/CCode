@@ -8,14 +8,12 @@ listeners.but_title = function(target)
 end
 
 listeners.but_add = function(target)
-    -- if CENTER_X == 640 and not IS_SIM then ADMOB.hide() end
     BLOCKS.group.isVisible = false
     NEW_BLOCK = require 'Interfaces.new-block'
     NEW_BLOCK.create()
 end
 
 listeners.but_play = function(target)
-    -- if not IS_SIM then ADMOB.hide() end
     GAME_GROUP_OPEN = BLOCKS
     BLOCKS.group.isVisible = false
     GAME = require 'Core.Simulation.start'

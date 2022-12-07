@@ -15,8 +15,7 @@ listeners.pos = function(e)
 
     LIST.new(list, e.target.x, e.target.y - e.target.height / 2, 'down', function(e)
         if e.index > 0 then
-            LOCAL.pos_top_ads = e.text == STR['settings.topads'] -- ADMOB.hide()
-            -- if LOCAL.show_ads then ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'}) end
+            LOCAL.pos_top_ads = e.text == STR['settings.topads']
 
             SETTINGS.group:removeSelf()
             SETTINGS.group = nil
@@ -33,8 +32,7 @@ listeners.show = function(e)
 
     LIST.new(list, e.target.x, e.target.y - e.target.height / 2, 'down', function(e)
         if e.index > 0 then
-            LOCAL.show_ads = e.text == STR['button.yes'] -- ADMOB.hide()
-            -- if LOCAL.show_ads then ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'}) end
+            LOCAL.show_ads = e.text == STR['button.yes'] 
 
             SETTINGS.group:removeSelf()
             SETTINGS.group = nil

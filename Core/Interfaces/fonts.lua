@@ -57,7 +57,6 @@ listeners.but_add = function(target)
 end
 
 listeners.but_play = function(target)
-    -- if system.getInfo 'environment' ~= 'simulator' then ADMOB.hide() end
     GAME_GROUP_OPEN = FONTS
     FONTS.group.isVisible = false
     GAME = require 'Core.Simulation.start'
