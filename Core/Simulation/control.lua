@@ -69,7 +69,16 @@ M['timer'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() timer.new((' .. CALC(params[1], '0') .. ') * 1000, ' .. CALC(params[2], '1') .. ', function()'
 end
 
+M['timerName'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.timers[' .. CALC(params[1]) .. '] = timer.new(' .. CALC(params[2], '0.001')
+    GAME.lua = GAME.lua .. ' * 1000, ' .. CALC(params[3], '1') .. ', function()'
+end
+
 M['timerEnd'] = function(params)
+    GAME.lua = GAME.lua .. ' end) end)'
+end
+
+M['timerNameEnd'] = function(params)
     GAME.lua = GAME.lua .. ' end) end)'
 end
 
@@ -110,6 +119,30 @@ end
 
 M['repeatEnd'] = function(params)
     GAME.lua = GAME.lua .. ' end'
+end
+
+M['timerPause'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() timer.pause(GAME.group.timers[' .. CALC(params[1]) .. ']) end)'
+end
+
+M['timerResume'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() timer.resume(GAME.group.timers[' .. CALC(params[1]) .. ']) end)'
+end
+
+M['timerCancel'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() timer.cancel(GAME.group.timers[' .. CALC(params[1]) .. ']) end)'
+end
+
+M['timerPauseAll'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() timer.pauseAll() end)'
+end
+
+M['timerResumeAll'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() timer.resumeAll() end)'
+end
+
+M['timerCancelAll'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() timer.cancelAll() end)'
 end
 
 return M
