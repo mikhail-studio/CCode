@@ -94,14 +94,14 @@ M.listBlock = {
         'forEnd',
         'for',
         'setFocus',
-        'setFocusMultitouch',
-        'activateMultitouch',
-        'deactivateMultitouch',
-        'toastShort',
-        'toastLong',
-        'comment',
-        'requestApi',
-        'requestExit'
+            'setFocusMultitouch',
+            'activateMultitouch',
+            'deactivateMultitouch',
+            'toastShort',
+            'toastLong',
+            'comment',
+            'requestApi',
+            'requestExit'
     },
 
     ['shapes'] = {
@@ -350,8 +350,7 @@ M.listName = {
         ['updHeight'] = {'objects', 'value', 'value'},
 
     -- control
-    ['requestApi'] = {'control', 'text'},
-        ['requestFun'] = {'control', 'fun'},
+    ['requestFun'] = {'control', 'fun'},
         ['requestFunParams'] = {'control', 'fun', 'value'},
         ['returnValue'] = {'control', 'value'},
         ['setListener'] = {'control', 'value', 'fun'},
@@ -366,14 +365,15 @@ M.listName = {
         ['repeatEnd'] = {'control'},
         ['for'] = {'control', 'value', 'value', 'localvar', 'value'},
         ['forEnd'] = {'control'},
-        ['toastShort'] = {'control', 'value'},
-        ['toastLong'] = {'control', 'value'},
-        ['comment'] = {'control', 'value'},
-        ['requestExit'] = {'control'},
         ['setFocus'] = {'control', 'value'},
-        ['setFocusMultitouch'] = {'control', 'value', 'value'},
-        ['activateMultitouch'] = {'control'},
-        ['deactivateMultitouch'] = {'control'},
+            ['toastShort'] = {'control', 'value'},
+            ['toastLong'] = {'control', 'value'},
+            ['comment'] = {'control', 'value'},
+            ['requestExit'] = {'control'},
+            ['requestApi'] = {'control', 'text'},
+            ['setFocusMultitouch'] = {'control', 'value', 'value'},
+            ['activateMultitouch'] = {'control'},
+            ['deactivateMultitouch'] = {'control'},
 
     -- shapes
     ['newRect'] = {'shapes', 'value', 'color', 'value', 'value', 'value', 'value'},
@@ -557,7 +557,8 @@ M.listName = {
 }
 
 M.listDelimiter = {
-    ['groups'] = {'newTag', 'blocks.create.groups', 'blocks.create.tags'}
+    ['groups'] = {'newTag'},
+    ['control'] = {'setFocus'},
 }
 
 M.listNested = {

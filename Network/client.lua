@@ -24,7 +24,7 @@ M.createClientLoop = function(ip, port, clientListener)
                     clientTable._sess_hash = data._sess_hash
                 elseif not data._sess_hash and clientTable._sess_hash then
                     data._sess_hash = clientTable._sess_hash
-                end data._device_id = system.getInfo('deviceID')
+                end data._device_id = DEVICE_ID or system.getInfo('deviceID')
             else
                 data = {}
             end
@@ -34,7 +34,7 @@ M.createClientLoop = function(ip, port, clientListener)
             if type(_data) == 'table' then
                 if clientTable._sess_hash then
                     _data._sess_hash = clientTable._sess_hash
-                end _data._device_id = system.getInfo('deviceID')
+                end _data._device_id = DEVICE_ID or system.getInfo('deviceID')
             end
 
             local msg = json.encode2(type(_data) == 'table' and _data or {}) .. '\n'
