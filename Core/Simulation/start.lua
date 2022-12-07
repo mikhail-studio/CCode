@@ -21,9 +21,10 @@ local function getStartLua(linkBuild)
     local funs1 = ' local fun, device = require \'Core.Functions.fun\', require \'Core.Functions.device\''
     local funs2 = ' local other, select = require \'Core.Functions.other\', require \'Core.Functions.select\''
     local funs3 = ' local math, prop = require \'Core.Functions.math\', require \'Core.Functions.prop\''
+    local funs4 = ' local SERVER, CLIENT = require \'Network.server\', require \'Network.client\''
     local code1 = ' GAME.orientation = CURRENT_ORIENTATION display.setDefault(\'background\', 0) transition.ignoreEmptyReference = true'
     local code2 = ' GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {} GAME.group.media = {}'
-    local code3 = ' GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {} GAME.currentStage = {}'
+    local code3 = ' GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {} GAME.currentStage = {} GAME.group.stops = {}'
     local code4 = ' GAME.group.animations = {} GAME.group.widgets = {} GAME.group.tags = {TAG = {}}'
     local code5 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} device.start()'
     local code6 = ' GAME.group.const.touch_fun = function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
@@ -36,7 +37,7 @@ local function getStartLua(linkBuild)
             .. require 'Data.build' .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
     else
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}'
-            .. funs1 .. funs2 .. funs3 .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
+            .. funs1 .. funs2 .. funs3 .. funs4 .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
     end
 end
 
@@ -44,7 +45,8 @@ M.remove = function()
     display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll()
     pcall(function() Runtime:removeEventListener('touch', M.group.const.touch_fun) end)
     pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
-    pcall(function() for _,v in pairs(M.group.bitmaps) do v:releaseSelf() end end) M.isStarted = nil
+    pcall(function() for _, v in pairs(M.group.bitmaps) do v:releaseSelf() end end)
+    pcall(function() for _, v in pairs(M.group.stops) do v() end end) M.isStarted = nil
     pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil math.randomseed(os.time())
     pcall(function() for child = display.currentStage.numChildren, 1, -1 do
     if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)

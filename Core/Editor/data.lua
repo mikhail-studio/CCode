@@ -3,8 +3,8 @@ local M = {}
 M.fun = {
     names = {},
     keys = {
-        'get_text', 'random_str', 'concat', 'tonumber', 'tostring', 'totable', 'len_table', 'unix_time',
-        'encode', 'gsub', 'sub', 'len', 'find', 'color_pixel', 'read_save', 'match'
+        'get_text', 'read_save', 'concat', 'tonumber', 'tostring', 'totable', 'len_table', 'unix_time',
+        'encode', 'gsub', 'sub', 'len', 'find', 'random_str', 'match', 'get_ip', 'color_pixel'
     }
 }
 

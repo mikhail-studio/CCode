@@ -68,6 +68,10 @@ M['match'] = function(str, pattern, i)
     return UTF8.match(str, pattern, i)
 end
 
+M['get_ip'] = function(any)
+    return SERVER.getIP()
+end
+
 M['color_pixel'] = function(x, y)
     local x = x or 0
     local y = y or 0

@@ -14,6 +14,10 @@ M.getListButtons = function(type)
         return {STR['blocks.select.backgroundTrue'], STR['blocks.select.backgroundFalse']}
     elseif type == 'textAlign' then
         return {STR['blocks.select.alignLeft'], STR['blocks.select.alignRight'], STR['blocks.select.alignCenter']}
+    elseif type == 'networkProgress' then
+        return {STR['blocks.select.progressDefault'], STR['blocks.select.progressDownload'], STR['blocks.select.progressUpload']}
+    elseif type == 'networkRedirects' then
+        return {STR['blocks.select.redirectsTrue'], STR['blocks.select.redirectsFalse']}
     elseif type == 'inputType' then
         return {
             STR['blocks.select.inputDefault'],
@@ -51,9 +55,14 @@ M.getListValue = function(type, text)
         return text == STR['blocks.select.ruleTrue'] and 'ruleTrue' or 'ruleFalse'
     elseif type == 'isBackground' then
         return text == STR['blocks.select.backgroundTrue'] and 'backgroundTrue' or 'backgroundFalse'
+    elseif type == 'networkRedirects' then
+        return text == STR['blocks.select.redirectsFalse'] and 'redirectsFalse' or 'redirectsTrue'
     elseif type == 'textAlign' then
         return text == STR['blocks.select.alignLeft'] and 'alignLeft'
             or text == STR['blocks.select.alignRight'] and 'alignRight' or 'alignCenter'
+    elseif type == 'networkProgress' then
+        return text == STR['blocks.select.progressUpload'] and 'progressUpload'
+            or text == STR['blocks.select.progressDownload'] and 'progressDownload' or 'progressDefault'
     elseif type == 'inputType' then
         return text == STR['blocks.select.inputDefault'] and 'inputDefault'
             or text == STR['blocks.select.inputNumber'] and 'inputNumber'
@@ -69,6 +78,8 @@ M.getListValue = function(type, text)
             or text == STR['blocks.select.widget'] and 'widget' or 'obj'
     elseif type == 'transitEasing' then
         return text
+    else
+        return nil
     end
 end
 
@@ -103,7 +114,6 @@ M.open = function(target)
             end BLOCKS.group[8]:setIsLocked(false, 'vertical')
         end, (paramsData[1] and paramsData[1][1]) and paramsData[1][1] or '') native.setKeyboardFocus(INPUT.box)
     elseif type == 'value' and ALERT then
-        -- if CENTER_X == 640 and system.getInfo 'environment' ~= 'simulator' then ADMOB.hide() end
         EDITOR = require 'Core.Editor.interface'
         EDITOR.create(blockName, blockIndex, paramsData, paramsIndex)
     elseif type == 'var' and ALERT then
@@ -131,8 +141,7 @@ M.open = function(target)
                 SET_GAME_CODE(CURRENT_LINK, data)
             end BLOCKS.group[8]:setIsLocked(false, 'vertical')
         end)
-    elseif type == 'body' or type == 'animation' or type == 'isBackground' or type == 'textAlign'
-    or type == 'inputType' or type == 'rule' or type == 'transitName' or type == 'transitEasing' then
+    elseif M.getListValue(type) then
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
         LIST.new(M.getListButtons(type), listX, listY, listDirection, function(e)
             if e.index > 0 then

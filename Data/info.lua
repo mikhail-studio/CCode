@@ -164,24 +164,24 @@ M.listBlock = {
         'updGroupRotation',
         'updGroupAlpha',
         'newTag',
-        'removeTag',
-        'showTag',
-        'hideTag',
-        'addTagObject',
-        'addTagText',
-        'addTagWidget',
-        'addTagGroup',
-        'addTagTag',
-        'setTagPos',
-        'setTagSize',
-        'setTagRotation',
-        'setTagAlpha',
-        'updTagPosX',
-        'updTagPosY',
-        'updTagWidth',
-        'updTagHeight',
-        'updTagRotation',
-        'updTagAlpha'
+            'removeTag',
+            'showTag',
+            'hideTag',
+            'addTagObject',
+            'addTagText',
+            'addTagWidget',
+            'addTagGroup',
+            'addTagTag',
+            'setTagPos',
+            'setTagSize',
+            'setTagRotation',
+            'setTagAlpha',
+            'updTagPosX',
+            'updTagPosY',
+            'updTagWidth',
+            'updTagHeight',
+            'updTagRotation',
+            'updTagAlpha'
     },
 
     ['physics'] = {
@@ -270,11 +270,26 @@ M.listBlock = {
         'setTransitionCancel',
         'setTransitionPauseAll',
         'setTransitionResumeAll',
-        'setTransitionCancelAll',
+        'setTransitionCancelAll'
+    },
+
+    ['network'] = {
+        'openURL',
+        'createServer',
+        'connectToServer',
+        'requestGET',
+        'requestPOST',
+        'requestPUT',
+        'requestPATCH',
+        'requestHEAD',
+        'requestDELETE',
+        'firebasePUT',
+        'firebasePATCH',
+        'firebaseGET',
+        'firebaseDELETE'
     },
 
     ['snapshot'] = {},
-    ['network'] = {},
     ['custom'] = {}
 }
 
@@ -521,6 +536,21 @@ M.listName = {
         ['setTransitionPauseAll'] = {'transition'},
         ['setTransitionResumeAll'] = {'transition'},
         ['setTransitionCancelAll'] = {'transition'},
+
+    -- network
+    ['openURL'] = {'network', 'value'},
+        ['createServer'] = {'network', 'value', 'fun'},
+        ['connectToServer'] = {'network', 'value', 'value', 'fun'},
+        ['requestGET'] = {'network', 'value', 'value', 'value', 'fun', 'networkProgress', 'networkRedirects', 'value'},
+        ['requestPOST'] = {'network', 'value', 'value', 'value', 'fun', 'networkProgress', 'networkRedirects', 'value'},
+        ['requestPUT'] = {'network', 'value', 'value', 'value', 'fun', 'networkProgress', 'networkRedirects', 'value'},
+        ['requestPATCH'] = {'network', 'value', 'value', 'value', 'fun', 'networkProgress', 'networkRedirects', 'value'},
+        ['requestHEAD'] = {'network', 'value', 'value', 'value', 'fun', 'networkProgress', 'networkRedirects', 'value'},
+        ['requestDELETE'] = {'network', 'value', 'value', 'value', 'fun', 'networkProgress', 'networkRedirects', 'value'},
+        ['firebasePUT'] = {'network', 'value', 'value', 'value', 'localvar'},
+        ['firebasePATCH'] = {'network', 'value', 'value', 'value', 'localvar'},
+        ['firebaseGET'] = {'network', 'value', 'value', 'localvar'},
+        ['firebaseDELETE'] = {'network', 'value', 'value', 'localvar'},
 
     -- custom
     ['_custom'] = {'custom'}

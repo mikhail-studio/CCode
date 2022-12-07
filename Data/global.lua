@@ -1,5 +1,7 @@
 LANG, STR = {}, {}
 
+CLIENT = require 'Network.client'
+SERVER = require 'Network.server'
 PARTICLE = require 'Emitter.particleDesigner'
 RESIZE = require 'Core.Modules.app-resize'
 INPUT = require 'Core.Modules.interface-input'
@@ -10,7 +12,6 @@ FILE = require 'plugin.cnkFileManager'
 EXPORT = require 'plugin.exportFile'
 PASTEBOARD = require 'plugin.pasteboard'
 ORIENTATION = require 'plugin.orientation'
--- ADMOB = require 'plugin.admob'
 IMPACK = require 'plugin.impack'
 SVG = require 'plugin.nanosvg'
 UTF8 = require 'plugin.utf8'
@@ -26,7 +27,6 @@ LIVE = false
 ALERT = true
 INDEX_LIST = 0
 MORE_LIST = true
-ADMOB_HEIGHT = 0
 LAST_CHECKBOX = 0
 ORIENTATION.init()
 CURRENT_SCRIPT = 0
@@ -42,7 +42,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1194
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1195
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
@@ -313,24 +313,13 @@ NEW_APP_CODE = function(title, link)
     }
 end
 
-local function adListener(event)
-    if event.phase == 'init' and LOCAL.show_ads then
-        -- ADMOB.load('banner', {adUnitId='ca-app-pub-3712284233366817/8879724699', childSafe = true})
-    elseif event.phase == 'loaded' and event.type == 'banner' and LOCAL.show_ads then
-        -- ADMOB.show('banner', {bgColor = '#0f0f11', y = LOCAL.pos_top_ads and 'top' or 'bottom'})
-    elseif event.phase == 'displayed' or event.phase == 'hidden' then
-        -- ADMOB_HEIGHT = event.phase == 'hidden' and 0 or ADMOB.height() / 2
-        -- setOrientationApp({type = CURRENT_ORIENTATION})
-    end
-end
-
 WIDGET.setTheme('widget_theme_android_holo_dark')
 display.setDefault('background', 0.15, 0.15, 0.17)
 display.setStatusBar(display.HiddenStatusBar) math.randomseed(os.time())
 DEVELOPERS = {['Ganin'] = true, ['Danil Nik'] = true, ['Terra'] = true}
 
 JSON.encode3 = require('Data.json').encode
-JSON.decode2, JSON.decode = JSON.decode, function(str) return type(str) == 'string' and JSON.decode2(str) or nil end
+JSON.decode2, JSON.decode = JSON.decode, function(str) return type(str) == 'string' and (JSON.decode2(str) or {}) or nil end
 math.factorial = function(num) if num == 0 then return 1 else return num * math.factorial(num - 1) end end
 math.hex = function(hex) local r, g, b = hex:match('(..)(..)(..)') return {tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)} end
 UTF8.trim = function(s) return UTF8.gsub(UTF8.gsub(s, '^%s+', ''), '%s+$', '') end
@@ -364,7 +353,7 @@ if IS_SIM then
     JSON.encode, JSON.encode2, JSON.encode4 = JSON.prettify, JSON.encode, JSON.encode3
     JSON.encode3 = function(s, opt) local opt = opt or {} opt.indent = opt.indent == nil and true or opt.indent return JSON.encode4(s, opt) end
 else
-    -- ADMOB.init(adListener, {appId="ca-app-pub-3712284233366817~8085200542", testMode = true})
+    JSON.encode2 = JSON.encode
 end
 
 require('Core.Modules.custom-block').getBlocks()
