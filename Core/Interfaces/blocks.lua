@@ -355,7 +355,7 @@ listeners.but_okay = function(target)
                     BLOCKS.group.blocks[i].polygon.yScale = -1
                     BLOCKS.group.blocks[i].polygon:setFillColor(1)
                     data.scripts[CURRENT_SCRIPT].params[i].nested, BLOCKS.group.blocks[i].data.nested = {}, {}
-                else
+                elseif BLOCKS.group.blocks[i].data.nested and BLOCKS.group.blocks[i].polygon.yScale == 0 then
                     if BLOCKS.group.blocks[i].data.event then
                         for j = i + 1, #BLOCKS.group.blocks do
                             if BLOCKS.group.blocks[i + 1].data.event then break end
@@ -406,7 +406,7 @@ listeners.but_okay = function(target)
         end
     elseif INDEX_LIST == 5 then
         for i = 1, #BLOCKS.group.blocks do
-            if BLOCKS.group.blocks[i].checkbox.isOn then
+            if BLOCKS.group.blocks[i].checkbox.isOn and BLOCKS.group.blocks[i].data.nested and #BLOCKS.group.blocks[i].data.nested == 0 then
                 BLOCKS.group.blocks[i].checkbox:setState({isOn = false})
 
                 local blockIndex = i + 1

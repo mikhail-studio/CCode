@@ -9,50 +9,56 @@ M.createClientLoop = function(ip, port, clientListener)
     local sock, clientTable, clientPulse = M.connectToServer(ip, port), {}
 
     local function cPulse()
-        if server.getOnline() then
-            local data, err = sock:receive()
+        pcall(function()
+            if server.getOnline() then
+                local data, err = sock:receive()
 
-            if err == 'closed' and clientPulse then
-                sock = M.connectToServer(ip, port, clientTable._sess_hash)
-                local data = sock and sock:receive() or nil
+                if err == 'closed' and clientPulse then
+                    sock = M.connectToServer(ip, port, clientTable._sess_hash)
+                    local data = sock and sock:receive() or nil
+                end
+
+                if data then
+                    data = json.decode(data)
+
+                    if data._sess_hash and not clientTable._sess_hash then
+                        clientTable._sess_hash = data._sess_hash
+                    elseif not data._sess_hash and clientTable._sess_hash then
+                        data._sess_hash = clientTable._sess_hash
+                    end data._device_id = DEVICE_ID or system.getInfo('deviceID')
+                else
+                    data = {
+                        _device_id = DEVICE_ID or system.getInfo('deviceID')
+                    }
+                end
+
+                local _data = clientListener(data)
+
+                if type(_data) == 'table' then
+                    if clientTable._sess_hash then
+                        _data._sess_hash = clientTable._sess_hash
+                    end _data._device_id = DEVICE_ID or system.getInfo('deviceID')
+                end
+
+                local msg = json.encode2(type(_data) == 'table' and _data or {_device_id = DEVICE_ID or system.getInfo('deviceID')}) .. '\n'
+
+                local data, err = sock:send(msg)
+                if err == 'closed' and clientPulse then
+                    sock = M.connectToServer(ip, port, clientTable._sess_hash)
+                    if sock then sock:send(msg) end
+                end
             end
-
-            if data then
-                data = json.decode(data)
-
-                if data._sess_hash and not clientTable._sess_hash then
-                    clientTable._sess_hash = data._sess_hash
-                elseif not data._sess_hash and clientTable._sess_hash then
-                    data._sess_hash = clientTable._sess_hash
-                end data._device_id = DEVICE_ID or system.getInfo('deviceID')
-            else
-                data = {}
-            end
-
-            local _data = clientListener(data)
-
-            if type(_data) == 'table' then
-                if clientTable._sess_hash then
-                    _data._sess_hash = clientTable._sess_hash
-                end _data._device_id = DEVICE_ID or system.getInfo('deviceID')
-            end
-
-            local msg = json.encode2(type(_data) == 'table' and _data or {}) .. '\n'
-
-            local data, err = sock:send(msg)
-            if err == 'closed' and clientPulse then
-                sock = M.connectToServer(ip, port, clientTable._sess_hash)
-                if sock then sock:send(msg) end
-            end
-        end
+        end)
     end
 
 
     clientPulse = timer.performWithDelay(100, cPulse, 0)
 
     local function stopClient()
-        timer.cancel(clientPulse) clientPulse = nil sock:close()
-        if server.online then server.online:close() end
+        pcall(function()
+            timer.cancel(clientPulse) clientPulse = nil sock:close()
+            if server.online then server.online:close() end
+        end)
     end
 
     return stopClient

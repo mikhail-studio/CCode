@@ -66,20 +66,21 @@ M['setListener'] = function(params)
 end
 
 M['timer'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() timer.new((' .. CALC(params[1], '0') .. ') * 1000, ' .. CALC(params[2], '1') .. ', function()'
+    GAME.lua = GAME.lua .. ' pcall(function() timer.new((' .. CALC(params[1], '0') .. ') * 1000, ' .. CALC(params[2], '1') .. ','
+    GAME.lua = GAME.lua .. ' function() if GAME.group then'
 end
 
 M['timerName'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.timers[' .. CALC(params[1]) .. '] = timer.new(' .. CALC(params[2], '0.001')
-    GAME.lua = GAME.lua .. ' * 1000, ' .. CALC(params[3], '1') .. ', function()'
+    GAME.lua = GAME.lua .. ' * 1000, ' .. CALC(params[3], '1') .. ', function() if GAME.group then'
 end
 
 M['timerEnd'] = function(params)
-    GAME.lua = GAME.lua .. ' end) end)'
+    GAME.lua = GAME.lua .. ' end end) end)'
 end
 
 M['timerNameEnd'] = function(params)
-    GAME.lua = GAME.lua .. ' end) end)'
+    GAME.lua = GAME.lua .. ' end end) end)'
 end
 
 M['if'] = function(params)

@@ -97,8 +97,8 @@ M.set = function(name)
             if i == #t + 1 then table.insert(t, 1, name) end
         end
     elseif M.active == 'event' and name ~= '' then
-        local t = M.data.scripts[CURRENT_SCRIPT].params[M.getEventIndex(M.data, M.vars.index)].vars
-        if M.params[1] == 'tables' then t = M.data.scripts[CURRENT_SCRIPT].params[M.getEventIndex(M.data, M.vars.index)].tables end
+        local t = M.data.scripts[CURRENT_SCRIPT].params[M.tables.index].vars
+        if M.params[1] == 'tables' then t = M.data.scripts[CURRENT_SCRIPT].params[M.tables.index].tables end
 
         for i = 1, #t + 1 do
             if t[i] == name then return end

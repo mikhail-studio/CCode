@@ -3,12 +3,13 @@ local M = {}
 
 M['createServer'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.stops, SERVER.createServer('
-    GAME.lua = GAME.lua .. CALC(params[1], '22222') .. ', ' .. CALC(params[2], 'a', true) .. ')) end)'
+    GAME.lua = GAME.lua .. CALC(params[1], '22222') .. ', function(e) if GAME.group then ' .. CALC(params[2], 'a', true) .. '(e) end end)) end)'
 end
 
 M['connectToServer'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.stops, CLIENT.createClientLoop('
-    GAME.lua = GAME.lua .. CALC(params[1], 'nil') .. ', ' .. CALC(params[2], '22222') .. ', ' .. CALC(params[3], 'a', true) .. ')) end)'
+    GAME.lua = GAME.lua .. CALC(params[1], 'nil') .. ', ' .. CALC(params[2], '22222') .. ','
+    GAME.lua = GAME.lua .. ' function(e) if GAME.group then ' .. CALC(params[3], 'a', true) .. '(e) end end)) end)'
 end
 
 M['requestNetwork'] = function(params, method)
@@ -19,7 +20,8 @@ M['requestNetwork'] = function(params, method)
     local redirect = UTF8.match(CALC(params[6]), '%(select%[\'(.+)\'%]') or 'nil'
     local redirect = redirect == 'redirectsFalse' and 'false' or 'true'
 
-    GAME.lua = GAME.lua .. ' pcall(function() network.request(' .. link .. ', \'' .. method .. '\', ' .. listener .. ', {body'
+    GAME.lua = GAME.lua .. ' pcall(function() network.request(' .. link .. ', \'' .. method .. '\','
+    GAME.lua = GAME.lua .. ' function(e) if GAME.group then ' .. listener .. '(e) end end, {body'
     GAME.lua = GAME.lua .. ' = ' .. body .. ', headers = ' .. headers .. ', progress = ' .. progress .. ','
     GAME.lua = GAME.lua .. ' handleRedirects = ' .. redirect .. ', timeout = ' .. timeout .. '}) end)'
 end
