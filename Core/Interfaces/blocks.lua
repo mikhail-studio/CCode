@@ -355,7 +355,7 @@ listeners.but_okay = function(target)
                     BLOCKS.group.blocks[i].polygon.yScale = -1
                     BLOCKS.group.blocks[i].polygon:setFillColor(1)
                     data.scripts[CURRENT_SCRIPT].params[i].nested, BLOCKS.group.blocks[i].data.nested = {}, {}
-                elseif BLOCKS.group.blocks[i].data.nested and BLOCKS.group.blocks[i].polygon.yScale == 0 then
+                elseif BLOCKS.group.blocks[i].data.nested then
                     if BLOCKS.group.blocks[i].data.event then
                         for j = i + 1, #BLOCKS.group.blocks do
                             if BLOCKS.group.blocks[i + 1].data.event then break end
