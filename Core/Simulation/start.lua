@@ -33,13 +33,21 @@ local function getStartLua(linkBuild)
     local code9 = ' for child = 1, display.currentStage.numChildren do GAME.currentStage[display.currentStage[child]] = true end'
     local cod10 = ' GAME.group.conditions = {} GAME.group.const.enterFrame = function() for i = 1, #GAME.group.conditions do'
     local cod11 = ' GAME.group.conditions[i]() end end Runtime:addEventListener(\'enterFrame\', GAME.group.const.enterFrame)'
+    local cod12 = ' GAME.group.backs = {} GAME.group.suspends = {} GAME.group.const.keyBack = function(e) if e.phase == \'up\''
+    local cod13 = ' and (e.keyName == \'back\' or e.keyName == \'escape\') then for i = 1, #GAME.group.backs do GAME.group.backs[i]()'
+    local cod14 = ' end end return true end Runtime:addEventListener(\'key\', GAME.group.const.keyBack) GAME.group.resumes = {}'
+    local cod15 = ' GAME.group.const.system = function(e) if e.type == \'applicationSuspend\' or e.type == \'applicationExit\' then for i = 1,'
+    local cod16 = ' #GAME.group.suspends do GAME.group.suspends[i]() end elseif e.type == \'applicationResume\' then for i = 1,'
+    local cod17 = ' #GAME.group.resumes do GAME.group.resumes[i]() end end end Runtime:addEventListener(\'system\', GAME.group.const.system)'
 
     if linkBuild then
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. require 'Data.build'
-            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10 .. cod11
+            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
+            .. cod10 .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17
     else
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. funs1 .. funs2 .. funs3 .. funs4
-            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10 .. cod11
+            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
+            .. cod10 .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17
     end
 end
 
@@ -47,6 +55,8 @@ M.remove = function()
     display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll()
     pcall(function() for _, v in ipairs(M.group.ts) do timer.cancel(v) end end)
     pcall(function() for _, v in pairs(M.group.timers) do timer.cancel(v) end end)
+    pcall(function() Runtime:removeEventListener('key', M.group.const.keyBack) end)
+    pcall(function() Runtime:removeEventListener('system', M.group.const.system) end)
     pcall(function() Runtime:removeEventListener('touch', M.group.const.touch_fun) end)
     pcall(function() Runtime:removeEventListener('enterFrame', M.group.const.enterFrame) end)
     pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
@@ -62,7 +72,7 @@ end
 M.new = function(linkBuild, isDebug)
     M.group = display.newGroup()
     M.orientation, EVENTS.CUSTOM = CURRENT_ORIENTATION, {}
-    M.data = GET_GAME_CODE(linkBuild or CURRENT_LINK)
+    M.data = GET_GAME_CODE(linkBuild or CURRENT_LINK) M.needBack = true
     M.scrollY = GAME_GROUP_OPEN and select(2, GAME_GROUP_OPEN.scroll:getContentPosition()) or 0
     M.lua = getStartLua(linkBuild) .. ' GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'
     if linkBuild then M.data.settings.build = M.data.settings.build + 1 SET_GAME_CODE(M.data.link, M.data) end M.data = GET_FULL_DATA(M.data)

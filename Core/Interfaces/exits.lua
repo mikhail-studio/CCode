@@ -155,7 +155,7 @@ listeners.lis = function(event)
     if (event.keyName == 'back' or event.keyName == 'escape') and event.phase == 'up' and ALERT then
         if PROGRAMS and PROGRAMS.group and PROGRAMS.group.isVisible then
             listeners.programs()
-        elseif GAME and GAME.isStarted and GAME.group and GAME.group.isVisible then
+        elseif GAME and GAME.isStarted and GAME.needBack and GAME.group and GAME.group.isVisible then
             listeners.game()
         elseif PROGRAM and PROGRAM.group and PROGRAM.group.isVisible then
             listeners.program()

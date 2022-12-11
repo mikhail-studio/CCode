@@ -396,9 +396,11 @@ listeners.but_okay = function(target)
                         if BLOCKS.group.blocks[i].data.event then y = y + addY end BLOCKS.group.blocks[i].y = y
                     end
 
-                    BLOCKS.group.blocks[i].polygon.yScale = 1
-                    BLOCKS.group.blocks[i].polygon:setFillColor(0.25)
-                    data.scripts[CURRENT_SCRIPT].params[i].nested = BLOCKS.group.blocks[i].data.nested
+                    if #BLOCKS.group.blocks[i].data.nested > 0 then
+                        BLOCKS.group.blocks[i].polygon.yScale = 1
+                        BLOCKS.group.blocks[i].polygon:setFillColor(0.25)
+                        data.scripts[CURRENT_SCRIPT].params[i].nested = BLOCKS.group.blocks[i].data.nested
+                    end
                 end
 
                 BLOCKS.group[8]:setScrollHeight(GET_SCROLL_HEIGHT(BLOCKS.group)) break

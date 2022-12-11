@@ -23,6 +23,7 @@ M.listBlock = {
         'onStart',
         'onFun',
         'onFunParams',
+        'onCondition',
         'onTouchBegan',
         'onTouchEnded',
         'onTouchMoved',
@@ -33,7 +34,10 @@ M.listBlock = {
         'onWebViewCallback',
         'onFieldBegan',
         'onFieldEditing',
-        'onFieldEnded'
+        'onFieldEnded',
+        'onBackPress',
+        'onSuspend',
+        'onResume'
     },
 
     ['vars'] = {
@@ -309,6 +313,7 @@ M.listName = {
     ['onStart'] = {'events', 'text'},
         ['onFun'] = {'events', 'fun'},
         ['onFunParams'] = {'events', 'fun', 'localtable'},
+        ['onCondition'] = {'events', 'value'},
         ['onTouchBegan'] = {'events', 'fun', 'localtable'},
         ['onTouchEnded'] = {'events', 'fun', 'localtable'},
         ['onTouchMoved'] = {'events', 'fun', 'localtable'},
@@ -320,6 +325,9 @@ M.listName = {
         ['onFieldEditing'] = {'events', 'fun', 'localtable'},
         ['onFieldEnded'] = {'events', 'fun', 'localtable'},
         ['onWebViewCallback'] = {'events', 'fun', 'localtable'},
+        ['onBackPress'] = {'events'},
+        ['onSuspend'] = {'events'},
+        ['onResume'] = {'events'},
 
     -- vars
     ['setVar'] = {'vars', 'var', 'value'},

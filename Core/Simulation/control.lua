@@ -84,11 +84,11 @@ M['timerNameEnd'] = function(params)
 end
 
 M['if'] = function(params)
-    GAME.lua = GAME.lua .. ' if (' .. CALC(params[1]) .. ') then'
+    GAME.lua = GAME.lua .. ' if ' .. CALC(params[1]) .. ' then'
 end
 
 M['ifElse'] = function(params)
-    GAME.lua = GAME.lua .. ' elseif (' .. CALC(params[1]) .. ') then'
+    GAME.lua = GAME.lua .. ' elseif ' .. CALC(params[1]) .. ' then'
 end
 
 M['ifEnd'] = function(params)

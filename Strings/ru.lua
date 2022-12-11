@@ -153,6 +153,8 @@ return {
         ['blocks.onFun.params'] = {'Имя функции:'},
         ['blocks.onFunParams'] = 'Создать функцию с параметрами',
         ['blocks.onFunParams.params'] = {'Имя функции:', 'Имя таблицы:'},
+        ['blocks.onCondition'] = 'Пока условие истинно',
+        ['blocks.onCondition.params'] = {'Условие:'},
         ['blocks.onTouchBegan'] = 'Палец прикасается к объекту',
         ['blocks.onTouchBegan.params'] = {'Имя функции:', 'Имя таблицы:'},
         ['blocks.onTouchEnded'] = 'Палец отпускает объект',
@@ -175,6 +177,9 @@ return {
         ['blocks.onFieldEditing.params'] = {'Имя функции:', 'Имя таблицы:'},
         ['blocks.onFieldEnded'] = 'Закончилось редактирование поля',
         ['blocks.onFieldEnded.params'] = {'Имя функции:', 'Имя таблицы:'},
+        ['blocks.onBackPress'] = 'При нажатии на кнопку \'Назад\'',
+        ['blocks.onSuspend'] = 'Приложение свернули с экрана',
+        ['blocks.onResume'] = 'Приложение вернули на экран',
 
     ['blocks.vars'] = 'Данные\n& Текст',
         ['blocks.setVar'] = 'Установить значение переменной',

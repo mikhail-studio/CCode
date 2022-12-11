@@ -30,6 +30,12 @@ M['onFunParams'] = function(nested, params)
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end)'
 end
 
+M['onCondition'] = function(nested, params)
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.conditions, function()'
+    GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {} if ' .. CALC(params[1]) .. ' then'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end) end)'
+end
+
 M['onTouchBegan'] = function(nested, params)
     GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if p.phase == \'began\' then'
     GAME.lua = GAME.lua .. ' local varsE, tablesE, p = {}, {}, COPY_TABLE(p) ' .. CALC(params[2], 'a', true)
@@ -109,6 +115,24 @@ M['onFieldEnded'] = function(nested, params)
     GAME.lua = GAME.lua .. ' or p.phase == \'submitted\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {name = n, text = GAME.group.widgets[n].text}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
+end
+
+M['onBackPress'] = function(nested, params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.needBack = false table.insert(GAME.group.backs, function()'
+    GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {}'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end) end)'
+end
+
+M['onSuspend'] = function(nested, params)
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.suspends, function()'
+    GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {}'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end) end)'
+end
+
+M['onResume'] = function(nested, params)
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.resumes, function()'
+    GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {}'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end) end)'
 end
 
 return M
