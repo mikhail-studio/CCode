@@ -332,11 +332,11 @@ table.len, math.round, table.merge = function(t)
     return type(t) == 'table' and ((type(#t) == 'number' and #t > 0) and #t
     or (function() local i = 0 for k in pairs(t) do i = i + 1 end return i end)()) or 0
 end, function(num, exp)
-    if (not exp) or (not tonumber(exp)) or (not (tonumber(exp) and tonumber(exp) > 0)) then
-    return tonumber(string.match(tostring(num), '(.*)%.')) or num else local exps, factor = string.match(tostring(num), '%.(.*)'), '0.'
-    if not exps then return num end for i = 1, exp - 1 do factor = factor .. '0' end factor = factor .. '5' num = tonumber(num)
-    and num + factor or 0 num = string.match(tostring(num), '(.*)%.') or tostring(num)
-    exp = exps:sub(1, tonumber(exp)) return tonumber(num .. '.' .. exp) end
+    if (not exp) or (not tonumber(exp)) then return tonumber(string.match(tostring(num), '(.*)%.')) or num
+    else local exps, factor = string.match(tostring(num), '%.(.*)'), tonumber(exp) == 0 and '0.' or '0.0' if not exps then
+    return num end for i = 1, tonumber(exp) - 1 do factor = factor .. '0' end factor = factor .. '5' num = tonumber(num) and num + factor
+    or 0 exp = string.match(tostring(num), '%.(.*)') and string.match(tostring(num), '%.(.*)'):sub(1, tonumber(exp)) or '0'
+    num = string.match(tostring(num), '(.*)%.') or tostring(num) return tonumber(num .. '.' .. exp) end
 end, function(t1, t2)
     for k, v in pairs(t2) do if (type(v) == 'table') and (type(t1[k] or false) == 'table')
     then merge(t1[k], t2[k]) else t1[k] = v end end return t1
