@@ -66,17 +66,17 @@ M['setListener'] = function(params)
 end
 
 M['timer'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() timer.new((' .. CALC(params[1], '0') .. ') * 1000, ' .. CALC(params[2], '1') .. ','
-    GAME.lua = GAME.lua .. ' function() if GAME.group then'
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.ts, timer.new(' .. CALC(params[1], '0.001')
+    GAME.lua = GAME.lua .. ' * 1000, ' .. CALC(params[2], '1') .. ', function(e) print(1) if GAME.group then'
 end
 
 M['timerName'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.timers[' .. CALC(params[1]) .. '] = timer.new(' .. CALC(params[2], '0.001')
-    GAME.lua = GAME.lua .. ' * 1000, ' .. CALC(params[3], '1') .. ', function() if GAME.group then'
+    GAME.lua = GAME.lua .. ' * 1000, ' .. CALC(params[3], '1') .. ', function(e) if GAME.group then'
 end
 
 M['timerEnd'] = function(params)
-    GAME.lua = GAME.lua .. ' end end) end)'
+    GAME.lua = GAME.lua .. ' end end)) end)'
 end
 
 M['timerNameEnd'] = function(params)
@@ -96,11 +96,11 @@ M['ifEnd'] = function(params)
 end
 
 M['forever'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() timer.performWithDelay(0, function(e) if GAME.group then'
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.ts, timer.new(1, 0, function(e) if GAME.group then'
 end
 
 M['foreverEnd'] = function(params)
-    GAME.lua = GAME.lua .. ' else timer.cancel(e.source) end end, 0) end)'
+    GAME.lua = GAME.lua .. ' end end)) end)'
 end
 
 M['for'] = function(params)

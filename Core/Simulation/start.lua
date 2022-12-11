@@ -25,28 +25,33 @@ local function getStartLua(linkBuild)
     local code1 = ' GAME.orientation = CURRENT_ORIENTATION display.setDefault(\'background\', 0) transition.ignoreEmptyReference = true'
     local code2 = ' GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {} GAME.group.media = {}'
     local code3 = ' GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {} GAME.currentStage = {} GAME.group.stops = {}'
-    local code4 = ' GAME.group.animations = {} GAME.group.widgets = {} GAME.group.tags = {TAG = {}} GAME.group.timers = {}'
+    local code4 = ' GAME.group.animations = {} GAME.group.widgets = {} GAME.group.tags = {TAG = {}} GAME.group.timers = {} GAME.group.ts = {}'
     local code5 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} GAME.group.displays = {} device.start()'
     local code6 = ' GAME.group.const.touch_fun = function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
     local code7 = ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y for i = 1, #GAME.group.displays do GAME.group.displays[i](e)'
     local code8 = ' end return true end Runtime:addEventListener(\'touch\', GAME.group.const.touch_fun) PHYSICS.start()'
     local code9 = ' for child = 1, display.currentStage.numChildren do GAME.currentStage[display.currentStage[child]] = true end'
+    local cod10 = ' GAME.group.conditions = {} GAME.group.const.enterFrame = function() for i = 1, #GAME.group.conditions do'
+    local cod11 = ' GAME.group.conditions[i]() end end Runtime:addEventListener(\'enterFrame\', GAME.group.const.enterFrame)'
 
     if linkBuild then
-        return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}'
-            .. require 'Data.build' .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
+        return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. require 'Data.build'
+            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10 .. cod11
     else
-        return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}'
-            .. funs1 .. funs2 .. funs3 .. funs4 .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
+        return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. funs1 .. funs2 .. funs3 .. funs4
+            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10 .. cod11
     end
 end
 
 M.remove = function()
     display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll()
+    pcall(function() for _, v in ipairs(M.group.ts) do timer.cancel(v) end end)
+    pcall(function() for _, v in pairs(M.group.timers) do timer.cancel(v) end end)
     pcall(function() Runtime:removeEventListener('touch', M.group.const.touch_fun) end)
+    pcall(function() Runtime:removeEventListener('enterFrame', M.group.const.enterFrame) end)
     pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
     pcall(function() for _, v in pairs(M.group.bitmaps) do v:releaseSelf() end end)
-    pcall(function() for _, v in pairs(M.group.stops) do v() end end) M.isStarted = nil
+    pcall(function() for _, v in ipairs(M.group.stops) do v() end end) M.isStarted = nil
     pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil math.randomseed(os.time())
     pcall(function() for child = display.currentStage.numChildren, 1, -1 do
     if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
@@ -166,6 +171,8 @@ M.new = function(linkBuild, isDebug)
                 or dataEvent[j].name == 'onTouchDisplayMoved' or dataEvent[j].name == 'onSliderMoved'
                 or dataEvent[j].name == 'onFieldBegan' or dataEvent[j].name == 'onFieldEditing'
                 or dataEvent[j].name == 'onFieldEnded' or dataEvent[j].name == 'onWebViewCallback'
+                or dataEvent[j].name == 'onCondition' or dataEvent[j].name == 'onBackPress'
+                or dataEvent[j].name == 'onSuspend' or dataEvent[j].name == 'onResume'
 
                 if nestedScript[dataEvent[j].script] and not dataEvent[j].comment and isFunBlock then
                     pcall(function() EVENTS[dataEvent[j].name](nestedEvent[j], dataEvent[j].params) end)
@@ -182,7 +189,9 @@ M.new = function(linkBuild, isDebug)
         and dataEvent[i].name ~= 'onTouchDisplayBegan' and dataEvent[i].name ~= 'onTouchDisplayEnded'
         and dataEvent[i].name ~= 'onTouchDisplayMoved' and dataEvent[i].name ~= 'onSliderMoved'
         and dataEvent[i].name ~= 'onFieldBegan' and dataEvent[i].name ~= 'onFieldEditing'
-        and dataEvent[i].name ~= 'onFieldEnded' and dataEvent[i].name ~= 'onWebViewCallback' then
+        and dataEvent[i].name ~= 'onFieldEnded' and dataEvent[i].name ~= 'onWebViewCallback'
+        and dataEvent[i].name ~= 'onCondition' and dataEvent[i].name ~= 'onBackPress'
+        and dataEvent[i].name ~= 'onSuspend' and dataEvent[i].name ~= 'onResume' then
             pcall(function() EVENTS[dataEvent[i].name](nestedEvent[i], dataEvent[i].params) end)
         end
     end if #nestedEvent > 0 then M.lua = M.lua .. ' end end script()' end
