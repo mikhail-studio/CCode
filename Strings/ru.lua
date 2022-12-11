@@ -191,7 +191,7 @@ return {
         ['blocks.insertTable'] = 'Вставить значение в массив',
         ['blocks.insertTable.params'] = {'Ключ [N]:', 'Имя таблицы:', 'Значение:'},
         ['blocks.removeTable'] = 'Удалить значение из массива',
-        ['blocks.removeTable.params'] = {'Ключ [N]:', 'Имя таблицы:'},
+        ['blocks.removeTable.params'] = {'Имя таблицы:', 'Ключ [N]:'},
         ['blocks.resetTable'] = 'Перезаписать таблицу',
         ['blocks.resetTable.params'] = {'Имя таблицы:', 'Код json:'},
         ['blocks.saveValue'] = 'Сохранить значение',

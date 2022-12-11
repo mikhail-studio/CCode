@@ -65,11 +65,58 @@ M['addTable'] = function(params)
     GAME.lua = GAME.lua .. ' else ' .. table .. ' = {} ' .. table .. key .. ' = ' .. value .. ' end end)'
 end
 
+M['insertTable'] = function(params)
+    local key = UTF8.sub(CALC(params[1], '[1]', true), 2)
+    local table = CALC(params[2], 'a', true)
+    local value = CALC(params[3])
+    local temp_key = key
+
+    while true do
+        local _key = UTF8.match(key, '^%[(.-)%]%[')
+        if not _key then break end table = table .. '[' .. _key .. ']'
+        key = UTF8.sub(key, UTF8.find(key, '%]') + 1, UTF8.len(key))
+        if (not key) or key == '' then break end
+    end key = UTF8.match(temp_key, '%[(.-)%]$') or '(' .. table .. ') and (#' .. table .. ' + 1) or 1'
+
+    GAME.lua = GAME.lua .. ' pcall(function() if ' .. table .. ' then table.insert(' .. table .. ', ' .. key .. ', ' .. value .. ')'
+    GAME.lua = GAME.lua .. ' else ' .. table .. ' = {} table.insert(' .. table .. ', ' .. key .. ', ' .. value .. ') end end)'
+end
+
+M['removeTable'] = function(params)
+    local key = UTF8.sub(CALC(params[2], '[1]', true), 2)
+    local table = CALC(params[1], 'a', true)
+    local temp_key = key
+
+    while true do
+        local _key = UTF8.match(key, '^%[(.-)%]%[')
+        if not _key then break end table = table .. '[' .. _key .. ']'
+        key = UTF8.sub(key, UTF8.find(key, '%]') + 1, UTF8.len(key))
+        if (not key) or key == '' then break end
+    end key = UTF8.match(temp_key, '%[(.-)%]$') or '(' .. table .. ') and (#' .. table .. ') or 1'
+
+    GAME.lua = GAME.lua .. ' pcall(function() table.remove(' .. table .. ', ' .. key .. ') end)'
+end
+
 M['resetTable'] = function(params)
     local table = CALC(params[1], 'a', true)
     local value = CALC(params[2], '\'{}\'')
 
     GAME.lua = GAME.lua .. ' pcall(function() ' .. table .. ' = JSON.decode(' .. value .. ') end)'
+end
+
+M['saveValue'] = function(params)
+    local key = CALC(params[1])
+    local value = CALC(params[2])
+
+    GAME.lua = GAME.lua .. ' pcall(function() local data =  GET_GAME_SAVE(CURRENT_LINK)'
+    GAME.lua = GAME.lua .. ' data[tostring(' .. key .. ')] = ' .. value .. ' SET_GAME_SAVE(CURRENT_LINK, data) end)'
+end
+
+M['setRandomSeed'] = function(params)
+    local seed = CALC(params[1])
+
+    GAME.lua = GAME.lua .. ' pcall(function() math.randomseed(math.sum(UTF8.byte(tostring(' .. seed .. '), 1,'
+    GAME.lua = GAME.lua .. ' UTF8.len(tostring(' .. seed .. '))))) end)'
 end
 
 M['setText'] = function(params)
@@ -107,6 +154,15 @@ M['setTextRotation'] = function(params)
     local rotation = CALC(params[2])
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].rotation = ' .. rotation .. ' end)'
+end
+
+M['setTextAnchor'] = function(params)
+    local name = CALC(params[1])
+    local anchorX = CALC(params[2], '50') .. '/ 100'
+    local anchorY = CALC(params[3], '50') .. '/ 100'
+
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].anchorX = ' .. anchorX
+    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '].anchorY = ' .. anchorY .. ' end)'
 end
 
 M['setTextAlpha'] = function(params)
@@ -175,19 +231,24 @@ M['updTextAlpha'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].alpha = GAME.group.texts[' .. name .. '].alpha + ' .. alpha .. ' end)'
 end
 
-M['saveValue'] = function(params)
-    local key = CALC(params[1])
-    local value = CALC(params[2])
-
-    GAME.lua = GAME.lua .. ' pcall(function() local data =  GET_GAME_SAVE(CURRENT_LINK)'
-    GAME.lua = GAME.lua .. ' data[tostring(' .. key .. ')] = ' .. value .. ' SET_GAME_SAVE(CURRENT_LINK, data) end)'
+M['hideText'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. CALC(params[1]) .. '].isVisible = false end)'
 end
 
-M['setRandomSeed'] = function(params)
-    local seed = CALC(params[1])
+M['showText'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. CALC(params[1]) .. '].isVisible = true end)'
+end
 
-    GAME.lua = GAME.lua .. ' pcall(function() math.randomseed(math.sum(UTF8.byte(tostring(' .. seed .. '), 1,'
-    GAME.lua = GAME.lua .. ' UTF8.len(tostring(' .. seed .. '))))) end)'
+M['removeText'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. CALC(params[1]) .. ']:removeSelf() end)'
+end
+
+M['frontText'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. CALC(params[1]) .. ']:toFront() end)'
+end
+
+M['backText'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. CALC(params[1]) .. ']:toBack() end)'
 end
 
 return M
