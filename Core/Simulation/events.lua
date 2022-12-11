@@ -54,6 +54,30 @@ M['onTouchMoved'] = function(nested, params)
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 
+M['onTouchDisplayBegan'] = function(nested, params)
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.displays, function(e)'
+    GAME.lua = GAME.lua .. ' if e.phase == \'began\' then local varsE, tablesE = {}, {} ' .. CALC(params[1], 'a', true)
+    GAME.lua = GAME.lua .. ' = {name = \'_ccode_display\', x = e.x, y = e.y, xStart = e.xStart, yStart = e.yStart,'
+    GAME.lua = GAME.lua .. ' id = e.id, xDelta = e.xDelta, yDelta = e.yDelta}'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end) end)'
+end
+
+M['onTouchDisplayEnded'] = function(nested, params)
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.displays, function(e) if e.phase == \'ended\''
+    GAME.lua = GAME.lua .. ' or e.phase == \'cancelled\' then local varsE, tablesE = {}, {} ' .. CALC(params[1], 'a', true)
+    GAME.lua = GAME.lua .. ' = {name = \'_ccode_display\', x = e.x, y = e.y, xStart = e.xStart, yStart = e.yStart,'
+    GAME.lua = GAME.lua .. ' id = e.id, xDelta = e.xDelta, yDelta = e.yDelta}'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end) end)'
+end
+
+M['onTouchDisplayMoved'] = function(nested, params)
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.displays, function(e)'
+    GAME.lua = GAME.lua .. ' if e.phase == \'moved\' then local varsE, tablesE = {}, {} ' .. CALC(params[1], 'a', true)
+    GAME.lua = GAME.lua .. ' = {name = \'_ccode_display\', x = e.x, y = e.y, xStart = e.xStart, yStart = e.yStart,'
+    GAME.lua = GAME.lua .. ' id = e.id, xDelta = e.xDelta, yDelta = e.yDelta}'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end) end)'
+end
+
 M['onSliderMoved'] = function(nested, params)
     GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(value)'
     GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = value'
@@ -74,9 +98,9 @@ M['onFieldBegan'] = function(nested, params)
 end
 
 M['onFieldEditing'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p, n) if p.phase == \'editing\' then local varsE,'
-    GAME.lua = GAME.lua .. ' tablesE, p = {}, {}, COPY_TABLE(p) ' .. CALC(params[2], 'a', true) .. ' = {startPosition = p.startPosition,'
-    GAME.lua = GAME.lua .. ' name = n, text = p.text, oldText = p.oldText, numDeleted = p.numDeleted, newCharacters = p.newCharacters}'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p, n) if p.phase == \'editing\' then local'
+    GAME.lua = GAME.lua .. ' varsE, tablesE, p = {}, {}, COPY_TABLE(p) ' .. CALC(params[2], 'a', true) .. ' = {numDeleted = p.numDeleted,'
+    GAME.lua = GAME.lua .. ' startPosition = p.startPosition, name = n, text = p.text, oldText = p.oldText, newCharacters = p.newCharacters}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 

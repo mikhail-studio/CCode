@@ -26,10 +26,10 @@ local function getStartLua(linkBuild)
     local code2 = ' GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {} GAME.group.media = {}'
     local code3 = ' GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {} GAME.currentStage = {} GAME.group.stops = {}'
     local code4 = ' GAME.group.animations = {} GAME.group.widgets = {} GAME.group.tags = {TAG = {}} GAME.group.timers = {}'
-    local code5 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} device.start()'
+    local code5 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} GAME.group.displays = {} device.start()'
     local code6 = ' GAME.group.const.touch_fun = function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
-    local code7 = ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y return true end'
-    local code8 = ' Runtime:addEventListener(\'touch\', GAME.group.const.touch_fun) PHYSICS.start()'
+    local code7 = ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y for i = 1, #GAME.group.displays do GAME.group.displays[i](e)'
+    local code8 = ' end return true end Runtime:addEventListener(\'touch\', GAME.group.const.touch_fun) PHYSICS.start()'
     local code9 = ' for child = 1, display.currentStage.numChildren do GAME.currentStage[display.currentStage[child]] = true end'
 
     if linkBuild then
@@ -162,6 +162,10 @@ M.new = function(linkBuild, isDebug)
                 local isFunBlock = dataEvent[j].name == 'onFun' or dataEvent[j].name == 'onFunParams'
                 or UTF8.sub(dataEvent[j].name, 1, 7) == '_custom' or dataEvent[j].name == 'onTouchBegan'
                 or dataEvent[j].name == 'onTouchEnded' or dataEvent[j].name == 'onTouchMoved'
+                or dataEvent[j].name == 'onTouchDisplayBegan' or dataEvent[j].name == 'onTouchDisplayEnded'
+                or dataEvent[j].name == 'onTouchDisplayMoved' or dataEvent[j].name == 'onSliderMoved'
+                or dataEvent[j].name == 'onFieldBegan' or dataEvent[j].name == 'onFieldEditing'
+                or dataEvent[j].name == 'onFieldEnded' or dataEvent[j].name == 'onWebViewCallback'
 
                 if nestedScript[dataEvent[j].script] and not dataEvent[j].comment and isFunBlock then
                     pcall(function() EVENTS[dataEvent[j].name](nestedEvent[j], dataEvent[j].params) end)
@@ -174,7 +178,11 @@ M.new = function(linkBuild, isDebug)
 
         if not dataEvent[i].comment and dataEvent[i].name ~= 'onFun' and dataEvent[i].name ~= 'onFunParams'
         and UTF8.sub(dataEvent[i].name, 1, 7) ~= '_custom' and dataEvent[i].name ~= 'onTouchBegan'
-        and dataEvent[i].name ~= 'onTouchEnded' and dataEvent[i].name ~= 'onTouchMoved' then
+        and dataEvent[i].name ~= 'onTouchEnded' and dataEvent[i].name ~= 'onTouchMoved'
+        and dataEvent[i].name ~= 'onTouchDisplayBegan' and dataEvent[i].name ~= 'onTouchDisplayEnded'
+        and dataEvent[i].name ~= 'onTouchDisplayMoved' and dataEvent[i].name ~= 'onSliderMoved'
+        and dataEvent[i].name ~= 'onFieldBegan' and dataEvent[i].name ~= 'onFieldEditing'
+        and dataEvent[i].name ~= 'onFieldEnded' and dataEvent[i].name ~= 'onWebViewCallback' then
             pcall(function() EVENTS[dataEvent[i].name](nestedEvent[i], dataEvent[i].params) end)
         end
     end if #nestedEvent > 0 then M.lua = M.lua .. ' end end script()' end
