@@ -31,11 +31,12 @@ local function showTypeScroll(event)
 
             M.group[4].isVisible = event.target.index == 1
             M.group[3].isVisible = event.target.index == 1 or event.target.index == 15
-            or event.target.index == 9 or event.target.index == 6
+            or event.target.index == 9 or event.target.index == 6 or event.target.index == 3
             for i = 5, 10 do M.group[i].isVisible = event.target.index == 15 end
             for i = 19, 20 do M.group[i].isVisible = event.target.index == 15 end
             for i = 11, 14 do M.group[i].isVisible = event.target.index == 9 end
             for i = 15, 18 do M.group[i].isVisible = event.target.index == 6 end
+            for i = 21, 24 do M.group[i].isVisible = event.target.index == 3 end
             M.group.currentIndex = event.target.index
         end
     end
@@ -277,7 +278,7 @@ M.create = function()
         end
 
         M.group[3].isVisible = M.group.currentIndex == 1 or M.group.currentIndex == 15
-        or M.group.currentIndex == 9 or M.group.currentIndex == 6
+        or M.group.currentIndex == 9 or M.group.currentIndex == 6 or M.group.currentIndex == 3
         M.group[4].isVisible, M.group[5].alpha = M.group.currentIndex == 1, 0.1
         M.group[7].alpha, M.group[7].isOn = 0.1, false
         M.group[9].alpha, M.group[9].isOn = 0.1, false
@@ -286,6 +287,7 @@ M.create = function()
         for i = 19, 20 do M.group[i].isVisible = M.group.currentIndex == 15 end
         for i = 11, 14 do M.group[i].isVisible = M.group.currentIndex == 9 end
         for i = 15, 18 do M.group[i].isVisible = M.group.currentIndex == 6 end
+        for i = 21, 24 do M.group[i].isVisible = M.group.currentIndex == 3 end
 
         if M.group.currentIndex == 1 and M.group[4].text ~= '' then
             M.group[4].text = ''
@@ -379,6 +381,12 @@ M.create = function()
                         elseif e.target.tag == 'control1' and not e.target.isOn then
                             e.target.isOn = true e.target.alpha = 0.3 M.group[17].isOn = false M.group[17].alpha = 0.1
                             M.group.types[6].scroll.isVisible = true M.group.types[6].scroll2.isVisible = false M.group.types[6].currentScroll = 1
+                        elseif e.target.tag == 'vars2' and not e.target.isOn then
+                            e.target.isOn = true e.target.alpha = 0.3 M.group[21].isOn = false M.group[21].alpha = 0.1
+                            M.group.types[3].scroll.isVisible = false M.group.types[3].scroll2.isVisible = true M.group.types[3].currentScroll = 2
+                        elseif e.target.tag == 'vars1' and not e.target.isOn then
+                            e.target.isOn = true e.target.alpha = 0.3 M.group[23].isOn = false M.group[23].alpha = 0.1
+                            M.group.types[3].scroll.isVisible = true M.group.types[3].scroll2.isVisible = false M.group.types[3].currentScroll = 1
                         end
                     end
                 end
@@ -487,6 +495,30 @@ M.create = function()
             button4Text.isVisible = false
         M.group:insert(button4Text)
 
+        local buttonVars1 = display.newRect(find.x - find.width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
+            buttonVars1.isOn = true
+            buttonVars1.alpha = 0.3
+            buttonVars1.tag = 'vars1'
+            buttonVars1:addEventListener('touch', buttonListeners)
+        M.group:insert(buttonVars1)
+
+        local buttonVars1Text = display.newText('1', buttonVars1.x, buttonVars1.y, 'ubuntu', 28)
+            buttonVars1.isVisible = false
+            buttonVars1Text.isVisible = false
+        M.group:insert(buttonVars1Text)
+
+        local buttonVars2 = display.newRect(buttonVars1.x + width3, ZERO_Y + 50, width3, 56)
+            buttonVars2.isOn = false
+            buttonVars2.alpha = 0.1
+            buttonVars2.tag = 'vars2'
+            buttonVars2:addEventListener('touch', buttonListeners)
+        M.group:insert(buttonVars2)
+
+        local buttonVars2Text = display.newText('2', buttonVars2.x, buttonVars2.y, 'ubuntu', 28)
+            buttonVars2.isVisible = false
+            buttonVars2Text.isVisible = false
+        M.group:insert(buttonVars2Text)
+
         local width = CENTER_X == 360 and DISPLAY_WIDTH / 5 - 24 or DISPLAY_WIDTH / 6
         local x, y = ZERO_X + 20, MAX_Y - 220
 
@@ -512,8 +544,8 @@ M.create = function()
             M.group:insert(M.group.types[i].text)
 
             M.group.types[i].scroll = WIDGET.newScrollView({
-                    x = CENTER_X, y = (((i == 1 or i == 15 or i == 9 or i == 6) and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
-                    width = DISPLAY_WIDTH, height = line.y - ((i == 1 or i == 15 or i == 9 or i == 6) and find.y + 2 or ZERO_Y + 1),
+                    x = CENTER_X, y = (((i == 1 or i == 15 or i == 9 or i == 6 or i == 3) and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
+                    width = DISPLAY_WIDTH, height = line.y - ((i == 1 or i == 15 or i == 9 or i == 6 or i == 3) and find.y + 2 or ZERO_Y + 1),
                     hideBackground = true, hideScrollBar = false,
                     horizontalScrollDisabled = true, isBounceEnabled = true
                 }) M.group.types[i].currentScroll = 1
@@ -521,8 +553,8 @@ M.create = function()
 
             if INFO.listDelimiter[INFO.listType[i]] then
                 M.group.types[i].scroll2 = WIDGET.newScrollView({
-                        x = CENTER_X, y = (((i == 1 or i == 15 or i == 9 or i == 6) and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
-                        width = DISPLAY_WIDTH, height = line.y - ((i == 1 or i == 15 or i == 9 or i == 6) and find.y + 2 or ZERO_Y + 1),
+                        x = CENTER_X, y = (((i == 1 or i == 15 or i == 9 or i == 6 or i == 3) and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
+                        width = DISPLAY_WIDTH, height = line.y - ((i == 1 or i == 15 or i == 9 or i == 6 or i == 3) and find.y + 2 or ZERO_Y + 1),
                         hideBackground = true, hideScrollBar = false,
                         horizontalScrollDisabled = true, isBounceEnabled = true
                     }) M.group.types[i].scroll2.isVisible = false
