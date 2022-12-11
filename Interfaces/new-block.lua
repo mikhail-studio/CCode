@@ -33,6 +33,7 @@ local function showTypeScroll(event)
             M.group[3].isVisible = event.target.index == 1 or event.target.index == 15
             or event.target.index == 9 or event.target.index == 6
             for i = 5, 10 do M.group[i].isVisible = event.target.index == 15 end
+            for i = 19, 20 do M.group[i].isVisible = event.target.index == 15 end
             for i = 11, 14 do M.group[i].isVisible = event.target.index == 9 end
             for i = 15, 18 do M.group[i].isVisible = event.target.index == 6 end
             M.group.currentIndex = event.target.index
@@ -67,6 +68,48 @@ local function newBlockListener(event)
                     for index, block in pairs(custom) do
                         if 'custom' .. index == name then
                             CUSTOM.newBlock(block[1], params, block[2], index) break
+                        end
+                    end
+                elseif M.group[19].isOn and event.target.index[1] == 15 then
+                    local name = INFO.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
+                    local custom = GET_GAME_CUSTOM() local _index = tostring(custom.len + 1)
+
+                    for i = 1, custom.len do
+                        if not custom[tostring(i)] then
+                            _index = tostring(i) break
+                        end
+                    end
+
+                    for index, block in pairs(custom) do
+                        if 'custom' .. index == name then
+                            local blockParams = (function() local t = {} for i = 1, #custom[index][2] do t[i] = 'value' end return t end)()
+
+                            custom.len = custom.len + 1
+                            custom[_index] = {
+                                custom[index][1],
+                                COPY_TABLE(custom[index][2]),
+                                type(custom[index][3]) == 'table' and COPY_TABLE(custom[index][3]) or custom[index][3],
+                                os.time()
+                            }
+
+                            STR['blocks.custom' .. _index] = custom[_index][1]
+                            STR['blocks.custom' .. _index .. '.params'] = custom[_index][2]
+                            LANG.ru['blocks.custom' .. _index] = custom[_index][1]
+                            LANG.ru['blocks.custom' .. _index .. '.params'] = custom[_index][2]
+                            INFO.listName['custom' .. _index] = {'custom', unpack(blockParams)}
+
+                            table.insert(INFO.listBlock.custom, 1, 'custom' .. _index)
+                            table.insert(INFO.listBlock.everyone, 'custom' .. _index)
+
+                            SET_GAME_CUSTOM(custom)
+                            M.remove() M.create()
+                            M.group.types[1].scroll.isVisible = false
+                            M.group.types[15].scroll.isVisible = true
+                            M.group[3].isVisible = true
+                            M.group[4].isVisible = false
+                            for i = 5, 10 do M.group[i].isVisible = true end
+                            for i = 19, 20 do M.group[i].isVisible = true end
+                            M.group.currentIndex = 15 break
                         end
                     end
                 elseif M.group[9].isOn and event.target.index[1] == 15 then
@@ -104,6 +147,7 @@ local function newBlockListener(event)
                             M.group[3].isVisible = true
                             M.group[4].isVisible = false
                             for i = 5, 10 do M.group[i].isVisible = true end
+                            for i = 19, 20 do M.group[i].isVisible = true end
                             M.group.currentIndex = 15 break
                         end
                     end
@@ -237,7 +281,9 @@ M.create = function()
         M.group[4].isVisible, M.group[5].alpha = M.group.currentIndex == 1, 0.1
         M.group[7].alpha, M.group[7].isOn = 0.1, false
         M.group[9].alpha, M.group[9].isOn = 0.1, false
+        M.group[19].alpha, M.group[19].isOn = 0.1, false
         for i = 5, 10 do M.group[i].isVisible = M.group.currentIndex == 15 end
+        for i = 19, 20 do M.group[i].isVisible = M.group.currentIndex == 15 end
         for i = 11, 14 do M.group[i].isVisible = M.group.currentIndex == 9 end
         for i = 15, 18 do M.group[i].isVisible = M.group.currentIndex == 6 end
 
@@ -305,11 +351,22 @@ M.create = function()
                             e.target.isOn = not e.target.isOn
                             M.group[9].alpha = e.target.isOn and 0.1 or M.group[9].alpha
                             M.group[9].isOn = (function() if e.target.isOn then return false else return M.group[9].isOn end end)()
+                            M.group[19].alpha = e.target.isOn and 0.1 or M.group[19].alpha
+                            M.group[19].isOn = (function() if e.target.isOn then return false else return M.group[19].isOn end end)()
                         elseif e.target.tag == 'remove' then
                             e.target.alpha = e.target.isOn and 0.1 or 0.3
                             e.target.isOn = not e.target.isOn
                             M.group[7].alpha = e.target.isOn and 0.1 or M.group[7].alpha
                             M.group[7].isOn = (function() if e.target.isOn then return false else return M.group[7].isOn end end)()
+                            M.group[19].alpha = e.target.isOn and 0.1 or M.group[19].alpha
+                            M.group[19].isOn = (function() if e.target.isOn then return false else return M.group[19].isOn end end)()
+                        elseif e.target.tag == 'copy' then
+                            e.target.alpha = e.target.isOn and 0.1 or 0.3
+                            e.target.isOn = not e.target.isOn
+                            M.group[7].alpha = e.target.isOn and 0.1 or M.group[7].alpha
+                            M.group[7].isOn = (function() if e.target.isOn then return false else return M.group[7].isOn end end)()
+                            M.group[9].alpha = e.target.isOn and 0.1 or M.group[9].alpha
+                            M.group[9].isOn = (function() if e.target.isOn then return false else return M.group[9].isOn end end)()
                         elseif e.target.tag == 'tags' and not e.target.isOn then
                             e.target.isOn = true e.target.alpha = 0.3 M.group[11].isOn = false M.group[11].alpha = 0.1
                             M.group.types[9].scroll.isVisible = false M.group.types[9].scroll2.isVisible = true M.group.types[9].currentScroll = 2
@@ -332,8 +389,7 @@ M.create = function()
             return true
         end
 
-        local width = (DISPLAY_WIDTH - RIGHT_HEIGHT - 60) * 0.4
-        local width2 = (DISPLAY_WIDTH - RIGHT_HEIGHT - 60) * 0.3
+        local width = (DISPLAY_WIDTH - RIGHT_HEIGHT - 60) * 0.25
         local width3 = (DISPLAY_WIDTH - RIGHT_HEIGHT - 60) * 0.5
 
         local button = display.newRect(find.x - find.width / 2 + width / 2, ZERO_Y + 50, width, 56)
@@ -347,7 +403,7 @@ M.create = function()
             buttonText.isVisible = false
         M.group:insert(buttonText)
 
-        local button2 = display.newRect(button.x + width / 2 + width2 / 2, ZERO_Y + 50, width2, 56)
+        local button2 = display.newRect(button.x + width / 2 + width / 2, ZERO_Y + 50, width, 56)
             button2.isOn = false
             button2.alpha = 0.1
             button2.tag = 'change'
@@ -359,7 +415,7 @@ M.create = function()
             button2Text.isVisible = false
         M.group:insert(button2Text)
 
-        local button3 = display.newRect(button2.x + width2, ZERO_Y + 50, width2, 56)
+        local button3 = display.newRect(button2.x + width, ZERO_Y + 50, width, 56)
             button3.isOn = false
             button3.alpha = 0.1
             button3.tag = 'remove'
@@ -418,6 +474,18 @@ M.create = function()
             buttonControl2.isVisible = false
             buttonControl2Text.isVisible = false
         M.group:insert(buttonControl2Text)
+
+        local button4 = display.newRect(button3.x + width, ZERO_Y + 50, width, 56)
+            button4.isOn = false
+            button4.alpha = 0.1
+            button4.tag = 'copy'
+            button4:addEventListener('touch', buttonListeners)
+        M.group:insert(button4)
+
+        local button4Text = display.newText(STR['blocks.create.copy'], button4.x, button4.y, 'ubuntu', 28)
+            button4.isVisible = false
+            button4Text.isVisible = false
+        M.group:insert(button4Text)
 
         local width = CENTER_X == 360 and DISPLAY_WIDTH / 5 - 24 or DISPLAY_WIDTH / 6
         local x, y = ZERO_X + 20, MAX_Y - 220
