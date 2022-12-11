@@ -15,7 +15,7 @@ M.create = function()
     -- M.group:insert(lineH)
 
     local lMaxWidth = MAX_X - ZERO_X - 250
-    local rCenterX = (lMaxWidth + MAX_X + 20) / 2
+    local rCenterX = ZERO_X + (lMaxWidth + MAX_X + 20) / 2
     local rMaxWidth = 200
 
     local title = display.newText(STR['menu.settings'], ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)
@@ -24,7 +24,7 @@ M.create = function()
     M.group:insert(title)
 
     local lang_text = display.newText({
-            text = STR['settings.applang'], x = 20, y = title.y + 120,
+            text = STR['settings.applang'], x = ZERO_X + 20, y = title.y + 120,
             font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
         }) lang_text.anchorX = 0
     M.group:insert(lang_text)
@@ -36,7 +36,7 @@ M.create = function()
     M.group:insert(lang_button.text)
 
     local confirm_text = display.newText({
-            text = STR['settings.confirmdelete'], x = 20, y = lang_text.y + 70,
+            text = STR['settings.confirmdelete'], x = ZERO_X + 20, y = lang_text.y + 70,
             font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
         }) confirm_text.anchorX = 0
     M.group:insert(confirm_text)
@@ -49,7 +49,7 @@ M.create = function()
     M.group:insert(confirm_button.text)
 
     local show_ads_text = display.newText({
-            text = STR['settings.showads'], x = 20, y = confirm_button.y + 70,
+            text = STR['settings.showads'], x = ZERO_X + 20, y = confirm_button.y + 70,
             font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
         }) show_ads_text.anchorX = 0
     M.group:insert(show_ads_text)
@@ -62,7 +62,7 @@ M.create = function()
     M.group:insert(show_ads_button.text)
 
     local pos_top_ads_text = display.newText({
-            text = STR['settings.posads'], x = 20, y = show_ads_button.y + 70,
+            text = STR['settings.posads'], x = ZERO_X + 20, y = show_ads_button.y + 70,
             font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
         }) pos_top_ads_text.anchorX = 0
     M.group:insert(pos_top_ads_text)
@@ -75,7 +75,7 @@ M.create = function()
     M.group:insert(pos_top_ads_button.text)
 
     local orientation_text = display.newText({
-            text = STR['settings.orientation'], x = 20, y = pos_top_ads_button.y + 120,
+            text = STR['settings.orientation'], x = ZERO_X + 20, y = pos_top_ads_button.y + 120,
             font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
         }) orientation_text.anchorX = 0
     M.group:insert(orientation_text)

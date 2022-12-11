@@ -57,9 +57,10 @@ end
 M.new = function(linkBuild, isDebug)
     M.group = display.newGroup()
     M.orientation, EVENTS.CUSTOM = CURRENT_ORIENTATION, {}
-    M.data = GET_FULL_DATA(GET_GAME_CODE(linkBuild or CURRENT_LINK))
+    M.data = GET_GAME_CODE(linkBuild or CURRENT_LINK)
     M.scrollY = GAME_GROUP_OPEN and select(2, GAME_GROUP_OPEN.scroll:getContentPosition()) or 0
     M.lua = getStartLua(linkBuild) .. ' GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'
+    if linkBuild then M.data.settings.build = M.data.settings.build + 1 SET_GAME_CODE(M.data.link, M.data) end M.data = GET_FULL_DATA(M.data)
 
     if M.data.settings.orientation == 'portrait' and CURRENT_ORIENTATION ~= 'portrait' then
         M.lua = M.lua .. ' setOrientationApp({type = \'portrait\', sim = true})'
@@ -144,7 +145,9 @@ M.new = function(linkBuild, isDebug)
                     }
                 end
             elseif not M.data.scripts[i].params[j].comment and not eventComment then
-                table.insert(nestedEvent[nestedIndex], M.data.scripts[i].params[j])
+                if not (linkBuild and (name == 'toastShort' or name == 'toastLong')) then
+                    table.insert(nestedEvent[nestedIndex], M.data.scripts[i].params[j])
+                end
             end
         end
     end

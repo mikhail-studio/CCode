@@ -304,6 +304,7 @@ end
 M.remove = function(input, rgb)
     if M and M.group then
         ALERT = true
+        INPUT.remove(false)
         native.setKeyboardFocus(nil)
         M.listener({input = input, rgb = rgb})
         timer.cancel(M.timer)

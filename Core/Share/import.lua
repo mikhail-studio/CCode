@@ -31,27 +31,27 @@ return {
                                         custom[new_index] = block
                                         custom[new_index][4] = os.time()
                                         dataCustom[index] = new_index
-                                    end
+                                    else
+                                        for _index, _block in pairs(custom) do
+                                            if tonumber(_index) and _block[1] == block[1] then
+                                                local t1 = JSON.encode3(_block[3], {keyorder = KEYORDER})
+                                                local t2 = JSON.encode3(block[3], {keyorder = KEYORDER})
 
-                                    for _index, _block in pairs(custom) do
-                                        if tonumber(_index) and _block[1] == block[1] then
-                                            local t1 = JSON.encode3(_block[3], {keyorder = KEYORDER})
-                                            local t2 = JSON.encode3(block[3], {keyorder = KEYORDER})
+                                                if t1 == t2 then
+                                                    if _block[4] < block[4] then
+                                                        custom[_index] = COPY_TABLE(block)
+                                                        custom[_index][4] = os.time()
+                                                        dataCustom[index] = _index
+                                                    end
 
-                                            if t1 == t2 then
-                                                if _block[4] < block[4] then
-                                                    custom[_index] = COPY_TABLE(block)
-                                                    custom[_index][4] = os.time()
-                                                    dataCustom[index] = _index
+                                                    break
                                                 end
-
-                                                break
+                                            elseif tonumber(_index) == custom.len then
+                                                custom.len = custom.len + 1
+                                                custom[new_index] = block
+                                                custom[new_index][4] = os.time()
+                                                dataCustom[index] = new_index
                                             end
-                                        elseif tonumber(_index) == custom.len then
-                                            custom.len = custom.len + 1
-                                            custom[new_index] = block
-                                            custom[new_index][4] = os.time()
-                                            dataCustom[index] = new_index
                                         end
                                     end
                                 end

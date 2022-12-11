@@ -19,7 +19,7 @@ M.create = function()
         title.anchorY = 0
     M.group:insert(title)
 
-    local build_text = display.newText(STR['psettings.build'], 20, title.y + 150, 'ubuntu', 30)
+    local build_text = display.newText(STR['psettings.build'], ZERO_X + 20, title.y + 150, 'ubuntu', 30)
         build_text.anchorX = 0
     M.group:insert(build_text)
 
@@ -37,7 +37,7 @@ M.create = function()
     M.group:insert(build_button)
         build_value:toFront()
 
-    local version_text = display.newText(STR['psettings.version'], 20, build_text.y + 100, 'ubuntu', 30)
+    local version_text = display.newText(STR['psettings.version'], ZERO_X + 20, build_text.y + 100, 'ubuntu', 30)
         version_text.anchorX = 0
     M.group:insert(version_text)
 
@@ -55,7 +55,7 @@ M.create = function()
     M.group:insert(version_button)
         version_value:toFront()
 
-    local package_text = display.newText(STR['psettings.package'], 20, version_text.y + 100, 'ubuntu', 30)
+    local package_text = display.newText(STR['psettings.package'], ZERO_X + 20, version_text.y + 100, 'ubuntu', 30)
         package_text.anchorX = 0
     M.group:insert(package_text)
 
@@ -73,11 +73,11 @@ M.create = function()
     M.group:insert(package_button)
         package_value:toFront()
 
-    local icon_text = display.newText(STR['psettings.icon'], 20, package_text.y + 150, 'ubuntu', 30)
+    local icon_text = display.newText(STR['psettings.icon'], ZERO_X + 20, package_text.y + 150, 'ubuntu', 30)
         icon_text.anchorX = 0
     M.group:insert(icon_text)
 
-    local orientation_text = display.newText(STR['psettings.orientation'], 20, icon_text.y + 150, 'ubuntu', 30)
+    local orientation_text = display.newText(STR['psettings.orientation'], ZERO_X + 20, icon_text.y + 150, 'ubuntu', 30)
         orientation_text.anchorX = 0
     M.group:insert(orientation_text)
 
@@ -131,9 +131,6 @@ M.create = function()
 
     icon.id = 'icon'
     icon:addEventListener('touch', require 'Core.Interfaces.program-settings')
-
-    build_button.id = 'build_button'
-    build_button:addEventListener('touch', require 'Core.Interfaces.program-settings')
 
     version_button.id = 'version_button'
     version_button:addEventListener('touch', require 'Core.Interfaces.program-settings')
