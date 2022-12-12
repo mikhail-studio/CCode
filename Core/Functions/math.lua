@@ -13,6 +13,7 @@ M.factorial = math.factorial
 M.random = math.random
 M.radical = math.sqrt
 M.log10 = math.log10
+M.round = math.round
 M.module = math.abs
 M.power = math.pow
 M.log0 = math.log
@@ -23,44 +24,58 @@ M.max = math.max
 M.min = math.min
 M.pi = math.pi
 
-M['round'] = function(num, count)
-    return tonumber(string.format('%.' .. (count or '0') .. 'f', tostring(num))) or num
-end
-
 M['remainder'] = function(num, count)
-    return num % count
+    local result = pcall(function()
+        return num % count
+    end) return result or 0
 end
 
 M['asin'] = function(num)
-    return asin(num * M.pi / 180)
+    local result = pcall(function()
+        return asin(num * M.pi / 180)
+    end) return result or 0
 end
 
 M['acos'] = function(num)
-    return acos(num * M.pi / 180)
+    local result = pcall(function()
+        return acos(num * M.pi / 180)
+    end) return result or 0
 end
 
 M['atan'] = function(num)
-    return atan(num * M.pi / 180)
+    local result = pcall(function()
+        return atan(num * M.pi / 180)
+    end) return result or 0
 end
 
 M['atan2'] = function(x, y)
-    return atan2(y * M.pi / 180, x * M.pi / 180)
+    local result = pcall(function()
+        return atan2(x * M.pi / 180, y * M.pi / 180)
+    end) return result or 0
 end
 
 M['sin'] = function(num)
-    return sin(num * M.pi / 180)
+    local result = pcall(function()
+        return sin(num * M.pi / 180)
+    end) return result or 0
 end
 
 M['cos'] = function(num)
-    return cos(num * M.pi / 180)
+    local result = pcall(function()
+        return cos(num * M.pi / 180)
+    end) return result or 0
 end
 
 M['tan'] = function(num)
-    return tan(num * M.pi / 180)
+    local result = pcall(function()
+        return tan(num * M.pi / 180)
+    end) return result or 0
 end
 
 M['ctan'] = function(num)
-    return 1 / tan(num * M.pi / 180)
+    local result = pcall(function()
+        return 1 / tan(num * M.pi / 180)
+    end) return result or 0
 end
 
 return M
