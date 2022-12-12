@@ -26,8 +26,8 @@ M['newRect'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. colors
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end)'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name ..  '] = display.newRect(GAME.group, ' .. posX .. ', ' .. posY .. ', '
-    GAME.lua = GAME.lua .. width .. ', ' .. height .. ') GAME.group:insert(GAME.group.objects[' .. name .. '])'
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. ']:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
+    GAME.lua = GAME.lua .. width .. ', ' .. height .. ') pcall(function()'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._width = GAME.group.objects[' .. name .. '].width'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._height = GAME.group.objects[' .. name .. '].height'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = 1 GAME.group.objects[' .. name .. ']._bounce = 0'
@@ -46,7 +46,7 @@ M['newRoundedRect'] = function(params)
 
     GAME.lua = GAME.lua .. ' pcall(function() pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end)'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name ..  '] = display.newRoundedRect(GAME.group, ' .. posX .. ', ' .. posY .. ', '
-    GAME.lua = GAME.lua .. width .. ', ' .. height .. ', ' .. radius .. ') GAME.group:insert(GAME.group.objects[' .. name .. '])'
+    GAME.lua = GAME.lua .. width .. ', ' .. height .. ', ' .. radius .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._width = GAME.group.objects[' .. name .. '].width'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._height = GAME.group.objects[' .. name .. '].height'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = 1 GAME.group.objects[' .. name .. ']._bounce = 0'
@@ -62,9 +62,8 @@ M['newCircle'] = function(params)
     local posX = '(CENTER_X + (' .. CALC(params[3]) .. '))'
     local posY = '(CENTER_Y - (' .. CALC(params[4]) .. '))'
 
-    GAME.lua = GAME.lua .. ' pcall(function() pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end)'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name ..  '] = display.newCircle(GAME.group, ' .. posX .. ', ' .. posY .. ', ' .. radius .. ')'
-    GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.objects[' .. name .. '])'
+    GAME.lua = GAME.lua .. ' pcall(function() pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end) GAME.group.objects['
+    GAME.lua = GAME.lua .. name ..  '] = display.newCircle(GAME.group, ' .. posX .. ', ' .. posY .. ', ' .. radius .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._radius = GAME.group.objects[' .. name .. '].path.radius'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = 1 GAME.group.objects[' .. name .. ']._bounce = 0'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._friction = 0 GAME.group.objects[' .. name .. ']._gravity = 1'
@@ -72,6 +71,52 @@ M['newCircle'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
+end
+
+M['newPolygon'] = function(params)
+    local name, coords = CALC(params[1]), CALC(params[2], '{0,110,27,35,105,35,43,-16,65,-90,0,-45,-65,-90,-43,-15,-105,35,-27,35}')
+    local posX = '(CENTER_X + (' .. CALC(params[3]) .. '))'
+    local posY = '(CENTER_Y - (' .. CALC(params[4]) .. '))'
+
+    GAME.lua = GAME.lua .. ' pcall(function() local coords = ' .. coords .. ' for i = 1, #coords do if i % 2 == 0 then coords[i]'
+    GAME.lua = GAME.lua .. ' = -coords[i] end end pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name ..  '] = display.newPolygon(GAME.group, ' .. posX .. ', ' .. posY .. ', coords)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._width = GAME.group.objects[' .. name .. '].width'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._height = GAME.group.objects[' .. name .. '].height'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = 1 GAME.group.objects[' .. name .. ']._bounce = 0'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._friction = 0 GAME.group.objects[' .. name .. ']._gravity = 1'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
+end
+
+M['newLine'] = function(params)
+    local name, colors = CALC(params[1]), CALC(params[2], '{255}')
+    local posX1 = '(CENTER_X + (' .. CALC(params[3], '0') .. '))'
+    local posY1 = '(CENTER_Y - (' .. CALC(params[4], '200') .. '))'
+    local posX2 = '(CENTER_X + (' .. CALC(params[5], '0') .. '))'
+    local posY2 = '(CENTER_Y - (' .. CALC(params[6], '-200') .. '))'
+
+    GAME.lua = GAME.lua .. ' pcall(function() local x1, y1, x2, y2 = ' .. posX1 .. ', ' .. posY1 .. ', ' .. posX2 .. ', ' .. posY2
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end) local colors = ' .. colors
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name ..  '] = display.newLine(GAME.group, x1, y1, x2, y2) pcall(function()'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']:setStrokeColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].strokeWidth = 5'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._width = GAME.group.objects[' .. name .. '].strokeWidth'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._height = GAME.group.objects[' .. name .. '].strokeWidth'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = 1 GAME.group.objects[' .. name .. ']._bounce = 0'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._friction = 0 GAME.group.objects[' .. name .. ']._gravity = 1'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
+end
+
+M['appendLine'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local coords = ' .. CALC(params[2], '{}') .. ' for i = 1, #coords do if i % 2 == 0 then'
+    GAME.lua = GAME.lua .. ' coords[i] = CENTER_Y - coords[i] else coords[i] = CENTER_X + coords[i] end end'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. CALC(params[1]) ..  ']:append(unpack(coords)) end)'
 end
 
 M['setColor'] = function(params)

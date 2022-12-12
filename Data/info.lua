@@ -75,7 +75,6 @@ M.listBlock = {
     ['objects'] = {
         'newObject',
         'newSprite',
-        'copyObject',
         'setPos',
         'setPosX',
         'setPosY',
@@ -136,7 +135,6 @@ M.listBlock = {
 
     ['shapes'] = {
         'setSprite',
-        'setSizeBySprite',
         'newCircle',
         'newRoundedRect',
         'newRect',
@@ -382,7 +380,6 @@ M.listName = {
     -- objects
     ['newObject'] = {'objects', 'value', 'value', 'value', 'value'},
         ['newSprite'] = {'objects', 'value', 'value', 'value', 'value', 'value', 'value', 'value', 'value'},
-        ['copyObject'] = {'objects', 'value', 'value'},
         ['setPos'] = {'objects', 'value', 'value', 'value'},
         ['setPosX'] = {'objects', 'value', 'value'},
         ['setPosY'] = {'objects', 'value', 'value'},
@@ -447,7 +444,6 @@ M.listName = {
         ['newLine'] = {'shapes', 'value', 'color', 'value', 'value', 'value', 'value'},
         ['appendLine'] = {'shapes', 'value', 'value'},
         ['setSprite'] = {'shapes', 'value', 'value'},
-        ['setSizeBySprite'] = {'shapes', 'value'},
         ['setColor'] = {'shapes', 'value', 'color'},
         ['setRGB'] = {'shapes', 'value', 'value', 'value', 'value'},
         ['setHEX'] = {'shapes', 'value', 'value'},

@@ -77,14 +77,16 @@ M['setWidth'] = function(params)
     local name = CALC(params[1])
     local width = CALC(params[2])
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].width = ' .. width .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.objects[' .. name .. ']._radius then GAME.group.objects[' .. name .. '].path.radius'
+    GAME.lua = GAME.lua .. ' = ' .. width .. ' else GAME.group.objects[' .. name .. '].width = ' .. width .. ' end end)'
 end
 
 M['setHeight'] = function(params)
     local name = CALC(params[1])
     local height = CALC(params[2])
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].height = ' .. height .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.objects[' .. name .. ']._radius then GAME.group.objects[' .. name .. '].path.radius'
+    GAME.lua = GAME.lua .. ' = ' .. height .. ' else GAME.group.objects[' .. name .. '].height = ' .. height .. ' end end)'
 end
 
 M['setSize'] = function(params)
