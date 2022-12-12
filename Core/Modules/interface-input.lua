@@ -1,16 +1,28 @@
 local M = {}
 
+M.resize = function()
+    pcall(function()
+        if M.count > 5 then M.count = 5 end
+        M.bg.height = M.bg._height + 44 * M.count
+        M.box.height = not IS_SIM and 36 + 26 * M.count or 72 + 44 * M.count
+        M.line.y = CENTER_Y - 75 + 22 * M.count
+        M.buttonOK.y = (M.bg.y + M.bg.height / 2 + M.line.y) / 2 + 2
+        M.text.y = M.buttonOK.y
+    end)
+end
+
 M.new = function(title, textListener, inputListener, oldText, textCheckbox, isTextEditor)
     if not M.group then
         ALERT = false
         M.listener = inputListener
         M.timer = timer.performWithDelay(0, function() M.group:toFront() end, 0)
-        M.group = display.newGroup()
+        M.group, M.count = display.newGroup(), 0
 
         local isAddHeight = textCheckbox or isTextEditor
 
         M.bg = display.newRoundedRect(CENTER_X, CENTER_Y - (isAddHeight and 75 or 100), DISPLAY_WIDTH - 100, isAddHeight and 150 or 100, 20)
             M.bg:setFillColor(0.2, 0.2, 0.22)
+            M.bg._height = M.bg.height
         M.group:insert(M.bg)
 
         if isTextEditor then
@@ -79,6 +91,21 @@ M.new = function(title, textListener, inputListener, oldText, textCheckbox, isTe
 
                 return true
             end)
+        end
+
+        local text = oldText
+        local count = 0
+
+        while text do
+            local isStroke = UTF8.find(text, '\n')
+            if not isStroke then break end
+            text = UTF8.sub(text, isStroke + 1)
+            count = count + 1
+        end
+
+        if count ~= INPUT.count then
+            INPUT.count = count
+            INPUT.resize()
         end
 
         EXITS.add(M.remove, false)

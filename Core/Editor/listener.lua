@@ -240,7 +240,22 @@ M['Text'] = function(data, cursor, backup)
     EDITOR.group[9]:setIsLocked(true, 'vertical')
     EDITOR.group[66]:setIsLocked(true, 'vertical')
 
-    INPUT.new(STR['blocks.entertext'], function(event) end, function(e)
+    INPUT.new(STR['blocks.entertext'], function(event)
+        local text = event.text
+        local count = 0
+
+        while text do
+            local isStroke = UTF8.find(text, '\n')
+            if not isStroke then break end
+            text = UTF8.sub(text, isStroke + 1)
+            count = count + 1
+        end
+
+        if count ~= INPUT.count then
+            INPUT.count = count
+            INPUT.resize()
+        end
+    end, function(e)
         EDITOR.group[9]:setIsLocked(false, 'vertical')
         EDITOR.group[66]:setIsLocked(false, 'vertical')
 
