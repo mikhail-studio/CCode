@@ -112,6 +112,15 @@ M['setAlpha'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].alpha = ' .. alpha .. ' end)'
 end
 
+M['setAnchor'] = function(params)
+    local name = CALC(params[1])
+    local anchorX = CALC(params[2], '50') .. '/ 100'
+    local anchorY = CALC(params[3], '50') .. '/ 100'
+
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].anchorX = ' .. anchorX
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].anchorY = ' .. anchorY .. ' end)'
+end
+
 M['updPosX'] = function(params)
     local name = CALC(params[1])
     local posX = '(' .. CALC(params[2]) .. ')'
@@ -163,6 +172,27 @@ M['updHeight'] = function(params)
     local height = '(' .. CALC(params[2]) .. ')'
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].height = GAME.group.objects[' .. name .. '].height + ' .. height .. ' end)'
+end
+
+M['hideObject'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].isVisible = false end)'
+end
+
+M['showObject'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].isVisible = true end)'
+end
+
+M['removeObject'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1])
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]:removeSelf() GAME.group.objects[name] = nil end)'
+end
+
+M['frontObject'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. ']:toFront() end)'
+end
+
+M['backObject'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. ']:toBack() end)'
 end
 
 return M

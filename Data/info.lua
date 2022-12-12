@@ -75,6 +75,7 @@ M.listBlock = {
     ['objects'] = {
         'newObject',
         'newSprite',
+        'copyObject',
         'setPos',
         'setPosX',
         'setPosY',
@@ -83,13 +84,19 @@ M.listBlock = {
         'setAlpha',
         'setWidth',
         'setHeight',
+        'setAnchor',
         'updPosX',
         'updPosY',
         'updSize',
         'updRotation',
         'updAlpha',
         'updWidth',
-        'updHeight'
+        'updHeight',
+        'hideObject',
+        'showObject',
+        'removeObject',
+        'frontObject',
+        'backObject'
     },
 
     ['control'] = {
@@ -129,12 +136,16 @@ M.listBlock = {
 
     ['shapes'] = {
         'setSprite',
+        'setSizeBySprite',
         'newCircle',
         'newRoundedRect',
         'newRect',
+        'newPolygon',
         'setColor',
         'setRGB',
         'setHEX',
+        'newLine',
+        'appendLine',
         'newBitmap',
         'updBitmap',
         'setPixel',
@@ -371,6 +382,7 @@ M.listName = {
     -- objects
     ['newObject'] = {'objects', 'value', 'value', 'value', 'value'},
         ['newSprite'] = {'objects', 'value', 'value', 'value', 'value', 'value', 'value', 'value', 'value'},
+        ['copyObject'] = {'objects', 'value', 'value'},
         ['setPos'] = {'objects', 'value', 'value', 'value'},
         ['setPosX'] = {'objects', 'value', 'value'},
         ['setPosY'] = {'objects', 'value', 'value'},
@@ -379,6 +391,7 @@ M.listName = {
         ['setAlpha'] = {'objects', 'value', 'value'},
         ['setWidth'] = {'objects', 'value', 'value'},
         ['setHeight'] = {'objects', 'value', 'value'},
+        ['setAnchor'] = {'objects', 'value', 'value', 'value'},
         ['updPosX'] = {'objects', 'value', 'value'},
         ['updPosY'] = {'objects', 'value', 'value'},
         ['updSize'] = {'objects', 'value', 'value'},
@@ -386,6 +399,11 @@ M.listName = {
         ['updAlpha'] = {'objects', 'value', 'value'},
         ['updWidth'] = {'objects', 'value', 'value'},
         ['updHeight'] = {'objects', 'value', 'value'},
+        ['hideObject'] = {'objects', 'value'},
+        ['showObject'] = {'objects', 'value'},
+        ['removeObject'] = {'objects', 'value'},
+        ['frontObject'] = {'objects', 'value'},
+        ['backObject'] = {'objects', 'value'},
 
     -- control
     ['requestFun'] = {'control', 'fun'},
@@ -425,7 +443,11 @@ M.listName = {
     ['newRect'] = {'shapes', 'value', 'color', 'value', 'value', 'value', 'value'},
         ['newRoundedRect'] = {'shapes', 'value', 'value', 'value', 'value', 'value', 'value'},
         ['newCircle'] = {'shapes', 'value', 'value', 'value', 'value'},
+        ['newPolygon'] = {'shapes', 'value', 'value', 'value', 'value'},
+        ['newLine'] = {'shapes', 'value', 'color', 'value', 'value', 'value', 'value'},
+        ['appendLine'] = {'shapes', 'value', 'value'},
         ['setSprite'] = {'shapes', 'value', 'value'},
+        ['setSizeBySprite'] = {'shapes', 'value'},
         ['setColor'] = {'shapes', 'value', 'color'},
         ['setRGB'] = {'shapes', 'value', 'value', 'value', 'value'},
         ['setHEX'] = {'shapes', 'value', 'value'},

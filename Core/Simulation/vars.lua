@@ -240,7 +240,8 @@ M['showText'] = function(params)
 end
 
 M['removeText'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. CALC(params[1]) .. ']:removeSelf() end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1])
+    GAME.lua = GAME.lua .. ' GAME.group.texts[name]:removeSelf() GAME.group.texts[name] = nil end)'
 end
 
 M['frontText'] = function(params)
