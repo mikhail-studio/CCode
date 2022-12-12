@@ -455,9 +455,9 @@ return ' ' .. UTF8.trimFull([[
         end
 
         M['random_str'] = function(...)
-            local result = pcall(function()
-                local args = {...}
+            local args = {...}
 
+            local result = pcall(function()
                 if #args > 0 then
                     return args[math.random(1, #args)]
                 else
@@ -467,9 +467,9 @@ return ' ' .. UTF8.trimFull([[
         end
 
         M['concat'] = function(...)
-            local result = pcall(function()
-                local args, str = {...}, ''
+            local args, str = {...}, ''
 
+            local result = pcall(function()
                 for i = 1, #args do
                     str = str .. args[i]
                 end
