@@ -331,6 +331,7 @@ return ' ' .. UTF8.trimFull([[
         end
 
         WIDGET.setTheme('widget_theme_android_holo_dark')
+        PHYSICS.setReportCollisionsInContentCoordinates(true)
         display.setStatusBar(display.HiddenStatusBar) math.randomseed(os.time())
         JSON.decode2, JSON.decode = JSON.decode, function(str) return type(str) == 'string' and (JSON.decode2(str) or {}) or nil end
         math.factorial = function(num) if num == 0 then return 1 else return num * math.factorial(num - 1) end end

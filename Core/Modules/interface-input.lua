@@ -4,7 +4,7 @@ M.resize = function()
     pcall(function()
         if M.count > 5 then M.count = 5 end
         M.bg.height = M.bg._height + 44 * M.count
-        M.box.height = not IS_SIM and 36 + 26 * M.count or 72 + 44 * M.count
+        M.box.height = not IS_SIM and 36 + 44 * M.count or 72 + 44 * M.count
         M.line.y = CENTER_Y - 75 + 22 * M.count
         M.buttonOK.y = (M.bg.y + M.bg.height / 2 + M.line.y) / 2 + 2
         M.text.y = M.buttonOK.y
