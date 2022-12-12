@@ -25,57 +25,57 @@ M.min = math.min
 M.pi = math.pi
 
 M['remainder'] = function(num, count)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return num % count
-    end) return result or 0
+    end) return isComplete and result or 0
 end
 
 M['asin'] = function(num)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return asin(num * M.pi / 180)
-    end) return result or 0
+    end) return isComplete and result or 0
 end
 
 M['acos'] = function(num)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return acos(num * M.pi / 180)
-    end) return result or 0
+    end) return isComplete and result or 0
 end
 
 M['atan'] = function(num)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return atan(num * M.pi / 180)
-    end) return result or 0
+    end) return isComplete and result or 0
 end
 
 M['atan2'] = function(x, y)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return atan2(x * M.pi / 180, y * M.pi / 180)
-    end) return result or 0
+    end) return isComplete and result or 0
 end
 
 M['sin'] = function(num)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return sin(num * M.pi / 180)
-    end) return result or 0
+    end) return isComplete and result or 0
 end
 
 M['cos'] = function(num)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return cos(num * M.pi / 180)
-    end) return result or 0
+    end) return isComplete and result or 0
 end
 
 M['tan'] = function(num)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return tan(num * M.pi / 180)
-    end) return result or 0
+    end) return isComplete and result or 0
 end
 
 M['ctan'] = function(num)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return 1 / tan(num * M.pi / 180)
-    end) return result or 0
+    end) return isComplete and result or 0
 end
 
 return M

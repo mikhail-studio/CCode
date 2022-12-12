@@ -1,45 +1,45 @@
 local M = {}
 
 M['get_text'] = function(name)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return GAME.group.texts[name or '0'] and GAME.group.texts[name or '0'].text or 'nil'
-    end) return result or 'nil'
+    end) return isComplete and result or 'nil'
 end
 
 M['read_save'] = function(key)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return GET_GAME_SAVE(CURRENT_LINK)[tostring(key)]
-    end) return result or 'nil'
+    end) return isComplete and result or 'nil'
 end
 
 M['random_str'] = function(...)
     local args = {...}
 
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         if #args > 0 then
             return args[math.random(1, #args)]
         else
             return 'nil'
         end
-    end) return result or 'nil'
+    end) return isComplete and result or 'nil'
 end
 
 M['concat'] = function(...)
     local args, str = {...}, ''
-    
-    local result = pcall(function()
+
+    local isComplete, result = pcall(function()
         for i = 1, #args do
             str = str .. args[i]
         end
 
         return str
-    end) return result or 'nil'
+    end) return isComplete and result or 'nil'
 end
 
 M['tonumber'] = function(str)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return tonumber(str) or 0
-    end) return result or 0
+    end) return isComplete and result or 0
 end
 
 M['tostring'] = function(any)
@@ -55,49 +55,49 @@ M['len_table'] = function(t)
 end
 
 M['encode'] = function(t, prettify)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return JSON[prettify and 'prettify' or 'encode'](t)
-    end) return result or '{}'
+    end) return isComplete and result or '{}'
 end
 
 M['gsub'] = function(str, pattern, replace, n)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return UTF8.gsub(str, pattern, replace, n)
-    end) return result or (str or 'nil')
+    end) return isComplete and result or (str or 'nil')
 end
 
 M['sub'] = function(str, i, j)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return UTF8.sub(str, i, j)
-    end) return result or (str or 'nil')
+    end) return isComplete and result or (str or 'nil')
 end
 
 M['len'] = function(str)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return UTF8.len(str)
-    end) return result or 0
+    end) return isComplete and result or 0
 end
 
 M['find'] = function(str, pattern, i, plain)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return UTF8.find(str, pattern, i, plain)
-    end) return result or (str or 'nil')
+    end) return isComplete and result or (str or 'nil')
 end
 
 M['match'] = function(str, pattern, i)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return UTF8.match(str, pattern, i)
-    end) return result or (str or 'nil')
+    end) return isComplete and result or (str or 'nil')
 end
 
 M['get_ip'] = function(any)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         return SERVER.getIP()
-    end) return result or 'nil'
+    end) return isComplete and result or 'nil'
 end
 
 M['color_pixel'] = function(x, y)
-    local result = pcall(function()
+    local isComplete, result = pcall(function()
         local x = x or 0
         local y = y or 0
         local colors = {0, 0, 0, 0}
@@ -109,7 +109,7 @@ M['color_pixel'] = function(x, y)
         end
 
         return colors
-    end) return result or {0, 0, 0, 0}
+    end) return isComplete and result or {0, 0, 0, 0}
 end
 
 M['unix_time'] = function()
