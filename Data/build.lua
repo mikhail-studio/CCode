@@ -444,14 +444,14 @@ return ' ' .. UTF8.trimFull([[
 
         M['get_text'] = function(name)
             local isComplete, result = pcall(function()
-                return GAME.group.texts[name or '0'] and GAME.group.texts[name or '0'].text or 'nil'
-            end) return isComplete and result or 'nil'
+                return GAME.group.texts[name or '0'] and GAME.group.texts[name or '0'].text or ''
+            end) return isComplete and result or ''
         end
 
         M['read_save'] = function(key)
             local isComplete, result = pcall(function()
                 return GET_GAME_SAVE(CURRENT_LINK)[tostring(key)]
-            end) return isComplete and result or 'nil'
+            end) return isComplete and result or nil
         end
 
         M['random_str'] = function(...)
@@ -461,9 +461,9 @@ return ' ' .. UTF8.trimFull([[
                 if #args > 0 then
                     return args[math.random(1, #args)]
                 else
-                    return 'nil'
+                    return nil
                 end
-            end) return isComplete and result or 'nil'
+            end) return isComplete and result or ''
         end
 
         M['concat'] = function(...)
@@ -475,7 +475,7 @@ return ' ' .. UTF8.trimFull([[
                 end
 
                 return str
-            end) return isComplete and result or 'nil'
+            end) return isComplete and result or ''
         end
 
         M['tonumber'] = function(str)
@@ -505,13 +505,13 @@ return ' ' .. UTF8.trimFull([[
         M['gsub'] = function(str, pattern, replace, n)
             local isComplete, result = pcall(function()
                 return UTF8.gsub(str, pattern, replace, n)
-            end) return isComplete and result or (str or 'nil')
+            end) return isComplete and result or str
         end
 
         M['sub'] = function(str, i, j)
             local isComplete, result = pcall(function()
                 return UTF8.sub(str, i, j)
-            end) return isComplete and result or (str or 'nil')
+            end) return isComplete and result or str
         end
 
         M['len'] = function(str)
@@ -523,19 +523,19 @@ return ' ' .. UTF8.trimFull([[
         M['find'] = function(str, pattern, i, plain)
             local isComplete, result = pcall(function()
                 return UTF8.find(str, pattern, i, plain)
-            end) return isComplete and result or (str or 'nil')
+            end) return isComplete and result or str
         end
 
         M['match'] = function(str, pattern, i)
             local isComplete, result = pcall(function()
                 return UTF8.match(str, pattern, i)
-            end) return isComplete and result or (str or 'nil')
+            end) return isComplete and result or str
         end
 
         M['get_ip'] = function(any)
             local isComplete, result = pcall(function()
                 return SERVER.getIP()
-            end) return isComplete and result or 'nil'
+            end) return isComplete and result or nil
         end
 
         M['color_pixel'] = function(x, y)

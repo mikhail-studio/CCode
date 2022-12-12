@@ -789,6 +789,7 @@ return {
 
     ['editor.list.log.true'] = 'истина',
         ['editor.list.log.false'] = 'ложь',
+        ['editor.list.log.nil'] = 'ничего',
         ['editor.list.log.>'] = '>',
         ['editor.list.log.<'] = '<',
         ['editor.list.log.>='] = '≥',

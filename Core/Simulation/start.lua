@@ -2,18 +2,29 @@ local EVENTS = require 'Core.Simulation.events'
 local CALC = require 'Core.Simulation.calc'
 local M = {}
 
-local function setCustom(name)
-    EVENTS.BLOCKS[name] = function(params)
-        M.lua = M.lua .. ' pcall(function() funsC[\'' .. name .. '\'](' for i = 1, #params do
-        M.lua = M.lua .. CALC(params[i]) .. (i == #params and '' or ', ') end
-        M.lua = M.lua .. ') end)'
-    end
+local function setCustom(name, logic)
+    if logic then
+        EVENTS.BLOCKS[name] = function(params)
+            M.lua = M.lua .. ' pcall(function() funsC[\'' .. name .. '\'](' for i = 1, #params do
+            M.lua = M.lua .. CALC(params[i]) .. (i == #params and '' or ', ') end M.lua = M.lua .. ') end)'
+        end
 
-    EVENTS['_' .. name] = function(nested, params)
-        M.lua = M.lua .. ' pcall(function() funsC[\'' .. name .. '\'] = function(...)'
-        M.lua = M.lua .. ' local varsE, tablesE, args = {}, {}, {...}' for i = 1, #params do if params[i][1] then
-        M.lua = M.lua .. ' varsE[\'' .. params[i][1][1] .. '\'] = args[' .. i .. ']' end end
-        EVENTS.requestNestedBlock(nested) M.lua = M.lua .. ' end end)'
+        EVENTS['_' .. name] = function(nested, params)
+            M.lua = M.lua .. ' pcall(function() funsC[\'' .. name .. '\'] = function(...) local args = {...} local isComplete, result ='
+            EVENTS.BLOCKS.requestApi({{{logic}}}) M.lua = M.lua .. ' print(result) return isComplete and result or nil end end)'
+        end
+    else
+        EVENTS.BLOCKS[name] = function(params)
+            M.lua = M.lua .. ' pcall(function() funsC[\'' .. name .. '\'](' for i = 1, #params do
+            M.lua = M.lua .. CALC(params[i]) .. (i == #params and '' or ', ') end M.lua = M.lua .. ') end)'
+        end
+
+        EVENTS['_' .. name] = function(nested, params)
+            M.lua = M.lua .. ' pcall(function() funsC[\'' .. name .. '\'] = function(...)'
+            M.lua = M.lua .. ' local varsE, tablesE, args = {}, {}, {...}' for i = 1, #params do if params[i][1] then
+            M.lua = M.lua .. ' varsE[\'' .. params[i][1][1] .. '\'] = args[' .. i .. ']' end end
+            EVENTS.requestNestedBlock(nested) M.lua = M.lua .. ' end end)'
+        end
     end
 end
 
@@ -126,9 +137,11 @@ M.new = function(linkBuild, isDebug)
                 local logic = custom[index][3]
 
                 if type(logic) == 'string' then
-                    EVENTS.CUSTOM[name] = function(params)
-                        EVENTS.CONTROL.requestApi({{{logic}}}, params)
-                    end
+                    table.insert(M.data.scripts, 1, GET_FULL_DATA({scripts = {{
+                        title = '', funs = {}, tables = {}, vars = {}, custom = true,
+                        params = {{tables = {}, vars = {}, name = '_' .. name, event = true, nested = {}, comment = false, params = {}}}
+                    }}}).scripts[1])
+                    setCustom(name, logic)
                 elseif type(logic) == 'table' then
                     for i = 1, #logic.params do
                         if logic.params[i].name == '_custom' then

@@ -1,17 +1,17 @@
 local CALC = require 'Core.Simulation.calc'
 local M = {}
 
-M['requestApi'] = function(params, custom)
-    local p1, p2 = params[1][1][1]:gsub('\n', '\\n'):gsub('\r', ''):gsub('\'', '\\\''), 'local args = {}'
-    for i = 1, custom and #custom or 0 do p2 = p2 .. ' args[' .. i .. '] = ' .. CALC(custom[i]) end
+M['requestApi'] = function(params)
+    local p1 = params[1][1][1]:gsub('\n', '\\n'):gsub('\r', ''):gsub('\'', '\\\'')
     p1 = UTF8.gsub(p1, 'loadstring', 'print')
     p1 = UTF8.gsub(p1, 'currentStage', 'fps')
     p1 = UTF8.gsub(p1, 'getCurrentStage', 'getDefault')
     p1 = UTF8.gsub(p1, 'setFocus', 'display.getCurrentStage():setFocus')
-    p2 = p2:gsub('\n', '\\n'):gsub('\r', ''):gsub('\'', '\\\'')
 
-    GAME.lua = GAME.lua .. ' pcall(function() loadstring(\'local G = {} for key, value in pairs(GET_GLOBAL_TABLE())'
-    GAME.lua = GAME.lua .. ' do G[key] = value end setfenv(1, G) ' .. p2 .. ' ' .. p1 .. '\')() end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local args = type(args) == \'table\' and JSON.encode(args) or \'{}\''
+    GAME.lua = GAME.lua .. ' args = args:gsub(\'\\n\', \'\\\\n\'):gsub(\'\\r\', \'\'):gsub(\'\\\'\', \'\\\\\\\'\')'
+    GAME.lua = GAME.lua .. ' return loadstring(\'local G = {} G.args = JSON.decode(\\\'\' .. args .. \'\\\') for key, value in'
+    GAME.lua = GAME.lua .. ' pairs(GET_GLOBAL_TABLE()) do G[key] = value end setfenv(1, G) ' .. p1 .. '\')() end)'
 end
 
 M['requestFun'] = function(params)

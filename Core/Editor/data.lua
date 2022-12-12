@@ -57,7 +57,7 @@ M.prop = {
 
 M.log = {
     names = {},
-    keys = {'true', 'false', '~=', '>', '<', '>=', '<=', 'and', 'or', 'not'}
+    keys = {'true', 'false', 'nil', '~=', '>', '<', '>=', '<=', 'and', 'or', 'not'}
 }
 
 M.device = {
