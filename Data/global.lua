@@ -42,7 +42,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1201
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1202
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
@@ -328,6 +328,8 @@ UTF8.trimRight = function(s) return UTF8.gsub(s, '%s+$', '') end
 UTF8.trimFull = function(s) return UTF8.trim(UTF8.gsub(s, '%s+', ' ')) end
 timer.new = function(sec, rep, lis) return timer.performWithDelay(sec, lis, rep) end
 math.sum = function(...) local args, num = {...}, 0 for i = 1, #args do num = num + args[i] end return num end
+math.getMaskBits = function(t) local s = 0 for j = 1, #t do s = s + math.getBit(t[j]) end return s end
+math.getBit = function(i) return 2 ^ (i-1) end
 table.len, math.round, table.merge = function(t)
     return type(t) == 'table' and ((type(#t) == 'number' and #t > 0) and #t
     or (function() local i = 0 for k in pairs(t) do i = i + 1 end return i end)()) or 0

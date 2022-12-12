@@ -8,12 +8,14 @@ M['setBody'] = function(params)
     local bounce = CALC(params[4], '0')
     local friction = CALC(params[5], '0')
     local gravity = '0 - (' .. CALC(params[6], '-1') .. ')'
+    local categoryBit = CALC(params[7], 'nil')
+    local maskBits = CALC(params[8], 'nil')
     local hitbox = 'GAME.group.objects[' .. name .. ']._hitbox'
 
     GAME.lua = GAME.lua .. ' pcall(function() pcall(function() PHYSICS.removeBody(GAME.group.objects[' .. name .. ']) end)'
-    GAME.lua = GAME.lua .. ' local params = other.getPhysicsParams(' .. friction .. ', ' .. bounce .. ', ' .. density .. ', ' .. hitbox .. ')'
-    GAME.lua = GAME.lua .. ' PHYSICS.addBody(GAME.group.objects[' .. name .. '], ' .. type .. ', params)'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = ' .. density
+    GAME.lua = GAME.lua .. ' local params = other.getPhysicsParams(' .. friction .. ', ' .. bounce .. ', ' .. density .. ', ' .. hitbox .. ','
+    GAME.lua = GAME.lua .. ' {' .. categoryBit .. ', ' .. maskBits .. '}) PHYSICS.addBody(GAME.group.objects[' .. name .. '], ' .. type .. ','
+    GAME.lua = GAME.lua .. ' params) print(JSON.encode(params)) GAME.group.objects[' .. name .. ']._density = ' .. density
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._bounce = ' .. bounce
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._friction = ' .. friction
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._gravity = ' .. gravity

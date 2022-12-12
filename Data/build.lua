@@ -341,6 +341,8 @@ return ' ' .. UTF8.trimFull([[
         UTF8.trimFull = function(s) return UTF8.trim(UTF8.gsub(s, '%s+', ' ')) end
         timer.new = function(sec, rep, lis) return timer.performWithDelay(sec, lis, rep) end
         math.sum = function(...) local args, num = {...}, 0 for i = 1, #args do num = num + args[i] end return num end
+        math.getMaskBits = function(t) local s = 0 for j = 1, #t do s = s + math.getBit(t[j]) end return s end
+        math.getBit = function(i) return 2 ^ (i-1) end
         table.len, math.round, table.merge = function(t)
             return type(t) == 'table' and ((type(#t) == 'number' and #t > 0) and #t
             or (function() local i = 0 for k in pairs(t) do i = i + 1 end return i end)()) or 0
@@ -572,9 +574,11 @@ return ' ' .. UTF8.trimFull([[
         local atan = math.atan
         local atan2 = math.atan2
 
+        M.getMaskBits = math.getMaskBits
         M.randomseed = math.randomseed
         M.factorial = math.factorial
         M.random = math.random
+        M.getBit = math.getBit
         M.radical = math.sqrt
         M.log10 = math.log10
         M.round = math.round
@@ -976,8 +980,15 @@ return ' ' .. UTF8.trimFull([[
             GAME.group.bitmaps[name]:invalidate()
         end
 
-        M.getPhysicsParams = function(friction, bounce, density, hitbox)
+        M.getPhysicsParams = function(friction, bounce, density, hitbox, filter)
             local params = {friction = friction, bounce = bounce, density = density}
+
+            if filter[1] and filter[2] then
+                params.filter = {
+                    categoryBits = math.getBit(filter[1]),
+                    maskBits = math.getMaskBits(filter[2])
+                }
+            end
 
             if hitbox.type == 'box' then
                 params.box = {

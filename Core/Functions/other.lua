@@ -22,8 +22,15 @@ M.getBitmapTexture = function(link, name)
     GAME.group.bitmaps[name]:invalidate()
 end
 
-M.getPhysicsParams = function(friction, bounce, density, hitbox)
+M.getPhysicsParams = function(friction, bounce, density, hitbox, filter)
     local params = {friction = friction, bounce = bounce, density = density}
+
+    if filter[1] and filter[2] then
+        params.filter = {
+            categoryBits = math.getBit(filter[1]),
+            maskBits = math.getMaskBits(filter[2])
+        }
+    end
 
     if hitbox.type == 'box' then
         params.box = {

@@ -8,9 +8,11 @@ local acos = math.acos
 local atan = math.atan
 local atan2 = math.atan2
 
+M.getMaskBits = math.getMaskBits
 M.randomseed = math.randomseed
 M.factorial = math.factorial
 M.random = math.random
+M.getBit = math.getBit
 M.radical = math.sqrt
 M.log10 = math.log10
 M.round = math.round

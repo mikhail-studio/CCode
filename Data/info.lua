@@ -517,7 +517,7 @@ M.listName = {
             ['updTagAlpha'] = {'groups', 'value', 'value'},
 
     -- physics
-    ['setBody'] = {'physics', 'value', 'body', 'value', 'value', 'value', 'value'},
+    ['setBody'] = {'physics', 'value', 'body', 'value', 'value', 'value', 'value', 'value', 'value'},
         ['setTextBody'] = {'physics', 'value', 'body', 'value', 'value', 'value', 'value'},
         ['removeBody'] = {'physics', 'value'},
         ['setBodyType'] = {'physics', 'value', 'body'},
