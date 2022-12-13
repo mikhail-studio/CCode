@@ -42,7 +42,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1206
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1207
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
@@ -201,14 +201,14 @@ IS_ZERO_TABLE = function(t)
     return result
 end
 
-COPY_TABLE = function(t)
+COPY_TABLE = function(t, isSim)
     local result = {}
 
     pcall(function() if t then
         for key, value in pairs(t) do
-            if type(value) == 'table' and key ~= '_class' then
-                result[key] = COPY_TABLE(value)
-            else
+            if type(value) == 'table' and key ~= '_class' and key ~= '_tableListeners' then
+                result[key] = COPY_TABLE(value, isSim)
+            elseif (not isSim) or (key ~= '_tableListeners' and key ~= '_class') then
                 result[key] = value
             end
         end
@@ -217,18 +217,26 @@ COPY_TABLE = function(t)
     return result
 end
 
-COPY_TABLE_P = function(t)
+COPY_TABLE_P = function(t, isSim)
     local result = {}
 
     pcall(function()
         if type(t[1]) == 'table' and #t == 1 then
-            result = COPY_TABLE(t[1])
+            result = COPY_TABLE(t[1], isSim)
         else
-            result = COPY_TABLE(t)
+            result = COPY_TABLE(t, isSim)
         end
     end)
 
     return result
+end
+
+GET_X = function(x)
+    return type(x) == 'number' and x - CENTER_X or 0
+end
+
+GET_Y = function(y)
+    return type(y) == 'number' and CENTER_Y - y or 0
 end
 
 NEW_DATA = function()

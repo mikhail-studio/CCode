@@ -298,6 +298,14 @@ return ' ' .. UTF8.trimFull([[
             return result
         end
 
+        GET_X = function(x)
+            return type(x) == 'number' and x - CENTER_X or 0
+        end
+
+        GET_Y = function(y)
+            return type(y) == 'number' and CENTER_Y - y or 0
+        end
+
         GET_GAME_SAVE = function(link)
             local path = DOC_DIR .. '/' .. link .. '/save.json'
             local file, data = io.open(path, 'r'), {}

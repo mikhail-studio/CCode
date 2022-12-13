@@ -11,7 +11,7 @@ local function setCustom(name, logic)
 
         EVENTS['_' .. name] = function(nested, params)
             M.lua = M.lua .. ' pcall(function() funsC[\'' .. name .. '\'] = function(...) local args = {...} local isComplete, result ='
-            EVENTS.BLOCKS.requestApi({{{logic}}}) M.lua = M.lua .. ' print(result) return isComplete and result or nil end end)'
+            EVENTS.BLOCKS.requestApi({{{logic}}}) M.lua = M.lua .. ' return isComplete and result or nil end end)'
         end
     else
         EVENTS.BLOCKS[name] = function(params)
@@ -70,9 +70,11 @@ M.remove = function()
     pcall(function() Runtime:removeEventListener('system', M.group.const.system) end)
     pcall(function() Runtime:removeEventListener('touch', M.group.const.touch_fun) end)
     pcall(function() Runtime:removeEventListener('enterFrame', M.group.const.enterFrame) end)
-    pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
+    pcall(function() for _, v in pairs(M.group.objects) do pcall(function() PHYSICS.removeBody(v) end) end end)
+    pcall(function() for _, v in pairs(M.group.texts) do pcall(function() PHYSICS.removeBody(v) end) end end)
     pcall(function() for _, v in pairs(M.group.bitmaps) do v:releaseSelf() end end)
     pcall(function() for _, v in ipairs(M.group.stops) do v() end end) M.isStarted = nil
+    pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
     pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil math.randomseed(os.time())
     pcall(function() for child = display.currentStage.numChildren, 1, -1 do
     if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
@@ -196,6 +198,10 @@ M.new = function(linkBuild, isDebug)
                 or dataEvent[j].name == 'onFieldEnded' or dataEvent[j].name == 'onWebViewCallback'
                 or dataEvent[j].name == 'onCondition' or dataEvent[j].name == 'onBackPress'
                 or dataEvent[j].name == 'onSuspend' or dataEvent[j].name == 'onResume'
+                or dataEvent[j].name == 'onLocalCollisionBegan' or dataEvent[j].name == 'onLocalCollisionEnded' 
+                or dataEvent[j].name == 'onLocalPreCollision' or dataEvent[j].name == 'onLocalPostCollision' 
+                or dataEvent[j].name == 'onGlobalCollisionBegan' or dataEvent[j].name == 'onGlobalCollisionEnded' 
+                or dataEvent[j].name == 'onGlobalPreCollision' or dataEvent[j].name == 'onGlobalPostCollision' 
 
                 if nestedScript[dataEvent[j].script] and not dataEvent[j].comment and isFunBlock then
                     pcall(function() EVENTS[dataEvent[j].name](nestedEvent[j], dataEvent[j].params) end)
@@ -214,7 +220,11 @@ M.new = function(linkBuild, isDebug)
         and dataEvent[i].name ~= 'onFieldBegan' and dataEvent[i].name ~= 'onFieldEditing'
         and dataEvent[i].name ~= 'onFieldEnded' and dataEvent[i].name ~= 'onWebViewCallback'
         and dataEvent[i].name ~= 'onCondition' and dataEvent[i].name ~= 'onBackPress'
-        and dataEvent[i].name ~= 'onSuspend' and dataEvent[i].name ~= 'onResume' then
+        and dataEvent[i].name ~= 'onSuspend' and dataEvent[i].name ~= 'onResume'
+        and dataEvent[i].name ~= 'onLocalCollisionBegan' and dataEvent[i].name ~= 'onLocalCollisionEnded'
+        and dataEvent[i].name ~= 'onLocalPreCollision' and dataEvent[i].name ~= 'onLocalPostCollision'
+        and dataEvent[i].name ~= 'onGlobalCollisionBegan' and dataEvent[i].name ~= 'onGlobalCollisionEnded'
+        and dataEvent[i].name ~= 'onGlobalPreCollision' and dataEvent[i].name ~= 'onGlobalPostCollision' then
             pcall(function() EVENTS[dataEvent[i].name](nestedEvent[i], dataEvent[i].params) end)
         end
     end if #nestedEvent > 0 then M.lua = M.lua .. ' end end script()' end

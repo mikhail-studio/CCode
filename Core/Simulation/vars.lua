@@ -126,6 +126,13 @@ M['setText'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].text = tostring(' .. text .. ') end)'
 end
 
+M['setTextSize'] = function(params)
+    local name = CALC(params[1])
+    local size = CALC(params[2], '36')
+
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].size = ' .. size .. ' end)'
+end
+
 M['setTextPos'] = function(params)
     local name = CALC(params[1])
     local posX = '(CENTER_X + (' .. CALC(params[2]) .. '))'

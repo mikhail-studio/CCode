@@ -65,9 +65,30 @@ M['setListener'] = function(params)
     GAME.lua = GAME.lua .. ' end) return isComplete and result or false end) end)'
 end
 
+M['setLocalCollision'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1])
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].collision = function(s, e) local isComplete, result ='
+    GAME.lua = GAME.lua .. ' pcall(function() return ' .. CALC(params[2], 'a', true) .. '(e) end) return isComplete'
+    GAME.lua = GAME.lua .. ' and result or false end GAME.group.objects[name]:addEventListener(\'collision\') end)'
+end
+
+M['setLocalPreCollision'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1])
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].preCollision = function(s, e) local isComplete, result ='
+    GAME.lua = GAME.lua .. ' pcall(function() return ' .. CALC(params[2], 'a', true) .. '(e) end) return isComplete'
+    GAME.lua = GAME.lua .. ' and result or false end GAME.group.objects[name]:addEventListener(\'preCollision\') end)'
+end
+
+M['setLocalPostCollision'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1])
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].postCollision = function(s, e) local isComplete, result ='
+    GAME.lua = GAME.lua .. ' pcall(function() return ' .. CALC(params[2], 'a', true) .. '(e) end) return isComplete'
+    GAME.lua = GAME.lua .. ' and result or false end GAME.group.objects[name]:addEventListener(\'postCollision\') end)'
+end
+
 M['timer'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.ts, timer.new(' .. CALC(params[1], '0.001')
-    GAME.lua = GAME.lua .. ' * 1000, ' .. CALC(params[2], '1') .. ', function(e) print(1) if GAME.group then'
+    GAME.lua = GAME.lua .. ' * 1000, ' .. CALC(params[2], '1') .. ', function(e) if GAME.group then'
 end
 
 M['timerName'] = function(params)

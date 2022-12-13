@@ -15,7 +15,7 @@ M['setBody'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() pcall(function() PHYSICS.removeBody(GAME.group.objects[' .. name .. ']) end)'
     GAME.lua = GAME.lua .. ' local params = other.getPhysicsParams(' .. friction .. ', ' .. bounce .. ', ' .. density .. ', ' .. hitbox .. ','
     GAME.lua = GAME.lua .. ' {' .. categoryBit .. ', ' .. maskBits .. '}) PHYSICS.addBody(GAME.group.objects[' .. name .. '], ' .. type .. ','
-    GAME.lua = GAME.lua .. ' params) print(JSON.encode(params)) GAME.group.objects[' .. name .. ']._density = ' .. density
+    GAME.lua = GAME.lua .. ' params) GAME.group.objects[' .. name .. ']._density = ' .. density
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._bounce = ' .. bounce
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._friction = ' .. friction
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._gravity = ' .. gravity
@@ -108,6 +108,27 @@ M['setAngularImpulse'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. ']:applyAngularImpulse(' .. force .. ') end)'
 end
 
+M['setBounce'] = function(params)
+    local contact = CALC(params[1])
+    local bounce = CALC(params[2])
+
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. contact .. '[\'bounce\'] = ' .. bounce .. ' end)'
+end
+
+M['setFriction'] = function(params)
+    local contact = CALC(params[1])
+    local friction = CALC(params[2])
+
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. contact .. '[\'friction\'] = ' .. friction .. ' end)'
+end
+
+M['setTangentSpeed'] = function(params)
+    local contact = CALC(params[1])
+    local speed = CALC(params[2])
+
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. contact .. '[\'tangentSpeed\'] = ' .. speed .. ' end)'
+end
+
 M['setForce'] = function(params)
     local name = CALC(params[1])
     local forceX = CALC(params[2], '0')
@@ -122,6 +143,10 @@ end
 
 M['setTorque'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. ']:applyTorque(' .. CALC(params[2])  .. ') end)'
+end
+
+M['disableCollision'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1]) .. '[\'isEnabled\'] = false end)'
 end
 
 M['setHitboxBox'] = function(params)
