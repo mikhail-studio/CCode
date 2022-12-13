@@ -4,7 +4,6 @@ M.new = function(title, buttons, listener, dog)
     if not M.group then
         ALERT = false
         M.listener = listener
-        M.timer = timer.performWithDelay(0, function() M.group:toFront() end, 0)
         M.group, M.buttons = display.newGroup(), {}
 
         M.bg = display.newRoundedRect(CENTER_X, CENTER_Y - 100, DISPLAY_WIDTH - 100, #buttons > 0 and 110 or 36, 20)
@@ -76,6 +75,7 @@ M.new = function(title, buttons, listener, dog)
             end)
         end
 
+        M.group:toFront()
         if #buttons > 0 then EXITS.add(M.remove, 0) end
     end
 end
@@ -84,7 +84,6 @@ M.remove = function(index)
     if M and M.group then
         ALERT = true
         M.listener({index = index})
-        timer.cancel(M.timer)
         M.group:removeSelf()
         M.group = nil
     end

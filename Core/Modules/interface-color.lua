@@ -8,7 +8,6 @@ M.new = function(rgb, listener)
     if not M.group then
         ALERT = false
         M.listener = listener
-        M.timer = timer.performWithDelay(0, function() M.group:toFront() end, 0)
         M.group = display.newGroup()
 
         local bg = display.newRoundedRect(CENTER_X, CENTER_Y - 120, 500, 700, 20)
@@ -289,7 +288,7 @@ M.new = function(rgb, listener)
             end
         end
 
-        EXITS.add(M.remove, false)
+        EXITS.add(M.remove, false) M.group:toFront()
         redPlus:addEventListener('touch', function(e) colorPlus(e, 'red') return true end)
         redMinus:addEventListener('touch', function(e) colorMinus(e, 'red') return true end)
         greenPlus:addEventListener('touch', function(e) colorPlus(e, 'green') return true end)
@@ -307,7 +306,6 @@ M.remove = function(input, rgb)
         INPUT.remove(false)
         native.setKeyboardFocus(nil)
         M.listener({input = input, rgb = rgb})
-        timer.cancel(M.timer)
         M.group:removeSelf()
         M.group = nil
     end
