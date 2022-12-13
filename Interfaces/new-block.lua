@@ -31,12 +31,14 @@ local function showTypeScroll(event)
 
             M.group[4].isVisible = event.target.index == 1
             M.group[3].isVisible = event.target.index == 1 or event.target.index == 15
-            or event.target.index == 9 or event.target.index == 6 or event.target.index == 3
+            or event.target.index == 9 or event.target.index == 6
+            or event.target.index == 2 or event.target.index == 3
             for i = 5, 10 do M.group[i].isVisible = event.target.index == 15 end
             for i = 19, 20 do M.group[i].isVisible = event.target.index == 15 end
             for i = 11, 14 do M.group[i].isVisible = event.target.index == 9 end
             for i = 15, 18 do M.group[i].isVisible = event.target.index == 6 end
             for i = 21, 24 do M.group[i].isVisible = event.target.index == 3 end
+            for i = 25, 28 do M.group[i].isVisible = event.target.index == 2 end
             M.group.currentIndex = event.target.index
         end
     end
@@ -278,7 +280,8 @@ M.create = function()
         end
 
         M.group[3].isVisible = M.group.currentIndex == 1 or M.group.currentIndex == 15
-        or M.group.currentIndex == 9 or M.group.currentIndex == 6 or M.group.currentIndex == 3
+        or M.group.currentIndex == 9 or M.group.currentIndex == 6
+        or M.group.currentIndex == 3 or M.group.currentIndex == 2
         M.group[4].isVisible, M.group[5].alpha = M.group.currentIndex == 1, 0.1
         M.group[7].alpha, M.group[7].isOn = 0.1, false
         M.group[9].alpha, M.group[9].isOn = 0.1, false
@@ -288,6 +291,7 @@ M.create = function()
         for i = 11, 14 do M.group[i].isVisible = M.group.currentIndex == 9 end
         for i = 15, 18 do M.group[i].isVisible = M.group.currentIndex == 6 end
         for i = 21, 24 do M.group[i].isVisible = M.group.currentIndex == 3 end
+        for i = 25, 28 do M.group[i].isVisible = M.group.currentIndex == 2 end
 
         if M.group.currentIndex == 1 and M.group[4].text ~= '' then
             M.group[4].text = ''
@@ -332,20 +336,26 @@ M.create = function()
 
         local buttonListeners = function(e)
             if M.group and M.group.isVisible then
+                local allowedTag = false
+                if e.target.tag then
+                    allowedTag = e.target.tag == 'groups' or e.target.tag == 'tags' or e.target.tag == 'vars2' or e.target.tag == 'vars1'
+                    or e.target.tag == 'control2' or e.target.tag == 'control1' or e.target.tag == 'events2' or e.target.tag == 'events1'
+                end
+
                 if e.phase == 'began' then
                     display.getCurrentStage():setFocus(e.target)
-                    e.target.alpha = ((e.target.tag == 'groups' or e.target.tag == 'tags') and e.target.isOn) and 0.3 or 0.2
+                    e.target.alpha = (allowedTag and e.target.isOn) and 0.3 or 0.2
                     e.target.click = true
                 elseif e.phase == 'moved' and (math.abs(e.xDelta) > 30 or math.abs(e.yDelta) > 30) then
                     display.getCurrentStage():setFocus(nil)
                     e.target.alpha = ((e.target.tag == 'change' or e.target.tag == 'remove') and e.target.isOn) and 0.3
-                    or (((e.target.tag == 'groups' or e.target.tag == 'tags') and e.target.isOn) and 0.3 or 0.1)
+                    or ((allowedTag and e.target.isOn) and 0.3 or 0.1)
                     e.target.click = false
                 elseif e.phase == 'ended' or e.phase == 'cancelled' then
                     display.getCurrentStage():setFocus(nil)
                     if e.target.click then
                         e.target.click = false
-                        e.target.alpha = ((e.target.tag == 'groups' or e.target.tag == 'tags') and e.target.isOn) and 0.3 or 0.1
+                        e.target.alpha = (allowedTag and e.target.isOn) and 0.3 or 0.1
                         if e.target.tag == 'create' then
                             CUSTOM.newBlock()
                         elseif e.target.tag == 'change' then
@@ -387,6 +397,12 @@ M.create = function()
                         elseif e.target.tag == 'vars1' and not e.target.isOn then
                             e.target.isOn = true e.target.alpha = 0.3 M.group[23].isOn = false M.group[23].alpha = 0.1
                             M.group.types[3].scroll.isVisible = true M.group.types[3].scroll2.isVisible = false M.group.types[3].currentScroll = 1
+                        elseif e.target.tag == 'events2' and not e.target.isOn then
+                            e.target.isOn = true e.target.alpha = 0.3 M.group[25].isOn = false M.group[25].alpha = 0.1
+                            M.group.types[2].scroll.isVisible = false M.group.types[2].scroll2.isVisible = true M.group.types[2].currentScroll = 2
+                        elseif e.target.tag == 'events1' and not e.target.isOn then
+                            e.target.isOn = true e.target.alpha = 0.3 M.group[27].isOn = false M.group[27].alpha = 0.1
+                            M.group.types[2].scroll.isVisible = true M.group.types[2].scroll2.isVisible = false M.group.types[2].currentScroll = 1
                         end
                     end
                 end
@@ -519,6 +535,30 @@ M.create = function()
             buttonVars2Text.isVisible = false
         M.group:insert(buttonVars2Text)
 
+        local buttonEvents1 = display.newRect(find.x - find.width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
+            buttonEvents1.isOn = true
+            buttonEvents1.alpha = 0.3
+            buttonEvents1.tag = 'events1'
+            buttonEvents1:addEventListener('touch', buttonListeners)
+        M.group:insert(buttonEvents1)
+
+        local buttonEvents1Text = display.newText('1', buttonEvents1.x, buttonEvents1.y, 'ubuntu', 28)
+            buttonEvents1.isVisible = false
+            buttonEvents1Text.isVisible = false
+        M.group:insert(buttonEvents1Text)
+
+        local buttonEvents2 = display.newRect(buttonEvents1.x + width3, ZERO_Y + 50, width3, 56)
+            buttonEvents2.isOn = false
+            buttonEvents2.alpha = 0.1
+            buttonEvents2.tag = 'events2'
+            buttonEvents2:addEventListener('touch', buttonListeners)
+        M.group:insert(buttonEvents2)
+
+        local buttonEvents2Text = display.newText('2', buttonEvents2.x, buttonEvents2.y, 'ubuntu', 28)
+            buttonEvents2.isVisible = false
+            buttonEvents2Text.isVisible = false
+        M.group:insert(buttonEvents2Text)
+
         local width = CENTER_X == 360 and DISPLAY_WIDTH / 5 - 24 or DISPLAY_WIDTH / 6
         local x, y = ZERO_X + 20, MAX_Y - 220
 
@@ -544,8 +584,8 @@ M.create = function()
             M.group:insert(M.group.types[i].text)
 
             M.group.types[i].scroll = WIDGET.newScrollView({
-                    x = CENTER_X, y = (((i == 1 or i == 15 or i == 9 or i == 6 or i == 3) and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
-                    width = DISPLAY_WIDTH, height = line.y - ((i == 1 or i == 15 or i == 9 or i == 6 or i == 3) and find.y + 2 or ZERO_Y + 1),
+                    x = CENTER_X, y = (((i == 1 or i == 15 or i == 9 or i == 6 or i == 3 or i == 2) and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
+                    width = DISPLAY_WIDTH, height = line.y - ((i == 1 or i == 15 or i == 9 or i == 6 or i == 3 or i == 2) and find.y + 2 or ZERO_Y + 1),
                     hideBackground = true, hideScrollBar = false,
                     horizontalScrollDisabled = true, isBounceEnabled = true
                 }) M.group.types[i].currentScroll = 1
@@ -553,8 +593,8 @@ M.create = function()
 
             if INFO.listDelimiter[INFO.listType[i]] then
                 M.group.types[i].scroll2 = WIDGET.newScrollView({
-                        x = CENTER_X, y = (((i == 1 or i == 15 or i == 9 or i == 6 or i == 3) and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
-                        width = DISPLAY_WIDTH, height = line.y - ((i == 1 or i == 15 or i == 9 or i == 6 or i == 3) and find.y + 2 or ZERO_Y + 1),
+                        x = CENTER_X, y = (((i == 1 or i == 15 or i == 9 or i == 6 or i == 3 or i == 2) and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
+                        width = DISPLAY_WIDTH, height = line.y - ((i == 1 or i == 15 or i == 9 or i == 6 or i == 3 or i == 2) and find.y + 2 or ZERO_Y + 1),
                         hideBackground = true, hideScrollBar = false,
                         horizontalScrollDisabled = true, isBounceEnabled = true
                     }) M.group.types[i].scroll2.isVisible = false
