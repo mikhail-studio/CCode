@@ -330,6 +330,7 @@ return ' ' .. UTF8.trimFull([[
             end
         end
 
+        PHYSICS.setAverageCollisionPositions(true)
         WIDGET.setTheme('widget_theme_android_holo_dark')
         PHYSICS.setReportCollisionsInContentCoordinates(true)
         display.setStatusBar(display.HiddenStatusBar) math.randomseed(os.time())
