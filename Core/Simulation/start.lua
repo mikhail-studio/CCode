@@ -40,7 +40,7 @@ local function getStartLua(linkBuild)
     local code5 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} GAME.group.displays = {} device.start()'
     local code6 = ' GAME.group.const.touch_fun = function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
     local code7 = ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y for i = 1, #GAME.group.displays do GAME.group.displays[i](e)'
-    local code8 = ' end return true end Runtime:addEventListener(\'touch\', GAME.group.const.touch_fun) PHYSICS.start()'
+    local code8 = ' end return true end Runtime:addEventListener(\'touch\', GAME.group.const.touch_fun) PHYSICS.start() GAME.group.collis = {}'
     local code9 = ' for child = 1, display.currentStage.numChildren do GAME.currentStage[display.currentStage[child]] = true end'
     local cod10 = ' GAME.group.conditions = {} GAME.group.const.enterFrame = function() for i = 1, #GAME.group.conditions do'
     local cod11 = ' GAME.group.conditions[i]() end end Runtime:addEventListener(\'enterFrame\', GAME.group.const.enterFrame)'
@@ -70,7 +70,12 @@ M.remove = function()
     pcall(function() Runtime:removeEventListener('system', M.group.const.system) end)
     pcall(function() Runtime:removeEventListener('touch', M.group.const.touch_fun) end)
     pcall(function() Runtime:removeEventListener('enterFrame', M.group.const.enterFrame) end)
-    pcall(function() for _, v in pairs(M.group.objects) do pcall(function() PHYSICS.removeBody(v) end) end end)
+    pcall(function() for _, v in ipairs(M.group.collis) do
+    pcall(function() Runtime:removeEventListener('collision', v) end) pcall(function() Runtime:removeEventListener('preCollision', v) end)
+    pcall(function() Runtime:removeEventListener('postCollision', v) end) end end)
+    pcall(function() for _, v in pairs(M.group.objects) do 
+    pcall(function() v:removeEventListener('collision') end) pcall(function() v:removeEventListener('preCollision') end)
+    pcall(function() v:removeEventListener('postCollision') end) pcall(function() PHYSICS.removeBody(v) end) end end)
     pcall(function() for _, v in pairs(M.group.texts) do pcall(function() PHYSICS.removeBody(v) end) end end)
     pcall(function() for _, v in pairs(M.group.bitmaps) do v:releaseSelf() end end)
     pcall(function() for _, v in ipairs(M.group.stops) do v() end end) M.isStarted = nil
@@ -198,10 +203,10 @@ M.new = function(linkBuild, isDebug)
                 or dataEvent[j].name == 'onFieldEnded' or dataEvent[j].name == 'onWebViewCallback'
                 or dataEvent[j].name == 'onCondition' or dataEvent[j].name == 'onBackPress'
                 or dataEvent[j].name == 'onSuspend' or dataEvent[j].name == 'onResume'
-                or dataEvent[j].name == 'onLocalCollisionBegan' or dataEvent[j].name == 'onLocalCollisionEnded' 
-                or dataEvent[j].name == 'onLocalPreCollision' or dataEvent[j].name == 'onLocalPostCollision' 
-                or dataEvent[j].name == 'onGlobalCollisionBegan' or dataEvent[j].name == 'onGlobalCollisionEnded' 
-                or dataEvent[j].name == 'onGlobalPreCollision' or dataEvent[j].name == 'onGlobalPostCollision' 
+                or dataEvent[j].name == 'onLocalCollisionBegan' or dataEvent[j].name == 'onLocalCollisionEnded'
+                or dataEvent[j].name == 'onLocalPreCollision' or dataEvent[j].name == 'onLocalPostCollision'
+                or dataEvent[j].name == 'onGlobalCollisionBegan' or dataEvent[j].name == 'onGlobalCollisionEnded'
+                or dataEvent[j].name == 'onGlobalPreCollision' or dataEvent[j].name == 'onGlobalPostCollision'
 
                 if nestedScript[dataEvent[j].script] and not dataEvent[j].comment and isFunBlock then
                     pcall(function() EVENTS[dataEvent[j].name](nestedEvent[j], dataEvent[j].params) end)
