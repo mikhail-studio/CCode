@@ -1,32 +1,20 @@
 local M = {}
 
-M.resize = function()
-    pcall(function()
-        if M.count > 5 then M.count = 5 end
-        M.bg.height = M.bg._height + 44 * M.count
-        M.box.height = not IS_SIM and 36 + 44 * M.count or 72 + 44 * M.count
-        M.line.y = CENTER_Y - 75 + 22 * M.count
-        M.buttonOK.y = (M.bg.y + M.bg.height / 2 + M.line.y) / 2 + 2
-        M.text.y = M.buttonOK.y
-    end)
-end
-
 M.new = function(title, textListener, inputListener, oldText, textCheckbox, isTextEditor)
     if not M.group then
         ALERT = false
         M.listener = inputListener
-        M.timer = timer.performWithDelay(0, function() M.group:toFront() end, 0)
-        M.group, M.count = display.newGroup(), 0
+        M.group, M.count = display.newGroup(), isTextEditor and 4 or 0
 
         local isAddHeight = textCheckbox or isTextEditor
 
         M.bg = display.newRoundedRect(CENTER_X, CENTER_Y - (isAddHeight and 75 or 100), DISPLAY_WIDTH - 100, isAddHeight and 150 or 100, 20)
             M.bg:setFillColor(0.2, 0.2, 0.22)
-            M.bg._height = M.bg.height
+            M.bg.height = M.bg.height + (IS_SIM and 46 * M.count or 40 * M.count)
         M.group:insert(M.bg)
 
         if isTextEditor then
-            M.box = native.newTextBox(5000, CENTER_Y - 110, DISPLAY_WIDTH - 150, not IS_SIM and 36 or 72)
+            M.box = native.newTextBox(5000, CENTER_Y - 110, DISPLAY_WIDTH - 150, not IS_SIM and 36 + 40 * M.count or 72 + 44 * M.count)
         else
             M.box = native.newTextField(5000, CENTER_Y - 110, DISPLAY_WIDTH - 150, not IS_SIM and 36 or 72)
         end
@@ -52,7 +40,7 @@ M.new = function(title, textListener, inputListener, oldText, textCheckbox, isTe
         M.box:setSelection(UTF8.len(M.box.text))
         M.group:insert(M.box)
 
-        M.line = display.newRect(M.group, CENTER_X, CENTER_Y - 75, DISPLAY_WIDTH - 150, 2)
+        M.line = display.newRect(M.group, CENTER_X, CENTER_Y - 75 + (IS_SIM and 22 or 18) * M.count, DISPLAY_WIDTH - 150, 2)
         M.group:insert(M.line)
 
         if textCheckbox then
@@ -93,21 +81,7 @@ M.new = function(title, textListener, inputListener, oldText, textCheckbox, isTe
             end)
         end
 
-        local text = oldText
-        local count = 0
-
-        while text do
-            local isStroke = UTF8.find(text, '\n')
-            if not isStroke then break end
-            text = UTF8.sub(text, isStroke + 1)
-            count = count + 1
-        end
-
-        if count ~= INPUT.count then
-            INPUT.count = count
-            INPUT.resize()
-        end
-
+        M.group:toFront()
         EXITS.add(M.remove, false)
     end
 end
@@ -117,7 +91,6 @@ M.remove = function(input, text)
         ALERT = true
         native.setKeyboardFocus(nil)
         M.listener({input = input, text = text, checkbox = M.checkbox and M.checkbox.isOn})
-        timer.cancel(M.timer)
         M.group:removeSelf()
         M.group = nil
     end

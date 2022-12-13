@@ -60,9 +60,9 @@ end
 
 M['setListener'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. ']:addEventListener(\'touch\','
-    GAME.lua = GAME.lua .. ' function(e) GAME.group.const.touch = e.phase ~= \'ended\' and'
-    GAME.lua = GAME.lua .. ' e.phase ~= \'cancelled\' GAME.group.const.touch_x, GAME.group.const.touch_y, e.target._touch = e.x, e.y,'
-    GAME.lua = GAME.lua .. ' GAME.group.const.touch return ' .. CALC(params[2], 'a', true) .. '(e) end) end)'
+    GAME.lua = GAME.lua .. ' function(e) e.target._touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
+    GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() return ' .. CALC(params[2], 'a', true) .. '(e)'
+    GAME.lua = GAME.lua .. ' end) return isComplete and result or false end) end)'
 end
 
 M['timer'] = function(params)

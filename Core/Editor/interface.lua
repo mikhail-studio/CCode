@@ -129,6 +129,12 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         block.y = block.height / 2 + 12
     blockScroll:insert(block)
 
+    if M.scrollY == 0 and paramsIndex > 6 then
+        local indexUp = math.round((paramsIndex - 6) / 2, 0)
+        local maxUp = math.round((length - 6) / 2, 0) M.scrollY = -60 * indexUp
+        if maxUp > indexUp then M.scrollY = M.scrollY - 60 end
+    end
+
     block.y = block.y < blockScroll.height / 2 and blockScroll.height / 2 or block.y
     blockScroll:scrollToPosition({y = M.scrollY, time = 0}) M.scrollY = 0
     blockScroll:setScrollHeight(block.height + 24)
