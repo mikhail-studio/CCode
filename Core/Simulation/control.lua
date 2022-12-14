@@ -3,6 +3,7 @@ local M = {}
 
 M['requestApi'] = function(params)
     local p1 = params[1][1][1]:gsub('\n', '\\n'):gsub('\r', ''):gsub('\'', '\\\'')
+    p1 = UTF8.gsub(p1, 'setfenv', 'print')
     p1 = UTF8.gsub(p1, 'loadstring', 'print')
     p1 = UTF8.gsub(p1, 'currentStage', 'fps')
     p1 = UTF8.gsub(p1, 'getCurrentStage', 'getDefault')
@@ -10,7 +11,8 @@ M['requestApi'] = function(params)
 
     GAME.lua = GAME.lua .. ' pcall(function() local args = type(args) == \'table\' and JSON.encode(args) or \'{}\''
     GAME.lua = GAME.lua .. ' args = args:gsub(\'\\n\', \'\\\\n\'):gsub(\'\\r\', \'\'):gsub(\'\\\'\', \'\\\\\\\'\')'
-    GAME.lua = GAME.lua .. ' return loadstring(\'local G = {} G.args = JSON.decode(\\\'\' .. args .. \'\\\') for key, value in'
+    GAME.lua = GAME.lua .. ' return loadstring(\'local G = {} G.fun, G.device, G.other, G.math, G.prop = fun, device, other, math, prop'
+    GAME.lua = GAME.lua .. ' G.args = JSON.decode(\\\'\' .. args .. \'\\\') for key, value in'
     GAME.lua = GAME.lua .. ' pairs(GET_GLOBAL_TABLE()) do G[key] = value end setfenv(1, G) ' .. p1 .. '\')() end)'
 end
 

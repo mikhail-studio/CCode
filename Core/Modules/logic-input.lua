@@ -292,7 +292,7 @@ M.renameEvent = function(data, text, name, type, eventIndex, isCheck)
         for k = eventIndex, #BLOCKS.group.blocks do
             if BLOCKS.group.blocks[k].data.event and k ~= eventIndex then break end
             for u = 1, #BLOCKS.group.blocks[k].data.params do
-                for o = #BLOCKS.group.blocks[k].data.params[u], 1, -1 do
+                for o = type(BLOCKS.group.blocks[k].data.params[u]) == 'table' and #BLOCKS.group.blocks[k].data.params[u] or 0, 1, -1 do
                     if BLOCKS.group.blocks[k].data.params[u][o][2] == type
                     and BLOCKS.group.blocks[k].data.params[u][o][1] == text then
                         BLOCKS.group.blocks[k].data.params = COPY_TABLE(data.scripts[CURRENT_SCRIPT].params[k].params)

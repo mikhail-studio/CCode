@@ -864,6 +864,44 @@ return ' ' .. UTF8.trimFull([[
             end
         end
 
+        if 'Медиа' then
+            M['media.current_time'] = function(name)
+                local isComplete, result = pcall(function()
+                    return GAME.group.media[name] and GAME.group.media[name].currentTime or 0
+                end) return isComplete and result or 0
+            end
+
+            M['media.total_time'] = function(name)
+                local isComplete, result = pcall(function()
+                    return GAME.group.media[name] and GAME.group.media[name].totalTime or 0
+                end) return isComplete and result or 0
+            end
+
+            M['media.sound_volume'] = function(name)
+                local isComplete, result = pcall(function()
+                    return audio.getVolume((GAME.group.media[name] and GAME.group.media[name][2]) and {channel=GAME.group.media[name][2]} or nil)
+                end) return isComplete and result or 0
+            end
+
+            M['media.sound_total_time'] = function(name)
+                local isComplete, result = pcall(function()
+                    return (GAME.group.media[name] and GAME.group.media[name][1]) and audio.getDuration(GAME.group.media[name][1]) or 0
+                end) return isComplete and result or 0
+            end
+
+            M['media.sound_pause'] = function(name)
+                local isComplete, result = pcall(function()
+                    return (GAME.group.media[name] and GAME.group.media[name][2]) and audio.isChannelPaused(GAME.group.media[name][2]) or nil
+                end) return isComplete and result or nil
+            end
+
+            M['media.sound_play'] = function(name)
+                local isComplete, result = pcall(function()
+                    return (GAME.group.media[name] and GAME.group.media[name][2]) and audio.isChannelPlaying(GAME.group.media[name][2]) or nil
+                end) return isComplete and result or nil
+            end
+        end
+
         return M
     end
 

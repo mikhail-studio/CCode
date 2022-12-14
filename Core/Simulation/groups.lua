@@ -46,6 +46,13 @@ if 'Группы' then
         GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. nameGroup .. ']:insert(GAME.group.widgets[' .. nameWidget .. ']) end)'
     end
 
+    M['addGroupMedia'] = function(params)
+        local nameGroup = CALC(params[1])
+        local nameMedia = CALC(params[2])
+
+        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. nameGroup .. ']:insert(GAME.group.media[' .. nameMedia .. ']) end)'
+    end
+
     M['addGroupTag'] = function(params)
         local nameGroup = CALC(params[1])
         local nameTag = CALC(params[2])
@@ -177,6 +184,11 @@ if 'Теги' then
     M['addTagWidget'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local name, tag = ' .. CALC(params[2]) .. ', ' .. CALC(params[1])
         GAME.lua = GAME.lua .. ' table.insert(GAME.group.tags[tag], {name, \'widgets\'}) GAME.group.widgets[name]._tag = tag end)'
+    end
+
+    M['addTagMedia'] = function(params)
+        GAME.lua = GAME.lua .. ' pcall(function() local name, tag = ' .. CALC(params[2]) .. ', ' .. CALC(params[1])
+        GAME.lua = GAME.lua .. ' table.insert(GAME.group.tags[tag], {name, \'media\'}) GAME.group.media[name]._tag = tag end)'
     end
 
     M['addTagGroup'] = function(params)

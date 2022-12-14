@@ -217,6 +217,7 @@ end
 
 local function textListener(event)
     if event.phase == 'editing' then
+        M.boxText = event.target.text
         M.group.types[1].scroll:removeSelf()
         M.group.types[1].scroll = WIDGET.newScrollView({
                 x = CENTER_X, y = (M.group[3].y + 2 + M.group[2].y) / 2,
@@ -232,7 +233,7 @@ local function textListener(event)
         for j = 1, #INFO.listBlock.everyone do
             local notCustom = not (BLOCKS.custom and INFO.getType(INFO.listBlock.everyone[j]) == 'custom' and j ~= 1)
 
-            if UTF8.find(UTF8.lower(STR['blocks.' .. INFO.listBlock.everyone[j]]), UTF8.lower(event.target.text), 1, true) and notCustom then
+            if UTF8.find(UTF8.lower(STR['blocks.' .. INFO.listBlock.everyone[j]]), UTF8.lower(M.boxText), 1, true) and notCustom then
                 local event = INFO.getType(INFO.listBlock.everyone[j]) == 'events'
 
                 M.group.types[1].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(event, DISPLAY_WIDTH - RIGHT_HEIGHT - 60, event and 102 or 116))
@@ -295,14 +296,15 @@ M.create = function()
         for i = 25, 28 do M.group[i].isVisible = M.group.currentIndex == 2 end
         for i = 29, 32 do M.group[i].isVisible = M.group.currentIndex == 7 end
 
-        if M.group.currentIndex == 1 and M.group[4].text ~= '' then
-            M.group[4].text = ''
+        if M.group.currentIndex == 1 and M.boxText ~= '' then
+            M.boxText = '' M.group[4].text = ''
             textListener({phase = 'editing', target = M.group[4]})
         end
     else
         M.group = display.newGroup()
         M.group.types = {}
         M.group.currentIndex = 1
+        M.boxText = ''
 
         local bg = display.newImage('Sprites/bg.png', CENTER_X, CENTER_Y)
             bg.width = CENTER_X == 640 and DISPLAY_HEIGHT or DISPLAY_WIDTH

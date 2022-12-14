@@ -41,12 +41,12 @@ M['playSound'] = function(params)
     local name = CALC(params[1])
     local loops = CALC(params[2], '1')
     local fun = CALC(params[3], 'a', true)
-    local duration = CALC(params[4], '0') .. ' * 1000'
+    local duration = CALC(params[4], 'nil')
     local fadein = CALC(params[5], '0') .. ' * 1000'
 
-    GAME.lua = GAME.lua .. ' pcall(function() local name, loops = ' .. name .. ', ' .. loops .. ' - 1'
-    GAME.lua = GAME.lua .. ' GAME.group.media[name][2] = audio.play(GAME.group.media[name][1], {channel = audio.findFreeChannel(),'
-    GAME.lua = GAME.lua .. ' loops = loops, duration = ' .. duration .. ', fadein = ' .. fadein .. ', onComplete = function(e)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name, loops, duration = ' .. name .. ', ' .. loops .. ' - 1, ' .. duration
+    GAME.lua = GAME.lua .. ' GAME.group.media[name][2] = audio.play(GAME.group.media[name][1], {channel = audio.findFreeChannel(), loops'
+    GAME.lua = GAME.lua .. ' = loops, duration = duration and duration * 1000 or nil, fadein = ' .. fadein .. ', onComplete = function(e)'
     GAME.lua = GAME.lua .. ' pcall(function() e.name = name ' .. fun .. '(e) end) end}) end)'
 end
 

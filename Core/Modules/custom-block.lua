@@ -291,12 +291,20 @@ M.newBlock = function(name, params, str, index)
     local completeImportLua = function(import)
         if import and import.done == 'ok' then
             M.addBlock({string = READ_FILE(DOC_DIR .. '/custom.lua')}, index)
+        else
+            ALERT = false
+            M.alert = true
+            M.scroll:setIsLocked(false, 'vertical')
         end
     end
 
     local onPaste = function(e)
-        if e.string then
-            M.addBlock({string = e.string}, index)
+        if e.string or e.url then
+            M.addBlock({string = e.string or e.url}, index)
+        else
+            ALERT = false
+            M.alert = true
+            M.scroll:setIsLocked(false, 'vertical')
         end
     end
 
@@ -345,8 +353,12 @@ M.newBlock = function(name, params, str, index)
                         WINDOW.new(STR['blocks.create.block.save.lua.title'],
                             {STR['button.pasteFromClipboard'], STR['button.importLuaFile']}, function(e)
                                 if e.index == 1 then
-                                    if not IS_SIM and not IS_WIN then
+                                    if (not IS_SIM) and (not IS_WIN) then
                                         PASTEBOARD.paste(onPaste)
+                                    else
+                                        ALERT = false
+                                        M.alert = true
+                                        M.scroll:setIsLocked(false, 'vertical')
                                     end
                                 elseif e.index == 2 then
                                     FILE.pickFile(DOC_DIR, completeImportLua, 'custom.lua', '', 'text/x-lua', nil, nil, nil)

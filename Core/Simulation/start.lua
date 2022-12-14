@@ -46,7 +46,7 @@ local function getStartLua(linkBuild)
     local cod11 = ' GAME.group.conditions[i]() end end Runtime:addEventListener(\'enterFrame\', GAME.group.const.enterFrame)'
     local cod12 = ' GAME.group.backs = {} GAME.group.suspends = {} GAME.group.const.keyBack = function(e) if e.phase == \'up\''
     local cod13 = ' and (e.keyName == \'back\' or e.keyName == \'escape\') then for i = 1, #GAME.group.backs do GAME.group.backs[i]()'
-    local cod14 = ' end end return true end Runtime:addEventListener(\'key\', GAME.group.const.keyBack) GAME.group.resumes = {}'
+    local cod14 = ' end return true end end Runtime:addEventListener(\'key\', GAME.group.const.keyBack) GAME.group.resumes = {}'
     local cod15 = ' GAME.group.const.system = function(e) if e.type == \'applicationSuspend\' or e.type == \'applicationExit\' then for i = 1,'
     local cod16 = ' #GAME.group.suspends do GAME.group.suspends[i]() end elseif e.type == \'applicationResume\' then for i = 1,'
     local cod17 = ' #GAME.group.resumes do GAME.group.resumes[i]() end end end Runtime:addEventListener(\'system\', GAME.group.const.system)'
@@ -70,10 +70,10 @@ M.remove = function()
     pcall(function() Runtime:removeEventListener('system', M.group.const.system) end)
     pcall(function() Runtime:removeEventListener('touch', M.group.const.touch_fun) end)
     pcall(function() Runtime:removeEventListener('enterFrame', M.group.const.enterFrame) end)
-    pcall(function() for _, v in ipairs(M.group.collis) do
+    pcall(function() audio.stop() end) pcall(function() for _, v in ipairs(M.group.collis) do
     pcall(function() Runtime:removeEventListener('collision', v) end) pcall(function() Runtime:removeEventListener('preCollision', v) end)
     pcall(function() Runtime:removeEventListener('postCollision', v) end) end end)
-    pcall(function() for _, v in pairs(M.group.objects) do 
+    pcall(function() for _, v in pairs(M.group.objects) do
     pcall(function() v:removeEventListener('collision') end) pcall(function() v:removeEventListener('preCollision') end)
     pcall(function() v:removeEventListener('postCollision') end) pcall(function() PHYSICS.removeBody(v) end) end end)
     pcall(function() for _, v in pairs(M.group.texts) do pcall(function() PHYSICS.removeBody(v) end) end end)
@@ -84,14 +84,14 @@ M.remove = function()
     pcall(function() for child = display.currentStage.numChildren, 1, -1 do
     if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
     timer.performWithDelay(1, function() if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true})
-    if GAME_GROUP_OPEN then GAME_GROUP_OPEN.scroll:scrollToPosition({y = M.scrollY, time = 0}) end end end)
+    if (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) then GAME_GROUP_OPEN.scroll:scrollToPosition({y = M.scrollY, time = 0}) end end end)
 end
 
 M.new = function(linkBuild, isDebug)
     M.group = display.newGroup()
     M.orientation, EVENTS.CUSTOM = CURRENT_ORIENTATION, {}
     M.data = GET_GAME_CODE(linkBuild or CURRENT_LINK) M.needBack = true
-    M.scrollY = GAME_GROUP_OPEN and select(2, GAME_GROUP_OPEN.scroll:getContentPosition()) or 0
+    M.scrollY = (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) and select(2, GAME_GROUP_OPEN.scroll:getContentPosition()) or 0
     M.lua = getStartLua(linkBuild) .. ' GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'
     if linkBuild then M.data.settings.build = M.data.settings.build + 1 SET_GAME_CODE(M.data.link, M.data) end M.data = GET_FULL_DATA(M.data)
 
@@ -249,7 +249,7 @@ M.new = function(linkBuild, isDebug)
 
                 WINDOW.new(STR['game.isbug'], {STR['button.close']}, function()
                     display.setDefault('background', 0.15, 0.15, 0.17)
-                    if GAME_GROUP_OPEN then GAME_GROUP_OPEN.group.isVisible = true end
+                    if (GAME_GROUP_OPEN and GAME_GROUP_OPEN.group) then GAME_GROUP_OPEN.group.isVisible = true end
                 end, 5)
 
                 WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
