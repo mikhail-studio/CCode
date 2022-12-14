@@ -610,49 +610,49 @@ return ' ' .. UTF8.trimFull([[
 
         M['asin'] = function(num)
             local isComplete, result = pcall(function()
-                return asin(num * M.pi / 180)
+                return asin(num) * 180 / M.pi
             end) return isComplete and result or 0
         end
 
         M['acos'] = function(num)
             local isComplete, result = pcall(function()
-                return acos(num * M.pi / 180)
+                return acos(num) * 180 / M.pi
             end) return isComplete and result or 0
         end
 
         M['atan'] = function(num)
             local isComplete, result = pcall(function()
-                return atan(num * M.pi / 180)
+                return atan(num) * 180 / M.pi
             end) return isComplete and result or 0
         end
 
-        M['atan2'] = function(x, y)
+        M['atan2'] = function(y, x)
             local isComplete, result = pcall(function()
-                return atan2(x * M.pi / 180, y * M.pi / 180)
+                return atan2(y, x) * 180 / M.pi
             end) return isComplete and result or 0
         end
 
         M['sin'] = function(num)
             local isComplete, result = pcall(function()
-                return sin(num * M.pi / 180)
+                return tonumber(string.format('%.4f', sin(num * M.pi / 180)))
             end) return isComplete and result or 0
         end
 
         M['cos'] = function(num)
             local isComplete, result = pcall(function()
-                return cos(num * M.pi / 180)
+                return tonumber(string.format('%.4f', cos(num * M.pi / 180)))
             end) return isComplete and result or 0
         end
 
         M['tan'] = function(num)
             local isComplete, result = pcall(function()
-                return tan(num * M.pi / 180)
+                return tonumber(string.format('%.4f', tan(num * M.pi / 180)))
             end) return isComplete and result or 0
         end
 
         M['ctan'] = function(num)
             local isComplete, result = pcall(function()
-                return 1 / tan(num * M.pi / 180)
+                return tonumber(string.format('%.4f', 1 / tan(num * M.pi / 180)))
             end) return isComplete and result or 0
         end
 
