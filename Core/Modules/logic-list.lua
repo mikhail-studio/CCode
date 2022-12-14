@@ -35,7 +35,7 @@ M.create = function(data, size, twidth, tsize, needParams)
     for i = 1, #polygon do polygon[i] = i % 2 == 0 and polygon[i] / size or  polygon[i] / size * tsize end
 
     block.block = display.newPolygon(0, 0, polygon)
-        block.block:setFillColor(INFO.getBlockColor(data.name, data.comment))
+        block.block:setFillColor(INFO.getBlockColor(data.name, data.comment, nil, data.color))
         block.block:setStrokeColor(0.3)
         block.block.strokeWidth = 4
     block:insert(block.block)
@@ -135,6 +135,14 @@ M.new = function(target)
                     target.data.params[i] = {}
                 end
             end
+        end
+
+        local custom = GET_GAME_CUSTOM()
+        if INFO.getType(name) == 'custom' then
+            local index = UTF8.gsub(name, 'custom', '', 1)
+            color = index and custom[index][5] or nil
+            color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}
+            target.data.color = color
         end
 
         local block = M.create(target.data, size, nil, nil, needParams)

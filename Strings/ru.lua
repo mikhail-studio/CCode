@@ -95,6 +95,7 @@ return {
         ['blocks.create.transition'] = 'Переходы',
         ['blocks.create.particle'] = 'Частицы',
         ['blocks.create.block'] = 'Создать',
+        ['blocks.create.color'] = 'Цвет',
         ['blocks.create.copy'] = 'Копия',
         ['blocks.create.block.save.lua'] = 'Сохранить (Lua код)',
         ['blocks.create.block.save.sandbox'] = 'Сохранить (Песочница)',

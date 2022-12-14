@@ -52,6 +52,7 @@ local function newBlockListener(event)
         if event.phase == 'began' then
             display.getCurrentStage():setFocus(event.target)
             event.target.click = true
+            event.target.alpha = 0.8
         elseif event.phase == 'moved' then
             if math.abs(event.x - event.xStart) > 30 or math.abs(event.y - event.yStart) > 30 then
                 if M.group.types[event.target.index[1]].currentScroll == 2 then
@@ -60,9 +61,11 @@ local function newBlockListener(event)
                     M.group.types[event.target.index[1]].scroll:takeFocus(event)
                 end
                 event.target.click = false
+                event.target.alpha = 1
             end
         elseif event.phase == 'ended' or event.phase == 'cancelled' then
             display.getCurrentStage():setFocus(nil)
+            event.target.alpha = 1
             if event.target.click then
                 event.target.click = false
                 if M.group[7].isOn and event.target.index[1] == 15 then
@@ -71,7 +74,7 @@ local function newBlockListener(event)
 
                     for index, block in pairs(custom) do
                         if 'custom' .. index == name then
-                            CUSTOM.newBlock(block[1], params, block[2], index) break
+                            CUSTOM.newBlock(block[1], params, block[2], index, block[5] or {0.36 * 255, 0.47 * 255, 0.5 * 255}) break
                         end
                     end
                 elseif M.group[19].isOn and event.target.index[1] == 15 then
@@ -93,7 +96,8 @@ local function newBlockListener(event)
                                 custom[index][1],
                                 COPY_TABLE(custom[index][2]),
                                 type(custom[index][3]) == 'table' and COPY_TABLE(custom[index][3]) or custom[index][3],
-                                os.time()
+                                os.time(),
+                                custom[index][5] or {0.36 * 255, 0.47 * 255, 0.5 * 255}
                             }
 
                             STR['blocks.custom' .. _index] = custom[_index][1]
@@ -678,6 +682,7 @@ M.create = function()
 
         local width = CENTER_X == 360 and DISPLAY_WIDTH / 5 - 24 or DISPLAY_WIDTH / 6
         local x, y = ZERO_X + 20, MAX_Y - 220
+        local custom = GET_GAME_CUSTOM()
 
         for i = 1, BLOCKS.custom and #INFO.listType - 1 or #INFO.listType do
             M.group.types[i] = display.newRoundedRect(x, y, width, 62, 11)
@@ -740,12 +745,18 @@ M.create = function()
                     end
 
                     if UTF8.sub(name, UTF8.len(name) - 2, UTF8.len(name)) ~= 'End' and name ~= 'ifElse' and notCustom then
-                        local event = INFO.listType[i] == 'events' or INFO.getType(name) == 'events'
+                        local event, color = INFO.listType[i] == 'events' or INFO.getType(name) == 'events'
+
+                        if INFO.getType(name) == 'custom' then
+                            local index = UTF8.gsub(name, 'custom', '', 1)
+                            color = index and custom[index][5] or nil
+                            color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}
+                        end
 
                         M.group.types[i].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(event, DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60, event and 102 or 116))
                             M.group.types[i].blocks[j].x = DISPLAY_WIDTH / 2
                             M.group.types[i].blocks[j].y = lastY
-                            M.group.types[i].blocks[j]:setFillColor(INFO.getBlockColor(name))
+                            M.group.types[i].blocks[j]:setFillColor(INFO.getBlockColor(name, nil, nil, color))
                             M.group.types[i].blocks[j]:setStrokeColor(0.3)
                             M.group.types[i].blocks[j].strokeWidth = 4
                             M.group.types[i].blocks[j].index = {i, j}

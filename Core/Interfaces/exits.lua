@@ -62,7 +62,8 @@ listeners.blocks = function()
         WINDOW.new(STR['scripts.sandbox.exit'], {STR['scripts.sandbox.not.save'], STR['scripts.sandbox.save']}, function(e)
             if e.index == 2 then
                 local custom = GET_GAME_CUSTOM() custom[BLOCKS.custom.index] = {
-                    BLOCKS.custom.name, COPY_TABLE(BLOCKS.custom.params), COPY_TABLE(data.scripts[1]), os.time()
+                    BLOCKS.custom.name, COPY_TABLE(BLOCKS.custom.params), COPY_TABLE(data.scripts[1]),
+                    os.time(), COPY_TABLE(BLOCKS.custom.color)
                 } custom.len = custom.len + (BLOCKS.custom.isChange and 0 or 1) SET_GAME_CUSTOM(custom)
 
                 if BLOCKS.custom.isChange then

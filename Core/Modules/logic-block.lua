@@ -150,11 +150,18 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
     local addY = index == 1 and 24 + (blockHeight - 116) / 2 or 24
     if event then y = y + addY end table.insert(group.blocks, index, display.newGroup())
 
+    local custom = GET_GAME_CUSTOM()
+    if INFO.getType(name) == 'custom' then
+        local index = UTF8.gsub(name, 'custom', '', 1)
+        color = index and custom[index][5] or nil
+        color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}
+    end
+
     group.blocks[index].data = {event = event, comment = comment, name = name, params = params, nested = nested, vars = vars, tables = tables}
     group.blocks[index].x, group.blocks[index].y = scroll.width / 2, y
 
     group.blocks[index].block = display.newPolygon(0, 0, blockParams)
-        group.blocks[index].block:setFillColor(INFO.getBlockColor(name, comment))
+        group.blocks[index].block:setFillColor(INFO.getBlockColor(name, comment, nil, color))
         group.blocks[index].block:setStrokeColor(0.3)
         group.blocks[index].block.strokeWidth = 4
         group.blocks[index]:addEventListener('touch', require 'Core.Modules.logic-listener')

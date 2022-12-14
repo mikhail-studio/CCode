@@ -3,7 +3,9 @@ local INFO = require 'Data.info'
 local M = {}
 
 local function genBlock(params, index)
-    M.block = LOGIC.create({name = '', params = params}, 1.0, true)
+    local color = {} for i = 1, 3 do color[i] = M.color[i] / 255 end
+
+    M.block = LOGIC.create({name = '', params = params, color = color}, 1.0, true)
         M.block.y = M.scroll.height / 2 - M.block.height / 2 < 20 and 20 + M.block.height / 2 or M.scroll.height / 2
         M.block.x = M.scroll.width / 2
     M.scroll:insert(M.block)
@@ -106,7 +108,7 @@ M.addBlock = function(params, _index)
 
     if params.string then
         custom.len = custom.len + (_index and 0 or 1)
-        custom[index] = {STR['blocks.'], COPY_TABLE(STR['blocks..params']), params.string, os.time()}
+        custom[index] = {STR['blocks.'], COPY_TABLE(STR['blocks..params']), params.string, os.time(), M.color}
 
         local block = custom[index]
         local typeBlock = 'custom' .. index
@@ -131,10 +133,8 @@ M.addBlock = function(params, _index)
             table.insert(INFO.listBlock.everyone, typeBlock)
         end
 
-        SET_GAME_CUSTOM(custom) ALERT = true
-        M.scroll:removeSelf() M.group:removeSelf()
-        STR['blocks..params'] = {} STR['blocks.'] = STR['blocks.default']
-        NEW_BLOCK.custom(2)
+        SET_GAME_CUSTOM(custom) ALERT = true M.scroll:removeSelf() M.group:removeSelf()
+        STR['blocks..params'] = {} STR['blocks.'] = STR['blocks.default'] NEW_BLOCK.custom(2)
     else
         local data = GET_GAME_CODE(CURRENT_LINK)
         local block = {STR['blocks.'], COPY_TABLE(STR['blocks..params'])}
@@ -165,7 +165,7 @@ M.addBlock = function(params, _index)
         STR['blocks..params'] = {} STR['blocks.'] = STR['blocks.default']
         ALERT = true M.scroll:removeSelf() M.group:removeSelf() NEW_BLOCK.custom(1)
         BLOCKS.group:removeSelf() BLOCKS.group = nil LAST_CURRENT_SCRIPT, CURRENT_SCRIPT = CURRENT_SCRIPT, 1
-        BLOCKS.create({name = block[1], params = COPY_TABLE(block[2]), index = index, isChange = _index})
+        BLOCKS.create({name = block[1], params = COPY_TABLE(block[2]), index = index, isChange = _index, color = M.color})
         BLOCKS.group.isVisible = true
     end
 end
@@ -178,6 +178,7 @@ M.removeOverlay = function(index)
                     custom[index][1] = STR['blocks.']
                     custom[index][2] = COPY_TABLE(STR['blocks..params'])
                     custom[index][4] = os.time()
+                    custom[index][5] = M.color
                 SET_GAME_CUSTOM(custom)
 
                 STR['blocks.custom' .. index] = STR['blocks.']
@@ -246,7 +247,8 @@ M.removeOverlay = function(index)
     end
 end
 
-M.newBlock = function(name, params, str, index)
+M.newBlock = function(name, params, str, index, color)
+    M.color = color or {0.36 * 255, 0.47 * 255, 0.5 * 255}
     M.group = display.newGroup()
         ALERT = false
     M.alert = true
@@ -260,6 +262,11 @@ M.newBlock = function(name, params, str, index)
         title.anchorX = 0
         title.anchorY = 0
     M.group:insert(title)
+
+    local buttonColor = display.newText(STR['blocks.create.color'], MAX_X - 10, ZERO_Y + 10, 'ubuntu', 32)
+        buttonColor.anchorX = 1
+        buttonColor.anchorY = 0
+    M.group:insert(buttonColor)
 
     M.scroll = WIDGET.newScrollView({
             x = CENTER_X, y = title.y + 80,
@@ -305,19 +312,19 @@ M.newBlock = function(name, params, str, index)
         if M.alert then
             if e.phase == 'began' then
                 display.getCurrentStage():setFocus(e.target)
-                if e.target.tag == 'exit'
+                if (e.target.tag == 'exit' or e.target.tag == 'color')
                 then e.target:setFillColor(0.7)
                 else e.target.alpha = 0.1 end
                 e.target.click = true
             elseif e.phase == 'moved' and (math.abs(e.xDelta) > 30 or math.abs(e.yDelta) > 30) then
                 display.getCurrentStage():setFocus(nil)
-                if e.target.tag == 'exit'
+                if (e.target.tag == 'exit' or e.target.tag == 'color')
                 then e.target:setFillColor(1)
                 else e.target.alpha = 0.005 end
                 e.target.click = false
             elseif e.phase == 'ended' or e.phase == 'cancelled' then
                 display.getCurrentStage():setFocus(nil)
-                if e.target.tag == 'exit'
+                if (e.target.tag == 'exit' or e.target.tag == 'color')
                 then e.target:setFillColor(1)
                 else e.target.alpha = 0.005 end
                 if e.target.click then
@@ -341,6 +348,23 @@ M.newBlock = function(name, params, str, index)
                         end
                     elseif e.target.tag == 'exit' then
                         M.removeOverlay(index)
+                    elseif e.target.tag == 'color' then
+                        M.scroll:setIsLocked(true, 'vertical') M.alert = false
+                        require('Core.Modules.interface-color').new(COPY_TABLE(M.color), function(e)
+                            if e.input then
+                                M.color = JSON.decode(e.rgb)
+                                M.scroll:remove(M.block) M.block:removeSelf() genBlock(params, index)
+
+                                if M.block.y + M.block.height / 2 + 20 > M.scroll.height then
+                                    M.scroll:scrollToPosition({time = 200, y = -(M.block.y + M.block.height / 2 + 20 - M.scroll.height)})
+                                end
+                            end
+
+                            ALERT = false
+                            M.alert = true
+                            M.scroll:setIsLocked(false, 'vertical')
+                            EXITS.add(M.removeOverlay, index)
+                        end)
                     elseif e.target.tag == 'lua' then
                         M.scroll:setIsLocked(true, 'vertical') M.alert = false
                         WINDOW.new(STR['blocks.create.block.save.lua.title'],
@@ -415,6 +439,9 @@ M.newBlock = function(name, params, str, index)
     local textSandbox = display.newText(STR['blocks.create.block.save.sandbox'], buttonSandbox.x, buttonSandbox.y, 'ubuntu', 28)
         buttonSandbox:addEventListener('touch', buttonListeners)
     M.group:insert(textSandbox)
+
+    buttonColor.tag = 'color'
+    buttonColor:addEventListener('touch', buttonListeners)
 
     title.tag = 'exit' EXITS.add(M.removeOverlay, index)
     title:addEventListener('touch', buttonListeners)

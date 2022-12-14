@@ -702,7 +702,7 @@ end
 -- local r, g, b = math.random(0, 200) / 255, math.random(0, 200) / 255, math.random(0, 200) / 255
 -- print(r .. ', ' .. g .. ', ' .. b)
 
-M.getBlockColor = function(name, comment, type)
+M.getBlockColor = function(name, comment, type, color)
     local type = type or M.getType(name)
     if comment or type == 'none' then return 0.6 end
 
@@ -735,6 +735,7 @@ M.getBlockColor = function(name, comment, type)
     elseif type == 'everyone' then
         return 0.15, 0.55, 0.4
     elseif type == 'custom' then
+        if color then return unpack(color) end
         return 0.36, 0.47, 0.5
     end
 end
