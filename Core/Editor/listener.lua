@@ -157,8 +157,11 @@ M.list = function(target)
                 TEXT.set(TEXT.gen(EDITOR.data, EDITOR.cursor[2]), EDITOR.group[9])
                 EDITOR.group[9]:scrollToPosition({y = 0, time = 0})
             elseif e.index == 2 and EDITOR.copy then
-                EDITOR.data = COPY_TABLE(EDITOR.copy[1])
-                EDITOR.cursor = COPY_TABLE(EDITOR.copy[2])
+                local len = #EDITOR.data - 1
+                local copy = COPY_TABLE(EDITOR.copy) copy[2][1] = copy[2][1] + len
+                table.remove(EDITOR.data, M.find(EDITOR.data))
+                for i = 1, #copy[1] do table.insert(EDITOR.data, copy[1][i]) end
+                EDITOR.cursor = COPY_TABLE(copy[2])
                 EDITOR.backup = M.backup(EDITOR.backup, 'add', EDITOR.data)
                 TEXT.set(TEXT.gen(EDITOR.data, EDITOR.cursor[2]), EDITOR.group[9])
             elseif e.index == 1 and #EDITOR.data > 1 then
