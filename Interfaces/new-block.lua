@@ -259,6 +259,7 @@ local function textListener(event)
             end
         end
 
+        M.group.types[1].scroll.isVisible = M.group.currentIndex == 1
         M.group.types[1].scroll:setScrollHeight(scrollHeight)
     end
 end
@@ -269,6 +270,86 @@ M.remove = function()
         M.group:removeSelf()
         M.group = nil
     end)
+end
+
+M.custom = function(i)
+    if i == 1 then
+        M.group.types[15].isVisible = false
+        M.group.types[15].text.isVisible = false
+        M.group.types[15].scroll.isVisible = false
+        M.group.currentIndex = 1 M.group[4].text = ''
+        textListener({phase = 'editing', target = M.group[4]})
+    elseif i == 2 then
+        M.group.isVisible = true
+        M.group.types[15].isVisible = true
+        M.group.types[15].text.isVisible = true
+        M.group.types[15].scroll.isVisible = true
+        M.group.currentIndex = 15 M.group[4].text = ''
+
+        for i = 1, 14 do
+            pcall(function()
+                M.group.types[i].scroll.isVisible = false
+                M.group.types[i].scroll2.isVisible = false
+            end)
+        end
+
+        M.group[3].isVisible = true
+        M.group[4].isVisible = false M.group[5].alpha = 0.1
+        M.group[7].alpha, M.group[7].isOn = 0.1, false
+        M.group[9].alpha, M.group[9].isOn = 0.1, false
+        M.group[19].alpha, M.group[19].isOn = 0.1, false
+
+        for i = 5, 10 do M.group[i].isVisible = M.group.currentIndex == 15 end
+        for i = 19, 20 do M.group[i].isVisible = M.group.currentIndex == 15 end
+        for i = 11, 14 do M.group[i].isVisible = M.group.currentIndex == 9 end
+        for i = 15, 18 do M.group[i].isVisible = M.group.currentIndex == 6 end
+        for i = 21, 24 do M.group[i].isVisible = M.group.currentIndex == 3 end
+        for i = 25, 28 do M.group[i].isVisible = M.group.currentIndex == 2 end
+        for i = 29, 32 do M.group[i].isVisible = M.group.currentIndex == 7 end
+
+        M.group.types[15].scroll:removeSelf()
+        M.group.types[15].scroll = WIDGET.newScrollView({
+                x = CENTER_X, y = (M.group[3].y + 2 + M.group[2].y) / 2,
+                width = DISPLAY_WIDTH, height = M.group[2].y - M.group[3].y + 2,
+                hideBackground = true, hideScrollBar = false,
+                horizontalScrollDisabled = true, isBounceEnabled = true,
+            })
+        M.group:insert(M.group.types[15].scroll)
+
+        local lastY = 90
+        local scrollHeight = 50
+
+        for j = 1, #INFO.listBlock.custom do
+            M.group.types[15].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(false, DISPLAY_WIDTH - RIGHT_HEIGHT - 60, 116))
+                M.group.types[15].blocks[j].x = DISPLAY_WIDTH / 2
+                M.group.types[15].blocks[j].y = lastY
+                M.group.types[15].blocks[j]:setFillColor(INFO.getBlockColor(INFO.listBlock.custom[j]))
+                M.group.types[15].blocks[j]:setStrokeColor(0.3)
+                M.group.types[15].blocks[j].strokeWidth = 4
+                M.group.types[15].blocks[j].index = {1, j}
+                M.group.types[15].blocks[j]:addEventListener('touch', newBlockListener)
+            M.group.types[15].scroll:insert(M.group.types[15].blocks[j])
+
+            M.group.types[15].blocks[j].text = display.newText({
+                    text = STR['blocks.' .. INFO.listBlock.custom[j]],
+                    x = DISPLAY_WIDTH / 2 - M.group.types[15].blocks[j].width / 2 + 20,
+                    y = lastY, width = M.group.types[15].blocks[j].width - 40,
+                    height = 40, font = 'ubuntu', fontSize = 32, align = 'left'
+                }) M.group.types[15].blocks[j].text.anchorX = 0
+            M.group.types[15].scroll:insert(M.group.types[15].blocks[j].text)
+
+            lastY = lastY + 140
+            scrollHeight = scrollHeight + 140
+        end
+
+        M.group.types[15].scroll.isVisible = true
+        M.group.types[15].scroll:setScrollHeight(scrollHeight)
+
+        if M.boxText ~= '' then
+            M.boxText = '' M.group[4].text = ''
+            textListener({phase = 'editing', target = M.group[4]})
+        end
+    end
 end
 
 M.create = function()
@@ -288,6 +369,7 @@ M.create = function()
         M.group[7].alpha, M.group[7].isOn = 0.1, false
         M.group[9].alpha, M.group[9].isOn = 0.1, false
         M.group[19].alpha, M.group[19].isOn = 0.1, false
+
         for i = 5, 10 do M.group[i].isVisible = M.group.currentIndex == 15 end
         for i = 19, 20 do M.group[i].isVisible = M.group.currentIndex == 15 end
         for i = 11, 14 do M.group[i].isVisible = M.group.currentIndex == 9 end
@@ -296,7 +378,7 @@ M.create = function()
         for i = 25, 28 do M.group[i].isVisible = M.group.currentIndex == 2 end
         for i = 29, 32 do M.group[i].isVisible = M.group.currentIndex == 7 end
 
-        if M.group.currentIndex == 1 and M.boxText ~= '' then
+        if M.boxText ~= '' then
             M.boxText = '' M.group[4].text = ''
             textListener({phase = 'editing', target = M.group[4]})
         end

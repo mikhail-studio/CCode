@@ -134,14 +134,7 @@ M.addBlock = function(params, _index)
         SET_GAME_CUSTOM(custom) ALERT = true
         M.scroll:removeSelf() M.group:removeSelf()
         STR['blocks..params'] = {} STR['blocks.'] = STR['blocks.default']
-
-        NEW_BLOCK.remove() NEW_BLOCK.create()
-        NEW_BLOCK.group.types[15].scroll.isVisible = true
-        NEW_BLOCK.group.types[1].scroll.isVisible = false
-        NEW_BLOCK.group[4].isVisible = false
-        NEW_BLOCK.group.currentIndex = 15
-        for i = 5, 10 do NEW_BLOCK.group[i].isVisible = true end
-        for i = 19, 20 do NEW_BLOCK.group[i].isVisible = true end
+        NEW_BLOCK.custom(2)
     else
         local data = GET_GAME_CODE(CURRENT_LINK)
         local block = {STR['blocks.'], COPY_TABLE(STR['blocks..params'])}
@@ -170,7 +163,7 @@ M.addBlock = function(params, _index)
         SET_GAME_CODE(CURRENT_LINK, data)
 
         STR['blocks..params'] = {} STR['blocks.'] = STR['blocks.default']
-        ALERT = true M.scroll:removeSelf() M.group:removeSelf() NEW_BLOCK.remove()
+        ALERT = true M.scroll:removeSelf() M.group:removeSelf() NEW_BLOCK.custom(1)
         BLOCKS.group:removeSelf() BLOCKS.group = nil LAST_CURRENT_SCRIPT, CURRENT_SCRIPT = CURRENT_SCRIPT, 1
         BLOCKS.create({name = block[1], params = COPY_TABLE(block[2]), index = index, isChange = _index})
         BLOCKS.group.isVisible = true

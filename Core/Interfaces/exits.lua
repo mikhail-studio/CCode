@@ -109,14 +109,7 @@ listeners.blocks = function()
                 BLOCKS.group:removeSelf() BLOCKS.group = nil
                 BLOCKS.create() BLOCKS.custom = nil
                 BLOCKS.group.isVisible = false
-
-                NEW_BLOCK.remove() NEW_BLOCK.create()
-                NEW_BLOCK.group.types[15].scroll.isVisible = true
-                NEW_BLOCK.group.types[1].scroll.isVisible = false
-                NEW_BLOCK.group[4].isVisible = false
-                for i = 5, 10 do NEW_BLOCK.group[i].isVisible = true end
-                for i = 19, 20 do NEW_BLOCK.group[i].isVisible = true end
-                NEW_BLOCK.group.currentIndex = 15
+                NEW_BLOCK.custom(2)
             end
         end, 4)
     else
