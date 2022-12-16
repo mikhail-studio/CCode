@@ -735,8 +735,14 @@ M.getBlockColor = function(name, comment, type, color)
     elseif type == 'everyone' then
         return 0.15, 0.55, 0.4
     elseif type == 'custom' then
-        if color then return unpack(color) end
-        return 0.36, 0.47, 0.5
+        if color then return unpack(color)
+        elseif name then
+            local custom, name = GET_GAME_CUSTOM(), UTF8.gsub(name, '_', '', 1)
+            local index = UTF8.gsub(name, 'custom', '', 1) if index == '' and _G.type(BLOCKS.custom.color) == 'table' then
+            return unpack({BLOCKS.custom.color[1] / 255, BLOCKS.custom.color[2] / 255, BLOCKS.custom.color[3] / 255})
+            end color = index and (custom[index] and custom[index][5] or nil) or nil
+            return unpack(_G.type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5})
+        end return 0.36, 0.47, 0.5
     end
 end
 

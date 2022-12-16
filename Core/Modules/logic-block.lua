@@ -150,8 +150,8 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
     local addY = index == 1 and 24 + (blockHeight - 116) / 2 or 24
     if event then y = y + addY end table.insert(group.blocks, index, display.newGroup())
 
-    local custom = GET_GAME_CUSTOM()
-    if INFO.getType(name) == 'custom' then
+    local custom, color = GET_GAME_CUSTOM()
+    if INFO.getType(name) == 'custom' and UTF8.sub(name, 1, 1) ~= '_' then
         local index = UTF8.gsub(name, 'custom', '', 1)
         color = index and custom[index][5] or nil
         color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}

@@ -28,14 +28,24 @@ M.create = function(data, size, twidth, tsize, needParams)
     local blockWidth = DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60
     local lengthParams = needParams or #data.params if blockWidth / 116 > 15 then blockWidth = 116 * 15 end
     local blockHeight = 116 + 60 * math.round((lengthParams - 2 < 0 and 0 or lengthParams - 2) / 2, 0)
+    local color = type(data.color) == 'table' and COPY_TABLE(data.color) or nil
 
     local polygon = BLOCK.getPolygonParams(data.event, blockWidth, data.event and blockHeight - 14 or blockHeight)
     local _polygon = display.newPolygon(0, 0, polygon) _polygon.strokeWidth = 4
     local pwidth = (twidth and type(twidth) == 'number') and twidth or _polygon.width _polygon:removeSelf()
     for i = 1, #polygon do polygon[i] = i % 2 == 0 and polygon[i] / size or  polygon[i] / size * tsize end
 
+    if not color then
+        local custom = GET_GAME_CUSTOM()
+        if INFO.getType(data.name) == 'custom' and UTF8.sub(data.name, 1, 1) ~= '_' then
+            local index = UTF8.gsub(data.name, 'custom', '', 1)
+            color = index and custom[index][5] or nil
+            color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}
+        end
+    end
+
     block.block = display.newPolygon(0, 0, polygon)
-        block.block:setFillColor(INFO.getBlockColor(data.name, data.comment, nil, data.color))
+        block.block:setFillColor(INFO.getBlockColor(data.name, data.comment, nil, color))
         block.block:setStrokeColor(0.3)
         block.block.strokeWidth = 4
     block:insert(block.block)
@@ -135,14 +145,6 @@ M.new = function(target)
                     target.data.params[i] = {}
                 end
             end
-        end
-
-        local custom = GET_GAME_CUSTOM()
-        if INFO.getType(name) == 'custom' then
-            local index = UTF8.gsub(name, 'custom', '', 1)
-            color = index and custom[index][5] or nil
-            color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}
-            target.data.color = color
         end
 
         local block = M.create(target.data, size, nil, nil, needParams)

@@ -60,42 +60,69 @@ listeners.but_list = function(target)
     if #SCRIPTS.group.blocks > 0 then
         SCRIPTS.group[8]:setIsLocked(true, 'vertical')
         if SCRIPTS.group.isVisible then
-            LIST.new({STR['button.remove'], STR['button.rename'], STR['button.copy']}, MAX_X, target.y - target.height / 2, 'down', function(e)
-                SCRIPTS.group[8]:setIsLocked(false, 'vertical')
+            LIST.new({
+                STR['button.remove'], STR['button.rename'], STR['button.copy'], STR['button.find']},
+                MAX_X, target.y - target.height / 2, 'down', function(e)
+                    SCRIPTS.group[8]:setIsLocked(false, 'vertical')
 
-                if e.index ~= 0 then
-                    ALERT = false
-                    INDEX_LIST = e.index
-                    EXITS.add(listeners.but_okay_end)
-                    SCRIPTS.group[3].isVisible = true
-                    SCRIPTS.group[4].isVisible = false
-                    SCRIPTS.group[5].isVisible = false
-                    SCRIPTS.group[6].isVisible = false
-                    SCRIPTS.group[7].isVisible = true
-                end
-
-                if e.index == 1 then
-                    MORE_LIST = true
-                    SCRIPTS.group[3].text = '(' .. STR['button.remove'] .. ')'
-
-                    for i = 1, #SCRIPTS.group.blocks do
-                        SCRIPTS.group.blocks[i].checkbox.isVisible = true
+                    if e.index ~= 0 and e.index ~= 4 then
+                        ALERT = false
+                        INDEX_LIST = e.index
+                        EXITS.add(listeners.but_okay_end)
+                        SCRIPTS.group[3].isVisible = true
+                        SCRIPTS.group[4].isVisible = false
+                        SCRIPTS.group[5].isVisible = false
+                        SCRIPTS.group[6].isVisible = false
+                        SCRIPTS.group[7].isVisible = true
                     end
-                elseif e.index == 2 then
-                    MORE_LIST = false
-                    SCRIPTS.group[3].text = '(' .. STR['button.rename'] .. ')'
 
-                    for i = 1, #SCRIPTS.group.blocks do
-                        SCRIPTS.group.blocks[i].checkbox.isVisible = true
-                    end
-                elseif e.index == 3 then
-                    MORE_LIST = false
-                    SCRIPTS.group[3].text = '(' .. STR['button.copy'] .. ')'
+                    if e.index == 1 then
+                        MORE_LIST = true
+                        SCRIPTS.group[3].text = '(' .. STR['button.remove'] .. ')'
 
-                    for i = 1, #SCRIPTS.group.blocks do
-                        SCRIPTS.group.blocks[i].checkbox.isVisible = true
+                        for i = 1, #SCRIPTS.group.blocks do
+                            SCRIPTS.group.blocks[i].checkbox.isVisible = true
+                        end
+                    elseif e.index == 2 then
+                        MORE_LIST = false
+                        SCRIPTS.group[3].text = '(' .. STR['button.rename'] .. ')'
+
+                        for i = 1, #SCRIPTS.group.blocks do
+                            SCRIPTS.group.blocks[i].checkbox.isVisible = true
+                        end
+                    elseif e.index == 3 then
+                        MORE_LIST = false
+                        SCRIPTS.group[3].text = '(' .. STR['button.copy'] .. ')'
+
+                        for i = 1, #SCRIPTS.group.blocks do
+                            SCRIPTS.group.blocks[i].checkbox.isVisible = true
+                        end
+                    elseif e.index == 4 then
+                        SCRIPTS.group[8]:setIsLocked(true, 'vertical')
+                        INPUT.new(STR['scripts.entername'], function(event)
+                            if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
+                                INPUT.remove(true, event.target.text)
+                            end
+                        end, function(e)
+                            SCRIPTS.group[8]:setIsLocked(false, 'vertical')
+
+                            if e.input then
+                                local data = GET_GAME_CODE(CURRENT_LINK)
+
+                                for i = #SCRIPTS.group.data, 1, -1 do
+                                    SCRIPTS.group.blocks[i].remove(i)
+                                end
+
+                                timer.performWithDelay(10, function()
+                                    for index, script_config in pairs(data.scripts) do
+                                        if UTF8.find(UTF8.lower(script_config.title), UTF8.lower(e.text)) then
+                                            SCRIPTS.new(script_config.title, #SCRIPTS.group.blocks + 1)
+                                        end
+                                    end
+                                end)
+                            end
+                        end)
                     end
-                end
             end, nil, nil, 1)
         else
             SCRIPTS.group[8]:setIsLocked(false, 'vertical')

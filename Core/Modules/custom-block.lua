@@ -236,6 +236,11 @@ M.removeOverlay = function(index)
                 for i = 5, 10 do NEW_BLOCK.group[i].isVisible = true end
                 for i = 19, 20 do NEW_BLOCK.group[i].isVisible = true end
                 NEW_BLOCK.group.currentIndex = 15
+            else
+                ALERT = false
+                M.alert = true
+                EXITS.add(M.removeOverlay, index)
+                M.scroll:setIsLocked(false, 'vertical')
             end
         end, 4)
     else

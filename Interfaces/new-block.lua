@@ -278,6 +278,7 @@ end
 
 M.custom = function(i)
     if i == 1 then
+        M.group.isVisible = false
         M.group.types[15].isVisible = false
         M.group.types[15].text.isVisible = false
         M.group.types[15].scroll.isVisible = false
@@ -322,15 +323,22 @@ M.custom = function(i)
 
         local lastY = 90
         local scrollHeight = 50
+        local custom = GET_GAME_CUSTOM()
 
         for j = 1, #INFO.listBlock.custom do
+            if INFO.getType(INFO.listBlock.custom[j]) == 'custom' and UTF8.sub(INFO.listBlock.custom[j], 1, 1) ~= '_' then
+                local index = UTF8.gsub(INFO.listBlock.custom[j], 'custom', '', 1)
+                color = index and custom[index][5] or nil
+                color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}
+            end
+
             M.group.types[15].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(false, DISPLAY_WIDTH - RIGHT_HEIGHT - 60, 116))
                 M.group.types[15].blocks[j].x = DISPLAY_WIDTH / 2
                 M.group.types[15].blocks[j].y = lastY
-                M.group.types[15].blocks[j]:setFillColor(INFO.getBlockColor(INFO.listBlock.custom[j]))
+                M.group.types[15].blocks[j]:setFillColor(INFO.getBlockColor(INFO.listBlock.custom[j], nil, nil, color))
                 M.group.types[15].blocks[j]:setStrokeColor(0.3)
                 M.group.types[15].blocks[j].strokeWidth = 4
-                M.group.types[15].blocks[j].index = {1, j}
+                M.group.types[15].blocks[j].index = {15, j}
                 M.group.types[15].blocks[j]:addEventListener('touch', newBlockListener)
             M.group.types[15].scroll:insert(M.group.types[15].blocks[j])
 
@@ -747,7 +755,7 @@ M.create = function()
                     if UTF8.sub(name, UTF8.len(name) - 2, UTF8.len(name)) ~= 'End' and name ~= 'ifElse' and notCustom then
                         local event, color = INFO.listType[i] == 'events' or INFO.getType(name) == 'events'
 
-                        if INFO.getType(name) == 'custom' then
+                        if INFO.getType(name) == 'custom' and UTF8.sub(name, 1, 1) ~= '_' then
                             local index = UTF8.gsub(name, 'custom', '', 1)
                             color = index and custom[index][5] or nil
                             color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}
