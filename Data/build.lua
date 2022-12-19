@@ -677,13 +677,13 @@ return ' ' .. UTF8.trimFull([[
 
             M['obj.pos_x'] = function(name)
                 local isComplete, result = pcall(function()
-                    return GAME.group.objects[name] and select(1, GAME.group.objects[name]:localToContent(-CENTER_X, -CENTER_Y)) or 0
+                    return GAME.group.objects[name] and GAME.group.objects[name].x - CENTER_X or 0
                 end) return isComplete and result or 0
             end
 
             M['obj.pos_y'] = function(name)
                 local isComplete, result = pcall(function()
-                    return GAME.group.objects[name] and 0 - select(2, GAME.group.objects[name]:localToContent(-CENTER_X, -CENTER_Y)) or 0
+                    return GAME.group.objects[name] and 0 - GAME.group.objects[name].y + CENTER_Y or 0
                 end) return isComplete and result or 0
             end
 
@@ -747,13 +747,13 @@ return ' ' .. UTF8.trimFull([[
 
             M['text.pos_x'] = function(name)
                 local isComplete, result = pcall(function()
-                    return GAME.group.texts[name] and select(1, GAME.group.texts[name]:localToContent(-CENTER_X, -CENTER_Y)) or 0
+                    return GAME.group.texts[name] and GAME.group.texts[name].x - CENTER_X or 0
                 end) return isComplete and result or 0
             end
 
             M['text.pos_y'] = function(name)
                 local isComplete, result = pcall(function()
-                    return GAME.group.texts[name] and 0 - select(2, GAME.group.texts[name]:localToContent(-CENTER_X, -CENTER_Y)) or 0
+                    return GAME.group.texts[name] and 0 - GAME.group.texts[name].y + CENTER_Y or 0
                 end) return isComplete and result or 0
             end
 
@@ -791,13 +791,13 @@ return ' ' .. UTF8.trimFull([[
 
             M['group.pos_x'] = function(name)
                 local isComplete, result = pcall(function()
-                    return GAME.group.groups[name] and select(1, GAME.group.groups[name]:localToContent(0, 0)) or 0
+                    return GAME.group.groups[name] and GAME.group.groups[name].x or 0
                 end) return isComplete and result or 0
             end
 
             M['group.pos_y'] = function(name)
                 local isComplete, result = pcall(function()
-                    return GAME.group.groups[name] and 0 - select(2, GAME.group.groups[name]:localToContent(0, 0)) or 0
+                    return GAME.group.groups[name] and 0 - GAME.group.groups[name].y or 0
                 end) return isComplete and result or 0
             end
 
@@ -835,13 +835,13 @@ return ' ' .. UTF8.trimFull([[
 
             M['widget.pos_x'] = function(name)
                 local isComplete, result = pcall(function()
-                    return GAME.group.widgets[name] and select(1, GAME.group.widgets[name]:localToContent(-CENTER_X, -CENTER_Y)) or 0
+                    return GAME.group.widgets[name] and GAME.group.widgets[name].x - CENTER_X or 0
                 end) return isComplete and result or 0
             end
 
             M['widget.pos_y'] = function(name)
                 local isComplete, result = pcall(function()
-                    return GAME.group.widgets[name] and 0 - select(2, GAME.group.widgets[name]:localToContent(-CENTER_X, -CENTER_Y)) or 0
+                    return GAME.group.widgets[name] and 0 - GAME.group.widgets[name].y + CENTER_Y or 0
                 end) return isComplete and result or 0
             end
 

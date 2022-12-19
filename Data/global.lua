@@ -378,9 +378,9 @@ GET_GLOBAL_TABLE = function()
     return {
         sendLaunchAnalytics = sendLaunchAnalytics, transition = transition, tostring = tostring, tonumber = tonumber,
         gcinfo = gcinfo, assert = assert, debug = debug, GAME = GAME, collectgarbage = collectgarbage, GANIN = GANIN,
-        io = io, os = os, display = display, dofile = dofile, module = module, media = media, OS_REMOVE = OS_REMOVE,
+        print2 = io, os = os, display = display, dofile = dofile, module = module, media = media, OS_REMOVE = OS_REMOVE,
         native = native, coroutine = coroutine, CENTER_X = CENTER_X, CENTER_Y = CENTER_Y, ipairs = ipairs,
-        TOP_HEIGHT = TOP_HEIGHT, network = network, LFS = lfs, _network_pathForFile = _network_pathForFile,
+        TOP_HEIGHT = TOP_HEIGHT, network = network, print3 = lfs, _network_pathForFile = _network_pathForFile,
         pcall = pcall, BUILD = BUILD, MAX_Y = MAX_Y, MAX_X = MAX_X, string = string, SIZE = SIZE, READ_FILE = READ_FILE,
         xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, print = print, OS_MOVE = OS_MOVE,
         table = table, lpeg = lpeg, COPY_TABLE = COPY_TABLE, DISPLAY_HEIGHT = DISPLAY_HEIGHT, OS_COPY = OS_COPY,
