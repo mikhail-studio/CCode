@@ -345,6 +345,7 @@ return ' ' .. UTF8.trimFull([[
         JSON.decode2, JSON.decode = JSON.decode, function(str) return type(str) == 'string' and (JSON.decode2(str) or {}) or nil end
         math.factorial = function(num) if num == 0 then return 1 else return num * math.factorial(num - 1) end end
         math.hex = function(hex) local r, g, b = hex:match('(..)(..)(..)') return {tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)} end
+        UTF8.split = function(text, sep) local result = {} for s in text:gmatch('[^' .. sep .. ']+') do result[#result + 1] = s end return result end
         UTF8.trim = function(s) return UTF8.gsub(UTF8.gsub(s, '^%s+', ''), '%s+$', '') end
         UTF8.trimLeft = function(s) return UTF8.gsub(s, '^%s+', '') end
         UTF8.trimRight = function(s) return UTF8.gsub(s, '%s+$', '') end
@@ -395,6 +396,12 @@ return ' ' .. UTF8.trimFull([[
             return DEVICE_ID
         end
 
+        M['read_save'] = function(key)
+            local isComplete, result = pcall(function()
+                return GET_GAME_SAVE(CURRENT_LINK)[tostring(key)]
+            end) return isComplete and result or nil
+        end
+
         M['width_screen'] = function()
             return DISPLAY_WIDTH
         end
@@ -437,6 +444,12 @@ return ' ' .. UTF8.trimFull([[
 
         M['finger_touching_screen_y'] = function()
             return CENTER_Y - GAME.group.const.touch_y
+        end
+
+        M['get_ip'] = function(any)
+            local isComplete, result = pcall(function()
+                return SERVER.getIP()
+            end) return isComplete and result or nil
         end
 
         M['fps'] = function()
@@ -536,6 +549,12 @@ return ' ' .. UTF8.trimFull([[
             local isComplete, result = pcall(function()
                 return UTF8.find(str, pattern, i, plain)
             end) return isComplete and result or str
+        end
+
+        M['split'] = function(str, sep)
+            local isComplete, result = pcall(function()
+                return UTF8.split(str, sep)
+            end) return isComplete and result or {}
         end
 
         M['match'] = function(str, pattern, i)

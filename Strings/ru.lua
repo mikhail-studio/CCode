@@ -761,6 +761,7 @@ return {
         ['editor.list.fun.sub'] = 'символ_из_текста',
         ['editor.list.fun.len'] = 'длина_текста',
         ['editor.list.fun.find'] = 'найти_в_тексте',
+        ['editor.list.fun.split'] = 'разделить_текст',
         ['editor.list.fun.color_pixel'] = 'цвет_пикселя',
         ['editor.list.fun.match'] = 'регулярное_выражение',
         ['editor.list.fun.get_ip'] = 'получить_свой_адрес',
@@ -843,6 +844,7 @@ return {
         ['editor.list.log.not'] = 'не',
 
     ['editor.list.device.fps'] = 'фпс',
+        ['editor.list.device.read_save'] = 'прочитать_сохранение',
         ['editor.list.device.device_id'] = 'айди_устройства',
         ['editor.list.device.width_screen'] = 'ширина_экрана',
         ['editor.list.device.height_screen'] = 'высота_экрана',
@@ -855,4 +857,5 @@ return {
         ['editor.list.device.finger_touching_screen'] = 'палец_касается_экрана',
         ['editor.list.device.finger_touching_screen_x'] = 'палец_касается_экрана_x',
         ['editor.list.device.finger_touching_screen_y'] = 'палец_касается_экрана_y',
+        ['editor.list.device.get_ip'] = 'получить_свой_адрес'
 }

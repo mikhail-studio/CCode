@@ -3,8 +3,8 @@ local M = {}
 M.fun = {
     names = {},
     keys = {
-        'get_text', 'read_save', 'concat', 'tonumber', 'tostring', 'totable', 'len_table', 'unix_time',
-        'encode', 'gsub', 'sub', 'len', 'find', 'random_str', 'match', 'get_ip', 'color_pixel'
+        'get_text', 'concat', 'tonumber', 'tostring', 'totable', 'len_table', 'unix_time',
+        'encode', 'gsub', 'sub', 'len', 'find', 'split', 'random_str', 'match', 'color_pixel'
     }
 }
 
@@ -63,8 +63,9 @@ M.log = {
 M.device = {
     names = {},
     keys = {
-        'fps', 'device_id', 'width_screen', 'height_screen', 'top_point_screen', 'bottom_point_screen', 'right_point_screen',
-        'left_point_screen', 'height_top', 'height_bottom', 'finger_touching_screen', 'finger_touching_screen_x', 'finger_touching_screen_y'
+        'fps', 'read_save', 'device_id', 'width_screen', 'height_screen', 'top_point_screen',
+        'bottom_point_screen', 'right_point_screen', 'left_point_screen', 'height_top', 'height_bottom',
+        'finger_touching_screen', 'finger_touching_screen_x', 'finger_touching_screen_y', 'get_ip'
     }
 }
 

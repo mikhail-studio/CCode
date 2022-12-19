@@ -4,6 +4,12 @@ M['device_id'] = function()
     return DEVICE_ID
 end
 
+M['read_save'] = function(key)
+    local isComplete, result = pcall(function()
+        return GET_GAME_SAVE(CURRENT_LINK)[tostring(key)]
+    end) return isComplete and result or nil
+end
+
 M['width_screen'] = function()
     return DISPLAY_WIDTH
 end
@@ -46,6 +52,12 @@ end
 
 M['finger_touching_screen_y'] = function()
     return CENTER_Y - GAME.group.const.touch_y
+end
+
+M['get_ip'] = function(any)
+    local isComplete, result = pcall(function()
+        return SERVER.getIP()
+    end) return isComplete and result or nil
 end
 
 M['fps'] = function()

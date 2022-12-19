@@ -333,6 +333,7 @@ JSON.encode3 = require('Data.json').encode
 JSON.decode2, JSON.decode = JSON.decode, function(str) return type(str) == 'string' and (JSON.decode2(str) or {}) or nil end
 math.factorial = function(num) if num == 0 then return 1 else return num * math.factorial(num - 1) end end
 math.hex = function(hex) local r, g, b = hex:match('(..)(..)(..)') return {tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)} end
+UTF8.split = function(text, sep) local result = {} for s in text:gmatch('[^' .. sep .. ']+') do result[#result + 1] = s end return result end
 UTF8.trim = function(s) return UTF8.gsub(UTF8.gsub(s, '^%s+', ''), '%s+$', '') end
 UTF8.trimLeft = function(s) return UTF8.gsub(s, '^%s+', '') end
 UTF8.trimRight = function(s) return UTF8.gsub(s, '%s+$', '') end

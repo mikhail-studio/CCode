@@ -84,6 +84,12 @@ M['find'] = function(str, pattern, i, plain)
     end) return isComplete and result or str
 end
 
+M['split'] = function(str, sep)
+    local isComplete, result = pcall(function()
+        return UTF8.split(str, sep)
+    end) return isComplete and result or {}
+end
+
 M['match'] = function(str, pattern, i)
     local isComplete, result = pcall(function()
         return UTF8.match(str, pattern, i)
