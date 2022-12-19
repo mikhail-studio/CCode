@@ -791,13 +791,13 @@ return ' ' .. UTF8.trimFull([[
 
             M['group.pos_x'] = function(name)
                 local isComplete, result = pcall(function()
-                    return GAME.group.groups[name] and select(1, GAME.group.groups[name]:localToContent(-CENTER_X, -CENTER_Y)) or 0
+                    return GAME.group.groups[name] and select(1, GAME.group.groups[name]:localToContent(0, 0)) or 0
                 end) return isComplete and result or 0
             end
 
             M['group.pos_y'] = function(name)
                 local isComplete, result = pcall(function()
-                    return GAME.group.groups[name] and 0 - select(2, GAME.group.groups[name]:localToContent(-CENTER_X, -CENTER_Y)) or 0
+                    return GAME.group.groups[name] and 0 - select(2, GAME.group.groups[name]:localToContent(0, 0)) or 0
                 end) return isComplete and result or 0
             end
 

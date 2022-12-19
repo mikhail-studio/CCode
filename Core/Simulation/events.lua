@@ -45,9 +45,9 @@ M['onTouchBegan'] = function(nested, params)
 end
 
 M['onTouchEnded'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if p.phase == \'ended\''
-    GAME.lua = GAME.lua .. ' or p.phase == \'cancelled\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) '
-    GAME.lua = GAME.lua .. CALC(params[2], 'a', true) .. ' = {name = p.target.name, x = GET_X(p.x), y = GET_Y(p.y), xStart = GET_X(p.xStart),'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if p.phase == \'ended\' or p.phase =='
+    GAME.lua = GAME.lua .. ' \'cancelled\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
+    GAME.lua = GAME.lua .. ' = {name = p.target.name, x = GET_X(p.x), y = GET_Y(p.y), xStart = GET_X(p.xStart),'
     GAME.lua = GAME.lua .. ' yStart = GET_Y(p.yStart), id = p.id, xDelta = GET_X(p.xDelta), yDelta = GET_Y(p.yDelta)}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end

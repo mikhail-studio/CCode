@@ -141,7 +141,7 @@ M.open = function(target)
                 SET_GAME_CODE(CURRENT_LINK, data)
             end BLOCKS.group[8]:setIsLocked(false, 'vertical')
         end)
-    elseif M.getListValue(type) then
+    elseif M.getListValue(type) and ALERT then
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
         LIST.new(M.getListButtons(type), listX, listY, listDirection, function(e)
             if e.index > 0 then

@@ -85,6 +85,8 @@ listeners.checkLocalData = function(blocks, bIndex, pIndex, pType)
                     if i > bIndex then break end
                     countEvent = countEvent + 1
                     lastIndexEvent = i
+                elseif i > bIndex then
+                    break
                 end
             end
 

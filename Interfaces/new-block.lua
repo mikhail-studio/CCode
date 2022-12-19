@@ -110,14 +110,7 @@ local function newBlockListener(event)
                             table.insert(INFO.listBlock.everyone, 'custom' .. _index)
 
                             SET_GAME_CUSTOM(custom)
-                            M.remove() M.create()
-                            M.group.types[1].scroll.isVisible = false
-                            M.group.types[15].scroll.isVisible = true
-                            M.group[3].isVisible = true
-                            M.group[4].isVisible = false
-                            for i = 5, 10 do M.group[i].isVisible = true end
-                            for i = 19, 20 do M.group[i].isVisible = true end
-                            M.group.currentIndex = 15 break
+                            M.custom(2) break
                         end
                     end
                 elseif M.group[9].isOn and event.target.index[1] == 15 then
@@ -147,16 +140,9 @@ local function newBlockListener(event)
                             BLOCKS.create() BLOCKS.custom = nil
                             BLOCKS.group.isVisible = false
                             custom[index] = nil custom.len = custom.len - 1
-                            SET_GAME_CUSTOM(custom)
 
-                            M.remove() M.create()
-                            M.group.types[1].scroll.isVisible = false
-                            M.group.types[15].scroll.isVisible = true
-                            M.group[3].isVisible = true
-                            M.group[4].isVisible = false
-                            for i = 5, 10 do M.group[i].isVisible = true end
-                            for i = 19, 20 do M.group[i].isVisible = true end
-                            M.group.currentIndex = 15 break
+                            SET_GAME_CUSTOM(custom)
+                            M.custom(2) break
                         end
                     end
                 else

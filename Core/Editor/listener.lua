@@ -19,7 +19,7 @@ M.rect = function(target, restart, data)
     local index = target.index
     local type = INFO.listName[restart[1]][index + 1]
 
-    if type == 'value' then
+    if type == 'value' and ALERT then
         if TEXT.check(COPY_TABLE(data)) then
             local param = TEXT.number(data, true)
             local data = GET_GAME_CODE(CURRENT_LINK)

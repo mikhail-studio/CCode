@@ -130,12 +130,13 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
                 if e.target.data.name == 'ifElse' then nestedName = 'if' end
 
                 for i = M.index - 1, 1, -1 do
-                    local name = group.blocks[i].data.name
+                    local name, _name = group.blocks[i].data.name, ''
                     local notNested = not (group.blocks[i].data.nested and #group.blocks[i].data.nested > 0)
-                    if name == 'ifElse' and e.target.data.name ~= 'ifElse' then name = 'if' end
+                    if name == 'ifElse' and e.target.data.name ~= 'ifElse' then name, _name = 'if', name end
 
                     if name == nestedName and notNested then
                         nestedEndIndex = nestedEndIndex - 1
+                        if nestedEndIndex ~= 0 and _name == 'ifElse' then nestedEndIndex = nestedEndIndex + 1 end
                         if nestedEndIndex == 0 then M.stopY, M.stopT, M.stopI = group.blocks[i].y, tostring(group.blocks[i]), i break end
                     elseif name == (e.target.data.name == 'ifElse' and 'ifEnd' or e.target.data.name) then
                         nestedEndIndex = nestedEndIndex + 1
@@ -373,7 +374,16 @@ local function stopMoveLogicBlock(e, group, scroll)
         if M.countClose > 0 then
             local diffScrollY = scroll.y - e.target.y + e.target.height / 2
             scroll:scrollToPosition({y = diffScrollY > 0 and 0 or diffScrollY, time = 0})
-            for j = M.index, #group.blocks do if group.blocks[j] == target then M.index = j break end end
+        end
+
+        for j = M.index, #group.blocks do
+            if group.blocks[j] == target then
+                M.index = j
+            end 
+
+            if group.blocks[j].x > BLOCK_CENTER_X then
+                group.blocks[j].x = BLOCK_CENTER_X
+            end
         end
 
         if e.target.data.nested then

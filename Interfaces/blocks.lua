@@ -6,7 +6,7 @@ local genBlocks = function(data)
     for i = 1, #data.scripts[CURRENT_SCRIPT].params do
         local params = data.scripts[CURRENT_SCRIPT].params[i]
 
-        if INFO.listName[params.name] then
+        if type(params) == 'table' and params.name and INFO.listName[params.name] then
             M.new(params.name, i, params.event, params.params, params.comment, params.nested, params.vars, params.tables)
         else
             M.new('comment', i, false, {{{STR['blocks.not.exist'], 't'}}}, false)

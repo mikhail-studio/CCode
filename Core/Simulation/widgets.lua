@@ -42,7 +42,10 @@ M['setWidgetListener'] = function(params)
 end
 
 M['removeWidget'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() timer.new(10, 1, function() GAME.group.widgets[' .. CALC(params[1]) .. ']:removeSelf() end) end)'
+    local name = CALC(params[1])
+
+    GAME.lua = GAME.lua .. ' pcall(function() timer.new(10, 1, function() pcall(function() GAME.group.widgets[' .. name .. ']:removeSelf()'
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '] = nil end) end) end)'
 end
 
 M['newWebView'] = function(params)

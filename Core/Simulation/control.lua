@@ -61,8 +61,10 @@ M['requestExit'] = function(params)
 end
 
 M['setListener'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. ']:addEventListener(\'touch\','
-    GAME.lua = GAME.lua .. ' function(e) e.target._touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. ']:addEventListener(\'touch\', function(e)'
+    GAME.lua = GAME.lua .. ' e.target._touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\' GAME.group.const.touch = e.target._touch'
+    GAME.lua = GAME.lua .. ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y if e.target._touch then'
+    GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(e.target) else display.getCurrentStage():setFocus(nil) end'
     GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() return ' .. CALC(params[2], 'a', true) .. '(e)'
     GAME.lua = GAME.lua .. ' end) return isComplete and result or false end) end)'
 end

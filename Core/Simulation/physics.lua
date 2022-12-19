@@ -76,7 +76,7 @@ M['setLinearVelocityY'] = function(params)
     local speedY = CALC(params[2], '0')
 
     GAME.lua = GAME.lua .. ' pcall(function() local speedX, speedY = GAME.group.objects[' .. name .. ']:getLinearVelocity()'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']:setLinearVelocity(speedX, ' .. speedY .. ') end)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']:setLinearVelocity(speedX, -' .. speedY .. ') end)'
 end
 
 M['setAngularVelocity'] = function(params)
@@ -192,7 +192,7 @@ M['setHitboxPolygon'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._hitbox.shape = ' .. polygon .. ' end)'
 end
 
-M['updHitbox'] = function(params)    
+M['updHitbox'] = function(params)
     local name = CALC(params[1])
     local type = 'GAME.group.objects[' .. name .. ']._body'
     local friction = 'GAME.group.objects[' .. name .. ']._friction'

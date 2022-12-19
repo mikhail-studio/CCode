@@ -158,7 +158,7 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
     end
 
     group.blocks[index].data = {event = event, comment = comment, name = name, params = params, nested = nested, vars = vars, tables = tables}
-    group.blocks[index].x, group.blocks[index].y = scroll.width / 2, y
+    group.blocks[index].x, group.blocks[index].y, BLOCK_CENTER_X = scroll.width / 2, y, scroll.width / 2
 
     group.blocks[index].block = display.newPolygon(0, 0, blockParams)
         group.blocks[index].block:setFillColor(INFO.getBlockColor(name, comment, nil, color))

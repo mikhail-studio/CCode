@@ -11,6 +11,7 @@ return {
                     else
                         local link = 'App' .. numApp
                         GANIN.uncompress(DOC_DIR .. '/import.ccode', DOC_DIR .. '/' .. link, function()
+                            local INFO, changeDataCustom = require 'Data.info', {}
                             local data, hash = GET_GAME_CODE(link), READ_FILE(DOC_DIR .. '/' .. link .. '/hash.txt')
                             local new_custom = JSON.decode(READ_FILE(DOC_DIR .. '/' .. link .. '/custom.json'))
                             local code, custom, dataCustom = JSON.encode3(data, {keyorder = KEYORDER}), GET_GAME_CUSTOM(), {}
@@ -42,9 +43,8 @@ return {
                                                         custom[_index] = COPY_TABLE(block)
                                                         custom[_index][4] = os.time()
                                                         dataCustom[index] = _index
-                                                    end
-
-                                                    break
+                                                        changeDataCustom[_index] = true
+                                                    end break
                                                 end
                                             elseif tonumber(_index) == custom.len then
                                                 custom.len = custom.len + 1
@@ -54,6 +54,23 @@ return {
                                             end
                                         end
                                     end
+                                end
+                            end
+
+                            for _, index in ipairs(dataCustom) do
+                                local block = custom[index]
+                                local typeBlock = 'custom' .. index
+                                local blockParams = {} for i = 1, #block[2] do blockParams[i] = 'value' end
+
+                                STR['blocks.' .. typeBlock] = block[1]
+                                STR['blocks.' .. typeBlock .. '.params'] = block[2]
+                                LANG.ru['blocks.' .. typeBlock] = block[1]
+                                LANG.ru['blocks.' .. typeBlock .. '.params'] = block[2]
+                                INFO.listName[typeBlock] = {'custom', unpack(blockParams)}
+
+                                if changeDataCustom[index] then
+                                    table.insert(INFO.listBlock.custom, 1, typeBlock)
+                                    table.insert(INFO.listBlock.everyone, typeBlock)
                                 end
                             end
 
