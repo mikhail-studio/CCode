@@ -394,6 +394,8 @@ return {
         ['blocks.setPixel.params'] = {'Имя растр. текстуры:', 'Позиция (X):', 'Позиция (Y):', 'Цвет:'},
         ['blocks.setPixelRGB'] = 'Установить RGB цвет пикселя',
         ['blocks.setPixelRGB.params'] = {'Имя растр. текстуры:', 'Позиция (X):', 'Позиция (Y):', 'Цвет (R):', 'Цвет (G):', 'Цвет (B):'},
+        ['blocks.removePixel'] = 'Удалить цвет пикселя',
+        ['blocks.removePixel.params'] = {'Имя растр. текстуры:', 'Позиция (X):', 'Позиция (Y):'},
         ['blocks.updBitmap'] = 'Обновить растровую текстуру',
         ['blocks.updBitmap.params'] = {'Имя растр. текстуры:'},
         ['blocks.setBitmapSprite'] = 'Установить растр. текстуру объекта',
