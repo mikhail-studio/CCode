@@ -688,6 +688,12 @@ return ' ' .. UTF8.trimFull([[
                 end) return isComplete and result
             end
 
+            M['obj.var'] = function(name)
+                local isComplete, result = pcall(function()
+                    return GAME.group.objects[name] and GAME.group.objects[name]._data or {}
+                end) return isComplete and result or {}
+            end
+
             M['obj.tag'] = function(name)
                 local isComplete, result = pcall(function()
                     return GAME.group.objects[name] and GAME.group.objects[name]._tag or ''

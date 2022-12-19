@@ -21,7 +21,7 @@ M.prop = {
     obj = {
         names = {},
         keys = {
-            'touch', 'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation',
+            'touch', 'var', 'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation',
             'alpha', 'name_texture', 'velocity_x', 'velocity_y', 'angular_velocity'
         }
     },

@@ -794,6 +794,7 @@ return {
 
     ['editor.list.prop.obj.touch'] = 'нажатие',
         ['editor.list.prop.obj.tag'] = 'тег',
+            ['editor.list.prop.obj.var'] = 'переменные',
             ['editor.list.prop.obj.pos_x'] = 'позиция_x',
             ['editor.list.prop.obj.pos_y'] = 'позиция_y',
             ['editor.list.prop.obj.width'] = 'ширина',

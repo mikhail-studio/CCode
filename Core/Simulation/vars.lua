@@ -61,7 +61,7 @@ M['setObjVar'] = function(params)
     local obj = 'GAME.group.objects[' .. CALC(params[2]) .. ']._data'
     local value = CALC(params[3])
 
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. obj .. key .. ' = ' .. value .. ' end end)'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. obj .. key .. ' = ' .. value .. ' end)'
 end
 
 M['addTable'] = function(params)
