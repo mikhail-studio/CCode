@@ -203,6 +203,8 @@ return {
         ['blocks.setVar.params'] = {'Имя переменной:', 'Значение:'},
         ['blocks.updVar'] = 'Добавить значение к переменной',
         ['blocks.updVar.params'] = {'Имя переменной:', 'Значение:'},
+        ['blocks.setObjVar'] = 'Установить переменную объекта',
+        ['blocks.setObjVar.params'] = {'Ключ [K]:', 'Имя объекта:', 'Значение:'},
         ['blocks.addTable'] = 'Установить значение в таблицу',
         ['blocks.addTable.params'] = {'Ключ [K]:', 'Имя таблицы:', 'Значение:'},
         ['blocks.insertTable'] = 'Вставить значение в массив',

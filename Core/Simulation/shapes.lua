@@ -35,6 +35,7 @@ M['newRect'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._data = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
 end
 
@@ -54,6 +55,7 @@ M['newRoundedRect'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._data = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
 end
 
@@ -70,6 +72,7 @@ M['newCircle'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._data = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
 end
 
@@ -88,6 +91,7 @@ M['newPolygon'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._data = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
 end
 
@@ -110,6 +114,7 @@ M['newLine'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._data = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
 end
 

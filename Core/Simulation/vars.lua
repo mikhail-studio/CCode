@@ -56,6 +56,14 @@ M['updVar'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() ' .. var .. ' = ' .. var .. ' + ' .. value .. ' end)'
 end
 
+M['setObjVar'] = function(params)
+    local key = UTF8.sub(CALC(params[1], '[\'KEY\']', true), 2)
+    local obj = 'GAME.group.objects[' .. CALC(params[2]) .. ']._data'
+    local value = CALC(params[3])
+
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. obj .. key .. ' = ' .. value .. ' end end)'
+end
+
 M['addTable'] = function(params)
     local key = UTF8.sub(CALC(params[1], '[\'KEY\']', true), 2)
     local table = CALC(params[2], 'a', true)
