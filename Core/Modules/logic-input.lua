@@ -45,7 +45,7 @@ M.listener = function(e)
                     if event.input then M.rename(e.target, event.text) end
                 end, e.target.text) native.setKeyboardFocus(INPUT.box)
             else
-                if M.alert and (e.target.isNew or (type(e.target.text) == 'table' and e.target.text.isNew)) then
+                if M.alert and type(e.target.text) == 'table' and e.target.text.isNew then
                     M.alert = false
                     M.scroll:setIsLocked(true, 'vertical')
                     INPUT.new(STR['blocks.entertext'], function(event)
@@ -66,12 +66,16 @@ M.listener = function(e)
                     if M.params[1] == 'tables' then mode = M.active == 'event' and 'tE' or M.active == 'script' and 'tS' or 'tP' end
                     if M.params[1] == 'funs' then mode = M.active == 'script' and 'fS' or 'fP' end
 
-                    M.data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex] = {{e.target.text.text, mode}}
-                    BLOCKS.group.blocks[blockIndex].data.params[paramsIndex] = {{e.target.text.text, mode}}
-                    BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(params, paramsIndex)
+                    if e.target.isNew then
+                        M.data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex] = {{}}
+                        BLOCKS.group.blocks[blockIndex].data.params[paramsIndex] = {{}}
+                    else
+                        M.data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex] = {{e.target.text.text, mode}}
+                        BLOCKS.group.blocks[blockIndex].data.params[paramsIndex] = {{e.target.text.text, mode}}
+                    end 
 
-                    SET_GAME_CODE(CURRENT_LINK, M.data)
-                    M.cancel()
+                    BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(params, paramsIndex)
+                    SET_GAME_CODE(CURRENT_LINK, M.data) M.cancel()
                 end
             end
         end
@@ -390,11 +394,7 @@ M.gen = function(mode, scroll)
             buttons[i].plus1:setFillColor(0.8)
         scroll:insert(buttons[i].plus1)
 
-        if buttons[i].text.isNew then
-            buttons[i].plus2 = display.newRect(scroll.width - 35, buttonsY, 3, 30)
-                buttons[i].plus2:setFillColor(0.8)
-            scroll:insert(buttons[i].plus2)
-        else
+        if not buttons[i].text.isNew then
             buttons[i].plus2 = display.newRect(scroll.width - 35, buttonsY - 10, 30, 3)
                 buttons[i].plus2:setFillColor(0.8)
             scroll:insert(buttons[i].plus2)
