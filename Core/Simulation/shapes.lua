@@ -171,7 +171,7 @@ M['setPixel'] = function(params)
     local posY = 'GAME.group.bitmaps[' .. name .. '].height + 1 - ' .. CALC(params[3])
 
     GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. colors .. ' GAME.group.bitmaps[' .. name .. ']:setPixel('
-    GAME.lua = GAME.lua .. posX .. ', ' .. posY .. ', colors[1]/255, colors[2]/255, colors[3]/255) end)'
+    GAME.lua = GAME.lua .. posX .. ', ' .. posY .. ', colors[1]/255, colors[2]/255, colors[3]/255, 1) end)'
 end
 
 M['setPixelRGB'] = function(params)
@@ -180,12 +180,12 @@ M['setPixelRGB'] = function(params)
     local r, g, b = CALC(params[4], '255'), CALC(params[5], '255'), CALC(params[6], '255')
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.bitmaps[' .. name .. ']:setPixel('
-    GAME.lua = GAME.lua .. posX .. ', ' .. posY .. ', ' .. r .. '/255, ' .. g .. '/255, ' .. b .. '/255) end)'
+    GAME.lua = GAME.lua .. posX .. ', ' .. posY .. ', ' .. r .. '/255, ' .. g .. '/255, ' .. b .. '/255, 1) end)'
 end
 
 M['removePixel'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.bitmaps[' .. CALC(params[1]) .. ']:setPixel(' .. CALC(params[2]) .. ','
-    GAME.lua = GAME.lua .. ' GAME.group.bitmaps[' .. CALC(params[1]) .. '].height + 1 - ' .. CALC(params[3]) .. ', 0, 0, 0) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.bitmaps[' .. CALC(params[1]) .. '].height + 1 - ' .. CALC(params[3]) .. ', 0, 0, 0, 0) end)'
 end
 
 M['updBitmap'] = function(params)

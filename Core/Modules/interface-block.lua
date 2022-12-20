@@ -143,10 +143,23 @@ local listener = function(e, scroll, group, type)
                             end icon.x, icon.y = CENTER_X, CENTER_Y
                         group_image:insert(icon)
 
-                        group_image:addEventListener('touch', function(e)
+                        PHYSICS.start()
+                        PHYSICS.setDrawMode('hybrid')
+                        PHYSICS.addBody(icon, 'static')
+
+                        shadow:addEventListener('touch', function(e)
                             if e.phase == 'began' then
                                 shadow.color = shadow.color == 0 and 1 or 0
                                 shadow:setFillColor(shadow.color)
+                            end return true
+                        end)
+
+                        icon:addEventListener('touch', function(e)
+                            if e.phase == 'began' then
+                                timer.performWithDelay(1, function()
+                                    PHYSICS.setDrawMode('normal')
+                                    shadow:setFillColor(shadow.color)
+                                end)
                             end return true
                         end)
 
@@ -154,7 +167,8 @@ local listener = function(e, scroll, group, type)
                         keyMaster = function(event)
                             if (event.keyName == 'back' or event.keyName == 'escape') and event.phase == 'up' and not ALERT then
                                 if group_image and group_image.isVisible then
-                                    group_image:removeSelf() ALERT = true
+                                    PHYSICS.setDrawMode('normal') PHYSICS.removeBody(icon)
+                                    PHYSICS.stop() group_image:removeSelf() ALERT = true
                                     Runtime:removeEventListener('key', keyMaster)
                                     IMAGES.group[8]:setIsLocked(false, 'vertical')
                                 end

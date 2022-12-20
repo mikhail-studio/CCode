@@ -1039,13 +1039,7 @@ return ' ' .. UTF8.trimFull([[
 
             for i = 1, size do
                 local args = {data:byte(i * 3 - 2, i * 3)}
-
-                GAME.group.bitmaps[name]:setPixel(x, y,
-                        args[1] / 255,
-                        args[2] / 255,
-                        args[3] / 255
-                    )
-
+                GAME.group.bitmaps[name]:setPixel(x, y, args[1] / 255, args[2] / 255, args[3] / 255, 1)
                 x = x == width and 1 or x + 1
                 y = x == 1 and y + 1 or y
             end
