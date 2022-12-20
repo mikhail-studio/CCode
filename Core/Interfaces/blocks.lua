@@ -22,7 +22,7 @@ end
 
 listeners.but_list = function(target)
     if #BLOCKS.group.blocks ~= 0 then
-        local list = {STR['button.remove'], STR['button.copy'], STR['button.comment'], STR['button.debug']}
+        local list = {STR['button.remove'], STR['button.copy'], STR['button.comment'], STR['button.debug'], STR['button.to.buffer']}
 
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
         if BLOCKS.group.isVisible then
@@ -37,6 +37,8 @@ listeners.but_list = function(target)
                     WINDOW.new(STR['game.debug'], {STR['button.okay']}, function(e) BLOCKS.group.isVisible = true end, 1)
                     WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
                     WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                elseif e.index == 5 then
+                    pcall(function() BUFFER = COPY_TABLE(GET_GAME_CODE(CURRENT_LINK).scripts[CURRENT_SCRIPT]) end)
                 elseif e.index ~= 0 then
                     ALERT = false
                     INDEX_LIST = e.index

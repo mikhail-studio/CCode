@@ -60,12 +60,11 @@ listeners.but_list = function(target)
     if #SCRIPTS.group.blocks > 0 then
         SCRIPTS.group[8]:setIsLocked(true, 'vertical')
         if SCRIPTS.group.isVisible then
-            LIST.new({
-                STR['button.remove'], STR['button.rename'], STR['button.copy'], STR['button.find']},
+            LIST.new({STR['button.remove'], STR['button.rename'], STR['button.copy'], STR['button.find'], STR['button.from.buffer']},
                 MAX_X, target.y - target.height / 2, 'down', function(e)
                     SCRIPTS.group[8]:setIsLocked(false, 'vertical')
 
-                    if e.index ~= 0 and e.index ~= 4 then
+                    if e.index ~= 0 and e.index < 4 then
                         ALERT = false
                         INDEX_LIST = e.index
                         EXITS.add(listeners.but_okay_end)
@@ -122,6 +121,31 @@ listeners.but_list = function(target)
                                 end)
                             end
                         end)
+                    elseif e.index == 5 and type(BUFFER) == 'table' and type(BUFFER.params) == 'table' and #BUFFER.params > 0 then
+                        FILTER.check(BUFFER.title, function(ev)
+                            if ev.isError then
+                                WINDOW.new(STR['errors.' .. ev.typeError], {STR['button.close'], STR['button.okay']}, function() end, 5)
+                            else
+                                local data = GET_GAME_CODE(CURRENT_LINK)
+                                local scrollY = select(2, SCRIPTS.group[8]:getContentPosition())
+                                local diffY = SCRIPTS.group[8].y - SCRIPTS.group[8].height / 2
+                                local targetY = math.abs(scrollY) + diffY + CENTER_Y - 150
+
+                                for i = 1, #SCRIPTS.group.data do
+                                    if SCRIPTS.group.data[i].y > targetY then
+                                        table.insert(data.scripts, i, COPY_TABLE(BUFFER))
+                                        SET_GAME_CODE(CURRENT_LINK, data)
+                                        SCRIPTS.new(BUFFER.title, i)
+                                        BUFFER = {} return
+                                    end
+                                end
+
+                                table.insert(data.scripts, #data.scripts + 1, COPY_TABLE(BUFFER))
+                                SET_GAME_CODE(CURRENT_LINK, data)
+                                SCRIPTS.new(BUFFER.title, #SCRIPTS.group.blocks + 1)
+                                BUFFER = {}
+                            end
+                        end, SCRIPTS.group.blocks)
                     end
             end, nil, nil, 1)
         else

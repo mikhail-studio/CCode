@@ -15,7 +15,7 @@ return {
                             local data, hash = GET_GAME_CODE(link), READ_FILE(DOC_DIR .. '/' .. link .. '/hash.txt')
                             local new_custom = JSON.decode(READ_FILE(DOC_DIR .. '/' .. link .. '/custom.json'))
                             local code, custom, dataCustom = JSON.encode3(data, {keyorder = KEYORDER}), GET_GAME_CUSTOM(), {}
-                            local current_hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, code, '?.cc_ode'), 'cc.ode_?')
+                            local current_hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, code, '?.cc_ode-'), '*cc.ode_?')
 
                             for index, block in pairs(new_custom) do
                                 if tonumber(index) then

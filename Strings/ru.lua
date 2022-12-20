@@ -14,6 +14,8 @@ return {
         ['button.remove'] = 'Удалить',
         ['button.rename'] = 'Переименовать',
         ['button.copy'] = 'Копировать',
+        ['button.to.buffer'] = 'В буфер',
+        ['button.from.buffer'] = 'Из буфера',
         ['button.paste'] = 'Вставить',
         ['button.debug'] = 'Дебаг',
         ['button.alldelete'] = 'Удалить всё',

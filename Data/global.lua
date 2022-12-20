@@ -23,6 +23,7 @@ WIDGET = require 'widget'
 CRYPTO = require 'crypto'
 
 SIZE = 1.0
+BUFFER = {}
 LIVE = false
 ALERT = true
 INDEX_LIST = 0
