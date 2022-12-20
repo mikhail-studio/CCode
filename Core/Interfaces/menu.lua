@@ -3,7 +3,7 @@ local listeners = {}
 listeners.but_myprogram = function(target)
     MENU.group.isVisible = false
     PROGRAMS = require 'Interfaces.programs'
-    PROGRAMS.create()
+    PROGRAMS.create() BACK.front()
     PROGRAMS.group.isVisible = true
 end
 
@@ -11,7 +11,7 @@ listeners.but_continue = function(target)
     if LOCAL.last == '' then
         MENU.group.isVisible = false
         PROGRAMS = require 'Interfaces.programs'
-        PROGRAMS.create()
+        PROGRAMS.create() BACK.front()
         PROGRAMS.group.isVisible = true
     else
         local data = GET_GAME_CODE(LOCAL.last_link)
@@ -24,12 +24,12 @@ listeners.but_continue = function(target)
 
             MENU.group.isVisible = false
             PROGRAMS = require 'Interfaces.programs'
-            PROGRAMS.create()
+            PROGRAMS.create() BACK.front()
             CURRENT_LINK = LOCAL.last_link
 
             PROGRAMS.group.isVisible = false
             PROGRAM = require 'Interfaces.program'
-            PROGRAM.create(LOCAL.last)
+            PROGRAM.create(LOCAL.last) BACK.front()
             PROGRAM.group.isVisible = true
         end
     end
@@ -38,7 +38,7 @@ end
 listeners.but_settings = function(target)
     MENU.group.isVisible = false
     SETTINGS = require 'Interfaces.settings'
-    SETTINGS.create()
+    SETTINGS.create() BACK.front()
     SETTINGS.group.isVisible = true
 end
 

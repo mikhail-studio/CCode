@@ -19,7 +19,7 @@ listeners.pos = function(e)
 
             SETTINGS.group:removeSelf()
             SETTINGS.group = nil
-            SETTINGS.create()
+            SETTINGS.create() BACK.front()
             SETTINGS.group.isVisible = true
 
             NEW_DATA()
@@ -32,11 +32,11 @@ listeners.show = function(e)
 
     LIST.new(list, e.target.x, e.target.y - e.target.height / 2, 'down', function(e)
         if e.index > 0 then
-            LOCAL.show_ads = e.text == STR['button.yes'] 
+            LOCAL.show_ads = e.text == STR['button.yes']
 
             SETTINGS.group:removeSelf()
             SETTINGS.group = nil
-            SETTINGS.create()
+            SETTINGS.create() BACK.front()
             SETTINGS.group.isVisible = true
 
             NEW_DATA()
@@ -53,7 +53,7 @@ listeners.confirm = function(e)
 
             SETTINGS.group:removeSelf()
             SETTINGS.group = nil
-            SETTINGS.create()
+            SETTINGS.create() BACK.front()
             SETTINGS.group.isVisible = true
 
             NEW_DATA()
@@ -92,7 +92,7 @@ listeners.lang = function(e)
 
             SETTINGS.group:removeSelf()
             SETTINGS.group = nil
-            SETTINGS.create()
+            SETTINGS.create() BACK.front()
             SETTINGS.group.isVisible = true
 
             NEW_DATA()

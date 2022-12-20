@@ -10,7 +10,7 @@ end
 listeners.but_add = function(target)
     BLOCKS.group.isVisible = false
     NEW_BLOCK = require 'Interfaces.new-block'
-    NEW_BLOCK.create()
+    NEW_BLOCK.create() BACK.front()
 end
 
 listeners.but_play = function(target)

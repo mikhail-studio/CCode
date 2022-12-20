@@ -142,7 +142,7 @@ local function newBlockListener(event)
                             custom[index] = nil custom.len = custom.len - 1
 
                             SET_GAME_CUSTOM(custom)
-                            M.custom(2) break
+                            M.custom(2) BACK.front() break
                         end
                     end
                 else

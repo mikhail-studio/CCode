@@ -101,7 +101,7 @@ listeners.icon = function(target)
 
                 PROGRAMS.group:removeSelf()
                 PROGRAMS.group = nil
-                PROGRAMS.create()
+                PROGRAMS.create() BACK.front()
                 PROGRAMS.group.isVisible = false
             end)
         end

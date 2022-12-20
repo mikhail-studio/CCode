@@ -10,7 +10,7 @@ M.cancel = function() pcall(function()
     if M.isEditor then
         EDITOR.group:removeSelf() EDITOR.group = nil
         EDITOR.create(unpack(M.isEditor))
-        EDITOR.group.isVisible = true
+        EDITOR.group.isVisible = true BACK.front()
     else
         BLOCKS.group[8]:setIsLocked(false, 'vertical')
     end
@@ -72,7 +72,7 @@ M.listener = function(e)
                     else
                         M.data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex] = {{e.target.text.text, mode}}
                         BLOCKS.group.blocks[blockIndex].data.params[paramsIndex] = {{e.target.text.text, mode}}
-                    end 
+                    end
 
                     BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(params, paramsIndex)
                     SET_GAME_CODE(CURRENT_LINK, M.data) M.cancel()

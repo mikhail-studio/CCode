@@ -110,7 +110,7 @@ listeners.blocks = function()
                 BLOCKS.group:removeSelf() BLOCKS.group = nil
                 BLOCKS.create() BLOCKS.custom = nil
                 BLOCKS.group.isVisible = false
-                NEW_BLOCK.custom(2)
+                NEW_BLOCK.custom(2) BACK.front()
             end
         end, 4)
     else

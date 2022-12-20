@@ -63,6 +63,7 @@ local function getStartLua(linkBuild)
 end
 
 M.remove = function()
+    native.setProperty('androidSystemUiVisibility', 'immersiveSticky')
     display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll()
     pcall(function() for _, v in ipairs(M.group.ts) do timer.cancel(v) end end)
     pcall(function() for _, v in pairs(M.group.timers) do timer.cancel(v) end end)
@@ -82,13 +83,13 @@ M.remove = function()
     pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
     pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil math.randomseed(os.time())
     pcall(function() for child = display.currentStage.numChildren, 1, -1 do
-    if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
+    if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end) BACK.show() BACK.front()
     timer.performWithDelay(1, function() if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true})
     if (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) then GAME_GROUP_OPEN.scroll:scrollToPosition({y = M.scrollY, time = 0}) end end end)
 end
 
 M.new = function(linkBuild, isDebug)
-    M.group = display.newGroup()
+    M.group = display.newGroup() BACK.hide()
     M.orientation, EVENTS.CUSTOM = CURRENT_ORIENTATION, {}
     M.data = GET_GAME_CODE(linkBuild or CURRENT_LINK) M.needBack = true
     M.scrollY = (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) and select(2, GAME_GROUP_OPEN.scroll:getContentPosition()) or 0
@@ -248,7 +249,7 @@ M.new = function(linkBuild, isDebug)
                 pcall(function() M.group:removeSelf() M.group, M.isStarted = nil, nil end)
 
                 WINDOW.new(STR['game.isbug'], {STR['button.close']}, function()
-                    display.setDefault('background', 0.15, 0.15, 0.17)
+                    display.setDefault('background', 0.15, 0.15, 0.17) BACK.show() BACK.front()
                     if (GAME_GROUP_OPEN and GAME_GROUP_OPEN.group) then GAME_GROUP_OPEN.group.isVisible = true end
                 end, 5)
 

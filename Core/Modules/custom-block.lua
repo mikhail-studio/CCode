@@ -166,7 +166,7 @@ M.addBlock = function(params, _index)
         ALERT = true M.scroll:removeSelf() M.group:removeSelf() NEW_BLOCK.custom(1)
         BLOCKS.group:removeSelf() BLOCKS.group = nil LAST_CURRENT_SCRIPT, CURRENT_SCRIPT = CURRENT_SCRIPT, 1
         BLOCKS.create({name = block[1], params = COPY_TABLE(block[2]), index = index, isChange = _index, color = M.color})
-        BLOCKS.group.isVisible = true
+        BLOCKS.group.isVisible = true BACK.front()
     end
 end
 
@@ -219,7 +219,7 @@ M.removeOverlay = function(index)
                 SET_GAME_CODE(CURRENT_LINK, data)
                 BLOCKS.group:removeSelf() BLOCKS.group = nil
                 BLOCKS.create() BLOCKS.custom = nil
-                BLOCKS.group.isVisible = false
+                BLOCKS.group.isVisible = false BACK.front()
             end
 
             if e.index ~= 0 then
@@ -235,7 +235,7 @@ M.removeOverlay = function(index)
                 NEW_BLOCK.group[4].isVisible = false
                 for i = 5, 10 do NEW_BLOCK.group[i].isVisible = true end
                 for i = 19, 20 do NEW_BLOCK.group[i].isVisible = true end
-                NEW_BLOCK.group.currentIndex = 15
+                NEW_BLOCK.group.currentIndex = 15 BACK.front()
             else
                 ALERT = false
                 M.alert = true
@@ -445,7 +445,7 @@ M.newBlock = function(name, params, str, index, color)
         buttonSandbox:addEventListener('touch', buttonListeners)
     M.group:insert(textSandbox)
 
-    buttonColor.tag = 'color'
+    buttonColor.tag = 'color' BACK.front()
     buttonColor:addEventListener('touch', buttonListeners)
 
     title.tag = 'exit' EXITS.add(M.removeOverlay, index)

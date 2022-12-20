@@ -59,38 +59,38 @@ local listener = function(e, scroll, group, type)
                         LOCAL.last = e.target.text.text
                         LOCAL.last_link = CURRENT_LINK
                         MENU.group[9].text = LOCAL.last
-                        NEW_DATA()
+                        NEW_DATA() BACK.front()
                     end
                 elseif type == 'program' and ALERT then
                     if e.target.text.text == STR['program.scripts'] then
                         group.isVisible = false
                         SCRIPTS = require 'Interfaces.scripts'
-                        SCRIPTS.create()
+                        SCRIPTS.create() BACK.front()
                         SCRIPTS.group.isVisible = true
                     elseif e.target.text.text == STR['program.images'] then
                         group.isVisible = false
                         IMAGES = require 'Interfaces.images'
-                        IMAGES.create()
+                        IMAGES.create() BACK.front()
                         IMAGES.group.isVisible = true
                     elseif e.target.text.text == STR['program.sounds'] then
                         group.isVisible = false
                         SOUNDS = require 'Interfaces.sounds'
-                        SOUNDS.create()
+                        SOUNDS.create() BACK.front()
                         SOUNDS.group.isVisible = true
                     elseif e.target.text.text == STR['program.videos'] then
                         group.isVisible = false
                         VIDEOS = require 'Interfaces.videos'
-                        VIDEOS.create()
+                        VIDEOS.create() BACK.front()
                         VIDEOS.group.isVisible = true
                     elseif e.target.text.text == STR['program.fonts'] then
                         group.isVisible = false
                         FONTS = require 'Interfaces.fonts'
-                        FONTS.create()
+                        FONTS.create() BACK.front()
                         FONTS.group.isVisible = true
                     elseif e.target.text.text == STR['menu.settings'] then
                         group.isVisible = false
                         PSETTINGS = require 'Interfaces.program-settings'
-                        PSETTINGS.create()
+                        PSETTINGS.create() BACK.front()
                         PSETTINGS.group.isVisible = true
                     elseif e.target.text.text == STR['program.export'] then
                         group:removeSelf() group = nil
@@ -110,7 +110,7 @@ local listener = function(e, scroll, group, type)
                         CURRENT_SCRIPT = e.target.getIndex(e.target)
                         group.isVisible = false
                         BLOCKS = require 'Interfaces.blocks'
-                        BLOCKS.create()
+                        BLOCKS.create() BACK.front()
                         BLOCKS.group.isVisible = true
                     end
 
@@ -175,7 +175,7 @@ local listener = function(e, scroll, group, type)
                             end
                         end
 
-                        Runtime:addEventListener('key', keyMaster)
+                        Runtime:addEventListener('key', keyMaster) BACK.front()
                     end
 
                     if e.target.timer then
@@ -219,7 +219,7 @@ local listener = function(e, scroll, group, type)
                             end
                         end
 
-                        Runtime:addEventListener('key', keyMaster)
+                        Runtime:addEventListener('key', keyMaster) BACK.front()
                     end
 
                     if e.target.timer then
@@ -259,7 +259,7 @@ local listener = function(e, scroll, group, type)
                             end
                         end
 
-                        Runtime:addEventListener('key', keyMaster)
+                        Runtime:addEventListener('key', keyMaster) BACK.front()
                     end
 
                     if e.target.timer then
@@ -306,7 +306,7 @@ local listener = function(e, scroll, group, type)
                             end
                         end
 
-                        Runtime:addEventListener('key', keyMaster)
+                        Runtime:addEventListener('key', keyMaster) BACK.front()
                     end
 
                     if e.target.timer then

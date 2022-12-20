@@ -115,7 +115,7 @@ M.open = function(target)
         end, (paramsData[1] and paramsData[1][1]) and paramsData[1][1] or '') native.setKeyboardFocus(INPUT.box)
     elseif type == 'value' and ALERT then
         EDITOR = require 'Core.Editor.interface'
-        EDITOR.create(blockName, blockIndex, paramsData, paramsIndex)
+        EDITOR.create(blockName, blockIndex, paramsData, paramsIndex) BACK.front()
     elseif type == 'var' and ALERT then
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
         LOGIC.new('vars', blockIndex, paramsIndex, COPY_TABLE(paramsData))
