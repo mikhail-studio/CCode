@@ -16,10 +16,10 @@ M['requestFirebase'] = function(params, method)
     local link, value = CALC(params[1]), (method == 'GET' or method == 'DELETE') and 'nil' or 'tostring(' .. CALC(params[2]) .. ')'
     local key = (method == 'GET' or method == 'DELETE') and CALC(params[2]) or CALC(params[3])
     local link = '\'https://\' .. tostring(' .. link .. ') .. \'.firebaseio.com/\' .. tostring(' .. key .. ') .. \'.json\''
-    local listener = (method == 'GET' or method == 'DELETE') and CALC(params[3], 'a', true)  or CALC(params[4], 'a', true)
+    local var = (method == 'GET' or method == 'DELETE') and CALC(params[3], 'a', true)  or CALC(params[4], 'a', true)
 
     GAME.lua = GAME.lua .. ' pcall(function() network.request(' .. link .. ', \'' .. method .. '\', function(e) if GAME.group'
-    GAME.lua = GAME.lua .. ' then ' .. listener .. '(e) end end, {body = ' .. value .. '}) end)'
+    GAME.lua = GAME.lua .. ' then ' .. var .. ' = e.response end end, {body = ' .. value .. '}) end)'
 end
 
 M['requestNetwork'] = function(params, method)

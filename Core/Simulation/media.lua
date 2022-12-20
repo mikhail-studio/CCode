@@ -29,12 +29,12 @@ end
 
 M['loadSound'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local link, name = other.getSound(' .. CALC(params[2]) .. '), ' .. CALC(params[1])
-    GAME.lua = GAME.lua .. ' GAME.group.media[name] = {audio.loadSound(link, system.DocumentsDirectory)} end)'
+    GAME.lua = GAME.lua .. ' GAME.group.media[name] = {link and audio.loadSound(link, system.DocumentsDirectory) or nil} end)'
 end
 
 M['loadStream'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local link, name = other.getSound(' .. CALC(params[2]) .. '), ' .. CALC(params[1])
-    GAME.lua = GAME.lua .. ' GAME.group.media[name] = {audio.loadStream(link, system.DocumentsDirectory)} end)'
+    GAME.lua = GAME.lua .. ' GAME.group.media[name] = {link and audio.loadStream(link, system.DocumentsDirectory) or nil} end)'
 end
 
 M['playSound'] = function(params)
