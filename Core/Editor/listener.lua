@@ -156,12 +156,18 @@ M.list = function(target)
                 EDITOR.backup = M.backup(EDITOR.backup, 'add', EDITOR.data)
                 TEXT.set(TEXT.gen(EDITOR.data, EDITOR.cursor[2]), EDITOR.group[9])
                 EDITOR.group[9]:scrollToPosition({y = 0, time = 0})
-            elseif e.index == 2 and EDITOR.copy then
-                local len = #EDITOR.data - 1
-                local copy = COPY_TABLE(EDITOR.copy) copy[2][1] = copy[2][1] + len
-                table.remove(EDITOR.data, M.find(EDITOR.data))
-                for i = 1, #copy[1] do table.insert(EDITOR.data, copy[1][i]) end
-                EDITOR.cursor = COPY_TABLE(copy[2])
+            elseif e.index == 2 and EDITOR.copy and EDITOR.cursor[2] == 'w' then
+                local copy = COPY_TABLE(EDITOR.copy)
+                local cursorI = M.find(EDITOR.data)
+                local len = #copy[1] - 1
+
+                EDITOR.cursor[1] = EDITOR.cursor[1] + len
+                table.remove(copy[1], M.find(copy[1]))
+
+                for i = #copy[1], 1, -1 do
+                    table.insert(EDITOR.data, cursorI, copy[1][i])
+                end
+
                 EDITOR.backup = M.backup(EDITOR.backup, 'add', EDITOR.data)
                 TEXT.set(TEXT.gen(EDITOR.data, EDITOR.cursor[2]), EDITOR.group[9])
             elseif e.index == 1 and #EDITOR.data > 1 then
