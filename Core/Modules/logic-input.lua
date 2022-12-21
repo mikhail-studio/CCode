@@ -75,6 +75,7 @@ M.listener = function(e)
                     end
 
                     BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(params, paramsIndex)
+                    SET_GAME_SCRIPT(CURRENT_LINK, M.script, CURRENT_SCRIPT, M.data)
                     SET_GAME_CODE(CURRENT_LINK, M.data) M.cancel()
                 end
             end
@@ -111,6 +112,7 @@ M.set = function(name)
     end
 
     SET_GAME_CODE(CURRENT_LINK, M.data)
+    SET_GAME_SCRIPT(CURRENT_LINK, M.script, CURRENT_SCRIPT, M.data)
     M.remove(M.scroll.x, M.scroll.y, M.scroll.width, M.scroll.height)
     M.gen(M.active, M.scroll)
 end
