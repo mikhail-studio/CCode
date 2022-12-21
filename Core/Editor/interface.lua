@@ -25,17 +25,20 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     BLOCKS.group.isVisible = false
 
     local custom, ids = GET_GAME_CUSTOM(), {}
-    local data = GET_GAME_CODE(CURRENT_LINK) DATA.new()
-        M.vars = {project = data.vars, script = data.scripts[CURRENT_SCRIPT].vars, event = {}}
-        M.tables = {project = data.tables, script = data.scripts[CURRENT_SCRIPT].tables, event = {}}
-        M.funs = {project = data.funs, script = data.scripts[CURRENT_SCRIPT].funs, custom = {}, _custom = {}}
+    local data = GET_GAME_CODE(CURRENT_LINK)
+    local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
+
+    DATA.new()
+        M.vars = {project = data.vars, script = script.vars, event = {}}
+        M.tables = {project = data.tables, script = script.tables, event = {}}
+        M.funs = {project = data.funs, script = script.funs, custom = {}, _custom = {}}
         M.prop = {obj = DATA.prop.obj, text = DATA.prop.text, group = DATA.prop.group, widget = DATA.prop.widget, media = DATA.prop.media}
         M.fun, M.math, M.log, M.device = DATA.fun, DATA.math, DATA.log, DATA.device
 
     for i = blockIndex, 1, -1 do
-        if data.scripts[CURRENT_SCRIPT].params[i].event then
-            M.vars.event = data.scripts[CURRENT_SCRIPT].params[i].vars
-            M.tables.event = data.scripts[CURRENT_SCRIPT].params[i].tables
+        if script.params[i].event then
+            M.vars.event = script.params[i].vars
+            M.tables.event = script.params[i].tables
             break
         end
     end

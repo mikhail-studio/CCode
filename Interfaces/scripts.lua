@@ -5,7 +5,7 @@ local genBlocks = function()
     local data = GET_GAME_CODE(CURRENT_LINK)
 
     for i = 1, #data.scripts do
-        M.new(data.scripts[i].title, #M.group.blocks + 1)
+        M.new(GET_GAME_SCRIPT(CURRENT_LINK, i, data).title, #M.group.blocks + 1)
     end
 end
 

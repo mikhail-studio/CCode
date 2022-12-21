@@ -91,10 +91,10 @@ end
 M.new = function(linkBuild, isDebug)
     M.group = display.newGroup() BACK.hide()
     M.orientation, EVENTS.CUSTOM = CURRENT_ORIENTATION, {}
-    M.data = GET_GAME_CODE(linkBuild or CURRENT_LINK) M.needBack = true
+    M.data = GET_GAME_CODE(linkBuild or CURRENT_LINK) M.needBack, M.scripts = true, {}
     M.scrollY = (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) and select(2, GAME_GROUP_OPEN.scroll:getContentPosition()) or 0
     M.lua = getStartLua(linkBuild) .. ' GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'
-    if linkBuild then M.data.settings.build = M.data.settings.build + 1 SET_GAME_CODE(M.data.link, M.data) end M.data = GET_FULL_DATA(M.data)
+    if linkBuild then M.data.settings.build = M.data.settings.build + 1 SET_GAME_CODE(M.data.link, M.data) end
 
     if M.data.settings.orientation == 'portrait' and CURRENT_ORIENTATION ~= 'portrait' then
         M.lua = M.lua .. ' setOrientationApp({type = \'portrait\', sim = true})'
@@ -112,14 +112,16 @@ M.new = function(linkBuild, isDebug)
     local custom = GET_GAME_CUSTOM()
 
     for i = 1, #M.data.scripts do
-        for j = 1, #M.data.scripts[i].params do
-            local name = M.data.scripts[i].params[j].name
+        M.scripts[i] = GET_FULL_DATA(GET_GAME_SCRIPT(CURRENT_LINK, i, M.data))
+
+        for j = 1, #M.scripts[i].params do
+            local name = M.scripts[i].params[j].name
             dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = UTF8.sub(name, 1, 6) == 'custom'
 
-            for u = 1, #M.data.scripts[i].params[j].params do
-                for o = #M.data.scripts[i].params[j].params[u], 1, -1 do
-                    if M.data.scripts[i].params[j].params[u][o][2] == 'fC' then
-                        local name = M.data.scripts[i].params[j].params[u][o][1]
+            for u = 1, #M.scripts[i].params[j].params do
+                for o = #M.scripts[i].params[j].params[u], 1, -1 do
+                    if M.scripts[i].params[j].params[u][o][2] == 'fC' then
+                        local name = M.scripts[i].params[j].params[u][o][1]
                         dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = true
                     end
                 end
@@ -130,13 +132,13 @@ M.new = function(linkBuild, isDebug)
     if BLOCKS and BLOCKS.custom then
         local name = 'custom' .. BLOCKS.custom.index
 
-        for i = 1, #M.data.scripts[1].params do
-            if M.data.scripts[1].params[i].name == '_custom' then
-                M.data.scripts[1].params[i].name = '_custom' .. BLOCKS.custom.index break
+        for i = 1, #M.scripts[1].params do
+            if M.scripts[1].params[i].name == '_custom' then
+                M.scripts[1].params[i].name = '_custom' .. BLOCKS.custom.index break
             end
         end
 
-        M.data.scripts = {GET_FULL_DATA({scripts = {M.data.scripts[1]}}).scripts[1]}
+        M.scripts = {COPY_TABLE(M.scripts[1])}
         setCustom(name)
     else
         for index, block in pairs(custom) do
@@ -145,11 +147,10 @@ M.new = function(linkBuild, isDebug)
                 local logic = custom[index][3]
 
                 if type(logic) == 'string' then
-                    table.insert(M.data.scripts, 1, GET_FULL_DATA({scripts = {{
+                    table.insert(M.scripts, 1, GET_FULL_DATA({
                         title = '', funs = {}, tables = {}, vars = {}, custom = true,
                         params = {{tables = {}, vars = {}, name = '_' .. name, event = true, nested = {}, comment = false, params = {}}}
-                    }}}).scripts[1])
-                    setCustom(name, logic)
+                    })) setCustom(name, logic)
                 elseif type(logic) == 'table' then
                     for i = 1, #logic.params do
                         if logic.params[i].name == '_custom' then
@@ -159,30 +160,30 @@ M.new = function(linkBuild, isDebug)
                         end
                     end
 
-                    table.insert(M.data.scripts, 1, GET_FULL_DATA({scripts = {logic}}).scripts[1])
+                    table.insert(M.scripts, 1, GET_FULL_DATA(logic))
                     setCustom(name)
                 end
             end
         end
     end
 
-    for i = 1, #M.data.scripts do
-        for j = 1, #M.data.scripts[i].params do
-            if M.data.scripts[i].params[j].event then
-                eventComment = M.data.scripts[i].params[j].comment
+    for i = 1, #M.scripts do
+        for j = 1, #M.scripts[i].params do
+            if M.scripts[i].params[j].event then
+                eventComment = M.scripts[i].params[j].comment
                 if not eventComment then
                     nestedIndex = nestedIndex + 1
                     nestedEvent[nestedIndex] = {}
                     dataEvent[nestedIndex] = {
                         script = i,
-                        name = M.data.scripts[i].params[j].name,
-                        params = M.data.scripts[i].params[j].params,
-                        comment = M.data.scripts[i].params[j].comment
+                        name = M.scripts[i].params[j].name,
+                        params = M.scripts[i].params[j].params,
+                        comment = M.scripts[i].params[j].comment
                     }
                 end
-            elseif not M.data.scripts[i].params[j].comment and not eventComment then
+            elseif not M.scripts[i].params[j].comment and not eventComment then
                 if not (linkBuild and (name == 'toastShort' or name == 'toastLong')) then
-                    table.insert(nestedEvent[nestedIndex], M.data.scripts[i].params[j])
+                    table.insert(nestedEvent[nestedIndex], M.scripts[i].params[j])
                 end
             end
         end

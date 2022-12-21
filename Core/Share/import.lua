@@ -75,13 +75,14 @@ return {
                             end
 
                             for i = 1, #data.scripts do
-                                for j = 1, #data.scripts[i].params do
-                                    local name = data.scripts[i].params[j].name
+                                local script, isChange = GET_GAME_SCRIPT(CURRENT_LINK, i, data)
+                                for j = 1, #script.params do
+                                    local name = script.params[j].name
                                     if UTF8.sub(name, 1, 6) == 'custom' then
-                                        local index = UTF8.sub(name, 7, UTF8.len(name))
-                                        data.scripts[i].params[j].name = dataCustom[index] and 'custom' .. dataCustom[index] or name
+                                        local index = UTF8.sub(name, 7, UTF8.len(name)) isChange = true
+                                        script.params[j].name = dataCustom[index] and 'custom' .. dataCustom[index] or name
                                     end
-                                end
+                                end if isChange then SET_GAME_SCRIPT(CURRENT_LINK, script, i, data) end
                             end
 
                             if current_hash == hash then

@@ -23,14 +23,16 @@ M.rect = function(target, restart, data)
         if TEXT.check(COPY_TABLE(data)) then
             local param = TEXT.number(data, true)
             local data = GET_GAME_CODE(CURRENT_LINK)
+            local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
             local blockIndex, paramsIndex = restart[2], restart[4]
-            local params = data.scripts[CURRENT_SCRIPT].params[blockIndex].params
+            local params = script.params[blockIndex].params
 
             EDITOR.rScrollParams = {}
             params[paramsIndex] = COPY_TABLE(param)
             BLOCKS.group.blocks[blockIndex].data.params = COPY_TABLE(params)
             BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(params, paramsIndex)
             SET_GAME_CODE(CURRENT_LINK, data)
+            SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
 
             for i = #EDITOR.group[66].buttons, 1, -1 do
                 if EDITOR.group[66].buttons[i].isOpen then
@@ -39,7 +41,7 @@ M.rect = function(target, restart, data)
             end
 
             restart[5], restart[4] = true, index
-            restart[3] = COPY_TABLE(data.scripts[CURRENT_SCRIPT].params[restart[2]].params[restart[4]])
+            restart[3] = COPY_TABLE(script.params[restart[2]].params[restart[4]])
             table.insert(EDITOR.rScrollParams, select(2, EDITOR.group[66]:getContentPosition()))
             EDITOR.scrollY = select(2, EDITOR.group[8]:getContentPosition())
             EDITOR.group:removeSelf() EDITOR.group = nil
@@ -56,8 +58,9 @@ M.rect = function(target, restart, data)
         end
     elseif type == 'color' and ALERT then
         local data = GET_GAME_CODE(CURRENT_LINK)
+        local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
         local blockIndex, paramsIndex = restart[2], index
-        local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
+        local paramsData = script.params[blockIndex].params[paramsIndex]
 
         EDITOR.group[9]:setIsLocked(true, 'vertical')
         EDITOR.group[66]:setIsLocked(true, 'vertical')
@@ -66,10 +69,11 @@ M.rect = function(target, restart, data)
             EDITOR.rScrollParams = {}
 
             if e.input then
-                data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex][1] = {e.rgb, 'c'}
+                script.params[blockIndex].params[paramsIndex][1] = {e.rgb, 'c'}
                 BLOCKS.group.blocks[blockIndex].data.params[paramsIndex][1] = {e.rgb, 'c'}
                 BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[blockIndex].data.params, paramsIndex)
                 SET_GAME_CODE(CURRENT_LINK, data)
+                SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
             end
 
             for i = #EDITOR.group[66].buttons, 1, -1 do
@@ -87,8 +91,9 @@ M.rect = function(target, restart, data)
         end)
     elseif PARAMS.getListValue(type) and ALERT then
         local data = GET_GAME_CODE(CURRENT_LINK)
+        local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
         local blockIndex, paramsIndex = restart[2], index
-        local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
+        local paramsData = script.params[blockIndex].params[paramsIndex]
         local listX = target.parent.parent.x + target.x + target.width / 2
         local listY = EDITOR.group[1].y + EDITOR.group[1].height + 295
 
@@ -99,10 +104,11 @@ M.rect = function(target, restart, data)
             EDITOR.rScrollParams = {}
 
             if e.index > 0 then
-                data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex][1] = {PARAMS.getListValue(type, e.text), 'sl'}
+                script.params[blockIndex].params[paramsIndex][1] = {PARAMS.getListValue(type, e.text), 'sl'}
                 BLOCKS.group.blocks[blockIndex].data.params[paramsIndex][1] = {PARAMS.getListValue(type, e.text), 'sl'}
                 BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[blockIndex].data.params, paramsIndex)
                 SET_GAME_CODE(CURRENT_LINK, data)
+                SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
             end
 
             for i = #EDITOR.group[66].buttons, 1, -1 do
@@ -120,8 +126,9 @@ M.rect = function(target, restart, data)
         end, paramsData[1] and paramsData[1][1] or nil)
     elseif (type == 'var' or type == 'table' or type == 'fun' or type == 'localvar' or type == 'localtable') and ALERT then
         local data = GET_GAME_CODE(CURRENT_LINK)
+        local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
         local blockIndex, paramsIndex = restart[2], index
-        local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
+        local paramsData = script.params[blockIndex].params[paramsIndex]
         local paramsType = type == 'localvar' and 'vars' or type == 'localtable' and 'tables' or type .. 's'
 
         EDITOR.rScrollParams = {}
@@ -305,13 +312,15 @@ M['Ok'] = function(data, cursor, backup)
     if TEXT.check(COPY_TABLE(data)) then
         local param = TEXT.number(data, true)
         local data = GET_GAME_CODE(CURRENT_LINK)
+        local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
         local blockIndex, paramsIndex = EDITOR.restart[2], EDITOR.restart[4]
-        local params = data.scripts[CURRENT_SCRIPT].params[blockIndex].params
+        local params = script.params[blockIndex].params
 
         params[paramsIndex] = COPY_TABLE(param)
         BLOCKS.group.blocks[blockIndex].data.params = COPY_TABLE(params)
         BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(params, paramsIndex)
         SET_GAME_CODE(CURRENT_LINK, data)
+        SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
 
         EDITOR.group:removeSelf()
         EDITOR.group = nil

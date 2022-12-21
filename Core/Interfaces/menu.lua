@@ -16,8 +16,26 @@ listeners.but_continue = function(target)
     else
         local data = GET_GAME_CODE(LOCAL.last_link)
 
+        if tonumber(data.build) < 1215 then
+            local scripts = COPY_TABLE(data.scripts) data.build = BUILD
+            LFS.mkdir(DOC_DIR .. '/' .. LOCAL.last_link .. '/Scripts')
+
+            for i = 1, #scripts do
+                data.scripts[i] = i
+            end
+
+            for i = 1, #scripts do
+                SET_GAME_SCRIPT(LOCAL.last_link, scripts[i], i, data)
+            end
+
+            SET_GAME_CODE(LOCAL.last_link, data)
+        end
+
         if tonumber(data.build) > 1170 then
-            if data.scripts[1] and data.scripts[1].custom then
+            local script = GET_GAME_SCRIPT(LOCAL.last_link, 1, data)
+
+            if script and script.custom then
+                DEL_GAME_SCRIPT(LOCAL.last_link, 1, data)
                 table.remove(data.scripts, 1)
                 SET_GAME_CODE(LOCAL.last_link, data)
             end

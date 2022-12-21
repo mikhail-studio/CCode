@@ -62,7 +62,7 @@ listeners.blocks = function()
         WINDOW.new(STR['scripts.sandbox.exit'], {STR['scripts.sandbox.not.save'], STR['scripts.sandbox.save']}, function(e)
             if e.index == 2 then
                 local custom = GET_GAME_CUSTOM() custom[BLOCKS.custom.index] = {
-                    BLOCKS.custom.name, COPY_TABLE(BLOCKS.custom.params), COPY_TABLE(data.scripts[1]),
+                    BLOCKS.custom.name, COPY_TABLE(BLOCKS.custom.params), COPY_TABLE(GET_GAME_SCRIPT(CURRENT_LINK, 1, data)),
                     os.time(), COPY_TABLE(BLOCKS.custom.color)
                 } custom.len = custom.len + (BLOCKS.custom.isChange and 0 or 1) SET_GAME_CUSTOM(custom)
 
@@ -76,25 +76,29 @@ listeners.blocks = function()
                     end
 
                     for i = 1, #data.scripts do
-                        for j = 1, #data.scripts[i].params do
-                            if data.scripts[i].params[j].name == 'custom' .. BLOCKS.custom.index then
+                        local script = GET_GAME_SCRIPT(CURRENT_LINK, i, data)
+
+                        for j = 1, #script.params do
+                            if script.params[j].name == 'custom' .. BLOCKS.custom.index then
                                 local block = custom[BLOCKS.custom.index]
                                 local typeBlock = 'custom' .. BLOCKS.custom.index
                                 local blockParams = {} for i = 1, #block[2] do blockParams[i] = 'value' end
 
                                 INFO.listName[typeBlock] = {'custom', unpack(blockParams)}
 
-                                if #data.scripts[i].params[j].params >= #block[2] then
-                                    for k = #data.scripts[i].params[j].params, #block[2] + 1, -1 do
-                                        table.remove(data.scripts[i].params[j].params, k)
+                                if #script.params[j].params >= #block[2] then
+                                    for k = #script.params[j].params, #block[2] + 1, -1 do
+                                        table.remove(script.params[j].params, k)
                                     end
                                 else
-                                    for k = #data.scripts[i].params[j].params + 1, #block[2] do
-                                        data.scripts[i].params[j].params[k] = {}
+                                    for k = #script.params[j].params + 1, #block[2] do
+                                        script.params[j].params[k] = {}
                                     end
                                 end
                             end
                         end
+
+                        SET_GAME_SCRIPT(CURRENT_LINK, script, i, data)
                     end
                 else
                     table.insert(INFO.listBlock.custom, 1, 'custom' .. BLOCKS.custom.index)
@@ -103,6 +107,7 @@ listeners.blocks = function()
             end
 
             if e.index ~= 0 then
+                DEL_GAME_SCRIPT(CURRENT_LINK, 1, data)
                 table.remove(INFO.listBlock.everyone, 1)
                 table.remove(data.scripts, 1)
                 SET_GAME_CODE(CURRENT_LINK, data)

@@ -2,9 +2,9 @@ local BLOCK = require 'Core.Modules.logic-block'
 local INFO = require 'Data.info'
 local M = {}
 
-local genBlocks = function(data)
-    for i = 1, #data.scripts[CURRENT_SCRIPT].params do
-        local params = data.scripts[CURRENT_SCRIPT].params[i]
+local genBlocks = function(data, script)
+    for i = 1, #script.params do
+        local params = script.params[i]
 
         if type(params) == 'table' and params.name and INFO.listName[params.name] then
             M.new(params.name, i, params.event, params.params, params.comment, params.nested, params.vars, params.tables)
@@ -25,14 +25,16 @@ M.create = function(custom)
     M.group.scrollHeight = 10
     M.custom = custom and COPY_TABLE(custom) or nil
 
+    local data = GET_GAME_CODE(CURRENT_LINK)
+    local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
+
     local bg = display.newImage('Sprites/bg.png', CENTER_X, CENTER_Y)
         bg.width = CENTER_X == 640 and DISPLAY_HEIGHT or DISPLAY_WIDTH
         bg.height = CENTER_X == 640 and DISPLAY_WIDTH or DISPLAY_HEIGHT
         bg.rotation = CENTER_X == 640 and 90 or 0
     M.group:insert(bg)
 
-    local data = GET_GAME_CODE(CURRENT_LINK)
-    local title = display.newText(data.scripts[CURRENT_SCRIPT].title, ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)
+    local title = display.newText(script.title, ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)
         title.anchorX = 0
         title.anchorY = 0
         title.button = 'but_title'
@@ -77,7 +79,7 @@ M.create = function(custom)
         })
     M.group:insert(M.scroll)
 
-    genBlocks(data)
+    genBlocks(data, script)
 end
 
 return M

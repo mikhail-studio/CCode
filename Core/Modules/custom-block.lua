@@ -158,8 +158,11 @@ M.addBlock = function(params, _index)
 
         INFO.listName[typeBlock] = {'custom', unpack(blockParams)}
         INFO.listName['_custom'] = {'custom', unpack(eventParams)}
+
         table.insert(INFO.listBlock.everyone, 1, typeBlock)
-        table.insert(data.scripts, 1, sandboxScript)
+        table.insert(data.scripts, 1, GET_INDEX_SCRIPT(CURRENT_LINK))
+
+        SET_GAME_SCRIPT(CURRENT_LINK, sandboxScript, 1, data)
         SET_GAME_CODE(CURRENT_LINK, data)
 
         STR['blocks..params'] = {} STR['blocks.'] = STR['blocks.default']
@@ -195,25 +198,29 @@ M.removeOverlay = function(index)
                 end
 
                 for i = 1, #data.scripts do
-                    for j = 1, #data.scripts[i].params do
-                        if data.scripts[i].params[j].name == 'custom' .. index then
+                    local script = GET_GAME_SCRIPT(CURRENT_LINK, i, data)
+
+                    for j = 1, #script.params do
+                        if script.params[j].name == 'custom' .. index then
                             local block = custom[index]
                             local typeBlock = 'custom' .. index
                             local blockParams = {} for i = 1, #block[2] do blockParams[i] = 'value' end
 
                             INFO.listName[typeBlock] = {'custom', unpack(blockParams)}
 
-                            if #data.scripts[i].params[j].params >= #block[2] then
-                                for k = #data.scripts[i].params[j].params, #block[2] + 1, -1 do
-                                    table.remove(data.scripts[i].params[j].params, k)
+                            if #script.params[j].params >= #block[2] then
+                                for k = #script.params[j].params, #block[2] + 1, -1 do
+                                    table.remove(script.params[j].params, k)
                                 end
                             else
-                                for k = #data.scripts[i].params[j].params + 1, #block[2] do
-                                    data.scripts[i].params[j].params[k] = {}
+                                for k = #script.params[j].params + 1, #block[2] do
+                                    script.params[j].params[k] = {}
                                 end
                             end
                         end
                     end
+
+                    SET_GAME_SCRIPT(CURRENT_LINK, script, i, data)
                 end
 
                 SET_GAME_CODE(CURRENT_LINK, data)

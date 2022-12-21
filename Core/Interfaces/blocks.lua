@@ -38,7 +38,7 @@ listeners.but_list = function(target)
                     WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
                     WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
                 elseif e.index == 5 then
-                    pcall(function() BUFFER = COPY_TABLE(GET_GAME_CODE(CURRENT_LINK).scripts[CURRENT_SCRIPT]) end)
+                    pcall(function() BUFFER = COPY_TABLE(GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT)) end)
                 elseif e.index ~= 0 then
                     ALERT = false
                     INDEX_LIST = e.index
@@ -75,6 +75,7 @@ listeners.checkLocalData = function(blocks, bIndex, pIndex, pType)
         local varsE = {}
         local tablesE = {}
         local data = GET_GAME_CODE(CURRENT_LINK)
+        local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
         local name = pType ~= 'value' and blocks[bIndex].data.params[pIndex][1][1] or ''
         local modify = pType ~= 'value' and blocks[bIndex].data.params[pIndex][1][2] or ''
 
@@ -82,8 +83,8 @@ listeners.checkLocalData = function(blocks, bIndex, pIndex, pType)
             local countEvent = 0
             local lastIndexEvent = 1
 
-            for i = 1, #data.scripts[CURRENT_SCRIPT].params do
-                if data.scripts[CURRENT_SCRIPT].params[i].event then
+            for i = 1, #script.params do
+                if script.params[i].event then
                     if i > bIndex then break end
                     countEvent = countEvent + 1
                     lastIndexEvent = i
@@ -92,8 +93,8 @@ listeners.checkLocalData = function(blocks, bIndex, pIndex, pType)
                 end
             end
 
-            varsE = data.scripts[CURRENT_SCRIPT].params[lastIndexEvent].vars
-            tablesE = data.scripts[CURRENT_SCRIPT].params[lastIndexEvent].tables
+            varsE = script.params[lastIndexEvent].vars
+            tablesE = script.params[lastIndexEvent].tables
 
             if pType == 'value' then
                 for o = #blocks[bIndex].data.params[pIndex], 1, -1 do
@@ -133,6 +134,7 @@ end
 
 listeners.but_okay = function(target)
     local data = GET_GAME_CODE(CURRENT_LINK)
+    local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
 
     ALERT = true
     EXITS.remove()
@@ -172,7 +174,7 @@ listeners.but_okay = function(target)
                     if BLOCKS.group.blocks[i].data.event then BLOCKS.group.scrollHeight = BLOCKS.group.scrollHeight - 24 end
                     BLOCKS.group.blocks[i]:removeSelf()
                     table.remove(BLOCKS.group.blocks, i)
-                    table.remove(data.scripts[CURRENT_SCRIPT].params, i)
+                    table.remove(script.params, i)
                 end
             end
 
@@ -183,6 +185,7 @@ listeners.but_okay = function(target)
             end
 
             SET_GAME_CODE(CURRENT_LINK, data)
+            SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
             BLOCKS.group[8]:setIsLocked(false, 'vertical')
             BLOCKS.group[8]:setScrollHeight(GET_SCROLL_HEIGHT(BLOCKS.group))
         end
@@ -233,14 +236,14 @@ listeners.but_okay = function(target)
                         endIndex = #INFO.listNested[blockData.name]
                     end
 
-                    table.insert(data.scripts[CURRENT_SCRIPT].params, blockIndex, blockData)
+                    table.insert(script.params, blockIndex, blockData)
                     BLOCKS.new(blockData.name, blockIndex, blockData.event, blockData.params, blockData.comment, blockData.nested, blockData.vars, blockData.tables)
 
                     if #blockData.nested == 0 or blockData.event then
                         for j = blockIndex + 2, #BLOCKS.group.blocks do
                             if isEvent and BLOCKS.group.blocks[j + blockIndex - i].data.event then break end
                             blockIndex, blockData = blockIndex + 1, COPY_TABLE(BLOCKS.group.blocks[j + blockIndex - i].data)
-                            table.insert(data.scripts[CURRENT_SCRIPT].params, blockIndex, blockData)
+                            table.insert(script.params, blockIndex, blockData)
                             BLOCKS.new(blockData.name, blockIndex, blockData.event, blockData.params, blockData.comment, blockData.nested, blockData.vars, blockData.tables)
                             local notNested = not (blockData.nested and #blockData.nested > 0)
 
@@ -256,6 +259,7 @@ listeners.but_okay = function(target)
                     end
 
                     SET_GAME_CODE(CURRENT_LINK, data)
+                    SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
 
                     if isEvent then
                         local diffScrollY = BLOCKS.group[8].y - BLOCKS.group.blocks[i].y + BLOCKS.group.blocks[i].height / 2
@@ -267,10 +271,11 @@ listeners.but_okay = function(target)
                         newMoveLogicBlock({target = BLOCKS.group.blocks[i]}, BLOCKS.group, BLOCKS.group[8], nil, true)
                     end
                 else
-                    table.insert(data.scripts[CURRENT_SCRIPT].params, blockIndex, blockData)
+                    table.insert(script.params, blockIndex, blockData)
                     BLOCKS.new(blockData.name, blockIndex, blockData.event, blockData.params, blockData.comment)
 
                     SET_GAME_CODE(CURRENT_LINK, data)
+                    SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
                     display.getCurrentStage():setFocus(BLOCKS.group.blocks[blockIndex])
                     BLOCKS.group.blocks[blockIndex].click = true
                     BLOCKS.group.blocks[blockIndex].move = true
@@ -292,11 +297,11 @@ listeners.but_okay = function(target)
                 BLOCKS.group.blocks[i].checkbox:setState({isOn = false})
 
                 if BLOCKS.group.blocks[i].data.comment then
-                    data.scripts[CURRENT_SCRIPT].params[i].comment = false
+                    script.params[i].comment = false
                     BLOCKS.group.blocks[i].block:setFillColor(INFO.getBlockColor(BLOCKS.group.blocks[i].data.name, false))
                     BLOCKS.group.blocks[i].data.comment = false
                 else
-                    data.scripts[CURRENT_SCRIPT].params[i].comment = true
+                    script.params[i].comment = true
                     BLOCKS.group.blocks[i].block:setFillColor(INFO.getBlockColor(BLOCKS.group.blocks[i].data.name, true))
                     BLOCKS.group.blocks[i].data.comment = true
                 end
@@ -321,12 +326,12 @@ listeners.but_okay = function(target)
                             local notEvent = not BLOCKS.group.blocks[i].data.event
                             if BLOCKS.group.blocks[j].data.event then break end
 
-                            data.scripts[CURRENT_SCRIPT].params[j].comment = BLOCKS.group.blocks[i].data.comment
+                            script.params[j].comment = BLOCKS.group.blocks[i].data.comment
                             BLOCKS.group.blocks[j].block:setFillColor(INFO.getBlockColor(BLOCKS.group.blocks[j].data.name, BLOCKS.group.blocks[i].data.comment))
                             BLOCKS.group.blocks[j].data.comment = BLOCKS.group.blocks[i].data.comment
 
                             if isNested then
-                                nestedFun(data.scripts[CURRENT_SCRIPT].params[j].nested, BLOCKS.group.blocks[j].data.comment)
+                                nestedFun(script.params[j].nested, BLOCKS.group.blocks[j].data.comment)
                             end
 
                             if notEvent and name == BLOCKS.group.blocks[i].data.name and not isNested then
@@ -337,7 +342,7 @@ listeners.but_okay = function(target)
                             end
                         end
                     else
-                        nestedFun(data.scripts[CURRENT_SCRIPT].params[i].nested, BLOCKS.group.blocks[i].data.comment)
+                        nestedFun(script.params[i].nested, BLOCKS.group.blocks[i].data.comment)
                     end
                 end
             end
@@ -348,17 +353,17 @@ listeners.but_okay = function(target)
                 BLOCKS.group.blocks[i].checkbox:setState({isOn = false})
 
                 if BLOCKS.group.blocks[i].data.nested and BLOCKS.group.blocks[i].polygon.yScale == 1 then
-                    local nestedTable = COPY_TABLE(data.scripts[CURRENT_SCRIPT].params[i].nested)
+                    local nestedTable = COPY_TABLE(script.params[i].nested)
 
                     for j = 1, #nestedTable do
                         local blockIndex, blockData = i + j, COPY_TABLE(nestedTable[j])
-                        table.insert(data.scripts[CURRENT_SCRIPT].params, blockIndex, blockData)
+                        table.insert(script.params, blockIndex, blockData)
                         BLOCKS.new(blockData.name, blockIndex, blockData.event, blockData.params, blockData.comment, blockData.nested)
                     end
 
                     BLOCKS.group.blocks[i].polygon.yScale = -1
                     BLOCKS.group.blocks[i].polygon:setFillColor(1)
-                    data.scripts[CURRENT_SCRIPT].params[i].nested, BLOCKS.group.blocks[i].data.nested = {}, {}
+                    script.params[i].nested, BLOCKS.group.blocks[i].data.nested = {}, {}
                 elseif BLOCKS.group.blocks[i].data.nested then
                     if BLOCKS.group.blocks[i].data.event then
                         for j = i + 1, #BLOCKS.group.blocks do
@@ -366,7 +371,7 @@ listeners.but_okay = function(target)
                             table.insert(BLOCKS.group.blocks[i].data.nested, BLOCKS.group.blocks[i + 1].data)
                             BLOCKS.group.scrollHeight = BLOCKS.group.scrollHeight - BLOCKS.group.blocks[i + 1].block.height + 4
                             BLOCKS.group.blocks[i + 1]:removeSelf() table.remove(BLOCKS.group.blocks, i + 1)
-                            table.remove(data.scripts[CURRENT_SCRIPT].params, i + 1)
+                            table.remove(script.params, i + 1)
                         end
                     elseif INFO.listNested[BLOCKS.group.blocks[i].data.name] then
                         local endIndex = #INFO.listNested[BLOCKS.group.blocks[i].data.name]
@@ -380,7 +385,7 @@ listeners.but_okay = function(target)
                                 table.insert(BLOCKS.group.blocks[i].data.nested, BLOCKS.group.blocks[insideNestedIndex].data)
                                 BLOCKS.group.scrollHeight = BLOCKS.group.scrollHeight - BLOCKS.group.blocks[insideNestedIndex].block.height + 4
                                 BLOCKS.group.blocks[insideNestedIndex]:removeSelf() table.remove(BLOCKS.group.blocks, insideNestedIndex)
-                                table.remove(data.scripts[CURRENT_SCRIPT].params, insideNestedIndex)
+                                table.remove(script.params, insideNestedIndex)
 
                                 if name == BLOCKS.group.blocks[i].data.name and notNested then
                                     nestedEndIndex = nestedEndIndex + 1
@@ -403,7 +408,7 @@ listeners.but_okay = function(target)
                     if #BLOCKS.group.blocks[i].data.nested > 0 then
                         BLOCKS.group.blocks[i].polygon.yScale = 1
                         BLOCKS.group.blocks[i].polygon:setFillColor(0.25)
-                        data.scripts[CURRENT_SCRIPT].params[i].nested = BLOCKS.group.blocks[i].data.nested
+                        script.params[i].nested = BLOCKS.group.blocks[i].data.nested
                     end
                 end
 
@@ -418,10 +423,11 @@ listeners.but_okay = function(target)
                 local blockIndex = i + 1
                 local blockData = {name = 'ifElse', params = {{}}, event = false, comment = false}
 
-                table.insert(data.scripts[CURRENT_SCRIPT].params, blockIndex, blockData)
+                table.insert(script.params, blockIndex, blockData)
                 BLOCKS.new(blockData.name, blockIndex, blockData.event, blockData.params, blockData.comment)
 
                 SET_GAME_CODE(CURRENT_LINK, data)
+                SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
                 display.getCurrentStage():setFocus(BLOCKS.group.blocks[blockIndex])
                 BLOCKS.group.blocks[blockIndex].click = true
                 BLOCKS.group.blocks[blockIndex].move = true
@@ -434,7 +440,7 @@ listeners.but_okay = function(target)
 
     if INDEX_LIST ~= 1 then
         for i = 1, #BLOCKS.group.blocks do BLOCKS.group.blocks[i].checkbox:setState({isOn = false}) end
-        if INDEX_LIST ~= 2 then SET_GAME_CODE(CURRENT_LINK, data) end
+        if INDEX_LIST ~= 2 then SET_GAME_CODE(CURRENT_LINK, data) SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data) end
     end
 end
 

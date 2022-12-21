@@ -44,7 +44,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1216
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1217
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets() BOTTOM_HEIGHT = 100
@@ -83,37 +83,36 @@ if not IS_SIM and not LIVE then
     require('Core.Share.build').reset()
 end
 
-GET_NESTED_DATA = function(data, nestedInfo, INFO)
-    local data = COPY_TABLE(data)
+GET_NESTED_DATA = function(script, nestedInfo, INFO)
+    local script = COPY_TABLE(script)
 
     for i = #nestedInfo, 1, -1 do
-        local current_params = nestedInfo[i][1]
-        local current_script = nestedInfo[i][2]
+        local current_params = nestedInfo[i]
 
-        if data.scripts[current_script].params[current_params].event then
+        if script.params[current_params].event then
             local fixIndex = current_params + 1
 
-            for j = fixIndex, #data.scripts[current_script].params do
-                if data.scripts[current_script].params[fixIndex].event then break end
-                table.insert(data.scripts[current_script].params[current_params].nested, data.scripts[current_script].params[fixIndex])
-                table.remove(data.scripts[current_script].params, fixIndex)
+            for j = fixIndex, #script.params do
+                if script.params[fixIndex].event then break end
+                table.insert(script.params[current_params].nested, script.params[fixIndex])
+                table.remove(script.params, fixIndex)
             end
-        elseif INFO.listNested[data.scripts[current_script].params[current_params].name] then
-            local endIndex = #INFO.listNested[data.scripts[current_script].params[current_params].name]
+        elseif INFO.listNested[script.params[current_params].name] then
+            local endIndex = #INFO.listNested[script.params[current_params].name]
             local fixIndex = current_params + 1
             local nestedEndIndex = 1
 
-            for j = fixIndex, #data.scripts[current_script].params do
-                if not data.scripts[current_script].params[fixIndex].event then
-                    local name = data.scripts[current_script].params[fixIndex].name
-                    local notNested = not (data.scripts[current_script].params[fixIndex].nested
-                    and #data.scripts[current_script].params[fixIndex].nested > 0)
-                    table.insert(data.scripts[current_script].params[current_params].nested, data.scripts[current_script].params[fixIndex])
-                    table.remove(data.scripts[current_script].params, fixIndex)
+            for j = fixIndex, #script.params do
+                if not script.params[fixIndex].event then
+                    local name = script.params[fixIndex].name
+                    local notNested = not (script.params[fixIndex].nested
+                    and #script.params[fixIndex].nested > 0)
+                    table.insert(script.params[current_params].nested, script.params[fixIndex])
+                    table.remove(script.params, fixIndex)
 
-                    if name == data.scripts[current_script].params[current_params].name and notNested then
+                    if name == script.params[current_params].name and notNested then
                         nestedEndIndex = nestedEndIndex + 1
-                    elseif name == INFO.listNested[data.scripts[current_script].params[current_params].name][endIndex] then
+                    elseif name == INFO.listNested[script.params[current_params].name][endIndex] then
                         nestedEndIndex = nestedEndIndex - 1
                         if nestedEndIndex == 0 then break end
                     end
@@ -124,32 +123,29 @@ GET_NESTED_DATA = function(data, nestedInfo, INFO)
         end
     end
 
-    return data
+    return script
 end
 
-GET_FULL_DATA = function(data)
-    local data, nestedInfo = COPY_TABLE(data), {}
+GET_FULL_DATA = function(script)
+    local script, nestedInfo = COPY_TABLE(script), {}
+    local blockIndex = 0
 
-    for i = 1, #data.scripts do
-        local blockIndex = 0
+    while blockIndex < #script.params do
+        blockIndex = blockIndex + 1
 
-        while blockIndex < #data.scripts[i].params do
-            blockIndex = blockIndex + 1
+        if script.params[blockIndex].nested and #script.params[blockIndex].nested > 0 then
+            table.insert(nestedInfo, blockIndex)
 
-            if data.scripts[i].params[blockIndex].nested and #data.scripts[i].params[blockIndex].nested > 0 then
-                table.insert(nestedInfo, {blockIndex, i})
-
-                for j = 1, #data.scripts[i].params[blockIndex].nested do
-                    local blockIndex, blockData = blockIndex + j, data.scripts[i].params[blockIndex].nested[j]
-                    table.insert(data.scripts[i].params, blockIndex, blockData)
-                end
-
-                data.scripts[i].params[blockIndex].nested = {}
+            for j = 1, #script.params[blockIndex].nested do
+                local blockIndex, blockData = blockIndex + j, script.params[blockIndex].nested[j]
+                table.insert(script.params, blockIndex, blockData)
             end
+
+            script.params[blockIndex].nested = {}
         end
     end
 
-    return data, nestedInfo
+    return script, nestedInfo
 end
 
 GET_SCROLL_HEIGHT = function(group)
@@ -179,6 +175,10 @@ WRITE_FILE = function(path, data, bin)
         file:write(tostring(data))
         io.close(file)
     end
+end
+
+IS_FOLDER = function(path)
+    return LFS.attributes(path, 'mode') == 'directory'
 end
 
 IS_IMAGE = function(path)
@@ -251,6 +251,27 @@ end
 
 SET_GAME_CODE = function(link, data)
     WRITE_FILE(DOC_DIR .. '/' .. link .. '/game.json', JSON.encode3(data, {keyorder = KEYORDER}))
+end
+
+GET_INDEX_SCRIPT = function(link)
+    local numScript = 1 while true do if READ_FILE(DOC_DIR .. '/' .. link .. '/Scripts/Script' .. numScript)
+    then numScript = numScript + 1 else break end end return numScript
+end
+
+DEL_GAME_SCRIPT = function(link, index, code)
+    OS_REMOVE(DOC_DIR .. '/' .. link .. '/Scripts/Script' .. (code or GET_GAME_CODE(link)).scripts[index])
+end
+
+GET_GAME_SCRIPT = function(link, index, code)
+    local code = code or GET_GAME_CODE(link)
+    return code.scripts[index] and JSON.decode(READ_FILE(DOC_DIR .. '/' .. link .. '/Scripts/Script' .. code.scripts[index])) or nil
+end
+
+SET_GAME_SCRIPT = function(link, data, index, code)
+    local code = code or GET_GAME_CODE(link) if not code.scripts[index] then
+    local numScript = 1 while true do if READ_FILE(DOC_DIR .. '/' .. link .. '/Scripts/Script' .. numScript) then numScript = numScript + 1
+    else table.insert(code.scripts, index, numScript) SET_GAME_CODE(link, code) break end end end
+    WRITE_FILE(DOC_DIR .. '/' .. link .. '/Scripts/Script' .. code.scripts[index], JSON.encode3(data, {keyorder = KEYORDER}))
 end
 
 GET_GAME_CUSTOM = function()

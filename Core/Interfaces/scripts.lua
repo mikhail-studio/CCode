@@ -32,16 +32,15 @@ listeners.but_add = function(target)
 
                 for i = 1, #SCRIPTS.group.data do
                     if SCRIPTS.group.data[i].y > targetY then
-                        table.insert(data.scripts, i, {title = e.text, params = {}, vars = {}, tables = {}, funs = {}})
-                        SET_GAME_CODE(CURRENT_LINK, data)
-                        SCRIPTS.new(e.text, i)
-                        return
+                        table.insert(data.scripts, i, GET_INDEX_SCRIPT(CURRENT_LINK))
+                        SET_GAME_SCRIPT(CURRENT_LINK, {title = e.text, params = {}, vars = {}, tables = {}, funs = {}}, i, data)
+                        SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(e.text, i) return
                     end
                 end
 
-                table.insert(data.scripts, #data.scripts + 1, {title = e.text, params = {}, vars = {}, tables = {}, funs = {}})
-                SET_GAME_CODE(CURRENT_LINK, data)
-                SCRIPTS.new(e.text, #SCRIPTS.group.blocks + 1)
+                table.insert(data.scripts, #data.scripts + 1, GET_INDEX_SCRIPT(CURRENT_LINK))
+                SET_GAME_SCRIPT(CURRENT_LINK, {title = e.text, params = {}, vars = {}, tables = {}, funs = {}}, #data.scripts, data)
+                SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(e.text, #SCRIPTS.group.blocks + 1)
             end
         end)
     else
@@ -113,7 +112,8 @@ listeners.but_list = function(target)
                                 end
 
                                 timer.performWithDelay(10, function()
-                                    for index, script_config in pairs(data.scripts) do
+                                    for index, _ in ipairs(data.scripts) do
+                                        local script_config = GET_GAME_SCRIPT(CURRENT_LINK, index, data)
                                         if UTF8.find(UTF8.lower(script_config.title), UTF8.lower(e.text)) then
                                             SCRIPTS.new(script_config.title, #SCRIPTS.group.blocks + 1)
                                         end
@@ -133,17 +133,15 @@ listeners.but_list = function(target)
 
                                 for i = 1, #SCRIPTS.group.data do
                                     if SCRIPTS.group.data[i].y > targetY then
-                                        table.insert(data.scripts, i, COPY_TABLE(BUFFER))
-                                        SET_GAME_CODE(CURRENT_LINK, data)
-                                        SCRIPTS.new(BUFFER.title, i)
-                                        BUFFER = {} return
+                                        table.insert(data.scripts, i, GET_INDEX_SCRIPT(CURRENT_LINK))
+                                        SET_GAME_SCRIPT(CURRENT_LINK, COPY_TABLE(BUFFER), i, data)
+                                        SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(BUFFER.title, i) BUFFER = {} return
                                     end
                                 end
 
-                                table.insert(data.scripts, #data.scripts + 1, COPY_TABLE(BUFFER))
-                                SET_GAME_CODE(CURRENT_LINK, data)
-                                SCRIPTS.new(BUFFER.title, #SCRIPTS.group.blocks + 1)
-                                BUFFER = {}
+                                table.insert(data.scripts, #data.scripts + 1, GET_INDEX_SCRIPT(CURRENT_LINK))
+                                SET_GAME_SCRIPT(CURRENT_LINK, COPY_TABLE(BUFFER), #data.scripts, data)
+                                SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(BUFFER.title, #SCRIPTS.group.blocks + 1) BUFFER = {}
                             end
                         end, SCRIPTS.group.blocks)
                     end
@@ -185,8 +183,8 @@ listeners.but_okay = function(target)
 
             if SCRIPTS.group.blocks[i].checkbox.isOn then
                 local data = GET_GAME_CODE(CURRENT_LINK)
+                DEL_GAME_SCRIPT(CURRENT_LINK, i, data)
                 table.remove(data.scripts, i)
-
                 SET_GAME_CODE(CURRENT_LINK, data)
                 SCRIPTS.group.blocks[i].remove(i)
             end
@@ -221,11 +219,9 @@ listeners.but_okay = function(target)
                     end
                 end, function(e)
                     if e.input then
-                        local data = GET_GAME_CODE(CURRENT_LINK)
-                        data.scripts[i].title = e.text
-
-                        SET_GAME_CODE(CURRENT_LINK, data)
-                        SCRIPTS.group.blocks[i].text.text = e.text
+                        local script = GET_GAME_SCRIPT(CURRENT_LINK, i, data)
+                        script.title, SCRIPTS.group.blocks[i].text.text = e.text, e.text
+                        SET_GAME_SCRIPT(CURRENT_LINK, script, i, data)
                     end
                 end, SCRIPTS.group.blocks[i].text.text)
             end
@@ -256,24 +252,19 @@ listeners.but_okay = function(target)
 
                         for j = 1, #SCRIPTS.group.data do
                             if SCRIPTS.group.data[j].y > targetY then
-                                table.insert(data.scripts, j, {
+                                table.insert(data.scripts, j, GET_INDEX_SCRIPT(CURRENT_LINK))
+                                SET_GAME_SCRIPT(CURRENT_LINK, {
                                     title = e.text, params = data.scripts[i].params,
                                     vars = data.scripts[i].vars, tables = data.scripts[i].tables, funs = data.scripts[i].funs
-                                })
-
-                                SET_GAME_CODE(CURRENT_LINK, data)
-                                SCRIPTS.new(e.text, j)
-                                return
+                                }, j, data) SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(e.text, j) return
                             end
                         end
 
-                        table.insert(data.scripts, #data.scripts + 1, {
+                        table.insert(data.scripts, #data.scripts + 1, GET_INDEX_SCRIPT(CURRENT_LINK))
+                        SET_GAME_SCRIPT(CURRENT_LINK, {
                             title = e.text, params = data.scripts[i].params,
                             vars = data.scripts[i].vars, tables = data.scripts[i].tables, funs = data.scripts[i].funs
-                        })
-
-                        SET_GAME_CODE(CURRENT_LINK, data)
-                        SCRIPTS.new(e.text, #SCRIPTS.group.blocks + 1)
+                        }, #data.scripts, data) SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(e.text, #SCRIPTS.group.blocks + 1)
                     end
                 end, SCRIPTS.group.blocks[i].text.text)
             end

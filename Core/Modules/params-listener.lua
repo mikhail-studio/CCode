@@ -87,12 +87,13 @@ M.open = function(target)
     local BLOCK = require 'Core.Modules.logic-block'
     local LOGIC = require 'Core.Modules.logic-input'
     local data = GET_GAME_CODE(CURRENT_LINK)
+    local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
     local paramsIndex = target.index
     local blockName = target.parent.parent.data.name
     local blockY = target.parent.parent.y
     local blockIndex = target.parent.parent.getIndex(target.parent.parent)
     local scrollY = select(2, BLOCKS.scroll:getContentPosition())
-    local paramsData = data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex]
+    local paramsData = script.params[blockIndex].params[paramsIndex]
     local diffScrollY = BLOCKS.scroll.y - BLOCKS.scroll.height / 2
     local listDirection = blockY + target.y + scrollY + diffScrollY > CENTER_Y and 'up' or 'down'
     local listY = blockY + scrollY + target.y + diffScrollY + (listDirection == 'up' and target.height or -target.height) - 10
@@ -107,10 +108,10 @@ M.open = function(target)
             end
         end, function(e)
             if e.input then
-                data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex][1] = {e.text, 't'}
+                script.params[blockIndex].params[paramsIndex][1] = {e.text, 't'}
                 target.parent.parent.data.params[paramsIndex][1] = {e.text, 't'}
                 target.parent.parent.params[paramsIndex].value.text = BLOCK.getParamsValueText(target.parent.parent.data.params, paramsIndex)
-                SET_GAME_CODE(CURRENT_LINK, data)
+                SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
             end BLOCKS.group[8]:setIsLocked(false, 'vertical')
         end, (paramsData[1] and paramsData[1][1]) and paramsData[1][1] or '') native.setKeyboardFocus(INPUT.box)
     elseif type == 'value' and ALERT then
@@ -135,20 +136,20 @@ M.open = function(target)
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
         COLOR.new(COPY_TABLE((paramsData[1] and paramsData[1][1]) and JSON.decode(paramsData[1][1]) or {255, 255, 255, 255}), function(e)
             if e.input then
-                data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex][1] = {e.rgb, 'c'}
+                script.params[blockIndex].params[paramsIndex][1] = {e.rgb, 'c'}
                 target.parent.parent.data.params[paramsIndex][1] = {e.rgb, 'c'}
                 target.parent.parent.params[paramsIndex].value.text = BLOCK.getParamsValueText(target.parent.parent.data.params, paramsIndex)
-                SET_GAME_CODE(CURRENT_LINK, data)
+                SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
             end BLOCKS.group[8]:setIsLocked(false, 'vertical')
         end)
     elseif M.getListValue(type) and ALERT then
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
         LIST.new(M.getListButtons(type), listX, listY, listDirection, function(e)
             if e.index > 0 then
-                data.scripts[CURRENT_SCRIPT].params[blockIndex].params[paramsIndex][1] = {M.getListValue(type, e.text), 'sl'}
+                script.params[blockIndex].params[paramsIndex][1] = {M.getListValue(type, e.text), 'sl'}
                 target.parent.parent.data.params[paramsIndex][1] = {M.getListValue(type, e.text), 'sl'}
                 target.parent.parent.params[paramsIndex].value.text = BLOCK.getParamsValueText(target.parent.parent.data.params, paramsIndex)
-                SET_GAME_CODE(CURRENT_LINK, data)
+                SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
             end BLOCKS.group[8]:setIsLocked(false, 'vertical')
         end, paramsText)
     end

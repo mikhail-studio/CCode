@@ -16,8 +16,9 @@ return {
         local hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, code, '?.cc_ode-'), '*cc.ode_?')
 
         for i = 1, #data.scripts do
-            for j = 1, #data.scripts[i].params do
-                local name = data.scripts[i].params[j].name
+            local script = GET_GAME_SCRIPT(CURRENT_LINK, i, data)
+            for j = 1, #script.params do
+                local name = script.params[j].name
                 if UTF8.sub(name, 1, 6) == 'custom' then
                     dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = true
                 end

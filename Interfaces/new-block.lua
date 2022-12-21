@@ -128,14 +128,14 @@ local function newBlockListener(event)
                             end
 
                             for i = 1, #data.scripts do
-                                for j = 1, #data.scripts[i].params do
-                                    if data.scripts[i].params[j].name == 'custom' .. index then
-                                        table.remove(data.scripts[i].params, j)
+                                local script, isChange = GET_GAME_SCRIPT(CURRENT_LINK, i, data)
+                                for j = 1, #script.params do
+                                    if script.params[j].name == 'custom' .. index then
+                                        table.remove(script.params, j) isChange = true
                                     end
-                                end
+                                end if isChange then SET_GAME_SCRIPT(CURRENT_LINK, script, i, data) end
                             end
 
-                            SET_GAME_CODE(CURRENT_LINK, data)
                             BLOCKS.group:removeSelf() BLOCKS.group = nil
                             BLOCKS.create() BLOCKS.custom = nil
                             BLOCKS.group.isVisible = false
@@ -149,6 +149,7 @@ local function newBlockListener(event)
                     EXITS.new_block()
 
                     local data = GET_GAME_CODE(CURRENT_LINK)
+                    local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
                     local scrollY = select(2, BLOCKS.group[8]:getContentPosition())
                     local diffY = BLOCKS.group[8].y - BLOCKS.group[8].height / 2
                     local targetY = math.abs(scrollY) + diffY + CENTER_Y - 150
@@ -171,7 +172,7 @@ local function newBlockListener(event)
                     end
 
                     if not blockEvent and #BLOCKS.group.blocks == 0 then
-                        table.insert(data.scripts[CURRENT_SCRIPT].params, 1, {
+                        table.insert(script.params, 1, {
                             name = 'onStart', params = {{}}, event = true, comment = false,
                             nested = {}, vars = {}, tables = {}
                         }) BLOCKS.new('onStart', 1, true, {{}}, false, {}) blockIndex = 2
@@ -180,15 +181,15 @@ local function newBlockListener(event)
                     if INFO.listNested[blockName] then
                         blockParams.nested = {}
                         for i = 1, #INFO.listNested[blockName] do
-                            table.insert(data.scripts[CURRENT_SCRIPT].params, blockIndex, {
+                            table.insert(script.params, blockIndex, {
                                 name = INFO.listNested[blockName][i], params = {{}}, event = false, comment = false
                             }) BLOCKS.new(INFO.listNested[blockName][i], blockIndex, false, {{}}, false)
                         end
                     end
 
                     native.setKeyboardFocus(nil)
-                    table.insert(data.scripts[CURRENT_SCRIPT].params, blockIndex, blockParams)
-                    SET_GAME_CODE(CURRENT_LINK, data)
+                    table.insert(script.params, blockIndex, blockParams)
+                    SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
                     BLOCKS.new(blockName, blockIndex, blockEvent, COPY_TABLE(blockParams.params), false, blockParams.nested)
 
                     if #BLOCKS.group.blocks > 2 then

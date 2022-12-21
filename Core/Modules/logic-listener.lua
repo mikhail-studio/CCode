@@ -191,6 +191,7 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
             display.getCurrentStage():setFocus(e.target)
             M.index = e.target.getIndex(e.target)
             M.data = GET_GAME_CODE(CURRENT_LINK)
+            M.script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, M.data)
             M.nestedBlocks, M.nestedData = {}, {}
             M.diffY = scroll.y - scroll.height / 2
             e.target.y = e.y or e.target.y
@@ -229,9 +230,9 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
                             end
 
                             y = y + group.blocks[M.index + 1].block.height - 4
-                            table.insert(M.nestedData, M.data.scripts[CURRENT_SCRIPT].params[M.index + 1])
+                            table.insert(M.nestedData, M.script.params[M.index + 1])
                             table.insert(M.nestedBlocks, group.blocks[M.index + 1])
-                            table.remove(M.data.scripts[CURRENT_SCRIPT].params, M.index + 1)
+                            table.remove(M.script.params, M.index + 1)
                             table.remove(group.blocks, M.index + 1)
 
                             if not e.target.data.event then
@@ -283,7 +284,7 @@ local function updMoveLogicBlock(e, group, scroll)
                 if e.target.y > M.lastY then
                     if group.blocks[M.index + 1] then
                         local countBlocksReplace = 0
-                        local block = M.data.scripts[CURRENT_SCRIPT].params[M.index]
+                        local block = M.script.params[M.index]
 
                         for i = M.index + 1, #group.blocks do
                             if group.blocks[i] and group.blocks[i].y < e.target.y then
@@ -293,15 +294,15 @@ local function updMoveLogicBlock(e, group, scroll)
                         end
 
                         M.index = M.index + countBlocksReplace
-                        table.remove(M.data.scripts[CURRENT_SCRIPT].params, M.index - countBlocksReplace)
+                        table.remove(M.script.params, M.index - countBlocksReplace)
                         table.insert(group.blocks, M.index + 1, e.target)
                         table.remove(group.blocks, M.index - countBlocksReplace)
-                        table.insert(M.data.scripts[CURRENT_SCRIPT].params, M.index, block)
+                        table.insert(M.script.params, M.index, block)
                     end
                 elseif e.target.y < M.lastY then
                     if group.blocks[M.index - 1] then
                         local countBlocksReplace = 0
-                        local block = M.data.scripts[CURRENT_SCRIPT].params[M.index]
+                        local block = M.script.params[M.index]
 
                         for i = M.index - 1, 1, -1 do
                             if group.blocks[i] and group.blocks[i].y > e.target.y and (i > 1 or e.target.data.event) then
@@ -311,10 +312,10 @@ local function updMoveLogicBlock(e, group, scroll)
                         end
 
                         M.index = M.index - countBlocksReplace
-                        table.remove(M.data.scripts[CURRENT_SCRIPT].params, M.index + countBlocksReplace)
+                        table.remove(M.script.params, M.index + countBlocksReplace)
                         table.insert(group.blocks, M.index, e.target)
                         table.remove(group.blocks, M.index + countBlocksReplace + 1)
-                        table.insert(M.data.scripts[CURRENT_SCRIPT].params, M.index, block)
+                        table.insert(M.script.params, M.index, block)
                     end
                 end
             end
@@ -337,7 +338,7 @@ local function stopMoveLogicBlock(e, group, scroll)
 
             for i = 1, #M.nestedBlocks do
                 y = y + M.nestedBlocks[1].block.height - 4
-                table.insert(M.data.scripts[CURRENT_SCRIPT].params, M.index + i, M.nestedData[1])
+                table.insert(M.script.params, M.index + i, M.nestedData[1])
                 table.insert(group.blocks, M.index + i, M.nestedBlocks[1])
                 table.remove(M.nestedBlocks, 1)
                 table.remove(M.nestedData, 1)
@@ -351,7 +352,7 @@ local function stopMoveLogicBlock(e, group, scroll)
             end
         end
 
-        SET_GAME_CODE(CURRENT_LINK, M.data)
+        SET_GAME_SCRIPT(CURRENT_LINK, M.script, CURRENT_SCRIPT, M.data)
 
         if M.countClose > 0 then
             for i = #group.blocks, 1, -1 do
@@ -379,7 +380,7 @@ local function stopMoveLogicBlock(e, group, scroll)
         for j = M.index, #group.blocks do
             if group.blocks[j] == target then
                 M.index = j
-            end 
+            end
 
             if group.blocks[j].x > BLOCK_CENTER_X then
                 group.blocks[j].x = BLOCK_CENTER_X

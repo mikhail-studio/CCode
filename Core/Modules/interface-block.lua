@@ -44,8 +44,23 @@ local listener = function(e, scroll, group, type)
                 if type == 'programs' and ALERT then
                     local data = GET_GAME_CODE(e.target.link)
 
+                    if tonumber(data.build) < 1215 then
+                        local scripts = COPY_TABLE(data.scripts) data.build = BUILD
+                        LFS.mkdir(DOC_DIR .. '/' .. e.target.link .. '/Scripts')
+
+                        for i = 1, #scripts do
+                            data.scripts[i] = i
+                            SET_GAME_SCRIPT(e.target.link, scripts[i], i, data)
+                        end
+
+                        SET_GAME_CODE(e.target.link, data)
+                    end
+
                     if tonumber(data.build) > 1170 then
-                        if data.scripts[1] and data.scripts[1].custom then
+                        local script = GET_GAME_SCRIPT(e.target.link, 1, data)
+
+                        if script and script.custom then
+                            DEL_GAME_SCRIPT(e.target.link, 1, data)
                             table.remove(data.scripts, 1)
                             SET_GAME_CODE(e.target.link, data)
                         end
