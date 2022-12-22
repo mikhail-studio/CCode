@@ -112,7 +112,7 @@ M.new = function(linkBuild, isDebug)
     local custom = GET_GAME_CUSTOM()
 
     for i = 1, #M.data.scripts do
-        M.scripts[i] = GET_FULL_DATA(GET_GAME_SCRIPT(CURRENT_LINK, i, M.data))
+        M.scripts[i] = GET_FULL_DATA(GET_GAME_SCRIPT(linkBuild or CURRENT_LINK, i, M.data))
 
         for j = 1, #M.scripts[i].params do
             local name = M.scripts[i].params[j].name
@@ -147,10 +147,10 @@ M.new = function(linkBuild, isDebug)
                 local logic = custom[index][3]
 
                 if type(logic) == 'string' then
-                    table.insert(M.scripts, 1, GET_FULL_DATA({
+                    local _script = GET_FULL_DATA({
                         title = '', funs = {}, tables = {}, vars = {}, custom = true,
                         params = {{tables = {}, vars = {}, name = '_' .. name, event = true, nested = {}, comment = false, params = {}}}
-                    })) setCustom(name, logic)
+                    }) table.insert(M.scripts, 1, _script) setCustom(name, logic)
                 elseif type(logic) == 'table' then
                     for i = 1, #logic.params do
                         if logic.params[i].name == '_custom' then
@@ -160,7 +160,8 @@ M.new = function(linkBuild, isDebug)
                         end
                     end
 
-                    table.insert(M.scripts, 1, GET_FULL_DATA(logic))
+                    local _script = GET_FULL_DATA(logic)
+                    table.insert(M.scripts, 1, _script)
                     setCustom(name)
                 end
             end
