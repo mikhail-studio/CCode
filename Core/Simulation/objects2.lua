@@ -43,9 +43,10 @@ M['newParAnimation'] = function(params)
 end
 
 M['playAnimation'] = function(params)
-    local nameObject, nameAnimation = CALC(params[1]), CALC(params[2])
+    local nameObject, nameAnimation = CALC(params[1]), CALC(params[2], 'nil')
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. nameObject .. ']:setSequence(' .. nameAnimation .. ')'
+    GAME.lua = GAME.lua .. ' pcall(function() local nameAnimation = ' .. nameAnimation .. ' if nameAnimation then'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. nameObject .. ']:setSequence(nameAnimation) end'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. nameObject .. ']:play() end)'
 end
 

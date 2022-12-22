@@ -624,7 +624,7 @@ return {
         ['blocks.setWidgetPos.params'] = {'Имя виджета:', 'Позиция (X):', 'Позиция (Y):'},
         ['blocks.setWidgetSize'] = 'Установить размер виджета',
         ['blocks.setWidgetSize.params'] = {'Имя виджета:', 'Ширина:', 'Высота:'},
-        ['blocks.setWidgetListener'] = 'Установить слушатель изменений',
+        ['blocks.setWidgetListener'] = 'Установить функцию изменений',
         ['blocks.setWidgetListener.params'] = {'Имя виджета:', 'Имя функции:'},
         ['blocks.setWebViewFront'] = 'Перейти на сайт вперёд',
         ['blocks.setWebViewFront.params'] =  {'Имя виджета:'},
@@ -768,8 +768,8 @@ return {
         ['editor.list.fun.len'] = 'длина_текста',
         ['editor.list.fun.find'] = 'найти_в_тексте',
         ['editor.list.fun.split'] = 'разделить_текст',
-        ['editor.list.fun.color_pixel'] = 'цвет_пикселя',
         ['editor.list.fun.match'] = 'регулярное_выражение',
+        ['editor.list.fun.color_pixel'] = 'цвет_пикселя',
         ['editor.list.fun.get_ip'] = 'получить_свой_адрес',
 
     ['editor.list.math.random'] = 'рандом',

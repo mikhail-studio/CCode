@@ -350,7 +350,7 @@ M.listBlock = {
 
 M.listName = {
     -- events
-    ['onStart'] = {'events', 'text'},
+    ['onStart'] = {'events', 'value'},
         ['onFun'] = {'events', 'fun'},
         ['onFunParams'] = {'events', 'fun', 'localtable'},
         ['onCondition'] = {'events', 'value'},

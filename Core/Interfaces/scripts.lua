@@ -246,6 +246,7 @@ listeners.but_okay = function(target)
                 end, function(e)
                     if e.input then
                         local data = GET_GAME_CODE(CURRENT_LINK)
+                        local script = GET_GAME_SCRIPT(CURRENT_LINK, i, data)
                         local scrollY = select(2, SCRIPTS.group[8]:getContentPosition())
                         local diffY = SCRIPTS.group[8].y - SCRIPTS.group[8].height / 2
                         local targetY = math.abs(scrollY) + diffY + CENTER_Y - 150
@@ -254,16 +255,16 @@ listeners.but_okay = function(target)
                             if SCRIPTS.group.data[j].y > targetY then
                                 table.insert(data.scripts, j, GET_INDEX_SCRIPT(CURRENT_LINK))
                                 SET_GAME_SCRIPT(CURRENT_LINK, {
-                                    title = e.text, params = data.scripts[i].params,
-                                    vars = data.scripts[i].vars, tables = data.scripts[i].tables, funs = data.scripts[i].funs
+                                    title = e.text, params = script.params,
+                                    vars = script.vars, tables = script.tables, funs = script.funs
                                 }, j, data) SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(e.text, j) return
                             end
                         end
 
                         table.insert(data.scripts, #data.scripts + 1, GET_INDEX_SCRIPT(CURRENT_LINK))
                         SET_GAME_SCRIPT(CURRENT_LINK, {
-                            title = e.text, params = data.scripts[i].params,
-                            vars = data.scripts[i].vars, tables = data.scripts[i].tables, funs = data.scripts[i].funs
+                            title = e.text, params = script.params,
+                            vars = script.vars, tables = script.tables, funs = script.funs
                         }, #data.scripts, data) SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(e.text, #SCRIPTS.group.blocks + 1)
                     end
                 end, SCRIPTS.group.blocks[i].text.text)
