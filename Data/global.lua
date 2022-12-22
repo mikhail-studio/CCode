@@ -382,7 +382,8 @@ end
 LOCAL = require 'Data.local'
 LANG.en = require 'Strings.en'
 LANG.ru = require 'Strings.ru'
-LANGS = {'en', 'ru'}
+LANG.pt = require 'Strings.pt'
+LANGS = {'en', 'ru', 'pt'}
 
 for i = 1, #LANGS do if LANGS[i] == LOCAL.lang then break elseif i == #LANGS then LOCAL.lang = 'en' end end
 STR = LANG[LOCAL.lang] for k, v in pairs(LANG.ru) do if not STR[k] then STR[k] = v end end
