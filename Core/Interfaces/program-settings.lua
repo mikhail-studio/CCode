@@ -107,6 +107,7 @@ listeners.icon = function(target)
         end
     end
 
+    GIVE_PERMISSION_DATA()
     FILE.pickFile(path, completeImportPicture, 'icon.png', '', 'image/*', nil, nil, nil)
 end
 

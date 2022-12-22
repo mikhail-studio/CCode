@@ -341,7 +341,6 @@ return ' ' .. UTF8.trimFull([[
         PHYSICS.setAverageCollisionPositions(true)
         WIDGET.setTheme('widget_theme_android_holo_dark')
         PHYSICS.setReportCollisionsInContentCoordinates(true)
-        native.setProperty('androidSystemUiVisibility', 'immersiveSticky')
         display.setStatusBar(display.HiddenStatusBar) math.randomseed(os.time())
         JSON.decode2, JSON.decode = JSON.decode, function(str) return type(str) == 'string' and (JSON.decode2(str) or {}) or nil end
         math.factorial = function(num) if num == 0 then return 1 else return num * math.factorial(num - 1) end end
@@ -397,12 +396,6 @@ return ' ' .. UTF8.trimFull([[
             return DEVICE_ID
         end
 
-        M['read_save'] = function(key)
-            local isComplete, result = pcall(function()
-                return GET_GAME_SAVE(CURRENT_LINK)[tostring(key)]
-            end) return isComplete and result or nil
-        end
-
         M['width_screen'] = function()
             return DISPLAY_WIDTH
         end
@@ -432,7 +425,8 @@ return ' ' .. UTF8.trimFull([[
         end
 
         M['height_bottom'] = function()
-            return BOTTOM_HEIGHT
+            local _, _, bottom_height = display.getSafeAreaInsets()
+            return bottom_height
         end
 
         M['finger_touching_screen'] = function()
@@ -445,12 +439,6 @@ return ' ' .. UTF8.trimFull([[
 
         M['finger_touching_screen_y'] = function()
             return CENTER_Y - GAME.group.const.touch_y
-        end
-
-        M['get_ip'] = function(any)
-            local isComplete, result = pcall(function()
-                return SERVER.getIP()
-            end) return isComplete and result or nil
         end
 
         M['fps'] = function()

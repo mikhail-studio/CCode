@@ -45,6 +45,7 @@ listeners.but_add = function(target)
                         numFont = numFont + 1
                         io.close(file)
                     else
+                        GIVE_PERMISSION_DATA()
                         FILE.pickFile(path, completeImportPicture, 'Font' .. numFont, '', '*/*', nil, nil, nil)
                         break
                     end

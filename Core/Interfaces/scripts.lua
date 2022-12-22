@@ -59,7 +59,7 @@ listeners.but_list = function(target)
     if #SCRIPTS.group.blocks > 0 then
         SCRIPTS.group[8]:setIsLocked(true, 'vertical')
         if SCRIPTS.group.isVisible then
-            LIST.new({STR['button.remove'], STR['button.rename'], STR['button.copy'], STR['button.find'], STR['button.from.buffer']},
+            LIST.new({STR['button.remove'], STR['button.rename'], STR['button.copy'], STR['button.from.buffer']},
                 MAX_X, target.y - target.height / 2, 'down', function(e)
                     SCRIPTS.group[8]:setIsLocked(false, 'vertical')
 
@@ -95,7 +95,7 @@ listeners.but_list = function(target)
                         for i = 1, #SCRIPTS.group.blocks do
                             SCRIPTS.group.blocks[i].checkbox.isVisible = true
                         end
-                    elseif e.index == 4 then
+                    elseif e.index == 5 then
                         SCRIPTS.group[8]:setIsLocked(true, 'vertical')
                         INPUT.new(STR['scripts.entername'], function(event)
                             if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
@@ -121,7 +121,7 @@ listeners.but_list = function(target)
                                 end)
                             end
                         end)
-                    elseif e.index == 5 and type(BUFFER) == 'table' and type(BUFFER.params) == 'table' and #BUFFER.params > 0 then
+                    elseif e.index == 4 and type(BUFFER) == 'table' and type(BUFFER.params) == 'table' and #BUFFER.params > 0 then
                         FILTER.check(BUFFER.title, function(ev)
                             if ev.isError then
                                 WINDOW.new(STR['errors.' .. ev.typeError], {STR['button.close'], STR['button.okay']}, function() end, 5)

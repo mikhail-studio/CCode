@@ -4,12 +4,6 @@ M['device_id'] = function()
     return DEVICE_ID
 end
 
-M['read_save'] = function(key)
-    local isComplete, result = pcall(function()
-        return GET_GAME_SAVE(CURRENT_LINK)[tostring(key)]
-    end) return isComplete and result or nil
-end
-
 M['width_screen'] = function()
     return DISPLAY_WIDTH
 end
@@ -39,7 +33,8 @@ M['height_top'] = function()
 end
 
 M['height_bottom'] = function()
-    return BOTTOM_HEIGHT
+    local _, _, bottom_height = display.getSafeAreaInsets()
+    return bottom_height
 end
 
 M['finger_touching_screen'] = function()
@@ -52,12 +47,6 @@ end
 
 M['finger_touching_screen_y'] = function()
     return CENTER_Y - GAME.group.const.touch_y
-end
-
-M['get_ip'] = function(any)
-    local isComplete, result = pcall(function()
-        return SERVER.getIP()
-    end) return isComplete and result or nil
 end
 
 M['fps'] = function()

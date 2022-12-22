@@ -61,6 +61,42 @@ listeners.confirm = function(e)
     end, nil, nil, 0.5)
 end
 
+listeners.back = function(e)
+    local list = LOCAL.back == 'System' and {STR['settings.backSystem'], STR['settings.backCCode'], STR['settings.backNo']}
+    or LOCAL.back == 'CCode' and {STR['settings.backCCode'], STR['settings.backSystem'], STR['settings.backNo']}
+    or {STR['settings.backNo'], STR['settings.backSystem'], STR['settings.backCCode']}
+
+    LIST.new(list, e.target.x, e.target.y - e.target.height / 2, 'down', function(e)
+        if e.index > 0 then
+            LOCAL.back = LOCAL.back == 'System' and (e.index == 2 and 'CCode' or e.index == 3 and 'No' or 'System')
+            or LOCAL.back == 'CCode' and (e.index == 2 and 'System' or e.index == 3 and 'No' or 'CCode')
+            or (e.index == 2 and 'System' or e.index == 3 and 'CCode' or 'No')
+
+            if LOCAL.back == 'System' then
+                native.setProperty('androidSystemUiVisibility', 'default')
+            else
+                native.setProperty('androidSystemUiVisibility', 'immersiveSticky')
+            end
+
+            local _, _, bottom_height = display.getSafeAreaInsets()
+            BOTTOM_HEIGHT = LOCAL.back == 'System' and bottom_height or LOCAL.back == 'CCode' and 100 or 0
+            MAX_Y = CENTER_Y + DISPLAY_HEIGHT / 2 - BOTTOM_HEIGHT
+
+            MENU.group:removeSelf()
+            MENU.group = nil
+            MENU.create()
+
+            SETTINGS.group:removeSelf()
+            SETTINGS.group = nil
+            SETTINGS.create()
+            SETTINGS.group.isVisible = true
+
+            pcall(function() NEW_BLOCK.remove() end)
+            NEW_DATA() BACK.create() BACK.front()
+        end
+    end, nil, nil, 0.5)
+end
+
 listeners.lang = function(e)
     local list = {{STR['lang.' .. LOCAL.lang]}, {LOCAL.lang}}
 

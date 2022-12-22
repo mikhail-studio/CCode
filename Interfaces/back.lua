@@ -1,19 +1,29 @@
 local M = {}
 
 M.hide = function()
-    M.group.isVisible = false
+    if LOCAL.back == 'CCode' and M.group then
+        M.group.isVisible = false
+    end
 end
 
 M.show = function()
-    M.group.isVisible = true
+    if LOCAL.back == 'CCode' and M.group then
+        M.group.isVisible = true
+    end
 end
 
 M.front = function()
-    M.group:toFront()
+    if LOCAL.back == 'CCode' and M.group then
+        M.group:toFront()
+    end
+end
+
+M.remove = function()
+    pcall(function() M.group:removeSelf() M.group = nil end)
 end
 
 M.create = function()
-    if not M.group then
+    if not M.group and LOCAL.back == 'CCode' then
         M.group = display.newGroup()
 
         local but_back = display.newRect(CENTER_X, MAX_Y + BOTTOM_HEIGHT / 2, DISPLAY_WIDTH, BOTTOM_HEIGHT)
@@ -42,6 +52,8 @@ M.create = function()
                 end
             end return true
         end)
+    elseif LOCAL.back ~= 'CCode' then
+        M.remove()
     end
 end
 

@@ -45,6 +45,7 @@ listeners.but_add = function(target)
                         numSound = numSound + 1
                         io.close(file)
                     else
+                        GIVE_PERMISSION_DATA()
                         FILE.pickFile(path, completeImportPicture, 'Sound' .. numSound, '', 'audio/*', nil, nil, nil)
                         break
                     end

@@ -44,10 +44,10 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1220
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1222
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
-TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets() BOTTOM_HEIGHT = 100
+TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
 ZERO_X = CENTER_X - DISPLAY_WIDTH / 2 + LEFT_HEIGHT
 ZERO_Y = CENTER_Y - DISPLAY_HEIGHT / 2 + TOP_HEIGHT
 MAX_X = CENTER_X + DISPLAY_WIDTH / 2 - RIGHT_HEIGHT
@@ -146,6 +146,10 @@ GET_FULL_DATA = function(script)
     end
 
     return script, nestedInfo
+end
+
+GIVE_PERMISSION_DATA = function()
+    native.showPopup('requestAppPermission', {appPermission = 'Storage', urgency = 'normal'})
 end
 
 GET_SCROLL_HEIGHT = function(group)
@@ -348,7 +352,6 @@ PHYSICS.setAverageCollisionPositions(true)
 WIDGET.setTheme('widget_theme_android_holo_dark')
 display.setDefault('background', 0.15, 0.15, 0.17)
 PHYSICS.setReportCollisionsInContentCoordinates(true)
-native.setProperty('androidSystemUiVisibility', 'immersiveSticky')
 display.setStatusBar(display.HiddenStatusBar) math.randomseed(os.time())
 DEVELOPERS = {['Ganin'] = true, ['Danil Nik'] = true, ['Terra'] = true}
 
@@ -385,8 +388,15 @@ LANG.ru = require 'Strings.ru'
 LANG.pt = require 'Strings.pt'
 LANGS = {'en', 'ru', 'pt'}
 
+if LOCAL.back == 'System' then native.setProperty('androidSystemUiVisibility', 'default')
+else native.setProperty('androidSystemUiVisibility', 'immersiveSticky') end
+
+BOTTOM_HEIGHT = LOCAL.back == 'CCode' and 100 or BOTTOM_HEIGHT
+MAX_Y = CENTER_Y + DISPLAY_HEIGHT / 2 - BOTTOM_HEIGHT
+
 for i = 1, #LANGS do if LANGS[i] == LOCAL.lang then break elseif i == #LANGS then LOCAL.lang = 'en' end end
-STR = LANG[LOCAL.lang] for k, v in pairs(LANG.ru) do if not STR[k] then STR[k] = v end end
+STR = LANG[LOCAL.lang] for k, v in pairs(LANG.ru) do if not STR[k] then STR[k] = v elseif type(STR[k]) == 'table' then
+for k2, v2 in ipairs(LANG.ru[k]) do if not STR[k][k2] then STR[k][k2] = v2 end end end end
 
 if IS_SIM then
     JSON.encode, JSON.encode2, JSON.encode4 = JSON.prettify, JSON.encode, JSON.encode3

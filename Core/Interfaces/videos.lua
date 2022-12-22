@@ -45,6 +45,7 @@ listeners.but_add = function(target)
                         numVideo = numVideo + 1
                         io.close(file)
                     else
+                        GIVE_PERMISSION_DATA()
                         FILE.pickFile(path, completeImportPicture, 'Video' .. numVideo, '', 'video/*', nil, nil, nil)
                         break
                     end

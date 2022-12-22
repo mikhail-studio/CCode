@@ -21,19 +21,20 @@ M['requestFunParams'] = function(params)
 end
 
 M['setFocus'] = function(params)
-    GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(' .. CALC(params[1], 'nil') .. ')'
+    GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(GAME.group.objects[' .. CALC(params[1], 'nil') .. '])'
 end
 
 M['setFocusMultitouch'] = function(params)
-    GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(' .. CALC(params[1], 'nil') .. ', ' .. CALC(params[2], 'nil') .. ')'
+    GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(GAME.group.objects['
+    GAME.lua = GAME.lua .. CALC(params[1], 'nil') .. '], ' .. CALC(params[2], 'nil') .. ')'
 end
 
 M['activateMultitouch'] = function(params)
-    GAME.lua = GAME.lua .. ' system.activate(\'multitouch\')'
+    GAME.lua = GAME.lua .. ' GAME.multi = true system.activate(\'multitouch\')'
 end
 
 M['deactivateMultitouch'] = function(params)
-    GAME.lua = GAME.lua .. ' system.deactivate(\'multitouch\')'
+    GAME.lua = GAME.lua .. ' GAME.multi = false system.deactivate(\'multitouch\')'
 end
 
 M['toastShort'] = function(params)
@@ -60,7 +61,10 @@ M['setListener'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. ']:addEventListener(\'touch\', function(e)'
     GAME.lua = GAME.lua .. ' e.target._touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\' GAME.group.const.touch = e.target._touch'
     GAME.lua = GAME.lua .. ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y if e.target._touch then'
-    GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(e.target) else display.getCurrentStage():setFocus(nil) end'
+    GAME.lua = GAME.lua .. ' if GAME.multi then display.getCurrentStage():setFocus(e.target, e.id) else'
+    GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(e.target) end else'
+    GAME.lua = GAME.lua .. ' if GAME.multi then display.getCurrentStage():setFocus(e.target, nil) else'
+    GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(nil) end end'
     GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() return ' .. CALC(params[2], 'a', true) .. '(e)'
     GAME.lua = GAME.lua .. ' end) return isComplete and result or false end) end)'
 end

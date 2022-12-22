@@ -19,7 +19,8 @@ return {
 
             timer.performWithDelay(1, function()
                 local folders = {'Resources', 'Images', 'Sounds', 'Videos', 'Fonts'}
-                local icons = {'mipmap-hdpi-v4', 'mipmap-mdpi-v4', 'mipmap-xhdpi-v4', 'mipmap-xxhdpi-v4', 'mipmap-xxxhdpi-v4'}
+                -- local icons = {'mipmap-hdpi-v4', 'mipmap-mdpi-v4', 'mipmap-xhdpi-v4', 'mipmap-xxhdpi-v4', 'mipmap-xxxhdpi-v4'}
+                local icons = {'mipmap-hdpi', 'mipmap-mdpi', 'mipmap-xhdpi', 'mipmap-xxhdpi', 'mipmap-xxxhdpi'}
 
                 for i = 1, #folders do
                     for file in LFS.dir(DOC_DIR .. '/' .. link .. '/' .. folders[i]) do
@@ -69,10 +70,15 @@ return {
         LFS.mkdir(MY_PATH .. '/res')
         LFS.mkdir(MY_PATH .. '/assets')
         LFS.mkdir(MY_PATH .. '/assets/Emitter')
-        LFS.mkdir(MY_PATH .. '/res/mipmap-hdpi-v4')
-        LFS.mkdir(MY_PATH .. '/res/mipmap-mdpi-v4')
-        LFS.mkdir(MY_PATH .. '/res/mipmap-xhdpi-v4')
-        LFS.mkdir(MY_PATH .. '/res/mipmap-xxhdpi-v4')
-        LFS.mkdir(MY_PATH .. '/res/mipmap-xxxhdpi-v4')
+        LFS.mkdir(MY_PATH .. '/res/mipmap-hdpi')
+        LFS.mkdir(MY_PATH .. '/res/mipmap-mdpi')
+        LFS.mkdir(MY_PATH .. '/res/mipmap-xhdpi')
+        LFS.mkdir(MY_PATH .. '/res/mipmap-xxhdpi')
+        LFS.mkdir(MY_PATH .. '/res/mipmap-xxxhdpi')
+        -- LFS.mkdir(MY_PATH .. '/res/mipmap-hdpi-v4')
+        -- LFS.mkdir(MY_PATH .. '/res/mipmap-mdpi-v4')
+        -- LFS.mkdir(MY_PATH .. '/res/mipmap-xhdpi-v4')
+        -- LFS.mkdir(MY_PATH .. '/res/mipmap-xxhdpi-v4')
+        -- LFS.mkdir(MY_PATH .. '/res/mipmap-xxxhdpi-v4')
     end
 }

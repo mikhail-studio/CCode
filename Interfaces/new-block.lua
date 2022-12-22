@@ -315,7 +315,7 @@ M.custom = function(i)
         for j = 1, #INFO.listBlock.custom do
             if INFO.getType(INFO.listBlock.custom[j]) == 'custom' and UTF8.sub(INFO.listBlock.custom[j], 1, 1) ~= '_' then
                 local index = UTF8.gsub(INFO.listBlock.custom[j], 'custom', '', 1)
-                color = index and custom[index][5] or nil
+                color = (index and custom[index]) and custom[index][5] or nil
                 color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}
             end
 
@@ -344,10 +344,8 @@ M.custom = function(i)
         M.group.types[15].scroll.isVisible = true
         M.group.types[15].scroll:setScrollHeight(scrollHeight)
 
-        if M.boxText ~= '' then
-            M.boxText = '' M.group[4].text = ''
-            textListener({phase = 'editing', target = M.group[4]})
-        end
+        M.boxText = '' M.group[4].text = ''
+        textListener({phase = 'editing', target = M.group[4]})
     end
 end
 
@@ -744,7 +742,7 @@ M.create = function()
 
                         if INFO.getType(name) == 'custom' and UTF8.sub(name, 1, 1) ~= '_' then
                             local index = UTF8.gsub(name, 'custom', '', 1)
-                            color = index and custom[index][5] or nil
+                            color = (index and custom[index]) and custom[index][5] or nil
                             color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}
                         end
 

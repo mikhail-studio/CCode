@@ -114,6 +114,7 @@ return {
         end
 
 
+        GIVE_PERMISSION_DATA()
         FILE.pickFile(DOC_DIR, completeImportProject, 'import.ccode', '', (IS_SIM or IS_WIN) and 'ccode/*' or '*/*', nil, nil, nil)
     end
 }

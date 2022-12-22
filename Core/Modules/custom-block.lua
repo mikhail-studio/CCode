@@ -235,14 +235,7 @@ M.removeOverlay = function(index)
                 M.scroll:removeSelf()
                 STR['blocks..params'] = {}
                 STR['blocks.'] = STR['blocks.default']
-
-                NEW_BLOCK.remove() NEW_BLOCK.create()
-                NEW_BLOCK.group.types[15].scroll.isVisible = true
-                NEW_BLOCK.group.types[1].scroll.isVisible = false
-                NEW_BLOCK.group[4].isVisible = false
-                for i = 5, 10 do NEW_BLOCK.group[i].isVisible = true end
-                for i = 19, 20 do NEW_BLOCK.group[i].isVisible = true end
-                NEW_BLOCK.group.currentIndex = 15 BACK.front()
+                NEW_BLOCK.custom(2) BACK.front()
             else
                 ALERT = false
                 M.alert = true
@@ -390,6 +383,7 @@ M.newBlock = function(name, params, str, index, color)
                                         M.scroll:setIsLocked(false, 'vertical')
                                     end
                                 elseif e.index == 2 then
+                                    GIVE_PERMISSION_DATA()
                                     FILE.pickFile(DOC_DIR, completeImportLua, 'custom.lua', '', 'text/x-lua', nil, nil, nil)
                                 end
 

@@ -30,6 +30,7 @@ M.listBlock = {
         'onTouchDisplayBegan',
         'onTouchDisplayEnded',
         'onTouchDisplayMoved',
+        'onFirebase',
         'onBackPress',
         'onSuspend',
         'onResume',
@@ -360,6 +361,7 @@ M.listName = {
         ['onTouchDisplayBegan'] = {'events', 'localtable'},
         ['onTouchDisplayEnded'] = {'events', 'localtable'},
         ['onTouchDisplayMoved'] = {'events', 'localtable'},
+        ['onFirebase'] = {'events', 'fun', 'localvar'},
         ['onBackPress'] = {'events'},
         ['onSuspend'] = {'events'},
         ['onResume'] = {'events'},
@@ -657,10 +659,10 @@ M.listName = {
         ['requestPATCH'] = {'network', 'value', 'value', 'value', 'fun', 'networkProgress', 'networkRedirects', 'value'},
         ['requestHEAD'] = {'network', 'value', 'value', 'value', 'fun', 'networkProgress', 'networkRedirects', 'value'},
         ['requestDELETE'] = {'network', 'value', 'value', 'value', 'fun', 'networkProgress', 'networkRedirects', 'value'},
-        ['firebasePUT'] = {'network', 'value', 'value', 'value', 'localvar'},
-        ['firebasePATCH'] = {'network', 'value', 'value', 'value', 'localvar'},
-        ['firebaseGET'] = {'network', 'value', 'value', 'localvar'},
-        ['firebaseDELETE'] = {'network', 'value', 'value', 'localvar'},
+        ['firebasePUT'] = {'network', 'value', 'value', 'value', 'fun'},
+        ['firebasePATCH'] = {'network', 'value', 'value', 'value', 'fun'},
+        ['firebaseGET'] = {'network', 'value', 'value', 'fun'},
+        ['firebaseDELETE'] = {'network', 'value', 'value', 'fun'},
 
     -- custom
     ['_custom'] = {'custom'}
@@ -741,8 +743,8 @@ M.getBlockColor = function(name, comment, type, color)
     elseif type == 'custom' then
         if color then return unpack(color)
         elseif name then
-            local custom, name = GET_GAME_CUSTOM(), UTF8.gsub(name, '_', '', 1)
-            local index = UTF8.gsub(name, 'custom', '', 1) if index == '' and _G.type(BLOCKS.custom.color) == 'table' then
+            local custom, name = GET_GAME_CUSTOM(), UTF8.gsub(name, '_', '', 1) local index = UTF8.gsub(name, 'custom', '', 1)
+            if index == '' and _G.type(BLOCKS.custom) == 'table' and _G.type(BLOCKS.custom.color) == 'table' then
             return unpack({BLOCKS.custom.color[1] / 255, BLOCKS.custom.color[2] / 255, BLOCKS.custom.color[3] / 255})
             end color = index and (custom[index] and custom[index][5] or nil) or nil
             return unpack(_G.type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5})

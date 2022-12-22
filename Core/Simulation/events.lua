@@ -84,6 +84,12 @@ M['onTouchDisplayMoved'] = function(nested, params)
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end) end)'
 end
 
+M['onFirebase'] = function(nested, params)
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(response)'
+    GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = response'
+    M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end)'
+end
+
 M['onSliderMoved'] = function(nested, params)
     GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(value)'
     GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = value'

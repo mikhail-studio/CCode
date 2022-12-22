@@ -34,7 +34,7 @@ local function getStartLua(linkBuild)
     local funs3 = ' local math, prop = require \'Core.Functions.math\', require \'Core.Functions.prop\''
     local funs4 = ' local SERVER, CLIENT = require \'Network.server\', require \'Network.client\''
     local code1 = ' GAME.orientation = CURRENT_ORIENTATION display.setDefault(\'background\', 0) transition.ignoreEmptyReference = true'
-    local code2 = ' GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {} GAME.group.media = {}'
+    local code2 = ' GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {} GAME.group.media = {} GAME.multi = false'
     local code3 = ' GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {} GAME.currentStage = {} GAME.group.stops = {}'
     local code4 = ' GAME.group.animations = {} GAME.group.widgets = {} GAME.group.tags = {TAG = {}} GAME.group.timers = {} GAME.group.ts = {}'
     local code5 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} GAME.group.displays = {} device.start()'
@@ -63,10 +63,13 @@ local function getStartLua(linkBuild)
 end
 
 M.remove = function()
-    native.setProperty('androidSystemUiVisibility', 'immersiveSticky')
+    if LOCAL.back == 'System' then native.setProperty('androidSystemUiVisibility', 'default')
+    else native.setProperty('androidSystemUiVisibility', 'immersiveSticky') end
     display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll()
     pcall(function() for _, v in ipairs(M.group.ts) do timer.cancel(v) end end)
     pcall(function() for _, v in pairs(M.group.timers) do timer.cancel(v) end end)
+    pcall(function() for _, v in pairs(M.group.widgets) do timer.new(10, 1, function()
+    pcall(function() v:removeSelf() v = nil end) end) end end)
     pcall(function() Runtime:removeEventListener('key', M.group.const.keyBack) end)
     pcall(function() Runtime:removeEventListener('system', M.group.const.system) end)
     pcall(function() Runtime:removeEventListener('touch', M.group.const.touch_fun) end)
@@ -100,6 +103,12 @@ M.new = function(linkBuild, isDebug)
         M.lua = M.lua .. ' setOrientationApp({type = \'portrait\', sim = true})'
     elseif M.data.settings.orientation == 'landscape' and (linkBuild or CURRENT_ORIENTATION ~= 'landscape') then
         M.lua = M.lua .. ' setOrientationApp({type = \'landscape\', sim = true})'
+    end
+
+    if LOCAL.back == 'System' then
+        M.lua = M.lua .. ' native.setProperty(\'androidSystemUiVisibility\', \'default\')'
+    else
+        M.lua = M.lua .. ' native.setProperty(\'androidSystemUiVisibility\', \'immersiveSticky\')'
     end
 
     local onStartCount = 0
@@ -210,6 +219,7 @@ M.new = function(linkBuild, isDebug)
                 or dataEvent[j].name == 'onLocalPreCollision' or dataEvent[j].name == 'onLocalPostCollision'
                 or dataEvent[j].name == 'onGlobalCollisionBegan' or dataEvent[j].name == 'onGlobalCollisionEnded'
                 or dataEvent[j].name == 'onGlobalPreCollision' or dataEvent[j].name == 'onGlobalPostCollision'
+                or dataEvent[j].name == 'onFirebase'
 
                 if nestedScript[dataEvent[j].script] and not dataEvent[j].comment and isFunBlock then
                     pcall(function() EVENTS[dataEvent[j].name](nestedEvent[j], dataEvent[j].params) end)
@@ -232,7 +242,8 @@ M.new = function(linkBuild, isDebug)
         and dataEvent[i].name ~= 'onLocalCollisionBegan' and dataEvent[i].name ~= 'onLocalCollisionEnded'
         and dataEvent[i].name ~= 'onLocalPreCollision' and dataEvent[i].name ~= 'onLocalPostCollision'
         and dataEvent[i].name ~= 'onGlobalCollisionBegan' and dataEvent[i].name ~= 'onGlobalCollisionEnded'
-        and dataEvent[i].name ~= 'onGlobalPreCollision' and dataEvent[i].name ~= 'onGlobalPostCollision' then
+        and dataEvent[i].name ~= 'onGlobalPreCollision' and dataEvent[i].name ~= 'onGlobalPostCollision'
+        and dataEvent[i].name ~= 'onFirebase' then
             pcall(function() EVENTS[dataEvent[i].name](nestedEvent[i], dataEvent[i].params) end)
         end
     end if #nestedEvent > 0 then M.lua = M.lua .. ' end end script()' end

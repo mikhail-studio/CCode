@@ -64,6 +64,10 @@ return {
 	["fonts.needexit"] = "CCode forçado a desligar porque a fonte não é removida até que o programa seja fechado",
 	["settings.applang"] = "Idioma do aplicativo:",
 	["settings.confirmdelete"] = "Confirmar exclusão:",
+	['settings.back'] = 'Painel inferior:',
+	['settings.backCCode'] = 'Aplicação',
+	['settings.backSystem'] = 'Sistema',
+	['settings.backNo'] = 'Remover',
 	["settings.showads"] = "Mostrar anúncios:",
 	["settings.posads"] = "Localização dos anúncios:",
 	["settings.topads"] = "Topo",
@@ -192,6 +196,8 @@ return {
 	["blocks.onTouchDisplayMoved.params"] = {
 		"Nome da tabela:"
 	},
+	['blocks.onFirebase'] = 'Resposta recebida do Firebase',
+	['blocks.onFirebase.params'] = {"Nome da função:", 'Resposta:'},
 	["blocks.onBackPress"] = "Ao clicar em \\'Voltar\\'",
 	["blocks.onSuspend"] = "O aplicativo foi minimizado da tela",
 	["blocks.onResume"] = "O aplicativo voltou à tela",
@@ -1106,7 +1112,9 @@ return {
 		"Densidade:",
 		"Quicar:",
 		"Atrito:",
-		"Gravidade:"
+		"Gravidade:",
+		"Filtro colisão:",
+		"Tabela colisão:"
 	},
 	["blocks.removeBody"] = "Excluir corpo físico do objeto",
 	["blocks.removeBody.params"] = {
@@ -1546,26 +1554,26 @@ return {
 		"Símbolo:",
 		"Valor:",
 		"Chave:",
-		"Resposta:"
+		"Ouvinte do pedido:"
 	},
 	["blocks.firebasePATCH"] = "Atualização no Firebase",
 	["blocks.firebasePATCH.params"] = {
 		"Símbolo:",
 		"Valor:",
 		"Chave:",
-		"Resposta:"
+		"Ouvinte do pedido:"
 	},
 	["blocks.firebaseGET"] = "Obter do Firebase",
 	["blocks.firebaseGET.params"] = {
 		"Símbolo:",
 		"Chave:",
-		"Resposta:"
+		"Ouvinte do pedido:"
 	},
 	["blocks.firebaseDELETE"] = "Remover do Firebase",
 	["blocks.firebaseDELETE.params"] = {
 		"Símbolo:",
 		"Chave:",
-		"Resposta:"
+		"Ouvinte do pedido:"
 	},
 	["blocks.transition"] = "Transições\n& Partículas",
 	["blocks.setTransitionTo"] = "Iniciar transição",

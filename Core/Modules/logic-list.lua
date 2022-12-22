@@ -39,7 +39,7 @@ M.create = function(data, size, twidth, tsize, needParams)
         local custom = GET_GAME_CUSTOM()
         if INFO.getType(data.name) == 'custom' and UTF8.sub(data.name, 1, 1) ~= '_' then
             local index = UTF8.gsub(data.name, 'custom', '', 1)
-            color = index and custom[index][5] or nil
+            color = (index and custom[index]) and custom[index][5] or nil
             color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}
         end
     end

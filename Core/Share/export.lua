@@ -1,4 +1,5 @@
 local function export(name, link)
+    GIVE_PERMISSION_DATA()
     EXPORT.export({
         path = DOC_DIR .. '/export.zip', name = name .. '.ccode',
         listener = function(event)
