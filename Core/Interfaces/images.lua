@@ -33,9 +33,13 @@ listeners.but_add = function(target)
                         local data = GET_GAME_CODE(CURRENT_LINK)
                         local path = path .. '/Image' .. numImage
 
-                        table.insert(data.resources.images, 1, {e.text, e.checkbox and 'nearest' or 'linear', 'Image' .. numImage})
-                        SET_GAME_CODE(CURRENT_LINK, data)
-                        IMAGES.new(e.text, 1, e.checkbox and 'nearest' or 'linear', 'Image' .. numImage)
+                        if IS_IMAGE(CURRENT_LINK .. '/Images/Image' .. numImage) then
+                            table.insert(data.resources.images, 1, {e.text, e.checkbox and 'nearest' or 'linear', 'Image' .. numImage})
+                            SET_GAME_CODE(CURRENT_LINK, data) IMAGES.new(e.text, 1, e.checkbox and 'nearest' or 'linear', 'Image' .. numImage)
+                        else
+                            table.insert(data.resources.images, 1, {e.text, 'vector', 'Image' .. numImage})
+                            SET_GAME_CODE(CURRENT_LINK, data) IMAGES.new(e.text, 1, 'vector', 'Image' .. numImage)
+                        end
                     end
                 end
 

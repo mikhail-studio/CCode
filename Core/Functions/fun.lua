@@ -108,11 +108,9 @@ M['color_pixel'] = function(x, y)
         local y = y or 0
         local colors = {0, 0, 0, 0}
 
-        if coroutine.status(GAME.CO) ~= 'running' then
-            display.colorSample(CENTER_X + x, CENTER_Y - y, function(e)
-                colors = {math.round(e.r * 255), math.round(e.g * 255), math.round(e.b * 255), math.round(e.a * 255)}
-            end)
-        end
+        display.colorSample(CENTER_X + x, CENTER_Y - y, function(e)
+            colors = {math.round(e.r * 255), math.round(e.g * 255), math.round(e.b * 255), math.round(e.a * 255)}
+        end)
 
         return colors
     end) return isComplete and result or {0, 0, 0, 0}

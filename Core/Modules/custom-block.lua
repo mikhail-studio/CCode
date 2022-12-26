@@ -384,7 +384,7 @@ M.newBlock = function(name, params, str, index, color)
                                     end
                                 elseif e.index == 2 then
                                     GIVE_PERMISSION_DATA()
-                                    FILE.pickFile(DOC_DIR, completeImportLua, 'custom.lua', '', 'text/x-lua', nil, nil, nil)
+                                    FILE.pickFile(DOC_DIR, completeImportLua, 'custom.lua', '', '*/*', nil, nil, nil)
                                 end
 
                                 if e.index == 0 then

@@ -22,9 +22,6 @@ listeners.but_continue = function(target)
 
             for i = 1, #scripts do
                 data.scripts[i] = i
-            end
-
-            for i = 1, #scripts do
                 SET_GAME_SCRIPT(LOCAL.last_link, scripts[i], i, data)
             end
 

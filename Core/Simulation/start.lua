@@ -11,7 +11,7 @@ local function setCustom(name, logic)
 
         EVENTS['_' .. name] = function(nested, params)
             M.lua = M.lua .. ' pcall(function() funsC[\'' .. name .. '\'] = function(...) local args = {...} local isComplete, result ='
-            EVENTS.BLOCKS.requestApi({{{logic}}}) M.lua = M.lua .. ' return isComplete and result or nil end end)'
+            EVENTS.BLOCKS.requestApi({{{logic, 't'}}}) M.lua = M.lua .. ' return isComplete and result or nil end end)'
         end
     else
         EVENTS.BLOCKS[name] = function(params)
@@ -50,15 +50,16 @@ local function getStartLua(linkBuild)
     local cod15 = ' GAME.group.const.system = function(e) if e.type == \'applicationSuspend\' or e.type == \'applicationExit\' then for i = 1,'
     local cod16 = ' #GAME.group.suspends do GAME.group.suspends[i]() end elseif e.type == \'applicationResume\' then for i = 1,'
     local cod17 = ' #GAME.group.resumes do GAME.group.resumes[i]() end end end Runtime:addEventListener(\'system\', GAME.group.const.system)'
+    local cod18 = ' GAME.group.textures = {}'
 
     if linkBuild then
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. require 'Data.build'
             .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
-            .. cod10 .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17
+            .. cod10 .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18
     else
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. funs1 .. funs2 .. funs3 .. funs4
             .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
-            .. cod10 .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17
+            .. cod10 .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18
     end
 end
 
@@ -81,7 +82,8 @@ M.remove = function()
     pcall(function() v:removeEventListener('collision') end) pcall(function() v:removeEventListener('preCollision') end)
     pcall(function() v:removeEventListener('postCollision') end) pcall(function() PHYSICS.removeBody(v) end) end end)
     pcall(function() for _, v in pairs(M.group.texts) do pcall(function() PHYSICS.removeBody(v) end) end end)
-    pcall(function() for _, v in pairs(M.group.bitmaps) do v:releaseSelf() end end)
+    pcall(function() for _, v in pairs(M.group.bitmaps) do v:releaseSelf() v = nil end end)
+    pcall(function() for _, v in pairs(M.group.textures) do v:releaseSelf() v = nil end end)
     pcall(function() for _, v in ipairs(M.group.stops) do v() end end) M.isStarted = nil
     pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
     pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil math.randomseed(os.time())

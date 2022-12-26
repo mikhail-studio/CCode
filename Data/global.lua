@@ -44,7 +44,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1222
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1223
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
@@ -186,12 +186,9 @@ IS_FOLDER = function(path)
 end
 
 IS_IMAGE = function(path)
-    local test_image = display.newImage(path, system.DocumentsDirectory, 10000, 10000)
-    local is_image = test_image and test_image.width and test_image.height
-
-    pcall(function() test_image:removeSelf() end) test_image = nil
-
-    return is_image
+    local image = display.newImage2(path, 10000, 10000)
+    local is_image = type(image) == 'table' and image.width > 0 and image.height > 0
+    pcall(function() image:removeSelf() image = nil end) return is_image
 end
 
 IS_ZERO_TABLE = function(t)
@@ -380,6 +377,20 @@ end, function(num, exp)
 end, function(t1, t2)
     for k, v in pairs(t2) do if (type(v) == 'table') and (type(t1[k] or false) == 'table')
     then merge(t1[k], t2[k]) else t1[k] = v end end return t1
+end
+
+display.newImage2, display.newImage = display.newImage, function(link, ...)
+    local image = display.newImage2(link, ...)
+
+    if not (type(image) == 'table' and image.width > 0 and image.height > 0) then
+        local args = {...} image = SVG.newImage({
+            filename = link, baseDir = args[1],
+            x = type(args[1]) == 'userdata' and (args[2] or 0) or (args[1] or 0),
+            y = type(args[1]) == 'userdata' and (args[3] or 0) or (args[2] or 0)
+        })
+    end
+
+    return type(image) == 'table' and image.width > 0 and image.height > 0 and image or nil
 end
 
 LOCAL = require 'Data.local'
