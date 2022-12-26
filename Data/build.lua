@@ -510,6 +510,10 @@ return ' ' .. UTF8.trimFull([[
             return table.len(t)
         end
 
+        M['noise'] = function(x, y, seed)
+            return NOISE.new(x, y, seed)
+        end
+
         M['encode'] = function(t, prettify)
             local isComplete, result = pcall(function()
                 return JSON[prettify and 'prettify' or 'encode'](t)

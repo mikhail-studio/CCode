@@ -776,6 +776,7 @@ return {
         ['editor.list.fun.match'] = 'regular_expression',
         ['editor.list.fun.color_pixel'] = 'color_pixel',
         ['editor.list.fun.get_ip'] = 'get_own_ip',
+        ['editor.list.fun.noise'] = 'noise',
 
     ['editor.list.math.random'] = 'random',
         ['editor.list.math.radical'] = 'radical',

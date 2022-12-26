@@ -3,6 +3,7 @@ LANG, STR = {}, {}
 CLIENT = require 'Network.client'
 SERVER = require 'Network.server'
 PARTICLE = require 'Emitter.particleDesigner'
+NOISE = require 'Core.Modules.noise'
 RESIZE = require 'Core.Modules.app-resize'
 INPUT = require 'Core.Modules.interface-input'
 WINDOW = require 'Core.Modules.interface-window'
@@ -424,15 +425,15 @@ GET_GLOBAL_TABLE = function()
     return {
         sendLaunchAnalytics = sendLaunchAnalytics, transition = transition, tostring = tostring, tonumber = tonumber,
         gcinfo = gcinfo, assert = assert, debug = debug, GAME = GAME, collectgarbage = collectgarbage, GANIN = GANIN,
-        print2 = io, os = os, display = display, dofile = dofile, module = module, media = media, OS_REMOVE = OS_REMOVE,
-        native = native, coroutine = coroutine, CENTER_X = CENTER_X, CENTER_Y = CENTER_Y, ipairs = ipairs,
+        print2 = io, os = os, display = display, print4 = dofile, module = module, media = media, OS_REMOVE = OS_REMOVE,
+        native = native, coroutine = coroutine, CENTER_X = CENTER_X, CENTER_Y = CENTER_Y, JSON = JSON, ipairs = ipairs,
         TOP_HEIGHT = TOP_HEIGHT, network = network, print3 = lfs, _network_pathForFile = _network_pathForFile,
         pcall = pcall, BUILD = BUILD, MAX_Y = MAX_Y, MAX_X = MAX_X, string = string, SIZE = SIZE, READ_FILE = READ_FILE,
         xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, print = print, OS_MOVE = OS_MOVE,
         table = table, lpeg = lpeg, COPY_TABLE = COPY_TABLE, DISPLAY_HEIGHT = DISPLAY_HEIGHT, OS_COPY = OS_COPY,
         unpack = unpack, require = require, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
         graphics = graphics, system = system, rawequal = rawequal,  getmetatable = getmetatable, WRITE_FILE = WRITE_FILE,
-        timer = timer, BOTTOM_HEIGHT = BOTTOM_HEIGHT, newproxy = newproxy, metatable = metatable,
+        timer = timer, BOTTOM_HEIGHT = BOTTOM_HEIGHT, newproxy = newproxy, metatable = metatable, NOISE = NOISE,
         al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, math = math, DOC_DIR = DOC_DIR,
         LEFT_HEIGHT = LEFT_HEIGHT, cloneArray = cloneArray, DISPLAY_WIDTH = DISPLAY_WIDTH, type = type,
         audio = audio, pairs = pairs, select = select, rawget = rawget, Runtime = Runtime, error = error

@@ -1748,6 +1748,7 @@ return {
 	["editor.list.fun.match"] = "expressão regular",
 	["editor.list.fun.color_pixel"] = "color_pixel",
 	["editor.list.fun.get_ip"] = "get_own_ip",
+	['editor.list.fun.noise'] = 'ruído',
 	["editor.list.math.random"] = "aleatória",
 	["editor.list.math.radical"] = "radical",
 	["editor.list.math.power"] = "potência",

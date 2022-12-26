@@ -4,7 +4,7 @@ M.fun = {
     names = {},
     keys = {
         'get_text', 'read_save', 'concat', 'tonumber', 'tostring', 'totable', 'len_table', 'unix_time',
-        'encode', 'gsub', 'sub', 'len', 'find', 'split', 'random_str', 'match', 'color_pixel', 'get_ip'
+        'encode', 'noise', 'gsub', 'sub', 'len', 'find', 'split', 'random_str', 'match', 'color_pixel', 'get_ip'
     }
 }
 
@@ -83,7 +83,7 @@ M.set = function(key, name)
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
         elseif name == 'find' or name == 'match' or name == 'color_pixel' or name == 'random'
-        or name == 'power' or name == 'remainder' or name == 'atan2' then
+        or name == 'power' or name == 'remainder' or name == 'atan2' or name == 'noise' then
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
         end
     end

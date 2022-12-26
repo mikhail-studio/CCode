@@ -7,7 +7,7 @@ return function(params, default, withoutBrackets)
         end
 
         if params[i][2] ~= 's' then
-            params[i][1] = params[i][1]:gsub('\n', '\\n'):gsub('\r', ''):gsub('\'', '\\\'')
+            params[i][1] = params[i][1]:gsub('\\', '\\\\'):gsub('\n', '\\n'):gsub('\r', ''):gsub('\'', '\\\'')
         end
 
         if params[i][2] == 'n' then

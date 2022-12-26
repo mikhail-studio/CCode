@@ -776,6 +776,7 @@ return {
         ['editor.list.fun.match'] = 'регулярное_выражение',
         ['editor.list.fun.color_pixel'] = 'цвет_пикселя',
         ['editor.list.fun.get_ip'] = 'получить_свой_адрес',
+        ['editor.list.fun.noise'] = 'шум',
 
     ['editor.list.math.random'] = 'рандом',
         ['editor.list.math.radical'] = 'корень',
