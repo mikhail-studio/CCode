@@ -139,7 +139,7 @@ local listener = function(e, scroll, group, type)
                         e.target.move = false
                         MOVE.stop(e, scroll, group, type)
                     elseif ALERT then
-                        local group_image, icon = display.newGroup() ALERT = false
+                        local group_image = display.newGroup() ALERT = false
                         IMAGES.group[8]:setIsLocked(true, 'vertical')
 
                         local shadow = display.newRect(CENTER_X, CENTER_Y, DISPLAY_WIDTH, DISPLAY_HEIGHT)

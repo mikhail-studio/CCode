@@ -1,10 +1,7 @@
 return {
-	["lang.ru"] = "Russo",
-	["lang.en"] = "Inglês",
-    ["lang.pt"] = "Português",
-	["lang.uk"] = "Ucraniano",
-	["lang.es"] = "Espanhol",
-	["lang.pl"] = "Polonês",
+	["lang.ru"] = "Русский",
+	["lang.en"] = "English",
+    ["lang.pt"] = "Brasileiro",
 	["button.yes"] = "Sim",
 	["button.no"] = "Não",
 	["button.okay"] = "OK",
@@ -868,6 +865,8 @@ return {
 		"Nome do objeto:",
 		"Nome da animação:"
 	},
+	['blocks.setFrame'] = 'Definir quadro do objeto',
+	['blocks.setFrame.params'] = {'Nome do objeto:', 'Quadro:'},
 	["blocks.newMask"] = "Criar máscara",
 	["blocks.newMask.params"] = {
 		"Nome da máscara:",

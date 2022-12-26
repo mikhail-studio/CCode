@@ -1,6 +1,13 @@
 local CALC = require 'Core.Simulation.calc'
 local M = {}
 
+M['setFrame'] = function(params)
+    local nameObject = CALC(params[1])
+    local frame = CALC(params[2], '1')
+
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. nameObject .. ']:setFrame(' .. frame .. ') end)'
+end
+
 M['setScale'] = function(params)
     local nameObject = CALC(params[1])
     local scale = '((' .. CALC(params[2]) .. ') / 100)'
