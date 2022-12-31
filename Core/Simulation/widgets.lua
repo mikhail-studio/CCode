@@ -177,4 +177,22 @@ M['setFieldRule'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. CALC(params[1]) .. '].isEditable = ' .. CALC(params[2]) .. ' end)'
 end
 
+M['setFieldFocus'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() native.setKeyboardFocus(GAME.group.widgets[' .. CALC(params[1]) .. ']) end)'
+end
+
+M['setFieldFocusNil'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() native.setKeyboardFocus(nil) end)'
+end
+
+M['hidePanelInterface'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() native.setProperty(\'androidSystemUiVisibility\', \'immersiveSticky\')'
+    GAME.lua = GAME.lua .. ' if LOCAL.back == \'CCode\' then BACK.hide() end end)'
+end
+
+M['showPanelInterface'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() native.setProperty(\'androidSystemUiVisibility\', \'default\')'
+    GAME.lua = GAME.lua .. ' if LOCAL.back == \'CCode\' then BACK.show() BACK.front() end end)'
+end
+
 return M

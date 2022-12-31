@@ -267,7 +267,7 @@ return {
             ['blocks.backText'] = 'Установить текст на слой ниже',
             ['blocks.backText.params'] = {'Имя текста:'},
 
-    ['blocks.objects'] = 'Объекты\n& Фильтры',
+    ['blocks.objects'] = 'Объекты',
         ['blocks.newObject'] = 'Создать объект',
         ['blocks.newObject.params'] = {'Имя объекта:', 'Имя спрайта:', 'Позиция (X):', 'Позиция (Y):'},
         ['blocks.newSprite'] = 'Создать объект из частей спрайта',
@@ -649,6 +649,11 @@ return {
         ['blocks.setFieldRule.params'] = {'Имя виджета:', 'Правило:'},
         ['blocks.setFieldText'] = 'Установить текст в текстовом поле',
         ['blocks.setFieldText.params'] = {'Имя виджета:', 'Текст:'},
+        ['blocks.setFieldFocus'] = 'Установить фокус на текстовое поле',
+        ['blocks.setFieldFocus.params'] = {'Имя виджета:'},
+        ['blocks.setFieldFocusNil'] = 'Выключить экранную клавиатуру',
+        ['blocks.hidePanelInterface'] = 'Скрыть панели интерфейса',
+        ['blocks.showPanelInterface'] = 'Показать панели интерфейса',
 
     ['blocks.media'] = 'Медиа',
         ['blocks.newVideo'] = 'Создать видео',

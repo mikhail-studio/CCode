@@ -434,7 +434,7 @@ return {
 	["blocks.backText.params"] = {
 		"Nome do texto:"
 	},
-	["blocks.objects"] = "Objetos\n& Filtros",
+	["blocks.objects"] = "Objetos",
 	["blocks.newObject"] = "Criar objeto",
 	["blocks.newObject.params"] = {
 		"Nome do objeto:",
@@ -1391,6 +1391,11 @@ return {
 		"Nome do widget:",
 		"Texto:"
 	},
+	['blocks.setFieldFocus'] = 'Definir foco em textfield',
+	['blocks.setFieldFocus.params'] = {'Nome do widget:'},
+	['blocks.setFieldFocusNil'] = 'Desligue o teclado',
+	['blocks.hidePanelInterface'] = 'Ocultar Painéis De Interface',
+	['blocks.showPanelInterface'] = 'Mostrar Painéis De Interface',
 	["blocks.media"] = "Mídia",
 	["blocks.newVideo"] = "Criar vídeo",
 	["blocks.newVideo.params"] = {

@@ -294,7 +294,11 @@ M.listBlock = {
         'setFieldSecure',
         'removeFieldSecure',
         'setFieldText',
-        'setFieldRule'
+        'setFieldRule',
+        'setFieldFocus',
+        'setFieldFocusNil',
+        'hidePanelInterface',
+        'showPanelInterface'
     },
 
     ['media'] = {
@@ -619,6 +623,10 @@ M.listName = {
         ['removeFieldSecure'] = {'widgets', 'value'},
         ['setFieldText'] = {'widgets', 'value', 'value'},
         ['setFieldRule'] = {'widgets', 'value', 'rule'},
+        ['setFieldFocus'] = {'widgets', 'value'},
+        ['setFieldFocusNil'] = {'widgets'},
+        ['hidePanelInterface'] = {'widgets'},
+        ['showPanelInterface'] = {'widgets'},
 
     -- media
     ['newVideo'] = {'media', 'value', 'value', 'fun', 'value', 'value', 'value', 'value'},

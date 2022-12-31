@@ -33,7 +33,7 @@ return {
                             if current_hash == hash then
                                 for index, block in pairs(new_custom) do
                                     if tonumber(index) then
-                                        local new_index = tostring(custom.len + 1)
+                                        local new_index, change_custom = tostring(custom.len + 1)
 
                                         for i = 1, custom.len do
                                             if not custom[tostring(i)] then
@@ -58,14 +58,16 @@ return {
                                                             custom[_index][4] = os.time()
                                                             dataCustom[index] = _index
                                                             changeDataCustom[_index] = true
-                                                        end break
+                                                        end change_custom = true break
                                                     end
-                                                elseif tonumber(_index) == custom.len then
-                                                    custom.len = custom.len + 1
-                                                    custom[new_index] = block
-                                                    custom[new_index][4] = os.time()
-                                                    dataCustom[index] = new_index
                                                 end
+                                            end
+
+                                            if not change_custom then
+                                                custom.len = custom.len + 1
+                                                custom[new_index] = block
+                                                custom[new_index][4] = os.time()
+                                                dataCustom[index] = new_index
                                             end
                                         end
                                     end

@@ -267,7 +267,7 @@ return {
             ['blocks.backText'] = 'Set text to layer below',
             ['blocks.backText.params'] = {'Text name:'},
 
-    ['blocks.objects'] = 'Objects\n& Filters',
+    ['blocks.objects'] = 'Objects',
         ['blocks.newObject'] = 'Create object',
         ['blocks.newObject.params'] = {'Object name:', 'Sprite name:', 'Position (X):', 'Position (Y):'},
         ['blocks.newSprite'] = 'Create object from parts of sprite',
@@ -649,6 +649,11 @@ return {
         ['blocks.setFieldRule.params'] = {'Widget name:', 'Rule:'},
         ['blocks.setFieldText'] = 'Set text in textfield',
         ['blocks.setFieldText.params'] = {'Widget name:', 'Text:'},
+        ['blocks.setFieldFocus'] = 'Set focus on textfield',
+        ['blocks.setFieldFocus.params'] = {'Widget name:'},
+        ['blocks.setFieldFocusNil'] = 'Turn off keyboard',
+        ['blocks.hidePanelInterface'] = 'Hide Interface Panels',
+        ['blocks.showPanelInterface'] = 'Show Interface Panels',
 
     ['blocks.media'] = 'Media',
         ['blocks.newVideo'] = 'Create video',
