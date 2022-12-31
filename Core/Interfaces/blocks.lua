@@ -24,6 +24,10 @@ listeners.but_list = function(target)
     if #BLOCKS.group.blocks ~= 0 then
         local list = {STR['button.remove'], STR['button.copy'], STR['button.comment'], STR['button.debug'], STR['button.to.buffer']}
 
+        if BLOCKS.custom then
+            table.remove(list, 5)
+        end
+
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
         if BLOCKS.group.isVisible then
             LIST.new(list, MAX_X, target.y - target.height / 2, 'down', function(e)

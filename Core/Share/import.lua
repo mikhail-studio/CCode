@@ -82,7 +82,7 @@ return {
                                     LANG.ru['blocks.' .. typeBlock .. '.params'] = block[2]
                                     INFO.listName[typeBlock] = {'custom', unpack(blockParams)}
 
-                                    if changeDataCustom[index] then
+                                    if not changeDataCustom[index] then
                                         table.insert(INFO.listBlock.custom, 1, typeBlock)
                                         table.insert(INFO.listBlock.everyone, typeBlock)
                                     end
@@ -94,7 +94,7 @@ return {
                                         local name = script.params[j].name
                                         if UTF8.sub(name, 1, 6) == 'custom' then
                                             local index = UTF8.sub(name, 7, UTF8.len(name)) isChange = true
-                                            script.params[j].name = dataCustom[index] and 'custom' .. dataCustom[index] or name
+                                            script.params[j].name = 'custom' .. dataCustom[index]
                                         end
                                     end if isChange then SET_GAME_SCRIPT(link, script, i, data) end
                                 end

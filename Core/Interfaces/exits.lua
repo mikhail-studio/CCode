@@ -117,7 +117,7 @@ listeners.blocks = function()
                 BLOCKS.group.isVisible = false
                 NEW_BLOCK.custom(2) BACK.front()
             end
-        end, 4)
+        end, 4) require('Core.Modules.logic-list').remove()
     else
         BLOCKS.group:removeSelf()
         BLOCKS.group = nil

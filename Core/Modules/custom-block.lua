@@ -134,7 +134,7 @@ M.addBlock = function(params, _index)
         end
 
         SET_GAME_CUSTOM(custom) ALERT = true M.scroll:removeSelf() M.group:removeSelf()
-        STR['blocks..params'] = {} STR['blocks.'] = STR['blocks.default'] NEW_BLOCK.custom(2)
+        STR['blocks..params'] = {} STR['blocks.'] = STR['blocks.default'] NEW_BLOCK.custom(2) EXITS.remove()
     else
         local data = GET_GAME_CODE(CURRENT_LINK)
         local block = {STR['blocks.'], COPY_TABLE(STR['blocks..params'])}
@@ -169,7 +169,7 @@ M.addBlock = function(params, _index)
         ALERT = true M.scroll:removeSelf() M.group:removeSelf() NEW_BLOCK.custom(1)
         BLOCKS.group:removeSelf() BLOCKS.group = nil LAST_CURRENT_SCRIPT, CURRENT_SCRIPT = CURRENT_SCRIPT, 1
         BLOCKS.create({name = block[1], params = COPY_TABLE(block[2]), index = index, isChange = _index, color = M.color})
-        BLOCKS.group.isVisible = true BACK.front()
+        BLOCKS.group.isVisible = true BACK.front() EXITS.remove()
     end
 end
 
@@ -242,7 +242,7 @@ M.removeOverlay = function(index)
                 EXITS.add(M.removeOverlay, index)
                 M.scroll:setIsLocked(false, 'vertical')
             end
-        end, 4)
+        end, 4) LOGIC.remove()
     else
         ALERT = true
         M.group:removeSelf()
