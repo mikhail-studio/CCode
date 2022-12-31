@@ -593,14 +593,14 @@ return {
 	["blocks.if.params"] = {
 		"Doença:"
 	},
-	["blocks.foreverEnd"] = "acabar para sempre",
+	["blocks.foreverEnd"] = "Acabar para sempre",
 	["blocks.forever"] = "Repita para sempre",
 	["blocks.repeatEnd"] = "Fim da repetição",
 	["blocks.repeat"] = "Repita N vezes",
 	["blocks.repeat.params"] = {
 		"Número de repetições:"
 	},
-	["blocks.forEnd"] = "ciclo final",
+	["blocks.forEnd"] = "Ciclo final",
 	["blocks.for"] = "Ciclo",
 	["blocks.for.params"] = {
 		"A partir de:",
@@ -608,6 +608,13 @@ return {
 		"Nome variável:",
 		"Etapa:"
 	},
+	['blocks.whileEnd'] = 'Fim da repetição',
+	['blocks.while'] = 'Repita até que condição verdadeira',
+	['blocks.while.params'] = {'Condição:'},
+	['blocks.foreachEnd'] = 'Ciclo final',
+	['blocks.foreach'] = 'Percorra todos elementos tabela',
+	['blocks.foreach.params'] = {'Nome da tabela:', 'Nome da variável:'},
+	['blocks.break'] = 'Ciclo paragem',
 	["blocks.requestFun"] = "função de solicitação",
 	["blocks.requestFun.params"] = {
 		"Nome da função:"
