@@ -183,7 +183,7 @@ local function newBlockListener(event)
                         for i = 1, #INFO.listNested[blockName] do
                             table.insert(script.params, blockIndex, {
                                 name = INFO.listNested[blockName][i], params = {{}}, event = false, comment = false
-                            }) BLOCKS.new(INFO.listNested[blockName][i], blockIndex, false, {{}}, false, blockParams.nested, blockParams.vars, blockParams.tables)
+                            }) BLOCKS.new(INFO.listNested[blockName][i], blockIndex, false, {{}}, false)
                         end
                     end
 

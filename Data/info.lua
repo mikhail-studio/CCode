@@ -126,6 +126,11 @@ M.listBlock = {
         'repeat',
         'forEnd',
         'for',
+        'whileEnd',
+        'while',
+        'foreachEnd',
+        'foreach',
+        'break',
         'timerPause',
         'timerResume',
         'timerCancel',
@@ -465,6 +470,11 @@ M.listName = {
         ['repeatEnd'] = {'control'},
         ['for'] = {'control', 'value', 'value', 'localvar', 'value'},
         ['forEnd'] = {'control'},
+        ['while'] = {'control', 'value'},
+        ['whileEnd'] = {'control'},
+        ['foreach'] = {'control', 'table', 'localvar'},
+        ['foreachEnd'] = {'control'},
+        ['break'] = {'control'},
         ['setListener'] = {'control', 'value', 'fun'},
             ['setLocalCollision'] = {'control', 'value', 'fun'},
             ['setLocalPreCollision'] = {'control', 'value', 'fun'},
@@ -692,7 +702,9 @@ M.listNested = {
     ['timerName'] = {'timerNameEnd'},
     ['if'] = {'ifEnd'},
     ['repeat'] = {'repeatEnd'},
-    ['for'] = {'forEnd'}
+    ['for'] = {'forEnd'},
+    ['while'] = {'whileEnd'},
+    ['foreach'] = {'foreachEnd'}
 }
 
 M.listBlock.everyone = {'onStart', 'onFun', 'newObject', 'setSize', 'setVar', 'newText', 'setText', 'timer', 'requestFun', 'setListener'}

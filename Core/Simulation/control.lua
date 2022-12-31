@@ -158,12 +158,32 @@ M['forEnd'] = function(params)
     GAME.lua = GAME.lua .. ' end'
 end
 
+M['foreach'] = function(params)
+    GAME.lua = GAME.lua .. ' for _, value in pairs(' .. CALC(params[1], 'a', true) .. ') do ' .. CALC(params[2], 'a', true) .. ' = value'
+end
+
+M['foreachEnd'] = function(params)
+    GAME.lua = GAME.lua .. ' end'
+end
+
+M['while'] = function(params)
+    GAME.lua = GAME.lua .. ' while ' .. CALC(params[1]) .. ' do'
+end
+
+M['whileEnd'] = function(params)
+    GAME.lua = GAME.lua .. ' end'
+end
+
 M['repeat'] = function(params)
     GAME.lua = GAME.lua .. ' for i = 1, ' .. CALC(params[1]) .. ' do'
 end
 
 M['repeatEnd'] = function(params)
     GAME.lua = GAME.lua .. ' end'
+end
+
+M['break'] = function(params)
+    GAME.lua = GAME.lua .. ' break'
 end
 
 M['timerPause'] = function(params)
