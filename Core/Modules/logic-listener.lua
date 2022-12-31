@@ -377,6 +377,12 @@ local function stopMoveLogicBlock(e, group, scroll)
             scroll:scrollToPosition({y = diffScrollY > 0 and 0 or diffScrollY, time = 0})
         end
 
+        for j = 1, M.index - 1 do
+            if group.blocks[j].x > BLOCK_CENTER_X then
+                group.blocks[j].x = BLOCK_CENTER_X
+            end
+        end
+
         for j = M.index, #group.blocks do
             if group.blocks[j] == target then
                 M.index = j
@@ -394,7 +400,10 @@ local function stopMoveLogicBlock(e, group, scroll)
                     if INFO.listName[group.blocks[j].data.name][i] == 'localvar' or INFO.listName[group.blocks[j].data.name][i] == 'localtable'
                     or INFO.listName[group.blocks[j].data.name][i] == 'var' or INFO.listName[group.blocks[j].data.name][i] == 'table'
                     or INFO.listName[group.blocks[j].data.name][i] == 'value' then
-                        LISTENER({blocks = group.blocks, bIndex = j, pIndex = i - 1, pType = INFO.listName[group.blocks[j].data.name][i]})
+                        LISTENER({
+                            bIndex = j, pIndex = i - 1, pType = INFO.listName[group.blocks[j].data.name][i],
+                            script = M.script, data = M.data
+                        })
                     end
                 end
             end
@@ -403,7 +412,10 @@ local function stopMoveLogicBlock(e, group, scroll)
                 if INFO.listName[e.target.data.name][i] == 'localvar' or INFO.listName[e.target.data.name][i] == 'localtable'
                 or INFO.listName[e.target.data.name][i] == 'var' or INFO.listName[e.target.data.name][i] == 'table'
                 or INFO.listName[e.target.data.name][i] == 'value' then
-                    LISTENER({blocks = group.blocks, bIndex = M.index, pIndex = i - 1, pType = INFO.listName[e.target.data.name][i]})
+                    LISTENER({
+                        bIndex = M.index, pIndex = i - 1, pType = INFO.listName[e.target.data.name][i],
+                        script = M.script, data = M.data
+                    })
                 end
             end
         end

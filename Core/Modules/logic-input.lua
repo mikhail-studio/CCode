@@ -118,13 +118,82 @@ M.set = function(name)
 end
 
 M.renameProject = function(data, text, name, type)
-    local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
-    local t = COPY_TABLE(type == 'fP' and data.funs or data.vars)
-    if type == 'tP' then t = COPY_TABLE(data.tables) end
+    return pcall(function() 
+        local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
+        local t = COPY_TABLE(type == 'fP' and data.funs or data.vars)
+        if type == 'tP' then t = COPY_TABLE(data.tables) end
 
-    local function renameForAllParams(i)
-        for j = 1, #data.scripts do
-            local script, nestedInfo, isChange = GET_FULL_DATA(GET_GAME_SCRIPT(CURRENT_LINK, j, data))
+        local function renameForAllParams(i)
+            for j = 1, #data.scripts do
+                local script, nestedInfo, isChange = GET_FULL_DATA(GET_GAME_SCRIPT(CURRENT_LINK, j, data))
+                for k = 1, #script.params do
+                    for u = 1, #script.params[k].params do
+                        for o = #script.params[k].params[u], 1, -1 do
+                            if script.params[k].params[u][o][2] == type
+                            and script.params[k].params[u][o][1] == text then
+                                if name == '' then
+                                    if INFO.listName[script.params[k].name][u + 1] == 'var'
+                                    or INFO.listName[script.params[k].name][u + 1] == 'fun'
+                                    or INFO.listName[script.params[k].name][u + 1] == 'table'
+                                    or INFO.listName[script.params[k].name][u + 1] == 'localvar'
+                                    or INFO.listName[script.params[k].name][u + 1] == 'localtable' then
+                                        table.remove(script.params[k].params[u], o) isChange = true
+                                    else
+                                        script.params[k].params[u][o] = {'0', 'n'} isChange = true
+                                    end
+                                else
+                                    script.params[k].params[u][o][1] = name isChange = true
+                                end
+                            end
+                        end
+                    end
+                end if isChange then SET_GAME_SCRIPT(CURRENT_LINK, GET_NESTED_DATA(script, nestedInfo, INFO), j, data) end
+            end if name == '' and i then table.remove(t, i) elseif i then t[i] = name end
+
+            if type == 'vP' then
+                data.vars = COPY_TABLE(t)
+            elseif type == 'tP' then
+                data.tables = COPY_TABLE(t)
+            elseif type == 'fP' then
+                data.funs = COPY_TABLE(t)
+            end
+
+            for k = 1, #BLOCKS.group.blocks do
+                for u = 1, #BLOCKS.group.blocks[k].data.params do
+                    for o = #BLOCKS.group.blocks[k].data.params[u], 1, -1 do
+                        if BLOCKS.group.blocks[k].data.params[u][o][2] == type
+                        and BLOCKS.group.blocks[k].data.params[u][o][1] == text then
+                            BLOCKS.group.blocks[k].data.params = COPY_TABLE(script.params[k].params)
+                        end BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
+                    end
+                end
+            end
+        end
+
+        if #t == 0 then
+            renameForAllParams()
+        end
+
+        for i = 1, #t do
+            if t[i] == name then return end
+            if t[i] == text then
+                for j = i, #t do if t[j] == name then return end end
+                renameForAllParams(i) break
+            end
+        end
+
+        M.data = COPY_TABLE(data)
+        SET_GAME_CODE(CURRENT_LINK, M.data)
+    end)
+end
+
+M.renameScript = function(data, text, name, type)
+    return pcall(function()
+        local script, nestedInfo = GET_FULL_DATA(GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data))
+        local t = COPY_TABLE(type == 'fS' and script.funs or script.vars)
+        if type == 'tS' then t = COPY_TABLE(script.tables) end
+
+        local function renameForAllParams(i)
             for k = 1, #script.params do
                 for u = 1, #script.params[k].params do
                     for o = #script.params[k].params[u], 1, -1 do
@@ -136,193 +205,124 @@ M.renameProject = function(data, text, name, type)
                                 or INFO.listName[script.params[k].name][u + 1] == 'table'
                                 or INFO.listName[script.params[k].name][u + 1] == 'localvar'
                                 or INFO.listName[script.params[k].name][u + 1] == 'localtable' then
-                                    table.remove(script.params[k].params[u], o) isChange = true
+                                    table.remove(script.params[k].params[u], o)
                                 else
-                                    script.params[k].params[u][o] = {'0', 'n'} isChange = true
+                                    script.params[k].params[u][o] = {'0', 'n'}
                                 end
                             else
-                                script.params[k].params[u][o][1] = name isChange = true
+                                script.params[k].params[u][o][1] = name
                             end
                         end
                     end
                 end
-            end if isChange then SET_GAME_SCRIPT(CURRENT_LINK, GET_NESTED_DATA(script, nestedInfo, INFO), j, data) end
-        end if name == '' and i then table.remove(t, i) elseif i then t[i] = name end
+            end if name == '' and i then table.remove(t, i) elseif i then t[i] = name end
 
-        if type == 'vP' then
-            data.vars = COPY_TABLE(t)
-        elseif type == 'tP' then
-            data.tables = COPY_TABLE(t)
-        elseif type == 'fP' then
-            data.funs = COPY_TABLE(t)
-        end
+            if type == 'vS' then
+                script.vars = COPY_TABLE(t)
+            elseif type == 'tS' then
+                script.tables = COPY_TABLE(t)
+            elseif type == 'fS' then
+                script.funs = COPY_TABLE(t)
+            end
 
-        for k = 1, #BLOCKS.group.blocks do
-            for u = 1, #BLOCKS.group.blocks[k].data.params do
-                for o = #BLOCKS.group.blocks[k].data.params[u], 1, -1 do
-                    if BLOCKS.group.blocks[k].data.params[u][o][2] == type
-                    and BLOCKS.group.blocks[k].data.params[u][o][1] == text then
-                        BLOCKS.group.blocks[k].data.params = COPY_TABLE(script.params[k].params)
-                    end BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
+            script = GET_NESTED_DATA(script, nestedInfo, INFO)
+
+            for k = 1, #BLOCKS.group.blocks do
+                for u = 1, #BLOCKS.group.blocks[k].data.params do
+                    for o = #BLOCKS.group.blocks[k].data.params[u], 1, -1 do
+                        if BLOCKS.group.blocks[k].data.params[u][o][2] == type
+                        and BLOCKS.group.blocks[k].data.params[u][o][1] == text then
+                            BLOCKS.group.blocks[k].data.params = COPY_TABLE(script.params[k].params)
+                        end BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
+                    end
                 end
             end
         end
-    end
 
-    if #t == 0 then
-        renameForAllParams()
-    end
-
-    for i = 1, #t do
-        if t[i] == name then return end
-        if t[i] == text then
-            for j = i, #t do if t[j] == name then return end end
-            renameForAllParams(i) break
+        if #t == 0 then
+            renameForAllParams()
         end
-    end
 
-    M.data = COPY_TABLE(data)
-    SET_GAME_CODE(CURRENT_LINK, M.data)
+        for i = 1, #t do
+            if t[i] == name then return end
+            if t[i] == text then
+                for j = i, #t do if t[j] == name then return end end
+                renameForAllParams(i) break
+            end
+        end
 
-    return true
+        M.script = COPY_TABLE(script)
+        SET_GAME_SCRIPT(CURRENT_LINK, M.script, CURRENT_SCRIPT, M.data)
+    end)
 end
 
-M.renameScript = function(data, text, name, type)
-    local script, nestedInfo = GET_FULL_DATA(GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data))
-    local t = COPY_TABLE(type == 'fS' and script.funs or script.vars)
-    if type == 'tS' then t = COPY_TABLE(script.tables) end
+M.renameEvent = function(data, text, name, type, eventIndex)
+    return pcall(function()
+        local script, nestedInfo = GET_FULL_DATA(GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data))
+        local eventIndex = M.getEventIndex(script, eventIndex)
+        local t = COPY_TABLE(script.params[eventIndex].vars)
+        if type == 'tE' then t = COPY_TABLE(script.params[eventIndex].tables) end
 
-    local function renameForAllParams(i)
-        for k = 1, #script.params do
-            for u = 1, #script.params[k].params do
-                for o = #script.params[k].params[u], 1, -1 do
-                    if script.params[k].params[u][o][2] == type
-                    and script.params[k].params[u][o][1] == text then
-                        if name == '' then
-                            if INFO.listName[script.params[k].name][u + 1] == 'var'
-                            or INFO.listName[script.params[k].name][u + 1] == 'fun'
-                            or INFO.listName[script.params[k].name][u + 1] == 'table'
-                            or INFO.listName[script.params[k].name][u + 1] == 'localvar'
-                            or INFO.listName[script.params[k].name][u + 1] == 'localtable' then
-                                table.remove(script.params[k].params[u], o)
+        local function renameForAllParams(i)
+            for k = eventIndex, #script.params do
+                if script.params[k].event and k ~= eventIndex then break end
+                for u = 1, #script.params[k].params do
+                    for o = #script.params[k].params[u], 1, -1 do
+                        if script.params[k].params[u][o][2] == type
+                        and script.params[k].params[u][o][1] == text then
+                            if name == '' then
+                                if INFO.listName[script.params[k].name][u + 1] == 'var'
+                                or INFO.listName[script.params[k].name][u + 1] == 'table'
+                                or INFO.listName[script.params[k].name][u + 1] == 'localvar'
+                                or INFO.listName[script.params[k].name][u + 1] == 'localtable' then
+                                    table.remove(script.params[k].params[u], o)
+                                else
+                                    script.params[k].params[u][o] = {'0', 'n'}
+                                end
                             else
-                                script.params[k].params[u][o] = {'0', 'n'}
+                                script.params[k].params[u][o][1] = name
                             end
-                        else
-                            script.params[k].params[u][o][1] = name
                         end
                     end
                 end
+            end if name == '' and i then table.remove(t, i) elseif i then t[i] = name end
+
+            if type == 'vE' then
+                script.params[eventIndex].vars = COPY_TABLE(t)
+            elseif type == 'tE' then
+                script.params[eventIndex].tables = COPY_TABLE(t)
             end
-        end if name == '' and i then table.remove(t, i) elseif i then t[i] = name end
 
-        if type == 'vS' then
-            script.vars = COPY_TABLE(t)
-        elseif type == 'tS' then
-            script.tables = COPY_TABLE(t)
-        elseif type == 'fS' then
-            script.funs = COPY_TABLE(t)
-        end
+            script = GET_NESTED_DATA(script, nestedInfo, INFO)
 
-        script = GET_NESTED_DATA(script, nestedInfo, INFO)
-
-        for k = 1, #BLOCKS.group.blocks do
-            for u = 1, #BLOCKS.group.blocks[k].data.params do
-                for o = #BLOCKS.group.blocks[k].data.params[u], 1, -1 do
-                    if BLOCKS.group.blocks[k].data.params[u][o][2] == type
-                    and BLOCKS.group.blocks[k].data.params[u][o][1] == text then
-                        BLOCKS.group.blocks[k].data.params = COPY_TABLE(script.params[k].params)
-                    end BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
-                end
-            end
-        end
-    end
-
-    if #t == 0 then
-        renameForAllParams()
-    end
-
-    for i = 1, #t do
-        if t[i] == name then return end
-        if t[i] == text then
-            for j = i, #t do if t[j] == name then return end end
-            renameForAllParams(i) break
-        end
-    end
-
-    M.script = COPY_TABLE(script)
-    SET_GAME_SCRIPT(CURRENT_LINK, M.script, CURRENT_SCRIPT, M.data)
-
-    return true
-end
-
-M.renameEvent = function(data, text, name, type, eventIndex, isCheck)
-    local script, nestedInfo = GET_FULL_DATA(GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data))
-    local eventIndex = M.getEventIndex(script, eventIndex)
-    local t = COPY_TABLE(script.params[eventIndex].vars)
-    if type == 'tE' then t = COPY_TABLE(script.params[eventIndex].tables) end
-
-    local function renameForAllParams(i)
-        for k = eventIndex, #script.params do
-            if script.params[k].event and k ~= eventIndex then break end
-            for u = 1, #script.params[k].params do
-                for o = #script.params[k].params[u], 1, -1 do
-                    if script.params[k].params[u][o][2] == type
-                    and script.params[k].params[u][o][1] == text then
-                        if name == '' then
-                            if INFO.listName[script.params[k].name][u + 1] == 'var'
-                            or INFO.listName[script.params[k].name][u + 1] == 'table'
-                            or INFO.listName[script.params[k].name][u + 1] == 'localvar'
-                            or INFO.listName[script.params[k].name][u + 1] == 'localtable' then
-                                table.remove(script.params[k].params[u], o)
-                            else
-                                script.params[k].params[u][o] = {'0', 'n'}
-                            end
-                        else
-                            script.params[k].params[u][o][1] = name
-                        end
+            for k = eventIndex, #BLOCKS.group.blocks do
+                if BLOCKS.group.blocks[k].data.event and k ~= eventIndex then break end
+                for u = 1, #BLOCKS.group.blocks[k].data.params do
+                    for o = _G.type(BLOCKS.group.blocks[k].data.params[u]) == 'table' and #BLOCKS.group.blocks[k].data.params[u] or 0, 1, -1 do
+                        if BLOCKS.group.blocks[k].data.params[u][o][2] == type
+                        and BLOCKS.group.blocks[k].data.params[u][o][1] == text then
+                            BLOCKS.group.blocks[k].data.params = COPY_TABLE(script.params[k].params)
+                        end BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
                     end
                 end
             end
-        end if name == '' and i then table.remove(t, i) elseif i then t[i] = name end
-
-        if type == 'vE' then
-            script.params[eventIndex].vars = COPY_TABLE(t)
-        elseif type == 'tE' then
-            script.params[eventIndex].tables = COPY_TABLE(t)
         end
 
-        script = GET_NESTED_DATA(script, nestedInfo, INFO)
+        if #t == 0 then
+            renameForAllParams()
+        end
 
-        for k = eventIndex, #BLOCKS.group.blocks do
-            if BLOCKS.group.blocks[k].data.event and k ~= eventIndex then break end
-            for u = 1, #BLOCKS.group.blocks[k].data.params do
-                for o = _G.type(BLOCKS.group.blocks[k].data.params[u]) == 'table' and #BLOCKS.group.blocks[k].data.params[u] or 0, 1, -1 do
-                    if BLOCKS.group.blocks[k].data.params[u][o][2] == type
-                    and BLOCKS.group.blocks[k].data.params[u][o][1] == text then
-                        BLOCKS.group.blocks[k].data.params = COPY_TABLE(script.params[k].params)
-                    end BLOCKS.group.blocks[k].params[u].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[k].data.params, u)
-                end
+        for i = 1, #t do
+            if t[i] == name then return end
+            if t[i] == text then
+                for j = i, #t do if t[j] == name then return end end
+                renameForAllParams(i) break
             end
         end
-    end
 
-    if isCheck or #t == 0 then
-        renameForAllParams()
-    end
-
-    for i = 1, #t do
-        if t[i] == name then return end
-        if t[i] == text then
-            for j = i, #t do if t[j] == name then return end end
-            renameForAllParams(i) break
-        end
-    end
-
-    M.script = COPY_TABLE(script)
-    SET_GAME_SCRIPT(CURRENT_LINK, M.script, CURRENT_SCRIPT, M.data)
-
-    return true
+        M.script = COPY_TABLE(script)
+        SET_GAME_SCRIPT(CURRENT_LINK, M.script, CURRENT_SCRIPT, M.data)
+    end)
 end
 
 M.rename = function(target, name)

@@ -70,14 +70,10 @@ listeners.but_list = function(target)
     end
 end
 
-listeners.checkLocalData = function(blocks, bIndex, pIndex, pType)
-    if pType == 'value' or blocks[bIndex].data.params[pIndex][1] then
-        local varsE = {}
-        local tablesE = {}
-        local data = GET_GAME_CODE(CURRENT_LINK)
-        local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
-        local name = pType ~= 'value' and blocks[bIndex].data.params[pIndex][1][1] or ''
-        local modify = pType ~= 'value' and blocks[bIndex].data.params[pIndex][1][2] or ''
+listeners.checkLocalData = function(bIndex, pIndex, pType, script, data)
+    if pType == 'value' or script.params[bIndex].params[pIndex][1] then
+        local name = pType ~= 'value' and script.params[bIndex].params[pIndex][1][1] or ''
+        local modify = pType ~= 'value' and script.params[bIndex].params[pIndex][1][2] or ''
 
         if modify == 'vE' or modify == 'tE' or pType == 'value' then
             local countEvent = 0
@@ -93,23 +89,27 @@ listeners.checkLocalData = function(blocks, bIndex, pIndex, pType)
                 end
             end
 
-            varsE = script.params[lastIndexEvent].vars
-            tablesE = script.params[lastIndexEvent].tables
+            local varsE = script.params[lastIndexEvent].vars
+            local tablesE = script.params[lastIndexEvent].tables
 
             if pType == 'value' then
-                for o = #blocks[bIndex].data.params[pIndex], 1, -1 do
-                    local name = blocks[bIndex].data.params[pIndex][o][1]
-                    local modify = blocks[bIndex].data.params[pIndex][o][2]
+                for o = #script.params[bIndex].params[pIndex], 1, -1 do
+                    local name = script.params[bIndex].params[pIndex][o][1]
+                    local modify = script.params[bIndex].params[pIndex][o][2]
 
                     if (modify == 'vE' and not table.indexOf(varsE, name)) or (modify == 'tE' and not table.indexOf(tablesE, name)) then
-                        LOGIC.renameEvent(data, name, '', modify, countEvent, true)
+                        table.insert(modify == 'vE' and varsE or tablesE, 1, name)
+                        -- LOGIC.renameEvent(data, name, '', modify, countEvent, true)
                     end
                 end
             else
                 if (modify == 'vE' and not table.indexOf(varsE, name)) or (modify == 'tE' and not table.indexOf(tablesE, name)) then
-                    LOGIC.renameEvent(data, name, '', modify, countEvent, true)
+                    table.insert(modify == 'vE' and varsE or tablesE, 1, name)
+                    -- LOGIC.renameEvent(data, name, '', modify, countEvent, true)
                 end
             end
+
+            SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
         end
     end
 end
@@ -232,14 +232,14 @@ listeners.but_okay = function(target)
                     local bName = blockData.name
                     local isEvent = blockData.event
 
-                    if not blockData.event then
+                    if not isEvent then
                         endIndex = #INFO.listNested[blockData.name]
                     end
 
                     table.insert(script.params, blockIndex, blockData)
-                    BLOCKS.new(blockData.name, blockIndex, blockData.event, blockData.params, blockData.comment, blockData.nested, blockData.vars, blockData.tables)
+                    BLOCKS.new(blockData.name, blockIndex, isEvent, blockData.params, blockData.comment, blockData.nested, blockData.vars, blockData.tables)
 
-                    if #blockData.nested == 0 or blockData.event then
+                    if #blockData.nested == 0 or isEvent then
                         for j = blockIndex + 2, #BLOCKS.group.blocks do
                             if isEvent and BLOCKS.group.blocks[j + blockIndex - i].data.event then break end
                             blockIndex, blockData = blockIndex + 1, COPY_TABLE(BLOCKS.group.blocks[j + blockIndex - i].data)
@@ -264,6 +264,20 @@ listeners.but_okay = function(target)
                     if isEvent then
                         local diffScrollY = BLOCKS.group[8].y - BLOCKS.group.blocks[i].y + BLOCKS.group.blocks[i].height / 2
                         BLOCKS.group[8]:scrollToPosition({y = diffScrollY > 0 and 0 or diffScrollY, time = 0})
+
+                        for j = i, #BLOCKS.group.blocks do
+                            if BLOCKS.group.blocks[j].data.event and j ~= i then break end
+
+                            for k = 2, #INFO.listName[BLOCKS.group.blocks[j].data.name] do
+                                if INFO.listName[BLOCKS.group.blocks[j].data.name][k] == 'localvar'
+                                or INFO.listName[BLOCKS.group.blocks[j].data.name][k] == 'localtable'
+                                or INFO.listName[BLOCKS.group.blocks[j].data.name][k] == 'var'
+                                or INFO.listName[BLOCKS.group.blocks[j].data.name][k] == 'table'
+                                or INFO.listName[BLOCKS.group.blocks[j].data.name][k] == 'value' then
+                                    listeners.checkLocalData(j, k - 1, INFO.listName[BLOCKS.group.blocks[j].data.name][k], script, data)
+                                end
+                            end
+                        end
                     else
                         display.getCurrentStage():setFocus(BLOCKS.group.blocks[i])
                         BLOCKS.group.blocks[i].click = true
@@ -445,8 +459,8 @@ listeners.but_okay = function(target)
 end
 
 return function(e)
-    if e.blocks then
-        listeners.checkLocalData(e.blocks, e.bIndex, e.pIndex, e.pType)
+    if e.bIndex then
+        listeners.checkLocalData(e.bIndex, e.pIndex, e.pType, e.script, e.data)
     elseif BLOCKS.group.isVisible and (ALERT or e.target.button == 'but_okay') then
         if e.phase == 'began' then
             display.getCurrentStage():setFocus(e.target)

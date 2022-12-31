@@ -175,7 +175,7 @@ local function newBlockListener(event)
                         table.insert(script.params, 1, {
                             name = 'onStart', params = {{}}, event = true, comment = false,
                             nested = {}, vars = {}, tables = {}
-                        }) BLOCKS.new('onStart', 1, true, {{}}, false, {}) blockIndex = 2
+                        }) BLOCKS.new('onStart', 1, true, {{}}, false, {}, {}, {}) blockIndex = 2
                     end
 
                     if INFO.listNested[blockName] then
@@ -183,14 +183,14 @@ local function newBlockListener(event)
                         for i = 1, #INFO.listNested[blockName] do
                             table.insert(script.params, blockIndex, {
                                 name = INFO.listNested[blockName][i], params = {{}}, event = false, comment = false
-                            }) BLOCKS.new(INFO.listNested[blockName][i], blockIndex, false, {{}}, false)
+                            }) BLOCKS.new(INFO.listNested[blockName][i], blockIndex, false, {{}}, false, blockParams.nested, blockParams.vars, blockParams.tables)
                         end
                     end
 
                     native.setKeyboardFocus(nil)
                     table.insert(script.params, blockIndex, blockParams)
                     SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
-                    BLOCKS.new(blockName, blockIndex, blockEvent, COPY_TABLE(blockParams.params), false, blockParams.nested)
+                    BLOCKS.new(blockName, blockIndex, blockEvent, COPY_TABLE(blockParams.params), false, blockParams.nested, blockParams.vars, blockParams.tables)
 
                     if #BLOCKS.group.blocks > 2 then
                         display.getCurrentStage():setFocus(BLOCKS.group.blocks[blockIndex])
