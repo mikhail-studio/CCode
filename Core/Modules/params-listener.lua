@@ -13,6 +13,10 @@ M.getListButtons = function(type)
         return {STR['blocks.select.backgroundTrue'], STR['blocks.select.backgroundFalse']}
     elseif type == 'textAlign' then
         return {STR['blocks.select.alignLeft'], STR['blocks.select.alignRight'], STR['blocks.select.alignCenter']}
+    elseif type == 'switchType' then
+        return {STR['blocks.select.switchRadio'], STR['blocks.select.switchCheckbox'], STR['blocks.select.switchToggle']}
+    elseif type == 'switchState' then
+        return {STR['blocks.select.switchOff'], STR['blocks.select.switchOn']}
     elseif type == 'networkProgress' then
         return {STR['blocks.select.progressDefault'], STR['blocks.select.progressDownload'], STR['blocks.select.progressUpload']}
     elseif type == 'networkRedirects' then
@@ -56,9 +60,14 @@ M.getListValue = function(type, text)
         return text == STR['blocks.select.backgroundTrue'] and 'backgroundTrue' or 'backgroundFalse'
     elseif type == 'networkRedirects' then
         return text == STR['blocks.select.redirectsFalse'] and 'redirectsFalse' or 'redirectsTrue'
+    elseif type == 'switchState' then
+        return text == STR['blocks.select.switchOff'] and 'switchOff' or 'switchOn'
     elseif type == 'textAlign' then
         return text == STR['blocks.select.alignLeft'] and 'alignLeft'
             or text == STR['blocks.select.alignRight'] and 'alignRight' or 'alignCenter'
+    elseif type == 'switchType' then
+        return text == STR['blocks.select.switchRadio'] and 'switchRadio'
+            or text == STR['blocks.select.switchToggle'] and 'switchToggle' or 'switchCheckbox'
     elseif type == 'networkProgress' then
         return text == STR['blocks.select.progressUpload'] and 'progressUpload'
             or text == STR['blocks.select.progressDownload'] and 'progressDownload' or 'progressDefault'

@@ -20,8 +20,18 @@ return {
             local script = GET_GAME_SCRIPT(CURRENT_LINK, i, data)
             for j = 1, #script.params do
                 local name = script.params[j].name
-                if UTF8.sub(name, 1, 6) == 'custom' then
-                    dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = true
+                local index = UTF8.sub(name, 7, UTF8.len(name))
+                dataCustom[index] = UTF8.sub(name, 1, 6) == 'custom'
+
+                if not dataCustom[index] then
+                    for u = 1, #script.params[j].params do
+                        for o = #script.params[j].params[u], 1, -1 do
+                            if script.params[j].params[u][o][2] == 'fC' then
+                                local name = script.params[j].params[u][o][1]
+                                dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = true
+                            end
+                        end
+                    end
                 end
             end
         end

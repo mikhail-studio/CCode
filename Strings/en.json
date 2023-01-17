@@ -3,6 +3,7 @@
         "lang.ru": "Русский",
         "lang.en": "English",
         "lang.pt": "Brasileiro",
+        "lang.custom": "Custom",
         "button.yes": "Yes",
         "button.no": "No",
         "button.okay": "Ok",
@@ -400,7 +401,23 @@
             "blocks.toastLong.params": ["Text:"],
             "blocks.comment": "Comment (for yourself)",
             "blocks.comment.params": ["Note:"],
-            "blocks.requestExit": "Close program"
+            "blocks.requestExit": "Close program",
+        "blocks.setBackgroundColor": "Set background color",
+            "blocks.setBackgroundColor.params": ["Color:"],
+            "blocks.setBackgroundRGB": "Set RGB background color",
+            "blocks.setBackgroundRGB.params": ["Color (R):", "Color (G):", "Color (B):"],
+            "blocks.setBackgroundHEX": "Set HEX background color",
+            "blocks.setBackgroundHEX.params": ["Color (Hex):"],
+            "blocks.setPortraitOrientation": "Set portrait orientation",
+            "blocks.setPortraitOrientation.params": ["Function name:"],
+            "blocks.setLandscapeOrientation": "Set landscape orientation",
+            "blocks.setLandscapeOrientation.params": ["Function name:"],
+            "blocks.turnOnAccelerometer": "Set accelerometer function",
+            "blocks.turnOnAccelerometer.params": ["Function name:"],
+            "blocks.setAccelerometerFrequency": "Set accelerometer frequency",
+            "blocks.setAccelerometerFrequency.params": ["Frequency (Hz):"],
+            "blocks.scheduleNotification": "Register a notification",
+            "blocks.scheduleNotification.params": ["Text:", "Time (Seconds):"]
     },
 
     "shapes": {

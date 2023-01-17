@@ -433,6 +433,16 @@ M.new = function(text, scroll, group, type, index, filter, link)
 
         display.setDefault('magTextureFilter', 'linear')
         display.setDefault('minTextureFilter', 'linear')
+    elseif type == 'program' then
+        local path = index == 1 and 'Script' or index == 2 and 'Sprite'
+        or index == 3 and 'Sound' or index == 4 and 'Video'
+        or index == 5 and 'Font' or index == 6 and 'Setting'
+        or index == 7 and 'Export' or index == 8 and 'Build' or ''
+
+        if path ~= '' then
+            group.blocks[index].icon = display.newImage('Sprites/icon' .. path .. '.png')
+            group.blocks[index].container:insert(group.blocks[index].icon, true)
+        end
     else
         group.blocks[index].icon = display.newRect(group.blocks[index].container.x, y, 94, 94)
             group.blocks[index].icon:setFillColor(0.15, 0.15, 0.17)

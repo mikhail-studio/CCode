@@ -43,6 +43,7 @@ M.listBlock = {
             'onGlobalPreCollision',
             'onGlobalPostCollision',
             'onSliderMoved',
+            'onSwitchCallback',
             'onWebViewCallback',
             'onFieldBegan',
             'onFieldEditing',
@@ -285,6 +286,7 @@ M.listBlock = {
             'setHitboxVisible',
             'removeHitboxVisible',
             'startPhysics',
+            'pausePhysics',
             'stopPhysics',
             'setTextBody'
     },
@@ -311,7 +313,9 @@ M.listBlock = {
         'setFieldFocus',
         'setFieldFocusNil',
         'hidePanelInterface',
-        'showPanelInterface'
+        'showPanelInterface',
+        'newSwitch',
+            'setSwitchState'
     },
 
     ['media'] = {
@@ -392,6 +396,7 @@ M.listName = {
             ['onGlobalPreCollision'] = {'events', 'fun', 'localtable'},
             ['onGlobalPostCollision'] = {'events', 'fun', 'localtable'},
             ['onSliderMoved'] = {'events', 'fun', 'localvar'},
+            ['onSwitchCallback'] = {'events', 'fun', 'localvar'},
             ['onFieldBegan'] = {'events', 'fun', 'localtable'},
             ['onFieldEditing'] = {'events', 'fun', 'localtable'},
             ['onFieldEnded'] = {'events', 'fun', 'localtable'},
@@ -409,7 +414,7 @@ M.listName = {
     ['setVar'] = {'vars', 'var', 'value'},
         ['updVar'] = {'vars', 'var', 'value'},
         ['newText'] = {'vars', 'value', 'value', 'value', 'value', 'color', 'value', 'value', 'value'},
-        ['newText2'] = {'vars', 'value', 'value', 'value', 'value', 'color', 'value', 'value', 'value', 'value', 'value'},
+        ['newText2'] = {'vars', 'value', 'value', 'value', 'value', 'color', 'textAlign', 'value', 'value', 'value', 'value'},
         ['setText'] = {'vars', 'value', 'value'},
         ['setTextSize'] = {'vars', 'value', 'value'},
         ['hideText'] = {'vars', 'value'},
@@ -539,6 +544,7 @@ M.listName = {
             ['scheduleNotification'] = {'control', 'value', 'value'},
             ['setAccelerometerFrequency'] = {'control', 'value'},
             ['turnOnAccelerometer'] = {'control', 'fun'},
+
     -- shapes
     ['newRect'] = {'shapes', 'value', 'color', 'value', 'value', 'value', 'value'},
         ['newRoundedRect'] = {'shapes', 'value', 'value', 'value', 'value', 'value', 'value'},
@@ -658,6 +664,7 @@ M.listName = {
             ['setHitboxVisible'] = {'physics'},
             ['removeHitboxVisible'] = {'physics'},
             ['startPhysics'] = {'physics'},
+            ['pausePhysics'] = {'physics'},
             ['stopPhysics'] = {'physics'},
             ['setTextBody'] = {'physics', 'value', 'body', 'value', 'value', 'value', 'value'},
 
@@ -684,6 +691,8 @@ M.listName = {
         ['setFieldFocusNil'] = {'widgets'},
         ['hidePanelInterface'] = {'widgets'},
         ['showPanelInterface'] = {'widgets'},
+        ['newSwitch'] = {'widgets', 'value', 'switchType', 'switchState', 'value', 'value', 'value', 'value', 'fun', 'fun'},
+            ['setSwitchState'] = {'widgets', 'value', 'switchState'},
 
     -- media
     ['newVideo'] = {'media', 'value', 'value', 'fun', 'value', 'value', 'value', 'value'},
@@ -742,13 +751,14 @@ M.listDelimiter = {
     ['vars'] = {'setTextPos'},
     ['events'] = {'onLocalCollisionBegan'},
     ['physics'] = {'setWorldGravity'},
+    ['widgets'] = {'newSwitch'}
 }
 
 M.listDelimiterNoob = {
     ['groups'] = {'newTag'},
     ['control'] = {'timerPauseAll'},
     ['vars'] = {'setTextPos'},
-    ['physics'] = {'setWorldGravity'},
+    ['physics'] = {'setWorldGravity'}
 }
 
 M.listNested = {

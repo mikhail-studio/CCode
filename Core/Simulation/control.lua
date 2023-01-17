@@ -9,7 +9,8 @@ M['requestApi'] = function(params)
     GAME.lua = GAME.lua .. ' p1 = UTF8.gsub(p1, \'currentStage\', \'fps\') p1 = UTF8.gsub(p1, \'getCurrentStage\', \'getDefault\')'
     GAME.lua = GAME.lua .. ' return loadstring(\'local G = {} G.fun, G.device, G.other, G.math, G.prop = fun, device, other, math, prop'
     GAME.lua = GAME.lua .. ' G.args = JSON.decode(\\\'\' .. args .. \'\\\') for key, value in'
-    GAME.lua = GAME.lua .. ' pairs(GET_GLOBAL_TABLE()) do G[key] = value end setfenv(1, G) \' .. p1)() end)'
+    GAME.lua = GAME.lua .. ' pairs(GET_GLOBAL_TABLE()) do G[key] = value end setfenv(1, G) require = function(path)'
+    GAME.lua = GAME.lua .. ' return path:find(\\\'%.\\\') and {} or print5(path) end \' .. p1)() end)'
 end
 
 M['requestFun'] = function(params)

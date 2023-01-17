@@ -277,6 +277,10 @@ M['startPhysics'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() PHYSICS.start() end)'
 end
 
+M['pausePhysics'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() PHYSICS.pause() end)'
+end
+
 M['stopPhysics'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() PHYSICS.stop() end)'
 end

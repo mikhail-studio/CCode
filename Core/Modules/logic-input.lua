@@ -66,8 +66,8 @@ M.listener = function(e)
                     if M.params[1] == 'funs' then mode = M.active == 'script' and 'fS' or 'fP' end
 
                     if e.target.isNew then
-                        M.script.params[blockIndex].params[paramsIndex] = {{}}
-                        BLOCKS.group.blocks[blockIndex].data.params[paramsIndex] = {{}}
+                        M.script.params[blockIndex].params[paramsIndex] = {}
+                        BLOCKS.group.blocks[blockIndex].data.params[paramsIndex] = {}
                     else
                         M.script.params[blockIndex].params[paramsIndex] = {{e.target.text.text, mode}}
                         BLOCKS.group.blocks[blockIndex].data.params[paramsIndex] = {{e.target.text.text, mode}}

@@ -128,6 +128,11 @@
         "blocks.select.backgroundFalse": "Убрать",
         "blocks.select.ruleTrue": "Разрешено",
         "blocks.select.ruleFalse": "Запрещено",
+        "blocks.select.switchRadio": "Радио",
+        "blocks.select.switchCheckbox": "Флажок",
+        "blocks.select.switchToggle": "Тумблер",
+        "blocks.select.switchOn": "Включен",
+        "blocks.select.switchOff": "Выключен",
         "blocks.select.obj": "Объект",
         "blocks.select.text": "Текст",
         "blocks.select.group": "Группа",
@@ -204,6 +209,8 @@
             "blocks.onGlobalPostCollision.params": ["Имя функции:", "Имя таблицы:"],
             "blocks.onWebViewCallback": "В веб просмотре произошли изменения",
             "blocks.onWebViewCallback.params": ["Имя функции:", "Имя таблицы:"],
+            "blocks.onSwitchCallback": "Началось событие в переключателе",
+            "blocks.onSwitchCallback.params": ["Имя функции:", "Имя переменной:"],
             "blocks.onSliderMoved": "Пока слайдер перемещается",
             "blocks.onSliderMoved.params": ["Имя функции:", "Имя переменной:"],
             "blocks.onFieldBegan": "Началось редактирование поля",
@@ -654,8 +661,9 @@
             "blocks.setAngularImpulse.params": ["Имя объекта:", "Сила:"],
             "blocks.setHitboxVisible": "Показать хитбоксы",
             "blocks.removeHitboxVisible": "Скрыть хитбоксы",
-            "blocks.startPhysics": "Включить физический движок",
-            "blocks.stopPhysics": "Выключить физический движок",
+            "blocks.startPhysics": "Запустить физический движок",
+            "blocks.pausePhysics": "Приостановить физический движок",
+            "blocks.stopPhysics": "Остановить физический движок",
             "blocks.setTextBody": "Установить физическое тело текста",
             "blocks.setTextBody.params": ["Имя текста:", "Тип:", "Плотность:", "Отскок:", "Трение:", "Гравитация:"]
     },
@@ -702,7 +710,11 @@
         "blocks.setFieldFocus.params": ["Имя виджета:"],
         "blocks.setFieldFocusNil": "Выключить экранную клавиатуру",
         "blocks.hidePanelInterface": "Скрыть панели интерфейса",
-        "blocks.showPanelInterface": "Показать панели интерфейса"
+        "blocks.showPanelInterface": "Показать панели интерфейса",
+        "blocks.newSwitch": "Создать переключатель",
+            "blocks.newSwitch.params": ["Имя виджета:", "Тип:", "Состояние:", "Ширина:", "Высота:", "Позиция (X):", "Позиция (Y):", "При касании:", "После касания:"],
+            "blocks.setSwitchState": "Установить состояние переключателя",
+            "blocks.setSwitchState.params": ["Имя виджета:", "Состояние:"]
     },
 
     "media": {

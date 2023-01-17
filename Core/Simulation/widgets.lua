@@ -62,6 +62,25 @@ M['newWebView'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._type = \'webview\' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
 end
 
+M['newSwitch'] = function(params)
+    local name = CALC(params[1])
+    local style = CALC(params[2], '\'checkbox\'')
+    local state = CALC(params[3], 'false')
+    local width = style == '(select[\'switchToggle\']())' and CALC(params[4], '250') or CALC(params[4], '100')
+    local height = style == '(select[\'switchToggle\']())' and CALC(params[4], '50') or CALC(params[4], '100')
+    local posX = '(CENTER_X + (' .. CALC(params[6]) .. '))'
+    local posY = '(CENTER_Y - (' .. CALC(params[7]) .. '))'
+    local onPress = CALC(params[8], 'a', true)
+    local onRelease = CALC(params[9], 'a', true)
+
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. ']:removeSelf() end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. '] = WIDGET.newSwitch({style = ' .. style .. ','
+    GAME.lua = GAME.lua .. ' x = ' .. posX .. ', y = ' .. posY .. ', initialSwitchState = ' .. state .. ', onPress = ' .. onPress .. ','
+    GAME.lua = GAME.lua .. ' onRelease = ' .. onRelease .. '}) GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].width, GAME.group.widgets[' .. name .. '].height = ' .. width .. ',' .. height
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._type = \'switch\' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
+end
+
 M['newHSlider'] = function(params)
     local name = CALC(params[1])
     local width = CALC(params[2], '100')
@@ -163,6 +182,11 @@ end
 M['setSliderValue'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local value = tonumber(' ..  CALC(params[2]) .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' ..  CALC(params[1]) .. ']:setValue(value > 100 and 100 or value < 0 and 0 or value) end)'
+end
+
+M['setSwitchState'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets['
+    GAME.lua = GAME.lua .. CALC(params[1]) .. ']:setState({isOn = ' .. CALC(params[2], 'false') .. '}) end)'
 end
 
 M['setFieldSecure'] = function(params)

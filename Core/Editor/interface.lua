@@ -131,9 +131,10 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         block.y = block.height / 2 + 12
     blockScroll:insert(block)
 
-    if M.scrollY == 0 and paramsIndex > 6 then
-        local indexUp = math.round((paramsIndex - 6) / 2, 0)
-        local maxUp = math.round((length - 6) / 2, 0) M.scrollY = -60 * indexUp
+    if M.scrollY == 0 and ((paramsIndex > 6 and length % 2 == 0) or (paramsIndex > 5 and length % 2 == 1)) then
+        local minusFactor = (paramsIndex > 6 and length % 2 == 0) and 6 or 5
+        local indexUp = math.round((paramsIndex - minusFactor) / 2, 0)
+        local maxUp = math.round((length - minusFactor) / 2, 0) M.scrollY = -60 * indexUp
         if maxUp > indexUp then M.scrollY = M.scrollY - 60 end
     end
 

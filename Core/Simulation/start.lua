@@ -128,13 +128,16 @@ M.new = function(linkBuild, isDebug)
 
         for j = 1, #M.scripts[i].params do
             local name = M.scripts[i].params[j].name
-            dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = UTF8.sub(name, 1, 6) == 'custom'
+            local index = UTF8.sub(name, 7, UTF8.len(name))
+            dataCustom[index] = UTF8.sub(name, 1, 6) == 'custom'
 
-            for u = 1, #M.scripts[i].params[j].params do
-                for o = #M.scripts[i].params[j].params[u], 1, -1 do
-                    if M.scripts[i].params[j].params[u][o][2] == 'fC' then
-                        local name = M.scripts[i].params[j].params[u][o][1]
-                        dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = true
+            if not dataCustom[index] then
+                for u = 1, #M.scripts[i].params[j].params do
+                    for o = #M.scripts[i].params[j].params[u], 1, -1 do
+                        if M.scripts[i].params[j].params[u][o][2] == 'fC' then
+                            local name = M.scripts[i].params[j].params[u][o][1]
+                            dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = true
+                        end
                     end
                 end
             end
@@ -222,7 +225,10 @@ M.new = function(linkBuild, isDebug)
                 or dataEvent[j].name == 'onLocalPreCollision' or dataEvent[j].name == 'onLocalPostCollision'
                 or dataEvent[j].name == 'onGlobalCollisionBegan' or dataEvent[j].name == 'onGlobalCollisionEnded'
                 or dataEvent[j].name == 'onGlobalPreCollision' or dataEvent[j].name == 'onGlobalPostCollision'
-                or dataEvent[j].name == 'onFirebase'
+                or dataEvent[j].name == 'onFirebase' or dataEvent[j].name == 'onSwitchCallback'
+                or dataEvent[j].name == 'onConditionNoob' or dataEvent[j].name == 'onFunNoob'
+                or dataEvent[j].name == 'onTouchBeganNoob' or dataEvent[j].name == 'onTouchEndedNoob'
+                or dataEvent[j].name == 'onTouchMovedNoob' or dataEvent[j].name == 'onLocalCollisionBeganNoob'
 
                 if nestedScript[dataEvent[j].script] and not dataEvent[j].comment and isFunBlock then
                     pcall(function() EVENTS[dataEvent[j].name](nestedEvent[j], dataEvent[j].params) end)
@@ -246,7 +252,10 @@ M.new = function(linkBuild, isDebug)
         and dataEvent[i].name ~= 'onLocalPreCollision' and dataEvent[i].name ~= 'onLocalPostCollision'
         and dataEvent[i].name ~= 'onGlobalCollisionBegan' and dataEvent[i].name ~= 'onGlobalCollisionEnded'
         and dataEvent[i].name ~= 'onGlobalPreCollision' and dataEvent[i].name ~= 'onGlobalPostCollision'
-        and dataEvent[i].name ~= 'onFirebase' then
+        and dataEvent[i].name ~= 'onFirebase' and dataEvent[i].name ~= 'onSwitchCallback'
+        and dataEvent[i].name ~= 'onConditionNoob' and dataEvent[i].name ~= 'onFunNoob'
+        and dataEvent[i].name ~= 'onTouchBeganNoob' and dataEvent[i].name ~= 'onTouchEndedNoob'
+        and dataEvent[i].name ~= 'onTouchMovedNoob' and dataEvent[i].name ~= 'onLocalCollisionBeganNoob' then
             pcall(function() EVENTS[dataEvent[i].name](nestedEvent[i], dataEvent[i].params) end)
         end
     end if #nestedEvent > 0 then M.lua = M.lua .. ' end end script()' end

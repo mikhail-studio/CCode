@@ -92,4 +92,24 @@ M['tag'] = function()
     return 'tags'
 end
 
+M['switchRadio'] = function()
+    return 'radio'
+end
+
+M['switchToggle'] = function()
+    return 'onOff'
+end
+
+M['switchCheckbox'] = function()
+    return 'checkbox'
+end
+
+M['switchOn'] = function()
+    return true
+end
+
+M['switchOff'] = function()
+    return false
+end
+
 return M

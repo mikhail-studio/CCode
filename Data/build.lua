@@ -496,7 +496,7 @@ return ' ' .. UTF8.trimFull([===[
                 pcall = pcall, BUILD = BUILD, MAX_Y = MAX_Y, MAX_X = MAX_X, string = string, SIZE = SIZE, READ_FILE = READ_FILE,
                 xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, print = print, OS_MOVE = OS_MOVE,
                 table = table, lpeg = lpeg, COPY_TABLE = COPY_TABLE, DISPLAY_HEIGHT = DISPLAY_HEIGHT, OS_COPY = OS_COPY,
-                unpack = unpack, require = require, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
+                unpack = unpack, print5 = require, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
                 graphics = graphics, system = system, rawequal = rawequal,  getmetatable = getmetatable, WRITE_FILE = WRITE_FILE,
                 timer = timer, BOTTOM_HEIGHT = BOTTOM_HEIGHT, newproxy = newproxy, metatable = metatable, NOISE = NOISE,
                 al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, math = math, DOC_DIR = DOC_DIR,
@@ -1143,6 +1143,26 @@ return ' ' .. UTF8.trimFull([===[
 
         M['tag'] = function()
             return 'tags'
+        end
+
+        M['switchRadio'] = function()
+            return 'radio'
+        end
+
+        M['switchToggle'] = function()
+            return 'onOff'
+        end
+
+        M['switchCheckbox'] = function()
+            return 'checkbox'
+        end
+
+        M['switchOn'] = function()
+            return true
+        end
+
+        M['switchOff'] = function()
+            return false
         end
 
         return M

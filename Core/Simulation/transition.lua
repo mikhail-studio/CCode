@@ -1,6 +1,10 @@
 local CALC = require 'Core.Simulation.calc'
 local M = {}
 
+M['setTransitionListener'] = function(listener)
+    return ' function(e) pcall(function() if GAME.group then ' .. listener .. '(e) end end) end'
+end
+
 M['setTransitionTo'] = function(params)
     local name, count = CALC(params[1]), CALC(params[4], '1')
     local direction, time, easing = CALC(params[3]), CALC(params[5], '1'), CALC(params[14], 'nil')
@@ -24,6 +28,12 @@ M['setTransitionTo'] = function(params)
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
+
+    local onComplete = M['setTransitionListener'](onComplete)
+    local onCancel = M['setTransitionListener'](onCancel)
+    local onPause = M['setTransitionListener'](onPause)
+    local onResume = M['setTransitionListener'](onResume)
+    local onRepeat = M['setTransitionListener'](onRepeat)
 
     GAME.lua = GAME.lua .. ' pcall(function() local obj, name = ' .. type .. '[' .. name .. '], ' .. name .. ' local function doTo(obj)'
     GAME.lua = GAME.lua .. ' transition.' .. direction .. '(obj, {onComplete = ' .. onComplete .. ', onRepeat = ' .. onRepeat .. ','
@@ -54,6 +64,12 @@ M['setTransitionPos'] = function(params)
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
 
+    local onComplete = M['setTransitionListener'](onComplete)
+    local onCancel = M['setTransitionListener'](onCancel)
+    local onPause = M['setTransitionListener'](onPause)
+    local onResume = M['setTransitionListener'](onResume)
+    local onRepeat = M['setTransitionListener'](onRepeat)
+
     GAME.lua = GAME.lua .. ' pcall(function() local obj, name = ' .. type .. '[' .. name .. '], ' .. name .. ' local function doTo(obj)'
     GAME.lua = GAME.lua .. ' transition.' .. direction .. '(obj, {onComplete = ' .. onComplete .. ', onRepeat = ' .. onRepeat .. ','
     GAME.lua = GAME.lua .. ' onPause = ' .. onPause .. ', onResume = ' .. onResume .. ', onCancel = ' .. onCancel .. ','
@@ -80,9 +96,19 @@ M['setTransitionSize'] = function(params)
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
 
+    local onComplete = M['setTransitionListener'](onComplete)
+    local onCancel = M['setTransitionListener'](onCancel)
+    local onPause = M['setTransitionListener'](onPause)
+    local onResume = M['setTransitionListener'](onResume)
+    local onRepeat = M['setTransitionListener'](onRepeat)
+
+    if type == 'GAME.group.texts' then
+        width, height, size = 'nil', 'nil', width ~= 'nil' and width or height
+    end
+
     GAME.lua = GAME.lua .. ' pcall(function() local obj, name = ' .. type .. '[' .. name .. '], ' .. name .. ' local function doTo(obj)'
-    GAME.lua = GAME.lua .. ' transition.' .. direction .. '(obj, {onComplete = ' .. onComplete .. ', onRepeat = ' .. onRepeat .. ','
-    GAME.lua = GAME.lua .. ' onPause = ' .. onPause .. ', onResume = ' .. onResume .. ', onCancel = ' .. onCancel .. ','
+    GAME.lua = GAME.lua .. ' transition.' .. direction .. '(obj, {onComplete = ' .. onComplete .. ', onRepeat = ' .. onRepeat .. ', onPause'
+    GAME.lua = GAME.lua .. ' = ' .. onPause .. ', onResume = ' .. onResume .. ', onCancel = ' .. onCancel .. ', size = ' .. size .. ','
     GAME.lua = GAME.lua .. ' time = ' .. time .. ' * 1000, iterations = ' .. count .. ', transition = easing.' .. easing .. ','
     GAME.lua = GAME.lua .. ' width = ' .. width .. ', height = ' .. height .. '}) end if \'' .. type .. '\' == \'GAME.group.tags\''
     GAME.lua = GAME.lua .. ' then pcall(function() local function doTag(tag) for _, child in ipairs(obj) do if child[2]'
@@ -107,6 +133,12 @@ M['setTransitionScale'] = function(params)
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
+
+    local onComplete = M['setTransitionListener'](onComplete)
+    local onCancel = M['setTransitionListener'](onCancel)
+    local onPause = M['setTransitionListener'](onPause)
+    local onResume = M['setTransitionListener'](onResume)
+    local onRepeat = M['setTransitionListener'](onRepeat)
 
     GAME.lua = GAME.lua .. ' pcall(function() local obj, name = ' .. type .. '[' .. name .. '], ' .. name .. ' local function doTo(obj)'
     GAME.lua = GAME.lua .. ' transition.' .. direction .. '(obj, {onComplete = ' .. onComplete .. ', onRepeat = ' .. onRepeat .. ','
@@ -133,6 +165,12 @@ M['setTransitionRotation'] = function(params)
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
+
+    local onComplete = M['setTransitionListener'](onComplete)
+    local onCancel = M['setTransitionListener'](onCancel)
+    local onPause = M['setTransitionListener'](onPause)
+    local onResume = M['setTransitionListener'](onResume)
+    local onRepeat = M['setTransitionListener'](onRepeat)
 
     GAME.lua = GAME.lua .. ' pcall(function() local obj, name = ' .. type .. '[' .. name .. '], ' .. name .. ' local function doTo(obj)'
     GAME.lua = GAME.lua .. ' transition.' .. direction .. '(obj, {onComplete = ' .. onComplete .. ', onRepeat = ' .. onRepeat .. ','
@@ -161,6 +199,12 @@ M['setTransitionAlpha'] = function(params)
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
 
+    local onComplete = M['setTransitionListener'](onComplete)
+    local onCancel = M['setTransitionListener'](onCancel)
+    local onPause = M['setTransitionListener'](onPause)
+    local onResume = M['setTransitionListener'](onResume)
+    local onRepeat = M['setTransitionListener'](onRepeat)
+
     GAME.lua = GAME.lua .. ' pcall(function() local obj, name = ' .. type .. '[' .. name .. '], ' .. name .. ' local function doTo(obj)'
     GAME.lua = GAME.lua .. ' transition.' .. direction .. '(obj, {onComplete = ' .. onComplete .. ', onRepeat = ' .. onRepeat .. ','
     GAME.lua = GAME.lua .. ' onPause = ' .. onPause .. ', onResume = ' .. onResume .. ', onCancel = ' .. onCancel .. ','
@@ -182,6 +226,12 @@ M['setTransitionAngles'] = function(params)
 
     if type == '(select[\'obj\']())' then type = 'GAME.group.objects'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
+
+    local onComplete = M['setTransitionListener'](onComplete)
+    local onCancel = M['setTransitionListener'](onCancel)
+    local onPause = M['setTransitionListener'](onPause)
+    local onResume = M['setTransitionListener'](onResume)
+    local onRepeat = M['setTransitionListener'](onRepeat)
 
     if type == 'GAME.group.tags' or type == 'GAME.group.objects' then
         GAME.lua = GAME.lua .. ' pcall(function() local obj, name = ' .. type .. '[' .. name .. '], ' .. name
