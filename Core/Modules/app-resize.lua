@@ -1,4 +1,4 @@
-local function appResize(type)
+local function appResize(type, listener)
     if CURRENT_ORIENTATION ~= type then
         CENTER_X, CENTER_Y = CENTER_Y, CENTER_X
         DISPLAY_WIDTH, DISPLAY_HEIGHT = DISPLAY_HEIGHT, DISPLAY_WIDTH
@@ -13,10 +13,11 @@ local function appResize(type)
 
     CURRENT_ORIENTATION = type
     ORIENTATION.lock(CURRENT_ORIENTATION)
+    if listener then listener({orientation = type}) end
 end
 
 function setOrientationApp(event)
-    local vis = appResize(event.type)
+    local vis = appResize(event.type, event.lis)
 
     -- if MENU and MENU.group then
     --     vis = MENU.group.isVisible

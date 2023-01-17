@@ -5,7 +5,7 @@ M.listType = {
     'events',
     'vars',
     'objects',
-    'objects2',
+    'media',
     'control',
     'physics',
     'transition',
@@ -14,7 +14,7 @@ M.listType = {
     'widgets',
     'snapshot',
     'network',
-    'media',
+    'objects2',
     'custom'
 }
 
@@ -152,7 +152,15 @@ M.listBlock = {
             'toastLong',
             'comment',
             'requestApi',
-            'requestExit'
+            'requestExit',
+        'setBackgroundColor',
+            'setBackgroundRGB',
+            'setBackgroundHEX',
+            'setPortraitOrientation',
+            'setLandscapeOrientation',
+            'scheduleNotification',
+            'setAccelerometerFrequency',
+            'turnOnAccelerometer'
     },
 
     ['shapes'] = {
@@ -389,6 +397,14 @@ M.listName = {
             ['onFieldEnded'] = {'events', 'fun', 'localtable'},
             ['onWebViewCallback'] = {'events', 'fun', 'localtable'},
 
+        -- noob
+        ['onConditionNoob'] = {'events', 'value'},
+            ['onFunNoob'] = {'events', 'fun'},
+            ['onTouchBeganNoob'] = {'events', 'value'},
+            ['onTouchEndedNoob'] = {'events', 'value'},
+            ['onTouchMovedNoob'] = {'events', 'value'},
+            ['onLocalCollisionBeganNoob'] = {'events', 'value', 'value'},
+
     -- vars
     ['setVar'] = {'vars', 'var', 'value'},
         ['updVar'] = {'vars', 'var', 'value'},
@@ -447,8 +463,32 @@ M.listName = {
         ['frontObject'] = {'objects', 'value'},
         ['backObject'] = {'objects', 'value'},
 
+        -- noob
+        ['newObjectNoob'] = {'objects', 'value', 'value', 'value'},
+            ['setPosNoob'] = {'objects', 'value', 'value', 'value'},
+            ['setPosXNoob'] = {'objects', 'value', 'value'},
+            ['setPosYNoob'] = {'objects', 'value', 'value'},
+            ['setSizeNoob'] = {'objects', 'value', 'value'},
+            ['setRotationNoob'] = {'objects', 'value', 'value'},
+            ['setAlphaNoob'] = {'objects', 'value', 'value'},
+            ['setWidthNoob'] = {'objects', 'value', 'value'},
+            ['setHeightNoob'] = {'objects', 'value', 'value'},
+            ['updPosXNoob'] = {'objects', 'value', 'value'},
+            ['updPosYNoob'] = {'objects', 'value', 'value'},
+            ['updSizeNoob'] = {'objects', 'value', 'value'},
+            ['updRotationNoob'] = {'objects', 'value', 'value'},
+            ['updAlphaNoob'] = {'objects', 'value', 'value'},
+            ['updWidthNoob'] = {'objects', 'value', 'value'},
+            ['updHeightNoob'] = {'objects', 'value', 'value'},
+            ['hideObjectNoob'] = {'objects', 'value'},
+            ['showObjectNoob'] = {'objects', 'value'},
+            ['removeObjectNoob'] = {'objects', 'value'},
+            ['frontObjectNoob'] = {'objects', 'value'},
+            ['backObjectNoob'] = {'objects', 'value'},
+
     -- control
     ['requestFun'] = {'control', 'fun'},
+        ['requestFunNoob'] = {'control', 'fun'},
         ['requestFunParams'] = {'control', 'fun', 'value'},
         ['returnValue'] = {'control', 'value'},
         ['timer'] = {'control', 'value', 'value'},
@@ -491,7 +531,14 @@ M.listName = {
             ['setFocusMultitouch'] = {'control', 'value', 'value'},
             ['activateMultitouch'] = {'control'},
             ['deactivateMultitouch'] = {'control'},
-
+        ['setBackgroundColor'] = {'control', 'color'},
+            ['setBackgroundRGB'] = {'control', 'value', 'value', 'value'},
+            ['setBackgroundHEX'] = {'control', 'value'},
+            ['setPortraitOrientation'] = {'control', 'fun'},
+            ['setLandscapeOrientation'] = {'control', 'fun'},
+            ['scheduleNotification'] = {'control', 'value', 'value'},
+            ['setAccelerometerFrequency'] = {'control', 'value'},
+            ['turnOnAccelerometer'] = {'control', 'fun'},
     -- shapes
     ['newRect'] = {'shapes', 'value', 'color', 'value', 'value', 'value', 'value'},
         ['newRoundedRect'] = {'shapes', 'value', 'value', 'value', 'value', 'value', 'value'},
@@ -655,19 +702,20 @@ M.listName = {
         ['removeVideo'] = {'media', 'value'},
 
     -- transition
-    ['setTransitionTo'] = {'transition', 'value', 'transitName', 'animation', 'value', 'value', 'value', 'value', 'value', 'value', 'value', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
-        ['setTransitionPos'] = {'transition', 'value', 'transitName', 'animation', 'value', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
-        ['setTransitionSize'] = {'transition', 'value', 'transitName', 'animation', 'value', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
-        ['setTransitionScale'] = {'transition', 'value', 'transitName', 'animation', 'value', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
-        ['setTransitionRotation'] = {'transition', 'value', 'animation', 'transitName', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
-        ['setTransitionAlpha'] = {'transition', 'value', 'animation', 'transitName', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
-        ['setTransitionAngles'] = {'transition', 'value', 'animation', 'transitName', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
-        ['setTransitionPause'] = {'transition', 'value', 'transitName'},
-        ['setTransitionResume'] = {'transition', 'value', 'transitName'},
-        ['setTransitionCancel'] = {'transition', 'value', 'transitName'},
-        ['setTransitionPauseAll'] = {'transition'},
-        ['setTransitionResumeAll'] = {'transition'},
-        ['setTransitionCancelAll'] = {'transition'},
+    ['setTransitionTo'] = {'transition', 'value', 'transitName', 'animation', 'value', 'value', 'value', 'value', 'value',
+        'value', 'value', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
+            ['setTransitionPos'] = {'transition', 'value', 'transitName', 'animation', 'value', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
+            ['setTransitionSize'] = {'transition', 'value', 'transitName', 'animation', 'value', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
+            ['setTransitionScale'] = {'transition', 'value', 'transitName', 'animation', 'value', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
+            ['setTransitionRotation'] = {'transition', 'value', 'animation', 'transitName', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
+            ['setTransitionAlpha'] = {'transition', 'value', 'animation', 'transitName', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
+            ['setTransitionAngles'] = {'transition', 'value', 'animation', 'transitName', 'value', 'value', 'value', 'transitEasing', 'fun', 'fun', 'fun', 'fun', 'fun'},
+            ['setTransitionPause'] = {'transition', 'value', 'transitName'},
+            ['setTransitionResume'] = {'transition', 'value', 'transitName'},
+            ['setTransitionCancel'] = {'transition', 'value', 'transitName'},
+            ['setTransitionPauseAll'] = {'transition'},
+            ['setTransitionResumeAll'] = {'transition'},
+            ['setTransitionCancelAll'] = {'transition'},
 
     -- network
     ['openURL'] = {'network', 'value'},
@@ -690,9 +738,16 @@ M.listName = {
 
 M.listDelimiter = {
     ['groups'] = {'newTag'},
-    ['control'] = {'setListener'},
+    ['control'] = {'setListener', 'setBackgroundColor'},
     ['vars'] = {'setTextPos'},
     ['events'] = {'onLocalCollisionBegan'},
+    ['physics'] = {'setWorldGravity'},
+}
+
+M.listDelimiterNoob = {
+    ['groups'] = {'newTag'},
+    ['control'] = {'timerPauseAll'},
+    ['vars'] = {'setTextPos'},
     ['physics'] = {'setWorldGravity'},
 }
 
@@ -707,8 +762,9 @@ M.listNested = {
     ['foreach'] = {'foreachEnd'}
 }
 
+M.listDelimiterCopy = COPY_TABLE(M.listDelimiter)
 M.listBlock.everyone = {'onStart', 'onFun', 'newObject', 'setSize', 'setVar', 'newText', 'setText', 'timer', 'requestFun', 'setListener'}
-M.listBlock._everyone = 'onStart, onFun, newObject, setPos, setSize, setVar, requestFun, setListener, setText, newText, timer'
+M.listBlock._everyone = 'onStart, onFun, newObject, setSize, setVar, newText, setText, timer, requestFun, setListener'
 
 for i = 1, #M.listType do
     if M.listType[i] ~= 'none' and M.listType[i] ~= 'everyone' then
@@ -722,6 +778,74 @@ for i = 1, #M.listType do
     end
 end
 
+M.listBlockNoob = COPY_TABLE(M.listBlock)
+M.listBlockCopy = COPY_TABLE(M.listBlock)
+M.listDeleteType = {[11] = 'widgets', [12] = 'snapshot', [13] = 'network', [14] = 'objects2', [15] = 'custom'}
+
+for type, blocks in pairs(M.listBlock) do
+    if type ~= 'everyone' and type ~= '_everyone' then
+        for index, block in pairs(blocks) do
+            if M.listName[block .. 'Noob'] then
+                M.listBlockNoob.everyone[table.indexOf(M.listBlockNoob.everyone, block)] = block .. 'Noob'
+                M.listBlockNoob[type][table.indexOf(M.listBlockNoob[type], block)] = block .. 'Noob'
+            end
+        end
+    end
+end
+
+local blocksDelete = {
+    ['onFunParams'] = 'events',
+        ['onFirebase'] = 'events',
+        ['onSuspend'] = 'events',
+        ['onResume'] = 'events',
+        ['onLocalCollisionEnded'] = 'events',
+        ['onLocalPreCollision'] = 'events',
+        ['onLocalPostCollision'] = 'events',
+        ['onGlobalCollisionBegan'] = 'events',
+        ['onGlobalCollisionBeganEnded'] = 'events',
+        ['onGlobalPreCollision'] = 'events',
+        ['onGlobalPostCollision'] = 'events',
+        ['onSliderMoved'] = 'events',
+        ['onWebViewCallback'] = 'events',
+        ['onFieldBegan'] = 'events',
+        ['onFieldEditing'] = 'events',
+        ['onFieldEnded'] = 'events',
+
+    ['newSprite'] = 'objects',
+        ['setAnchor'] = 'objects',
+
+    ['setListener'] = 'control',
+        ['requestFunParams'] = 'control',
+        ['for'] = 'control',
+        ['while'] = 'control',
+        ['foreach'] = 'control',
+        ['break'] = 'control',
+        ['setLocalCollision'] = 'control',
+        ['setLocalPreCollision'] = 'control',
+        ['setLocalPostCollision'] = 'control',
+        ['setGlobalCollision'] = 'control',
+        ['setGlobalPreCollision'] = 'control',
+        ['setGlobalPostCollision'] = 'control',
+        ['setFocus'] = 'control',
+        ['setFocusMultitouch'] = 'control',
+        ['requestApi'] = 'control'
+}
+
+for index, type in pairs(M.listDeleteType) do
+    for index, block in pairs(M.listBlock[type]) do
+        blocksDelete[block] = type
+    end
+end
+
+for block, type in pairs(blocksDelete) do
+    table.remove(M.listBlockNoob.everyone, table.indexOf(M.listBlockNoob.everyone, block))
+    table.remove(M.listBlockNoob[type], table.indexOf(M.listBlockNoob[type], block))
+end
+
+table.remove(M.listBlockNoob.everyone, 4) table.remove(M.listBlockNoob.everyone, 6)
+table.remove(M.listBlockNoob.everyone, table.indexOf(M.listBlockNoob.everyone, 'onConditionNoob'))
+table.insert(M.listBlockNoob.everyone, 3, 'onConditionNoob')
+
 M.getType = function(name)
     return M.listName[name] and M.listName[name][1] or 'custom'
 end
@@ -730,8 +854,9 @@ end
 -- local r, g, b = math.random(0, 200) / 255, math.random(0, 200) / 255, math.random(0, 200) / 255
 -- print(r .. ', ' .. g .. ', ' .. b)
 
-M.getBlockColor = function(name, comment, type, color)
+M.getBlockColor = function(name, comment, type, color, lock)
     local type = type or M.getType(name)
+    if lock then return 0.3, 0.3, 0.3 end
     if comment or type == 'none' then return 0.6 end
 
     if type == 'events' then

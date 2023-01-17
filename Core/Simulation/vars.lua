@@ -57,26 +57,26 @@ M['updVar'] = function(params)
 end
 
 M['setObjVar'] = function(params)
-    local key = UTF8.sub(CALC(params[1], '[\'KEY\']', true), 2)
-    local obj = 'GAME.group.objects[' .. CALC(params[2]) .. ']._data'
-    local value = CALC(params[3])
+    local key = CALC(params[1], '[\'KEY\']', true)
+    local obj, value = 'GAME.group.objects[' .. CALC(params[2]) .. ']._data', CALC(params[3])
+    local key = UTF8.sub(key, 1, 2) ~= 't[' and '[' .. key .. ']' or UTF8.sub(key, 2)
 
     GAME.lua = GAME.lua .. ' pcall(function() ' .. obj .. key .. ' = ' .. value .. ' end)'
 end
 
 M['addTable'] = function(params)
-    local key = UTF8.sub(CALC(params[1], '[\'KEY\']', true), 2)
-    local table = CALC(params[2], 'a', true)
-    local value = CALC(params[3])
+    local key = CALC(params[1], '[\'KEY\']', true)
+    local table, value = CALC(params[2], 'a', true), CALC(params[3])
+    local key = UTF8.sub(key, 1, 2) ~= 't[' and '[' .. key .. ']' or UTF8.sub(key, 2)
 
     GAME.lua = GAME.lua .. ' pcall(function() if ' .. table .. ' then ' .. table .. key .. ' = ' .. value
     GAME.lua = GAME.lua .. ' else ' .. table .. ' = {} ' .. table .. key .. ' = ' .. value .. ' end end)'
 end
 
 M['insertTable'] = function(params)
-    local key = UTF8.sub(CALC(params[1], '[1]', true), 2)
-    local table = CALC(params[2], 'a', true)
-    local value = CALC(params[3])
+    local key = CALC(params[1], '[\'KEY\']', true)
+    local table, value = CALC(params[2], 'a', true), CALC(params[3])
+    local key = UTF8.sub(key, 1, 2) ~= 't[' and '[' .. key .. ']' or UTF8.sub(key, 2)
     local temp_key = key
 
     while true do
@@ -91,8 +91,9 @@ M['insertTable'] = function(params)
 end
 
 M['removeTable'] = function(params)
-    local key = UTF8.sub(CALC(params[2], '[1]', true), 2)
+    local key = CALC(params[1], '[\'KEY\']', true)
     local table = CALC(params[1], 'a', true)
+    local key = UTF8.sub(key, 1, 2) ~= 't[' and '[' .. key .. ']' or UTF8.sub(key, 2)
     local temp_key = key
 
     while true do

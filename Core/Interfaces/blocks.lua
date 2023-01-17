@@ -1,7 +1,6 @@
 local listeners = {}
 local LIST = require 'Core.Modules.interface-list'
 local LOGIC = require 'Core.Modules.logic-input'
-local INFO = require 'Data.info'
 
 listeners.but_title = function(target)
     EXITS.blocks()
@@ -74,7 +73,9 @@ listeners.but_list = function(target)
     end
 end
 
-listeners.checkLocalData = function(bIndex, pIndex, pType, script, data)
+listeners.checkLocalData = function(bIndex, pIndex, pType, data)
+    local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
+
     if pType == 'value' or script.params[bIndex].params[pIndex][1] then
         local name = pType ~= 'value' and script.params[bIndex].params[pIndex][1][1] or ''
         local modify = pType ~= 'value' and script.params[bIndex].params[pIndex][1][2] or ''
@@ -278,7 +279,7 @@ listeners.but_okay = function(target)
                                 or INFO.listName[BLOCKS.group.blocks[j].data.name][k] == 'var'
                                 or INFO.listName[BLOCKS.group.blocks[j].data.name][k] == 'table'
                                 or INFO.listName[BLOCKS.group.blocks[j].data.name][k] == 'value' then
-                                    listeners.checkLocalData(j, k - 1, INFO.listName[BLOCKS.group.blocks[j].data.name][k], script, data)
+                                    listeners.checkLocalData(j, k - 1, INFO.listName[BLOCKS.group.blocks[j].data.name][k], data)
                                 end
                             end
                         end
@@ -464,7 +465,7 @@ end
 
 return function(e)
     if e.bIndex then
-        listeners.checkLocalData(e.bIndex, e.pIndex, e.pType, e.script, e.data)
+        listeners.checkLocalData(e.bIndex, e.pIndex, e.pType, e.data)
     elseif BLOCKS.group.isVisible and (ALERT or e.target.button == 'but_okay') then
         if e.phase == 'began' then
             display.getCurrentStage():setFocus(e.target)

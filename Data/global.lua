@@ -2,6 +2,7 @@ LANG, STR = {}, {}
 
 CLIENT = require 'Network.client'
 SERVER = require 'Network.server'
+NOTIFICATIONS = require 'plugin.notifications.v2'
 PARTICLE = require 'Emitter.particleDesigner'
 NOISE = require 'Core.Modules.noise'
 RESIZE = require 'Core.Modules.app-resize'
@@ -28,6 +29,7 @@ BUFFER = {}
 LIVE = false
 ALERT = true
 INDEX_LIST = 0
+NOOBMODE = false
 MORE_LIST = true
 LAST_CHECKBOX = 0
 ORIENTATION.init()
@@ -45,7 +47,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1223
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1229
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
@@ -163,7 +165,7 @@ GET_SCROLL_HEIGHT = function(group)
 end
 
 READ_FILE = function(path, bin)
-    local file, data = io.open(path, bin and 'rb' or 'r'), nil
+    local file, data = io.open(path or '', bin and 'rb' or 'r'), nil
 
     if file then
         data = file:read('*a')
@@ -187,7 +189,7 @@ IS_FOLDER = function(path)
 end
 
 IS_IMAGE = function(path)
-    local image = display.newImage2(path, 10000, 10000)
+    local image = display.newImage2(path, system.DocumentsDirectory, 10000, 10000)
     local is_image = type(image) == 'table' and image.width > 0 and image.height > 0
     pcall(function() image:removeSelf() image = nil end) return is_image
 end
@@ -322,9 +324,11 @@ OS_COPY = function(link, link2)
     end
 end
 
-NEW_APP_CODE = function(title, link)
+NEW_APP_CODE = function(title, link, checkbox)
     return {
         build = tostring(BUILD),
+        created = tostring(BUILD),
+        noobmode = checkbox,
         title = title,
         link = link,
         tables = {},
@@ -383,7 +387,7 @@ end
 display.newImage2, display.newImage = display.newImage, function(link, ...)
     local image = display.newImage2(link, ...)
 
-    if not (type(image) == 'table' and image.width > 0 and image.height > 0) then
+    if image and not (type(image) == 'table' and image.width > 0 and image.height > 0) then
         local args = {...} image = SVG.newImage({
             filename = link, baseDir = args[1],
             x = type(args[1]) == 'userdata' and (args[2] or 0) or (args[1] or 0),
@@ -391,14 +395,20 @@ display.newImage2, display.newImage = display.newImage, function(link, ...)
         })
     end
 
-    return type(image) == 'table' and image.width > 0 and image.height > 0 and image or nil
+    return (type(image) == 'table' and image.width > 0 and image.height > 0) and image or nil
 end
 
 LOCAL = require 'Data.local'
-LANG.en = require 'Strings.en'
-LANG.ru = require 'Strings.ru'
-LANG.pt = require 'Strings.pt'
-LANGS = {'en', 'ru', 'pt'}
+LANGS = {'en', 'ru', 'pt', 'custom'}
+LANG.custom = {}
+LANG.ru = {}
+LANG.en = {}
+LANG.pt = {}
+
+for i = 1, #LANGS do
+    local langData = JSON.decode(READ_FILE(system.pathForFile('Strings/' .. LANGS[i] .. '.json')))
+    if langData then for _, langT in pairs(langData) do for key, str in pairs(langT) do LANG[LANGS[i]][key] = str end end end
+end
 
 if LOCAL.back == 'System' then native.setProperty('androidSystemUiVisibility', 'default')
 else native.setProperty('androidSystemUiVisibility', 'immersiveSticky') end
@@ -407,8 +417,9 @@ BOTTOM_HEIGHT = LOCAL.back == 'CCode' and 100 or BOTTOM_HEIGHT
 MAX_Y = CENTER_Y + DISPLAY_HEIGHT / 2 - BOTTOM_HEIGHT
 
 for i = 1, #LANGS do if LANGS[i] == LOCAL.lang then break elseif i == #LANGS then LOCAL.lang = 'en' end end
-STR = LANG[LOCAL.lang] for k, v in pairs(LANG.ru) do if not STR[k] then STR[k] = v elseif type(STR[k]) == 'table' then
-for k2, v2 in ipairs(LANG.ru[k]) do if not STR[k][k2] then STR[k][k2] = v2 end end end end
+STR = LANG[LOCAL.lang] for k, v in pairs(LANG.ru) do if not STR[k] then STR[k] = LANG.en[k] or v
+elseif type(STR[k]) == 'table' then for k2, v2 in ipairs(LANG.ru[k]) do if not STR[k][k2]
+then STR[k][k2] = (LANG.en[k] and LANG.en[k][k2]) and LANG.en[k][k2] or v2 end end end end
 
 if IS_SIM then
     JSON.encode, JSON.encode2, JSON.encode4 = JSON.prettify, JSON.encode, JSON.encode3
@@ -417,7 +428,7 @@ else
     JSON.encode2 = JSON.encode
 end
 
-require('Core.Modules.custom-block').getBlocks()
+INFO = require('Data.info') require('Core.Modules.custom-block').getBlocks()
 if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'}) end
 -- Runtime:addEventListener('unhandledError', function(event) return true end)
 

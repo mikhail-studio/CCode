@@ -1,5 +1,4 @@
 local BLOCK = require 'Core.Modules.logic-block'
-local INFO = require 'Data.info'
 local M = {}
 
 local genBlocks = function(data, script)

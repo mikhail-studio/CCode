@@ -1,6 +1,5 @@
 local COLOR = require 'Core.Modules.interface-color'
 local LIST = require 'Core.Modules.interface-list'
-local INFO = require 'Data.info'
 local M = {}
 
 M.getListButtons = function(type)
@@ -77,7 +76,7 @@ M.getListValue = function(type, text)
             or text == STR['blocks.select.tag'] and 'tag'
             or text == STR['blocks.select.widget'] and 'widget' or 'obj'
     elseif type == 'transitEasing' then
-        return text
+        return text or 'linear'
     else
         return nil
     end

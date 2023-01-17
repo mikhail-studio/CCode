@@ -56,7 +56,6 @@ end
 
 listeners.blocks = function()
     if BLOCKS.custom then
-        local INFO = require 'Data.info'
         local data = GET_GAME_CODE(CURRENT_LINK)
 
         WINDOW.new(STR['scripts.sandbox.exit'], {STR['scripts.sandbox.not.save'], STR['scripts.sandbox.save']}, function(e)

@@ -3,13 +3,14 @@ local M = {}
 
 M['createServer'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.stops, SERVER.createServer('
-    GAME.lua = GAME.lua .. CALC(params[1], '22222') .. ', function(e) if GAME.group then ' .. CALC(params[2], 'a', true) .. '(e) end end)) end)'
+    GAME.lua = GAME.lua .. CALC(params[1], '22222') .. ', function(e) if GAME.group then'
+    GAME.lua = GAME.lua .. ' return ' .. CALC(params[2], 'a', true) .. '(e) end end)) end)'
 end
 
 M['connectToServer'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.stops, CLIENT.createClientLoop('
     GAME.lua = GAME.lua .. CALC(params[1], 'nil') .. ', ' .. CALC(params[2], '22222') .. ','
-    GAME.lua = GAME.lua .. ' function(e) if GAME.group then ' .. CALC(params[3], 'a', true) .. '(e) end end)) end)'
+    GAME.lua = GAME.lua .. ' function(e) if GAME.group then return ' .. CALC(params[3], 'a', true) .. '(e) end end)) end)'
 end
 
 M['requestFirebase'] = function(params, method)

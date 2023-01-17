@@ -36,6 +36,14 @@ M.getPhysicsParams = function(friction, bounce, density, hitbox, filter)
     elseif hitbox.type == 'mesh' then
         params.outline = hitbox.outline
     elseif hitbox.type == 'polygon' then
+        if type(hitbox.shape) == 'table' then
+            for i = 1, #hitbox.shape do
+                if i % 2 == 0 then
+                    hitbox.shape[i] = -hitbox.shape[i]
+                end
+            end
+        end
+
         params.shape = hitbox.shape
     end
 

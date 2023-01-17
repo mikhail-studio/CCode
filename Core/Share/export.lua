@@ -14,7 +14,7 @@ return {
     new = function(link)
         local data, dataCustom, custom = GET_GAME_CODE(link), {}, GET_GAME_CUSTOM()
         local name, code = data.title, JSON.encode3(data, {keyorder = KEYORDER})
-        local hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, code, '?.cc_ode-'), '*cc.ode_?')
+        local hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, code, '?.cc_ode-123%'), '%^()*cc.ode_?')
 
         for i = 1, #data.scripts do
             local script = GET_GAME_SCRIPT(CURRENT_LINK, i, data)

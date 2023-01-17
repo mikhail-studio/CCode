@@ -6,8 +6,8 @@ M['setSprite'] = function(params)
     local link = CALC(params[2])
 
     GAME.lua = GAME.lua .. ' pcall(function() local link, filter = other.getImage(' .. link .. ')'
-    GAME.lua = GAME.lua .. ' display.setDefault(\'magTextureFilter\', filter)'
-    GAME.lua = GAME.lua .. ' display.setDefault(\'minTextureFilter\', filter)'
+    GAME.lua = GAME.lua .. ' display.setDefault(\'magTextureFilter\', filter ~= \'linear\' and \'nearest\' or \'linear\')'
+    GAME.lua = GAME.lua .. ' display.setDefault(\'minTextureFilter\', filter ~= \'linear\' and \'nearest\' or \'linear\')'
     GAME.lua = GAME.lua .. ' local image = display.newImage(tostring(link), system.DocumentsDirectory)'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._width = image.width'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._height = image.height'
@@ -211,8 +211,8 @@ M['getBitmapSprite'] = function(params)
     local link, name = CALC(params[1]), CALC(params[2])
 
     GAME.lua = GAME.lua .. ' pcall(function() local link, filter = other.getImage(' .. link .. ')'
-    GAME.lua = GAME.lua .. ' display.setDefault(\'magTextureFilter\', filter)'
-    GAME.lua = GAME.lua .. ' display.setDefault(\'minTextureFilter\', filter)'
+    GAME.lua = GAME.lua .. ' display.setDefault(\'magTextureFilter\', filter or \'nearest\')'
+    GAME.lua = GAME.lua .. ' display.setDefault(\'minTextureFilter\', filter or \'nearest\')'
     GAME.lua = GAME.lua .. ' other.getBitmapTexture(link, ' .. name .. ') end)'
 end
 

@@ -58,8 +58,20 @@ M['noise'] = function(x, y, seed)
     return NOISE.new(x, y, seed)
 end
 
-M['encode'] = function(t, prettify)
+M['encode'] = function(t, prettify, validate)
     local isComplete, result = pcall(function()
+        if validate then
+            local t = COPY_TABLE(t)
+
+            for k, v in pairs(t) do
+                if type(k) ~= 'string' and type(k) ~= 'number' then
+                    t[k], t[tostring(k)] = nil, v
+                end
+            end
+
+            return JSON[prettify and 'prettify' or 'encode'](t)
+        end
+
         return JSON[prettify and 'prettify' or 'encode'](t)
     end) return isComplete and result or '{}'
 end

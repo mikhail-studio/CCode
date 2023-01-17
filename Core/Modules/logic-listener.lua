@@ -1,6 +1,5 @@
 local LISTENER = require 'Core.Interfaces.blocks'
 local LIST = require 'Core.Modules.logic-list'
-local INFO = require 'Data.info'
 local M = {}
 
 function onCheckboxPress(e)
@@ -258,10 +257,6 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
         else
             e.target.move = false
         end
-
-        -- e.target.y = e.y - select(2, scroll:getContentPosition()) - M.diffY
-        -- M.lastY = e.target.y
-        -- e.target:toFront()
     end
 end
 
@@ -327,7 +322,6 @@ end
 
 local function stopMoveLogicBlock(e, group, scroll)
     if #group.blocks > 1 then
-        local target = group.blocks[M.index]
         local y = M.index == 1 and 50 or group.blocks[M.index - 1].y + group.blocks[M.index - 1].block.height / 2 + e.target.block.height / 2 - 4
         local addY = M.index == 1 and 24 + (e.target.block.height - 120) / 2 or 24
         e.target.x, e.target.y = e.target.x - 40, e.target.data.event and y + addY or y
@@ -356,16 +350,43 @@ local function stopMoveLogicBlock(e, group, scroll)
 
         if M.countClose > 0 then
             for i = #group.blocks, 1, -1 do
+                local oldCountBlocks = 0
+
+                if i < M.index then
+                    oldCountBlocks = #group.blocks
+                end
+
                 if M.nestedClose[tostring(group.blocks[i])] then
                     INDEX_LIST = 4
                     M.nestedClose[tostring(group.blocks[i])] = nil
                     onCheckboxPress({target =  group.blocks[i]}) ALERT = true
                     LISTENER({target = {button = 'but_okay', click = true}, phase = 'ended'})
                 end
+
+                if i < M.index then
+                    M.index = M.index + (#group.blocks - oldCountBlocks)
+                end
             end
 
+            local startNestedFor = true
+
             for i = 1, #group.blocks do
-                group.blocks[i].x = i == 1 and group.blocks[1].x + 20 * M.countClose or group.blocks[1].x
+                if group.blocks[i].x ~= BLOCK_CENTER_X then
+                    group.blocks[i].x = BLOCK_CENTER_X
+                end
+
+                if startNestedFor and e.target.data.nested and i >= M.index then
+                    if group.blocks[i].data.event and i ~= M.index then startNestedFor = false end
+                    for j = 2, #INFO.listName[group.blocks[i].data.name] do
+                        if INFO.listName[group.blocks[i].data.name][j] == 'localvar' or INFO.listName[group.blocks[i].data.name][j] == 'localtable'
+                        or INFO.listName[group.blocks[i].data.name][j] == 'var' or INFO.listName[group.blocks[i].data.name][j] == 'table'
+                        or INFO.listName[group.blocks[i].data.name][j] == 'value' then
+                            LISTENER({
+                                bIndex = i, pIndex = j - 1, pType = INFO.listName[group.blocks[i].data.name][j], data = M.data
+                            })
+                        end
+                    end
+                end
             end
         end
 
@@ -377,44 +398,13 @@ local function stopMoveLogicBlock(e, group, scroll)
             scroll:scrollToPosition({y = diffScrollY > 0 and 0 or diffScrollY, time = 0})
         end
 
-        for j = 1, M.index - 1 do
-            if group.blocks[j].x > BLOCK_CENTER_X then
-                group.blocks[j].x = BLOCK_CENTER_X
-            end
-        end
-
-        for j = M.index, #group.blocks do
-            if group.blocks[j] == target then
-                M.index = j
-            end
-
-            if group.blocks[j].x > BLOCK_CENTER_X then
-                group.blocks[j].x = BLOCK_CENTER_X
-            end
-        end
-
-        if e.target.data.nested then
-            for j = M.index, #group.blocks do
-                if group.blocks[j].data.event and j ~= M.index then break end
-                for i = 2, #INFO.listName[group.blocks[j].data.name] do
-                    if INFO.listName[group.blocks[j].data.name][i] == 'localvar' or INFO.listName[group.blocks[j].data.name][i] == 'localtable'
-                    or INFO.listName[group.blocks[j].data.name][i] == 'var' or INFO.listName[group.blocks[j].data.name][i] == 'table'
-                    or INFO.listName[group.blocks[j].data.name][i] == 'value' then
-                        LISTENER({
-                            bIndex = j, pIndex = i - 1, pType = INFO.listName[group.blocks[j].data.name][i],
-                            script = M.script, data = M.data
-                        })
-                    end
-                end
-            end
-        else
+        if not e.target.data.nested then
             for i = 2, #INFO.listName[e.target.data.name] do
                 if INFO.listName[e.target.data.name][i] == 'localvar' or INFO.listName[e.target.data.name][i] == 'localtable'
                 or INFO.listName[e.target.data.name][i] == 'var' or INFO.listName[e.target.data.name][i] == 'table'
                 or INFO.listName[e.target.data.name][i] == 'value' then
                     LISTENER({
-                        bIndex = M.index, pIndex = i - 1, pType = INFO.listName[e.target.data.name][i],
-                        script = M.script, data = M.data
+                        bIndex = M.index, pIndex = i - 1, pType = INFO.listName[e.target.data.name][i], data = M.data
                     })
                 end
             end

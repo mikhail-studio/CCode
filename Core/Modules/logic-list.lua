@@ -1,6 +1,5 @@
 local LISTENER = require 'Core.Interfaces.blocks'
 local BLOCK = require 'Core.Modules.logic-block'
-local INFO = require 'Data.info'
 local M = {}
 
 local function getButtonText(comment, nested, name)

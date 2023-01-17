@@ -64,8 +64,8 @@ M['setListener'] = function(params)
     GAME.lua = GAME.lua .. ' if GAME.multi then display.getCurrentStage():setFocus(e.target, e.id) else'
     GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(e.target) end else'
     GAME.lua = GAME.lua .. ' if GAME.multi then display.getCurrentStage():setFocus(e.target, nil) else'
-    GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(nil) end end for name, object in pairs(GAME.group.objects)'
-    GAME.lua = GAME.lua .. ' do if object._touch and object ~= e.target then GAME.group.objects[name]._touch = false end end'
+    GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(nil) for name, object in pairs(GAME.group.objects) do'
+    GAME.lua = GAME.lua .. ' if object._touch and object ~= e.target then GAME.group.objects[name]._touch = false end end end end'
     GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() return ' .. CALC(params[2], 'a', true) .. '(e)'
     GAME.lua = GAME.lua .. ' end) return isComplete and result or false end end) end)'
 end
@@ -208,6 +208,51 @@ end
 
 M['timerCancelAll'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() timer.cancelAll() end)'
+end
+
+M['setBackgroundColor'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. CALC(params[1], '{0}')
+    GAME.lua = GAME.lua .. ' display.setDefault(\'background\', colors[1]/255, colors[2]/255, colors[3]/255) end)'
+end
+
+M['setBackgroundRGB'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() display.setDefault(\'background\','
+    GAME.lua = GAME.lua .. CALC(params[1]) .. '/255, ' .. CALC(params[2]) .. '/255, ' .. CALC(params[3]) .. '/255) end)'
+end
+
+M['setBackgroundHEX'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local hex = UTF8.trim(tostring(' .. CALC(params[1], '\'000000\'') .. '))'
+    GAME.lua = GAME.lua .. ' if UTF8.sub(hex, 1, 1) == \'#\' then hex = UTF8.sub(hex, 2, 7) end'
+    GAME.lua = GAME.lua .. ' if UTF8.len(hex) ~= 6 then hex = \'FFFFFF\' end local errorHex = false'
+    GAME.lua = GAME.lua .. ' local filterHex = {\'0\', \'1\', \'2\', \'3\', \'4\', \'5\', \'6\','
+    GAME.lua = GAME.lua .. ' \'7\', \'8\', \'9\', \'A\', \'B\', \'C\', \'D\', \'E\', \'F\'}'
+    GAME.lua = GAME.lua .. ' for indexHex = 1, 6 do local symHex = UTF8.upper(UTF8.sub(hex, indexHex, indexHex))'
+    GAME.lua = GAME.lua .. ' for i = 1, #filterHex do if symHex == filterHex[i] then break elseif i == #filterHex then errorHex = true end end'
+    GAME.lua = GAME.lua .. ' end if errorHex then hex = \'FFFFFF\' end local r, g, b = unpack(math.hex(hex))'
+    GAME.lua = GAME.lua .. ' display.setDefault(\'background\', r/255, g/255, b/255) end)'
+end
+
+M['setPortraitOrientation'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() setOrientationApp({type = \'portrait\', lis = ' .. CALC(params[1], 'a', true) .. '}) end)'
+end
+
+M['setLandscapeOrientation'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() setOrientationApp({type = \'landscape\', lis = ' .. CALC(params[1], 'a', true) .. '}) end)'
+end
+
+M['scheduleNotification'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() NOTIFICATIONS.scheduleNotification(' .. CALC(params[1]) .. ','
+    GAME.lua = GAME.lua .. ' {alert = ' .. CALC(params[2]) .. '}) end)'
+end
+
+M['turnOnAccelerometer'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.accelerometers, function(e) pcall(function()'
+    GAME.lua = GAME.lua .. ' if GAME.group then ' .. CALC(params[1], 'a', true) .. '(e) end end) end)'
+    GAME.lua = GAME.lua .. ' Runtime:addEventListener(\'accelerometer\', GAME.group.accelerometers[#GAME.group.accelerometers]) end)'
+end
+
+M['setAccelerometerFrequency'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() system.setAccelerometerInterval(' .. CALC(params[1]) .. ') end)'
 end
 
 return M

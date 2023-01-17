@@ -1,4 +1,92 @@
-return ' ' .. UTF8.trimFull([[
+return ' ' .. UTF8.trimFull([===[
+    local NOISE = (function()
+        local rseed = math.randomseed
+        local rand = math.random
+        local floor = math.floor
+        local max = math.max
+
+        local MT = {
+        	__index = function(t, i)
+        		return t[i - 256]
+        	end
+        }
+
+        local Perms = setmetatable({
+        	151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225,
+        	140, 36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23, 190, 6, 148,
+        	247, 120, 234, 75, 0, 26, 197, 62, 94, 252, 219, 203, 117, 35, 11, 32,
+        	57, 177, 33, 88, 237, 149, 56, 87, 174, 20, 125, 136, 171, 168, 68,	175,
+        	74, 165, 71, 134, 139, 48, 27, 166, 77, 146, 158, 231, 83, 111,	229, 122,
+        	60, 211, 133, 230, 220, 105, 92, 41, 55, 46, 245, 40, 244, 102, 143, 54,
+        	65, 25, 63, 161, 1, 216, 80, 73, 209, 76, 132, 187, 208, 89, 18, 169,
+        	200, 196, 135, 130, 116, 188, 159, 86, 164, 100, 109, 198, 173, 186, 3, 64,
+        	52, 217, 226, 250, 124, 123, 5, 202, 38, 147, 118, 126, 255, 82, 85, 212,
+        	207, 206, 59, 227, 47, 16, 58, 17, 182, 189, 28, 42, 223, 183, 170, 213,
+        	119, 248, 152, 2, 44, 154, 163, 70, 221, 153, 101, 155, 167, 43, 172, 9,
+        	129, 22, 39, 253, 19, 98, 108, 110, 79, 113, 224, 232, 178, 185, 112, 104,
+        	218, 246, 97, 228, 251, 34, 242, 193, 238, 210, 144, 12, 191, 179, 162, 241,
+        	81,	51, 145, 235, 249, 14, 239,	107, 49, 192, 214, 31, 181, 199, 106, 157,
+        	184, 84, 204, 176, 115, 121, 50, 45, 127, 4, 150, 254, 138, 236, 205, 93,
+        	222, 114, 67, 29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180
+        }, MT)
+
+        local Perms12 = setmetatable({}, MT)
+
+        for i = 1, 256 do
+        	Perms12[i] = Perms[i] % 12 + 1
+        	Perms[i] = Perms[i] + 1
+        end
+
+        local Grads3 = {
+        	{ 1, 1, 0 }, { -1, 1, 0 }, { 1, -1, 0 }, { -1, -1, 0 },
+        	{ 1, 0, 1 }, { -1, 0, 1 }, { 1, 0, -1 }, { -1, 0, -1 },
+        	{ 0, 1, 1 }, { 0, -1, 1 }, { 0, 1, -1 }, { 0, -1, -1 }
+        }
+
+        local function GetN(ix, iy, x, y)
+            local t = 0.5 - x ^ 2 - y ^ 2
+            local index = Perms12[ix + Perms[iy + 1]]
+            local grad = Grads3[index]
+
+            return max(0, t ^ 4) * (grad[1] * x + grad[2] * y)
+        end
+
+        local F = (math.sqrt(3) - 1) / 2
+        local G = (3 - math.sqrt(3)) / 6
+        local G2 = 2 * G - 1
+
+        local function SampleNoise(x, y, seed)
+        	local rdm = 0
+            local x = x or 0
+            local y = y or 0
+
+            if seed then
+                rseed(seed)
+        		rdm = rand(seed, seed * 2)
+                x = x + 100000 + rdm
+                y = y + 100000 + rdm
+            end
+
+            local s = (x + y) * F
+            local ix, iy = floor(x + s), floor(y + s)
+
+            local t = (ix + iy) * G
+            local x0 = x + t - ix
+            local y0 = y + t - iy
+
+            ix, iy = ix % 256, iy % 256
+
+            local n0 = GetN(ix, iy, x0, y0)
+            local n2 = GetN(ix + 1, iy + 1, x0 + G2, y0 + G2)
+            local xi = x0 > y0 and 1 or 0
+            local n1 = GetN(ix + xi, iy + (1 - xi), x0 + G - xi, y0 + G - (1 - xi))
+
+            return 70.1480580019 * (n0 + n1 + n2)
+        end
+
+        return {new = SampleNoise}
+    end)()
+
     local SERVER = (function()
         local crypto = require 'crypto'
         local socket = require 'socket'
@@ -135,6 +223,7 @@ return ' ' .. UTF8.trimFull([[
     end)()
 
     local CLIENT = (function()
+        local server = SERVER
         local socket = require 'socket'
         local json = require 'json'
         local mime = require 'mime'
@@ -145,50 +234,56 @@ return ' ' .. UTF8.trimFull([[
             local sock, clientTable, clientPulse = M.connectToServer(ip, port), {}
 
             local function cPulse()
-                if SERVER.getOnline() then
-                    local data, err = sock:receive()
+                pcall(function()
+                    if server.getOnline() then
+                        local data, err = sock:receive()
 
-                    if err == 'closed' and clientPulse then
-                        sock = M.connectToServer(ip, port, clientTable._sess_hash)
-                        local data = sock and sock:receive() or nil
+                        if err == 'closed' and clientPulse then
+                            sock = M.connectToServer(ip, port, clientTable._sess_hash)
+                            local data = sock and sock:receive() or nil
+                        end
+
+                        if data then
+                            data = json.decode(data)
+
+                            if data._sess_hash and not clientTable._sess_hash then
+                                clientTable._sess_hash = data._sess_hash
+                            elseif not data._sess_hash and clientTable._sess_hash then
+                                data._sess_hash = clientTable._sess_hash
+                            end data._device_id = DEVICE_ID or system.getInfo('deviceID')
+                        else
+                            data = {
+                                _device_id = DEVICE_ID or system.getInfo('deviceID')
+                            }
+                        end
+
+                        local _data = clientListener(data)
+
+                        if type(_data) == 'table' then
+                            if clientTable._sess_hash then
+                                _data._sess_hash = clientTable._sess_hash
+                            end _data._device_id = DEVICE_ID or system.getInfo('deviceID')
+                        end
+
+                        local msg = json.encode2(type(_data) == 'table' and _data or {_device_id = DEVICE_ID or system.getInfo('deviceID')}) .. '\n'
+
+                        local data, err = sock:send(msg)
+                        if err == 'closed' and clientPulse then
+                            sock = M.connectToServer(ip, port, clientTable._sess_hash)
+                            if sock then sock:send(msg) end
+                        end
                     end
-
-                    if data then
-                        data = json.decode(data)
-
-                        if data._sess_hash and not clientTable._sess_hash then
-                            clientTable._sess_hash = data._sess_hash
-                        elseif not data._sess_hash and clientTable._sess_hash then
-                            data._sess_hash = clientTable._sess_hash
-                        end data._device_id = DEVICE_ID or system.getInfo('deviceID')
-                    else
-                        data = {}
-                    end
-
-                    local _data = clientListener(data)
-
-                    if type(_data) == 'table' then
-                        if clientTable._sess_hash then
-                            _data._sess_hash = clientTable._sess_hash
-                        end _data._device_id = DEVICE_ID or system.getInfo('deviceID')
-                    end
-
-                    local msg = json.encode2(type(_data) == 'table' and _data or {}) .. '\n'
-
-                    local data, err = sock:send(msg)
-                    if err == 'closed' and clientPulse then
-                        sock = M.connectToServer(ip, port, clientTable._sess_hash)
-                        if sock then sock:send(msg) end
-                    end
-                end
+                end)
             end
 
 
             clientPulse = timer.performWithDelay(100, cPulse, 0)
 
             local function stopClient()
-                timer.cancel(clientPulse) clientPulse = nil sock:close()
-                if SERVER.online then SERVER.online:close() end
+                pcall(function()
+                    timer.cancel(clientPulse) clientPulse = nil sock:close()
+                    if server.online then server.online:close() end
+                end)
             end
 
             return stopClient
@@ -209,7 +304,7 @@ return ' ' .. UTF8.trimFull([[
     end)()
 
     local function getGlobal()
-        local function appResize(type)
+        local function appResize(type, listener)
             if CURRENT_ORIENTATION ~= type then
                 CENTER_X, CENTER_Y = CENTER_Y, CENTER_X
                 DISPLAY_WIDTH, DISPLAY_HEIGHT = DISPLAY_HEIGHT, DISPLAY_WIDTH
@@ -224,21 +319,26 @@ return ' ' .. UTF8.trimFull([[
 
             CURRENT_ORIENTATION = type
             ORIENTATION.lock(CURRENT_ORIENTATION)
+            if listener then listener({orientation = type}) end
         end
 
         function setOrientationApp(event)
-            appResize(event.type)
+            appResize(event.type, event.lis)
         end
 
+        NOTIFICATIONS = require 'plugin.notifications.v2'
         BITMAP = require 'plugin.memoryBitmap'
         FILE = require 'plugin.cnkFileManager'
         EXPORT = require 'plugin.exportFile'
+        PASTEBOARD = require 'plugin.pasteboard'
         ORIENTATION = require 'plugin.orientation'
         IMPACK = require 'plugin.impack'
         SVG = require 'plugin.nanosvg'
+        UTF8 = require 'plugin.utf8'
         ZIP = require 'plugin.zip'
         PHYSICS = require 'physics'
         JSON = require 'json'
+        LFS = require 'lfs'
         WIDGET = require 'widget'
         CRYPTO = require 'crypto'
 
@@ -255,6 +355,10 @@ return ' ' .. UTF8.trimFull([[
         MAX_X = CENTER_X + DISPLAY_WIDTH / 2 - RIGHT_HEIGHT
         MAX_Y = CENTER_Y + DISPLAY_HEIGHT / 2 - BOTTOM_HEIGHT
 
+        GIVE_PERMISSION_DATA = function()
+            native.showPopup('requestAppPermission', {appPermission = 'Storage', urgency = 'normal'})
+        end
+
         IS_ZERO_TABLE = function(t)
             local result = true
 
@@ -268,14 +372,14 @@ return ' ' .. UTF8.trimFull([[
             return result
         end
 
-        COPY_TABLE = function(t)
+        COPY_TABLE = function(t, isSim)
             local result = {}
 
             pcall(function() if t then
                 for key, value in pairs(t) do
-                    if type(value) == 'table' then
-                        result[key] = COPY_TABLE(value)
-                    else
+                    if type(value) == 'table' and key ~= '_class' and key ~= '_tableListeners' then
+                        result[key] = COPY_TABLE(value, isSim)
+                    elseif (not isSim) or (key ~= '_tableListeners' and key ~= '_class') then
                         result[key] = value
                     end
                 end
@@ -284,14 +388,14 @@ return ' ' .. UTF8.trimFull([[
             return result
         end
 
-        COPY_TABLE_P = function(t)
+        COPY_TABLE_P = function(t, isSim)
             local result = {}
 
             pcall(function()
                 if type(t[1]) == 'table' and #t == 1 then
-                    result = COPY_TABLE(t[1])
+                    result = COPY_TABLE(t[1], isSim)
                 else
-                    result = COPY_TABLE(t)
+                    result = COPY_TABLE(t, isSim)
                 end
             end)
 
@@ -368,23 +472,36 @@ return ' ' .. UTF8.trimFull([[
             then merge(t1[k], t2[k]) else t1[k] = v end end return t1
         end
 
+        display.newImage2, display.newImage = display.newImage, function(link, ...)
+            local image = display.newImage2(link, ...)
+
+            if image and not (type(image) == 'table' and image.width > 0 and image.height > 0) then
+                local args = {...} image = SVG.newImage({
+                    filename = link, baseDir = args[1],
+                    x = type(args[1]) == 'userdata' and (args[2] or 0) or (args[1] or 0),
+                    y = type(args[1]) == 'userdata' and (args[3] or 0) or (args[2] or 0)
+                })
+            end
+
+            return (type(image) == 'table' and image.width > 0 and image.height > 0) and image or nil
+        end
+
         GET_GLOBAL_TABLE = function()
             return {
-                sendLaunchAnalytics = _G.sendLaunchAnalytics, transition = _G.transition, tostring = _G.tostring,
-                tonumber = _G.tonumber, gcinfo = _G.gcinfo, assert = _G.assert, debug = _G.debug, GAME = _G.GAME,
-                io = _G.io, os = _G.os, display = _G.display, load = _G.load, module = _G.module, media = _G.media,
-                native = _G.native, coroutine = _G.coroutine, CENTER_X = _G.CENTER_X, CENTER_Y = _G.CENTER_Y, ipairs = _G.ipairs,
-                TOP_HEIGHT = _G.TOP_HEIGHT, network = _G.network, LFS = _G.lfs, _network_pathForFile = _G._network_pathForFile,
-                pcall = _G.pcall, BUILD = _G.BUILD, MAX_Y = _G.MAX_Y, MAX_X = _G.MAX_X, string = _G.string,
-                xpcall = _G.xpcall, ZERO_Y = _G.ZERO_Y, ZERO_X = _G.ZERO_X, package = _G.package, print = _G.print,
-                table = _G.table, lpeg = _G.lpeg, COPY_TABLE = _G.COPY_TABLE, DISPLAY_HEIGHT = _G.DISPLAY_HEIGHT,
-                unpack = _G.unpack, require = _G.require, setmetatable = _G.setmetatable, next = _G.next,
-                RIGHT_HEIGHT = _G.RIGHT_HEIGHT, graphics = _G.graphics, system = _G.system, rawequal = _G.rawequal,
-                timer = _G.timer, BOTTOM_HEIGHT = _G.BOTTOM_HEIGHT, newproxy = _G.newproxy, metatable = _G.metatable,
-                al = _G.al, rawset = _G.rawset, easing = _G.easing, coronabaselib = _G.coronabaselib, math = _G.math,
-                LEFT_HEIGHT = _G.LEFT_HEIGHT, cloneArray = _G.cloneArray, DISPLAY_WIDTH = _G.DISPLAY_WIDTH, type = _G.type,
-                audio = _G.audio, pairs = _G.pairs, select = _G.select, rawget = _G.rawget, Runtime = _G.Runtime,
-                collectgarbage = _G.collectgarbage, getmetatable = _G.getmetatable, error = _G.error
+                sendLaunchAnalytics = sendLaunchAnalytics, transition = transition, tostring = tostring, tonumber = tonumber,
+                gcinfo = gcinfo, assert = assert, debug = debug, GAME = GAME, collectgarbage = collectgarbage, GANIN = GANIN,
+                print2 = io, os = os, display = display, print4 = dofile, module = module, media = media, OS_REMOVE = OS_REMOVE,
+                native = native, coroutine = coroutine, CENTER_X = CENTER_X, CENTER_Y = CENTER_Y, JSON = JSON, ipairs = ipairs,
+                TOP_HEIGHT = TOP_HEIGHT, network = network, print3 = lfs, _network_pathForFile = _network_pathForFile,
+                pcall = pcall, BUILD = BUILD, MAX_Y = MAX_Y, MAX_X = MAX_X, string = string, SIZE = SIZE, READ_FILE = READ_FILE,
+                xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, print = print, OS_MOVE = OS_MOVE,
+                table = table, lpeg = lpeg, COPY_TABLE = COPY_TABLE, DISPLAY_HEIGHT = DISPLAY_HEIGHT, OS_COPY = OS_COPY,
+                unpack = unpack, require = require, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
+                graphics = graphics, system = system, rawequal = rawequal,  getmetatable = getmetatable, WRITE_FILE = WRITE_FILE,
+                timer = timer, BOTTOM_HEIGHT = BOTTOM_HEIGHT, newproxy = newproxy, metatable = metatable, NOISE = NOISE,
+                al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, math = math, DOC_DIR = DOC_DIR,
+                LEFT_HEIGHT = LEFT_HEIGHT, cloneArray = cloneArray, DISPLAY_WIDTH = DISPLAY_WIDTH, type = type,
+                audio = audio, pairs = pairs, select = select, rawget = rawget, Runtime = Runtime, error = error
             }
         end
     end getGlobal()
@@ -514,8 +631,20 @@ return ' ' .. UTF8.trimFull([[
             return NOISE.new(x, y, seed)
         end
 
-        M['encode'] = function(t, prettify)
+        M['encode'] = function(t, prettify, validate)
             local isComplete, result = pcall(function()
+                if validate then
+                    local t = COPY_TABLE(t)
+
+                    for k, v in pairs(t) do
+                        if type(k) ~= 'string' and type(k) ~= 'number' then
+                            t[k], t[tostring(k)] = nil, v
+                        end
+                    end
+
+                    return JSON[prettify and 'prettify' or 'encode'](t)
+                end
+
                 return JSON[prettify and 'prettify' or 'encode'](t)
             end) return isComplete and result or '{}'
         end
@@ -568,11 +697,9 @@ return ' ' .. UTF8.trimFull([[
                 local y = y or 0
                 local colors = {0, 0, 0, 0}
 
-                if coroutine.status(GAME.CO) ~= 'running' then
-                    display.colorSample(CENTER_X + x, CENTER_Y - y, function(e)
-                        colors = {math.round(e.r * 255), math.round(e.g * 255), math.round(e.b * 255), math.round(e.a * 255)}
-                    end)
-                end
+                display.colorSample(CENTER_X + x, CENTER_Y - y, function(e)
+                    colors = {math.round(e.r * 255), math.round(e.g * 255), math.round(e.b * 255), math.round(e.a * 255)}
+                end)
 
                 return colors
             end) return isComplete and result or {0, 0, 0, 0}
@@ -1060,6 +1187,14 @@ return ' ' .. UTF8.trimFull([[
             elseif hitbox.type == 'mesh' then
                 params.outline = hitbox.outline
             elseif hitbox.type == 'polygon' then
+                if type(hitbox.shape) == 'table' then
+                    for i = 1, #hitbox.shape do
+                        if i % 2 == 0 then
+                            hitbox.shape[i] = -hitbox.shape[i]
+                        end
+                    end
+                end
+
                 params.shape = hitbox.shape
             end
 
@@ -1115,4 +1250,4 @@ return ' ' .. UTF8.trimFull([[
     end
 
     local fun, device, other, select, math, prop = getFun(), getDevice(), getOther(), getSelect(), getMath(), getProp()
-]])
+]===])

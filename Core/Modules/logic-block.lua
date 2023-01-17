@@ -1,5 +1,4 @@
 local LISTENER = require 'Core.Modules.params-listener'
-local INFO = require 'Data.info'
 local M  = {}
 
 M.getTextY = function(count)
@@ -54,6 +53,7 @@ M.getParamsValueText = function(params, i)
         for _, value in pairs(params[i]) do
             if value[2] == 't' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
+                -- if UTF8.len(value[1]) > 30 then value[1] = UTF8.sub(value[1], 1, 30) end
                 result = result .. '\'' .. value[1]:gsub('\n', ' '):gsub('\r', '') .. '\''
             elseif value[2] == 'n' or value[2] == 'u' or value[2] == 'c' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end

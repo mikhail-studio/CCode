@@ -18,11 +18,27 @@ local genBlocks = function()
     end
 end
 
-M.create = function(app)
+M.create = function(app, noobmode)
     M.group = display.newGroup()
     M.group.isVisible = false
     M.group.data = {}
     M.group.blocks = {}
+
+    if noobmode then
+        LOCAL_STR[1] = 'program.scenarios'
+        LOCAL_STR[2] = 'program.pictures'
+
+        if NEW_BLOCK and not NEW_BLOCK.noobmode then
+            pcall(function() NEW_BLOCK.remove() end)
+        end
+    else
+        LOCAL_STR[1] = 'program.scripts'
+        LOCAL_STR[2] = 'program.images'
+
+        if NEW_BLOCK and NEW_BLOCK.noobmode then
+            pcall(function() NEW_BLOCK.remove() end)
+        end
+    end NOOBMODE = noobmode
 
     local bg = display.newImage('Sprites/bg.png', CENTER_X, CENTER_Y)
         bg.width = CENTER_X == 640 and DISPLAY_HEIGHT or DISPLAY_WIDTH

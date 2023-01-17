@@ -59,6 +59,12 @@ local listener = function(e, scroll, group, type)
                     if tonumber(data.build) > 1170 then
                         local script = GET_GAME_SCRIPT(e.target.link, 1, data)
 
+                        if not data.created then
+                            data.created = '1223'
+                            data.noobmode = false
+                            SET_GAME_CODE(e.target.link, data)
+                        end
+
                         if script and script.custom then
                             DEL_GAME_SCRIPT(e.target.link, 1, data)
                             table.remove(data.scripts, 1)
@@ -67,7 +73,7 @@ local listener = function(e, scroll, group, type)
 
                         group.isVisible = false
                         PROGRAM = require 'Interfaces.program'
-                        PROGRAM.create(e.target.text.text)
+                        PROGRAM.create(e.target.text.text, data.noobmode)
                         PROGRAM.group.isVisible = true
 
                         CURRENT_LINK = e.target.link
@@ -77,12 +83,12 @@ local listener = function(e, scroll, group, type)
                         NEW_DATA() BACK.front()
                     end
                 elseif type == 'program' and ALERT then
-                    if e.target.text.text == STR['program.scripts'] then
+                    if e.target.text.text == STR['program.scripts'] or e.target.text.text == STR['program.scenarios'] then
                         group.isVisible = false
                         SCRIPTS = require 'Interfaces.scripts'
                         SCRIPTS.create() BACK.front()
                         SCRIPTS.group.isVisible = true
-                    elseif e.target.text.text == STR['program.images'] then
+                    elseif e.target.text.text == STR['program.images'] or e.target.text.text == STR['program.pictures'] then
                         group.isVisible = false
                         IMAGES = require 'Interfaces.images'
                         IMAGES.create() BACK.front()
@@ -402,8 +408,8 @@ M.new = function(text, scroll, group, type, index, filter, link)
     end
 
     if filter and (filter == 'linear' or filter == 'nearest' or filter == 'vector') then
-        display.setDefault('magTextureFilter', filter == 'vector' and 'linear' or filter)
-        display.setDefault('minTextureFilter', filter == 'vector' and 'linear' or filter)
+        display.setDefault('magTextureFilter', filter ~= 'linear' and 'nearest' or 'linear')
+        display.setDefault('minTextureFilter', filter ~= 'linear' and 'nearest' or 'linear')
     end
 
     if type == 'programs' then

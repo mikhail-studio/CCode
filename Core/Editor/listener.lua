@@ -4,7 +4,6 @@ local LIST = require 'Core.Modules.interface-list'
 local BLOCK = require 'Core.Modules.logic-block'
 local LOGIC = require 'Core.Modules.logic-input'
 local TEXT = require 'Core.Editor.text'
-local INFO = require 'Data.info'
 local M = {}
 
 M.find = function(data)

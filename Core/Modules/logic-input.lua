@@ -1,5 +1,4 @@
 local BLOCK = require 'Core.Modules.logic-block'
-local INFO = require 'Data.info'
 local M = {}
 
 M.cancel = function() pcall(function()
@@ -118,7 +117,7 @@ M.set = function(name)
 end
 
 M.renameProject = function(data, text, name, type)
-    return pcall(function() 
+    return pcall(function()
         local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
         local t = COPY_TABLE(type == 'fP' and data.funs or data.vars)
         if type == 'tP' then t = COPY_TABLE(data.tables) end

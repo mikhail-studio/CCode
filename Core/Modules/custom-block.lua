@@ -1,5 +1,4 @@
 local LOGIC = require 'Core.Modules.logic-list'
-local INFO = require 'Data.info'
 local M = {}
 
 local function genBlock(params, index)

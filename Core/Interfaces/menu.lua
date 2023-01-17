@@ -31,6 +31,12 @@ listeners.but_continue = function(target)
         if tonumber(data.build) > 1170 then
             local script = GET_GAME_SCRIPT(LOCAL.last_link, 1, data)
 
+            if not data.created then
+                data.created = '1223'
+                data.noobmode = false
+                SET_GAME_CODE(LOCAL.last_link, data)
+            end
+
             if script and script.custom then
                 DEL_GAME_SCRIPT(LOCAL.last_link, 1, data)
                 table.remove(data.scripts, 1)
@@ -44,8 +50,8 @@ listeners.but_continue = function(target)
 
             PROGRAMS.group.isVisible = false
             PROGRAM = require 'Interfaces.program'
-            PROGRAM.create(LOCAL.last) BACK.front()
-            PROGRAM.group.isVisible = true
+            PROGRAM.create(LOCAL.last, data.noobmode)
+            PROGRAM.group.isVisible = true BACK.front()
         end
     end
 end

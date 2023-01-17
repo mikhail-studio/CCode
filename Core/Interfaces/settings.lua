@@ -108,7 +108,7 @@ listeners.lang = function(e)
     end
 
     LIST.new(list[1], e.target.x, e.target.y - e.target.height / 2, 'down', function(e)
-        if e.index > 0 then
+        local function changeLang()
             LOCAL.lang = list[2][e.index]
             STR = LANG[LOCAL.lang]
 
@@ -132,6 +132,29 @@ listeners.lang = function(e)
             SETTINGS.group.isVisible = true
 
             NEW_DATA()
+        end
+
+        if e.text == STR['lang.custom'] then
+            local completeImportLanguage = function(import)
+                if import.done and import.done == 'ok' then
+                    local langData = JSON.decode(READ_FILE(DOC_DIR .. '/lang.json'))
+
+                    if langData then
+                        for _, langT in pairs(langData) do
+                            for key, str in pairs(langT) do
+                                LANG['custom'][key] = str
+                            end
+                        end
+                    end
+
+                    OS_REMOVE(DOC_DIR .. '/lang.json') changeLang()
+                end
+            end
+
+            GIVE_PERMISSION_DATA()
+            FILE.pickFile(DOC_DIR, completeImportLanguage, 'lang.json', '', '*/*', nil, nil, nil)
+        elseif e.index > 0 then
+            changeLang()
         end
     end, nil, nil, 0.5)
 end

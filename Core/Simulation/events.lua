@@ -1,5 +1,4 @@
 local CALC = require 'Core.Simulation.calc'
-local INFO = require 'Data.info'
 local M = {BLOCKS = {}}
 
 for i = 3, 14 do

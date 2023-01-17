@@ -50,7 +50,7 @@ local function getStartLua(linkBuild)
     local cod15 = ' GAME.group.const.system = function(e) if e.type == \'applicationSuspend\' or e.type == \'applicationExit\' then for i = 1,'
     local cod16 = ' #GAME.group.suspends do GAME.group.suspends[i]() end elseif e.type == \'applicationResume\' then for i = 1,'
     local cod17 = ' #GAME.group.resumes do GAME.group.resumes[i]() end end end Runtime:addEventListener(\'system\', GAME.group.const.system)'
-    local cod18 = ' GAME.group.textures = {}'
+    local cod18 = ' GAME.group.textures = {} GAME.group.accelerometers = {}'
 
     if linkBuild then
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. require 'Data.build'
@@ -70,7 +70,8 @@ M.remove = function()
     pcall(function() for _, v in ipairs(M.group.ts) do timer.cancel(v) end end)
     pcall(function() for _, v in pairs(M.group.timers) do timer.cancel(v) end end)
     pcall(function() for _, v in pairs(M.group.widgets) do timer.new(10, 1, function()
-    pcall(function() v:removeSelf() v = nil end) end) end end)
+    pcall(function() v:removeSelf() v = nil end) end) end end) pcall(function() for _, v in ipairs(M.group.accelerometers) do
+    pcall(function() Runtime:removeEventListener('accelerometer', v) end) end end)
     pcall(function() Runtime:removeEventListener('key', M.group.const.keyBack) end)
     pcall(function() Runtime:removeEventListener('system', M.group.const.system) end)
     pcall(function() Runtime:removeEventListener('touch', M.group.const.touch_fun) end)

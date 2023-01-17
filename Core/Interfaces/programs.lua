@@ -35,14 +35,14 @@ listeners.but_add = function(target)
 
                     NEW_DATA()
                     SET_GAME_SAVE('App' .. numApp, {})
-                    SET_GAME_CODE('App' .. numApp, NEW_APP_CODE(e.text, 'App' .. numApp))
+                    SET_GAME_CODE('App' .. numApp, NEW_APP_CODE(e.text, 'App' .. numApp, false)) -- e.checkbox))
                     PROGRAMS.new(e.text, 'App' .. numApp)
 
                     break
                 end
             end
         end
-    end)
+    end) --, nil, STR['programs.noobmode'])
 end
 
 listeners.but_import = function(target)

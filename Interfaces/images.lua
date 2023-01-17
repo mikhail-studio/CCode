@@ -25,7 +25,7 @@ M.create = function()
         bg.rotation = CENTER_X == 640 and 90 or 0
     M.group:insert(bg)
 
-    local title = display.newText(STR['program.images'], ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)
+    local title = display.newText(STR['program.' .. (NOOBMODE and 'pictures' or 'images')], ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)
         title.anchorX = 0
         title.anchorY = 0
         title.button = 'but_title'

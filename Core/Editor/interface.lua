@@ -3,7 +3,6 @@ local LISTENER = require 'Core.Editor.listener'
 local LIST = require 'Core.Modules.logic-list'
 local DATA = require 'Core.Editor.data'
 local TEXT = require 'Core.Editor.text'
-local INFO = require 'Data.info'
 local M = {rScrollParams = {}, scrollY = 0}
 
 local getFontSize = function(i)

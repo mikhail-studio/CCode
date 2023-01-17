@@ -54,13 +54,15 @@ local G = (3 - math.sqrt(3)) / 6
 local G2 = 2 * G - 1
 
 local function SampleNoise(x, y, seed)
+	local rdm = 0
     local x = x or 0
     local y = y or 0
 
     if seed then
         rseed(seed)
-        x = x + rand()
-        y = y + rand()
+		rdm = rand(seed, seed * 2)
+        x = x + 100000 + rdm
+        y = y + 100000 + rdm
     end
 
     local s = (x + y) * F
