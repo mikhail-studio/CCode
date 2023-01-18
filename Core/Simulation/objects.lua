@@ -46,8 +46,9 @@ M['newSprite'] = function(params)
     GAME.lua = GAME.lua .. ' else for _, v in ipairs(anims) do table.insert(animations, GAME.group.animations[v]) end end'
     GAME.lua = GAME.lua .. ' if not animations or IS_ZERO_TABLE(animations) then animations = {name = \'\', frames = {1}} end end)'
     GAME.lua = GAME.lua .. ' display.setDefault(\'magTextureFilter\', filter ~= \'linear\' and \'nearest\' or \'linear\')'
-    GAME.lua = GAME.lua .. ' display.setDefault(\'minTextureFilter\', filter ~= \'linear\' and \'nearest\' or \'linear\') local'
-    GAME.lua = GAME.lua .. ' sheetParams = {link, system.DocumentsDirectory} if filter == \'vector\' then local index = #GAME.group.textures + 1'
+    GAME.lua = GAME.lua .. ' display.setDefault(\'minTextureFilter\', filter ~= \'linear\' and \'nearest\' or \'linear\')'
+    GAME.lua = GAME.lua .. ' local sheetParams = {link, system.DocumentsDirectory}'
+    GAME.lua = GAME.lua .. ' if filter == \'vector\' then local index = #GAME.group.textures + 1'
     GAME.lua = GAME.lua .. ' GAME.group.textures[index] = SVG.newTexture({filename = link, baseDir = system.DocumentsDirectory})'
     GAME.lua = GAME.lua .. ' sheetParams = {GAME.group.textures[index].filename, GAME.group.textures[index].baseDir} end'
     GAME.lua = GAME.lua .. ' local imageSheet = graphics.newImageSheet(sheetParams[1], sheetParams[2],'
@@ -86,16 +87,18 @@ M['setWidth'] = function(params)
     local name = CALC(params[1])
     local width = CALC(params[2])
 
-    GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.objects[' .. name .. ']._radius then GAME.group.objects[' .. name .. '].path.radius'
-    GAME.lua = GAME.lua .. ' = ' .. width .. ' else GAME.group.objects[' .. name .. '].width = ' .. width .. ' end end)'
+    GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.objects[' .. name .. ']._radius then'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].path.radius = ' .. width .. ' else'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].width = ' .. width .. ' end end)'
 end
 
 M['setHeight'] = function(params)
     local name = CALC(params[1])
     local height = CALC(params[2])
 
-    GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.objects[' .. name .. ']._radius then GAME.group.objects[' .. name .. '].path.radius'
-    GAME.lua = GAME.lua .. ' = ' .. height .. ' else GAME.group.objects[' .. name .. '].height = ' .. height .. ' end end)'
+    GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.objects[' .. name .. ']._radius then'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].path.radius = ' .. height .. ' else'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].height = ' .. height .. ' end end)'
 end
 
 M['setSize'] = function(params)
@@ -114,6 +117,14 @@ M['setRotation'] = function(params)
     local rotation = CALC(params[2])
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].rotation = ' .. rotation .. ' end)'
+end
+
+M['setRotationTo'] = function(params)
+    local name1 = CALC(params[1])
+    local name2 = CALC(params[2])
+
+    GAME.lua = GAME.lua .. ' pcall(function() local obj1, obj2 = GAME.group.objects[' .. name1 .. '], GAME.group.objects[' .. name2 .. ']'
+    GAME.lua = GAME.lua .. ' obj1.rotation = math.atan2(obj2.y - obj1.y, obj2.x - obj1.x) end)'
 end
 
 M['setAlpha'] = function(params)
@@ -136,14 +147,16 @@ M['updPosX'] = function(params)
     local name = CALC(params[1])
     local posX = '(' .. CALC(params[2]) .. ')'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].x = GAME.group.objects[' .. name .. '].x + ' .. posX .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].x ='
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].x + ' .. posX .. ' end)'
 end
 
 M['updPosY'] = function(params)
     local name = CALC(params[1])
     local posY = '(' .. CALC(params[2]) .. ')'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].y = GAME.group.objects[' .. name .. '].y - ' .. posY .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].y ='
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].y - ' .. posY .. ' end)'
 end
 
 M['updSize'] = function(params)
@@ -161,28 +174,32 @@ M['updRotation'] = function(params)
     local name = CALC(params[1])
     local rotation = '(' .. CALC(params[2]) .. ')'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].rotation = GAME.group.objects[' .. name .. '].rotation + ' .. rotation .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].rotation ='
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].rotation + ' .. rotation .. ' end)'
 end
 
 M['updAlpha'] = function(params)
     local name = CALC(params[1])
     local alpha = '((' .. CALC(params[2]) .. ') / 100)'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].alpha = GAME.group.objects[' .. name .. '].alpha + ' .. alpha .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].alpha ='
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].alpha + ' .. alpha .. ' end)'
 end
 
 M['updWidth'] = function(params)
     local name = CALC(params[1])
     local width = '(' .. CALC(params[2]) .. ')'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].width = GAME.group.objects[' .. name .. '].width + ' .. width .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].width ='
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].width + ' .. width .. ' end)'
 end
 
 M['updHeight'] = function(params)
     local name = CALC(params[1])
     local height = '(' .. CALC(params[2]) .. ')'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].height = GAME.group.objects[' .. name .. '].height + ' .. height .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].height ='
+    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].height + ' .. height .. ' end)'
 end
 
 M['hideObject'] = function(params)

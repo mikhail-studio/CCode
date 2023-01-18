@@ -303,6 +303,8 @@
         "blocks.setSize.params": ["Имя объекта:", "Размер (%):"],
         "blocks.setRotation": "Установить вращение объекта",
         "blocks.setRotation.params": ["Имя объекта:", "Вращение (0-360):"],
+        "blocks.setRotationTo": "Установить вращение к объекту2",
+        "blocks.setRotationTo.params": ["Имя объекта1:", "Имя объекта2:"],
         "blocks.setAlpha": "Установить непрозрачность объекта",
         "blocks.setAlpha.params": ["Имя объекта:", "Непрозрачность (0-100):"],
         "blocks.setWidth": "Установить ширину объекта",
