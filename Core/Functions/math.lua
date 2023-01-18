@@ -32,6 +32,26 @@ M['remainder'] = function(num, count)
     end) return isComplete and result or 0
 end
 
+M['raycast'] = function(x1, y1, x2, y2, behavior)
+    local isComplete, result = pcall(function()
+        local rayT = PHYSICS.rayCast(CENTER_X + x1, CENTER_Y - y1, CENTER_X + x2, CENTER_Y - y2, behavior or 'closest')
+        local returnRayT = {}
+
+        for i = 1, #rayT do
+            returnRayT[i] = {
+                x = rayT[i].position.x, y = rayT[i].position.y, name = rayT[i].object.name,
+                normalX = rayT[i].normal.x, normalY = rayT[i].normal.y, fraction = rayT[i].fraction
+            }
+        end
+
+        if #returnRayT == 1 then
+            returnRayT = returnRayT[1]
+        end
+
+        return returnRayT
+    end) return isComplete and result or {}
+end
+
 M['asin'] = function(num)
     local isComplete, result = pcall(function()
         return asin(num) * 180 / M.pi

@@ -195,6 +195,13 @@ if 'Виджет' then
         end) return isComplete and result or 50
     end
 
+    M['widget.state'] = function(name)
+        local isComplete, result = pcall(function()
+            return GAME.group.widgets[name]
+                and (GAME.group.widgets[name]._type == 'switch' and GAME.group.widgets[name].isOn or false) or false
+        end) return isComplete and result or 50
+    end
+
     M['widget.text'] = function(name)
         local isComplete, result = pcall(function()
             return GAME.group.widgets[name] and (GAME.group.widgets[name]._type == 'field' and GAME.group.widgets[name].text or '') or ''

@@ -13,7 +13,7 @@ M.math = {
     keys = {
         'random', 'radical', 'power', 'round', 'remainder',
         'module', 'max', 'min', 'sin', 'cos', 'tan', 'ctan', 'pi',
-        'exp', 'factorial', 'log0', 'log10', 'asin', 'acos', 'atan', 'atan2'
+        'exp', 'factorial', 'log0', 'log10', 'asin', 'acos', 'atan', 'atan2', 'raycast'
     }
 }
 
@@ -43,7 +43,7 @@ M.prop = {
     widget = {
         names = {},
         keys = {
-            'tag', 'pos_x', 'pos_y', 'value', 'text', 'link'
+            'tag', 'pos_x', 'pos_y', 'value', 'state', 'text', 'link'
         }
     },
 
@@ -79,7 +79,11 @@ M.set = function(key, name)
         table.insert(EDITOR.data, EDITOR.cursor[1], {'|', '|'})
         table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {')', 's'})
 
-        if name == 'gsub' or name == 'sub' then
+        if name == 'raycast' then
+            table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
+            table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
+            table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
+        elseif name == 'gsub' or name == 'sub' then
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
         elseif name == 'find' or name == 'match' or name == 'color_pixel' or name == 'random'

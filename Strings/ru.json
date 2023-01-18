@@ -942,7 +942,8 @@
         "editor.list.math.asin": "арксинус",
         "editor.list.math.acos": "арккосинус",
         "editor.list.math.atan": "арктангенс",
-        "editor.list.math.atan2": "арктангенс2"
+        "editor.list.math.atan2": "арктангенс2",
+        "editor.list.math.raycast": "луч"
     },
 
     "editor.prop": {
@@ -980,6 +981,7 @@
             "editor.list.prop.widget.pos_x": "позиция_виджета_x",
             "editor.list.prop.widget.pos_y": "позиция_виджета_y",
             "editor.list.prop.widget.value": "значение_слайдера",
+            "editor.list.prop.widget.state": "состояние_переключателя",
             "editor.list.prop.widget.text": "текст_из_поля",
             "editor.list.prop.widget.link": "ссылка_из_веб_просмотра",
 
