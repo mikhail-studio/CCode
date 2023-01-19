@@ -47,7 +47,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1230
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1231
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
@@ -237,13 +237,24 @@ COPY_TABLE_P = function(t, isSim)
     return result
 end
 
-GET_X = function(x)
-    return type(x) == 'number' and x - CENTER_X or 0
+SET_X = function(x, scrollName)
+    return type(x) == 'number' and ((scrollName and GAME.group.widgets[scrollName]
+    and GAME.group.widgets[scrollName].wtype == 'scroll')
+    and x + GAME.group.widgets[scrollName].width / 2 or CENTER_X + x) or 0
 end
 
-GET_Y = function(y)
-    return type(y) == 'number' and CENTER_Y - y or 0
+SET_Y = function(y, scrollName)
+    return type(y) == 'number' and ((scrollName and GAME.group.widgets[scrollName]
+    and GAME.group.widgets[scrollName].wtype == 'scroll') and y or CENTER_Y - y) or 0
 end
+
+GET_X = function(x, scrollName)
+    return type(x) == 'number' and ((scrollName and GAME.group.widgets[scrollName]
+    and GAME.group.widgets[scrollName].wtype == 'scroll')
+    and x - GAME.group.widgets[scrollName].width / 2 or x - CENTER_X) or 0
+end
+
+GET_Y = SET_Y
 
 NEW_DATA = function()
     WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), JSON.encode(LOCAL))
@@ -399,11 +410,12 @@ display.newImage2, display.newImage = display.newImage, function(link, ...)
 end
 
 LOCAL = require 'Data.local'
-LANGS = {'en', 'ru', 'pt', 'custom'}
+LANGS = {'en', 'ru', 'pt', 'pl', 'custom'}
 LANG.custom = {}
 LANG.ru = {}
 LANG.en = {}
 LANG.pt = {}
+LANG.pl = {}
 
 for i = 1, #LANGS do
     local langData = JSON.decode(READ_FILE(system.pathForFile('Strings/' .. LANGS[i] .. '.json')))

@@ -3,6 +3,7 @@
         "lang.ru": "Русский",
         "lang.en": "English",
         "lang.pt": "Brasileiro",
+        "lang.pl": "Polski",
         "lang.custom": "Свой",
         "button.yes": "Да",
         "button.no": "Нет",
@@ -713,10 +714,14 @@
         "blocks.setFieldFocusNil": "Выключить экранную клавиатуру",
         "blocks.hidePanelInterface": "Скрыть панели интерфейса",
         "blocks.showPanelInterface": "Показать панели интерфейса",
-        "blocks.newSwitch": "Создать переключатель",
+        "blocks.newScrollView": "Создать скролл",
+            "blocks.newScrollView.params": ["Имя виджета:", "Панель прокрутки:", "Слушатель:", "Отскок:", "Трение:", "Прокрутка по оси X:", "Прокрутка по оси Y:", "Цвет:", "Фон:", "Ширина:", "Высота:", "Позиция (X):", "Позиция (Y):"],
+            "blocks.newSwitch": "Создать переключатель",
             "blocks.newSwitch.params": ["Имя виджета:", "Тип:", "Состояние:", "Ширина:", "Высота:", "Позиция (X):", "Позиция (Y):", "При касании:", "После касания:"],
             "blocks.setSwitchState": "Установить состояние переключателя",
-            "blocks.setSwitchState.params": ["Имя виджета:", "Состояние:"]
+            "blocks.setSwitchState.params": ["Имя виджета:", "Состояние:"],
+            "blocks.insertToScroll": "Добавить в скролл",
+            "blocks.insertToScroll.params": ["Имя виджета:", "Имя:", "Тип:"]
     },
 
     "media": {

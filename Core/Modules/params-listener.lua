@@ -31,6 +31,12 @@ M.getListButtons = function(type)
             STR['blocks.select.inputEmail'],
             STR['blocks.select.inputNoEmoji']
         }
+    elseif type == 'scrollType' then
+        return {
+            STR['blocks.select.obj'],
+            STR['blocks.select.text'],
+            STR['blocks.select.widget']
+        }
     elseif type == 'transitName' then
         return {
             STR['blocks.select.obj'],
@@ -78,6 +84,10 @@ M.getListValue = function(type, text)
             or text == STR['blocks.select.inputPhone'] and 'inputPhone'
             or text == STR['blocks.select.inputUrl'] and 'inputUrl'
             or text == STR['blocks.select.inputEmail'] and 'inputEmail' or 'inputNoEmoji'
+    elseif type == 'scrollType' then
+        return text == STR['blocks.select.obj'] and 'obj'
+            or text == STR['blocks.select.text'] and 'text'
+            or text == STR['blocks.select.widget'] and 'widget' or 'obj'
     elseif type == 'transitName' then
         return text == STR['blocks.select.obj'] and 'obj'
             or text == STR['blocks.select.text'] and 'text'

@@ -96,6 +96,8 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
             end
 
             local scrollY, diffScrollY = select(2, scroll:getContentPosition()), isCopy and 0 or select(2, scroll:getContentPosition())
+            local OLD_INDEX_LIST = INDEX_LIST
+
             M.isEnd = UTF8.sub(e.target.data.name, UTF8.len(e.target.data.name) - 2, UTF8.len(e.target.data.name)) == 'End'
             M.isEnd = M.isEnd or e.target.data.name == 'ifElse'
             M.index = e.target.getIndex(e.target)
@@ -116,7 +118,7 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
                     elseif not group.blocks[i] then
                         break
                     end
-                end
+                end INDEX_LIST = OLD_INDEX_LIST
 
                 for i = 1, #group.blocks do
                     group.blocks[i].x = group.blocks[i].x + 20 * M.countClose
@@ -175,7 +177,7 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
                     elseif not group.blocks[i] then
                         break
                     end
-                end
+                end INDEX_LIST = OLD_INDEX_LIST
 
                 for i = 1, #group.blocks do
                     group.blocks[i].x = group.blocks[i].x + 20 * M.countClose
@@ -366,7 +368,7 @@ local function stopMoveLogicBlock(e, group, scroll)
                 if i < M.index then
                     M.index = M.index + (#group.blocks - oldCountBlocks)
                 end
-            end
+            end INDEX_LIST = OLD_INDEX_LIST
 
             local startNestedFor = true
 

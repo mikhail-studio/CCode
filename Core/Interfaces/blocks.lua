@@ -447,6 +447,13 @@ listeners.but_okay = function(target)
 
                 SET_GAME_CODE(CURRENT_LINK, data)
                 SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
+
+                for j = 1, #BLOCKS.group.blocks do
+                    if BLOCKS.group.blocks[j].checkbox.isOn then
+                        BLOCKS.group.blocks[j].checkbox:setState({isOn = false})
+                    end
+                end
+
                 display.getCurrentStage():setFocus(BLOCKS.group.blocks[blockIndex])
                 BLOCKS.group.blocks[blockIndex].click = true
                 BLOCKS.group.blocks[blockIndex].move = true
@@ -459,7 +466,7 @@ listeners.but_okay = function(target)
 
     if INDEX_LIST ~= 1 then
         for i = 1, #BLOCKS.group.blocks do BLOCKS.group.blocks[i].checkbox:setState({isOn = false}) end
-        if INDEX_LIST ~= 2 then SET_GAME_CODE(CURRENT_LINK, data) SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data) end
+        if INDEX_LIST ~= 2 and INDEX_LIST ~= 5 then SET_GAME_CODE(CURRENT_LINK, data) SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data) end
     end
 end
 

@@ -3,6 +3,7 @@
         "lang.ru": "Русский",
         "lang.en": "English",
         "lang.pt": "Brasileiro",
+        "lang.pl": "Polski",
         "lang.custom": "Custom",
         "button.yes": "Yes",
         "button.no": "No",
@@ -128,6 +129,11 @@
         "blocks.select.backgroundFalse": "Remove",
         "blocks.select.ruleTrue": "Allowed",
         "blocks.select.ruleFalse": "Forbidden",
+        "blocks.select.switchRadio": "Radio",
+        "blocks.select.switchCheckbox": "Checkbox",
+        "blocks.select.switchToggle": "Toggle",
+        "blocks.select.switchOn": "On",
+        "blocks.select.switchOff": "Off",
         "blocks.select.obj": "Object",
         "blocks.select.text": "Text",
         "blocks.select.group": "Group",
@@ -204,6 +210,8 @@
             "blocks.onGlobalPostCollision.params": ["Function name:", "Table name:"],
             "blocks.onWebViewCallback": "There have been changes in webview",
             "blocks.onWebViewCallback.params": ["Function name:", "Table name:"],
+            "blocks.onSwitchCallback": "Event in switch has started",
+            "blocks.onSwitchCallback.params": ["Function name:", "Variable name:"],
             "blocks.onSliderMoved": "While slider is moving",
             "blocks.onSliderMoved.params": ["Function name:", "Variable name:"],
             "blocks.onFieldBegan": "Field editing has started",
@@ -296,6 +304,8 @@
         "blocks.setSize.params": ["Object name:", "Size (%):"],
         "blocks.setRotation": "Set object rotation",
         "blocks.setRotation.params": ["Object name:", "Rotation:"],
+        "blocks.setRotationTo": "Set rotation to object2",
+        "blocks.setRotationTo.params": ["Object name1:", "Object name2:"],
         "blocks.setAlpha": "Set object opacity",
         "blocks.setAlpha.params": ["Object name:", "Opacity (0-100):"],
         "blocks.setWidth": "Set object width",
@@ -655,6 +665,7 @@
             "blocks.setHitboxVisible": "Show hitboxes",
             "blocks.removeHitboxVisible": "Hide hitboxes",
             "blocks.startPhysics": "Enable physics engine",
+            "blocks.pausePhysics": "Pause physics engine",
             "blocks.stopPhysics": "Disable physics engine",
             "blocks.setTextBody": "Set physical body of text",
             "blocks.setTextBody.params": ["Object name:", "Type:", "Density:", "Bounce:", "Friction:", "Gravity:"]
@@ -665,9 +676,9 @@
         "blocks.newWebView": "Create web view",
         "blocks.newWebView.params": ["Widget name:", "Url:", "Width:", "Height:"],
         "blocks.newHSlider": "Create horizontal slider",
-        "blocks.newHSlider.params": ["Widget name:", "Width:", "Position (X):", "Position (Y):"],
+        "blocks.newHSlider.params": ["Widget name:", "Width:", "Listener:", "Position (X):", "Position (Y):"],
         "blocks.newVSlider": "Create vertical slider",
-        "blocks.newVSlider.params": ["Widget name:", "Height:", "Position (X):", "Position (Y):"],
+        "blocks.newVSlider.params": ["Widget name:", "Height:", "Listener:", "Position (X):", "Position (Y):"],
         "blocks.newField": "Create single line textfield",
         "blocks.newField.params": ["Widget name:", "Text:", "Input type:", "Text color:", "Size:", "Field background:", "Align:", "Font:", "Width:", "Height:", "Position (X):", "Position (Y):"],
         "blocks.newBox": "Create multiline textfield",
@@ -702,7 +713,15 @@
         "blocks.setFieldFocus.params": ["Widget name:"],
         "blocks.setFieldFocusNil": "Turn off keyboard",
         "blocks.hidePanelInterface": "Hide Interface Panels",
-        "blocks.showPanelInterface": "Show Interface Panels"
+        "blocks.showPanelInterface": "Show Interface Panels",
+        "blocks.newScrollView": "Create scroll view",
+            "blocks.newScrollView.params": ["Widget name:", "Scroll Bar:", "Listener:", "Bounce:", "Friction:", "Scrolling on the X:", "Scrolling on the Y:", "Color:", "Background:", "Width:", "Height:", "Position (X):", "Position (Y):"],
+            "blocks.newSwitch": "Create switch",
+            "blocks.newSwitch.params": ["Widget name:", "Type:", "State:", "Width:", "Height:", "Position (X):", "Position (Y):", "When touching:", "After touching:"],
+            "blocks.setSwitchState": "Set switch state",
+            "blocks.setSwitchState.params": ["Widget name:", "State:"],
+            "blocks.insertToScroll": "Insert to scroll",
+            "blocks.insertToScroll.params": ["Widget name:", "Name:", "Type:"]
     },
 
     "media": {
@@ -928,7 +947,8 @@
         "editor.list.math.asin": "asin",
         "editor.list.math.acos": "acos",
         "editor.list.math.atan": "atan",
-        "editor.list.math.atan2": "atan2"
+        "editor.list.math.atan2": "atan2",
+        "editor.list.math.raycast": "raycast"
     },
 
     "editor.prop": {
@@ -966,6 +986,7 @@
             "editor.list.prop.widget.pos_x": "widget_x_position",
             "editor.list.prop.widget.pos_y": "widget_y_position",
             "editor.list.prop.widget.value": "slider_value",
+            "editor.list.prop.widget.state": "switch_state",
             "editor.list.prop.widget.text": "text_from_field",
             "editor.list.prop.widget.link": "web_view_url",
 

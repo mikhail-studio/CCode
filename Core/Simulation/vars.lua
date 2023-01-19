@@ -5,8 +5,8 @@ M['newText'] = function(params)
     local name, text = CALC(params[1]), CALC(params[2])
     local font, size = CALC(params[3], '\'ubuntu\''), CALC(params[4], '36')
     local colors, alpha = CALC(params[5], '{255}'), CALC(params[6], '100')
-    local posX = '(CENTER_X + (' .. CALC(params[7]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[8]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[7]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[8]) .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local colors, font = ' .. colors .. ', other.getFont(' .. font .. ')'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. ']:removeSelf() end)'
@@ -26,8 +26,8 @@ M['newText2'] = function(params)
     local font, size = CALC(params[3], '\'ubuntu\''), CALC(params[4], '36')
     local colors, align = CALC(params[5], '{255}'), CALC(params[6], '\'center\'')
     local width, height = CALC(params[7]), CALC(params[8])
-    local posX = '(CENTER_X + (' .. CALC(params[9]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[10]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[9]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[10]) .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local colors, font = ' .. colors .. ', other.getFont(' .. font .. ')'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. ']:removeSelf() end)'
@@ -144,8 +144,8 @@ end
 
 M['setTextPos'] = function(params)
     local name = CALC(params[1])
-    local posX = '(CENTER_X + (' .. CALC(params[2]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[3]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.texts[' .. name .. ']._scroll))'
+    local posY = '(SET_Y(' .. CALC(params[3]) .. ', GAME.group.texts[' .. name .. ']._scroll))'
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].x = ' .. posX
     GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '].y = ' .. posY .. ' end)'
@@ -153,14 +153,14 @@ end
 
 M['setTextPosX'] = function(params)
     local name = CALC(params[1])
-    local posX = '(CENTER_X + (' .. CALC(params[2]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.texts[' .. name .. ']._scroll))'
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].x = ' .. posX .. ' end)'
 end
 
 M['setTextPosY'] = function(params)
     local name = CALC(params[1])
-    local posY = '(CENTER_Y - (' .. CALC(params[2]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[2]) .. ', GAME.group.texts[' .. name .. ']._scroll))'
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].y = ' .. posY .. ' end)'
 end

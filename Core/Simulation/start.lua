@@ -50,23 +50,24 @@ local function getStartLua(linkBuild)
     local cod15 = ' GAME.group.const.system = function(e) if e.type == \'applicationSuspend\' or e.type == \'applicationExit\' then for i = 1,'
     local cod16 = ' #GAME.group.suspends do GAME.group.suspends[i]() end elseif e.type == \'applicationResume\' then for i = 1,'
     local cod17 = ' #GAME.group.resumes do GAME.group.resumes[i]() end end end Runtime:addEventListener(\'system\', GAME.group.const.system)'
-    local cod18 = ' GAME.group.textures = {} GAME.group.accelerometers = {}'
+    local cod18 = ' GAME.group.textures = {} GAME.group.accelerometers = {} GAME.hash = CRYPTO.digest(CRYPTO.md5, math.random(1, 999999999))'
+    local cod19 = ' local hash = GAME.hash'
 
     if linkBuild then
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. require 'Data.build'
-            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
-            .. cod10 .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18
+            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10
+            .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19
     else
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. funs1 .. funs2 .. funs3 .. funs4
-            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9
-            .. cod10 .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18
+            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10
+            .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19
     end
 end
 
 M.remove = function()
+    display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll() transition.cancelAll()
     if LOCAL.back == 'System' then native.setProperty('androidSystemUiVisibility', 'default')
     else native.setProperty('androidSystemUiVisibility', 'immersiveSticky') end
-    display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll()
     pcall(function() for _, v in ipairs(M.group.ts) do timer.cancel(v) end end)
     pcall(function() for _, v in pairs(M.group.timers) do timer.cancel(v) end end)
     pcall(function() for _, v in pairs(M.group.widgets) do timer.new(10, 1, function()

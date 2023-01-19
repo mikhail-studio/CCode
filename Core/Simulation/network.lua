@@ -3,14 +3,14 @@ local M = {}
 
 M['createServer'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.stops, SERVER.createServer('
-    GAME.lua = GAME.lua .. CALC(params[1], '22222') .. ', function(e) if GAME.group then'
+    GAME.lua = GAME.lua .. CALC(params[1], '22222') .. ', function(e) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' return ' .. CALC(params[2], 'a', true) .. '(e) end end)) end)'
 end
 
 M['connectToServer'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.stops, CLIENT.createClientLoop('
     GAME.lua = GAME.lua .. CALC(params[1], 'nil') .. ', ' .. CALC(params[2], '22222') .. ','
-    GAME.lua = GAME.lua .. ' function(e) if GAME.group then return ' .. CALC(params[3], 'a', true) .. '(e) end end)) end)'
+    GAME.lua = GAME.lua .. ' function(e) if GAME.hash == hash then return ' .. CALC(params[3], 'a', true) .. '(e) end end)) end)'
 end
 
 M['requestFirebase'] = function(params, method)
@@ -19,7 +19,7 @@ M['requestFirebase'] = function(params, method)
     local link = '\'https://\' .. tostring(' .. link .. ') .. \'.firebaseio.com/\' .. tostring(' .. key .. ') .. \'.json\''
     local listener = (method == 'GET' or method == 'DELETE') and CALC(params[3], 'a', true)  or CALC(params[4], 'a', true)
 
-    GAME.lua = GAME.lua .. ' pcall(function() network.request(' .. link .. ', \'' .. method .. '\', function(e) if GAME.group'
+    GAME.lua = GAME.lua .. ' pcall(function() network.request(' .. link .. ', \'' .. method .. '\', function(e) if GAME.hash == hash'
     GAME.lua = GAME.lua .. ' then ' .. listener .. '(e.response) end end, {body = ' .. value .. '}) end)'
 end
 
@@ -32,7 +32,7 @@ M['requestNetwork'] = function(params, method)
     local redirect = redirect == 'redirectsFalse' and 'false' or 'true'
 
     GAME.lua = GAME.lua .. ' pcall(function() network.request(' .. link .. ', \'' .. method .. '\','
-    GAME.lua = GAME.lua .. ' function(e) if GAME.group then ' .. listener .. '(e) end end, {body'
+    GAME.lua = GAME.lua .. ' function(e) if GAME.hash == hash then ' .. listener .. '(e) end end, {body'
     GAME.lua = GAME.lua .. ' = ' .. body .. ', headers = ' .. headers .. ', progress = ' .. progress .. ','
     GAME.lua = GAME.lua .. ' handleRedirects = ' .. redirect .. ', timeout = ' .. timeout .. '}) end)'
 end

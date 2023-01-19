@@ -4,8 +4,8 @@ local M = {}
 M['newObject'] = function(params)
     local name = CALC(params[1])
     local link = CALC(params[2])
-    local posX = '(CENTER_X + (' .. CALC(params[3]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[4]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[3]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[4]) .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local link, filter = other.getImage(' .. link .. ')'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end)'
@@ -34,8 +34,8 @@ M['newSprite'] = function(params)
     local name, link = CALC(params[1]), CALC(params[2])
     local width, height = CALC(params[3]), CALC(params[4])
     local count, animations = CALC(params[5]), CALC(params[6], '{}')
-    local posX = '(CENTER_X + (' .. CALC(params[7]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[8]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[7]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[8]) .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local link, filter = other.getImage(' .. link .. ') local animations = {}'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end)'
@@ -68,19 +68,19 @@ end
 
 M['setPos'] = function(params)
     local name = CALC(params[1])
-    local posX = '(CENTER_X + (' .. CALC(params[2]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[3]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[2]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[3]) .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].x = ' .. posX
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].y = ' .. posY .. ' end)'
 end
 
 M['setPosX'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].x = CENTER_X + (' .. CALC(params[2]) .. ') end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].x = SET_X(' .. CALC(params[2]) .. ') end)'
 end
 
 M['setPosY'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].y = CENTER_Y - (' .. CALC(params[2]) .. ') end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].y = SET_Y(' .. CALC(params[2]) .. ') end)'
 end
 
 M['setWidth'] = function(params)

@@ -4,490 +4,490 @@
         "lang.en": "English",
         "lang.pt": "Brasileiro",
         "lang.pl": "Polski",
-        "lang.custom": "Customizado",
-        "button.yes": "Sim",
-        "button.no": "Não",
+        "lang.custom": "Swoje",
+        "button.yes": "Tak",
+        "button.no": "Nie",
         "button.okay": "Ok",
-        "button.close": "Fechar",
-        "button.download": "Baixar",
-        "button.change": "Editar bloco",
-        "button.remove": "Apagar",
-        "button.rename": "Editar nome",
-        "button.copy": "Copiar",
-        "button.to.buffer": "Carregar",
-        "button.from.buffer": "Do buffer",
-        "button.paste": "Colar",
-        "button.alldelete": "Apagar tudo",
-        "button.find": "Achar",
-        "button.debug": "Modo dev",
-        "button.comment": "Desligar",
-        "button.uncomment": "Ligar",
-        "button.hide": "Esconder",
-        "button.show": "Mostrar",
-        "button.addIfElse": "Condições",
-        "button.block.find": "Achar bloco",
-        "button.pasteFromClipboard": "Colar da área de transferência",
-        "button.importLuaFile": "Importar lua",
-        "menu.myprogram": "Meus jogos",
-        "menu.continue": "Continuar",
-        "menu.settings": "Definições",
-        "menu.testers": "Teste de versão:",
-        "menu.developers": "Varao de criador",
-        "menu.version.new": "Nova versão do CCode",
-        "menu.version.wait": "Baixando versão: não feise o CCode",
-        "programs.entername": "Nome do jogo",
-        "programs.changename": "Novo nome do jogo",
-        "programs.noobmode": "Modo fácil",
-        "program.images": "Imagens",
-        "program.pictures": "Fotos",
-        "program.scripts": "Códigos",
-        "program.scenarios": "Cenário",
-        "program.sounds": "Som",
-        "program.videos": "Vídeo",
-        "program.fonts": "Fonte",
-        "program.psettings": "Configuração do projeto",
-        "program.export": "Esportar arquivo ccode",
-        "program.build": "APK",
-        "program.editor": "Editar apk",
-        "scripts.entername": "Nome do código ",
-        "scripts.changename": "Mudar nome do código",
-        "scripts.sandbox": "Hitbox",
-        "scripts.sandbox.exit": "você deseja fechar o modo editor ?",
-        "scripts.sandbox.save": "Salvar",
-        "scripts.sandbox.not.save": "Não salvar",
-        "images.entername": "Nome da imagem",
-        "images.changename": "Mudar nome da imagem",
-        "images.pixel": "Imagem borada",
-        "sounds.entername": "Nome do som",
-        "sounds.changename": "Mudar nome do som",
-        "videos.entername": "Nome do vídeo",
-        "videos.changename": "Mudar nome do vídeo",
-        "fonts.entername": "Nome da fonte",
-        "fonts.changename": "Mudar nome da fonte",
-        "fonts.needexit": "Nova fonte Adicionada, Ccode vai fechar para atualizar drives",
-        "settings.applang": "Idiomas:",
-        "settings.confirmdelete": "Confirmar apagar código:",
-        "settings.back": "Botões:",
-        "settings.backCCode": "CCode",
-        "settings.backSystem": "Com Botão",
-        "settings.backNo": "Sem Botão",
-        "settings.showads": "Mostrar anúncios:",
-        "settings.posads": "Local de anúncios:",
-        "settings.topads": "Ok",
-        "settings.bottomads": "Nível baixo",
-        "settings.orientation": "Rotação:",
-        "psettings.icon": "Icone do projeto:",
-        "psettings.orientation": "Rotação do projeto:",
-        "psettings.build": "Tanto de apk:",
-        "psettings.version": "Versão do projeto:",
-        "psettings.package": "Data: pacote:",
-        "psettings.enterbuild": "Nome do jogo",
-        "psettings.enterversion": "Versão do projeto",
-        "psettings.enterpackage": "Nome do pacote",
-        "errors.build": "Nome existente",
-        "errors.package": "Mudar nome do pacote",
-        "errors.name": "Coloque um nome",
-        "errors.filter": "gta9 ?",
-        "build.start": "Espere fazer o apk",
-        "export.start": "Espere o apk",
-        "import.error": "Não sei o erro",
-        "game.debug": "Código lua é salvo na área de transferência",
-        "game.isbug": "erro"
+        "button.close": "Zamknij",
+        "button.download": "Pobierz",
+        "button.change": "Zmień",
+        "button.remove": "Usuń",
+        "button.rename": "Zmień nazwę",
+        "button.copy": "Kopiuj",
+        "button.to.buffer": "Do bufora",
+        "button.from.buffer": "Z bufora",
+        "button.paste": "Wklej",
+        "button.alldelete": "Usuń wszystko",
+        "button.find": "Znajdź",
+        "button.debug": "Debugowanie",
+        "button.comment": "Wyłącz",
+        "button.uncomment": "Włącz",
+        "button.hide": "Ukryj",
+        "button.show": "Pokaż",
+        "button.addIfElse": "Dodaj warunek",
+        "button.block.find": "Znajdź blok",
+        "button.pasteFromClipboard": "Wklej ze schowka",
+        "button.importLuaFile": "Importuj plik .lua",
+        "menu.myprogram": "Moje programy",
+        "menu.continue": "Kontynuuj",
+        "menu.settings": "Ustawienia",
+        "menu.testers": "Wersja testerów:",
+        "menu.developers": "Wersja developerów:",
+        "menu.version.new": "Nowa wersja testowa wydana!",
+        "menu.version.wait": "Proszę czekać, nie zamykaj aplikacji!",
+        "programs.entername": "Wprowadź nazwę programu",
+        "programs.changename": "Zmień nazwę programu",
+        "programs.noobmode": "Tryb uproszczony",
+        "program.images": "Duszki",
+        "program.pictures": "Zdjęcia",
+        "program.scripts": "Skrypty",
+        "program.scenarios": "Sceny",
+        "program.sounds": "Dźwięki",
+        "program.videos": "Filmy",
+        "program.fonts": "Czcionki",
+        "program.psettings": "Ustawienia projektu",
+        "program.export": "Eksportuj",
+        "program.build": "Kompiluj",
+        "program.editor": "Edytor wyrażeń",
+        "scripts.entername": "Wpisz nazwę skryptu",
+        "scripts.changename": "Zmień nazwę skryptu",
+        "scripts.sandbox": "Piaskownica",
+        "scripts.sandbox.exit": "Wyjdź z piaskownicy, wybierz żądaną akcję",
+        "scripts.sandbox.save": "Zapisz",
+        "scripts.sandbox.not.save": "Nie zapisuj",
+        "images.entername": "Wprowadź nazwę duszka",
+        "images.changename": "Zmień nazwę duszka",
+        "images.pixel": "Pikselowy duszek",
+        "sounds.entername": "Wprowadź nazwę dźwięku",
+        "sounds.changename": "Zmień nazwę dźwięku",
+        "videos.entername": "Wprowadź nazwę wideo",
+        "videos.changename": "Zmień nazwę wideo",
+        "fonts.entername": "Wprowadź nazwę czcionki",
+        "fonts.changename": "Zmień nazwę czcionki",
+        "fonts.needexit": "CCode wymusza wyłączenie, ponieważ czcionka nie jest usunięta, dopóki program nie zostanie zamknięty",
+        "settings.applang": "Język aplikacji:",
+        "settings.confirmdelete": "Potwierdzanie usunięcia:",
+        "settings.back": "Dolny panel:",
+        "settings.backCCode": "Aplikacja",
+        "settings.backSystem": "System",
+        "settings.backNo": "Usuń",
+        "settings.showads": "Pokaż reklamy:",
+        "settings.posads": "Lokalizacja reklam:",
+        "settings.topads": "U góry",
+        "settings.bottomads": "U dołu",
+        "settings.orientation": "Orientacja:",
+        "psettings.icon": "Ikona projektu:",
+        "psettings.orientation": "Orientacja projektu:",
+        "psettings.build": "Kompiluj:",
+        "psettings.version": "Wersja:",
+        "psettings.package": "Pakiet (package):",
+        "psettings.enterbuild": "Wprowadź numer kompilacji",
+        "psettings.enterversion": "Wprowadź nazwę wersji",
+        "psettings.enterpackage": "Wprowadź pakiet (package)",
+        "errors.build": "Błąd, wprowadź INTEGER",
+        "errors.package": "Błąd, wprowadź poprawną nazwę pakietu (package)",
+        "errors.name": "Błąd, nazwa jest już używana",
+        "errors.filter": "Błąd, pusta nazwa nie może być użyta",
+        "build.start": "Rozpoczęto kompilowanie APK, proszę czekać",
+        "export.start": "Eksport rozpoczęty, proszę czekać",
+        "import.error": "Błąd importu #",
+        "game.debug": "Kod lua programu został zapisany w schowku",
+        "game.isbug": "Nie udało się rozpocząć symulacji"
     },
     "blocks": {
-        "blocks.create.var": "Valor do texto",
-        "blocks.create.table": "tabela",
-        "blocks.create.fun": "função",
-        "blocks.create.objects": "objeto",
-        "blocks.create.filters": "Filtros",
-        "blocks.create.groups": "Grupo",
-        "blocks.create.tags": "Tags",
-        "blocks.create.transition": "Efeito",
-        "blocks.create.particle": "Partículas",
-        "blocks.create.block": "Criar bloco",
-        "blocks.create.color": "Cor do bloco",
-        "blocks.create.copy": "Copiar",
-        "blocks.create.block.save.lua": "Salvar (código lua)",
-        "blocks.create.block.save.sandbox": "Salvar (lua)",
-        "blocks.create.block.save.lua.title": "Escolha para importar código lua",
-        "blocks.select.dynamic": "Mover",
-        "blocks.select.static": "Parado",
-        "blocks.select.forward": "Avançar",
-        "blocks.select.bounce": "Quicar",
-        "blocks.select.inputDefault": "Predefinição",
-        "blocks.select.inputNumber": "Número",
-        "blocks.select.inputDecimal": "Doom",
-        "blocks.select.inputPhone": "Celular",
-        "blocks.select.inputUrl": "Link",
+        "blocks.create.var": "Utwórz zmienną",
+        "blocks.create.table": "Utwórz tabelę",
+        "blocks.create.fun": "Utwórz funkcję",
+        "blocks.create.objects": "Obiekty",
+        "blocks.create.filters": "Filtry",
+        "blocks.create.groups": "Grupy",
+        "blocks.create.tags": "Tagi",
+        "blocks.create.transition": "Przejścia",
+        "blocks.create.particle": "Cząsteczki",
+        "blocks.create.block": "Utwórz blok",
+        "blocks.create.color": "Kolor",
+        "blocks.create.copy": "Kopiuj",
+        "blocks.create.block.save.lua": "Zapisz (kod Lua)",
+        "blocks.create.block.save.sandbox": "Zapisz (Piaskownica)",
+        "blocks.create.block.save.lua.title": "Wybierz jedną z dwóch opcji importowania kodu lua",
+        "blocks.select.dynamic": "Dynamiczny",
+        "blocks.select.static": "Statyczny",
+        "blocks.select.forward": "Do przodu",
+        "blocks.select.bounce": "Odbijanie",
+        "blocks.select.inputDefault": "Domyślnie",
+        "blocks.select.inputNumber": "Liczba",
+        "blocks.select.inputDecimal": "Liczba dziesiętna",
+        "blocks.select.inputPhone": "Telefon",
+        "blocks.select.inputUrl": "Url",
         "blocks.select.inputEmail": "Email",
-        "blocks.select.inputNoEmoji": "Sem emoji",
-        "blocks.select.alignLeft": "Esquerda",
-        "blocks.select.alignRight": "Direito",
-        "blocks.select.alignCenter": "Centro",
-        "blocks.select.backgroundTrue": "Deixar",
-        "blocks.select.backgroundFalse": "Romever",
-        "blocks.select.ruleTrue": "Pode",
-        "blocks.select.ruleFalse": "Não pode",
+        "blocks.select.inputNoEmoji": "BezEmoji",
+        "blocks.select.alignLeft": "Lewo",
+        "blocks.select.alignRight": "Prawo",
+        "blocks.select.alignCenter": "Po środku",
+        "blocks.select.backgroundTrue": "Opuść",
+        "blocks.select.backgroundFalse": "Usuń",
+        "blocks.select.ruleTrue": "Dozwolone",
+        "blocks.select.ruleFalse": "Zabronione",
         "blocks.select.switchRadio": "Radio",
         "blocks.select.switchCheckbox": "Checkbox",
         "blocks.select.switchToggle": "Toggle",
         "blocks.select.switchOn": "On",
         "blocks.select.switchOff": "Off",
-        "blocks.select.obj": "Objeto",
-        "blocks.select.text": "Texto",
-        "blocks.select.group": "Grupo",
+        "blocks.select.obj": "Obiekt",
+        "blocks.select.text": "Tekst",
+        "blocks.select.group": "Grupa",
         "blocks.select.tag": "Tag",
-        "blocks.select.widget": "Ferramenta",
-        "blocks.select.progressDefault": "Definir",
-        "blocks.select.progressDownload": "Baixar",
-        "blocks.select.progressUpload": "Carregar",
-        "blocks.select.redirectsTrue": "Automático",
-        "blocks.select.redirectsFalse": "Manual",
-        "blocks.color.red": "Vermelho",
-        "blocks.color.green": "Verde",
-        "blocks.color.blue": "Azul",
-        "blocks.color.hex": "Hex",
-        "blocks.sure?": "você realmente quer ?",
-        "blocks.delete.yes": "Sim,eu quero",
-        "blocks.delete.no": "Não, não quero",
-        "blocks.entertext": "Texto",
-        "blocks.everyone": "Achar blocos",
-        "blocks.custom": "Criar bloco",
-        "blocks.none": "Nada",
-        "blocks.not.exist": "Isso não existe",
-        "blocks.type.noobmode": "bloco fechado no modo fácil",
-        "blocks.default": "Nome do bloco",
-        "blocks.": "Nome do bloco",
-        "blocks.params": "perímetro",
-        "blocks.params.add": "Adicionar blocos",
-        "blocks.params.remove": "Remover blocos",
+        "blocks.select.widget": "Widżet",
+        "blocks.select.progressDefault": "Domyślnie",
+        "blocks.select.progressDownload": "Pobierz",
+        "blocks.select.progressUpload": "Prześlij",
+        "blocks.select.redirectsTrue": "Automatycznie",
+        "blocks.select.redirectsFalse": "Ręcznie",
+        "blocks.color.red": "Czerwony",
+        "blocks.color.green": "Zielony",
+        "blocks.color.blue": "Niebieski",
+        "blocks.color.hex": "Wprowadź HEX (szesnastkowy)",
+        "blocks.sure?": "Jesteś pewny?",
+        "blocks.delete.yes": "Tak, usuń",
+        "blocks.delete.no": "Nie, nie usuwaj",
+        "blocks.entertext": "Wprowadź tekst",
+        "blocks.everyone": "Wszystkie bloki",
+        "blocks.custom": "Niestandardowe bloki",
+        "blocks.none": "Brak",
+        "blocks.not.exist": "Blok nie istnieje",
+        "blocks.type.noobmode": "Dostęp do tej kategorii jest zamknięty w trybie uproszczonym",
+        "blocks.default": "Nazwa bloku",
+        "blocks.": "Nazwa bloku",
+        "blocks.params": "Parametr",
+        "blocks.params.add": "Dodaj parametr",
+        "blocks.params.remove": "Usuń parametr",
         "blocks..params": {}
     },
     "events": {
-        "blocks.events": "Eventos",
-        "blocks.onStart": "Começar",
+        "blocks.events": "Wydarzenia",
+        "blocks.onStart": "Przy starcie",
         "blocks.onStart.params": [
-            "Comente:"
+            "Notatka:"
         ],
-        "blocks.onFun": "Criar função",
+        "blocks.onFun": "Utwórz funkcję",
         "blocks.onFun.params": [
-            "Nome da função:"
+            "Nazwa funkcji:"
         ],
-        "blocks.onFunParams": "Criar função com parâmetros",
+        "blocks.onFunParams": "Utwórz funkcję z parametrami",
         "blocks.onFunParams.params": [
-            "Função nome:",
-            "Nome da tabela:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
-        "blocks.onCondition": "Quando a função for verdadeira",
+        "blocks.onCondition": "Dopóki warunek jest prawdziwy",
         "blocks.onCondition.params": [
-            "Condição:"
+            "Warunek:"
         ],
-        "blocks.onTouchBegan": "Tocar no objeto",
+        "blocks.onTouchBegan": "Gdy palec dotyka obiektu",
         "blocks.onTouchBegan.params": [
-            "Nome da função:",
-            "Table name:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
-        "blocks.onTouchEnded": "Não toca no objeto",
+        "blocks.onTouchEnded": "Kiedy palec opuszcza obiekt",
         "blocks.onTouchEnded.params": [
-            "Nome da função:",
-            "Nome da tabela:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
-        "blocks.onTouchMoved": "dedo move sobre objeto",
+        "blocks.onTouchMoved": "Kiedy palec porusza się po obiekcie",
         "blocks.onTouchMoved.params": [
-            "Nome da função:",
-            "Table name:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
-        "blocks.onTouchDisplayBegan": "dedo toca na tela",
+        "blocks.onTouchDisplayBegan": "Gdy palec dotknie ekranu",
         "blocks.onTouchDisplayBegan.params": [
-            "Nome da tabela:"
+            "Nazwa tabeli:"
         ],
-        "blocks.onTouchDisplayEnded": "dedo solta a tela",
+        "blocks.onTouchDisplayEnded": "Kiedy palec opuści ekran",
         "blocks.onTouchDisplayEnded.params": [
-            "Nome da tabela:"
+            "Nazwa tabeli:"
         ],
-        "blocks.onTouchDisplayMoved": "move sobre a tela",
+        "blocks.onTouchDisplayMoved": "Kiedy palec porusza się po ekranie",
         "blocks.onTouchDisplayMoved.params": [
-            "Nome da tabela:"
+            "Nazwa tabeli:"
         ],
-        "blocks.onFirebase": "Resposta recebida",
+        "blocks.onFirebase": "Odpowiedź otrzymana od Firebase",
         "blocks.onFirebase.params": [
-            "Nome da função:",
-            "Resposta:"
+            "Nazwa funkcji:",
+            "Odpowiedź:"
         ],
-        "blocks.onBackPress": "clicar no botão de voltar",
-        "blocks.onSuspend": "Deixar em janela",
-        "blocks.onResume": "Voltar do modo janela",
-        "blocks.onLocalCollisionBegan": "Começado colisão local",
+        "blocks.onBackPress": "When you click on 'Back'",
+        "blocks.onSuspend": "Application was minimized from screen",
+        "blocks.onResume": "Application was returned to screen",
+        "blocks.onLocalCollisionBegan": "Beginning local collision",
         "blocks.onLocalCollisionBegan.params": [
             "Function name:",
-            "Nome da tabela:"
+            "Table name:"
         ],
-        "blocks.onLocalCollisionEnded": "Terminando Colisão local",
+        "blocks.onLocalCollisionEnded": "End local collision",
         "blocks.onLocalCollisionEnded.params": [
             "Function name:",
-            "Nome da tabela:"
+            "Table name:"
         ],
-        "blocks.onLocalPreCollision": "Antes da colisão local",
+        "blocks.onLocalPreCollision": "Before local collision",
         "blocks.onLocalPreCollision.params": [
             "Function name:",
-            "Nome da tabela:"
+            "Table name:"
         ],
-        "blocks.onLocalPostCollision": "Após colisão local",
+        "blocks.onLocalPostCollision": "After local collision",
         "blocks.onLocalPostCollision.params": [
             "Function name:",
-            "Nome da tabela:"
+            "Table name:"
         ],
-        "blocks.onGlobalCollisionBegan": "Começando colisão global",
+        "blocks.onGlobalCollisionBegan": "Beginning global collision",
         "blocks.onGlobalCollisionBegan.params": [
             "Function name:",
-            "Nome da tabela:"
+            "Table name:"
         ],
-        "blocks.onGlobalCollisionEnded": "Terminando colisão global",
+        "blocks.onGlobalCollisionEnded": "End global collision",
         "blocks.onGlobalCollisionEnded.params": [
             "Function name:",
-            "Nome da tabela:"
+            "Table name:"
         ],
-        "blocks.onGlobalPreCollision": "Antes da colisão global",
+        "blocks.onGlobalPreCollision": "Przed globalną kolizją",
         "blocks.onGlobalPreCollision.params": [
-            "Function name:",
-            "Nome da tabela:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
-        "blocks.onGlobalPostCollision": "Após colisão global",
+        "blocks.onGlobalPostCollision": "Po globalnej kolizji",
         "blocks.onGlobalPostCollision.params": [
-            "Function name:",
-            "Nome da tabela:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
-        "blocks.onWebViewCallback": "Houve mudanças no visualização da web",
+        "blocks.onWebViewCallback": "W widoku internetowym (webview) wystąpiły zmiany",
         "blocks.onWebViewCallback.params": [
-            "Function name:",
-            "Nome da tabela:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
         "blocks.onSwitchCallback": "Event in switch has started",
         "blocks.onSwitchCallback.params": [
             "Function name:",
             "Variable name:"
         ],
-        "blocks.onSliderMoved": "Enquanto o controle deslizante está se movendo",
+        "blocks.onSliderMoved": "Gdy suwak się rusza",
         "blocks.onSliderMoved.params": [
-            "Function name:",
-            "Variable name:"
+            "Nazwa funkcji:",
+            "Nazwa zmiennej:"
         ],
-        "blocks.onFieldBegan": "Edição do campo começou",
+        "blocks.onFieldBegan": "Edycja pola została rozpoczęta",
         "blocks.onFieldBegan.params": [
-            "Function name:",
-            "Nome da tabela:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
-        "blocks.onFieldEditing": "campo de texto está sendo editado",
+        "blocks.onFieldEditing": "Podczas edycji pola tekstowego",
         "blocks.onFieldEditing.params": [
-            "Function name:",
-            "Nome da tabela:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
-        "blocks.onFieldEnded": "Campo está concluída",
+        "blocks.onFieldEnded": "Edycja pola została zakończona",
         "blocks.onFieldEnded.params": [
-            "Function name:",
-            "Nome da tabela:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ]
     },
     "vars": {
-        "blocks.vars": "Data/texto",
-        "blocks.setVar": "Definir valor na variável",
+        "blocks.vars": "Dane\ni Tekst",
+        "blocks.setVar": "Ustaw wartość zmiennej",
         "blocks.setVar.params": [
-            "Nome da variável:",
-            "Valor:"
+            "Nazwa zmiennej:",
+            "Wartość:"
         ],
-        "blocks.updVar": "valor na variável",
+        "blocks.updVar": "Dodaj wartość do zmiennej",
         "blocks.updVar.params": [
-            "Nome variável:",
-            "Valor:"
+            "Nazwa zmiennej:",
+            "Wartość:"
         ],
-        "blocks.setObjVar": "variável no objeto",
+        "blocks.setObjVar": "Ustaw zmienną obiektu",
         "blocks.setObjVar.params": [
-            "Key [K]:",
-            "Nome do objeto:",
-            "Valor:"
+            "Klucz [K]:",
+            "Nazwa obiektu:",
+            "Wartość:"
         ],
-        "blocks.addTable": "valor para a tabela",
+        "blocks.addTable": "Ustaw wartość do tabeli",
         "blocks.addTable.params": [
-            "Key [K]:",
-            "Nome da tabela:",
-            "Valor:"
+            "Klucz [K]:",
+            "Nazwa tabeli:",
+            "Wartość:"
         ],
-        "blocks.insertTable": "Inserir valor na matriz",
+        "blocks.insertTable": "Wstaw wartość do tablicy",
         "blocks.insertTable.params": [
-            "Key [N]:",
-            "Tabela nome:",
-            "Value:"
+            "Klucz [N]:",
+            "Nazwa tabeli:",
+            "Wartość:"
         ],
-        "blocks.removeTable": "Excluir valor da matriz",
+        "blocks.removeTable": "Usuń wartość z tablicy",
         "blocks.removeTable.params": [
-            "Tabela nome:",
-            "Key [N]:"
+            "Nazwa tabeli:",
+            "Klucz [N]:"
         ],
-        "blocks.resetTable": "Substituir tabela",
+        "blocks.resetTable": "Nadpisz tabelę",
         "blocks.resetTable.params": [
-            "Nome da tabela:",
-            "Json code:"
+            "Nazwa tabeli:",
+            "Kod JSON:"
         ],
-        "blocks.saveValue": "Salvar valor",
+        "blocks.saveValue": "Zapisz wartość",
         "blocks.saveValue.params": [
-            "Key 'K':",
-            "Valor:"
+            "Klucz „K”:",
+            "Wartość:"
         ],
-        "blocks.setRandomSeed": "semente aleatória",
+        "blocks.setRandomSeed": "Ustaw losowy seed",
         "blocks.setRandomSeed.params": [
-            "Semente:"
+            "Seed:"
         ],
-        "blocks.newText": "Criar texto",
+        "blocks.newText": "Create text",
         "blocks.newText.params": [
-            "Nome do texto:",
-            "Texto:",
-            "Fonte:",
-            "Tamanho:",
-            "Cor:",
-            "Opacidade (0-100):",
-            "Posição (X):",
-            "Posição (Y):"
-        ],
-        "blocks.newText2": "Criar texto com largura e altura",
-        "blocks.newText2.params": [
-            "Nome do texto:",
-            "Texto:",
+            "Text name:",
+            "Text:",
             "Font:",
-            "Tamanho:",
-            "cor:",
-            "Alinhar:",
-            "Largura:",
+            "Size:",
+            "Color:",
+            "Opacity (0-100):",
+            "Position (X):",
+            "Position (Y):"
+        ],
+        "blocks.newText2": "Create text with width and height",
+        "blocks.newText2.params": [
+            "Text name:",
+            "Text:",
+            "Font:",
+            "Size:",
+            "Color:",
+            "Align:",
+            "Width:",
             "Height:",
-            "Posição (X):",
-            "Posição (Y):"
+            "Position (X):",
+            "Position (Y):"
         ],
         "blocks.setText": "Edit text",
         "blocks.setText.params": [
-            "Nome do texto:",
-            "Texto:"
+            "Text name:",
+            "Text:"
         ],
-        "blocks.setTextSize": "Tamanho do texto",
+        "blocks.setTextSize": "Set text font size",
         "blocks.setTextSize.params": [
-            "Nome do texto:",
-            "Tamanho:"
+            "Text name:",
+            "Size:"
         ],
-        "blocks.hideText": "Ocultar texto",
+        "blocks.hideText": "Hide text",
         "blocks.hideText.params": [
-            "Nome do texto:"
+            "Text name:"
         ],
-        "blocks.showText": "Mostrar texto",
+        "blocks.showText": "Pokaż tekst",
         "blocks.showText.params": [
-            "Nome do texto:"
+            "Nazwa tekstu:"
         ],
-        "blocks.removeText": "Apagar texto",
+        "blocks.removeText": "Usuń tekst",
         "blocks.removeText.params": [
-            "Nome do texto:"
+            "Text name:"
         ],
-        "blocks.setTextPos": "Definir posição do texto",
+        "blocks.setTextPos": "Set text position",
         "blocks.setTextPos.params": [
-            "Nome do texto:",
-            "Posição (X):",
-            "Posição (Y):"
+            "Text name:",
+            "Position (X):",
+            "Position (Y):"
         ],
-        "blocks.setTextPosX": "posição do texto X",
+        "blocks.setTextPosX": "Set text position X",
         "blocks.setTextPosX.params": [
-            "Nome do texto:",
-            "Posição (X):"
+            "Text name:",
+            "Position (X):"
         ],
-        "blocks.setTextPosY": "posição do texto Y",
+        "blocks.setTextPosY": "Set text position Y",
         "blocks.setTextPosY.params": [
-            "Nome do texto:",
-            "Posição (Y):"
+            "Text name:",
+            "Position (Y):"
         ],
-        "blocks.setTextRotation": "rotação de texto",
+        "blocks.setTextRotation": "Set text rotation",
         "blocks.setTextRotation.params": [
-            "Texto nome:",
-            "Rotação:"
+            "Text name:",
+            "Rotation:"
         ],
-        "blocks.setTextAlpha": "opacidade do texto",
+        "blocks.setTextAlpha": "Set text opacity",
         "blocks.setTextAlpha.params": [
-            "Nome do texto:",
-            "Opacidade (0-100):"
-        ],
-        "blocks.setTextColor": "cor do texto",
-        "blocks.setTextColor.params": [
-            "Nome do texto:",
-            "Cor:"
-        ],
-        "blocks.setTextRGB": "RGB do texto",
-        "blocks.setTextRGB.params": [
-            "Nome do texto:",
-            "Cor (R):",
-            "Cor (G):",
-            "Cor (B):"
-        ],
-        "blocks.setTextHEX": "cor do texto HEX",
-        "blocks.setTextHEX.params": [
-            "Nome do texto:",
-            "Cor (Hex):"
-        ],
-        "blocks.setTextAnchor": "ponto de ancoragem do texto",
-        "blocks.setTextAnchor.params": [
-            "Nome do texto:",
-            "Anchor X (0-100):",
-            "Âncora Y (0-100):"
-        ],
-        "blocks.updTextPosX": "Alterar posição do texto X",
-        "blocks.updTextPosX.params": [
-            "Nome do texto:",
-            "Posição (X):"
-        ],
-        "blocks.updTextPosY": "Alterar posição do texto Y",
-        "blocks.updTextPosY.params": [
-            "Nome do texto:",
-            "Posição (Y):"
-        ],
-        "blocks.updTextRotation": "Alterar rotação do texto",
-        "blocks.updTextRotation.params": [
-            "Texto nome:",
-            "Rotação:"
-        ],
-        "blocks.updTextAlpha": "Alterar opacidade do texto",
-        "blocks.updTextAlpha.params": [
-            "Nome do texto:",
+            "Text name:",
             "Opacity (0-100):"
         ],
-        "blocks.frontText": "Texto camada para acima",
-        "blocks.frontText.params": [
-            "Nome do texto:"
+        "blocks.setTextColor": "Set text color",
+        "blocks.setTextColor.params": [
+            "Nazwa tekstu:",
+            "Kolor:"
         ],
-        "blocks.backText": "Texto camara para abaixo",
+        "blocks.setTextRGB": "Ustaw kolor tekstu RGB",
+        "blocks.setTextRGB.params": [
+            "Nazwa tekstu:",
+            "Kolor (R):",
+            "Kolor (G):",
+            "Kolor (B):"
+        ],
+        "blocks.setTextHEX": "Ustaw kolor tekstu HEX",
+        "blocks.setTextHEX.params": [
+            "Nazwa tekstu:",
+            "Kolor (Hex):"
+        ],
+        "blocks.setTextAnchor": "Ustaw punkt kotwicy tekstu",
+        "blocks.setTextAnchor.params": [
+            "Nazwa tekstu:",
+            "Punkt kotwicy X (0–100):",
+            "Punkt kotwicy Y (0–100):"
+        ],
+        "blocks.updTextPosX": "Zmień pozycję X tekstu",
+        "blocks.updTextPosX.params": [
+            "Nazwa tekstu:",
+            "Pozycja (X):"
+        ],
+        "blocks.updTextPosY": "Zmień pozycję Y tekstu",
+        "blocks.updTextPosY.params": [
+            "Nazwa tekstu:",
+            "Pozycja (Y):"
+        ],
+        "blocks.updTextRotation": "Zmień rotację tekstu",
+        "blocks.updTextRotation.params": [
+            "Nazwa tekstu:",
+            "Rotacja:"
+        ],
+        "blocks.updTextAlpha": "Zmień przeźroczystość tekstu",
+        "blocks.updTextAlpha.params": [
+            "Nazwa tekstu:",
+            "Przezroczystość (0-100):"
+        ],
+        "blocks.frontText": "Ustaw tekst na warstwę powyżej",
+        "blocks.frontText.params": [
+            "Nazwa tekstu:"
+        ],
+        "blocks.backText": "Ustaw tekst na warstwie poniżej",
         "blocks.backText.params": [
-            "Nome do texto:"
+            "Nazwa tekstu:"
         ]
     },
     "objects": {
-        "blocks.objects": "Objects",
-        "blocks.newObject": "Create object",
+        "blocks.objects": "Obiekty",
+        "blocks.newObject": "Utwórz obiekt",
         "blocks.newObject.params": [
-            "Object name:",
-            "Sprite name:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa obiektu:",
+            "Nazwa duszka:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.newSprite": "Create object from parts of sprite",
+        "blocks.newSprite": "Utwórz obiekt z części duszka",
         "blocks.newSprite.params": [
-            "Object name:",
-            "Sprite name:",
-            "Frame width:",
-            "Frame height:",
-            "Number frames:",
-            "List animations:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa obiektu:",
+            "Nazwa duszka:",
+            "Szerokość ramki:",
+            "Wysokość ramki:",
+            "Liczba ramek:",
+            "Lista animacji:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.setPos": "Set object position",
+        "blocks.setPos": "Ustaw pozycję obiektu",
         "blocks.setPos.params": [
-            "Object name:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa obiektu:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.setPosX": "Set object position X",
+        "blocks.setPosX": "Ustaw pozycję X obiektu",
         "blocks.setPosX.params": [
             "Object name:",
             "Position (X):"
@@ -908,92 +908,92 @@
         ]
     },
     "objects2": {
-        "blocks.objects2": "Animação/Máscara",
-        "blocks.setScale": "Definir escala do objeto",
+        "blocks.objects2": "Animation\n& Masks",
+        "blocks.setScale": "Set object scale",
         "blocks.setScale.params": [
-            "Nome do objeto:",
-            "Escala (%):"
+            "Object name:",
+            "Scale (%):"
         ],
-        "blocks.setScaleX": "Definir escala de objeto X",
+        "blocks.setScaleX": "Set object scale X",
         "blocks.setScaleX.params": [
-            "Nome do objeto:",
-            "Escala (%):"
+            "Object name:",
+            "Scale (%):"
         ],
-        "blocks.setScaleY": "Definir escala do objeto Y",
+        "blocks.setScaleY": "Set object scale Y",
         "blocks.setScaleY.params": [
-            "Nome do objeto:",
-            "Escala (%):"
+            "Object name:",
+            "Scale (%):"
         ],
-        "blocks.newSeqAnimation": "Criar animação seguida",
+        "blocks.newSeqAnimation": "Create sequence animation",
         "blocks.newSeqAnimation.params": [
-            "Nome da animação:",
-            "Tipo de animação:",
-            "Quadro inicial:",
-            "Quantos quadros:",
-            "Repetições:",
-            "Tempo (segundos):"
+            "Animation name:",
+            "Animation type:",
+            "Starting frame:",
+            "Number frames:",
+            "Number repetitions:",
+            "Time (Seconds):"
         ],
-        "blocks.newParAnimation": "Criar animação paralela",
+        "blocks.newParAnimation": "Create parallel animation",
         "blocks.newParAnimation.params": [
-            "Tabela de molduras:",
-            "Nome da animação:",
-            "Tipo de animação:",
-            "Repetições:",
-            "Tempo (segundos):"
+            "Frames table:",
+            "Animation name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):"
         ],
-        "blocks.playAnimation": "Reproduzir animação",
+        "blocks.playAnimation": "Play animation",
         "blocks.playAnimation.params": [
-            "Nome do objeto:",
-            "Nome da animação:"
+            "Object name:",
+            "Animation name:"
         ],
-        "blocks.pauseAnimation": "Pausar animação",
+        "blocks.pauseAnimation": "Pause animation",
         "blocks.pauseAnimation.params": [
-            "Nome do objeto:",
-            "Nome da animação:"
+            "Object name:",
+            "Animation name:"
         ],
-        "blocks.setFrame": "Definir imagem do objeto",
+        "blocks.setFrame": "Set object frame",
         "blocks.setFrame.params": [
-            "Nome do objeto:",
-            "imagem:"
+            "Object name:",
+            "Frame:"
         ],
-        "blocks.newMask": "Criar máscara",
+        "blocks.newMask": "Create mask",
         "blocks.newMask.params": [
-            "Nome da máscara:",
-            "Nome do imagem"
+            "Mask name:",
+            "Sprite name:"
         ],
-        "blocks.addMaskToObject": "Adicionar máscara no objeto",
+        "blocks.addMaskToObject": "Add mask to object",
         "blocks.addMaskToObject.params": [
-            "Nome do objeto:",
-            "Nome da máscara:"
+            "Object name:",
+            "Mask name:"
         ],
-        "blocks.setMaskPos": "Definir posição da máscara",
+        "blocks.setMaskPos": "Set mask position",
         "blocks.setMaskPos.params": [
-            "Nome do objeto:",
-            "Posição (X):",
-            "Posição (Y):"
+            "Object name:",
+            "Position (X):",
+            "Position (Y):"
         ],
-        "blocks.setMaskScale": "Definir escala de máscara",
+        "blocks.setMaskScale": "Set mask scale",
         "blocks.setMaskScale.params": [
-            "Nome do objeto:",
-            "Escala (%):"
+            "Object name:",
+            "Scale (%):"
         ],
-        "blocks.setMaskScaleX": "Definir escala de máscara X",
+        "blocks.setMaskScaleX": "Set mask scale X",
         "blocks.setMaskScaleX.params": [
-            "Nome do objeto:",
-            "Escala (%):"
+            "Object name:",
+            "Scale (%):"
         ],
-        "blocks.setMaskScaleY": "Definir escala da máscara Y",
+        "blocks.setMaskScaleY": "Set mask scale Y",
         "blocks.setMaskScaleY.params": [
-            "Nome do objeto:",
-            "Escala (%):"
+            "Object name:",
+            "Scale (%):"
         ],
-        "blocks.setMaskHitTrue": "Definir máscara não clicável",
+        "blocks.setMaskHitTrue": "Set mask non-clickability",
         "blocks.setMaskHitTrue.params": [
-            "Nome do objeto:"
+            "Object name:"
         ],
-        "blocks.setMaskHitFalse": "Definir capacidade de clique na máscara",
+        "blocks.setMaskHitFalse": "Set mask clickability",
         "blocks.setMaskHitFalse.params": [
-            "Nome do objeto:"
+            "Object name:"
         ]
     },
     "groups": {
@@ -1444,10 +1444,10 @@
             "Width:",
             "Height:"
         ],
-        "blocks.setWidgetListener": "Definir função de alteração",
+        "blocks.setWidgetListener": "Set change function",
         "blocks.setWidgetListener.params": [
             "Widget name:",
-            "Nome da função:"
+            "Function name:"
         ],
         "blocks.setWebViewFront": "Go to website ahead",
         "blocks.setWebViewFront.params": [
@@ -1537,11 +1537,11 @@
         ]
     },
     "media": {
-        "blocks.media": "vídeos",
-        "blocks.newVideo": "Criar vídeo",
+        "blocks.media": "Media",
+        "blocks.newVideo": "Create video",
         "blocks.newVideo.params": [
-            "Nome da mídia:",
-            "Video do name:",
+            "Media name:",
+            "Video name:",
             "After execution:",
             "Position (X):",
             "Position (Y):",
@@ -1862,7 +1862,7 @@
         "blocks.setTransitionCancelAll": "Cancel all transition"
     },
     "objectsNoob": {
-        "blocks.newObjectNoob": "Criar imagem",
+        "blocks.newObjectNoob": "Создать картинку",
         "blocks.newObjectNoob.params": [
             "Имя картинки:",
             "Позиция (X):",
@@ -1997,7 +1997,7 @@
         ]
     },
     "editor.interface": {
-        "editor.window.error": "Erro no editor",
+        "editor.window.error": "Error in expression",
         "editor.button.error": "Fix",
         "editor.button.text": "Text",
         "editor.button.local": "{ }",
@@ -2008,7 +2008,7 @@
         "editor.list.fun": "Methods",
         "editor.list.math": "Mathematics",
         "editor.list.prop": "Properties",
-        "editor.list.log": "lógica",
+        "editor.list.log": "Logic",
         "editor.list.device": "Device",
         "editor.list.custom": "Custom",
         "editor.list.event": "Event",
@@ -2021,8 +2021,8 @@
         "editor.list.prop.widget": "Widget"
     },
     "editor.fun": {
-        "editor.list.fun.get_text": "obter_texto",
-        "editor.list.fun.read_save": "ler_salvar",
+        "editor.list.fun.get_text": "get_text",
+        "editor.list.fun.read_save": "read_save",
         "editor.list.fun.random_str": "random_string",
         "editor.list.fun.concat": "concat_string",
         "editor.list.fun.tonumber": "to_number",
@@ -2108,24 +2108,24 @@
         "editor.list.prop.media.sound_play": "sound_is_played"
     },
     "editor.log": {
-        "editor.list.log.true": "verdade",
-        "editor.list.log.false": "falso",
-        "editor.list.log.nil": "nada",
+        "editor.list.log.true": "true",
+        "editor.list.log.false": "false",
+        "editor.list.log.nil": "nil",
         "editor.list.log.>": ">",
         "editor.list.log.<": "<",
         "editor.list.log.>=": "≥",
         "editor.list.log.<=": "≤",
         "editor.list.log.~=": "≠",
-        "editor.list.log.and": "e",
-        "editor.list.log.or": "ou",
-        "editor.list.log.not": "não"
+        "editor.list.log.and": "and",
+        "editor.list.log.or": "or",
+        "editor.list.log.not": "not"
     },
     "editor.device": {
         "editor.list.device.fps": "fps",
-        "editor.list.device.read_save": "ler_salvar",
-        "editor.list.device.device_id": "dispositivo Id",
-        "editor.list.device.width_screen": "largura_tela",
-        "editor.list.device.height_screen": "altura_tela",
+        "editor.list.device.read_save": "read_save",
+        "editor.list.device.device_id": "device_id",
+        "editor.list.device.width_screen": "width_screen",
+        "editor.list.device.height_screen": "height_screen",
         "editor.list.device.top_point_screen": "top_point_screen",
         "editor.list.device.bottom_point_screen": "bottom_point_screen",
         "editor.list.device.right_point_screen": "right_point_screen",

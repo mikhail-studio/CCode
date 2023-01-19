@@ -3,27 +3,29 @@ local M = {}
 
 M['newVideo'] = function(params)
     local name, link, fun = CALC(params[1]), CALC(params[2]), CALC(params[3], 'a', true)
-    local posX = '(CENTER_X + (' .. CALC(params[4]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[5]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[4]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[5]) .. '))'
     local width, height = CALC(params[6]), CALC(params[7])
 
     GAME.lua = GAME.lua .. ' pcall(function() local link, name = other.getVideo(' .. link .. '), ' .. name .. ' GAME.group.media[name]'
     GAME.lua = GAME.lua .. ' = native.newVideo(' .. posX .. ', ' .. posY .. ', ' .. width .. ', ' .. height .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.media[name]:load(link, system.DocumentsDirectory) GAME.group.media[name]:play()'
-    GAME.lua = GAME.lua .. ' GAME.group.media[name]:addEventListener(\'video\', function(e) pcall(function() e.name = name ' .. fun .. '(e)'
-    GAME.lua = GAME.lua .. ' end) end) GAME.group.media[name]:setNativeProperty(\'IgnoreErrors\', true) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.media[name]:addEventListener(\'video\', function(e) if GAME.hash == hash'
+    GAME.lua = GAME.lua .. ' then pcall(function() e.name = name ' .. fun .. '(e)'
+    GAME.lua = GAME.lua .. ' end) end end) GAME.group.media[name]:setNativeProperty(\'IgnoreErrors\', true) end)'
 end
 
 M['newRemoteVideo'] = function(params)
     local name, link, fun = CALC(params[1]), CALC(params[2]), CALC(params[3], 'a', true)
-    local posX = '(CENTER_X + (' .. CALC(params[4]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[5]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[4]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[5]) .. '))'
     local width, height = CALC(params[6]), CALC(params[7])
 
     GAME.lua = GAME.lua .. ' pcall(function() local link, name = ' .. link .. ', ' .. name .. ' GAME.group.media[name]'
     GAME.lua = GAME.lua .. ' = native.newVideo(' .. posX .. ', ' .. posY .. ', ' .. width .. ', ' .. height .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.media[name]:load(link, media.RemoteSource) GAME.group.media[name]:play()'
-    GAME.lua = GAME.lua .. ' GAME.group.media[name]:addEventListener(\'video\', function(e) pcall(function() e.name = name ' .. fun .. '(e)'
+    GAME.lua = GAME.lua .. ' GAME.group.media[name]:addEventListener(\'video\', function(e) if GAME.hash == hash'
+    GAME.lua = GAME.lua .. ' then pcall(function() e.name = name ' .. fun .. '(e)'
     GAME.lua = GAME.lua .. ' end) end) GAME.group.media[name]:setNativeProperty(\'IgnoreErrors\', true) end)'
 end
 

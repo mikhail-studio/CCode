@@ -204,8 +204,8 @@ if 'Теги' then
     M['setTagPos'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
         GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else'
-        GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].x = CENTER_X + (' .. CALC(params[2]) .. ')'
-        GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].y = CENTER_Y - (' .. CALC(params[3]) .. ')'
+        GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].x = SET_X(' .. CALC(params[2]) .. ')'
+        GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].y = SET_Y(' .. CALC(params[3]) .. ')'
         GAME.lua = GAME.lua .. ' end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 

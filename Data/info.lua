@@ -315,8 +315,10 @@ M.listBlock = {
         'setFieldFocusNil',
         'hidePanelInterface',
         'showPanelInterface',
-        'newSwitch',
-            'setSwitchState'
+        'newScrollView',
+            'newSwitch',
+            'setSwitchState',
+            'insertToScroll'
     },
 
     ['media'] = {
@@ -693,8 +695,10 @@ M.listName = {
         ['setFieldFocusNil'] = {'widgets'},
         ['hidePanelInterface'] = {'widgets'},
         ['showPanelInterface'] = {'widgets'},
-        ['newSwitch'] = {'widgets', 'value', 'switchType', 'switchState', 'value', 'value', 'value', 'value', 'fun', 'fun'},
+        ['newScrollView'] = {'widgets', 'value', 'isBackground', 'fun', 'isBackground', 'value', 'isBackground', 'isBackground', 'color', 'isBackground', 'value', 'value', 'value', 'value'},
+            ['newSwitch'] = {'widgets', 'value', 'switchType', 'switchState', 'value', 'value', 'value', 'value', 'fun', 'fun'},
             ['setSwitchState'] = {'widgets', 'value', 'switchState'},
+            ['insertToScroll'] = {'widgets', 'value', 'value', 'scrollType'},
 
     -- media
     ['newVideo'] = {'media', 'value', 'value', 'fun', 'value', 'value', 'value', 'value'},
@@ -753,7 +757,7 @@ M.listDelimiter = {
     ['vars'] = {'setTextPos'},
     ['events'] = {'onLocalCollisionBegan'},
     ['physics'] = {'setWorldGravity'},
-    ['widgets'] = {'newSwitch'}
+    ['widgets'] = {'newScrollView'}
 }
 
 M.listDelimiterNoob = {

@@ -21,13 +21,13 @@ if 'Объект' then
 
     M['obj.pos_x'] = function(name)
         local isComplete, result = pcall(function()
-            return GAME.group.objects[name] and GAME.group.objects[name].x - CENTER_X or 0
+            return GAME.group.objects[name] and GET_X(GAME.group.objects[name].x, GAME.group.objects[name]._scroll) or 0
         end) return isComplete and result or 0
     end
 
     M['obj.pos_y'] = function(name)
         local isComplete, result = pcall(function()
-            return GAME.group.objects[name] and 0 - GAME.group.objects[name].y + CENTER_Y or 0
+            return GAME.group.objects[name] and GET_Y(GAME.group.objects[name].y, GAME.group.objects[name]._scroll) or 0
         end) return isComplete and result or 0
     end
 
@@ -91,13 +91,13 @@ if 'Текст' then
 
     M['text.pos_x'] = function(name)
         local isComplete, result = pcall(function()
-            return GAME.group.texts[name] and GAME.group.texts[name].x - CENTER_X or 0
+            return GAME.group.texts[name] and GET_X(GAME.group.texts[name].x, GAME.group.texts[name]._scroll) or 0
         end) return isComplete and result or 0
     end
 
     M['text.pos_y'] = function(name)
         local isComplete, result = pcall(function()
-            return GAME.group.texts[name] and 0 - GAME.group.texts[name].y + CENTER_Y or 0
+            return GAME.group.texts[name] and GET_Y(GAME.group.texts[name].y, GAME.group.texts[name]._scroll) or 0
         end) return isComplete and result or 0
     end
 
@@ -179,38 +179,38 @@ if 'Виджет' then
 
     M['widget.pos_x'] = function(name)
         local isComplete, result = pcall(function()
-            return GAME.group.widgets[name] and GAME.group.widgets[name].x - CENTER_X or 0
+            return GAME.group.widgets[name] and GET_X(GAME.group.widgets[name].x, GAME.group.widgets[name]._scroll) or 0
         end) return isComplete and result or 0
     end
 
     M['widget.pos_y'] = function(name)
         local isComplete, result = pcall(function()
-            return GAME.group.widgets[name] and 0 - GAME.group.widgets[name].y + CENTER_Y or 0
+            return GAME.group.widgets[name] and GET_Y(GAME.group.widgets[name].y, GAME.group.widgets[name]._scroll) or 0
         end) return isComplete and result or 0
     end
 
     M['widget.value'] = function(name)
         local isComplete, result = pcall(function()
-            return GAME.group.widgets[name] and (GAME.group.widgets[name]._type == 'slider' and GAME.group.widgets[name].value or 0) or 50
+            return GAME.group.widgets[name] and (GAME.group.widgets[name].wtype == 'slider' and GAME.group.widgets[name].value or 0) or 50
         end) return isComplete and result or 50
     end
 
     M['widget.state'] = function(name)
         local isComplete, result = pcall(function()
             return GAME.group.widgets[name]
-                and (GAME.group.widgets[name]._type == 'switch' and GAME.group.widgets[name].isOn or false) or false
+                and (GAME.group.widgets[name].wtype == 'switch' and GAME.group.widgets[name].isOn or false) or false
         end) return isComplete and result or 50
     end
 
     M['widget.text'] = function(name)
         local isComplete, result = pcall(function()
-            return GAME.group.widgets[name] and (GAME.group.widgets[name]._type == 'field' and GAME.group.widgets[name].text or '') or ''
+            return GAME.group.widgets[name] and (GAME.group.widgets[name].wtype == 'field' and GAME.group.widgets[name].text or '') or ''
         end) return isComplete and result or ''
     end
 
     M['widget.link'] = function(name)
         local isComplete, result = pcall(function()
-            return GAME.group.widgets[name] and (GAME.group.widgets[name]._type == 'webview' and GAME.group.widgets[name].url or '') or ''
+            return GAME.group.widgets[name] and (GAME.group.widgets[name].wtype == 'webview' and GAME.group.widgets[name].url or '') or ''
         end) return isComplete and result or ''
     end
 end

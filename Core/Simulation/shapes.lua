@@ -20,8 +20,8 @@ end
 M['newRect'] = function(params)
     local name, colors = CALC(params[1]), CALC(params[2], '{255}')
     local width, height = CALC(params[3]), CALC(params[4])
-    local posX = '(CENTER_X + (' .. CALC(params[5]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[6]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[5]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[6]) .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. colors
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end)'
@@ -42,8 +42,8 @@ end
 M['newRoundedRect'] = function(params)
     local name, radius = CALC(params[1]), CALC(params[2])
     local width, height = CALC(params[3]), CALC(params[4])
-    local posX = '(CENTER_X + (' .. CALC(params[5]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[6]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[5]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[6]) .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end)'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name ..  '] = display.newRoundedRect(GAME.group, ' .. posX .. ', ' .. posY .. ', '
@@ -61,8 +61,8 @@ end
 
 M['newCircle'] = function(params)
     local name, radius = CALC(params[1]), CALC(params[2])
-    local posX = '(CENTER_X + (' .. CALC(params[3]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[4]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[3]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[4]) .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end) GAME.group.objects['
     GAME.lua = GAME.lua .. name ..  '] = display.newCircle(GAME.group, ' .. posX .. ', ' .. posY .. ', ' .. radius .. ')'
@@ -78,8 +78,8 @@ end
 
 M['newPolygon'] = function(params)
     local name, coords = CALC(params[1]), CALC(params[2], '{0,110,27,35,105,35,43,-16,65,-90,0,-45,-65,-90,-43,-15,-105,35,-27,35}')
-    local posX = '(CENTER_X + (' .. CALC(params[3]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[4]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[3]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[4]) .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local coords = ' .. coords .. ' for i = 1, #coords do if i % 2 == 0 then coords[i]'
     GAME.lua = GAME.lua .. ' = -coords[i] end end pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end)'
@@ -97,10 +97,10 @@ end
 
 M['newLine'] = function(params)
     local name, colors = CALC(params[1]), CALC(params[2], '{255}')
-    local posX1 = '(CENTER_X + (' .. CALC(params[3], '0') .. '))'
-    local posY1 = '(CENTER_Y - (' .. CALC(params[4], '200') .. '))'
-    local posX2 = '(CENTER_X + (' .. CALC(params[5], '0') .. '))'
-    local posY2 = '(CENTER_Y - (' .. CALC(params[6], '-200') .. '))'
+    local posX1 = '(SET_X(' .. CALC(params[3], '0') .. '))'
+    local posY1 = '(SET_Y(' .. CALC(params[4], '200') .. '))'
+    local posX2 = '(SET_X(' .. CALC(params[5], '0') .. '))'
+    local posY2 = '(SET_Y(' .. CALC(params[6], '-200') .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local x1, y1, x2, y2 = ' .. posX1 .. ', ' .. posY1 .. ', ' .. posX2 .. ', ' .. posY2
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end) local colors = ' .. colors
@@ -120,7 +120,7 @@ end
 
 M['appendLine'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local coords = ' .. CALC(params[2], '{}') .. ' for i = 1, #coords do if i % 2 == 0 then'
-    GAME.lua = GAME.lua .. ' coords[i] = CENTER_Y - coords[i] else coords[i] = CENTER_X + coords[i] end end'
+    GAME.lua = GAME.lua .. ' coords[i] = SET_Y(coords[i]) else coords[i] = SET_X(coords[i]) end end'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. CALC(params[1]) ..  ']:append(unpack(coords)) end)'
 end
 

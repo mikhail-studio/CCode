@@ -2,7 +2,7 @@ local CALC = require 'Core.Simulation.calc'
 local M = {}
 
 M['setTransitionListener'] = function(listener)
-    return ' function(e) pcall(function() if GAME.group then ' .. listener .. '(e) end end) end'
+    return ' function(e) pcall(function() if GAME.hash == hash then ' .. listener .. '(e) end end) end'
 end
 
 M['setTransitionTo'] = function(params)
@@ -15,19 +15,19 @@ M['setTransitionTo'] = function(params)
     local onCancel, onRepeat = CALC(params[18], 'a', true), CALC(params[19], 'a', true)
     local alpha, rotation = CALC(params[12], 'nil'), CALC(params[13], 'nil')
 
-    local easing = easing == '(select[\'loop\']())' and 'continuousLoop' or (UTF8.match(easing, '%(select%[\'(.+)\'%]') or 'linear')
-    local direction = direction == '(select[\'bounce\']())' and 'loop' or 'to'
-    local posX = posX == 'nil' and 'nil' or 'CENTER_X + (' .. posX .. ')'
-    local posY = posY == 'nil' and 'nil' or 'CENTER_Y - (' .. posY .. ')'
-    local scaleX = scaleX == 'nil' and 'nil' or scaleX .. ' / 100'
-    local scaleY = scaleY == 'nil' and 'nil' or scaleY .. ' / 100'
-    local alpha = alpha == 'nil' and 'nil' or alpha .. ' / 100'
-
     if type == '(select[\'obj\']())' then type = 'GAME.group.objects'
     elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
+
+    local easing = easing == '(select[\'loop\']())' and 'continuousLoop' or (UTF8.match(easing, '%(select%[\'(.+)\'%]') or 'linear')
+    local direction = direction == '(select[\'bounce\']())' and 'loop' or 'to'
+    local posX = posX == 'nil' and 'nil' or 'SET_X(' .. posX .. ', ' .. type .. '[' .. name .. ']._scroll)'
+    local posY = posY == 'nil' and 'nil' or 'SET_Y(' .. posY .. ', ' .. type .. '[' .. name .. ']._scroll)'
+    local scaleX = scaleX == 'nil' and 'nil' or scaleX .. ' / 100'
+    local scaleY = scaleY == 'nil' and 'nil' or scaleY .. ' / 100'
+    local alpha = alpha == 'nil' and 'nil' or alpha .. ' / 100'
 
     local onComplete = M['setTransitionListener'](onComplete)
     local onCancel = M['setTransitionListener'](onCancel)
@@ -53,16 +53,16 @@ M['setTransitionPos'] = function(params)
     local onResume, onCancel = CALC(params[11], 'a', true), CALC(params[12], 'a', true)
     local onRepeat = CALC(params[13], 'a', true)
 
-    local easing = easing == '(select[\'loop\']())' and 'continuousLoop' or (UTF8.match(easing, '%(select%[\'(.+)\'%]') or 'linear')
-    local direction = direction == '(select[\'bounce\']())' and 'loop' or 'to'
-    local posX = posX == 'nil' and 'nil' or 'CENTER_X + (' .. posX .. ')'
-    local posY = posY == 'nil' and 'nil' or 'CENTER_Y - (' .. posY .. ')'
-
     if type == '(select[\'obj\']())' then type = 'GAME.group.objects'
     elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
+
+    local easing = easing == '(select[\'loop\']())' and 'continuousLoop' or (UTF8.match(easing, '%(select%[\'(.+)\'%]') or 'linear')
+    local direction = direction == '(select[\'bounce\']())' and 'loop' or 'to'
+    local posX = posX == 'nil' and 'nil' or 'SET_X(' .. posX .. ', ' .. type .. '[' .. name .. ']._scroll)'
+    local posY = posY == 'nil' and 'nil' or 'SET_Y(' .. posY .. ', ' .. type .. '[' .. name .. ']._scroll)'
 
     local onComplete = M['setTransitionListener'](onComplete)
     local onCancel = M['setTransitionListener'](onCancel)

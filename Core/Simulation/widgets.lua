@@ -3,8 +3,8 @@ local M = {}
 
 M['setWidgetPos'] = function(params)
     local name = CALC(params[1])
-    local posX = '(CENTER_X + (' .. CALC(params[2]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[3]) .. '))'
+    local posX = '(SET_X' .. CALC(params[2]) .. ', GAME.group.widgets[' .. name .. ']._scroll))'
+    local posY = '(SET_Y' .. CALC(params[3]) .. ', GAME.group.widgets[' .. name .. ']._scroll))'
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name ..'].x = ' .. posX
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].y = ' .. posY .. ' end)'
@@ -15,7 +15,7 @@ M['setWidgetSize'] = function(params)
     local width = CALC(params[2])
     local height = CALC(params[3])
 
-    GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.widgets[' .. name .. ']._type == \'slider\' then'
+    GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.widgets[' .. name .. '].wtype == \'slider\' then'
     GAME.lua = GAME.lua .. ' local widget = GAME.group.widgets[' .. name .. ']'
     GAME.lua = GAME.lua .. ' local type, posX, posY, value = widget.type, widget._x, widget._y, widget.value'
     GAME.lua = GAME.lua .. ' local size = type == \'horizontal\' and ' .. width .. ' or ' .. height
@@ -23,7 +23,7 @@ M['setWidgetSize'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() widget:removeSelf() end)'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '] = WIDGET.newSlider({x = posX, y = posY, value = value,'
     GAME.lua = GAME.lua .. ' [type == \'horizontal\' and \'width\' or \'height\'] = size, orientation = type or \'vertical\'})'
-    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].type = type GAME.group.widgets[' .. name .. ']._type = \'slider\''
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].type = type GAME.group.widgets[' .. name .. '].wtype = \'slider\''
     GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.widgets[' .. name .. '])'
     GAME.lua = GAME.lua .. ' else GAME.group.widgets[' .. name .. '].width = ' .. width
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].height = ' .. height .. ' end end)'
@@ -33,12 +33,12 @@ M['setWidgetListener'] = function(params)
     local name = CALC(params[1])
     local fun = CALC(params[2], 'a', true)
 
-    GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.widgets[' .. name .. ']._type == \'webview\' then'
+    GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.widgets[' .. name .. '].wtype == \'webview\' then'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']:addEventListener(\'urlRequest\', function(e) pcall(function()'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].url = e.url ' .. fun .. '(e, ' .. name .. ') end) end)'
-    GAME.lua = GAME.lua .. ' elseif GAME.group.widgets[' .. name .. ']._type == \'field\' then'
+    GAME.lua = GAME.lua .. ' elseif GAME.group.widgets[' .. name .. '].wtype == \'field\' then'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']:addEventListener(\'userInput\', function(e)'
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. fun .. '(e, ' .. name .. ') end) end) end end)'
+    GAME.lua = GAME.lua .. ' if GAME.hash == hash then pcall(function() ' .. fun .. '(e, ' .. name .. ') end) end end) end end)'
 end
 
 M['removeWidget'] = function(params)
@@ -58,8 +58,28 @@ M['newWebView'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. '] = native.newWebView(CENTER_X, CENTER_Y, '
     GAME.lua = GAME.lua .. width .. ', ' .. height .. ') GAME.group.widgets[' .. name .. ']:request(' .. link .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']:addEventListener(\'urlRequest\', function(e)'
-    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].url = e.url end) GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._type = \'webview\' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
+    GAME.lua = GAME.lua .. ' if GAME.hash == hash then GAME.group.widgets[' .. name .. '].url = e.url end end)'
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].wtype = \'webview\' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
+end
+
+M['newScrollView'] = function(params)
+    local name, listener, friction = CALC(params[1]), CALC(params[3], 'a', true), CALC(params[5])
+    local horizontalScrollDisabled, verticalScrollDisabled = CALC(params[7]), CALC(params[6])
+    local colors, isBounceEnabled = CALC(params[8], '{255}'), CALC(params[4])
+    local hideBackground = '(not ' .. CALC(params[9]) .. ')'
+    local hideScrollBar = '(not ' .. CALC(params[2]) .. ')'
+    local posX = '(SET_X(' .. CALC(params[12]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[13]) .. '))'
+    local width, height = CALC(params[10]), CALC(params[11])
+
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. ']:removeSelf() end) pcall(function()'
+    GAME.lua = GAME.lua .. ' local colors = ' .. colors .. ' GAME.group.widgets[' .. name .. '] = WIDGET.newScrollView({x = ' .. posX .. ','
+    GAME.lua = GAME.lua .. ' y = ' .. posY .. ', width = ' .. width .. ', horizontalScrollDisabled = ' .. horizontalScrollDisabled .. ','
+    GAME.lua = GAME.lua .. ' friction = ' .. friction .. ', isBounceEnabled = ' .. isBounceEnabled .. ', listener = ' .. listener .. ','
+    GAME.lua = GAME.lua .. ' verticalScrollDisabled = ' .. verticalScrollDisabled .. ', hideScrollBar = ' .. hideScrollBar .. ','
+    GAME.lua = GAME.lua .. ' hideBackground = ' .. hideBackground .. ', backgroundColor = {colors[1]/255, colors[2]/255, colors[3]/255},'
+    GAME.lua = GAME.lua .. ' height = ' .. height .. '}) GAME.group.widgets[' .. name .. '].wtype = \'scroll\' end)'
 end
 
 M['newSwitch'] = function(params)
@@ -68,8 +88,8 @@ M['newSwitch'] = function(params)
     local state = CALC(params[3], 'false')
     local width = style == '(select[\'switchToggle\']())' and CALC(params[4], '250') or CALC(params[4], '100')
     local height = style == '(select[\'switchToggle\']())' and CALC(params[4], '50') or CALC(params[4], '100')
-    local posX = '(CENTER_X + (' .. CALC(params[6]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[7]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[6]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[7]) .. '))'
     local onPress = CALC(params[8], 'a', true)
     local onRelease = CALC(params[9], 'a', true)
 
@@ -78,37 +98,39 @@ M['newSwitch'] = function(params)
     GAME.lua = GAME.lua .. ' x = ' .. posX .. ', y = ' .. posY .. ', initialSwitchState = ' .. state .. ', onPress = ' .. onPress .. ','
     GAME.lua = GAME.lua .. ' onRelease = ' .. onRelease .. '}) GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].width, GAME.group.widgets[' .. name .. '].height = ' .. width .. ',' .. height
-    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._type = \'switch\' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].wtype = \'switch\' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
 end
 
 M['newHSlider'] = function(params)
     local name = CALC(params[1])
     local width = CALC(params[2], '100')
     local fun = CALC(params[3], 'a', true)
-    local posX = '(CENTER_X + (' .. CALC(params[4]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[5]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[4]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[5]) .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. ']:removeSelf() end)'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. '] = WIDGET.newSlider({x = ' .. posX .. ', y = ' .. posY .. ','
-    GAME.lua = GAME.lua .. ' value = 50, width = ' .. width .. ', listener = function(e) pcall(function() ' .. fun .. '(e.value)'
-    GAME.lua = GAME.lua .. ' end) end}) GAME.group.widgets[' .. name .. '].type = \'horizontal\''
+    GAME.lua = GAME.lua .. ' value = 50, width = ' .. width .. ', listener = function(e) if GAME.hash == hash then pcall(function() '
+    GAME.lua = GAME.lua .. fun .. '(e.value) end) end end}) GAME.group.widgets[' .. name .. '].type = \'horizontal\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._x, GAME.group.widgets[' .. name .. ']._y = ' .. posX .. ', ' .. posY
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._type = \'slider\' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].wtype = \'slider\' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
 end
 
 M['newVSlider'] = function(params)
     local name = CALC(params[1])
     local height = CALC(params[2], '100')
-    local posX = '(CENTER_X + (' .. CALC(params[3]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[4]) .. '))'
+    local fun = CALC(params[3], 'a', true)
+    local posX = '(SET_X(' .. CALC(params[4]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[5]) .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. ']:removeSelf() end)'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. '] = WIDGET.newSlider({x = ' .. posX .. ', y = ' .. posY .. ','
-    GAME.lua = GAME.lua .. ' value = 50, height = ' .. height .. ', orientation = \'vertical\'})'
+    GAME.lua = GAME.lua .. ' value = 50, height = ' .. height .. ', listener = function(e) if GAME.hash == hash then pcall(function() '
+    GAME.lua = GAME.lua .. fun .. '(e.value) end) end end, orientation = \'vertical\'}) GAME.group.widgets[' .. name .. '].type = \'vertical\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._x, GAME.group.widgets[' .. name .. ']._y = ' .. posX .. ', ' .. posY
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._type = \'slider\' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].wtype = \'slider\' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
 end
 
 M['newField'] = function(params)
@@ -120,15 +142,15 @@ M['newField'] = function(params)
     local isBackground = CALC(params[6], 'true')
     local align = CALC(params[7], '\'left\'')
     local font = CALC(params[8], '\'ubuntu\'')
-    local posX = '(CENTER_X + (' .. CALC(params[11]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[12]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[11]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[12]) .. '))'
     local width, height = CALC(params[9], '400'), CALC(params[10], '80')
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. ']:removeSelf() end) pcall(function()'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '] = native.newTextField(' .. posX .. ', ' .. posY .. ', ' .. width .. ','
     GAME.lua = GAME.lua .. ' ' .. height .. ') GAME.group.widgets[' .. name .. '].placeholder = tostring' .. placeholder
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].font = native.newFont(other.getFont(' .. font .. '), ' .. fontSize .. ')'
-    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].align = ' .. align .. ' GAME.group.widgets[' .. name .. ']._type = \'field\''
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].align = ' .. align .. ' GAME.group.widgets[' .. name .. '].wtype = \'field\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].inputType = ' .. type .. ' local colors = ' .. colors
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].hasBackground = ' .. isBackground .. ' pcall(function()'
@@ -144,8 +166,8 @@ M['newBox'] = function(params)
     local isBackground = CALC(params[5], 'true')
     local align = CALC(params[6], '\'left\'')
     local font = CALC(params[7], '\'ubuntu\'')
-    local posX = '(CENTER_X + (' .. CALC(params[10]) .. '))'
-    local posY = '(CENTER_Y - (' .. CALC(params[11]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[10]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[11]) .. '))'
     local width, height = CALC(params[8], '400'), CALC(params[9], '80')
 
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. name .. ']:removeSelf() end)'
@@ -154,7 +176,7 @@ M['newBox'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].font = native.newFont(other.getFont(' .. font .. '), ' .. fontSize .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].align = ' .. align .. ' local colors = ' .. colors
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']._type = \'field\' GAME.group.widgets[' .. name .. '].isEditable = true'
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].wtype = \'field\' GAME.group.widgets[' .. name .. '].isEditable = true'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. '].hasBackground = ' .. isBackground .. ' pcall(function()'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[' .. name .. ']:setTextColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
     GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.widgets[' .. name .. ']) end)'
@@ -187,6 +209,20 @@ end
 M['setSwitchState'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets['
     GAME.lua = GAME.lua .. CALC(params[1]) .. ']:setState({isOn = ' .. CALC(params[2], 'false') .. '}) end)'
+end
+
+M['insertToScroll'] = function(params)
+    local scroll = CALC(params[1])
+    local object = CALC(params[2])
+    local type = CALC(params[3], 'GAME.group.objects')
+
+    if type == '(select[\'obj\']())' then type = 'GAME.group.objects'
+    elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
+    elseif type == '(select[\'group\']())' then type = 'GAME.group.groups' end
+
+    GAME.lua = GAME.lua .. ' pcall(function() local obj, scroll = ' .. type .. '[' .. object .. '], GAME.group.widgets[' .. scroll .. ']'
+    GAME.lua = GAME.lua .. ' obj.x, obj.y = GET_X(obj.x) + scroll.width / 2, GET_Y(obj.y)'
+    GAME.lua = GAME.lua .. ' scroll:insert(obj) obj._scroll = ' .. scroll .. ' end)'
 end
 
 M['setFieldSecure'] = function(params)

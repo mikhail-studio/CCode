@@ -59,8 +59,8 @@ M['requestExit'] = function(params)
 end
 
 M['setListener'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. ']:addEventListener(\'touch\', function(e)'
-    GAME.lua = GAME.lua .. ' if GAME.group then e.target._touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\' GAME.group.const.touch'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. ']:addEventListener(\'touch\', function(e) if'
+    GAME.lua = GAME.lua .. ' GAME.hash == hash then e.target._touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\' GAME.group.const.touch'
     GAME.lua = GAME.lua .. ' = e.target._touch GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y if e.target._touch then'
     GAME.lua = GAME.lua .. ' if GAME.multi then display.getCurrentStage():setFocus(e.target, e.id) else'
     GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(e.target) end else'
@@ -73,51 +73,51 @@ end
 
 M['setLocalCollision'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1])
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name].collision = function(s, e) if GAME.group then local isComplete, result ='
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].collision = function(s, e) if GAME.hash == hash then local isComplete, result ='
     GAME.lua = GAME.lua .. ' pcall(function() return ' .. CALC(params[2], 'a', true) .. '(e) end) return isComplete'
     GAME.lua = GAME.lua .. ' and result or false end end GAME.group.objects[name]:addEventListener(\'collision\') end)'
 end
 
 M['setLocalPreCollision'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1])
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name].preCollision = function(s, e) if GAME.group then e.phase = \'pre\' local isComplete,'
-    GAME.lua = GAME.lua .. ' result = pcall(function() return ' .. CALC(params[2], 'a', true) .. '(e) end) return isComplete'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].preCollision = function(s, e) if GAME.hash == hash then e.phase = \'pre\' local'
+    GAME.lua = GAME.lua .. ' isComplete, result = pcall(function() return ' .. CALC(params[2], 'a', true) .. '(e) end) return isComplete'
     GAME.lua = GAME.lua .. ' and result or false end end GAME.group.objects[name]:addEventListener(\'preCollision\') end)'
 end
 
 M['setLocalPostCollision'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1])
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name].postCollision = function(s, e) if GAME.group then e.phase = \'post\' local isComplete,'
-    GAME.lua = GAME.lua .. ' result = pcall(function() return ' .. CALC(params[2], 'a', true) .. '(e) end) return isComplete'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].postCollision = function(s, e) if GAME.hash == hash then e.phase = \'post\' local'
+    GAME.lua = GAME.lua .. ' isComplete, result = pcall(function() return ' .. CALC(params[2], 'a', true) .. '(e) end) return isComplete'
     GAME.lua = GAME.lua .. ' and result or false end end GAME.group.objects[name]:addEventListener(\'postCollision\') end)'
 end
 
 M['setGlobalCollision'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.collis, function(e) if GAME.group then local isCompl, result ='
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.collis, function(e) if GAME.hash == hash then local isCompl, result ='
     GAME.lua = GAME.lua .. ' pcall(function() return ' .. CALC(params[1], 'a', true) .. '(e) end) return isCompl and result or false'
     GAME.lua = GAME.lua .. ' end end) Runtime:addEventListener(\'collision\', GAME.group.collis[#GAME.group.collis]) end)'
 end
 
 M['setGlobalPreCollision'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.collis, function(e) if GAME.group then e.phase = \'pre\' local isCompl,'
-    GAME.lua = GAME.lua .. ' result = pcall(function() return ' .. CALC(params[1], 'a', true) .. '(e) end) return isCompl and result or false'
-    GAME.lua = GAME.lua .. ' end end) Runtime:addEventListener(\'preCollision\', GAME.group.collis[#GAME.group.collis]) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.collis, function(e) if GAME.hash == hash then e.phase = \'pre\' local'
+    GAME.lua = GAME.lua .. ' isCompl, result = pcall(function() return ' .. CALC(params[1], 'a', true) .. '(e) end) return isCompl and result'
+    GAME.lua = GAME.lua .. ' or false end end) Runtime:addEventListener(\'preCollision\', GAME.group.collis[#GAME.group.collis]) end)'
 end
 
 M['setGlobalPostCollision'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.collis, function(e) if GAME.group then e.phase = \'post\' local isCompl,'
-    GAME.lua = GAME.lua .. ' result = pcall(function() return ' .. CALC(params[1], 'a', true) .. '(e) end) return isCompl and result or false'
-    GAME.lua = GAME.lua .. ' end end) Runtime:addEventListener(\'postCollision\', GAME.group.collis[#GAME.group.collis]) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.collis, function(e) if GAME.hash == hash then e.phase = \'post\' local'
+    GAME.lua = GAME.lua .. ' isCompl, result = pcall(function() return ' .. CALC(params[1], 'a', true) .. '(e) end) return isCompl and result'
+    GAME.lua = GAME.lua .. ' or false end end) Runtime:addEventListener(\'postCollision\', GAME.group.collis[#GAME.group.collis]) end)'
 end
 
 M['timer'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.ts, timer.new(' .. CALC(params[1], '0.001')
-    GAME.lua = GAME.lua .. ' * 1000, ' .. CALC(params[2], '1') .. ', function(e) if GAME.group then'
+    GAME.lua = GAME.lua .. ' * 1000, ' .. CALC(params[2], '1') .. ', function(e) if GAME.hash == hash then'
 end
 
 M['timerName'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.timers[' .. CALC(params[1]) .. '] = timer.new(' .. CALC(params[2], '0.001')
-    GAME.lua = GAME.lua .. ' * 1000, ' .. CALC(params[3], '1') .. ', function(e) if GAME.group then'
+    GAME.lua = GAME.lua .. ' * 1000, ' .. CALC(params[3], '1') .. ', function(e) if GAME.hash == hash then'
 end
 
 M['timerEnd'] = function(params)
@@ -141,7 +141,7 @@ M['ifEnd'] = function(params)
 end
 
 M['forever'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.ts, timer.new(1, 0, function(e) if GAME.group then'
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.ts, timer.new(1, 0, function(e) if GAME.hash == hash then'
 end
 
 M['foreverEnd'] = function(params)
@@ -248,7 +248,7 @@ end
 
 M['turnOnAccelerometer'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.accelerometers, function(e) pcall(function()'
-    GAME.lua = GAME.lua .. ' if GAME.group then ' .. CALC(params[1], 'a', true) .. '(e) end end) end)'
+    GAME.lua = GAME.lua .. ' if GAME.hash == hash then ' .. CALC(params[1], 'a', true) .. '(e) end end) end)'
     GAME.lua = GAME.lua .. ' Runtime:addEventListener(\'accelerometer\', GAME.group.accelerometers[#GAME.group.accelerometers]) end)'
 end
 
