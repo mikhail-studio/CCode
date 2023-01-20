@@ -4,42 +4,41 @@ local M = {}
 M['newText'] = function(params)
     local name, text = CALC(params[1]), CALC(params[2])
     local font, size = CALC(params[3], '\'ubuntu\''), CALC(params[4], '36')
-    local colors, alpha = CALC(params[5], '{255}'), CALC(params[6], '100')
+    local colors, alpha = CALC(params[5], '{255, 255, 255}'), CALC(params[6], '100')
     local posX = '(SET_X(' .. CALC(params[7]) .. '))'
     local posY = '(SET_Y(' .. CALC(params[8]) .. '))'
 
-    GAME.lua = GAME.lua .. ' pcall(function() local colors, font = ' .. colors .. ', other.getFont(' .. font .. ')'
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. ']:removeSelf() end)'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '] = display.newText(GAME.group, tostring(' .. text .. '), '
-    GAME.lua = GAME.lua .. posX .. ', ' .. posY .. ', font, ' .. size .. ') GAME.group:insert(GAME.group.texts[' .. name .. '])'
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. ']:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].alpha = ' ..  alpha .. ' / 100 end)'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._density = 1 GAME.group.texts[' .. name .. ']._bounce = 0'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._friction = 0 GAME.group.texts[' .. name .. ']._gravity = 1'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._body = \'\' GAME.group.texts[' .. name .. ']._hitbox = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._touch = \'\' GAME.group.texts[' .. name .. ']._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '].name = ' .. name .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name, colors, font = ' .. name .. ', ' .. colors .. ', other.getFont(' .. font .. ')'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[name]:removeSelf() end) GAME.group.texts[name] ='
+    GAME.lua = GAME.lua .. ' display.newText(GAME.group, tostring(' .. text .. '), ' .. posX .. ', ' .. posY .. ', font, ' .. size .. ')'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[name]:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[name].alpha = ' ..  alpha .. ' / 100 end)'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[name]._density = 1 GAME.group.texts[name]._bounce = 0'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[name]._friction = 0 GAME.group.texts[name]._gravity = 1'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[name]._body = \'\' GAME.group.texts[name]._hitbox = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[name]._touch = \'\' GAME.group.texts[name]._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.texts[name]) GAME.group.texts[name].name = name end)'
 end
 
 M['newText2'] = function(params)
     local name, text = CALC(params[1]), CALC(params[2])
     local font, size = CALC(params[3], '\'ubuntu\''), CALC(params[4], '36')
-    local colors, align = CALC(params[5], '{255}'), CALC(params[6], '\'center\'')
+    local colors, align = CALC(params[5], '{255, 255, 255}'), CALC(params[6], '\'center\'')
     local width, height = CALC(params[7]), CALC(params[8])
     local posX = '(SET_X(' .. CALC(params[9]) .. '))'
     local posY = '(SET_Y(' .. CALC(params[10]) .. '))'
 
-    GAME.lua = GAME.lua .. ' pcall(function() local colors, font = ' .. colors .. ', other.getFont(' .. font .. ')'
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. ']:removeSelf() end)'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '] = display.newText({parent = GAME.group, text = tostring('
-    GAME.lua = GAME.lua .. text .. '), x = ' .. posX .. ', y = ' .. posY .. ', width = ' .. width .. ', height = ' .. height .. ', align = '
-    GAME.lua = GAME.lua .. align .. ', font = font, fontSize = ' .. size .. '}) GAME.group:insert(GAME.group.texts[' .. name .. '])'
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. ']:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._density = 1 GAME.group.texts[' .. name .. ']._bounce = 0'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._friction = 0 GAME.group.texts[' .. name .. ']._gravity = 1'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._body = \'\' GAME.group.texts[' .. name .. ']._hitbox = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']._touch = \'\' GAME.group.texts[' .. name .. ']._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '].name = ' .. name .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name, colors, font = ' .. name .. ', ' .. colors .. ', other.getFont(' .. font .. ')'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[name]:removeSelf() end)'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[name] = display.newText({parent = GAME.group, text = tostring(' .. text .. '),'
+    GAME.lua = GAME.lua .. ' x = ' .. posX .. ', y = ' .. posY .. ', width = ' .. width .. ', height = ' .. height .. ','
+    GAME.lua = GAME.lua .. ' align = ' .. align .. ', font = font, fontSize = ' .. size .. '}) GAME.group:insert(GAME.group.texts[name])'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[name]:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[name]._density = 1 GAME.group.texts[name]._bounce = 0'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[name]._friction = 0 GAME.group.texts[name]._gravity = 1'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[name]._body = \'\' GAME.group.texts[name]._hitbox = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.texts[name]._touch = \'\' GAME.group.texts[name]._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.texts[name].name = name end)'
 end
 
 M['setVar'] = function(params)
@@ -57,7 +56,7 @@ M['updVar'] = function(params)
 end
 
 M['setObjVar'] = function(params)
-    local key = CALC(params[1], '[\'KEY\']', true)
+    local key = CALC(params[1], '\'KEY\'', true)
     local obj, value = 'GAME.group.objects[' .. CALC(params[2]) .. ']._data', CALC(params[3])
     local key = UTF8.sub(key, 1, 2) ~= 't[' and '[' .. key .. ']' or UTF8.sub(key, 2)
 
@@ -65,7 +64,7 @@ M['setObjVar'] = function(params)
 end
 
 M['addTable'] = function(params)
-    local key = CALC(params[1], '[\'KEY\']', true)
+    local key = CALC(params[1], '\'KEY\'', true)
     local table, value = CALC(params[2], 'a', true), CALC(params[3])
     local key = UTF8.sub(key, 1, 2) ~= 't[' and '[' .. key .. ']' or UTF8.sub(key, 2)
 
@@ -74,7 +73,7 @@ M['addTable'] = function(params)
 end
 
 M['insertTable'] = function(params)
-    local key = CALC(params[1], '[\'KEY\']', true)
+    local key = CALC(params[1], '\'KEY\'', true)
     local table, value = CALC(params[2], 'a', true), CALC(params[3])
     local key = UTF8.sub(key, 1, 2) ~= 't[' and '[' .. key .. ']' or UTF8.sub(key, 2)
     local temp_key = key
@@ -91,7 +90,7 @@ M['insertTable'] = function(params)
 end
 
 M['removeTable'] = function(params)
-    local key = CALC(params[1], '[\'KEY\']', true)
+    local key = CALC(params[1], '\'KEY\'', true)
     local table = CALC(params[1], 'a', true)
     local key = UTF8.sub(key, 1, 2) ~= 't[' and '[' .. key .. ']' or UTF8.sub(key, 2)
     local temp_key = key
@@ -124,8 +123,8 @@ end
 M['setRandomSeed'] = function(params)
     local seed = CALC(params[1])
 
-    GAME.lua = GAME.lua .. ' pcall(function() math.randomseed(math.sum(UTF8.byte(tostring(' .. seed .. '), 1,'
-    GAME.lua = GAME.lua .. ' UTF8.len(tostring(' .. seed .. '))))) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local seed = ' .. seed .. ' math.randomseed(math.sum(UTF8.byte(tostring(seed), 1,'
+    GAME.lua = GAME.lua .. ' UTF8.len(tostring(seed))))) end)'
 end
 
 M['setText'] = function(params)
@@ -144,25 +143,25 @@ end
 
 M['setTextPos'] = function(params)
     local name = CALC(params[1])
-    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.texts[' .. name .. ']._scroll))'
-    local posY = '(SET_Y(' .. CALC(params[3]) .. ', GAME.group.texts[' .. name .. ']._scroll))'
+    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.texts[name]._scroll))'
+    local posY = '(SET_Y(' .. CALC(params[3]) .. ', GAME.group.texts[name]._scroll))'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].x = ' .. posX
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '].y = ' .. posY .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.texts[name].x = ' .. posX
+    GAME.lua = GAME.lua .. ' GAME.group.texts[name].y = ' .. posY .. ' end)'
 end
 
 M['setTextPosX'] = function(params)
     local name = CALC(params[1])
-    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.texts[' .. name .. ']._scroll))'
+    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.texts[name]._scroll))'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].x = ' .. posX .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.texts[name].x = ' .. posX .. ' end)'
 end
 
 M['setTextPosY'] = function(params)
     local name = CALC(params[1])
-    local posY = '(SET_Y(' .. CALC(params[2]) .. ', GAME.group.texts[' .. name .. ']._scroll))'
+    local posY = '(SET_Y(' .. CALC(params[2]) .. ', GAME.group.texts[name]._scroll))'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].y = ' .. posY .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.texts[name].y = ' .. posY .. ' end)'
 end
 
 M['setTextRotation'] = function(params)
@@ -177,8 +176,8 @@ M['setTextAnchor'] = function(params)
     local anchorX = CALC(params[2], '50') .. '/ 100'
     local anchorY = CALC(params[3], '50') .. '/ 100'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].anchorX = ' .. anchorX
-    GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. '].anchorY = ' .. anchorY .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.texts[name].anchorX = ' .. anchorX
+    GAME.lua = GAME.lua .. ' GAME.group.texts[name].anchorY = ' .. anchorY .. ' end)'
 end
 
 M['setTextAlpha'] = function(params)
@@ -190,7 +189,7 @@ end
 
 M['setTextColor'] = function(params)
     local name = CALC(params[1])
-    local colors = CALC(params[2], '{255}')
+    local colors = CALC(params[2], '{255, 255, 255}')
 
     GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. colors
     GAME.lua = GAME.lua .. ' GAME.group.texts[' .. name .. ']:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
@@ -223,28 +222,32 @@ M['updTextPosX'] = function(params)
     local name = CALC(params[1])
     local posX = '(' .. CALC(params[2]) .. ')'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].x = GAME.group.texts[' .. name .. '].x + ' .. posX .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.texts[name].x'
+    GAME.lua = GAME.lua .. ' = GAME.group.texts[name].x + ' .. posX .. ' end)'
 end
 
 M['updTextPosY'] = function(params)
     local name = CALC(params[1])
     local posY = '(' .. CALC(params[2]) .. ')'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].y = GAME.group.texts[' .. name .. '].y - ' .. posY .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.texts[name].y'
+    GAME.lua = GAME.lua .. ' = GAME.group.texts[name].y - ' .. posY .. ' end)'
 end
 
 M['updTextRotation'] = function(params)
     local name = CALC(params[1])
     local rotation = '(' .. CALC(params[2]) .. ')'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].rotation = GAME.group.texts[' .. name .. '].rotation + ' .. rotation .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.texts[name].rotation'
+    GAME.lua = GAME.lua .. ' = GAME.group.texts[name].rotation + ' .. rotation .. ' end)'
 end
 
 M['updTextAlpha'] = function(params)
     local name = CALC(params[1])
     local alpha = '((' .. CALC(params[2]) .. ') / 100)'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. name .. '].alpha = GAME.group.texts[' .. name .. '].alpha + ' .. alpha .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.texts[name].alpha'
+    GAME.lua = GAME.lua .. ' = GAME.group.texts[name].alpha + ' .. alpha .. ' end)'
 end
 
 M['hideText'] = function(params)

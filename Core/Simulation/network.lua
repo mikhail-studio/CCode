@@ -14,13 +14,18 @@ M['connectToServer'] = function(params)
 end
 
 M['requestFirebase'] = function(params, method)
-    local link, value = CALC(params[1]), (method == 'GET' or method == 'DELETE') and 'nil' or 'tostring(' .. CALC(params[2]) .. ')'
-    local key = (method == 'GET' or method == 'DELETE') and CALC(params[2]) or CALC(params[3])
+    local link, value = CALC(params[1]), (method == 'GET' or method == 'DELETE') and 'nil' or CALC(params[2])
+    local key = (method == 'GET' or method == 'DELETE') and CALC(params[2], '\'\'') or CALC(params[3], '\'\'')
     local link = '\'https://\' .. tostring(' .. link .. ') .. \'.firebaseio.com/\' .. tostring(' .. key .. ') .. \'.json\''
     local listener = (method == 'GET' or method == 'DELETE') and CALC(params[3], 'a', true)  or CALC(params[4], 'a', true)
 
-    GAME.lua = GAME.lua .. ' pcall(function() network.request(' .. link .. ', \'' .. method .. '\', function(e) if GAME.hash == hash'
-    GAME.lua = GAME.lua .. ' then ' .. listener .. '(e.response) end end, {body = ' .. value .. '}) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local value = ' .. value .. ' print(tostring(' .. link .. '))'
+    GAME.lua = GAME.lua .. ' if type(value) == \'number\' or type(value) == \'boolean\' then value = tostring(value)'
+    GAME.lua = GAME.lua .. ' elseif type(value) == \'string\' then value = \'"\' .. value .. \'"\''
+    GAME.lua = GAME.lua .. ' elseif type(value) == \'table\' then value = JSON.encode(value) end'
+    GAME.lua = GAME.lua .. ' table.insert(GAME.group.networks,'
+    GAME.lua = GAME.lua .. ' network.request(' .. link .. ', \'' .. method .. '\', function(e) pcall(function() if GAME.hash'
+    GAME.lua = GAME.lua .. ' == hash then ' .. listener .. '(e.response) end end) end, {body = value})) end)'
 end
 
 M['requestNetwork'] = function(params, method)
@@ -31,10 +36,11 @@ M['requestNetwork'] = function(params, method)
     local redirect = UTF8.match(CALC(params[6]), '%(select%[\'(.+)\'%]') or 'nil'
     local redirect = redirect == 'redirectsFalse' and 'false' or 'true'
 
-    GAME.lua = GAME.lua .. ' pcall(function() network.request(' .. link .. ', \'' .. method .. '\','
-    GAME.lua = GAME.lua .. ' function(e) if GAME.hash == hash then ' .. listener .. '(e) end end, {body'
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.networks,'
+    GAME.lua = GAME.lua .. ' network.request(' .. link .. ', \'' .. method .. '\','
+    GAME.lua = GAME.lua .. ' function(e) pcall(function() if GAME.hash == hash then ' .. listener .. '(e) end end) end, {body'
     GAME.lua = GAME.lua .. ' = ' .. body .. ', headers = ' .. headers .. ', progress = ' .. progress .. ','
-    GAME.lua = GAME.lua .. ' handleRedirects = ' .. redirect .. ', timeout = ' .. timeout .. '}) end)'
+    GAME.lua = GAME.lua .. ' handleRedirects = ' .. redirect .. ', timeout = ' .. timeout .. '})) end)'
 end
 
 M['requestGET'] = function(params) M['requestNetwork'](params, 'GET') end

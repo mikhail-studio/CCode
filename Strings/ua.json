@@ -6,992 +6,992 @@
         "lang.pl": "Polski",
         "lang.ua": "Український",
         "lang.cn": "中文",
-        "lang.custom": "Swoje",
-        "button.yes": "Tak",
-        "button.no": "Nie",
-        "button.okay": "Ok",
-        "button.close": "Zamknij",
-        "button.download": "Pobierz",
-        "button.change": "Zmień",
-        "button.remove": "Usuń",
-        "button.rename": "Zmień nazwę",
-        "button.copy": "Kopiuj",
-        "button.to.buffer": "Do bufora",
-        "button.from.buffer": "Z bufora",
-        "button.paste": "Wklej",
-        "button.alldelete": "Usuń wszystko",
-        "button.find": "Znajdź",
-        "button.debug": "Debugowanie",
-        "button.comment": "Wyłącz",
-        "button.uncomment": "Włącz",
-        "button.hide": "Ukryj",
-        "button.show": "Pokaż",
-        "button.addIfElse": "Dodaj warunek",
-        "button.block.find": "Znajdź blok",
-        "button.pasteFromClipboard": "Wklej ze schowka",
-        "button.importLuaFile": "Importuj plik .lua",
-        "menu.myprogram": "Moje programy",
-        "menu.continue": "Kontynuuj",
-        "menu.settings": "Ustawienia",
-        "menu.testers": "Wersja testerów:",
-        "menu.developers": "Wersja developerów:",
-        "menu.version.new": "Nowa wersja testowa wydana!",
-        "menu.version.wait": "Proszę czekać, nie zamykaj aplikacji!",
-        "programs.entername": "Wprowadź nazwę programu",
-        "programs.changename": "Zmień nazwę programu",
-        "programs.noobmode": "Tryb uproszczony",
-        "program.images": "Duszki",
-        "program.pictures": "Zdjęcia",
-        "program.scripts": "Skrypty",
-        "program.scenarios": "Sceny",
-        "program.sounds": "Dźwięki",
-        "program.videos": "Filmy",
-        "program.fonts": "Czcionki",
-        "program.psettings": "Ustawienia projektu",
-        "program.export": "Eksportuj",
-        "program.build": "Kompiluj",
-        "program.editor": "Edytor wyrażeń",
-        "scripts.entername": "Wpisz nazwę skryptu",
-        "scripts.changename": "Zmień nazwę skryptu",
-        "scripts.sandbox": "Piaskownica",
-        "scripts.sandbox.exit": "Wyjdź z piaskownicy, wybierz żądaną akcję",
-        "scripts.sandbox.save": "Zapisz",
-        "scripts.sandbox.not.save": "Nie zapisuj",
-        "images.entername": "Wprowadź nazwę duszka",
-        "images.changename": "Zmień nazwę duszka",
-        "images.pixel": "Pikselowy duszek",
-        "sounds.entername": "Wprowadź nazwę dźwięku",
-        "sounds.changename": "Zmień nazwę dźwięku",
-        "videos.entername": "Wprowadź nazwę wideo",
-        "videos.changename": "Zmień nazwę wideo",
-        "fonts.entername": "Wprowadź nazwę czcionki",
-        "fonts.changename": "Zmień nazwę czcionki",
-        "fonts.needexit": "CCode wymusza wyłączenie, ponieważ czcionka nie jest usunięta, dopóki program nie zostanie zamknięty",
-        "settings.applang": "Język aplikacji:",
-        "settings.confirmdelete": "Potwierdzanie usunięcia:",
-        "settings.back": "Dolny panel:",
-        "settings.backCCode": "Aplikacja",
-        "settings.backSystem": "System",
-        "settings.backNo": "Usuń",
-        "settings.showads": "Pokaż reklamy:",
-        "settings.posads": "Lokalizacja reklam:",
-        "settings.topads": "U góry",
-        "settings.bottomads": "U dołu",
-        "settings.orientation": "Orientacja:",
-        "psettings.icon": "Ikona projektu:",
-        "psettings.orientation": "Orientacja projektu:",
-        "psettings.build": "Kompiluj:",
-        "psettings.version": "Wersja:",
-        "psettings.package": "Pakiet (package):",
-        "psettings.enterbuild": "Wprowadź numer kompilacji",
-        "psettings.enterversion": "Wprowadź nazwę wersji",
-        "psettings.enterpackage": "Wprowadź pakiet (package)",
-        "errors.build": "Błąd, wprowadź INTEGER",
-        "errors.package": "Błąd, wprowadź poprawną nazwę pakietu (package)",
-        "errors.name": "Błąd, nazwa jest już używana",
-        "errors.filter": "Błąd, pusta nazwa nie może być użyta",
-        "build.start": "Rozpoczęto kompilowanie APK, proszę czekać",
-        "export.start": "Eksport rozpoczęty, proszę czekać",
-        "import.error": "Błąd importu #",
-        "game.debug": "Kod lua programu został zapisany w schowku",
-        "game.isbug": "Nie udało się rozpocząć symulacji"
+        "lang.custom": "Власний",
+        "button.yes": "Так",
+        "button.no": "Ні",
+        "button.okay": "Ок",
+        "button.close": "Закрити",
+        "button.download": "Завантажити",
+        "button.change": "Змінити",
+        "button.remove": "Видалити",
+        "button.rename": "Перейменувати",
+        "button.copy": "Копіювати",
+        "button.to.buffer": "В буфер",
+        "button.from.buffer": "З буфера",
+        "button.paste": "Вставити",
+        "button.alldelete": "Видалити всі",
+        "button.find": "Знайти",
+        "button.debug": "Дебаг",
+        "button.comment": "Вимкнути",
+        "button.uncomment": "Увімкнути",
+        "button.hide": "Приховати",
+        "button.show": "Показати",
+        "button.addIfElse": "Додати умову",
+        "button.block.find": "Знайти блок",
+        "button.pasteFromClipboard": "Вставити з буфера обміну",
+        "button.importLuaFile": "Імпортувати .lua файл",
+        "menu.myprogram": "Мої програми",
+        "menu.continue": "Продовжити",
+        "menu.settings": "Налаштування",
+        "menu.testers": "Версія тестерів:",
+        "menu.developers": "Версія розробника:",
+        "menu.version.new": "Вийшла нова версія тесту!",
+        "menu.version.wait": "Будь ласка, зачекайте, не закривайте додаток!",
+        "programs.entername": "Введіть назву програми",
+        "programs.changename": "Змініть ім'я програми",
+        "programs.noobmode": "Спрощений режим",
+        "program.images": "Спрайти",
+        "program.pictures": "Зображення",
+        "program.scripts": "Скрипти",
+        "program.scenarios": "Сценарії",
+        "program.sounds": "Звуки",
+        "program.videos": "Відео",
+        "program.fonts": "Шрифти",
+        "program.psettings": "Налаштування проєкт",
+        "program.export": "Експорт",
+        "program.build": "Збірка",
+        "program.editor": "Редактор виразів",
+        "scripts.entername": "Введіть назву скрипту",
+        "scripts.changename": "Змінить назву скрипту",
+        "scripts.sandbox": "Пісочниця",
+        "scripts.sandbox.exit": "Ви виходите з пісочниці, виберіть потрібну дію",
+        "scripts.sandbox.save": "Зберегти",
+        "scripts.sandbox.not.save": "Не зберігати",
+        "images.entername": "Введіть назву спрайту",
+        "images.changename": "Змінить назву спрайту",
+        "images.pixel": "Піксельний спрайт",
+        "sounds.entername": "Введіть назву звуку",
+        "sounds.changename": "Змініть назву звуку",
+        "videos.entername": "Введіть назву відео",
+        "videos.changename": "Змініть назву відео",
+        "fonts.entername": "Введіть назву шрифту",
+        "fonts.changename": "Змініть назву шрифту",
+        "fonts.needexit": "CCode примусово закрито, оскільки шрифт не буде видалено до тих пір, поки програма не закриється",
+        "settings.applang": "Мова програми:",
+        "settings.confirmdelete": "Підтвердити видалення:",
+        "settings.back": "Нижня панель:",
+        "settings.backCCode": "Програма",
+        "settings.backSystem": "Система",
+        "settings.backNo": "Видалити",
+        "settings.showads": "Показувати рекламу:",
+        "settings.posads": "Розміщення реклами:",
+        "settings.topads": "Верх",
+        "settings.bottomads": "Низ",
+        "settings.orientation": "Орієнтація:",
+        "psettings.icon": "Іконка проєкту:",
+        "psettings.orientation": "Орієнтація проєкту:",
+        "psettings.build": "Білд:",
+        "psettings.version": "Версія:",
+        "psettings.package": "Пакет:",
+        "psettings.enterbuild": "Введіть номер білду",
+        "psettings.enterversion": "Введіть ім'я версії",
+        "psettings.enterpackage": "Введіть ім'я пакету",
+        "errors.build": "Помилка, введіть ЦІЛЕ ЧИСЛО",
+        "errors.package": "Помилка, введіть правильне ім'я пакету",
+        "errors.name": "Помилка, ім'я вже споживається",
+        "errors.filter": "Помилка, пусте ім'я не можна використовувати",
+        "build.start": "Запуск збірки APK, зачекайте",
+        "export.start": "Експорт розпочато, будь ласка, зачекайте",
+        "import.error": "Помилка імпорту #",
+        "game.debug": "Lua код програми збережено в буфер обміну",
+        "game.isbug": "Не вдалося розпочати симуляцію"
     },
     "blocks": {
-        "blocks.create.var": "Utwórz zmienną",
-        "blocks.create.table": "Utwórz tabelę",
-        "blocks.create.fun": "Utwórz funkcję",
-        "blocks.create.objects": "Obiekty",
-        "blocks.create.filters": "Filtry",
-        "blocks.create.groups": "Grupy",
-        "blocks.create.tags": "Tagi",
-        "blocks.create.transition": "Przejścia",
-        "blocks.create.particle": "Cząsteczki",
-        "blocks.create.block": "Utwórz blok",
-        "blocks.create.color": "Kolor",
-        "blocks.create.copy": "Kopiuj",
-        "blocks.create.block.save.lua": "Zapisz (kod Lua)",
-        "blocks.create.block.save.sandbox": "Zapisz (Piaskownica)",
-        "blocks.create.block.save.lua.title": "Wybierz jedną z dwóch opcji importowania kodu lua",
-        "blocks.select.dynamic": "Dynamiczny",
-        "blocks.select.static": "Statyczny",
-        "blocks.select.forward": "Do przodu",
-        "blocks.select.bounce": "Odbijanie",
-        "blocks.select.inputDefault": "Domyślnie",
-        "blocks.select.inputNumber": "Liczba",
-        "blocks.select.inputDecimal": "Liczba dziesiętna",
-        "blocks.select.inputPhone": "Telefon",
+        "blocks.create.var": "Створити змінну",
+        "blocks.create.table": "Створити таблицю",
+        "blocks.create.fun": "Створити функцію",
+        "blocks.create.objects": "Об'єкти",
+        "blocks.create.filters": "Фільтри",
+        "blocks.create.groups": "Групи",
+        "blocks.create.tags": "Теги",
+        "blocks.create.transition": "Переходи",
+        "blocks.create.particle": "Частинки",
+        "blocks.create.block": "Створити блок",
+        "blocks.create.color": "Колір",
+        "blocks.create.copy": "Копіювати",
+        "blocks.create.block.save.lua": "Зберегти (Lua код)",
+        "blocks.create.block.save.sandbox": "Зберегти (пісочниця)",
+        "blocks.create.block.save.lua.title": "Оберіть один з двох варіантів імпорту lua кода",
+        "blocks.select.dynamic": "Динамічний",
+        "blocks.select.static": "Статичний",
+        "blocks.select.forward": "Далі",
+        "blocks.select.bounce": "Відскакування",
+        "blocks.select.inputDefault": "Стандарт",
+        "blocks.select.inputNumber": "Число",
+        "blocks.select.inputDecimal": "Десяткове значення",
+        "blocks.select.inputPhone": "Телефон",
         "blocks.select.inputUrl": "Url",
-        "blocks.select.inputEmail": "Email",
-        "blocks.select.inputNoEmoji": "BezEmoji",
-        "blocks.select.alignLeft": "Lewo",
-        "blocks.select.alignRight": "Prawo",
-        "blocks.select.alignCenter": "Po środku",
-        "blocks.select.backgroundTrue": "Opuść",
-        "blocks.select.backgroundFalse": "Usuń",
-        "blocks.select.ruleTrue": "Dozwolone",
-        "blocks.select.ruleFalse": "Zabronione",
-        "blocks.select.switchRadio": "Radio",
-        "blocks.select.switchCheckbox": "Checkbox",
-        "blocks.select.switchToggle": "Toggle",
-        "blocks.select.switchOn": "On",
-        "blocks.select.switchOff": "Off",
-        "blocks.select.obj": "Obiekt",
-        "blocks.select.text": "Tekst",
-        "blocks.select.group": "Grupa",
-        "blocks.select.tag": "Tag",
-        "blocks.select.widget": "Widżet",
-        "blocks.select.progressDefault": "Domyślnie",
-        "blocks.select.progressDownload": "Pobierz",
-        "blocks.select.progressUpload": "Prześlij",
-        "blocks.select.redirectsTrue": "Automatycznie",
-        "blocks.select.redirectsFalse": "Ręcznie",
-        "blocks.color.red": "Czerwony",
-        "blocks.color.green": "Zielony",
-        "blocks.color.blue": "Niebieski",
-        "blocks.color.hex": "Wprowadź HEX (szesnastkowy)",
-        "blocks.sure?": "Jesteś pewny?",
-        "blocks.delete.yes": "Tak, usuń",
-        "blocks.delete.no": "Nie, nie usuwaj",
-        "blocks.entertext": "Wprowadź tekst",
-        "blocks.everyone": "Wszystkie bloki",
-        "blocks.custom": "Niestandardowe bloki",
-        "blocks.none": "Brak",
-        "blocks.not.exist": "Blok nie istnieje",
-        "blocks.type.noobmode": "Dostęp do tej kategorii jest zamknięty w trybie uproszczonym",
-        "blocks.default": "Nazwa bloku",
-        "blocks.": "Nazwa bloku",
-        "blocks.params": "Parametr",
-        "blocks.params.add": "Dodaj parametr",
-        "blocks.params.remove": "Usuń parametr",
+        "blocks.select.inputEmail": "Електронна пошта",
+        "blocks.select.inputNoEmoji": "Без емодзі",
+        "blocks.select.alignLeft": "Ліворуч",
+        "blocks.select.alignRight": "Праворуч",
+        "blocks.select.alignCenter": "Центр",
+        "blocks.select.backgroundTrue": "Вийти",
+        "blocks.select.backgroundFalse": "Видалити",
+        "blocks.select.ruleTrue": "Дозволено",
+        "blocks.select.ruleFalse": "Заборонено",
+        "blocks.select.switchRadio": "Радіокнопки",
+        "blocks.select.switchCheckbox": "Прапорець",
+        "blocks.select.switchToggle": "Перемикач",
+        "blocks.select.switchOn": "Увімкнути",
+        "blocks.select.switchOff": "Вимкнути",
+        "blocks.select.obj": "Об'єкт",
+        "blocks.select.text": "Текст",
+        "blocks.select.group": "Група",
+        "blocks.select.tag": "Тег",
+        "blocks.select.widget": "Віджет",
+        "blocks.select.progressDefault": "Стандарт",
+        "blocks.select.progressDownload": "Завантажити",
+        "blocks.select.progressUpload": "Вивантажити",
+        "blocks.select.redirectsTrue": "Автоматично",
+        "blocks.select.redirectsFalse": "Власноруч",
+        "blocks.color.red": "Червоний",
+        "blocks.color.green": "Зелений",
+        "blocks.color.blue": "Синій",
+        "blocks.color.hex": "Введіть hex",
+        "blocks.sure?": "Ви впевнені?",
+        "blocks.delete.yes": "Так, видалити",
+        "blocks.delete.no": "Ні, не видаляти",
+        "blocks.entertext": "Введіть текст",
+        "blocks.everyone": "Усі блоки",
+        "blocks.custom": "Власні блоки",
+        "blocks.none": "Нiчого",
+        "blocks.not.exist": "Такого блоку не існує",
+        "blocks.type.noobmode": "Доступ до цієї категорії закритий в спрощеному режимі",
+        "blocks.default": "Назва блоку",
+        "blocks.": "Назва блоку",
+        "blocks.params": "Параметр",
+        "blocks.params.add": "Додати параметр",
+        "blocks.params.remove": "Видалити параметр",
         "blocks..params": {}
     },
     "events": {
-        "blocks.events": "Wydarzenia",
-        "blocks.onStart": "Przy starcie",
+        "blocks.events": "Події",
+        "blocks.onStart": "При старту",
         "blocks.onStart.params": [
-            "Notatka:"
+            "Нотатка:"
         ],
-        "blocks.onFun": "Utwórz funkcję",
+        "blocks.onFun": "Створити функцію",
         "blocks.onFun.params": [
-            "Nazwa funkcji:"
+            "Назва функції:"
         ],
-        "blocks.onFunParams": "Utwórz funkcję z parametrami",
+        "blocks.onFunParams": "Створити функцію з параметрами",
         "blocks.onFunParams.params": [
-            "Nazwa funkcji:",
-            "Nazwa tabeli:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onCondition": "Dopóki warunek jest prawdziwy",
+        "blocks.onCondition": "Поки умова істина",
         "blocks.onCondition.params": [
-            "Warunek:"
+            "Умова:"
         ],
-        "blocks.onTouchBegan": "Gdy palec dotyka obiektu",
+        "blocks.onTouchBegan": "Коли палець торкається об'єкту",
         "blocks.onTouchBegan.params": [
-            "Nazwa funkcji:",
-            "Nazwa tabeli:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onTouchEnded": "Kiedy palec opuszcza obiekt",
+        "blocks.onTouchEnded": "Коли палець відпускає об’єкт",
         "blocks.onTouchEnded.params": [
-            "Nazwa funkcji:",
-            "Nazwa tabeli:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onTouchMoved": "Kiedy palec porusza się po obiekcie",
+        "blocks.onTouchMoved": "Поки палець рухається по об’єкту",
         "blocks.onTouchMoved.params": [
-            "Nazwa funkcji:",
-            "Nazwa tabeli:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onTouchDisplayBegan": "Gdy palec dotknie ekranu",
+        "blocks.onTouchDisplayBegan": "Коли палець торкається екрану",
         "blocks.onTouchDisplayBegan.params": [
-            "Nazwa tabeli:"
+            "Назва таблиці:"
         ],
-        "blocks.onTouchDisplayEnded": "Kiedy palec opuści ekran",
+        "blocks.onTouchDisplayEnded": "Коли палець відпускає екран",
         "blocks.onTouchDisplayEnded.params": [
-            "Nazwa tabeli:"
+            "Назва таблиці:"
         ],
-        "blocks.onTouchDisplayMoved": "Kiedy palec porusza się po ekranie",
+        "blocks.onTouchDisplayMoved": "Поки палець рухається по екрану",
         "blocks.onTouchDisplayMoved.params": [
-            "Nazwa tabeli:"
+            "Назва таблиці:"
         ],
-        "blocks.onFirebase": "Odpowiedź otrzymana od Firebase",
+        "blocks.onFirebase": "Отримано відповідь від Firebase",
         "blocks.onFirebase.params": [
-            "Nazwa funkcji:",
-            "Odpowiedź:"
+            "Назва функції:",
+            "Відповідь:"
         ],
-        "blocks.onBackPress": "When you click on 'Back'",
-        "blocks.onSuspend": "Application was minimized from screen",
-        "blocks.onResume": "Application was returned to screen",
-        "blocks.onLocalCollisionBegan": "Beginning local collision",
+        "blocks.onBackPress": "Коли ви натиснете \"Назад\"",
+        "blocks.onSuspend": "Програма була згорнута з екрану",
+        "blocks.onResume": "Програма була повернена на екран",
+        "blocks.onLocalCollisionBegan": "Початок локальної колізії",
         "blocks.onLocalCollisionBegan.params": [
-            "Function name:",
-            "Table name:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onLocalCollisionEnded": "End local collision",
+        "blocks.onLocalCollisionEnded": "Кінець локальної колізії",
         "blocks.onLocalCollisionEnded.params": [
-            "Function name:",
-            "Table name:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onLocalPreCollision": "Before local collision",
+        "blocks.onLocalPreCollision": "Перед локальною колізією",
         "blocks.onLocalPreCollision.params": [
-            "Function name:",
-            "Table name:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onLocalPostCollision": "After local collision",
+        "blocks.onLocalPostCollision": "Після локальної колізії",
         "blocks.onLocalPostCollision.params": [
-            "Function name:",
-            "Table name:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onGlobalCollisionBegan": "Beginning global collision",
+        "blocks.onGlobalCollisionBegan": "Початок глобальної колізії",
         "blocks.onGlobalCollisionBegan.params": [
-            "Function name:",
-            "Table name:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onGlobalCollisionEnded": "End global collision",
+        "blocks.onGlobalCollisionEnded": "Кінець глобальної колізії",
         "blocks.onGlobalCollisionEnded.params": [
-            "Function name:",
-            "Table name:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onGlobalPreCollision": "Przed globalną kolizją",
+        "blocks.onGlobalPreCollision": "Перед глобальною колізією",
         "blocks.onGlobalPreCollision.params": [
-            "Nazwa funkcji:",
-            "Nazwa tabeli:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onGlobalPostCollision": "Po globalnej kolizji",
+        "blocks.onGlobalPostCollision": "Після глобальної колізії",
         "blocks.onGlobalPostCollision.params": [
-            "Nazwa funkcji:",
-            "Nazwa tabeli:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onWebViewCallback": "W widoku internetowym (webview) wystąpiły zmiany",
+        "blocks.onWebViewCallback": "Були зміни у Webview",
         "blocks.onWebViewCallback.params": [
-            "Nazwa funkcji:",
-            "Nazwa tabeli:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onSwitchCallback": "Event in switch has started",
+        "blocks.onSwitchCallback": "Подія в перемикачі була розпочата",
         "blocks.onSwitchCallback.params": [
-            "Function name:",
-            "Variable name:"
+            "Назва функції:",
+            "Назва змінної:"
         ],
-        "blocks.onSliderMoved": "Gdy suwak się rusza",
+        "blocks.onSliderMoved": "Поки слайдер рухається",
         "blocks.onSliderMoved.params": [
-            "Nazwa funkcji:",
-            "Nazwa zmiennej:"
+            "Назва функції:",
+            "Назва змінної:"
         ],
-        "blocks.onFieldBegan": "Edycja pola została rozpoczęta",
+        "blocks.onFieldBegan": "Редагування поля було розпочато",
         "blocks.onFieldBegan.params": [
-            "Nazwa funkcji:",
-            "Nazwa tabeli:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onFieldEditing": "Podczas edycji pola tekstowego",
+        "blocks.onFieldEditing": "Поки текстове поле редагується",
         "blocks.onFieldEditing.params": [
-            "Nazwa funkcji:",
-            "Nazwa tabeli:"
+            "Назва функції:",
+            "Назва таблиці:"
         ],
-        "blocks.onFieldEnded": "Edycja pola została zakończona",
+        "blocks.onFieldEnded": "Редагування поля було закінчено",
         "blocks.onFieldEnded.params": [
-            "Nazwa funkcji:",
-            "Nazwa tabeli:"
+            "Назва функції:",
+            "Назва таблиці:"
         ]
     },
     "vars": {
-        "blocks.vars": "Dane\ni Tekst",
-        "blocks.setVar": "Ustaw wartość zmiennej",
+        "blocks.vars": "Дані\n& Текст",
+        "blocks.setVar": "Встановити значення змінної",
         "blocks.setVar.params": [
-            "Nazwa zmiennej:",
-            "Wartość:"
+            "Назва змінної:",
+            "Значення:"
         ],
-        "blocks.updVar": "Dodaj wartość do zmiennej",
+        "blocks.updVar": "Додати значення до змінної",
         "blocks.updVar.params": [
-            "Nazwa zmiennej:",
-            "Wartość:"
+            "Назва змінної:",
+            "Значення:"
         ],
-        "blocks.setObjVar": "Ustaw zmienną obiektu",
+        "blocks.setObjVar": "Встановити змінну об'єкту",
         "blocks.setObjVar.params": [
-            "Klucz [K]:",
-            "Nazwa obiektu:",
-            "Wartość:"
+            "Ключ [K]:",
+            "Назва об' єкту:",
+            "Значення:"
         ],
-        "blocks.addTable": "Ustaw wartość do tabeli",
+        "blocks.addTable": "Встановити значення в таблицю",
         "blocks.addTable.params": [
-            "Klucz [K]:",
-            "Nazwa tabeli:",
-            "Wartość:"
+            "Ключ [K]:",
+            "Назва таблиці:",
+            "Значення:"
         ],
-        "blocks.insertTable": "Wstaw wartość do tablicy",
+        "blocks.insertTable": "Вставити значення в масив",
         "blocks.insertTable.params": [
-            "Klucz [N]:",
-            "Nazwa tabeli:",
-            "Wartość:"
+            "Ключ [N]:",
+            "Назва таблиці:",
+            "Значення:"
         ],
-        "blocks.removeTable": "Usuń wartość z tablicy",
+        "blocks.removeTable": "Видалити значення з масиву",
         "blocks.removeTable.params": [
-            "Nazwa tabeli:",
-            "Klucz [N]:"
+            "Назва таблиці:",
+            "Ключ [N]:"
         ],
-        "blocks.resetTable": "Nadpisz tabelę",
+        "blocks.resetTable": "Перезаписати таблицю",
         "blocks.resetTable.params": [
-            "Nazwa tabeli:",
-            "Kod JSON:"
+            "Назва таблиці:",
+            "Код Json:"
         ],
-        "blocks.saveValue": "Zapisz wartość",
+        "blocks.saveValue": "Зберегти значення",
         "blocks.saveValue.params": [
-            "Klucz „K”:",
-            "Wartość:"
+            "Ключ [K]':",
+            "Значення:"
         ],
-        "blocks.setRandomSeed": "Ustaw losowy seed",
+        "blocks.setRandomSeed": "Встановити випадковий сід",
         "blocks.setRandomSeed.params": [
-            "Seed:"
+            "Ключ генерації:"
         ],
-        "blocks.newText": "Create text",
+        "blocks.newText": "Створити текст",
         "blocks.newText.params": [
-            "Text name:",
-            "Text:",
-            "Font:",
-            "Size:",
-            "Color:",
-            "Opacity (0-100):",
-            "Position (X):",
-            "Position (Y):"
+            "Назва тексту:",
+            "Текст:",
+            "Шрифт:",
+            "Розмір:",
+            "Колір:",
+            "Непрозорість (0-100):",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.newText2": "Create text with width and height",
+        "blocks.newText2": "Створити текст з шириною і висотою",
         "blocks.newText2.params": [
-            "Text name:",
-            "Text:",
-            "Font:",
-            "Size:",
-            "Color:",
-            "Align:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва тексту:",
+            "Текст:",
+            "Шрифт:",
+            "Розмір:",
+            "Колір:",
+            "Вирівнювання:",
+            "Ширина:",
+            "Висота:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.setText": "Edit text",
+        "blocks.setText": "Змінити текст",
         "blocks.setText.params": [
-            "Text name:",
-            "Text:"
+            "Назва тексту:",
+            "Текст:"
         ],
-        "blocks.setTextSize": "Set text font size",
+        "blocks.setTextSize": "Встановити розмір шрифту тексту",
         "blocks.setTextSize.params": [
-            "Text name:",
-            "Size:"
+            "Назва тексту:",
+            "Розмір:"
         ],
-        "blocks.hideText": "Hide text",
+        "blocks.hideText": "Сховати текст",
         "blocks.hideText.params": [
-            "Text name:"
+            "Назва тексту:"
         ],
-        "blocks.showText": "Pokaż tekst",
+        "blocks.showText": "Показати текст",
         "blocks.showText.params": [
-            "Nazwa tekstu:"
+            "Назва тексту:"
         ],
-        "blocks.removeText": "Usuń tekst",
+        "blocks.removeText": "Видалити текст",
         "blocks.removeText.params": [
-            "Text name:"
+            "Назва тексту:"
         ],
-        "blocks.setTextPos": "Set text position",
+        "blocks.setTextPos": "Встановити позицію тексту",
         "blocks.setTextPos.params": [
-            "Text name:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва тексту:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.setTextPosX": "Set text position X",
+        "blocks.setTextPosX": "Встановити позицію X тексту",
         "blocks.setTextPosX.params": [
-            "Text name:",
-            "Position (X):"
+            "Назва тексту:",
+            "Позиція (X):"
         ],
-        "blocks.setTextPosY": "Set text position Y",
+        "blocks.setTextPosY": "Встановити позицію Y тексту",
         "blocks.setTextPosY.params": [
-            "Text name:",
-            "Position (Y):"
+            "Назва тексту:",
+            "Позиція (Y):"
         ],
-        "blocks.setTextRotation": "Set text rotation",
+        "blocks.setTextRotation": "Встановити оберт тексту",
         "blocks.setTextRotation.params": [
-            "Text name:",
-            "Rotation:"
+            "Назва тексту:",
+            "Оберт:"
         ],
-        "blocks.setTextAlpha": "Set text opacity",
+        "blocks.setTextAlpha": "Встановити непрозорість тексту",
         "blocks.setTextAlpha.params": [
-            "Text name:",
-            "Opacity (0-100):"
+            "Назва тексту:",
+            "Непрозорість (0-100):"
         ],
-        "blocks.setTextColor": "Set text color",
+        "blocks.setTextColor": "Встановити колір тексту",
         "blocks.setTextColor.params": [
-            "Nazwa tekstu:",
-            "Kolor:"
+            "Назва тексту:",
+            "Колір:"
         ],
-        "blocks.setTextRGB": "Ustaw kolor tekstu RGB",
+        "blocks.setTextRGB": "Встановити RGB колір тексту",
         "blocks.setTextRGB.params": [
-            "Nazwa tekstu:",
-            "Kolor (R):",
-            "Kolor (G):",
-            "Kolor (B):"
+            "Назва тексту:",
+            "Колір (R):",
+            "Колір (G):",
+            "Колір (B):"
         ],
-        "blocks.setTextHEX": "Ustaw kolor tekstu HEX",
+        "blocks.setTextHEX": "Встановити HEX колір тексту",
         "blocks.setTextHEX.params": [
-            "Nazwa tekstu:",
-            "Kolor (Hex):"
+            "Назва тексту:",
+            "Колір (Hex):"
         ],
-        "blocks.setTextAnchor": "Ustaw punkt kotwicy tekstu",
+        "blocks.setTextAnchor": "Встановити точку прив’язки тексту",
         "blocks.setTextAnchor.params": [
-            "Nazwa tekstu:",
-            "Punkt kotwicy X (0–100):",
-            "Punkt kotwicy Y (0–100):"
+            "Назва тексту:",
+            "Прив'язка по X (0-100):",
+            "Прив'язка по Y (0-100):"
         ],
-        "blocks.updTextPosX": "Zmień pozycję X tekstu",
+        "blocks.updTextPosX": "Змінити позицію X тексту",
         "blocks.updTextPosX.params": [
-            "Nazwa tekstu:",
-            "Pozycja (X):"
+            "Назва тексту:",
+            "Позиція (X):"
         ],
-        "blocks.updTextPosY": "Zmień pozycję Y tekstu",
+        "blocks.updTextPosY": "Змінити позицію Y тексту",
         "blocks.updTextPosY.params": [
-            "Nazwa tekstu:",
-            "Pozycja (Y):"
+            "Назва тексту:",
+            "Позиція (Y):"
         ],
-        "blocks.updTextRotation": "Zmień rotację tekstu",
+        "blocks.updTextRotation": "Змінити оберт текст",
         "blocks.updTextRotation.params": [
-            "Nazwa tekstu:",
-            "Rotacja:"
+            "Назва тексту:",
+            "Оберт:"
         ],
-        "blocks.updTextAlpha": "Zmień przeźroczystość tekstu",
+        "blocks.updTextAlpha": "Змінити непрозорість тексту",
         "blocks.updTextAlpha.params": [
-            "Nazwa tekstu:",
-            "Przezroczystość (0-100):"
+            "Назва тексту:",
+            "Непрозорість (0-100):"
         ],
-        "blocks.frontText": "Ustaw tekst na warstwę powyżej",
+        "blocks.frontText": "Встановити текст на шар вище",
         "blocks.frontText.params": [
-            "Nazwa tekstu:"
+            "Назва тексту:"
         ],
-        "blocks.backText": "Ustaw tekst na warstwie poniżej",
+        "blocks.backText": "Встановити текст на шар нижче",
         "blocks.backText.params": [
-            "Nazwa tekstu:"
+            "Назва тексту:"
         ]
     },
     "objects": {
-        "blocks.objects": "Obiekty",
-        "blocks.newObject": "Utwórz obiekt",
+        "blocks.objects": "Об'єкти",
+        "blocks.newObject": "Створити об'єкт",
         "blocks.newObject.params": [
-            "Nazwa obiektu:",
-            "Nazwa duszka:",
-            "Pozycja (X):",
-            "Pozycja (Y):"
+            "Назва об'єкту:",
+            "Назва спрайту:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.newSprite": "Utwórz obiekt z części duszka",
+        "blocks.newSprite": "Створити об'єкт з частин спрайту",
         "blocks.newSprite.params": [
-            "Nazwa obiektu:",
-            "Nazwa duszka:",
-            "Szerokość ramki:",
-            "Wysokość ramki:",
-            "Liczba ramek:",
-            "Lista animacji:",
-            "Pozycja (X):",
-            "Pozycja (Y):"
+            "Назва об'єкту:",
+            "Назва спрайту:",
+            "Ширина фрейму:",
+            "Висота фрейму:",
+            "Кількість фреймів:",
+            "Список анімацій:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.setPos": "Ustaw pozycję obiektu",
+        "blocks.setPos": "Встановити позицію об'єкту",
         "blocks.setPos.params": [
-            "Nazwa obiektu:",
-            "Pozycja (X):",
-            "Pozycja (Y):"
+            "Назва об'єкту:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.setPosX": "Ustaw pozycję X obiektu",
+        "blocks.setPosX": "Встановити позицію X тексту",
         "blocks.setPosX.params": [
-            "Object name:",
-            "Position (X):"
+            "Назва об'єкту:",
+            "Позиція (X):"
         ],
-        "blocks.setPosY": "Set object position Y",
+        "blocks.setPosY": "Встановити позицію X об'єкту",
         "blocks.setPosY.params": [
-            "Object name:",
-            "Position (Y):"
+            "Назва об'єкту:",
+            "Позиція (Y):"
         ],
-        "blocks.setSize": "Set object size",
+        "blocks.setSize": "Встановити розмір об'єкту",
         "blocks.setSize.params": [
-            "Object name:",
-            "Size (%):"
+            "Назва об'єкту:",
+            "Розмір (%):"
         ],
-        "blocks.setRotation": "Set object rotation",
+        "blocks.setRotation": "Встановити оберт об'єкту",
         "blocks.setRotation.params": [
-            "Object name:",
-            "Rotation:"
+            "Назва об'єкту:",
+            "Оберт:"
         ],
-        "blocks.setRotationTo": "Set rotation to object2",
+        "blocks.setRotationTo": "Встановити оберт до об'єкту2",
         "blocks.setRotationTo.params": [
-            "Object name1:",
-            "Object name2:"
+            "Назва об'єкту1:",
+            "Назва об'єкту2:"
         ],
-        "blocks.setAlpha": "Set object opacity",
+        "blocks.setAlpha": "Встановити непрозорість об'єкту",
         "blocks.setAlpha.params": [
-            "Object name:",
-            "Opacity (0-100):"
+            "Назва об'єкту:",
+            "Непрозорість (0-100):"
         ],
-        "blocks.setWidth": "Set object width",
+        "blocks.setWidth": "Встановити ширину об'єкту",
         "blocks.setWidth.params": [
-            "Object name:",
-            "Width:"
+            "Назва об'єкту:",
+            "Ширина:"
         ],
-        "blocks.setHeight": "Set object height",
+        "blocks.setHeight": "Встановити висоту об'єкту",
         "blocks.setHeight.params": [
-            "Object name:",
-            "Height:"
+            "Назва об'єкту:",
+            "Висота:"
         ],
-        "blocks.setAnchor": "Set anchor point of object",
+        "blocks.setAnchor": "Встановити точку прив’язки об'єкту",
         "blocks.setAnchor.params": [
-            "Object name:",
-            "Anchor X (0-100):",
-            "Anchor Y (0-100):"
+            "Назва об'єкту:",
+            "Прив'язка по X (0-100):",
+            "Прив'язка по Y (0-100):"
         ],
-        "blocks.updPosX": "Change object position X",
+        "blocks.updPosX": "Змінити позицію X об'єкту",
         "blocks.updPosX.params": [
-            "Object name:",
-            "Position (X):"
+            "Назва об'єкту:",
+            "Позиція (X):"
         ],
-        "blocks.updPosY": "Change object position Y",
+        "blocks.updPosY": "Змінити позицію Y об'єкту",
         "blocks.updPosY.params": [
-            "Object name:",
-            "Position (Y):"
+            "Назва об'єкту:",
+            "Позиція (Y):"
         ],
-        "blocks.updSize": "Change object size",
+        "blocks.updSize": "Змінити розмір об'єкту",
         "blocks.updSize.params": [
-            "Object name:",
-            "Size (%):"
+            "Назва об'єкту:",
+            "Розмір (%):"
         ],
-        "blocks.updRotation": "Change object rotation",
+        "blocks.updRotation": "Змінити оберт об'єкту",
         "blocks.updRotation.params": [
-            "Object name:",
-            "Rotation:"
+            "Назва об'єкту:",
+            "Оберт:"
         ],
-        "blocks.updAlpha": "Change object opacity",
+        "blocks.updAlpha": "Змінити непрозорість об'єкту",
         "blocks.updAlpha.params": [
-            "Object name:",
-            "Opacity (0-100):"
+            "Назва об'єкту:",
+            "Непрозорість (0-100):"
         ],
-        "blocks.updWidth": "Change object width",
+        "blocks.updWidth": "Змінити ширину об'єкту",
         "blocks.updWidth.params": [
-            "Object name:",
-            "Width:"
+            "Назва об'єкту:",
+            "Ширина:"
         ],
-        "blocks.updHeight": "Change object height",
+        "blocks.updHeight": "Змінити висоту об'єкту",
         "blocks.updHeight.params": [
-            "Object name:",
-            "Height:"
+            "Назва об'єкту:",
+            "Висота:"
         ],
-        "blocks.hideObject": "Hide object",
+        "blocks.hideObject": "Приховати об'єкт",
         "blocks.hideObject.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.showObject": "Show object",
+        "blocks.showObject": "Показати об'єкт",
         "blocks.showObject.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.removeObject": "Remove object",
+        "blocks.removeObject": "Видалити об'єкт",
         "blocks.removeObject.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.frontObject": "Place object on layer above",
+        "blocks.frontObject": "Розмістити об'єкт на шарі вище",
         "blocks.frontObject.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.backObject": "Place object on layer below",
+        "blocks.backObject": "Розмістити об'єкт на шарі нижче",
         "blocks.backObject.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ]
     },
     "control": {
-        "blocks.control": "Control",
-        "blocks.timerEnd": "End timer",
-        "blocks.timer": "Timer",
+        "blocks.control": "Керування",
+        "blocks.timerEnd": "Кінець таймеру",
+        "blocks.timer": "Таймер",
         "blocks.timer.params": [
-            "Time (Seconds):",
-            "Number repetitions:"
+            "Час (секунди):",
+            "Кількість повторень:"
         ],
-        "blocks.timerNameEnd": "End timer",
-        "blocks.timerName": "Timer with name",
+        "blocks.timerNameEnd": "Кінець таймеру",
+        "blocks.timerName": "Таймер з назвою",
         "blocks.timerName.params": [
-            "Timer name:",
-            "Time (Seconds):",
-            "Number repetitions:"
+            "Назва таймеру:",
+            "Час (в секундах):",
+            "Кількість повторень:"
         ],
-        "blocks.timerPause": "Pause timer",
+        "blocks.timerPause": "Призупинити таймер",
         "blocks.timerPause.params": [
-            "Timer name:"
+            "Назва таймеру:"
         ],
-        "blocks.timerResume": "Resume timer",
+        "blocks.timerResume": "Відновити таймер",
         "blocks.timerResume.params": [
-            "Timer name:"
+            "Назва таймеру:"
         ],
-        "blocks.timerCancel": "Cancel timer",
+        "blocks.timerCancel": "Завершити таймер",
         "blocks.timerCancel.params": [
-            "Timer name:"
+            "Назва таймеру:"
         ],
-        "blocks.timerPauseAll": "Pause all timers",
-        "blocks.timerResumeAll": "Resume all timers",
-        "blocks.timerCancelAll": "Cancel all timers",
-        "blocks.ifEnd": "End condition",
-        "blocks.ifElse": "Else, if condition is true",
+        "blocks.timerPauseAll": "Призупинити всі таймери",
+        "blocks.timerResumeAll": "Відновити всі таймери",
+        "blocks.timerCancelAll": "Завершити всі таймери",
+        "blocks.ifEnd": "Кінець умови",
+        "blocks.ifElse": "Інакше, якщо умова істина",
         "blocks.ifElse.params": [
-            "Condition:"
+            "Умова:"
         ],
-        "blocks.if": "If condition is true",
+        "blocks.if": "Якщо умова істина",
         "blocks.if.params": [
-            "Condition:"
+            "Умова:"
         ],
-        "blocks.foreverEnd": "End forever",
-        "blocks.forever": "Repeat forever",
-        "blocks.repeatEnd": "End repeat",
-        "blocks.repeat": "Repeat N times",
+        "blocks.foreverEnd": "Кінець вічності",
+        "blocks.forever": "Повторювати завжди",
+        "blocks.repeatEnd": "Кінець повторювання",
+        "blocks.repeat": "Повторити N разів",
         "blocks.repeat.params": [
-            "Number repetitions:"
+            "Кількість повторень:"
         ],
-        "blocks.forEnd": "End cycle",
-        "blocks.for": "Cycle",
+        "blocks.forEnd": "Кінець циклу",
+        "blocks.for": "Цикл",
         "blocks.for.params": [
-            "From:",
-            "To:",
-            "Variable name:",
-            "Step:"
+            "З:",
+            "До:",
+            "Назва змінної:",
+            "Крок:"
         ],
-        "blocks.whileEnd": "End repeat",
-        "blocks.while": "Repeat until condition is true",
+        "blocks.whileEnd": "Кінець повторювання",
+        "blocks.while": "Повторювати, поки умова дійсна",
         "blocks.while.params": [
-            "Condition:"
+            "Умова:"
         ],
-        "blocks.foreachEnd": "End cycle",
-        "blocks.foreach": "Bypass all table elements",
+        "blocks.foreachEnd": "Кінець циклу",
+        "blocks.foreach": "Пройтися по всім елементам таблиці",
         "blocks.foreach.params": [
-            "Table name:",
-            "Variable name:"
+            "Назва таблиці:",
+            "Назва змінної:"
         ],
-        "blocks.break": "Stop cycle",
-        "blocks.requestFun": "Request function",
+        "blocks.break": "Зупинити цикл",
+        "blocks.requestFun": "Викликати функцію",
         "blocks.requestFun.params": [
-            "Function name:"
+            "Назва функції:"
         ],
-        "blocks.requestFunParams": "Request function with parameters",
+        "blocks.requestFunParams": "Викликати функцію з параметрами",
         "blocks.requestFunParams.params": [
-            "Function name:",
-            "Parameters:"
+            "Назва функції:",
+            "Параметри:"
         ],
-        "blocks.setListener": "Set touch function",
+        "blocks.setListener": "Встановити функцію дотику",
         "blocks.setListener.params": [
-            "Object name:",
-            "Function name:"
+            "Назва об'єкту:",
+            "Назва функції:"
         ],
-        "blocks.setLocalCollision": "Set collision function",
+        "blocks.setLocalCollision": "Встановити функцію колізії",
         "blocks.setLocalCollision.params": [
-            "Object name:",
-            "Function name:"
+            "Назва об'єкту:",
+            "Назва функції:"
         ],
-        "blocks.setLocalPreCollision": "Set function before collision",
+        "blocks.setLocalPreCollision": "Встановити функцію перед-колізії",
         "blocks.setLocalPreCollision.params": [
-            "Object name:",
-            "Function name:"
+            "Назва об'єкту:",
+            "Назва функції:"
         ],
-        "blocks.setLocalPostCollision": "Set function after collision",
+        "blocks.setLocalPostCollision": "Встановити функцію після-колізії",
         "blocks.setLocalPostCollision.params": [
-            "Object name:",
-            "Function name:"
+            "Назва об'єкту:",
+            "Назва функції:"
         ],
-        "blocks.setGlobalCollision": "Global collision function",
+        "blocks.setGlobalCollision": "Функція глобальної колізії",
         "blocks.setGlobalCollision.params": [
-            "Function name:"
+            "Назва функції:"
         ],
-        "blocks.setGlobalPreCollision": "Function before global collision",
+        "blocks.setGlobalPreCollision": "Функція перед-глобальної колізії",
         "blocks.setGlobalPreCollision.params": [
-            "Function name:"
+            "Назва функції:"
         ],
-        "blocks.setGlobalPostCollision": "Function after global collision",
+        "blocks.setGlobalPostCollision": "Функція після-глобальної колізії",
         "blocks.setGlobalPostCollision.params": [
-            "Function name:"
+            "Назва функції:"
         ],
-        "blocks.setFocus": "Set touch focus",
+        "blocks.setFocus": "Встановити фокус натиску",
         "blocks.setFocus.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.setFocusMultitouch": "Set multitouch focus",
+        "blocks.setFocusMultitouch": "Встановити фокус мультинатиску",
         "blocks.setFocusMultitouch.params": [
-            "Object name:",
-            "Unique id:"
+            "Назва об'єкту:",
+            "Унікальний ідентифікатор:"
         ],
-        "blocks.activateMultitouch": "Activate multitouch",
-        "blocks.deactivateMultitouch": "Deactivate multitouch",
-        "blocks.returnValue": "Return value",
+        "blocks.activateMultitouch": "Активувати мультинатиск",
+        "blocks.deactivateMultitouch": "Деактивувати мультинатиск",
+        "blocks.returnValue": "Повернути значення",
         "blocks.returnValue.params": [
-            "Value:"
+            "Значення:"
         ],
-        "blocks.requestApi": "Request API method",
+        "blocks.requestApi": "Викликати API метод",
         "blocks.requestApi.params": [
-            "Lua code:"
+            "Lua код:"
         ],
-        "blocks.toastShort": "Short pop-up notification",
+        "blocks.toastShort": "Коротке спливаюче сповіщення",
         "blocks.toastShort.params": [
-            "Text:"
+            "Текст:"
         ],
-        "blocks.toastLong": "Long pop-up notification",
+        "blocks.toastLong": "Довге спливаюче сповіщення",
         "blocks.toastLong.params": [
-            "Text:"
+            "Текст:"
         ],
-        "blocks.comment": "Comment (for yourself)",
+        "blocks.comment": "Нотатка (для себе)",
         "blocks.comment.params": [
-            "Note:"
+            "Нотатка:"
         ],
-        "blocks.requestExit": "Close program",
-        "blocks.setBackgroundColor": "Set background color",
+        "blocks.requestExit": "Закрити програму",
+        "blocks.setBackgroundColor": "Встановити колір фону",
         "blocks.setBackgroundColor.params": [
-            "Color:"
+            "Колір:"
         ],
-        "blocks.setBackgroundRGB": "Set RGB background color",
+        "blocks.setBackgroundRGB": "Встановити RGB колір фону",
         "blocks.setBackgroundRGB.params": [
-            "Color (R):",
-            "Color (G):",
-            "Color (B):"
+            "Колір (R):",
+            "Колір (G):",
+            "Колір (B):"
         ],
-        "blocks.setBackgroundHEX": "Set HEX background color",
+        "blocks.setBackgroundHEX": "Встановити HEX колір фону",
         "blocks.setBackgroundHEX.params": [
-            "Color (Hex):"
+            "Колір (Hex):"
         ],
-        "blocks.setPortraitOrientation": "Set portrait orientation",
+        "blocks.setPortraitOrientation": "Встановити вертикальну орієнтацію",
         "blocks.setPortraitOrientation.params": [
-            "Function name:"
+            "Назва функції:"
         ],
-        "blocks.setLandscapeOrientation": "Set landscape orientation",
+        "blocks.setLandscapeOrientation": "Встановити горизонтальну орієнтацію",
         "blocks.setLandscapeOrientation.params": [
-            "Function name:"
+            "Назва функції:"
         ],
-        "blocks.turnOnAccelerometer": "Set accelerometer function",
+        "blocks.turnOnAccelerometer": "Встановити функцію акселерометра",
         "blocks.turnOnAccelerometer.params": [
-            "Function name:"
+            "Назва функції:"
         ],
-        "blocks.setAccelerometerFrequency": "Set accelerometer frequency",
+        "blocks.setAccelerometerFrequency": "Встановити частоту акселерометра",
         "blocks.setAccelerometerFrequency.params": [
-            "Frequency (Hz):"
+            "Частота (Гц):"
         ],
-        "blocks.scheduleNotification": "Register a notification",
+        "blocks.scheduleNotification": "Зареєструвати сповіщення",
         "blocks.scheduleNotification.params": [
-            "Text:",
-            "Time (Seconds):"
+            "Текст:",
+            "Час (секунди):"
         ]
     },
     "shapes": {
-        "blocks.shapes": "Textures\n& Shapes",
-        "blocks.setSprite": "Set object sprite",
+        "blocks.shapes": "Текстури\n& Фігури",
+        "blocks.setSprite": "Встановити спрайт об'єкту",
         "blocks.setSprite.params": [
-            "Object name:",
-            "Sprite name:"
+            "Назва об'єкту:",
+            "Назва спрайту:"
         ],
-        "blocks.newRect": "Create rect with color",
+        "blocks.newRect": "Створити прямокутник з кольором",
         "blocks.newRect.params": [
-            "Object name:",
-            "Color:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва об'єкту:",
+            "Колір:",
+            "Ширина:",
+            "Висота:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.newRoundedRect": "Create rect with corners",
+        "blocks.newRoundedRect": "Створити прямокутник з кутами",
         "blocks.newRoundedRect.params": [
-            "Object name:",
-            "Rounded corners:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва об'єкту:",
+            "Заокруглення кутів:",
+            "Ширина:",
+            "Висота:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.newCircle": "Create circle",
+        "blocks.newCircle": "Створити коло",
         "blocks.newCircle.params": [
-            "Object name:",
-            "Radius:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва об'єкту:",
+            "Радіус:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.newPolygon": "Create polygon",
+        "blocks.newPolygon": "Створити полігон",
         "blocks.newPolygon.params": [
-            "Object name:",
-            "Angles table:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва об'єкту:",
+            "Таблиця кутів:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.newLine": "Create line",
+        "blocks.newLine": "Створити лінію",
         "blocks.newLine.params": [
-            "Object name:",
-            "Color:",
-            "Position1 (X):",
-            "Position1 (Y):",
-            "Position2 (X):",
-            "Position2 (Y):"
+            "Назва об'єкту:",
+            "Колір:",
+            "Позиція1 (X):",
+            "Позиція1 (Y):",
+            "Позиція2 (X):",
+            "Позиція2 (Y):"
         ],
-        "blocks.appendLine": "Append point to line",
+        "blocks.appendLine": "Додати точку лінії",
         "blocks.appendLine.params": [
-            "Object name:",
-            "Coordinate table:"
+            "Назва об'єкту:",
+            "Таблиця координат:"
         ],
-        "blocks.newBitmap": "Create bitmap texture",
+        "blocks.newBitmap": "Створити растрову текстуру",
         "blocks.newBitmap.params": [
-            "Bitmap name:",
-            "Width:",
-            "Height:"
+            "Назва растрової текстури:",
+            "Ширина:",
+            "Висота:"
         ],
-        "blocks.setPixel": "Set pixel color",
+        "blocks.setPixel": "Встановити колір пікселя",
         "blocks.setPixel.params": [
-            "Bitmap name:",
-            "Position (X):",
-            "Position (Y):",
-            "Color:"
+            "Назва растрової текстури:",
+            "Позиція (X):",
+            "Позиція (Y):",
+            "Колір:"
         ],
-        "blocks.setPixelRGB": "Set RGB pixel color",
+        "blocks.setPixelRGB": "Встановити RGB колір пікселя",
         "blocks.setPixelRGB.params": [
-            "Bitmap name:",
-            "Position (X):",
-            "Position (Y):",
-            "Color (R):",
-            "Color (G):",
-            "Color (B):"
+            "Назва растрової текстури:",
+            "Позиція (X):",
+            "Позиція (Y):",
+            "Колір (R):",
+            "Колір (G):",
+            "Колір (B):"
         ],
-        "blocks.removePixel": "Remove pixel color",
+        "blocks.removePixel": "Видалити колір пікселя",
         "blocks.removePixel.params": [
-            "Bitmap name:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва растрової текстури:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.updBitmap": "Update bitmap texture",
+        "blocks.updBitmap": "Оновити растрову текстуру",
         "blocks.updBitmap.params": [
-            "Bitmap name:"
+            "Назва растрової текстури:"
         ],
-        "blocks.setBitmapSprite": "Set bitmap texture of object",
+        "blocks.setBitmapSprite": "Встановити растрову текстуру об'єкту",
         "blocks.setBitmapSprite.params": [
-            "Object name:",
-            "Bitmap name:"
+            "Назва об'єкту:",
+            "Назва растрової текстури:"
         ],
-        "blocks.getBitmapSprite": "Get bitmap texture of sprite",
+        "blocks.getBitmapSprite": "Отримати растрову текстуру спрайту",
         "blocks.getBitmapSprite.params": [
-            "Sprite name:",
-            "Bitmap name:"
+            "Назва спрайту:",
+            "Назва растрової текстури:"
         ],
-        "blocks.setColor": "Set object color",
+        "blocks.setColor": "Встановити колір об'єкту",
         "blocks.setColor.params": [
-            "Object name:",
-            "Color:"
+            "Назва об'єкту:",
+            "Колір:"
         ],
-        "blocks.setRGB": "Set RGB object color",
+        "blocks.setRGB": "Встановити RGB колір об'єкту",
         "blocks.setRGB.params": [
-            "Object name:",
-            "Color (R):",
-            "Color (G):",
-            "Color (B):"
+            "Назва об'єкту:",
+            "Колір (R):",
+            "Колір (G):",
+            "Колір (B):"
         ],
-        "blocks.setHEX": "Set HEX object color",
+        "blocks.setHEX": "Встановити HEX колір об'єкту",
         "blocks.setHEX.params": [
-            "Object name:",
-            "Color (Hex):"
+            "Назва об'єкту:",
+            "Колір (Hex):"
         ],
-        "blocks.setStrokeWidth": "Set stroke width",
+        "blocks.setStrokeWidth": "Встановити ширину обведення",
         "blocks.setStrokeWidth.params": [
-            "Object name:",
-            "Width:"
+            "Назва об'єкту:",
+            "Ширина:"
         ],
-        "blocks.updStrokeWidth": "Change stroke width",
+        "blocks.updStrokeWidth": "Змінити ширину обведення",
         "blocks.updStrokeWidth.params": [
-            "Object name:",
-            "Width:"
+            "Назва об'єкту:",
+            "Ширина:"
         ],
-        "blocks.setStrokeColor": "Set stroke color",
+        "blocks.setStrokeColor": "Встановити колір обведення",
         "blocks.setStrokeColor.params": [
-            "Object name:",
-            "Color:"
+            "Назва об'єкту:",
+            "Колір:"
         ],
-        "blocks.setStrokeRGB": "Set RGB stroke color",
+        "blocks.setStrokeRGB": "Встановити RRG колір обведення",
         "blocks.setStrokeRGB.params": [
-            "Object name:",
-            "Color (R):",
-            "Color (G):",
-            "Color (B):"
+            "Назва об'єкту:",
+            "Колір (R):",
+            "Колір (G):",
+            "Колір (B):"
         ],
-        "blocks.setGradientPaint": "Set gradient paint",
+        "blocks.setGradientPaint": "Встановити градієнт фарби",
         "blocks.setGradientPaint.params": [
-            "Object name:",
-            "Color1:",
-            "Color2:",
-            "Opacity1 (0-100):",
-            "Opacity2 (0-100):"
+            "Назва об'єкту:",
+            "Колір1:",
+            "Колір2:",
+            "Непрозорість1 (0-100):",
+            "Непрозорість2 (0-100):"
         ]
     },
     "objects2": {
-        "blocks.objects2": "Animation\n& Masks",
-        "blocks.setScale": "Set object scale",
+        "blocks.objects2": "Анімація\n& маски",
+        "blocks.setScale": "Встановити масштаб об'єкту",
         "blocks.setScale.params": [
-            "Object name:",
-            "Scale (%):"
+            "Назва об'єкту:",
+            "Масштаб (%):"
         ],
-        "blocks.setScaleX": "Set object scale X",
+        "blocks.setScaleX": "Встановити масштаб об'єкту по X",
         "blocks.setScaleX.params": [
-            "Object name:",
-            "Scale (%):"
+            "Назва об'єкту:",
+            "Масштаб (%):"
         ],
-        "blocks.setScaleY": "Set object scale Y",
+        "blocks.setScaleY": "Встановити масштаб об'єкту по Y",
         "blocks.setScaleY.params": [
-            "Object name:",
-            "Scale (%):"
+            "Назва об'єкту:",
+            "Масштаб (%):"
         ],
-        "blocks.newSeqAnimation": "Create sequence animation",
+        "blocks.newSeqAnimation": "Створити послідовну анімацію",
         "blocks.newSeqAnimation.params": [
-            "Animation name:",
-            "Animation type:",
-            "Starting frame:",
-            "Number frames:",
-            "Number repetitions:",
-            "Time (Seconds):"
+            "Назва анімації:",
+            "Тип анімації:",
+            "Початковий кадр:",
+            "Кількість фреймів:",
+            "Кількість повторень:",
+            "Час (секунди):"
         ],
-        "blocks.newParAnimation": "Create parallel animation",
+        "blocks.newParAnimation": "Створити паралельну анімацію",
         "blocks.newParAnimation.params": [
-            "Frames table:",
-            "Animation name:",
-            "Animation type:",
-            "Number repetitions:",
-            "Time (Seconds):"
+            "Таблиця фреймів:",
+            "Назва анімації:",
+            "Тип анімації:",
+            "Кількість повторень:",
+            "Час (секунди):"
         ],
-        "blocks.playAnimation": "Play animation",
+        "blocks.playAnimation": "Відтворити анімацію",
         "blocks.playAnimation.params": [
-            "Object name:",
-            "Animation name:"
+            "Назва об'єкту:",
+            "Назва анімації:"
         ],
-        "blocks.pauseAnimation": "Pause animation",
+        "blocks.pauseAnimation": "Призупинити анімацію",
         "blocks.pauseAnimation.params": [
-            "Object name:",
-            "Animation name:"
+            "Назва об'єкту:",
+            "Назва анімації:"
         ],
-        "blocks.setFrame": "Set object frame",
+        "blocks.setFrame": "Встановити масштаб фрейму",
         "blocks.setFrame.params": [
-            "Object name:",
-            "Frame:"
+            "Назва об'єкту:",
+            "Фрейм:"
         ],
-        "blocks.newMask": "Create mask",
+        "blocks.newMask": "Створити маску",
         "blocks.newMask.params": [
-            "Mask name:",
-            "Sprite name:"
+            "Назва маски:",
+            "Назва спрайту:"
         ],
-        "blocks.addMaskToObject": "Add mask to object",
+        "blocks.addMaskToObject": "Додати маску до об'єкту",
         "blocks.addMaskToObject.params": [
-            "Object name:",
-            "Mask name:"
+            "Назва об'єкту:",
+            "Назва маски:"
         ],
-        "blocks.setMaskPos": "Set mask position",
+        "blocks.setMaskPos": "Встановити позицію маски",
         "blocks.setMaskPos.params": [
-            "Object name:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва об'єкту:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.setMaskScale": "Set mask scale",
+        "blocks.setMaskScale": "Встановити масштаб маски",
         "blocks.setMaskScale.params": [
-            "Object name:",
-            "Scale (%):"
+            "Назва об'єкту:",
+            "Масштаб (%):"
         ],
-        "blocks.setMaskScaleX": "Set mask scale X",
+        "blocks.setMaskScaleX": "Встановити масштаб маски по X",
         "blocks.setMaskScaleX.params": [
-            "Object name:",
-            "Scale (%):"
+            "Назва об'єкту:",
+            "Масштаб (%):"
         ],
-        "blocks.setMaskScaleY": "Set mask scale Y",
+        "blocks.setMaskScaleY": "Встановити масштаб маски по X",
         "blocks.setMaskScaleY.params": [
-            "Object name:",
-            "Scale (%):"
+            "Назва об'єкту:",
+            "Масштаб (%):"
         ],
-        "blocks.setMaskHitTrue": "Set mask non-clickability",
+        "blocks.setMaskHitTrue": "Встановити неінтерактивність маски",
         "blocks.setMaskHitTrue.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
         "blocks.setMaskHitFalse": "Set mask clickability",
         "blocks.setMaskHitFalse.params": [
@@ -1021,10 +1021,10 @@
             "Group name:",
             "Object name:"
         ],
-        "blocks.addGroupText": "Insert text to group",
+        "blocks.addGroupText": "Вставте текст в групу",
         "blocks.addGroupText.params": [
-            "Group name:",
-            "Text name:"
+            "Назва групи:",
+            "Назва тексту:"
         ],
         "blocks.addGroupWidget": "Insert widget to group",
         "blocks.addGroupWidget.params": [
@@ -1068,7 +1068,7 @@
             "Group name:",
             "Opacity (0-100):"
         ],
-        "blocks.updGroupPosX": "Change group position X",
+        "blocks.updGroupPosX": "Змінити позицію X групи",
         "blocks.updGroupPosX.params": [
             "Group name:",
             "Position (X):"
@@ -1121,8 +1121,8 @@
         ],
         "blocks.addTagText": "Add tag to text",
         "blocks.addTagText.params": [
-            "Tag name:",
-            "Text name:"
+            "Назва тегу:",
+            "Назва тексту:"
         ],
         "blocks.addTagWidget": "Add tag to widget",
         "blocks.addTagWidget.params": [
@@ -1481,15 +1481,15 @@
         "blocks.removeFieldSecure.params": [
             "Widget name:"
         ],
-        "blocks.setFieldRule": "Permission to enter in textfield",
+        "blocks.setFieldRule": "Дозвіл на ввід у текстове поле",
         "blocks.setFieldRule.params": [
             "Widget name:",
             "Rule:"
         ],
         "blocks.setFieldText": "Set text in textfield",
         "blocks.setFieldText.params": [
-            "Widget name:",
-            "Text:"
+            "Назва віджету:",
+            "Текст:"
         ],
         "blocks.setFieldFocus": "Set focus on textfield",
         "blocks.setFieldFocus.params": [

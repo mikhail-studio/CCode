@@ -47,7 +47,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1231
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1232
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
@@ -410,12 +410,9 @@ display.newImage2, display.newImage = display.newImage, function(link, ...)
 end
 
 LOCAL = require 'Data.local'
-LANGS = {'en', 'ru', 'pt', 'pl', 'custom'}
-LANG.custom = {}
-LANG.ru = {}
-LANG.en = {}
-LANG.pt = {}
-LANG.pl = {}
+LANGS = {'en', 'ru', 'pt', 'pl', 'ua', 'cn', 'custom'}
+LANG.custom = {} LANG.ru = {} LANG.en = {} LANG.pt = {}
+LANG.pl = {} LANG.ua = {} LANG.cn = {}
 
 for i = 1, #LANGS do
     local langData = JSON.decode(READ_FILE(system.pathForFile('Strings/' .. LANGS[i] .. '.json')))
@@ -457,8 +454,9 @@ GET_GLOBAL_TABLE = function()
         unpack = unpack, print5 = require, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
         graphics = graphics, system = system, rawequal = rawequal,  getmetatable = getmetatable, WRITE_FILE = WRITE_FILE,
         timer = timer, BOTTOM_HEIGHT = BOTTOM_HEIGHT, newproxy = newproxy, metatable = metatable, NOISE = NOISE,
-        al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, math = math, DOC_DIR = DOC_DIR,
+        al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, DOC_DIR = DOC_DIR,
         LEFT_HEIGHT = LEFT_HEIGHT, cloneArray = cloneArray, DISPLAY_WIDTH = DISPLAY_WIDTH, type = type,
-        audio = audio, pairs = pairs, select = select, rawget = rawget, Runtime = Runtime, error = error
+        audio = audio, pairs = pairs, select = select, rawget = rawget, Runtime = Runtime, error = error,
+        fun = G_fun, math = G_math, other = G_other, device = G_device, prop = G_prop
     }
 end

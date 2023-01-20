@@ -12,8 +12,8 @@ M['setScale'] = function(params)
     local nameObject = CALC(params[1])
     local scale = '((' .. CALC(params[2]) .. ') / 100)'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. nameObject .. '].xScale = ' .. scale
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. nameObject .. '].yScale = ' .. scale .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. nameObject .. ' GAME.group.objects[name].xScale = ' .. scale
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].yScale = ' .. scale .. ' end)'
 end
 
 M['setScaleX'] = function(params)
@@ -35,7 +35,7 @@ M['newSeqAnimation'] = function(params)
     local startFrame, countFrame = CALC(params[3], '1'), CALC(params[4], '1')
     local countRepeat, time = CALC(params[5], '0'), '(' .. CALC(params[6], '0') .. ') * 1000'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.animations[' .. name .. '] = {name = ' .. name .. ','
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.animations[name] = {name = name,'
     GAME.lua = GAME.lua .. ' time = ' .. time .. ', loopDirection = ' .. direction .. ', start = ' .. startFrame .. ','
     GAME.lua = GAME.lua .. ' count = ' .. countFrame .. ', loopCount = ' .. countRepeat .. '} end)'
 end
@@ -44,17 +44,17 @@ M['newParAnimation'] = function(params)
     local tableFrames, name, direction = CALC(params[1], '{1}'), CALC(params[2]), CALC(params[3], '\'forward\'')
     local countRepeat, time = CALC(params[4], '0'), '(' .. CALC(params[5], '0') .. ') * 1000'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.animations[' .. name .. '] ='
-    GAME.lua = GAME.lua .. ' {name = ' .. name .. ', time = ' .. time .. ', frames = ' .. tableFrames .. ','
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.animations[name] ='
+    GAME.lua = GAME.lua .. ' {name = name, time = ' .. time .. ', frames = ' .. tableFrames .. ','
     GAME.lua = GAME.lua .. ' loopDirection = ' .. direction .. ', loopCount = ' .. countRepeat .. '} end)'
 end
 
 M['playAnimation'] = function(params)
     local nameObject, nameAnimation = CALC(params[1]), CALC(params[2], 'nil')
 
-    GAME.lua = GAME.lua .. ' pcall(function() local nameAnimation = ' .. nameAnimation .. ' if nameAnimation then'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. nameObject .. ']:setSequence(nameAnimation) end'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. nameObject .. ']:play() end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local nameAnimation, name = ' .. nameAnimation .. ', ' .. nameObject
+    GAME.lua = GAME.lua .. ' if nameAnimation then GAME.group.objects[name]:setSequence(nameAnimation) end'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]:play() end)'
 end
 
 M['newMask'] = function(params)
@@ -85,8 +85,8 @@ M['setMaskScale'] = function(params)
     local nameObject = CALC(params[1])
     local scale = '((' .. CALC(params[2]) .. ') / 100)'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. nameObject .. '].maskScaleX = ' .. scale
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. nameObject .. '].maskScaleY = ' .. scale .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name, scale = ' .. nameObject .. ', ' .. scale
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].maskScaleX = scale GAME.group.objects[name].maskScaleY = scale end)'
 end
 
 M['setMaskScaleX'] = function(params)
@@ -108,8 +108,8 @@ M['setMaskPos'] = function(params)
     local posX = '(' .. CALC(params[2]) .. ')'
     local posY = '-(' .. CALC(params[3]) .. ')'
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. '].maskX = ' .. posX
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].maskY = ' .. posY .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.objects[name].maskX = ' .. posX
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].maskY = ' .. posY .. ' end)'
 end
 
 M['pauseAnimation'] = function(params)

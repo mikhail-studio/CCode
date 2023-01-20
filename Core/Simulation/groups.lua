@@ -5,16 +5,16 @@ if 'Группы' then
     M['newGroup'] = function(params)
         local name = CALC(params[1])
 
-        GAME.lua = GAME.lua .. ' pcall(function() pcall(function() GAME.group.groups[' .. name .. ']:removeSelf() end)'
-        GAME.lua = GAME.lua .. ' GAME.group.groups[' .. name .. '] = display.newGroup() GAME.group.groups[' .. name .. ']._tag = \'TAG\''
-        GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.groups[' .. name .. ']) end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() GAME.group.groups[name]:removeSelf() end)'
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name] = display.newGroup() GAME.group.groups[name]._tag = \'TAG\''
+        GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.groups[name]) end)'
     end
 
     M['removeGroup'] = function(params)
         local name = CALC(params[1])
 
-        GAME.lua = GAME.lua .. ' pcall(function() pcall(function() GAME.group.groups[' .. name .. ']:removeSelf() end)'
-        GAME.lua = GAME.lua .. ' GAME.group.groups[' .. name .. '] = nil end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() GAME.group.groups[name]:removeSelf() end)'
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name] = nil end)'
     end
 
     M['showGroup'] = function(params)
@@ -75,8 +75,8 @@ if 'Группы' then
         local posX = CALC(params[2])
         local posY = '0 - (' .. CALC(params[3]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. name .. '].x = ' .. posX
-        GAME.lua = GAME.lua .. ' GAME.group.groups[' .. name .. '].y = ' .. posY .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.groups[name].x = ' .. posX
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name].y = ' .. posY .. ' end)'
     end
 
     M['setGroupSize'] = function(params)
@@ -84,9 +84,9 @@ if 'Группы' then
         local width = CALC(params[2])
         local height = CALC(params[3])
 
-        GAME.lua = GAME.lua .. ' pcall(function() local w, h = ' .. width .. ', ' .. height
-        GAME.lua = GAME.lua .. ' GAME.group.groups[' .. name .. '].height = h == 0 and GAME.group.groups[' .. name .. '].height or h'
-        GAME.lua = GAME.lua .. ' GAME.group.groups[' .. name .. '].width = w == 0 and GAME.group.groups[' .. name .. '].width or w end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local w, h, name = ' .. width .. ', ' .. height .. ', ' .. name
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name].height = h == 0 and GAME.group.groups[name].height or h'
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name].width = w == 0 and GAME.group.groups[name].width or w end)'
     end
 
     M['setGroupRotation'] = function(params)
@@ -101,48 +101,48 @@ if 'Группы' then
         local name = CALC(params[1])
         local posX = '(' .. CALC(params[2]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. name .. '].x ='
-        GAME.lua = GAME.lua .. ' GAME.group.groups[' .. name .. '].x + ' .. posX .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.groups[name].x ='
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name].x + ' .. posX .. ' end)'
     end
 
     M['updGroupPosY'] = function(params)
         local name = CALC(params[1])
         local posY = '(' .. CALC(params[2]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. name .. '].y ='
-        GAME.lua = GAME.lua .. ' GAME.group.groups[' .. name .. '].y - ' .. posY .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.groups[name].y ='
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name].y - ' .. posY .. ' end)'
     end
 
     M['updGroupWidth'] = function(params)
         local name = CALC(params[1])
         local width = '(' .. CALC(params[2]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. name .. '].width ='
-        GAME.lua = GAME.lua .. ' GAME.group.groups[' .. name .. '].width + ' .. width .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.groups[name].width ='
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name].width + ' .. width .. ' end)'
     end
 
     M['updGroupHeight'] = function(params)
         local name = CALC(params[1])
         local height = '(' .. CALC(params[2]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. name .. '].height ='
-        GAME.lua = GAME.lua .. ' GAME.group.groups[' .. name .. '].height + ' .. height .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.groups[name].height ='
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name].height + ' .. height .. ' end)'
     end
 
     M['updGroupRotation'] = function(params)
         local name = CALC(params[1])
         local rotation = '(' .. CALC(params[2]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. name .. '].rotation ='
-        GAME.lua = GAME.lua .. ' GAME.group.groups[' .. name .. '].rotation + ' .. rotation .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.groups[name].rotation ='
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name].rotation + ' .. rotation .. ' end)'
     end
 
     M['updGroupAlpha'] = function(params)
         local name = CALC(params[1])
         local alpha = '((' .. CALC(params[2]) .. ') / 100)'
 
-        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. name .. '].alpha ='
-        GAME.lua = GAME.lua .. ' GAME.group.groups[' .. name .. '].alpha + ' .. alpha .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.groups[name].alpha ='
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name].alpha + ' .. alpha .. ' end)'
     end
 end
 

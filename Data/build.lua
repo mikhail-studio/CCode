@@ -510,9 +510,10 @@ return ' ' .. UTF8.trimFull([===[
                 unpack = unpack, print5 = require, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
                 graphics = graphics, system = system, rawequal = rawequal,  getmetatable = getmetatable, WRITE_FILE = WRITE_FILE,
                 timer = timer, BOTTOM_HEIGHT = BOTTOM_HEIGHT, newproxy = newproxy, metatable = metatable, NOISE = NOISE,
-                al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, math = math, DOC_DIR = DOC_DIR,
+                al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, DOC_DIR = DOC_DIR,
                 LEFT_HEIGHT = LEFT_HEIGHT, cloneArray = cloneArray, DISPLAY_WIDTH = DISPLAY_WIDTH, type = type,
-                audio = audio, pairs = pairs, select = select, rawget = rawget, Runtime = Runtime, error = error
+                audio = audio, pairs = pairs, select = select, rawget = rawget, Runtime = Runtime, error = error,
+                fun = G_fun, math = G_math, other = G_other, device = G_device, prop = G_prop
             }
         end
     end getGlobal()

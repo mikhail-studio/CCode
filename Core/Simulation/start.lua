@@ -51,7 +51,7 @@ local function getStartLua(linkBuild)
     local cod16 = ' #GAME.group.suspends do GAME.group.suspends[i]() end elseif e.type == \'applicationResume\' then for i = 1,'
     local cod17 = ' #GAME.group.resumes do GAME.group.resumes[i]() end end end Runtime:addEventListener(\'system\', GAME.group.const.system)'
     local cod18 = ' GAME.group.textures = {} GAME.group.accelerometers = {} GAME.hash = CRYPTO.digest(CRYPTO.md5, math.random(1, 999999999))'
-    local cod19 = ' local hash = GAME.hash'
+    local cod19 = ' local hash = GAME.hash GAME.group.networks = {}'
 
     if linkBuild then
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. require 'Data.build'
@@ -68,8 +68,9 @@ M.remove = function()
     display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll() transition.cancelAll()
     if LOCAL.back == 'System' then native.setProperty('androidSystemUiVisibility', 'default')
     else native.setProperty('androidSystemUiVisibility', 'immersiveSticky') end
-    pcall(function() for _, v in ipairs(M.group.ts) do timer.cancel(v) end end)
-    pcall(function() for _, v in pairs(M.group.timers) do timer.cancel(v) end end)
+    pcall(function() for _, v in ipairs(M.group.networks) do pcall(function() network.cancel(v) end) end end)
+    pcall(function() for _, v in pairs(M.group.timers) do pcall(function() timer.cancel(v) end) end end)
+    pcall(function() for _, v in ipairs(M.group.ts) do pcall(function() timer.cancel(v) end) end end)
     pcall(function() for _, v in pairs(M.group.widgets) do timer.new(10, 1, function()
     pcall(function() v:removeSelf() v = nil end) end) end end) pcall(function() for _, v in ipairs(M.group.accelerometers) do
     pcall(function() Runtime:removeEventListener('accelerometer', v) end) end end)

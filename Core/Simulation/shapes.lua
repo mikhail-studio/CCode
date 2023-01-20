@@ -5,38 +5,39 @@ M['setSprite'] = function(params)
     local name = CALC(params[1])
     local link = CALC(params[2])
 
-    GAME.lua = GAME.lua .. ' pcall(function() local link, filter = other.getImage(' .. link .. ')'
+    GAME.lua = GAME.lua .. ' pcall(function() local _link, name = ' .. link .. ', ' .. name
+    GAME.lua = GAME.lua .. ' local link, filter = other.getImage(_link)'
     GAME.lua = GAME.lua .. ' display.setDefault(\'magTextureFilter\', filter ~= \'linear\' and \'nearest\' or \'linear\')'
     GAME.lua = GAME.lua .. ' display.setDefault(\'minTextureFilter\', filter ~= \'linear\' and \'nearest\' or \'linear\')'
-    GAME.lua = GAME.lua .. ' local image = display.newImage(tostring(link), system.DocumentsDirectory)'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._width = image.width'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._height = image.height'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = tostring(link)'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._name = ' .. link
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].fill = {type = \'image\', filename = tostring(link),'
-    GAME.lua = GAME.lua .. ' baseDir = system.DocumentsDirectory} image:removeSelf() image = nil end)'
+    GAME.lua = GAME.lua .. ' local image = {} pcall(function() image = display.newImage(tostring(link), system.DocumentsDirectory) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name]._width = image.width or 0 end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name]._height = image.height or 0 end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name]._link = tostring(link) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name]._name = _link end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name].fill = {type = \'image\', filename = tostring(link),'
+    GAME.lua = GAME.lua .. ' baseDir = system.DocumentsDirectory} end) image:removeSelf() image = nil end)'
 end
 
 M['newRect'] = function(params)
-    local name, colors = CALC(params[1]), CALC(params[2], '{255}')
+    local name, colors = CALC(params[1]), CALC(params[2], '{255, 255, 255}')
     local width, height = CALC(params[3]), CALC(params[4])
     local posX = '(SET_X(' .. CALC(params[5]) .. '))'
     local posY = '(SET_Y(' .. CALC(params[6]) .. '))'
 
-    GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. colors
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end)'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name ..  '] = display.newRect(GAME.group, ' .. posX .. ', ' .. posY .. ', '
+    GAME.lua = GAME.lua .. ' pcall(function() local colors, name = ' .. colors .. ', ' .. name
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name]:removeSelf() end)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name] = display.newRect(GAME.group, ' .. posX .. ', ' .. posY .. ', '
     GAME.lua = GAME.lua .. width .. ', ' .. height .. ') pcall(function()'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._width = GAME.group.objects[' .. name .. '].width'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._height = GAME.group.objects[' .. name .. '].height'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = 1 GAME.group.objects[' .. name .. ']._bounce = 0'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._friction = 0 GAME.group.objects[' .. name .. ']._gravity = 1'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._data = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._width = GAME.group.objects[name].width'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._height = GAME.group.objects[name].height'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._density = 1 GAME.group.objects[name]._bounce = 0'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._friction = 0 GAME.group.objects[name]._gravity = 1'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._body = \'\' GAME.group.objects[name]._hitbox = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = \'\' GAME.group.objects[name]._name = \'SHAPE\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._touch = false GAME.group.objects[name]._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._size, GAME.group.objects[name].name = 1, name end)'
 end
 
 M['newRoundedRect'] = function(params)
@@ -45,18 +46,18 @@ M['newRoundedRect'] = function(params)
     local posX = '(SET_X(' .. CALC(params[5]) .. '))'
     local posY = '(SET_Y(' .. CALC(params[6]) .. '))'
 
-    GAME.lua = GAME.lua .. ' pcall(function() pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end)'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name ..  '] = display.newRoundedRect(GAME.group, ' .. posX .. ', ' .. posY .. ', '
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() GAME.group.objects[name]:removeSelf() end)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name] = display.newRoundedRect(GAME.group, ' .. posX .. ', ' .. posY .. ', '
     GAME.lua = GAME.lua .. width .. ', ' .. height .. ', ' .. radius .. ')'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._width = GAME.group.objects[' .. name .. '].width'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._height = GAME.group.objects[' .. name .. '].height'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = 1 GAME.group.objects[' .. name .. ']._bounce = 0'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._friction = 0 GAME.group.objects[' .. name .. ']._gravity = 1'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._data = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._width = GAME.group.objects[name].width'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._height = GAME.group.objects[name].height'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._density = 1 GAME.group.objects[name]._bounce = 0'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._friction = 0 GAME.group.objects[name]._gravity = 1'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._body = \'\' GAME.group.objects[name]._hitbox = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = \'\' GAME.group.objects[name]._name = \'SHAPE\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._touch = false GAME.group.objects[name]._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._size, GAME.group.objects[name].name = 1, name end)'
 end
 
 M['newCircle'] = function(params)
@@ -64,16 +65,16 @@ M['newCircle'] = function(params)
     local posX = '(SET_X(' .. CALC(params[3]) .. '))'
     local posY = '(SET_Y(' .. CALC(params[4]) .. '))'
 
-    GAME.lua = GAME.lua .. ' pcall(function() pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end) GAME.group.objects['
-    GAME.lua = GAME.lua .. name ..  '] = display.newCircle(GAME.group, ' .. posX .. ', ' .. posY .. ', ' .. radius .. ')'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._radius = GAME.group.objects[' .. name .. '].path.radius'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = 1 GAME.group.objects[' .. name .. ']._bounce = 0'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._friction = 0 GAME.group.objects[' .. name .. ']._gravity = 1'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._data = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() GAME.group.objects[name]:removeSelf() end)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name] = display.newCircle(GAME.group, ' .. posX .. ', ' .. posY .. ', ' .. radius .. ')'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._radius = GAME.group.objects[name].path.radius'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._density = 1 GAME.group.objects[name]._bounce = 0'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._friction = 0 GAME.group.objects[name]._gravity = 1'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._body = \'\' GAME.group.objects[name]._hitbox = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = \'\' GAME.group.objects[name]._name = \'SHAPE\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._touch = false GAME.group.objects[name]._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._size, GAME.group.objects[name].name = 1, name end)'
 end
 
 M['newPolygon'] = function(params)
@@ -81,41 +82,41 @@ M['newPolygon'] = function(params)
     local posX = '(SET_X(' .. CALC(params[3]) .. '))'
     local posY = '(SET_Y(' .. CALC(params[4]) .. '))'
 
-    GAME.lua = GAME.lua .. ' pcall(function() local coords = ' .. coords .. ' for i = 1, #coords do if i % 2 == 0 then coords[i]'
-    GAME.lua = GAME.lua .. ' = -coords[i] end end pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end)'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name ..  '] = display.newPolygon(GAME.group, ' .. posX .. ', ' .. posY .. ', coords)'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._width = GAME.group.objects[' .. name .. '].width'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._height = GAME.group.objects[' .. name .. '].height'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = 1 GAME.group.objects[' .. name .. ']._bounce = 0'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._friction = 0 GAME.group.objects[' .. name .. ']._gravity = 1'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._data = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local coords, name = ' .. coords .. ', ' .. name .. ' for i = 1, #coords do if i % 2 == 0 then'
+    GAME.lua = GAME.lua .. ' coords[i] = -coords[i] end end pcall(function() GAME.group.objects[name]:removeSelf() end)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name] = display.newPolygon(GAME.group, ' .. posX .. ', ' .. posY .. ', coords)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._width = GAME.group.objects[name].width'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._height = GAME.group.objects[name].height'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._density = 1 GAME.group.objects[name]._bounce = 0'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._friction = 0 GAME.group.objects[name]._gravity = 1'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._body = \'\' GAME.group.objects[name]._hitbox = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = \'\' GAME.group.objects[name]._name = \'SHAPE\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._touch = false GAME.group.objects[name]._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._size, GAME.group.objects[name].name = 1, name end)'
 end
 
 M['newLine'] = function(params)
-    local name, colors = CALC(params[1]), CALC(params[2], '{255}')
+    local name, colors = CALC(params[1]), CALC(params[2], '{255, 255, 255}')
     local posX1 = '(SET_X(' .. CALC(params[3], '0') .. '))'
     local posY1 = '(SET_Y(' .. CALC(params[4], '200') .. '))'
     local posX2 = '(SET_X(' .. CALC(params[5], '0') .. '))'
     local posY2 = '(SET_Y(' .. CALC(params[6], '-200') .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local x1, y1, x2, y2 = ' .. posX1 .. ', ' .. posY1 .. ', ' .. posX2 .. ', ' .. posY2
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. name .. ']:removeSelf() end) local colors = ' .. colors
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name ..  '] = display.newLine(GAME.group, x1, y1, x2, y2) pcall(function()'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']:setStrokeColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].strokeWidth = 5'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._width = GAME.group.objects[' .. name .. '].strokeWidth'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._height = GAME.group.objects[' .. name .. '].strokeWidth'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._density = 1 GAME.group.objects[' .. name .. ']._bounce = 0'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._friction = 0 GAME.group.objects[' .. name .. ']._gravity = 1'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._body = \'\' GAME.group.objects[' .. name .. ']._hitbox = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = \'\' GAME.group.objects[' .. name .. ']._name = \'SHAPE\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._touch = false GAME.group.objects[' .. name .. ']._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._data = {}'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._size, GAME.group.objects[' .. name .. '].name = 1, ' .. name .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.objects[name]:removeSelf() end) local colors = ' .. colors
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name] = display.newLine(GAME.group, x1, y1, x2, y2) pcall(function()'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]:setStrokeColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].strokeWidth = 5'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._width = GAME.group.objects[name].strokeWidth'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._height = GAME.group.objects[name].strokeWidth'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._density = 1 GAME.group.objects[name]._bounce = 0'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._friction = 0 GAME.group.objects[name]._gravity = 1'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._body = \'\' GAME.group.objects[name]._hitbox = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = \'\' GAME.group.objects[name]._name = \'SHAPE\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._touch = false GAME.group.objects[name]._tag = \'TAG\''
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._size, GAME.group.objects[name].name = 1, name end)'
 end
 
 M['appendLine'] = function(params)
@@ -126,7 +127,7 @@ end
 
 M['setColor'] = function(params)
     local name = CALC(params[1])
-    local colors = CALC(params[2], '{255}')
+    local colors = CALC(params[2], '{255, 255, 255}')
 
     GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. colors
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
@@ -167,25 +168,26 @@ M['newBitmap'] = function(params)
 end
 
 M['setPixel'] = function(params)
-    local name, colors, posX = CALC(params[1]), CALC(params[4], '{255}'), CALC(params[2])
-    local posY = 'GAME.group.bitmaps[' .. name .. '].height + 1 - ' .. CALC(params[3])
+    local name, colors, posX = CALC(params[1]), CALC(params[4], '{255, 255, 255}'), CALC(params[2])
+    local posY = 'GAME.group.bitmaps[name].height + 1 - ' .. CALC(params[3])
 
-    GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. colors .. ' GAME.group.bitmaps[' .. name .. ']:setPixel('
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' local colors = ' .. colors .. ' GAME.group.bitmaps[name]:setPixel('
     GAME.lua = GAME.lua .. posX .. ', ' .. posY .. ', colors[1]/255, colors[2]/255, colors[3]/255, 1) end)'
 end
 
 M['setPixelRGB'] = function(params)
     local name, posX = CALC(params[1]), CALC(params[2])
-    local posY = 'GAME.group.bitmaps[' .. name .. '].height + 1 - ' .. CALC(params[3])
+    local posY = 'GAME.group.bitmaps[name].height + 1 - ' .. CALC(params[3])
     local r, g, b = CALC(params[4], '255'), CALC(params[5], '255'), CALC(params[6], '255')
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.bitmaps[' .. name .. ']:setPixel('
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.bitmaps[name]:setPixel('
     GAME.lua = GAME.lua .. posX .. ', ' .. posY .. ', ' .. r .. '/255, ' .. g .. '/255, ' .. b .. '/255, 1) end)'
 end
 
 M['removePixel'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.bitmaps[' .. CALC(params[1]) .. ']:setPixel(' .. CALC(params[2]) .. ','
-    GAME.lua = GAME.lua .. ' GAME.group.bitmaps[' .. CALC(params[1]) .. '].height + 1 - ' .. CALC(params[3]) .. ', 0, 0, 0, 0) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1])
+    GAME.lua = GAME.lua .. ' GAME.group.bitmaps[name]:setPixel(' .. CALC(params[2]) .. ','
+    GAME.lua = GAME.lua .. ' GAME.group.bitmaps[name].height + 1 - ' .. CALC(params[3]) .. ', 0, 0, 0, 0) end)'
 end
 
 M['updBitmap'] = function(params)
@@ -196,15 +198,16 @@ M['setBitmapSprite'] = function(params)
     local name = CALC(params[1])
     local link = CALC(params[2])
 
-    GAME.lua = GAME.lua .. ' pcall(function() local image = display.newImage(GAME.group.bitmaps[' .. link .. '].filename,'
-    GAME.lua = GAME.lua .. ' GAME.group.bitmaps[' .. link .. '].baseDir)'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._width = image.width'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._height = image.height'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._link = GAME.group.bitmaps[' .. link .. '].filename'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. ']._name = ' .. link
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. name .. '].fill = {type = \'image\','
-    GAME.lua = GAME.lua .. ' filename = GAME.group.bitmaps[' .. link .. '].filename,'
-    GAME.lua = GAME.lua .. ' baseDir = GAME.group.bitmaps[' .. link .. '].baseDir} image:removeSelf() image = nil end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local _link, name = ' .. link .. ', ' .. name
+    GAME.lua = GAME.lua .. ' local image = display.newImage(GAME.group.bitmaps[_link].filename,'
+    GAME.lua = GAME.lua .. ' GAME.group.bitmaps[_link].baseDir)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._width = image.width'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._height = image.height'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = GAME.group.bitmaps[_link].filename'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._name = _link'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].fill = {type = \'image\','
+    GAME.lua = GAME.lua .. ' filename = GAME.group.bitmaps[_link].filename,'
+    GAME.lua = GAME.lua .. ' baseDir = GAME.group.bitmaps[_link].baseDir} image:removeSelf() image = nil end)'
 end
 
 M['getBitmapSprite'] = function(params)
@@ -218,7 +221,7 @@ end
 
 M['setGradientPaint'] = function(params)
     local name = CALC(params[1])
-    local colors1, colors2 = CALC(params[2], '{255}'), CALC(params[3], '{255}')
+    local colors1, colors2 = CALC(params[2], '{255, 255, 255}'), CALC(params[3], '{255, 255, 255}')
     local alpha1, alpha2 = CALC(params[4], '100'), CALC(params[5], '100')
 
     GAME.lua = GAME.lua .. ' pcall(function() local colors1, colors2 = ' .. colors1 .. ', ' .. colors2
@@ -232,12 +235,12 @@ M['setStrokeWidth'] = function(params)
 end
 
 M['updStrokeWidth'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].strokeWidth ='
-    GAME.lua = GAME.lua .. ' GAME.group.objects[' .. CALC(params[1]) .. '].strokeWidth + ' .. CALC(params[2]) .. ' end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1]) .. ' GAME.group.objects[name].strokeWidth ='
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].strokeWidth + ' .. CALC(params[2]) .. ' end)'
 end
 
 M['setStrokeColor'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. CALC(params[2], '{255}')
+    GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. CALC(params[2], '{255, 255, 255}')
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. CALC(params[1]) .. '].stroke = {colors[1]/255, colors[2]/255, colors[3]/255} end)'
 end
 

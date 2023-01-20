@@ -93,9 +93,20 @@ return {
                                     local script, isChange = GET_GAME_SCRIPT(link, i, data)
                                     for j = 1, #script.params do
                                         local name = script.params[j].name
+
                                         if UTF8.sub(name, 1, 6) == 'custom' then
                                             local index = UTF8.sub(name, 7, UTF8.len(name)) isChange = true
                                             script.params[j].name = 'custom' .. dataCustom[index]
+                                        end
+
+                                        for u = 1, #script.params[j].params do
+                                            for o = #script.params[j].params[u], 1, -1 do
+                                                if script.params[j].params[u][o][2] == 'fC' then
+                                                    local name = script.params[j].params[u][o][1]
+                                                    local index = UTF8.sub(name, 7, UTF8.len(name)) isChange = true
+                                                    script.params[j].params[u][o][1] = 'custom' .. dataCustom[index]
+                                                end
+                                            end
                                         end
                                     end if isChange then SET_GAME_SCRIPT(link, script, i, data) end
                                 end
