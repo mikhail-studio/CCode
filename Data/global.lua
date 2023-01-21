@@ -47,7 +47,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1232
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1233
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
@@ -245,7 +245,7 @@ end
 
 SET_Y = function(y, scrollName)
     return type(y) == 'number' and ((scrollName and GAME.group.widgets[scrollName]
-    and GAME.group.widgets[scrollName].wtype == 'scroll') and y or CENTER_Y - y) or 0
+    and GAME.group.widgets[scrollName].wtype == 'scroll') and 0 - y or CENTER_Y - y) or 0
 end
 
 GET_X = function(x, scrollName)

@@ -443,6 +443,18 @@ M.new = function(text, scroll, group, type, index, filter, link)
             group.blocks[index].icon = display.newImage('Sprites/icon' .. path .. '.png')
             group.blocks[index].container:insert(group.blocks[index].icon, true)
         end
+    elseif type == 'scripts' then
+        group.blocks[index].icon = display.newImage('Sprites/iconScript.png')
+        group.blocks[index].container:insert(group.blocks[index].icon, true)
+    elseif type == 'sounds' then
+        group.blocks[index].icon = display.newImage('Sprites/iconSound.png')
+        group.blocks[index].container:insert(group.blocks[index].icon, true)
+    elseif type == 'videos' then
+        group.blocks[index].icon = display.newImage('Sprites/iconVideo.png')
+        group.blocks[index].container:insert(group.blocks[index].icon, true)
+    elseif type == 'fonts' then
+        group.blocks[index].icon = display.newImage('Sprites/iconFont.png')
+        group.blocks[index].container:insert(group.blocks[index].icon, true)
     else
         group.blocks[index].icon = display.newRect(group.blocks[index].container.x, y, 94, 94)
             group.blocks[index].icon:setFillColor(0.15, 0.15, 0.17)

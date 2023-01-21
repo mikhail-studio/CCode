@@ -85,7 +85,7 @@ M['setTransitionSize'] = function(params)
     local width, height, easing = CALC(params[6], 'nil'), CALC(params[7], 'nil'), CALC(params[8], 'nil')
     local onComplete, onPause = CALC(params[9], 'a', true), CALC(params[10], 'a', true)
     local onResume, onCancel = CALC(params[11], 'a', true), CALC(params[12], 'a', true)
-    local onRepeat = CALC(params[13], 'a', true)
+    local onRepeat, size = CALC(params[13], 'a', true), 'nil'
 
     local easing = easing == '(select[\'loop\']())' and 'continuousLoop' or (UTF8.match(easing, '%(select%[\'(.+)\'%]') or 'linear')
     local direction = direction == '(select[\'bounce\']())' and 'loop' or 'to'

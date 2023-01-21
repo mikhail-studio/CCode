@@ -7,6 +7,7 @@ M['requestApi'] = function(params)
     GAME.lua = GAME.lua .. ' local p1 = ' .. CALC(params[1]) .. ' p1 = UTF8.gsub(p1, \'setFocus\', \'display.getCurrentStage():setFocus\')'
     GAME.lua = GAME.lua .. ' p1 = UTF8.gsub(p1, \'setfenv\', \'print\') p1 = UTF8.gsub(p1, \'loadstring\', \'print\')'
     GAME.lua = GAME.lua .. ' p1 = UTF8.gsub(p1, \'currentStage\', \'fps\') p1 = UTF8.gsub(p1, \'getCurrentStage\', \'getDefault\')'
+    GAME.lua = GAME.lua .. ' p1 = UTF8.gsub(p1, \'io\', \'print\')'
     GAME.lua = GAME.lua .. ' G_fun, G_device, G_other, G_math, G_prop = fun, device, other, math, prop'
     GAME.lua = GAME.lua .. ' return loadstring(\'local G = {} G.args = JSON.decode(\\\'\' .. args .. \'\\\') for key, value in'
     GAME.lua = GAME.lua .. ' pairs(GET_GLOBAL_TABLE()) do G[key] = value end setfenv(1, G) require = function(path)'

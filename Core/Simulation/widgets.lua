@@ -223,8 +223,12 @@ M['insertToScroll'] = function(params)
 
     GAME.lua = GAME.lua .. ' pcall(function() local _scroll = ' .. scroll
     GAME.lua = GAME.lua .. ' local obj, scroll = ' .. type .. '[' .. object .. '], GAME.group.widgets[_scroll]'
-    GAME.lua = GAME.lua .. ' obj.x, obj.y = GET_X(obj.x) + scroll.width / 2, GET_Y(obj.y)'
+    GAME.lua = GAME.lua .. ' obj.x, obj.y = GET_X(obj.x) + scroll.width / 2, 0 - GET_Y(obj.y)'
     GAME.lua = GAME.lua .. ' scroll:insert(obj) obj._scroll = _scroll end)'
+end
+
+M['takeFocusScroll'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. CALC(params[1]) .. ']:takeFocus(' .. CALC(params[2]) .. ') end)'
 end
 
 M['setFieldSecure'] = function(params)

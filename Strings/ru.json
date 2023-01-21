@@ -723,7 +723,9 @@
             "blocks.setSwitchState": "Установить состояние переключателя",
             "blocks.setSwitchState.params": ["Имя виджета:", "Состояние:"],
             "blocks.insertToScroll": "Добавить в скролл",
-            "blocks.insertToScroll.params": ["Имя виджета:", "Имя:", "Тип:"]
+            "blocks.insertToScroll.params": ["Имя виджета:", "Имя:", "Тип:"],
+            "blocks.takeFocusScroll": "Установить фокус на скролл",
+            "blocks.takeFocusScroll.params": ["Имя виджета:", "Таблица события:"]
     },
 
     "media": {

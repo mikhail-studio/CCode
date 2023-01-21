@@ -156,6 +156,7 @@ local function newBlockListener(event)
                                 end if isChange then SET_GAME_SCRIPT(CURRENT_LINK, script, i, data) end
                             end
 
+                            INFO.listName[name] = nil
                             BLOCKS.group:removeSelf() BLOCKS.group = nil
                             BLOCKS.create() BLOCKS.custom = nil
                             BLOCKS.group.isVisible = false

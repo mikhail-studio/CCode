@@ -69,19 +69,21 @@ end
 
 M['setPos'] = function(params)
     local name = CALC(params[1])
-    local posX = '(SET_X(' .. CALC(params[2]) .. '))'
-    local posY = '(SET_Y(' .. CALC(params[3]) .. '))'
+    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.objects[name]._scroll))'
+    local posY = '(SET_Y(' .. CALC(params[3]) .. ', GAME.group.objects[name]._scroll))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.objects[name].x = ' .. posX
     GAME.lua = GAME.lua .. ' GAME.group.objects[name].y = ' .. posY .. ' end)'
 end
 
 M['setPosX'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].x = SET_X(' .. CALC(params[2]) .. ') end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1]) .. ' GAME.group.objects[name].x ='
+    GAME.lua = GAME.lua .. ' SET_X(' .. CALC(params[2]) .. ', GAME.group.objects[name]._scroll) end)'
 end
 
 M['setPosY'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].y = SET_Y(' .. CALC(params[2]) .. ') end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1]) .. ' GAME.group.objects[name].y ='
+    GAME.lua = GAME.lua .. ' SET_Y(' .. CALC(params[2]) .. ', GAME.group.objects[name]._scroll) end)'
 end
 
 M['setWidth'] = function(params)
@@ -164,8 +166,8 @@ M['updSize'] = function(params)
     local name = CALC(params[1])
     local size = '((' .. CALC(params[2]) .. ') / 100 + GAME.group.objects[name]._size)'
 
-    GAME.lua = GAME.lua .. ' pcall(function() local name, size = ' .. name .. ', ' .. size .. ' if GAME.group.objects[name]._radius then'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name].path.radius = GAME.group.objects[name]._radius * size'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' local size = ' .. size .. ' if GAME.group.objects[name]._radius'
+    GAME.lua = GAME.lua .. ' then GAME.group.objects[name].path.radius = GAME.group.objects[name]._radius * size'
     GAME.lua = GAME.lua .. ' else GAME.group.objects[name].width = GAME.group.objects[name]._width * size'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name].height = GAME.group.objects[name]._height * size'
     GAME.lua = GAME.lua .. ' end GAME.group.objects[name]._size = size end)'

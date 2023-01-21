@@ -104,7 +104,7 @@ M['newLine'] = function(params)
     local posY2 = '(SET_Y(' .. CALC(params[6], '-200') .. '))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local x1, y1, x2, y2 = ' .. posX1 .. ', ' .. posY1 .. ', ' .. posX2 .. ', ' .. posY2
-    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.objects[name]:removeSelf() end) local colors = ' .. colors
+    GAME.lua = GAME.lua .. ' local name = ' .. name .. ' pcall(function() GAME.group.objects[name]:removeSelf() end) local colors = ' .. colors
     GAME.lua = GAME.lua .. ' GAME.group.objects[name] = display.newLine(GAME.group, x1, y1, x2, y2) pcall(function()'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]:setStrokeColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name].strokeWidth = 5'

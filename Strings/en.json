@@ -723,7 +723,9 @@
             "blocks.setSwitchState": "Set switch state",
             "blocks.setSwitchState.params": ["Widget name:", "State:"],
             "blocks.insertToScroll": "Insert to scroll",
-            "blocks.insertToScroll.params": ["Widget name:", "Name:", "Type:"]
+            "blocks.insertToScroll.params": ["Widget name:", "Name:", "Type:"],
+            "blocks.takeFocusScroll": "Set focus on scroll",
+            "blocks.takeFocusScroll.params": ["Widget name:", "Event table:"]
     },
 
     "media": {

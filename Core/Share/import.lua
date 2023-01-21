@@ -55,9 +55,10 @@ return {
                                                     if _block[4] < block[4] then
                                                         custom[_index] = COPY_TABLE(block)
                                                         custom[_index][4] = os.time()
-                                                        dataCustom[index] = _index
-                                                        changeDataCustom[_index] = false
-                                                    end change_custom = true break
+                                                    end 
+
+                                                    dataCustom[index] = _index
+                                                    change_custom = true break
                                                 end
                                             end
                                         end

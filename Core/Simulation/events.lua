@@ -39,7 +39,7 @@ end
 M['onTouchBegan'] = function(nested, params)
     GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if p.phase == \'began\' then'
     GAME.lua = GAME.lua .. ' local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
-    GAME.lua = GAME.lua .. ' = {name = p.target.name, x = GET_X(p.x, p.target._scroll), y = GET_Y(p.y, p.target._scroll),'
+    GAME.lua = GAME.lua .. ' = {event = p, name = p.target.name, x = GET_X(p.x, p.target._scroll), y = GET_Y(p.y, p.target._scroll),'
     GAME.lua = GAME.lua .. ' xStart = GET_X(p.xStart, p.target._scroll), yStart = GET_Y(p.yStart, p.target._scroll),'
     GAME.lua = GAME.lua .. ' id = p.id, xDelta = GET_X(p.xDelta, p.target._scroll), yDelta = GET_Y(p.yDelta, p.target._scroll)}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
@@ -48,7 +48,7 @@ end
 M['onTouchEnded'] = function(nested, params)
     GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if p.phase == \'ended\' or p.phase =='
     GAME.lua = GAME.lua .. ' \'cancelled\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
-    GAME.lua = GAME.lua .. ' = {name = p.target.name, x = GET_X(p.x, p.target._scroll), y = GET_Y(p.y, p.target._scroll),'
+    GAME.lua = GAME.lua .. ' = {event = p, name = p.target.name, x = GET_X(p.x, p.target._scroll), y = GET_Y(p.y, p.target._scroll),'
     GAME.lua = GAME.lua .. ' xStart = GET_X(p.xStart, p.target._scroll), yStart = GET_Y(p.yStart, p.target._scroll),'
     GAME.lua = GAME.lua .. ' id = p.id, xDelta = GET_X(p.xDelta, p.target._scroll), yDelta = GET_Y(p.yDelta, p.target._scroll)}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
@@ -57,7 +57,7 @@ end
 M['onTouchMoved'] = function(nested, params)
     GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if p.phase == \'moved\' then'
     GAME.lua = GAME.lua .. ' local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
-    GAME.lua = GAME.lua .. ' = {name = p.target.name, x = GET_X(p.x, p.target._scroll), y = GET_Y(p.y, p.target._scroll),'
+    GAME.lua = GAME.lua .. ' = {event = p, name = p.target.name, x = GET_X(p.x, p.target._scroll), y = GET_Y(p.y, p.target._scroll),'
     GAME.lua = GAME.lua .. ' xStart = GET_X(p.xStart, p.target._scroll), yStart = GET_Y(p.yStart, p.target._scroll),'
     GAME.lua = GAME.lua .. ' id = p.id, xDelta = GET_X(p.xDelta, p.target._scroll), yDelta = GET_Y(p.yDelta, p.target._scroll)}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
@@ -66,7 +66,7 @@ end
 M['onTouchDisplayBegan'] = function(nested, params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.displays, function(e) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' if e.phase == \'began\' then local varsE, tablesE = {}, {} ' .. CALC(params[1], 'a', true)
-    GAME.lua = GAME.lua .. ' = {name = \'_ccode_display\', x = GET_X(e.x), y = GET_Y(e.y), xStart = GET_X(e.xStart),'
+    GAME.lua = GAME.lua .. ' = {event = e, name = \'_ccode_display\', x = GET_X(e.x), y = GET_Y(e.y), xStart = GET_X(e.xStart),'
     GAME.lua = GAME.lua .. ' yStart = GET_Y(e.yStart), id = e.id, xDelta = GET_X(e.xDelta), yDelta = GET_Y(e.yDelta)}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end) end)'
 end
@@ -74,7 +74,7 @@ end
 M['onTouchDisplayEnded'] = function(nested, params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.displays, function(e) if GAME.hash == hash then if e.phase == \'ended\''
     GAME.lua = GAME.lua .. ' or e.phase == \'cancelled\' then local varsE, tablesE = {}, {} ' .. CALC(params[1], 'a', true)
-    GAME.lua = GAME.lua .. ' = {name = \'_ccode_display\', x = GET_X(e.x), y = GET_Y(e.y), xStart = GET_X(e.xStart),'
+    GAME.lua = GAME.lua .. ' = {event = e, name = \'_ccode_display\', x = GET_X(e.x), y = GET_Y(e.y), xStart = GET_X(e.xStart),'
     GAME.lua = GAME.lua .. ' yStart = GET_Y(e.yStart), id = e.id, xDelta = GET_X(e.xDelta), yDelta = GET_Y(e.yDelta)}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end) end)'
 end
@@ -82,7 +82,7 @@ end
 M['onTouchDisplayMoved'] = function(nested, params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.displays, function(e) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' if e.phase == \'moved\' then local varsE, tablesE = {}, {} ' .. CALC(params[1], 'a', true)
-    GAME.lua = GAME.lua .. ' = {name = \'_ccode_display\', x = GET_X(e.x), y = GET_Y(e.y), xStart = GET_X(e.xStart),'
+    GAME.lua = GAME.lua .. ' = {event = e, name = \'_ccode_display\', x = GET_X(e.x), y = GET_Y(e.y), xStart = GET_X(e.xStart),'
     GAME.lua = GAME.lua .. ' yStart = GET_Y(e.yStart), id = e.id, xDelta = GET_X(e.xDelta), yDelta = GET_Y(e.yDelta)}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end) end)'
 end

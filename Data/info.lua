@@ -318,7 +318,8 @@ M.listBlock = {
         'newScrollView',
             'newSwitch',
             'setSwitchState',
-            'insertToScroll'
+            'insertToScroll',
+            'takeFocusScroll'
     },
 
     ['media'] = {
@@ -699,6 +700,7 @@ M.listName = {
             ['newSwitch'] = {'widgets', 'value', 'switchType', 'switchState', 'value', 'value', 'value', 'value', 'fun', 'fun'},
             ['setSwitchState'] = {'widgets', 'value', 'switchState'},
             ['insertToScroll'] = {'widgets', 'value', 'value', 'scrollType'},
+            ['takeFocusScroll'] = {'widgets', 'value', 'value'},
 
     -- media
     ['newVideo'] = {'media', 'value', 'value', 'fun', 'value', 'value', 'value', 'value'},
