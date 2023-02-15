@@ -4,9 +4,9 @@
         "lang.en": "English",
         "lang.pt": "Brasileiro",
         "lang.pl": "Polski",
-        "lang.ua": "Український",
+        "lang.ua": "Українська",
         "lang.cn": "中文",
-        "lang.custom": "Swoje",
+        "lang.custom": "Niestandardowy",
         "button.yes": "Tak",
         "button.no": "Nie",
         "button.okay": "Ok",
@@ -131,10 +131,10 @@
         "blocks.select.ruleTrue": "Dozwolone",
         "blocks.select.ruleFalse": "Zabronione",
         "blocks.select.switchRadio": "Radio",
-        "blocks.select.switchCheckbox": "Checkbox",
-        "blocks.select.switchToggle": "Toggle",
-        "blocks.select.switchOn": "On",
-        "blocks.select.switchOff": "Off",
+        "blocks.select.switchCheckbox": "Pola wyboru",
+        "blocks.select.switchToggle": "Przełącz",
+        "blocks.select.switchOn": "Wł.",
+        "blocks.select.switchOff": "Wył.",
         "blocks.select.obj": "Obiekt",
         "blocks.select.text": "Tekst",
         "blocks.select.group": "Grupa",
@@ -216,38 +216,38 @@
             "Nazwa funkcji:",
             "Odpowiedź:"
         ],
-        "blocks.onBackPress": "When you click on 'Back'",
-        "blocks.onSuspend": "Application was minimized from screen",
-        "blocks.onResume": "Application was returned to screen",
-        "blocks.onLocalCollisionBegan": "Beginning local collision",
+        "blocks.onBackPress": "Kiedy klikniesz 'Wstecz'",
+        "blocks.onSuspend": "Aplikacja została zminimalizowana z ekranu",
+        "blocks.onResume": "Aplikacja została zwrócona do ekranu",
+        "blocks.onLocalCollisionBegan": "Rozpoczęcie lokalnej kolizji",
         "blocks.onLocalCollisionBegan.params": [
-            "Function name:",
-            "Table name:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
-        "blocks.onLocalCollisionEnded": "End local collision",
+        "blocks.onLocalCollisionEnded": "Zakończ lokalną kolizję",
         "blocks.onLocalCollisionEnded.params": [
-            "Function name:",
-            "Table name:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
-        "blocks.onLocalPreCollision": "Before local collision",
+        "blocks.onLocalPreCollision": "Przed lokalną kolizją",
         "blocks.onLocalPreCollision.params": [
-            "Function name:",
-            "Table name:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
-        "blocks.onLocalPostCollision": "After local collision",
+        "blocks.onLocalPostCollision": "Po lokalnej kolizji",
         "blocks.onLocalPostCollision.params": [
-            "Function name:",
-            "Table name:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
-        "blocks.onGlobalCollisionBegan": "Beginning global collision",
+        "blocks.onGlobalCollisionBegan": "Rozpoczęcie globalnej kolizji",
         "blocks.onGlobalCollisionBegan.params": [
-            "Function name:",
-            "Table name:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
-        "blocks.onGlobalCollisionEnded": "End global collision",
+        "blocks.onGlobalCollisionEnded": "Zakończ globalną kolizję",
         "blocks.onGlobalCollisionEnded.params": [
-            "Function name:",
-            "Table name:"
+            "Nazwa funkcji:",
+            "Nazwa tabeli:"
         ],
         "blocks.onGlobalPreCollision": "Przed globalną kolizją",
         "blocks.onGlobalPreCollision.params": [
@@ -264,10 +264,10 @@
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onSwitchCallback": "Event in switch has started",
+        "blocks.onSwitchCallback": "Wydarzenie w przełączniku zostało rozpoczęte",
         "blocks.onSwitchCallback.params": [
-            "Function name:",
-            "Variable name:"
+            "Nazwa funkcji:",
+            "Nazwa zmiennej:"
         ],
         "blocks.onSliderMoved": "Gdy suwak się rusza",
         "blocks.onSliderMoved.params": [
@@ -337,45 +337,45 @@
         ],
         "blocks.setRandomSeed": "Ustaw losowy seed",
         "blocks.setRandomSeed.params": [
-            "Seed:"
+            "Ziarno:"
         ],
-        "blocks.newText": "Create text",
+        "blocks.newText": "Utwórz tekst",
         "blocks.newText.params": [
-            "Text name:",
-            "Text:",
-            "Font:",
-            "Size:",
-            "Color:",
-            "Opacity (0-100):",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa tekstu:",
+            "Tekst:",
+            "Czcionka:",
+            "Rozmiar:",
+            "Kolor:",
+            "Przezroczystość (0-100):",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.newText2": "Create text with width and height",
+        "blocks.newText2": "Utwórz tekst o szerokości i wysokości",
         "blocks.newText2.params": [
-            "Text name:",
-            "Text:",
-            "Font:",
-            "Size:",
-            "Color:",
-            "Align:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa tekstu:",
+            "Tekst:",
+            "Czcionka:",
+            "Rozmiar:",
+            "Kolor:",
+            "Wyrównanie:",
+            "Szerokość:",
+            "Wysokość:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.setText": "Edit text",
+        "blocks.setText": "Edytuj tekst",
         "blocks.setText.params": [
-            "Text name:",
-            "Text:"
+            "Nazwa tekstu:",
+            "Tekst:"
         ],
-        "blocks.setTextSize": "Set text font size",
+        "blocks.setTextSize": "Ustaw rozmiar czcionki",
         "blocks.setTextSize.params": [
-            "Text name:",
-            "Size:"
+            "Nazwa tekstu:",
+            "Rozmiar:"
         ],
-        "blocks.hideText": "Hide text",
+        "blocks.hideText": "Ukryj tekst",
         "blocks.hideText.params": [
-            "Text name:"
+            "Nazwa tekstu:"
         ],
         "blocks.showText": "Pokaż tekst",
         "blocks.showText.params": [
@@ -383,35 +383,35 @@
         ],
         "blocks.removeText": "Usuń tekst",
         "blocks.removeText.params": [
-            "Text name:"
+            "Nazwa tekstu:"
         ],
-        "blocks.setTextPos": "Set text position",
+        "blocks.setTextPos": "Ustaw pozycję tekstu",
         "blocks.setTextPos.params": [
-            "Text name:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa tekstu:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.setTextPosX": "Set text position X",
+        "blocks.setTextPosX": "Ustaw pozycję X tekstu",
         "blocks.setTextPosX.params": [
-            "Text name:",
-            "Position (X):"
+            "Nazwa tekstu:",
+            "Pozycja (X):"
         ],
-        "blocks.setTextPosY": "Set text position Y",
+        "blocks.setTextPosY": "Ustaw pozycję Y tekstu",
         "blocks.setTextPosY.params": [
-            "Text name:",
-            "Position (Y):"
+            "Nazwa tekstu:",
+            "Pozycja (Y):"
         ],
-        "blocks.setTextRotation": "Set text rotation",
+        "blocks.setTextRotation": "Ustaw rotację tekstu",
         "blocks.setTextRotation.params": [
-            "Text name:",
-            "Rotation:"
+            "Nazwa tekstu:",
+            "Rotacja:"
         ],
-        "blocks.setTextAlpha": "Set text opacity",
+        "blocks.setTextAlpha": "Ustaw przezroczystość tekstu",
         "blocks.setTextAlpha.params": [
-            "Text name:",
-            "Opacity (0-100):"
+            "Nazwa tekstu:",
+            "Przezroczystość (0-100):"
         ],
-        "blocks.setTextColor": "Set text color",
+        "blocks.setTextColor": "Ustaw kolor tekstu",
         "blocks.setTextColor.params": [
             "Nazwa tekstu:",
             "Kolor:"
@@ -491,392 +491,392 @@
         ],
         "blocks.setPosX": "Ustaw pozycję X obiektu",
         "blocks.setPosX.params": [
-            "Object name:",
-            "Position (X):"
+            "Nazwa obiektu:",
+            "Pozycja (X):"
         ],
-        "blocks.setPosY": "Set object position Y",
+        "blocks.setPosY": "Ustaw pozycję Y obiektu",
         "blocks.setPosY.params": [
-            "Object name:",
-            "Position (Y):"
+            "Nazwa obiektu:",
+            "Pozycja (Y):"
         ],
-        "blocks.setSize": "Set object size",
+        "blocks.setSize": "Ustaw rozmiar obiektu",
         "blocks.setSize.params": [
-            "Object name:",
-            "Size (%):"
+            "Nazwa obiektu:",
+            "Rozmiar (%):"
         ],
-        "blocks.setRotation": "Set object rotation",
+        "blocks.setRotation": "Ustaw rotację obiektu",
         "blocks.setRotation.params": [
-            "Object name:",
-            "Rotation:"
+            "Nazwa obiektu:",
+            "Rotacja:"
         ],
-        "blocks.setRotationTo": "Set rotation to object2",
+        "blocks.setRotationTo": "Ustaw rotację na obiekt2",
         "blocks.setRotationTo.params": [
-            "Object name1:",
-            "Object name2:"
+            "Nazwa obiektu1:",
+            "Nazwa obiektu2:"
         ],
-        "blocks.setAlpha": "Set object opacity",
+        "blocks.setAlpha": "Ustaw przezroczystość obiektu",
         "blocks.setAlpha.params": [
-            "Object name:",
-            "Opacity (0-100):"
+            "Nazwa obiektu:",
+            "Przezroczystość (0-100):"
         ],
-        "blocks.setWidth": "Set object width",
+        "blocks.setWidth": "Ustaw szerokość obiektu",
         "blocks.setWidth.params": [
-            "Object name:",
-            "Width:"
+            "Nazwa obiektu:",
+            "Szerokość:"
         ],
-        "blocks.setHeight": "Set object height",
+        "blocks.setHeight": "Ustaw wysokość obiektu",
         "blocks.setHeight.params": [
-            "Object name:",
-            "Height:"
+            "Nazwa obiektu:",
+            "Wysokość:"
         ],
-        "blocks.setAnchor": "Set anchor point of object",
+        "blocks.setAnchor": "Ustaw punkt kotwicy obiektu",
         "blocks.setAnchor.params": [
-            "Object name:",
-            "Anchor X (0-100):",
-            "Anchor Y (0-100):"
+            "Nazwa obiektu:",
+            "Punkt kotwicy X (0–100):",
+            "Punkt kotwicy Y (0–100):"
         ],
-        "blocks.updPosX": "Change object position X",
+        "blocks.updPosX": "Zmień pozycję X obiektu",
         "blocks.updPosX.params": [
-            "Object name:",
-            "Position (X):"
+            "Nazwa obiektu:",
+            "Pozycja (X):"
         ],
-        "blocks.updPosY": "Change object position Y",
+        "blocks.updPosY": "Zmień pozycję Y obiektu",
         "blocks.updPosY.params": [
-            "Object name:",
-            "Position (Y):"
+            "Nazwa obiektu:",
+            "Pozycja (Y):"
         ],
-        "blocks.updSize": "Change object size",
+        "blocks.updSize": "Zmień rozmiar obiektu",
         "blocks.updSize.params": [
-            "Object name:",
-            "Size (%):"
+            "Nazwa obiektu:",
+            "Rozmiar (%):"
         ],
-        "blocks.updRotation": "Change object rotation",
+        "blocks.updRotation": "Zmień rotację obiektu",
         "blocks.updRotation.params": [
-            "Object name:",
-            "Rotation:"
+            "Nazwa obiektu:",
+            "Rotacja:"
         ],
-        "blocks.updAlpha": "Change object opacity",
+        "blocks.updAlpha": "Zmień przezroczystość obiektu",
         "blocks.updAlpha.params": [
-            "Object name:",
-            "Opacity (0-100):"
+            "Nazwa obiektu:",
+            "Przezroczystość (0-100):"
         ],
-        "blocks.updWidth": "Change object width",
+        "blocks.updWidth": "Zmień szerokość obiektu",
         "blocks.updWidth.params": [
-            "Object name:",
-            "Width:"
+            "Nazwa obiektu:",
+            "Szerokość:"
         ],
-        "blocks.updHeight": "Change object height",
+        "blocks.updHeight": "Zmień wysokość obiektu",
         "blocks.updHeight.params": [
-            "Object name:",
-            "Height:"
+            "Nazwa obiektu:",
+            "Wysokość:"
         ],
-        "blocks.hideObject": "Hide object",
+        "blocks.hideObject": "Ukryj obiekt",
         "blocks.hideObject.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.showObject": "Show object",
+        "blocks.showObject": "Pokaż obiekt",
         "blocks.showObject.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.removeObject": "Remove object",
+        "blocks.removeObject": "Usuń obiekt",
         "blocks.removeObject.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.frontObject": "Place object on layer above",
+        "blocks.frontObject": "Umieść obiekt na warstwie powyżej",
         "blocks.frontObject.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.backObject": "Place object on layer below",
+        "blocks.backObject": "Umieść obiekt na warstwie poniżej",
         "blocks.backObject.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ]
     },
     "control": {
-        "blocks.control": "Control",
-        "blocks.timerEnd": "End timer",
+        "blocks.control": "Kontrola",
+        "blocks.timerEnd": "Koniec timera",
         "blocks.timer": "Timer",
         "blocks.timer.params": [
-            "Time (Seconds):",
-            "Number repetitions:"
+            "Czas (sekundy):",
+            "Liczba powtórzeń:"
         ],
-        "blocks.timerNameEnd": "End timer",
-        "blocks.timerName": "Timer with name",
+        "blocks.timerNameEnd": "Koniec timera",
+        "blocks.timerName": "Timer z nazwą",
         "blocks.timerName.params": [
-            "Timer name:",
-            "Time (Seconds):",
-            "Number repetitions:"
+            "Nazwa timera:",
+            "Czas (sekundy):",
+            "Liczba powtórzeń:"
         ],
-        "blocks.timerPause": "Pause timer",
+        "blocks.timerPause": "Wstrzymaj timer",
         "blocks.timerPause.params": [
-            "Timer name:"
+            "Nazwa timera:"
         ],
-        "blocks.timerResume": "Resume timer",
+        "blocks.timerResume": "Wznów timer",
         "blocks.timerResume.params": [
-            "Timer name:"
+            "Nazwa timera:"
         ],
-        "blocks.timerCancel": "Cancel timer",
+        "blocks.timerCancel": "Anuluj timer",
         "blocks.timerCancel.params": [
-            "Timer name:"
+            "Nazwa timera:"
         ],
-        "blocks.timerPauseAll": "Pause all timers",
-        "blocks.timerResumeAll": "Resume all timers",
-        "blocks.timerCancelAll": "Cancel all timers",
-        "blocks.ifEnd": "End condition",
-        "blocks.ifElse": "Else, if condition is true",
+        "blocks.timerPauseAll": "Wstrzymaj wszystkie timery",
+        "blocks.timerResumeAll": "Wznów wszystkie timery",
+        "blocks.timerCancelAll": "Anuluj wszystkie timery",
+        "blocks.ifEnd": "Koniec warunku",
+        "blocks.ifElse": "W przeciwnym razie, jeżeli warunek jest prawdą",
         "blocks.ifElse.params": [
-            "Condition:"
+            "Warunek:"
         ],
-        "blocks.if": "If condition is true",
+        "blocks.if": "Jeśli warunek jest prawdziwy",
         "blocks.if.params": [
-            "Condition:"
+            "Warunek:"
         ],
-        "blocks.foreverEnd": "End forever",
-        "blocks.forever": "Repeat forever",
-        "blocks.repeatEnd": "End repeat",
-        "blocks.repeat": "Repeat N times",
+        "blocks.foreverEnd": "Koniec zawsze",
+        "blocks.forever": "Powtarzaj zawsze",
+        "blocks.repeatEnd": "Koniec powtórzenia",
+        "blocks.repeat": "Powtarzaj N razy",
         "blocks.repeat.params": [
-            "Number repetitions:"
+            "Liczba powtórzeń:"
         ],
-        "blocks.forEnd": "End cycle",
-        "blocks.for": "Cycle",
+        "blocks.forEnd": "Koniec cyklu",
+        "blocks.for": "Cykl",
         "blocks.for.params": [
-            "From:",
-            "To:",
-            "Variable name:",
-            "Step:"
+            "Od:",
+            "Do:",
+            "Nazwa zmiennej:",
+            "Etap:"
         ],
-        "blocks.whileEnd": "End repeat",
-        "blocks.while": "Repeat until condition is true",
+        "blocks.whileEnd": "Koniec powtórzenia",
+        "blocks.while": "Powtarzaj aż warunek będzie prawdziwy",
         "blocks.while.params": [
-            "Condition:"
+            "Warunek:"
         ],
-        "blocks.foreachEnd": "End cycle",
-        "blocks.foreach": "Bypass all table elements",
+        "blocks.foreachEnd": "Koniec cyklu",
+        "blocks.foreach": "Pomiń wszystkie elementy tabeli",
         "blocks.foreach.params": [
-            "Table name:",
-            "Variable name:"
+            "Nazwa tabeli:",
+            "Nazwa zmiennej:"
         ],
-        "blocks.break": "Stop cycle",
-        "blocks.requestFun": "Request function",
+        "blocks.break": "Zatrzymaj cykl",
+        "blocks.requestFun": "Zażądaj funkcji",
         "blocks.requestFun.params": [
-            "Function name:"
+            "Nazwa funkcji:"
         ],
-        "blocks.requestFunParams": "Request function with parameters",
+        "blocks.requestFunParams": "Zażądaj funkcję z parametrami",
         "blocks.requestFunParams.params": [
-            "Function name:",
-            "Parameters:"
+            "Nazwa funkcji:",
+            "Parametry:"
         ],
-        "blocks.setListener": "Set touch function",
+        "blocks.setListener": "Ustaw funkcję dotyku",
         "blocks.setListener.params": [
-            "Object name:",
-            "Function name:"
+            "Nazwa obiektu:",
+            "Nazwa funkcji:"
         ],
-        "blocks.setLocalCollision": "Set collision function",
+        "blocks.setLocalCollision": "Ustaw funkcję kolizji",
         "blocks.setLocalCollision.params": [
-            "Object name:",
-            "Function name:"
+            "Nazwa obiektu:",
+            "Nazwa funkcji:"
         ],
-        "blocks.setLocalPreCollision": "Set function before collision",
+        "blocks.setLocalPreCollision": "Ustaw funkcję przed kolizją",
         "blocks.setLocalPreCollision.params": [
-            "Object name:",
-            "Function name:"
+            "Nazwa obiektu:",
+            "Nazwa funkcji:"
         ],
-        "blocks.setLocalPostCollision": "Set function after collision",
+        "blocks.setLocalPostCollision": "Ustaw funkcję po kolizji",
         "blocks.setLocalPostCollision.params": [
-            "Object name:",
-            "Function name:"
+            "Nazwa obiektu:",
+            "Nazwa funkcji:"
         ],
-        "blocks.setGlobalCollision": "Global collision function",
+        "blocks.setGlobalCollision": "Funkcja globalnej kolizji",
         "blocks.setGlobalCollision.params": [
-            "Function name:"
+            "Nazwa funkcji:"
         ],
-        "blocks.setGlobalPreCollision": "Function before global collision",
+        "blocks.setGlobalPreCollision": "Funkcja przed globalną kolizją",
         "blocks.setGlobalPreCollision.params": [
-            "Function name:"
+            "Nazwa funkcji:"
         ],
-        "blocks.setGlobalPostCollision": "Function after global collision",
+        "blocks.setGlobalPostCollision": "Funkcja po globalnej kolizji",
         "blocks.setGlobalPostCollision.params": [
-            "Function name:"
+            "Nazwa funkcji:"
         ],
-        "blocks.setFocus": "Set touch focus",
+        "blocks.setFocus": "Ustaw ostrość dotyku",
         "blocks.setFocus.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.setFocusMultitouch": "Set multitouch focus",
+        "blocks.setFocusMultitouch": "Ustaw ostrość multitouch",
         "blocks.setFocusMultitouch.params": [
-            "Object name:",
-            "Unique id:"
+            "Nazwa obiektu:",
+            "Unikalny id:"
         ],
-        "blocks.activateMultitouch": "Activate multitouch",
-        "blocks.deactivateMultitouch": "Deactivate multitouch",
-        "blocks.returnValue": "Return value",
+        "blocks.activateMultitouch": "Aktywuj multitouch",
+        "blocks.deactivateMultitouch": "Dezaktywuj multitouch",
+        "blocks.returnValue": "Zwróć wartość",
         "blocks.returnValue.params": [
-            "Value:"
+            "Wartość:"
         ],
-        "blocks.requestApi": "Request API method",
+        "blocks.requestApi": "Żądaj metody API",
         "blocks.requestApi.params": [
-            "Lua code:"
+            "Kod Lua:"
         ],
-        "blocks.toastShort": "Short pop-up notification",
+        "blocks.toastShort": "Krótkie powiadomienie pop-up",
         "blocks.toastShort.params": [
-            "Text:"
+            "Tekst:"
         ],
-        "blocks.toastLong": "Long pop-up notification",
+        "blocks.toastLong": "Długie powiadomienie pop-up",
         "blocks.toastLong.params": [
-            "Text:"
+            "Tekst:"
         ],
-        "blocks.comment": "Comment (for yourself)",
+        "blocks.comment": "Komentarz (dla siebie)",
         "blocks.comment.params": [
-            "Note:"
+            "Notatka:"
         ],
-        "blocks.requestExit": "Close program",
-        "blocks.setBackgroundColor": "Set background color",
+        "blocks.requestExit": "Zamknij program",
+        "blocks.setBackgroundColor": "Ustaw kolor tła",
         "blocks.setBackgroundColor.params": [
-            "Color:"
+            "Kolor:"
         ],
-        "blocks.setBackgroundRGB": "Set RGB background color",
+        "blocks.setBackgroundRGB": "Ustaw kolor tła RGB",
         "blocks.setBackgroundRGB.params": [
-            "Color (R):",
-            "Color (G):",
-            "Color (B):"
+            "Kolor (R):",
+            "Kolor (G):",
+            "Kolor (B):"
         ],
-        "blocks.setBackgroundHEX": "Set HEX background color",
+        "blocks.setBackgroundHEX": "Ustaw kolor tła HEX",
         "blocks.setBackgroundHEX.params": [
-            "Color (Hex):"
+            "Kolor (Hex):"
         ],
-        "blocks.setPortraitOrientation": "Set portrait orientation",
+        "blocks.setPortraitOrientation": "Ustaw orientację pionową",
         "blocks.setPortraitOrientation.params": [
-            "Function name:"
+            "Nazwa funkcji:"
         ],
-        "blocks.setLandscapeOrientation": "Set landscape orientation",
+        "blocks.setLandscapeOrientation": "Ustaw orientację poziomą",
         "blocks.setLandscapeOrientation.params": [
-            "Function name:"
+            "Nazwa funkcji:"
         ],
-        "blocks.turnOnAccelerometer": "Set accelerometer function",
+        "blocks.turnOnAccelerometer": "Ustaw funkcję przyspieszeniomierza",
         "blocks.turnOnAccelerometer.params": [
-            "Function name:"
+            "Nazwa funkcji:"
         ],
-        "blocks.setAccelerometerFrequency": "Set accelerometer frequency",
+        "blocks.setAccelerometerFrequency": "Ustaw częstotliwość przyspieszeniomierza",
         "blocks.setAccelerometerFrequency.params": [
-            "Frequency (Hz):"
+            "Częstotliwość (Hz):"
         ],
-        "blocks.scheduleNotification": "Register a notification",
+        "blocks.scheduleNotification": "Zarejestruj powiadomienie",
         "blocks.scheduleNotification.params": [
-            "Text:",
-            "Time (Seconds):"
+            "Tekst:",
+            "Czas (sekundy):"
         ]
     },
     "shapes": {
-        "blocks.shapes": "Textures\n& Shapes",
-        "blocks.setSprite": "Set object sprite",
+        "blocks.shapes": "Tekstury\ni kształty",
+        "blocks.setSprite": "Ustaw duszka obiektu",
         "blocks.setSprite.params": [
-            "Object name:",
-            "Sprite name:"
+            "Nazwa obiektu:",
+            "Nazwa duszka:"
         ],
-        "blocks.newRect": "Create rect with color",
+        "blocks.newRect": "Utwórz kwadrat z kolorem",
         "blocks.newRect.params": [
-            "Object name:",
-            "Color:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa obiektu:",
+            "Kolor:",
+            "Szerokość:",
+            "Wysokość:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.newRoundedRect": "Create rect with corners",
+        "blocks.newRoundedRect": "Utwórz kwadrat z narożnikami",
         "blocks.newRoundedRect.params": [
-            "Object name:",
-            "Rounded corners:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa obiektu:",
+            "Zaokrąglone narożniki:",
+            "Szerokość:",
+            "Wysokość:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.newCircle": "Create circle",
+        "blocks.newCircle": "Utwórz okrąg",
         "blocks.newCircle.params": [
-            "Object name:",
-            "Radius:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa obiektu:",
+            "Promień:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.newPolygon": "Create polygon",
+        "blocks.newPolygon": "Utwórz wielokąt",
         "blocks.newPolygon.params": [
-            "Object name:",
-            "Angles table:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa obiektu:",
+            "Tabela kątów:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.newLine": "Create line",
+        "blocks.newLine": "Utwórz linię",
         "blocks.newLine.params": [
-            "Object name:",
-            "Color:",
-            "Position1 (X):",
-            "Position1 (Y):",
-            "Position2 (X):",
-            "Position2 (Y):"
+            "Nazwa obiektu:",
+            "Kolor:",
+            "Pozycja1 (X):",
+            "Pozycja1 (Y):",
+            "Pozycja2 (X):",
+            "Pozycja2 (Y):"
         ],
-        "blocks.appendLine": "Append point to line",
+        "blocks.appendLine": "Dołącz punkt do linii",
         "blocks.appendLine.params": [
-            "Object name:",
-            "Coordinate table:"
+            "Nazwa obiektu:",
+            "Tabela współrzędnych:"
         ],
-        "blocks.newBitmap": "Create bitmap texture",
+        "blocks.newBitmap": "Utwórz teksturę bitmapy",
         "blocks.newBitmap.params": [
-            "Bitmap name:",
-            "Width:",
-            "Height:"
+            "Nazwa bitmapy:",
+            "Szerokość:",
+            "Wysokość:"
         ],
-        "blocks.setPixel": "Set pixel color",
+        "blocks.setPixel": "Ustaw kolor piksela",
         "blocks.setPixel.params": [
-            "Bitmap name:",
-            "Position (X):",
-            "Position (Y):",
-            "Color:"
+            "Nazwa bitmapy:",
+            "Pozycja (X):",
+            "Pozycja (Y):",
+            "Kolor:"
         ],
-        "blocks.setPixelRGB": "Set RGB pixel color",
+        "blocks.setPixelRGB": "Ustaw kolor piksela RGB",
         "blocks.setPixelRGB.params": [
-            "Bitmap name:",
-            "Position (X):",
-            "Position (Y):",
-            "Color (R):",
-            "Color (G):",
-            "Color (B):"
+            "Nazwa bitmapy:",
+            "Pozycja (X):",
+            "Pozycja (Y):",
+            "Kolor (R):",
+            "Kolor (G):",
+            "Kolor (B):"
         ],
-        "blocks.removePixel": "Remove pixel color",
+        "blocks.removePixel": "Usuń kolor piksela",
         "blocks.removePixel.params": [
-            "Bitmap name:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa bitmapy:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.updBitmap": "Update bitmap texture",
+        "blocks.updBitmap": "Aktualizuj teksturę bitmapy",
         "blocks.updBitmap.params": [
-            "Bitmap name:"
+            "Nazwa bitmapy:"
         ],
-        "blocks.setBitmapSprite": "Set bitmap texture of object",
+        "blocks.setBitmapSprite": "Ustaw teksturę bitmapy obiektu",
         "blocks.setBitmapSprite.params": [
-            "Object name:",
-            "Bitmap name:"
+            "Nazwa obiektu:",
+            "Nazwa bitmapy:"
         ],
-        "blocks.getBitmapSprite": "Get bitmap texture of sprite",
+        "blocks.getBitmapSprite": "Pobierz teksturę bitmapową duszka",
         "blocks.getBitmapSprite.params": [
-            "Sprite name:",
-            "Bitmap name:"
+            "Nazwa duszka:",
+            "Nazwa bitmapy:"
         ],
-        "blocks.setColor": "Set object color",
+        "blocks.setColor": "Ustaw kolor obiektu",
         "blocks.setColor.params": [
-            "Object name:",
-            "Color:"
+            "Nazwa obiektu:",
+            "Kolor:"
         ],
-        "blocks.setRGB": "Set RGB object color",
+        "blocks.setRGB": "Ustaw kolor obiektu RGB",
         "blocks.setRGB.params": [
-            "Object name:",
-            "Color (R):",
-            "Color (G):",
-            "Color (B):"
+            "Nazwa obiektu:",
+            "Kolor (R):",
+            "Kolor (G):",
+            "Kolor (B):"
         ],
-        "blocks.setHEX": "Set HEX object color",
+        "blocks.setHEX": "Ustaw kolor obiektu HEX",
         "blocks.setHEX.params": [
-            "Object name:",
-            "Color (Hex):"
+            "Nazwa obiektu:",
+            "Kolor (Hex):"
         ],
         "blocks.setStrokeWidth": "Set stroke width",
         "blocks.setStrokeWidth.params": [

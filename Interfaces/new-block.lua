@@ -46,8 +46,11 @@ local function showTypeScroll(event)
                 for i = 35, 38 do M.group[i].isVisible = event.target.index == 11 end
                 M.group.currentIndex = event.target.index
 
-                if NOOBMODE and event.target.index == 2 then
+                if NOOBMODE and (event.target.index == 2 or event.target.index == 6 or event.target.index == 7) then
                     for i = 25, 28 do M.group[i].isVisible = false end
+                    for i = 15, 18 do M.group[i].isVisible = false end
+                    for i = 33, 34 do M.group[i].isVisible = false end
+                    for i = 29, 32 do M.group[i].isVisible = false end
                     M.group[3].isVisible = false
                 end
             elseif NOOBMODE and INFO.listDeleteType[event.target.index] and M.group.isVisible then
@@ -89,16 +92,15 @@ local function newBlockListener(event)
             if event.target.click then
                 event.target.click = false
                 if M.group[7].isOn and event.target.index[1] == 15 then
-                    local custom, name = GET_GAME_CUSTOM(), INFO.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
-                    local params = (function() local t = {} for i = 1, #INFO.listName[name] - 1 do t[i] = {} end return t end)()
+                    local custom, name = GET_GAME_CUSTOM(), M.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
 
                     for index, block in pairs(custom) do
                         if 'custom' .. index == name then
-                            CUSTOM.newBlock(block[1], params, block[2], index, block[5] or {0.36 * 255, 0.47 * 255, 0.5 * 255}) break
+                            CUSTOM.newBlock(block[1], block[6], block[2], index, block[5] or {0.36 * 255, 0.47 * 255, 0.5 * 255}) break
                         end
                     end
                 elseif M.group[19].isOn and event.target.index[1] == 15 then
-                    local name = INFO.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
+                    local name = M.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
                     local custom = GET_GAME_CUSTOM() local _index = tostring(custom.len + 1)
 
                     for i = 1, custom.len do
@@ -109,7 +111,7 @@ local function newBlockListener(event)
 
                     for index, block in pairs(custom) do
                         if 'custom' .. index == name then
-                            local blockParams = (function() local t = {} for i = 1, #custom[index][2] do t[i] = 'value' end return t end)()
+                            local blockParams = (function() local t = {} for i = 1, #custom[index][2] do t[i] = {'value'} end return t end)()
 
                             custom.len = custom.len + 1
                             custom[_index] = {
@@ -129,12 +131,13 @@ local function newBlockListener(event)
                             table.insert(INFO.listBlock.custom, 1, 'custom' .. _index)
                             table.insert(INFO.listBlock.everyone, 'custom' .. _index)
 
+                            M.listBlock = COPY_TABLE(INFO.listBlock)
                             SET_GAME_CUSTOM(custom)
                             M.custom(2) break
                         end
                     end
                 elseif M.group[9].isOn and event.target.index[1] == 15 then
-                    local name = INFO.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
+                    local name = M.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
                     local custom, data = GET_GAME_CUSTOM(), GET_GAME_CODE(CURRENT_LINK)
 
                     for index, block in pairs(custom) do
@@ -162,8 +165,9 @@ local function newBlockListener(event)
                             BLOCKS.group.isVisible = false
                             custom[index] = nil custom.len = custom.len - 1
 
+                            M.listBlock = COPY_TABLE(INFO.listBlock)
                             SET_GAME_CUSTOM(custom)
-                            M.custom(2) BACK.front() break
+                            M.custom(2) break
                         end
                     end
                 else
@@ -174,7 +178,7 @@ local function newBlockListener(event)
                     local scrollY = select(2, BLOCKS.group[8]:getContentPosition())
                     local diffY = BLOCKS.group[8].y - BLOCKS.group[8].height / 2
                     local targetY = math.abs(scrollY) + diffY + CENTER_Y - 150
-                    local blockName = INFO.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
+                    local blockName = M.listBlock[INFO.listType[event.target.index[1]]][event.target.index[2]]
                     local blockEvent = M.group.currentIndex == 2 or INFO.getType(blockName) == 'events'
                     local blockIndex = #BLOCKS.group.blocks + 1
                     local blockParams = {
@@ -183,7 +187,15 @@ local function newBlockListener(event)
                     }
 
                     for i = 1, #INFO.listName[blockName] - 1 do
-                        blockParams.params[i] = {}
+                        if type(INFO.listName[blockName][i + 1][2]) == 'table' and type(INFO.listName[blockName][i + 1][2][1]) == 'table' then
+                            blockParams.params[i] = {}
+
+                            for j = 1, #INFO.listName[blockName][i + 1][2] do
+                                blockParams.params[i][j] = INFO.listName[blockName][i + 1][2][j] or {}
+                            end
+                        else
+                            blockParams.params[i] = {INFO.listName[blockName][i + 1][2]} or {}
+                        end
                     end
 
                     for i = 1, #BLOCKS.group.blocks do
@@ -242,16 +254,16 @@ local function textListener(event)
         local lastY = 90
         local scrollHeight = 50
 
-        for j = 1, #INFO.listBlock.everyone do
-            local notCustom = not (BLOCKS.custom and INFO.getType(INFO.listBlock.everyone[j]) == 'custom' and j ~= 1)
+        for j = 1, #M.listBlock.everyone do
+            local notCustom = not (BLOCKS.custom and INFO.getType(M.listBlock.everyone[j]) == 'custom' and j ~= 1)
 
-            if UTF8.find(UTF8.lower(STR['blocks.' .. INFO.listBlock.everyone[j]]), UTF8.lower(M.boxText), 1, true) and notCustom then
-                local event = INFO.getType(INFO.listBlock.everyone[j]) == 'events'
+            if UTF8.find(UTF8.lower(STR['blocks.' .. M.listBlock.everyone[j]]), UTF8.lower(M.boxText), 1, true) and notCustom then
+                local event = INFO.getType(M.listBlock.everyone[j]) == 'events'
 
                 M.group.types[1].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(event, DISPLAY_WIDTH - RIGHT_HEIGHT - 60, event and 102 or 116))
                     M.group.types[1].blocks[j].x = DISPLAY_WIDTH / 2
                     M.group.types[1].blocks[j].y = lastY
-                    M.group.types[1].blocks[j]:setFillColor(INFO.getBlockColor(INFO.listBlock.everyone[j]))
+                    M.group.types[1].blocks[j]:setFillColor(INFO.getBlockColor(M.listBlock.everyone[j]))
                     M.group.types[1].blocks[j]:setStrokeColor(0.3)
                     M.group.types[1].blocks[j].strokeWidth = 4
                     M.group.types[1].blocks[j].index = {1, j}
@@ -259,7 +271,7 @@ local function textListener(event)
                 M.group.types[1].scroll:insert(M.group.types[1].blocks[j])
 
                 M.group.types[1].blocks[j].text = display.newText({
-                        text = STR['blocks.' .. INFO.listBlock.everyone[j]],
+                        text = STR['blocks.' .. M.listBlock.everyone[j]],
                         x = DISPLAY_WIDTH / 2 - M.group.types[1].blocks[j].width / 2 + 20,
                         y = lastY, width = M.group.types[1].blocks[j].width - 40,
                         height = 40, font = 'ubuntu', fontSize = 32, align = 'left'
@@ -285,6 +297,8 @@ M.remove = function()
 end
 
 M.custom = function(i)
+    M.listBlock = COPY_TABLE(INFO.listBlock)
+
     if i == 1 then
         M.group.isVisible = false
         M.group.types[15].isVisible = false
@@ -336,9 +350,9 @@ M.custom = function(i)
         local scrollHeight = 50
         local custom = GET_GAME_CUSTOM()
 
-        for j = 1, #INFO.listBlock.custom do
-            if INFO.getType(INFO.listBlock.custom[j]) == 'custom' and UTF8.sub(INFO.listBlock.custom[j], 1, 1) ~= '_' then
-                local index = UTF8.gsub(INFO.listBlock.custom[j], 'custom', '', 1)
+        for j = 1, #M.listBlock.custom do
+            if INFO.getType(M.listBlock.custom[j]) == 'custom' and UTF8.sub(M.listBlock.custom[j], 1, 1) ~= '_' then
+                local index = UTF8.gsub(M.listBlock.custom[j], 'custom', '', 1)
                 color = (index and custom[index]) and custom[index][5] or nil
                 color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}
             end
@@ -346,7 +360,7 @@ M.custom = function(i)
             M.group.types[15].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(false, DISPLAY_WIDTH - RIGHT_HEIGHT - 60, 116))
                 M.group.types[15].blocks[j].x = DISPLAY_WIDTH / 2
                 M.group.types[15].blocks[j].y = lastY
-                M.group.types[15].blocks[j]:setFillColor(INFO.getBlockColor(INFO.listBlock.custom[j], nil, nil, color))
+                M.group.types[15].blocks[j]:setFillColor(INFO.getBlockColor(M.listBlock.custom[j], nil, nil, color))
                 M.group.types[15].blocks[j]:setStrokeColor(0.3)
                 M.group.types[15].blocks[j].strokeWidth = 4
                 M.group.types[15].blocks[j].index = {15, j}
@@ -354,7 +368,7 @@ M.custom = function(i)
             M.group.types[15].scroll:insert(M.group.types[15].blocks[j])
 
             M.group.types[15].blocks[j].text = display.newText({
-                    text = STR['blocks.' .. INFO.listBlock.custom[j]],
+                    text = STR['blocks.' .. M.listBlock.custom[j]],
                     x = DISPLAY_WIDTH / 2 - M.group.types[15].blocks[j].width / 2 + 20,
                     y = lastY, width = M.group.types[15].blocks[j].width - 40,
                     height = 40, font = 'ubuntu', fontSize = 32, align = 'left'
@@ -411,8 +425,11 @@ M.create = function()
         for i = 29, 32 do M.group[i].isVisible = M.group.currentIndex == 7 end
         for i = 35, 38 do M.group[i].isVisible = M.group.currentIndex == 11 end
 
-        if NOOBMODE and M.group.currentIndex == 2 then
+        if NOOBMODE and (M.group.currentIndex == 2 or M.group.currentIndex == 6 or M.group.currentIndex == 7) then
             for i = 25, 28 do M.group[i].isVisible = false end
+            for i = 15, 18 do M.group[i].isVisible = false end
+            for i = 33, 34 do M.group[i].isVisible = false end
+            for i = 29, 32 do M.group[i].isVisible = false end
             M.group[3].isVisible = false
         end
 
@@ -426,19 +443,18 @@ M.create = function()
         M.group.currentIndex = 1
         M.noobmode = NOOBMODE
         M.boxText = ''
+        M.listBlock = COPY_TABLE(INFO.listBlock)
+        M.listDelimiter = COPY_TABLE(INFO.listDelimiter)
 
-        -- if NOOBMODE then
-        --     INFO.listBlock = COPY_TABLE(INFO.listBlockNoob)
-        --     INFO.listDelimiter = COPY_TABLE(INFO.listDelimiterNoob)
-        -- else
-        --     INFO.listBlock = COPY_TABLE(INFO.listBlockCopy)
-        --     INFO.listDelimiter = COPY_TABLE(INFO.listDelimiterCopy)
-        -- end
+        if NOOBMODE then
+            M.listBlock = COPY_TABLE(INFO.listBlockNoob)
+            M.listDelimiter = COPY_TABLE(INFO.listDelimiterNoob)
+        end
 
         local bg = display.newImage('Sprites/bg.png', CENTER_X, CENTER_Y)
-            bg.width = CENTER_X == 640 and DISPLAY_HEIGHT or DISPLAY_WIDTH
-            bg.height = CENTER_X == 640 and DISPLAY_WIDTH or DISPLAY_HEIGHT
-            bg.rotation = CENTER_X == 640 and 90 or 0
+            bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
+            bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
+            bg.rotation = CENTER_X == 641 and 90 or 0
         M.group:insert(bg)
 
         local line = display.newRect(CENTER_X, MAX_Y - 275, DISPLAY_WIDTH, 2)
@@ -789,19 +805,16 @@ M.create = function()
                 M.group.types[i]:addEventListener('touch', showTypeScroll)
             M.group:insert(M.group.types[i])
 
-            local text = display.newText({
-                text = STR['blocks.' .. INFO.listType[i]],
-                x = 0, y = 0, width = width - 5, font = 'sans.ttf', fontSize = 19
-            })
-
+            local typeName = 'blocks.' .. INFO.listType[i]
+            if NOOBMODE and (i == 4 or i == 5 or i == 8 or i == 10) then typeName = typeName .. 'Noob' end
+            local text = display.newText({text = STR[typeName], x = 0, y = 0, width = width - 5, font = 'sans.ttf', fontSize = 19})
             local textheight = text.height > 48 and 48 or text.height text:removeSelf()
             local allowedIndex = i == 1 or i == 15 or i == 9 or i == 6 or i == 3 or i == 2 or i == 7 or i == 11
-            if NOOBMODE and i == 2 then allowedIndex = false end
+            if NOOBMODE and (i == 2 or i == 6 or i == 7) then allowedIndex = false end
 
             M.group.types[i].text = display.newText({
-                    text = STR['blocks.' .. INFO.listType[i]],
-                    x = x + width / 2, y = y, width = width - 5, height = textheight,
-                    font = 'ubuntu', fontSize = 19, align = 'center'
+                    text = STR[typeName], font = 'ubuntu', fontSize = 19, align = 'center',
+                    x = x + width / 2, y = y, width = width - 5, height = textheight
                 })
             M.group:insert(M.group.types[i].text)
 
@@ -813,7 +826,7 @@ M.create = function()
                 }) M.group.types[i].currentScroll = 1
             M.group:insert(M.group.types[i].scroll)
 
-            if INFO.listDelimiter[INFO.listType[i]] then
+            if M.listDelimiter[INFO.listType[i]] then
                 M.group.types[i].scroll2 = WIDGET.newScrollView({
                         x = CENTER_X, y = ((allowedIndex and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
                         width = DISPLAY_WIDTH, height = line.y - (allowedIndex and find.y + 2 or ZERO_Y + 1),
@@ -822,7 +835,7 @@ M.create = function()
                     }) M.group.types[i].scroll2.isVisible = false
                 M.group:insert(M.group.types[i].scroll2)
 
-                if #INFO.listDelimiter[INFO.listType[i]] > 1 then
+                if #M.listDelimiter[INFO.listType[i]] > 1 then
                     M.group.types[i].scroll3 = WIDGET.newScrollView({
                             x = CENTER_X, y = ((allowedIndex and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
                             width = DISPLAY_WIDTH, height = line.y - (allowedIndex and find.y + 2 or ZERO_Y + 1),
@@ -843,14 +856,14 @@ M.create = function()
             local startDelimiter = 1
 
             if INFO.listType[i] ~= 'none' then
-                for j = 1, #INFO.listBlock[INFO.listType[i]] do
-                    local name = INFO.listBlock[INFO.listType[i]][j]
+                for j = 1, #M.listBlock[INFO.listType[i]] do
+                    local name = M.listBlock[INFO.listType[i]][j]
                     local notCustom = not (BLOCKS.custom and INFO.getType(name) == 'custom' and j ~= 1)
 
-                    if INFO.listDelimiter[INFO.listType[i]] and name == INFO.listDelimiter[INFO.listType[i]][1] and startDelimiter ~= 2 then
+                    if M.listDelimiter[INFO.listType[i]] and name == M.listDelimiter[INFO.listType[i]][1] and startDelimiter ~= 2 then
                         startDelimiter = 2
                         lastY = 90
-                    elseif INFO.listDelimiter[INFO.listType[i]] and name == INFO.listDelimiter[INFO.listType[i]][2] and startDelimiter ~= 3 then
+                    elseif M.listDelimiter[INFO.listType[i]] and name == M.listDelimiter[INFO.listType[i]][2] and startDelimiter ~= 3 then
                         startDelimiter = 3
                         lastY = 90
                     end

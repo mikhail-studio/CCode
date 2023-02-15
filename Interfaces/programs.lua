@@ -8,7 +8,7 @@ local genBlocks = function()
 end
 
 M.new = function(title, link)
-    BLOCK.new(title, M.scroll, M.group, 'programs', #M.group.blocks + 1, nil, link)
+    BLOCK.new(title, M.scroll, M.group, 'programs', 1, nil, link)
 end
 
 M.create = function()
@@ -18,9 +18,9 @@ M.create = function()
     M.group.blocks = {}
 
     local bg = display.newImage('Sprites/bg.png', CENTER_X, CENTER_Y)
-        bg.width = CENTER_X == 640 and DISPLAY_HEIGHT or DISPLAY_WIDTH
-        bg.height = CENTER_X == 640 and DISPLAY_WIDTH or DISPLAY_HEIGHT
-        bg.rotation = CENTER_X == 640 and 90 or 0
+        bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
+        bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
+        bg.rotation = CENTER_X == 641 and 90 or 0
     M.group:insert(bg)
 
     local title = display.newText(STR['menu.myprogram'], ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)

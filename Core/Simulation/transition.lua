@@ -23,8 +23,8 @@ M['setTransitionTo'] = function(params)
 
     local easing = easing == '(select[\'loop\']())' and 'continuousLoop' or (UTF8.match(easing, '%(select%[\'(.+)\'%]') or 'linear')
     local direction = direction == '(select[\'bounce\']())' and 'loop' or 'to'
-    local posX = posX == 'nil' and 'nil' or 'SET_X(' .. posX .. ', ' .. type .. '[name]._scroll)'
-    local posY = posY == 'nil' and 'nil' or 'SET_Y(' .. posY .. ', ' .. type .. '[name]._scroll)'
+    local posX = posX == 'nil' and 'nil' or type == 'GAME.group.groups' and posX or 'SET_X(' .. posX .. ', ' .. type .. '[name]._scroll)'
+    local posY = posY == 'nil' and 'nil' or type == 'GAME.group.groups' and posY or 'SET_Y(' .. posY .. ', ' .. type .. '[name]._scroll)'
     local scaleX = scaleX == 'nil' and 'nil' or scaleX .. ' / 100'
     local scaleY = scaleY == 'nil' and 'nil' or scaleY .. ' / 100'
     local alpha = alpha == 'nil' and 'nil' or alpha .. ' / 100'
@@ -61,8 +61,8 @@ M['setTransitionPos'] = function(params)
 
     local easing = easing == '(select[\'loop\']())' and 'continuousLoop' or (UTF8.match(easing, '%(select%[\'(.+)\'%]') or 'linear')
     local direction = direction == '(select[\'bounce\']())' and 'loop' or 'to'
-    local posX = posX == 'nil' and 'nil' or 'SET_X(' .. posX .. ', ' .. type .. '[name]._scroll)'
-    local posY = posY == 'nil' and 'nil' or 'SET_Y(' .. posY .. ', ' .. type .. '[name]._scroll)'
+    local posX = posX == 'nil' and 'nil' or type == 'GAME.group.groups' and posX or 'SET_X(' .. posX .. ', ' .. type .. '[name]._scroll)'
+    local posY = posY == 'nil' and 'nil' or type == 'GAME.group.groups' and posY or 'SET_Y(' .. posY .. ', ' .. type .. '[name]._scroll)'
 
     local onComplete = M['setTransitionListener'](onComplete)
     local onCancel = M['setTransitionListener'](onCancel)

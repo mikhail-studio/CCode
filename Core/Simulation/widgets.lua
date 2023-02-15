@@ -25,7 +25,7 @@ M['setWidgetSize'] = function(params)
     GAME.lua = GAME.lua .. ' [type == \'horizontal\' and \'width\' or \'height\'] = size, orientation = type or \'vertical\'})'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[name].type = type GAME.group.widgets[name].wtype = \'slider\''
     GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.widgets[name])'
-    GAME.lua = GAME.lua .. ' else GAME.group.widgets[name].width = ' .. width
+    GAME.lua = GAME.lua .. ' elseif GAME.group.widgets[name].wtype ~= \'switch\' then GAME.group.widgets[name].width = ' .. width
     GAME.lua = GAME.lua .. ' GAME.group.widgets[name].height = ' .. height .. ' end end)'
 end
 
@@ -46,6 +46,20 @@ M['removeWidget'] = function(params)
 
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' timer.new(10, 1, function() pcall(function()'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[name]:removeSelf() GAME.group.widgets[name] = nil end) end) end)'
+end
+
+M['showWidget'] = function(params)
+    local name = CALC(params[1])
+
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' timer.new(10, 1, function()'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[name].isVisible = true end) end) end)'
+end
+
+M['hideWidget'] = function(params)
+    local name = CALC(params[1])
+
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' timer.new(10, 1, function()'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[name].isVisible = false end) end) end)'
 end
 
 M['newWebView'] = function(params)
@@ -228,7 +242,8 @@ M['insertToScroll'] = function(params)
 end
 
 M['takeFocusScroll'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. CALC(params[1]) .. ']:takeFocus(' .. CALC(params[2]) .. ') end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name, event = ' .. CALC(params[1]) .. ', ' .. CALC(params[2])
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[name]:takeFocus(event._ccode_event) end)'
 end
 
 M['setFieldSecure'] = function(params)
@@ -252,13 +267,11 @@ M['setFieldFocusNil'] = function(params)
 end
 
 M['hidePanelInterface'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() native.setProperty(\'androidSystemUiVisibility\', \'immersiveSticky\')'
-    GAME.lua = GAME.lua .. ' if LOCAL.back == \'CCode\' then BACK.hide() end end)'
+    GAME.lua = GAME.lua .. ' pcall(function() native.setProperty(\'androidSystemUiVisibility\', \'immersiveSticky\') end)'
 end
 
 M['showPanelInterface'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() native.setProperty(\'androidSystemUiVisibility\', \'default\')'
-    GAME.lua = GAME.lua .. ' if LOCAL.back == \'CCode\' then BACK.show() BACK.front() end end)'
+    GAME.lua = GAME.lua .. ' pcall(function() native.setProperty(\'androidSystemUiVisibility\', \'default\') end)'
 end
 
 return M

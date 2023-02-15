@@ -37,6 +37,13 @@ M.getListButtons = function(type)
             STR['blocks.select.text'],
             STR['blocks.select.widget']
         }
+    elseif type == 'noobName' then
+        return {
+            STR['blocks.select.pic'],
+            STR['blocks.select.text'],
+            STR['blocks.select.group'],
+            STR['blocks.select.tag']
+        }
     elseif type == 'transitName' then
         return {
             STR['blocks.select.obj'],
@@ -88,6 +95,11 @@ M.getListValue = function(type, text)
         return text == STR['blocks.select.obj'] and 'obj'
             or text == STR['blocks.select.text'] and 'text'
             or text == STR['blocks.select.widget'] and 'widget' or 'obj'
+    elseif type == 'noobName' then
+        return text == STR['blocks.select.pic'] and 'pic'
+            or text == STR['blocks.select.text'] and 'text'
+            or text == STR['blocks.select.group'] and 'group'
+            or text == STR['blocks.select.tag'] and 'tag' or 'pic'
     elseif type == 'transitName' then
         return text == STR['blocks.select.obj'] and 'obj'
             or text == STR['blocks.select.text'] and 'text'
@@ -115,7 +127,7 @@ M.open = function(target)
     local diffScrollY = BLOCKS.scroll.y - BLOCKS.scroll.height / 2
     local listDirection = blockY + target.y + scrollY + diffScrollY > CENTER_Y and 'up' or 'down'
     local listY = blockY + scrollY + target.y + diffScrollY + (listDirection == 'up' and target.height or -target.height) - 10
-    local listX, type = CENTER_X + target.x + target.width / 2, INFO.listName[blockName][paramsIndex + 1]
+    local listX, type = CENTER_X + target.x + target.width / 2, INFO.listName[blockName][paramsIndex + 1][1]
     local paramsText = BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text
 
     if type == 'text' and ALERT then
@@ -134,7 +146,7 @@ M.open = function(target)
         end, (paramsData[1] and paramsData[1][1]) and paramsData[1][1] or '') native.setKeyboardFocus(INPUT.box)
     elseif type == 'value' and ALERT then
         EDITOR = require 'Core.Editor.interface'
-        EDITOR.create(blockName, blockIndex, paramsData, paramsIndex) BACK.front()
+        EDITOR.create(blockName, blockIndex, paramsData, paramsIndex)
     elseif type == 'var' and ALERT then
         BLOCKS.group[8]:setIsLocked(true, 'vertical')
         LOGIC.new('vars', blockIndex, paramsIndex, COPY_TABLE(paramsData))

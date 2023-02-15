@@ -8,19 +8,19 @@ local M = {rScrollParams = {}, scrollY = 0}
 local getFontSize = function(i)
     if CENTER_X == 360 then
         return (i == 1 or i == 2) and 24 or 36
-    elseif CENTER_X == 640 then
+    elseif CENTER_X == 641 then
         return (i == 17 or i == 18) and 24 or 36
     end
 end
 
-M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientation)
+M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientation, _, customIndex)
     if newOrientation then
         local index = LISTENER.find(paramsData)
         if index then table.remove(paramsData, index) end
     end
 
-    M.group, M.data = display.newGroup(), COPY_TABLE(paramsData)
-    M.restart = {blockName, blockIndex, M.data, paramsIndex}
+    M.group, M.data = display.newGroup(), COPY_TABLE(blockName == 'customDefault' and paramsData[paramsIndex] or paramsData)
+    M.restart = {blockName, blockIndex, M.data, paramsIndex, nil, blockName == 'customDefault', customIndex, paramsData}
     BLOCKS.group.isVisible = false
 
     local custom, ids = GET_GAME_CUSTOM(), {}
@@ -28,29 +28,35 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
 
     DATA.new()
-        M.vars = {project = data.vars, script = script.vars, event = {}}
-        M.tables = {project = data.tables, script = script.tables, event = {}}
-        M.funs = {project = data.funs, script = script.funs, custom = {}, _custom = {}}
+        M.vars = {project = COPY_TABLE(data.vars), script = COPY_TABLE(script.vars), event = {}}
+        M.tables = {project = COPY_TABLE(data.tables), script = COPY_TABLE(script.tables), event = {}}
+        M.funs = {project = COPY_TABLE(data.funs), script = COPY_TABLE(script.funs), custom = {}, _custom = {}}
         M.prop = {obj = DATA.prop.obj, text = DATA.prop.text, group = DATA.prop.group, widget = DATA.prop.widget, media = DATA.prop.media}
         M.fun, M.math, M.log, M.device = DATA.fun, DATA.math, DATA.log, DATA.device
 
-    for i = blockIndex, 1, -1 do
-        if script.params[i].event then
-            M.vars.event = script.params[i].vars
-            M.tables.event = script.params[i].tables
-            break
+    if blockName ~= 'customDefault' then
+        for i = blockIndex, 1, -1 do
+            if script.params[i].event then
+                M.vars.event = script.params[i].vars
+                M.tables.event = script.params[i].tables
+                break
+            end
         end
-    end
 
-    for index, block in pairs(custom) do
-        if tonumber(index) then
-            table.insert(ids, {block[4], tonumber(index)})
+        for index, block in pairs(custom) do
+            if tonumber(index) then
+                table.insert(ids, {block[4], tonumber(index)})
+            end
+        end table.sort(ids, function(a, b) return (a[1] == b[1]) and (a[2] > b[2]) or (a[1] > b[1]) end)
+
+        for _, index in ipairs(ids) do
+            table.insert(M.funs.custom, STR['blocks.custom' .. index[2]])
+            table.insert(M.funs._custom, 'custom' .. index[2])
         end
-    end table.sort(ids, function(a, b) return (a[1] == b[1]) and (a[2] > b[2]) or (a[1] > b[1]) end)
-
-    for _, index in ipairs(ids) do
-        table.insert(M.funs.custom, STR['blocks.custom' .. index[2]])
-        table.insert(M.funs._custom, 'custom' .. index[2])
+    else
+        M.vars = {project = {}, script = {}, event = {}}
+        M.tables = {project = {}, script = {}, event = {}}
+        M.funs = {project = {}, script = {}, custom = {}, _custom = {}}
     end
 
     local buttonsText = {
@@ -88,7 +94,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     M.group:insert(redo)
     M.group:insert(redo.text)
 
-    if CENTER_X == 640 then
+    if CENTER_X == 641 then
         list.y = ZERO_Y + 38
         undo.y = ZERO_Y + 38
         redo.y = ZERO_Y + 38
@@ -97,25 +103,36 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         redo.text.y = redo.y - 18
     end
 
-    local target = BLOCKS.group.blocks[blockIndex]
-    local length, _length = #INFO.listName[target.data.name] - 1, #target.data.params
-    local twidth, size = CENTER_X == 640 and (MAX_X - ZERO_X - 844) * 1.5 or target.block.width * 1.0, CENTER_X == 640 and 1.5 or 1.0
-    local comment, params, name = target.data.comment, target.data.params, target.data.name
+    local targetWidth
+    local targetData
+    local length, _length
+    local twidth, size
 
-    if _length > length then
-        for i = 1, _length do
-            if i > length then
-                BLOCKS.group.blocks[blockIndex].data.params[i] = nil
-                target.data.params[i] = nil
+    if blockName ~= 'customDefault' then
+        targetWidth = BLOCKS.group.blocks[blockIndex].block.width
+        targetData = COPY_TABLE(BLOCKS.group.blocks[blockIndex].data)
+        length, _length = #INFO.listName[targetData.name] - 1, #targetData.params
+        twidth, size = CENTER_X == 641 and (MAX_X - ZERO_X - 844) * 1.5 or targetWidth * 1.0, CENTER_X == 641 and 1.5 or 1.0
+
+        if _length > length then
+            for i = 1, _length do
+                if i > length then
+                    table.remove(BLOCKS.group.blocks[blockIndex].data.params, length + 1)
+                    table.remove(targetData.params, length + 1)
+                end
+            end
+        elseif length > _length then
+            for i = 1, length do
+                if i > _length then
+                    table.insert(BLOCKS.group.blocks[blockIndex].data.params, _length + 1, {})
+                    table.insert(targetData.params, _length + 1, {})
+                end
             end
         end
-    elseif length > _length then
-        for i = 1, length do
-            if i > _length then
-                BLOCKS.group.blocks[blockIndex].data.params[i] = {}
-                target.data.params[i] = {}
-            end
-        end
+    else
+        targetWidth, length = BLOCKS.group.blocks[1].block.width, #paramsData
+        targetData = {event = false, name = '', params = paramsData, color = blockIndex}
+        twidth, size = CENTER_X == 641 and (MAX_X - ZERO_X - 844) * 1.5 or targetWidth * 1.0, CENTER_X == 641 and 1.5 or 1.0
     end
 
     local blockScroll = WIDGET.newScrollView({
@@ -126,7 +143,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         })
     M.group:insert(blockScroll)
 
-    local block = LIST.create(target.data, size, twidth, 1.0)
+    local block = LIST.create(targetData, size, twidth, 1.0)
         block.x = blockScroll.width / 2
         block.y = block.height / 2 + 12
     blockScroll:insert(block)
@@ -172,7 +189,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     local buttonsX = ZERO_X + 54
     local buttonsY = MAX_Y - 655
 
-    if CENTER_X == 640 then
+    if CENTER_X == 641 then
         buttonsY = MAX_Y - 355
         for i = 8, 1, -1 do table.insert(buttonsText, 25, buttonsText[i]) end
         for i = 8, 1, -1 do table.remove(buttonsText, 1) end
@@ -182,7 +199,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     local scrollHeight = buttonsY - 45 - blockScroll.y - 160
     local scrollWidth, scrollX = DISPLAY_WIDTH, CENTER_X
 
-    if CENTER_X == 640 then
+    if CENTER_X == 641 then
         scrollHeight = buttonsY - 95 - title.y - title.height
         scrollY = (title.y + title.height + buttonsY - 35) / 2
         scrollWidth, scrollX, blockScroll.y = 745, ZERO_X + 404, scrollY
@@ -205,17 +222,17 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
             buttons[i].text.id = i == 28 and 'Ok' or i == 1 and 'Text' or i == 2 and 'Hide' or i == 6 and 'Local' or buttons[i].text.text
         M.group:insert(buttons[i].text)
 
-        if CENTER_X == 640 then
+        if CENTER_X == 641 then
             buttons[i].text.id = i == 28 and 'Ok' or i == 17 and 'Text' or i == 18 and 'Hide' or i == 22 and 'Local' or buttons[i].text.text
         end
 
         buttonsX = i % 4 == 0 and ZERO_X + 54 or buttonsX + 100
         buttonsY = i % 4 == 0 and buttonsY + 100 or buttonsY
 
-        if CENTER_X == 640 and i == 16 then
+        if CENTER_X == 641 and i == 16 then
             buttonsX = buttonsX + 400
             buttonsY = MAX_Y - 355
-        elseif CENTER_X == 640 and i > 16 and i % 4 == 0 then
+        elseif CENTER_X == 641 and i > 16 and i % 4 == 0 then
             buttonsX = buttonsX + 400
         end
 
@@ -301,13 +318,19 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     local listButtonsText = {'var', 'table', 'funs', 'prop', 'fun', 'math', 'log', 'device'}
 
     for i = 1, 8 do
+        local listButtonName = 'editor.list.' .. listButtonsText[i]
+
+        if NOOBMODE and (i == 1 or i == 3 or i == 5) then
+            listButtonName = listButtonName .. '.noob'
+        end
+
         listScroll.buttons[i] = display.newRect(listButtonsX, listButtonsY, listScroll.width, 70)
             listScroll.buttons[i]:setFillColor(0.11, 0.11, 0.13)
             listScroll.buttons[i].isOpen = false
             listScroll.buttons[i].count = 0
         listScroll:insert(listScroll.buttons[i])
 
-        listScroll.buttons[i].text = display.newText(STR['editor.list.' .. listButtonsText[i]], 20, listButtonsY, 'ubuntu', 28)
+        listScroll.buttons[i].text = display.newText(STR[listButtonName], 20, listButtonsY, 'ubuntu', 28)
             listScroll.buttons[i].text.id = listButtonsText[i]
             listScroll.buttons[i].text.anchorX = 0
         listScroll:insert(listScroll.buttons[i].text)

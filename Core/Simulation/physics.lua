@@ -4,24 +4,25 @@ local M = {}
 M['setBody'] = function(params)
     local name = CALC(params[1])
     local type = CALC(params[2], '\'dynamic\'')
-    local density = CALC(params[3], '1')
-    local bounce = CALC(params[4], '0')
-    local friction = CALC(params[5], '0')
-    local gravity = '0 - (' .. CALC(params[6], '-1') .. ')'
-    local categoryBit = CALC(params[7], 'nil')
-    local maskBits = CALC(params[8], 'nil')
+    local density = #params == 4 and '1' or CALC(params[3], '1')
+    local bounce = #params == 4 and CALC(params[3], '0') or CALC(params[4], '0')
+    local friction = #params == 4 and '0' or CALC(params[5], '0')
+    local gravity = '0 - (' .. (#params == 4 and CALC(params[4], '-1') or CALC(params[6], '-1')) .. ')'
+    local categoryBit = #params == 4 and 'nil' or CALC(params[7], 'nil')
+    local maskBits = #params == 4 and 'nil' or CALC(params[8], 'nil')
     local hitbox = 'GAME.group.objects[name]._hitbox'
 
     GAME.lua = GAME.lua .. ' pcall(function() local name, type = ' .. name .. ', ' .. type
     GAME.lua = GAME.lua .. ' local maskBits, categoryBit = ' .. maskBits .. ', ' .. categoryBit
     GAME.lua = GAME.lua .. ' pcall(function() PHYSICS.removeBody(GAME.group.objects[name]) end)'
     GAME.lua = GAME.lua .. ' local params = other.getPhysicsParams(' .. friction .. ', ' .. bounce .. ', ' .. density .. ', ' .. hitbox .. ','
-    GAME.lua = GAME.lua .. ' {categoryBit, maskBits}) PHYSICS.addBody(GAME.group.objects[name], type,'
+    GAME.lua = GAME.lua .. ' {categoryBit, maskBits}) PHYSICS.addBody(GAME.group.objects[name], \'dynamic\','
     GAME.lua = GAME.lua .. ' params) GAME.group.objects[name]._density = params.density'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._bounce = params.bounce'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._friction = params.friction'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._gravity = ' .. gravity
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._body = type'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].bodyType = type'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._maskBits = maskBits'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._categoryBit = categoryBit'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name].gravityScale = GAME.group.objects[name]._gravity end)'
@@ -185,7 +186,7 @@ M['setHitboxMesh'] = function(params)
 
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.objects[name]._hitbox.type = \'mesh\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._hitbox.outline = graphics.newOutline(' .. mesh .. ','
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link, system.DocumentsDirectory) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link, GAME.group.objects[name]._baseDir) end)'
 end
 
 M['setHitboxPolygon'] = function(params)
@@ -215,8 +216,9 @@ M['updHitbox'] = function(params)
     GAME.lua = GAME.lua .. ' isFixedRotation = ' .. isFixedRotation .. ' isSensor, isBullet = ' .. isSensor .. ', ' .. isBullet .. ' end)'
     GAME.lua = GAME.lua .. ' pcall(function() PHYSICS.removeBody(GAME.group.objects[name]) end)'
     GAME.lua = GAME.lua .. ' local params = other.getPhysicsParams(' .. friction .. ', ' .. bounce .. ', ' .. density .. ', ' .. hitbox .. ','
-    GAME.lua = GAME.lua .. ' {' .. categoryBit .. ', ' .. maskBits .. '}) PHYSICS.addBody(GAME.group.objects[name], ' .. type .. ','
+    GAME.lua = GAME.lua .. ' {' .. categoryBit .. ', ' .. maskBits .. '}) PHYSICS.addBody(GAME.group.objects[name], \'dynamic\','
     GAME.lua = GAME.lua .. ' params) pcall(function() GAME.group.objects[name].isSensor = isSensor end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name].bodyType = ' .. type .. ' end)'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name].isFixedRotation = isFixedRotation end)'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name].isBullet = isBullet end)'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name].gravityScale = ' .. gravity .. ' end) end)'

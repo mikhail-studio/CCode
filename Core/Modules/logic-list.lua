@@ -135,13 +135,13 @@ M.new = function(target)
         if _length > length then
             for i = 1, _length do
                 if i > length then
-                    target.data.params[i] = nil
+                    table.remove(target.data.params, length + 1)
                 end
             end
         elseif length > _length then
             for i = 1, length do
                 if i > _length then
-                    target.data.params[i] = {}
+                    table.insert(target.data.params, _length + 1, {})
                 end
             end
         end

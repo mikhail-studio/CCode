@@ -65,13 +65,12 @@ local function getStartLua(linkBuild)
 end
 
 M.remove = function()
-    display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll() transition.cancelAll()
-    if LOCAL.back == 'System' then native.setProperty('androidSystemUiVisibility', 'default')
-    else native.setProperty('androidSystemUiVisibility', 'immersiveSticky') end
+    display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll()
+    transition.cancelAll() native.setProperty('androidSystemUiVisibility', 'default') GAME.hash = ''
     pcall(function() for _, v in ipairs(M.group.networks) do pcall(function() network.cancel(v) end) end end)
     pcall(function() for _, v in pairs(M.group.timers) do pcall(function() timer.cancel(v) end) end end)
     pcall(function() for _, v in ipairs(M.group.ts) do pcall(function() timer.cancel(v) end) end end)
-    pcall(function() for _, v in pairs(M.group.widgets) do timer.new(10, 1, function()
+    pcall(function() for _, v in pairs(M.group.widgets) do timer.new(20, 1, function()
     pcall(function() v:removeSelf() v = nil end) end) end end) pcall(function() for _, v in ipairs(M.group.accelerometers) do
     pcall(function() Runtime:removeEventListener('accelerometer', v) end) end end)
     pcall(function() Runtime:removeEventListener('key', M.group.const.keyBack) end)
@@ -81,7 +80,7 @@ M.remove = function()
     pcall(function() audio.stop() end) pcall(function() for _, v in ipairs(M.group.collis) do
     pcall(function() Runtime:removeEventListener('collision', v) end) pcall(function() Runtime:removeEventListener('preCollision', v) end)
     pcall(function() Runtime:removeEventListener('postCollision', v) end) end end)
-    pcall(function() for _, v in pairs(M.group.objects) do
+    pcall(function() system.deactivate('multitouch') for _, v in pairs(M.group.objects) do
     pcall(function() v:removeEventListener('collision') end) pcall(function() v:removeEventListener('preCollision') end)
     pcall(function() v:removeEventListener('postCollision') end) pcall(function() PHYSICS.removeBody(v) end) end end)
     pcall(function() for _, v in pairs(M.group.texts) do pcall(function() PHYSICS.removeBody(v) end) end end)
@@ -89,15 +88,15 @@ M.remove = function()
     pcall(function() for _, v in pairs(M.group.textures) do v:releaseSelf() v = nil end end)
     pcall(function() for _, v in ipairs(M.group.stops) do v() end end) M.isStarted = nil
     pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
-    pcall(function() M.group:removeSelf() M.group = nil end) RESOURCES = nil math.randomseed(os.time())
+    pcall(function() M.group:removeSelf() M.group = nil end) M.RESOURCES = nil math.randomseed(os.time())
     pcall(function() for child = display.currentStage.numChildren, 1, -1 do
-    if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end) BACK.show() BACK.front()
+    if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
     timer.performWithDelay(1, function() if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true})
     if (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) then GAME_GROUP_OPEN.scroll:scrollToPosition({y = M.scrollY, time = 0}) end end end)
 end
 
 M.new = function(linkBuild, isDebug)
-    M.group = display.newGroup() BACK.hide()
+    M.group = display.newGroup()
     M.orientation, EVENTS.CUSTOM = CURRENT_ORIENTATION, {}
     M.data = GET_GAME_CODE(linkBuild or CURRENT_LINK) M.needBack, M.scripts = true, {}
     M.scrollY = (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) and select(2, GAME_GROUP_OPEN.scroll:getContentPosition()) or 0
@@ -108,12 +107,6 @@ M.new = function(linkBuild, isDebug)
         M.lua = M.lua .. ' setOrientationApp({type = \'portrait\', sim = true})'
     elseif M.data.settings.orientation == 'landscape' and (linkBuild or CURRENT_ORIENTATION ~= 'landscape') then
         M.lua = M.lua .. ' setOrientationApp({type = \'landscape\', sim = true})'
-    end
-
-    if LOCAL.back == 'System' then
-        M.lua = M.lua .. ' native.setProperty(\'androidSystemUiVisibility\', \'default\')'
-    else
-        M.lua = M.lua .. ' native.setProperty(\'androidSystemUiVisibility\', \'immersiveSticky\')'
     end
 
     local onStartCount = 0
@@ -276,7 +269,7 @@ M.new = function(linkBuild, isDebug)
                 pcall(function() M.group:removeSelf() M.group, M.isStarted = nil, nil end)
 
                 WINDOW.new(STR['game.isbug'], {STR['button.close']}, function()
-                    display.setDefault('background', 0.15, 0.15, 0.17) BACK.show() BACK.front()
+                    display.setDefault('background', 0.15, 0.15, 0.17)
                     if (GAME_GROUP_OPEN and GAME_GROUP_OPEN.group) then GAME_GROUP_OPEN.group.isVisible = true end
                 end, 5)
 
@@ -285,6 +278,12 @@ M.new = function(linkBuild, isDebug)
             end
         end)
     end
+end
+
+for i = 3, 10 do
+    pcall(function()
+        EVENTS.BLOCKS = table.merge(EVENTS.BLOCKS, require('Core.Simulation.Noob.' .. INFO.listType[i]))
+    end)
 end
 
 return M

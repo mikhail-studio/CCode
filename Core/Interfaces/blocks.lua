@@ -9,7 +9,7 @@ end
 listeners.but_add = function(target)
     BLOCKS.group.isVisible = false
     NEW_BLOCK = require 'Interfaces.new-block'
-    NEW_BLOCK.create() BACK.front()
+    NEW_BLOCK.create()
 end
 
 listeners.but_play = function(target)
@@ -98,6 +98,10 @@ listeners.checkLocalData = function(bIndex, pIndex, pType, data)
             local tablesE = script.params[lastIndexEvent].tables
 
             if pType == 'value' then
+                if type(script.params[bIndex].params[pIndex]) ~= 'table' then
+                    script.params[bIndex].params[pIndex] = {}
+                end
+
                 for o = #script.params[bIndex].params[pIndex], 1, -1 do
                     local name = script.params[bIndex].params[pIndex][o][1]
                     local modify = script.params[bIndex].params[pIndex][o][2]
@@ -274,12 +278,12 @@ listeners.but_okay = function(target)
                             if BLOCKS.group.blocks[j].data.event and j ~= i then break end
 
                             for k = 2, #INFO.listName[BLOCKS.group.blocks[j].data.name] do
-                                if INFO.listName[BLOCKS.group.blocks[j].data.name][k] == 'localvar'
-                                or INFO.listName[BLOCKS.group.blocks[j].data.name][k] == 'localtable'
-                                or INFO.listName[BLOCKS.group.blocks[j].data.name][k] == 'var'
-                                or INFO.listName[BLOCKS.group.blocks[j].data.name][k] == 'table'
-                                or INFO.listName[BLOCKS.group.blocks[j].data.name][k] == 'value' then
-                                    listeners.checkLocalData(j, k - 1, INFO.listName[BLOCKS.group.blocks[j].data.name][k], data)
+                                if INFO.listName[BLOCKS.group.blocks[j].data.name][k][1] == 'localvar'
+                                or INFO.listName[BLOCKS.group.blocks[j].data.name][k][1] == 'localtable'
+                                or INFO.listName[BLOCKS.group.blocks[j].data.name][k][1] == 'var'
+                                or INFO.listName[BLOCKS.group.blocks[j].data.name][k][1] == 'table'
+                                or INFO.listName[BLOCKS.group.blocks[j].data.name][k][1] == 'value' then
+                                    listeners.checkLocalData(j, k - 1, INFO.listName[BLOCKS.group.blocks[j].data.name][k][1], data)
                                 end
                             end
                         end

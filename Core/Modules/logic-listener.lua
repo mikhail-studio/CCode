@@ -380,11 +380,13 @@ local function stopMoveLogicBlock(e, group, scroll)
                 if startNestedFor and e.target.data.nested and i >= M.index then
                     if group.blocks[i].data.event and i ~= M.index then startNestedFor = false end
                     for j = 2, #INFO.listName[group.blocks[i].data.name] do
-                        if INFO.listName[group.blocks[i].data.name][j] == 'localvar' or INFO.listName[group.blocks[i].data.name][j] == 'localtable'
-                        or INFO.listName[group.blocks[i].data.name][j] == 'var' or INFO.listName[group.blocks[i].data.name][j] == 'table'
-                        or INFO.listName[group.blocks[i].data.name][j] == 'value' then
+                        if INFO.listName[group.blocks[i].data.name][j][1] == 'localvar'
+                        or INFO.listName[group.blocks[i].data.name][j][1] == 'localtable'
+                        or INFO.listName[group.blocks[i].data.name][j][1] == 'var'
+                        or INFO.listName[group.blocks[i].data.name][j][1] == 'table'
+                        or INFO.listName[group.blocks[i].data.name][j][1] == 'value' then
                             LISTENER({
-                                bIndex = i, pIndex = j - 1, pType = INFO.listName[group.blocks[i].data.name][j], data = M.data
+                                bIndex = i, pIndex = j - 1, pType = INFO.listName[group.blocks[i].data.name][j][1], data = M.data
                             })
                         end
                     end
@@ -402,11 +404,13 @@ local function stopMoveLogicBlock(e, group, scroll)
 
         if not e.target.data.nested then
             for i = 2, #INFO.listName[e.target.data.name] do
-                if INFO.listName[e.target.data.name][i] == 'localvar' or INFO.listName[e.target.data.name][i] == 'localtable'
-                or INFO.listName[e.target.data.name][i] == 'var' or INFO.listName[e.target.data.name][i] == 'table'
-                or INFO.listName[e.target.data.name][i] == 'value' then
+                if INFO.listName[e.target.data.name][i][1] == 'localvar'
+                or INFO.listName[e.target.data.name][i][1] == 'localtable'
+                or INFO.listName[e.target.data.name][i][1] == 'var'
+                or INFO.listName[e.target.data.name][i][1] == 'table'
+                or INFO.listName[e.target.data.name][i][1] == 'value' then
                     LISTENER({
-                        bIndex = M.index, pIndex = i - 1, pType = INFO.listName[e.target.data.name][i], data = M.data
+                        bIndex = M.index, pIndex = i - 1, pType = INFO.listName[e.target.data.name][i][1], data = M.data
                     })
                 end
             end

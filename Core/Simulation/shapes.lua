@@ -13,6 +13,7 @@ M['setSprite'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name]._width = image.width or 0 end)'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name]._height = image.height or 0 end)'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name]._link = tostring(link) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name]._baseDir = system.DocumentsDirectory end)'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name]._name = _link end)'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name].fill = {type = \'image\', filename = tostring(link),'
     GAME.lua = GAME.lua .. ' baseDir = system.DocumentsDirectory} end) image:removeSelf() image = nil end)'
@@ -36,7 +37,8 @@ M['newRect'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._body = \'\' GAME.group.objects[name]._hitbox = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = \'\' GAME.group.objects[name]._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._touch = false GAME.group.objects[name]._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {} GAME.group.objects[name]._baseDir = system.DocumentsDirectory'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._listeners = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._size, GAME.group.objects[name].name = 1, name end)'
 end
 
@@ -56,7 +58,8 @@ M['newRoundedRect'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._body = \'\' GAME.group.objects[name]._hitbox = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = \'\' GAME.group.objects[name]._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._touch = false GAME.group.objects[name]._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {} GAME.group.objects[name]._baseDir = system.DocumentsDirectory'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._listeners = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._size, GAME.group.objects[name].name = 1, name end)'
 end
 
@@ -73,7 +76,8 @@ M['newCircle'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._body = \'\' GAME.group.objects[name]._hitbox = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = \'\' GAME.group.objects[name]._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._touch = false GAME.group.objects[name]._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {} GAME.group.objects[name]._baseDir = system.DocumentsDirectory'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._listeners = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._size, GAME.group.objects[name].name = 1, name end)'
 end
 
@@ -92,7 +96,8 @@ M['newPolygon'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._body = \'\' GAME.group.objects[name]._hitbox = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = \'\' GAME.group.objects[name]._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._touch = false GAME.group.objects[name]._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {} GAME.group.objects[name]._baseDir = system.DocumentsDirectory'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._listeners = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._size, GAME.group.objects[name].name = 1, name end)'
 end
 
@@ -115,13 +120,14 @@ M['newLine'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._body = \'\' GAME.group.objects[name]._hitbox = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = \'\' GAME.group.objects[name]._name = \'SHAPE\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._touch = false GAME.group.objects[name]._tag = \'TAG\''
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {}'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {} GAME.group.objects[name]._baseDir = system.DocumentsDirectory'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._listeners = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._size, GAME.group.objects[name].name = 1, name end)'
 end
 
 M['appendLine'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() local coords = ' .. CALC(params[2], '{}') .. ' for i = 1, #coords do if i % 2 == 0 then'
-    GAME.lua = GAME.lua .. ' coords[i] = SET_Y(coords[i]) else coords[i] = SET_X(coords[i]) end end'
+    GAME.lua = GAME.lua .. ' pcall(function() local coords = COPY_TABLE(' .. CALC(params[2], '{}') .. ') for i = 1, #coords do if i % 2 == 0'
+    GAME.lua = GAME.lua .. ' then coords[i] = SET_Y(coords[i]) else coords[i] = SET_X(coords[i]) end end'
     GAME.lua = GAME.lua .. ' GAME.group.objects[' .. CALC(params[1]) ..  ']:append(unpack(coords)) end)'
 end
 
@@ -204,6 +210,7 @@ M['setBitmapSprite'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._width = image.width'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._height = image.height'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = GAME.group.bitmaps[_link].filename'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._baseDir = GAME.group.bitmaps[_link].baseDir'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._name = _link'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name].fill = {type = \'image\','
     GAME.lua = GAME.lua .. ' filename = GAME.group.bitmaps[_link].filename,'
