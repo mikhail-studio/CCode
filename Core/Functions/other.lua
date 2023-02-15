@@ -19,7 +19,7 @@ end
 M.getPhysicsParams = function(friction, bounce, density, hitbox, filter)
     local params = {friction = friction, bounce = bounce, density = density}
 
-    if filter[1] and filter[2] then
+    if filter and filter[1] and filter[2] then
         params.filter = {
             categoryBits = math.getBit(filter[1]),
             maskBits = math.getMaskBits(filter[2])
@@ -48,6 +48,14 @@ M.getPhysicsParams = function(friction, bounce, density, hitbox, filter)
     end
 
     return params
+end
+
+M.getResource = function(link)
+    for i = 1, #GAME.RESOURCES.others do
+        if GAME.RESOURCES.others[i][1] == link then
+            return CURRENT_LINK .. '/Resources/' .. GAME.RESOURCES.others[i][2]
+        end
+    end
 end
 
 M.getSound = function(link)

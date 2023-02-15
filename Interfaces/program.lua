@@ -4,6 +4,7 @@ local LOCAL_STR = {
     'program.sounds',
     'program.videos',
     'program.fonts',
+    'program.resources',
     'menu.settings',
     'program.export',
     'program.build'
@@ -28,6 +29,11 @@ M.create = function(app, noobmode)
         LOCAL_STR[1] = 'program.scenarios'
         LOCAL_STR[2] = 'program.pictures'
 
+        if LOCAL_STR[4] == 'program.videos' then
+            table.remove(LOCAL_STR, 6)
+            table.remove(LOCAL_STR, 4)
+        end
+
         if NEW_BLOCK and not NEW_BLOCK.noobmode then
             pcall(function() NEW_BLOCK.remove() end)
         end
@@ -35,15 +41,20 @@ M.create = function(app, noobmode)
         LOCAL_STR[1] = 'program.scripts'
         LOCAL_STR[2] = 'program.images'
 
+        if LOCAL_STR[4] ~= 'program.videos' then
+            table.insert(LOCAL_STR, 4, 'program.videos')
+            table.insert(LOCAL_STR, 6, 'program.resources')
+        end
+
         if NEW_BLOCK and NEW_BLOCK.noobmode then
             pcall(function() NEW_BLOCK.remove() end)
         end
     end NOOBMODE = noobmode
 
     local bg = display.newImage('Sprites/bg.png', CENTER_X, CENTER_Y)
-        bg.width = CENTER_X == 640 and DISPLAY_HEIGHT or DISPLAY_WIDTH
-        bg.height = CENTER_X == 640 and DISPLAY_WIDTH or DISPLAY_HEIGHT
-        bg.rotation = CENTER_X == 640 and 90 or 0
+        bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
+        bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
+        bg.rotation = CENTER_X == 641 and 90 or 0
     M.group:insert(bg)
 
     local title = display.newText(app, ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)

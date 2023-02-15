@@ -17,7 +17,7 @@ return {
         local hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, code, '?.cc_ode-123%'), '%^()*cc.ode_?')
 
         for i = 1, #data.scripts do
-            local script = GET_GAME_SCRIPT(CURRENT_LINK, i, data)
+            local script = GET_FULL_DATA(GET_GAME_SCRIPT(CURRENT_LINK, i, data))
             for j = 1, #script.params do
                 local name = script.params[j].name
                 local index = UTF8.sub(name, 7, UTF8.len(name))
@@ -28,7 +28,8 @@ return {
                         for o = #script.params[j].params[u], 1, -1 do
                             if script.params[j].params[u][o][2] == 'fC' then
                                 local name = script.params[j].params[u][o][1]
-                                dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = true
+                                local index = UTF8.sub(name, 7, UTF8.len(name))
+                                dataCustom[index] = true
                             end
                         end
                     end

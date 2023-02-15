@@ -72,6 +72,10 @@ M['inputNoEmoji'] = function()
     return 'noemoji'
 end
 
+M['pic'] = function()
+    return 'objects'
+end
+
 M['obj'] = function()
     return 'objects'
 end

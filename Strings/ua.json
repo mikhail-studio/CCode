@@ -4,9 +4,9 @@
         "lang.en": "English",
         "lang.pt": "Brasileiro",
         "lang.pl": "Polski",
-        "lang.ua": "Український",
+        "lang.ua": "Українська",
         "lang.cn": "中文",
-        "lang.custom": "Власний",
+        "lang.custom": "Власна",
         "button.yes": "Так",
         "button.no": "Ні",
         "button.okay": "Ок",
@@ -106,7 +106,7 @@
         "blocks.create.tags": "Теги",
         "blocks.create.transition": "Переходи",
         "blocks.create.particle": "Частинки",
-        "blocks.create.block": "Створити блок",
+        "blocks.create.block": "Новий блок",
         "blocks.create.color": "Колір",
         "blocks.create.copy": "Копіювати",
         "blocks.create.block.save.lua": "Зберегти (Lua код)",
@@ -444,7 +444,7 @@
             "Назва тексту:",
             "Позиція (Y):"
         ],
-        "blocks.updTextRotation": "Змінити оберт текст",
+        "blocks.updTextRotation": "Змінити оберт тексту",
         "blocks.updTextRotation.params": [
             "Назва тексту:",
             "Оберт:"
@@ -993,1150 +993,1150 @@
         "blocks.setMaskHitTrue.params": [
             "Назва об'єкту:"
         ],
-        "blocks.setMaskHitFalse": "Set mask clickability",
+        "blocks.setMaskHitFalse": "Встановити клікабельність маски",
         "blocks.setMaskHitFalse.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ]
     },
     "groups": {
-        "blocks.groups": "Groups\n& Tags",
-        "blocks.newGroup": "Create group",
+        "blocks.groups": "Групи\n& Теги",
+        "blocks.newGroup": "Створити групу",
         "blocks.newGroup.params": [
-            "Group name:"
+            "Назва групи:"
         ],
-        "blocks.removeGroup": "Remove group",
+        "blocks.removeGroup": "Видалити групу",
         "blocks.removeGroup.params": [
-            "Group name:"
+            "Назва групи:"
         ],
-        "blocks.showGroup": "Show group",
+        "blocks.showGroup": "Показати групу",
         "blocks.showGroup.params": [
-            "Group name:"
+            "Назва групи:"
         ],
-        "blocks.hideGroup": "Hide group",
+        "blocks.hideGroup": "Сховати групу",
         "blocks.hideGroup.params": [
-            "Group name:"
+            "Назва групи:"
         ],
-        "blocks.addGroupObject": "Insert object to group",
+        "blocks.addGroupObject": "Вставити об'єкт у групу",
         "blocks.addGroupObject.params": [
-            "Group name:",
-            "Object name:"
+            "Назва групи:",
+            "Назва об'єкту:"
         ],
         "blocks.addGroupText": "Вставте текст в групу",
         "blocks.addGroupText.params": [
             "Назва групи:",
             "Назва тексту:"
         ],
-        "blocks.addGroupWidget": "Insert widget to group",
+        "blocks.addGroupWidget": "Вставити віджет в групу",
         "blocks.addGroupWidget.params": [
-            "Group name:",
-            "Widget name:"
+            "Назва групи:",
+            "Назва віджету:"
         ],
-        "blocks.addGroupMedia": "Insert media to group",
+        "blocks.addGroupMedia": "Вставити медіа в групу",
         "blocks.addGroupMedia.params": [
-            "Group name:",
-            "Media name:"
+            "Назва групи:",
+            "Назва медіа:"
         ],
-        "blocks.addGroupTag": "Insert tag to group",
+        "blocks.addGroupTag": "Вставити тег у групу",
         "blocks.addGroupTag.params": [
-            "Tag name:",
-            "Group name:"
+            "Назва тегу:",
+            "Назва групи:"
         ],
-        "blocks.addGroupGroup": "Insert group2 to group1",
+        "blocks.addGroupGroup": "Вставити групу2 до групи1",
         "blocks.addGroupGroup.params": [
-            "Group1 name:",
-            "Group2 name:"
+            "Назва групи1:",
+            "Назва групи2:"
         ],
-        "blocks.setGroupPos": "Set group position",
+        "blocks.setGroupPos": "Встановити позицію групи",
         "blocks.setGroupPos.params": [
-            "Group name:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва групи:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.setGroupSize": "Set group size",
+        "blocks.setGroupSize": "Встановити розмір групи",
         "blocks.setGroupSize.params": [
-            "Group name:",
-            "Width:",
-            "Height:"
+            "Назва групи:",
+            "Ширина:",
+            "Висота:"
         ],
-        "blocks.setGroupRotation": "Set group rotation",
+        "blocks.setGroupRotation": "Встановити поворот групи",
         "blocks.setGroupRotation.params": [
-            "Group name:",
-            "Rotation (0-360):"
+            "Назва групи:",
+            "Обертання (0-360):"
         ],
-        "blocks.setGroupAlpha": "Set group opacity",
+        "blocks.setGroupAlpha": "Встановити прозорість групи",
         "blocks.setGroupAlpha.params": [
-            "Group name:",
-            "Opacity (0-100):"
+            "Назва групи:",
+            "Непрозорість (0-100):"
         ],
         "blocks.updGroupPosX": "Змінити позицію X групи",
         "blocks.updGroupPosX.params": [
-            "Group name:",
-            "Position (X):"
+            "Назва групи:",
+            "Позиція (X):"
         ],
-        "blocks.updGroupPosY": "Change group position Y",
+        "blocks.updGroupPosY": "Змінити позицію Y групи",
         "blocks.updGroupPosY.params": [
-            "Group name:",
-            "Position (Y):"
+            "Назва групи:",
+            "Позиція (Y):"
         ],
-        "blocks.updGroupWidth": "Change group width",
+        "blocks.updGroupWidth": "Змінити ширину групи",
         "blocks.updGroupWidth.params": [
-            "Group name:",
-            "Width:"
+            "Назва групи:",
+            "Ширина:"
         ],
-        "blocks.updGroupHeight": "Change group height",
+        "blocks.updGroupHeight": "Змінити висоту групи",
         "blocks.updGroupHeight.params": [
-            "Group name:",
-            "Height:"
+            "Назва групи:",
+            "Висота:"
         ],
-        "blocks.updGroupRotation": "Change group rotation",
+        "blocks.updGroupRotation": "Змінити поворот групи",
         "blocks.updGroupRotation.params": [
-            "Group name:",
-            "Rotation (0-360):"
+            "Назва групи:",
+            "Обертання (0-360):"
         ],
-        "blocks.updGroupAlpha": "Change group opacity",
+        "blocks.updGroupAlpha": "Змінити непрозорість групи",
         "blocks.updGroupAlpha.params": [
-            "Group name:",
-            "Opacity (0-100):"
+            "Назва групи:",
+            "Прозорість (0-100):"
         ],
-        "blocks.newTag": "Create tag",
+        "blocks.newTag": "Створити тег",
         "blocks.newTag.params": [
-            "Tag name:"
+            "Назва тегу:"
         ],
-        "blocks.removeTag": "Remove tag",
+        "blocks.removeTag": "Видалити тег",
         "blocks.removeTag.params": [
-            "Tag name:"
+            "Назва тегу:"
         ],
-        "blocks.showTag": "Show tag",
+        "blocks.showTag": "Показати тег",
         "blocks.showTag.params": [
-            "Tag name:"
+            "Назва тегу:"
         ],
-        "blocks.hideTag": "Hide tag",
+        "blocks.hideTag": "Сховати тег",
         "blocks.hideTag.params": [
-            "Tag name:"
+            "Назва тегу:"
         ],
-        "blocks.addTagObject": "Add tag to object",
+        "blocks.addTagObject": "Додати тег до об'єкту",
         "blocks.addTagObject.params": [
-            "Tag name:",
-            "Object name:"
+            "Назва тегу:",
+            "Назва об'єкту:"
         ],
-        "blocks.addTagText": "Add tag to text",
+        "blocks.addTagText": "Додати тег до тексту",
         "blocks.addTagText.params": [
             "Назва тегу:",
             "Назва тексту:"
         ],
-        "blocks.addTagWidget": "Add tag to widget",
+        "blocks.addTagWidget": "Додати тег до віджету",
         "blocks.addTagWidget.params": [
-            "Tag name:",
-            "Widget name:"
+            "Назва тегу:",
+            "Назва віджету:"
         ],
-        "blocks.addTagMedia": "Add tag to media",
+        "blocks.addTagMedia": "Додати тег до медіа",
         "blocks.addTagMedia.params": [
-            "Tag name:",
-            "Media name:"
+            "Назва тегу:",
+            "Назва медіа:"
         ],
-        "blocks.addTagGroup": "Add tag to group",
+        "blocks.addTagGroup": "Додати тег до групи",
         "blocks.addTagGroup.params": [
-            "Tag name:",
-            "Group name:"
+            "Назва тегу:",
+            "Назва групи:"
         ],
-        "blocks.addTagTag": "Add tag1 to tag2",
+        "blocks.addTagTag": "Додати тег1 до тегу2",
         "blocks.addTagTag.params": [
-            "Tag name1:",
-            "Tag name2:"
+            "Назва тегу1:",
+            "Назва тегу2:"
         ],
-        "blocks.setTagPos": "Set tag position",
+        "blocks.setTagPos": "Встановити позицію тегу",
         "blocks.setTagPos.params": [
-            "Tag name:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва тегу:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.setTagSize": "Set tag size",
+        "blocks.setTagSize": "Встановити розмір тегу",
         "blocks.setTagSize.params": [
-            "Tag name:",
-            "Width:",
-            "Height:"
+            "Назва тегу:",
+            "Ширина:",
+            "Висота:"
         ],
-        "blocks.setTagRotation": "Set tag rotation",
+        "blocks.setTagRotation": "Встановити обертання тегу",
         "blocks.setTagRotation.params": [
-            "Tag name:",
-            "Rotation (0-360):"
+            "Назва тегу:",
+            "Обертання (0-360):"
         ],
-        "blocks.setTagAlpha": "Set tag alpha",
+        "blocks.setTagAlpha": "Встановити прозорість тегу",
         "blocks.setTagAlpha.params": [
-            "Tag name:",
-            "Opacity (0-100):"
+            "Назва тегу:",
+            "Прозорість (0-100):"
         ],
-        "blocks.updTagPosX": "Change tag position X",
+        "blocks.updTagPosX": "Змінити позицію X тегу",
         "blocks.updTagPosX.params": [
-            "Tag name:",
-            "Position (X):"
+            "Назва тегу:",
+            "Позиція (X):"
         ],
-        "blocks.updTagPosY": "Change tag position Y",
+        "blocks.updTagPosY": "Змінити позицію Y тегу",
         "blocks.updTagPosY.params": [
-            "Tag name:",
-            "Position (Y):"
+            "Назва тегу:",
+            "Позиція (Y):"
         ],
-        "blocks.updTagWidth": "Change tag width",
+        "blocks.updTagWidth": "Змінити ширину тегу",
         "blocks.updTagWidth.params": [
-            "Tag name:",
-            "Width:"
+            "Назва тегу:",
+            "Ширина:"
         ],
-        "blocks.updTagHeight": "Change tag height",
+        "blocks.updTagHeight": "Змінити висоту тегу",
         "blocks.updTagHeight.params": [
-            "Tag name:",
-            "Height:"
+            "Назва тегу:",
+            "Висота:"
         ],
-        "blocks.updTagRotation": "Change tag rotation",
+        "blocks.updTagRotation": "Змінити оберт тегу",
         "blocks.updTagRotation.params": [
-            "Tag name:",
-            "Rotation (0-360):"
+            "Назва тегу:",
+            "Оберт(0-360):"
         ],
-        "blocks.updTagAlpha": "Change tag opacity",
+        "blocks.updTagAlpha": "Змінити непрозорість тегу",
         "blocks.updTagAlpha.params": [
-            "Tag name:",
-            "Opacity (0-100):"
+            "Назва тегу:",
+            "Непрозорість (0-100):"
         ]
     },
     "physics": {
-        "blocks.physics": "Physics",
-        "blocks.setBody": "Set physical body of object",
+        "blocks.physics": "Фізика",
+        "blocks.setBody": "Встановити фізичне тіло об'єкту",
         "blocks.setBody.params": [
-            "Object name:",
-            "Type:",
-            "Density:",
-            "Bounce:",
-            "Friction:",
-            "Gravity:",
-            "Collision filter:",
-            "Collision table:"
+            "Назва об'єкту:",
+            "Тип:",
+            "Вага:",
+            "Відскакування:",
+            "Тертя:",
+            "Гравітація:",
+            "Фільтр колізії:",
+            "Таблиця колізій:"
         ],
-        "blocks.removeBody": "Delete physical body of object",
+        "blocks.removeBody": "Видалити фізичне тіло об'єкту",
         "blocks.removeBody.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.setBodyType": "Set object type",
+        "blocks.setBodyType": "Встановити тип об'єкту",
         "blocks.setBodyType.params": [
-            "Object name:",
-            "Type:"
+            "Назва об'єкту:",
+            "Тип:"
         ],
-        "blocks.setHitboxBox": "Set rectangular hitbox",
+        "blocks.setHitboxBox": "Встановити прямокутний хітбокс",
         "blocks.setHitboxBox.params": [
-            "Object name:",
-            "Rotation:",
-            "Width:",
-            "Height:",
-            "Offset (X):",
-            "Offset (Y):"
+            "Назва об'єкту:",
+            "Оберт:",
+            "Ширина:",
+            "Висота:",
+            "Зміщення (X):",
+            "Зміщення (Y):"
         ],
-        "blocks.setHitboxCircle": "Set round hitbox",
+        "blocks.setHitboxCircle": "Встановити круглий хітбокс",
         "blocks.setHitboxCircle.params": [
-            "Object name:",
-            "Radius:"
+            "Назва об'єкту:",
+            "Радіус:"
         ],
-        "blocks.setHitboxMesh": "Set mesh hitbox (by sprite)",
+        "blocks.setHitboxMesh": "Встановити меш хітбокс (за спрайтом)",
         "blocks.setHitboxMesh.params": [
-            "Object name:",
-            "Coarseness texels:"
+            "Назва об'єкту:",
+            "Грубість текселів:"
         ],
-        "blocks.setHitboxPolygon": "Set polygonal hitbox",
+        "blocks.setHitboxPolygon": "Встановити полігональний хітбокс",
         "blocks.setHitboxPolygon.params": [
-            "Object name:",
-            "Hitbox:"
+            "Назва об'єкту:",
+            "Хітбокс:"
         ],
-        "blocks.updHitbox": "Update object hitbox",
+        "blocks.updHitbox": "Оновити хітбокс об'єкту",
         "blocks.updHitbox.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.setGravity": "Set object gravity",
+        "blocks.setGravity": "Встановити гравітацію об'єкту",
         "blocks.setGravity.params": [
-            "Object name:",
-            "Gravity:"
+            "Назва об'єкту:",
+            "Гравітація:"
         ],
-        "blocks.setLinearVelocity": "Make a jump",
+        "blocks.setLinearVelocity": "Зробити стрибок",
         "blocks.setLinearVelocity.params": [
-            "Object name:",
-            "Speed (X):",
-            "Speed (Y):"
+            "Назва об'єкту:",
+            "Швидкість (X):",
+            "Швидкість (Y):"
         ],
-        "blocks.setLinearVelocityX": "Make a jump along X",
+        "blocks.setLinearVelocityX": "Зробити стрибок через X",
         "blocks.setLinearVelocityX.params": [
-            "Object name:",
-            "Speed (X):"
+            "Назва об'єкту:",
+            "Швидкість (X):"
         ],
-        "blocks.setLinearVelocityY": "Make a jump along Y",
+        "blocks.setLinearVelocityY": "Зробити стрибок через Y",
         "blocks.setLinearVelocityY.params": [
-            "Object name:",
-            "Speed (Y):"
+            "Назва об'єкту:",
+            "Швидкість (Y):"
         ],
-        "blocks.setSensor": "Set sensor mode",
+        "blocks.setSensor": "Встановити сенсорний режим",
         "blocks.setSensor.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.removeSensor": "Remove sensor mode",
+        "blocks.removeSensor": "Вимкнути сенсорний режим",
         "blocks.removeSensor.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.setFixedRotation": "Make body non-rotatable",
+        "blocks.setFixedRotation": "Зробити тіло неповоротним",
         "blocks.setFixedRotation.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.removeFixedRotation": "Make body can rotate",
+        "blocks.removeFixedRotation": "Зробити тіло поворотним",
         "blocks.removeFixedRotation.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.setBullet": "Set bullet mode",
+        "blocks.setBullet": "Встановити режим пулі",
         "blocks.setBullet.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.removeBullet": "Remove bullet mode",
+        "blocks.removeBullet": "Вимкнути режим пулі",
         "blocks.removeBullet.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.setWorldGravity": "Set world gravity",
+        "blocks.setWorldGravity": "Встановити гравітацію всього",
         "blocks.setWorldGravity.params": [
-            "Gravity (X):",
-            "Gravity (Y):"
+            "Гравітація (X):",
+            "Гравітація (Y):"
         ],
-        "blocks.setAwake": "Wake body up",
+        "blocks.setAwake": "Пробудити тіло",
         "blocks.setAwake.params": [
-            "Object name:"
+            "Назва об'єкту:"
         ],
-        "blocks.setBounce": "Set coefficient of bounce",
+        "blocks.setBounce": "Встановити коефіцієнт відскоку",
         "blocks.setBounce.params": [
-            "Physical contact:",
-            "Bounce:"
+            "Фізичний контакт:",
+            "Відскок:"
         ],
-        "blocks.setFriction": "Set coefficient of friction",
+        "blocks.setFriction": "Встановити коефіцієнт тертя",
         "blocks.setFriction.params": [
-            "Physical contact:",
-            "Friction:"
+            "Фізичний контакт:",
+            "Тертя:"
         ],
-        "blocks.setTangentSpeed": "Set tangential velocity",
+        "blocks.setTangentSpeed": "Встановити тангенційну швидкість",
         "blocks.setTangentSpeed.params": [
-            "Physical contact:",
-            "Velocity:"
+            "Фізичний контакт:",
+            "Швидкість:"
         ],
-        "blocks.disableCollision": "Disable physical collision",
+        "blocks.disableCollision": "Вимкнути фізичну колізію",
         "blocks.disableCollision.params": [
-            "Physical contact:"
+            "Фізичний контакт:"
         ],
-        "blocks.setAngularVelocity": "Set angular velocity",
+        "blocks.setAngularVelocity": "Встановити кутову швидкість",
         "blocks.setAngularVelocity.params": [
-            "Object name:",
-            "Speed:"
+            "Назва об'єкту:",
+            "Швидкість:"
         ],
-        "blocks.setAngularDamping": "Set angular damping",
+        "blocks.setAngularDamping": "Встановити кутове затухання",
         "blocks.setAngularDamping.params": [
-            "Object name:",
-            "Damping:"
+            "Назва об'єкту:",
+            "Затухання:"
         ],
-        "blocks.setLinearDamping": "Set linear damping",
+        "blocks.setLinearDamping": "Встановити лінійне затухання",
         "blocks.setLinearDamping.params": [
-            "Object name:",
-            "Damping:"
+            "Назва об'єкту:",
+            "Затухання:"
         ],
-        "blocks.setForce": "Apply force",
+        "blocks.setForce": "Застосувати силу",
         "blocks.setForce.params": [
-            "Object name:",
-            "Force (X):",
-            "Force (Y):",
-            "Offset (X):",
-            "Offset (Y):"
+            "Назва об'єкту:",
+            "Сила (X):",
+            "Сила (Y):",
+            "Зміщення (X):",
+            "Зміщення (Y):"
         ],
-        "blocks.setTorque": "Apply torque",
+        "blocks.setTorque": "Застосувати крутний момент",
         "blocks.setTorque.params": [
-            "Object name:",
-            "Force:"
+            "Назва об'єкту:",
+            "Сила:"
         ],
-        "blocks.setLinearImpulse": "Apply linear impulse",
+        "blocks.setLinearImpulse": "Застосувати лінійний імпульс",
         "blocks.setLinearImpulse.params": [
-            "Object name:",
-            "Force (X):",
-            "Force (Y):",
-            "Offset (X):",
-            "Offset (Y):"
+            "Назва об'єкту:",
+            "Сила (X):",
+            "Сила (Y):",
+            "Зміщення (X):",
+            "Зміщення (Y):"
         ],
-        "blocks.setAngularImpulse": "Apply angular impulse",
+        "blocks.setAngularImpulse": "Застосувати кутовий імпульс",
         "blocks.setAngularImpulse.params": [
-            "Object name:",
-            "Force:"
+            "Назва об'єкту:",
+            "Сила:"
         ],
-        "blocks.setHitboxVisible": "Show hitboxes",
-        "blocks.removeHitboxVisible": "Hide hitboxes",
-        "blocks.startPhysics": "Enable physics engine",
-        "blocks.pausePhysics": "Pause physics engine",
-        "blocks.stopPhysics": "Disable physics engine",
-        "blocks.setTextBody": "Set physical body of text",
+        "blocks.setHitboxVisible": "Показувати хітбокси",
+        "blocks.removeHitboxVisible": "Приховати хітбокси",
+        "blocks.startPhysics": "Увімкнути фізичний двигун",
+        "blocks.pausePhysics": "Призупинити фізичний двигун",
+        "blocks.stopPhysics": "Вимкнути фізичний двигун",
+        "blocks.setTextBody": "Встановити фізичне тіло тексту",
         "blocks.setTextBody.params": [
-            "Object name:",
-            "Type:",
-            "Density:",
-            "Bounce:",
-            "Friction:",
-            "Gravity:"
+            "Назва об'єкту:",
+            "Тип:",
+            "Вага:",
+            "Відскакування:",
+            "Тертя:",
+            "Гравітація:"
         ]
     },
     "widgets": {
-        "blocks.widgets": "Widgets",
-        "blocks.newWebView": "Create web view",
+        "blocks.widgets": "Віджети",
+        "blocks.newWebView": "Створити Webview",
         "blocks.newWebView.params": [
-            "Widget name:",
-            "Url:",
-            "Width:",
-            "Height:"
+            "Назва віджета:",
+            "Адрес:",
+            "Ширина:",
+            "Висота:"
         ],
-        "blocks.newHSlider": "Create horizontal slider",
+        "blocks.newHSlider": "Створити горизонтальний повзунок",
         "blocks.newHSlider.params": [
-            "Widget name:",
-            "Width:",
-            "Listener:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва віджету:",
+            "Ширина:",
+            "Слухач:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.newVSlider": "Create vertical slider",
+        "blocks.newVSlider": "Створити вертикальний повзунок",
         "blocks.newVSlider.params": [
-            "Widget name:",
-            "Height:",
-            "Listener:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва віджету:",
+            "Висота:",
+            "Слухач:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.newField": "Create single line textfield",
+        "blocks.newField": "Створити одно строкове текстове поле",
         "blocks.newField.params": [
-            "Widget name:",
-            "Text:",
-            "Input type:",
-            "Text color:",
-            "Size:",
-            "Field background:",
-            "Align:",
-            "Font:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва віджету:",
+            "Текст:",
+            "Тип введення:",
+            "Колір тексту:",
+            "Розмір:",
+            "Фон поля:",
+            "Вирівняти:",
+            "Шрифт:",
+            "Ширина:",
+            "Висота:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.newBox": "Create multiline textfield",
+        "blocks.newBox": "Створити багаторядкове поле",
         "blocks.newBox.params": [
-            "Widget name:",
-            "Text:",
-            "Text color:",
-            "Size:",
-            "Field background:",
-            "Align:",
-            "Font:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва віджету:",
+            "Текст:",
+            "Колір тексту:",
+            "Розмір:",
+            "Фон поля:",
+            "Вирівнювання:",
+            "Шрифт:",
+            "Ширина:",
+            "Висота:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.removeWidget": "Remove widget",
+        "blocks.removeWidget": "Видалити віджет",
         "blocks.removeWidget.params": [
-            "Widget name:"
+            "Назва віджету:"
         ],
-        "blocks.setWidgetPos": "Set widget position",
+        "blocks.setWidgetPos": "Встановити позицію віджету",
         "blocks.setWidgetPos.params": [
-            "Widget name:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва віджету:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.setWidgetSize": "Set widget size",
+        "blocks.setWidgetSize": "Встановити розмір віджету",
         "blocks.setWidgetSize.params": [
-            "Widget name:",
-            "Width:",
-            "Height:"
+            "Назва віджету:",
+            "Ширина:",
+            "Висота:"
         ],
-        "blocks.setWidgetListener": "Set change function",
+        "blocks.setWidgetListener": "Встановити функцію змін",
         "blocks.setWidgetListener.params": [
-            "Widget name:",
-            "Function name:"
+            "Назва віджету:",
+            "Назва функції:"
         ],
-        "blocks.setWebViewFront": "Go to website ahead",
+        "blocks.setWebViewFront": "Перейти до сайту вперед",
         "blocks.setWebViewFront.params": [
-            "Widget name:"
+            "Назва віджету:"
         ],
-        "blocks.setWebViewBack": "Go to website back",
+        "blocks.setWebViewBack": "Повернутися на сайт назад",
         "blocks.setWebViewBack.params": [
-            "Widget name:"
+            "Назва віджету:"
         ],
-        "blocks.updWebViewSite": "Update site in web view",
+        "blocks.updWebViewSite": "Оновити сайт у Webview",
         "blocks.updWebViewSite.params": [
-            "Widget name:"
+            "Назва віджету:"
         ],
-        "blocks.setWebViewLink": "Set url in web view",
+        "blocks.setWebViewLink": "Встановити url у Webview",
         "blocks.setWebViewLink.params": [
-            "Widget name:",
+            "Назва віджету:",
             "Url:"
         ],
-        "blocks.setSliderValue": "Set value to slider",
+        "blocks.setSliderValue": "Встановити значення слайдеру",
         "blocks.setSliderValue.params": [
-            "Widget name:",
-            "Value (0-100):"
+            "Назва віджету:",
+            "Значення (0-100):"
         ],
-        "blocks.setFieldSecure": "Set password mode",
+        "blocks.setFieldSecure": "Встановити парольний режим",
         "blocks.setFieldSecure.params": [
-            "Widget name:"
+            "Назва віджету:"
         ],
-        "blocks.removeFieldSecure": "Remove password mode",
+        "blocks.removeFieldSecure": "Видалити парольний режим",
         "blocks.removeFieldSecure.params": [
-            "Widget name:"
+            "Назва віджету:"
         ],
         "blocks.setFieldRule": "Дозвіл на ввід у текстове поле",
         "blocks.setFieldRule.params": [
-            "Widget name:",
-            "Rule:"
+            "Назва віджету:",
+            "Правило:"
         ],
-        "blocks.setFieldText": "Set text in textfield",
+        "blocks.setFieldText": "Встановити текст в текстове поле",
         "blocks.setFieldText.params": [
             "Назва віджету:",
             "Текст:"
         ],
-        "blocks.setFieldFocus": "Set focus on textfield",
+        "blocks.setFieldFocus": "Встановити фокус на текстове поле",
         "blocks.setFieldFocus.params": [
-            "Widget name:"
+            "Назва віджету:"
         ],
-        "blocks.setFieldFocusNil": "Turn off keyboard",
-        "blocks.hidePanelInterface": "Hide Interface Panels",
-        "blocks.showPanelInterface": "Show Interface Panels",
-        "blocks.newScrollView": "Create scroll view",
+        "blocks.setFieldFocusNil": "Вимкнути клавіатуру",
+        "blocks.hidePanelInterface": "Приховати панелі інтерфейсу",
+        "blocks.showPanelInterface": "Показувати панелі інтерфейсу",
+        "blocks.newScrollView": "Створити Scrollview",
         "blocks.newScrollView.params": [
-            "Widget name:",
-            "Scroll Bar:",
-            "Listener:",
-            "Bounce:",
-            "Friction:",
-            "Scrolling on the X:",
-            "Scrolling on the Y:",
-            "Color:",
-            "Background:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):"
+            "Назва віджету:",
+            "Смуга гортання:",
+            "Слухач:",
+            "Відскакування:",
+            "Тертя:",
+            "Прокручування по X:",
+            "Прокручування по Y:",
+            "Колір:",
+            "Фон:",
+            "Ширина:",
+            "Висота:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.newSwitch": "Create switch",
+        "blocks.newSwitch": "Створити перемикач",
         "blocks.newSwitch.params": [
-            "Widget name:",
-            "Type:",
-            "State:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):",
-            "When touching:",
-            "After touching:"
+            "Назва віджету:",
+            "Тип:",
+            "Стан:",
+            "Ширина:",
+            "Висота:",
+            "Позиція (X):",
+            "Позиція (Y):",
+            "Коли палець торкається:",
+            "Після дотику:"
         ],
-        "blocks.setSwitchState": "Set switch state",
+        "blocks.setSwitchState": "Змінити стан перемикачу",
         "blocks.setSwitchState.params": [
-            "Widget name:",
-            "State:"
+            "Назва віджету:",
+            "Стан:"
         ],
-        "blocks.insertToScroll": "Insert to scroll",
+        "blocks.insertToScroll": "Додати в Scrollview",
         "blocks.insertToScroll.params": [
-            "Widget name:",
-            "Name:",
-            "Type:"
+            "Назва віджету:",
+            "Назва:",
+            "Тип:"
         ]
     },
     "media": {
-        "blocks.media": "Media",
-        "blocks.newVideo": "Create video",
+        "blocks.media": "Медіа",
+        "blocks.newVideo": "Створити відео",
         "blocks.newVideo.params": [
-            "Media name:",
-            "Video name:",
-            "After execution:",
-            "Position (X):",
-            "Position (Y):",
-            "Width:",
-            "Height:"
+            "Назва медіа:",
+            "Назва відео:",
+            "Після виконання:",
+            "Позиція (X):",
+            "Позиція (Y):",
+            "Ширина:",
+            "Висота:"
         ],
-        "blocks.newRemoteVideo": "Create remote video",
+        "blocks.newRemoteVideo": "Створити віддалене відео",
         "blocks.newRemoteVideo.params": [
-            "Media name:",
+            "Назва медіа:",
             "Url:",
-            "After execution:",
-            "Position (X):",
-            "Position (Y):",
-            "Width:",
-            "Height:"
+            "Після виконання:",
+            "Позиція (X):",
+            "Позиція (Y):",
+            "Ширина:",
+            "Висота:"
         ],
-        "blocks.loadSound": "Load sound",
+        "blocks.loadSound": "Завантажити звук",
         "blocks.loadSound.params": [
-            "Media name:",
-            "Sound name:"
+            "Назва медіа:",
+            "Назва звуку:"
         ],
-        "blocks.loadStream": "Load streaming sound",
+        "blocks.loadStream": "Завантажити потоковий звук",
         "blocks.loadStream.params": [
-            "Media name:",
-            "Sound name:"
+            "Назва медіа:",
+            "Назва звуку:"
         ],
-        "blocks.playSound": "Play sound",
+        "blocks.playSound": "Відтворити звук",
         "blocks.playSound.params": [
-            "Media name:",
-            "Number repetitions:",
-            "After execution:",
-            "Time (Seconds):",
-            "Fading (Seconds):"
+            "Назва медіа:",
+            "Кількість повторень:",
+            "Після виконання:",
+            "Час (секунди):",
+            "Затухання (секунди):"
         ],
-        "blocks.resumeMedia": "Resume media",
+        "blocks.resumeMedia": "Відновити медіа",
         "blocks.resumeMedia.params": [
-            "Media name:"
+            "Назва медіа:"
         ],
-        "blocks.pauseMedia": "Pause media",
+        "blocks.pauseMedia": "Призупинити медіа",
         "blocks.pauseMedia.params": [
-            "Media name:"
+            "Назва медіа:"
         ],
-        "blocks.seekMedia": "Rewind media to timestamp",
+        "blocks.seekMedia": "Перемотати медіа до часової мітки",
         "blocks.seekMedia.params": [
-            "Media name:",
-            "Time (Seconds):"
+            "Назва медіа:",
+            "Час (секунди):"
         ],
-        "blocks.setVolume": "Set sound volume",
+        "blocks.setVolume": "Встановити гучність звуку",
         "blocks.setVolume.params": [
-            "Media name:",
-            "Volume:"
+            "Назва медіа:",
+            "Гучність:"
         ],
-        "blocks.fadeVolume": "Fade sound volume",
+        "blocks.fadeVolume": "Гучність затухання звуку",
         "blocks.fadeVolume.params": [
-            "Media name:",
-            "Time (Seconds):",
-            "Volume:"
+            "Назва медіа:",
+            "Час (секунди):",
+            "Гучність:"
         ],
-        "blocks.stopSound": "Stop sound",
+        "blocks.stopSound": "Зупинити звук",
         "blocks.stopSound.params": [
-            "Media name:"
+            "Назва медіа:"
         ],
-        "blocks.stopTimerSound": "Stop sound with timer",
+        "blocks.stopTimerSound": "Зупинити звук через таймер",
         "blocks.stopTimerSound.params": [
-            "Media name:",
-            "Time (Seconds):"
+            "Назва медіа:",
+            "Час (секунди):"
         ],
-        "blocks.disposeSound": "Dispose sound",
+        "blocks.disposeSound": "Вивантажити звук",
         "blocks.disposeSound.params": [
-            "Media name:"
+            "Назва медіа:"
         ],
-        "blocks.removeVideo": "Remove video",
+        "blocks.removeVideo": "Видалити відео",
         "blocks.removeVideo.params": [
-            "Media name:"
+            "Назва медіа:"
         ]
     },
     "snapshot": {
-        "blocks.snapshot": "Snapshots\n& Captures"
+        "blocks.snapshot": "Снапшоти\n& Знімки"
     },
     "network": {
-        "blocks.network": "Network",
-        "blocks.openURL": "Open url in browser",
+        "blocks.network": "Інтернет",
+        "blocks.openURL": "Відкрити url у браузері",
         "blocks.openURL.params": [
             "Url:"
         ],
-        "blocks.createServer": "Create LAN server",
+        "blocks.createServer": "Створити LAN сервер",
         "blocks.createServer.params": [
-            "Port:",
-            "Server listener:"
+            "Порт:",
+            "Слухач серверу:"
         ],
-        "blocks.connectToServer": "Connect to LAN server",
+        "blocks.connectToServer": "Під'єднатися до LAN сервера",
         "blocks.connectToServer.params": [
             "IP:",
-            "Port:",
-            "Client listener:"
+            "Порт:",
+            "Слухач клієнту:"
         ],
-        "blocks.requestGET": "Asynchronous GET request",
+        "blocks.requestGET": "Асинхронний GET запит",
         "blocks.requestGET.params": [
             "Url:",
-            "Request body:",
-            "Request header:",
-            "Request listener:",
-            "Type listener:",
-            "Redirection:",
-            "Timeout (Seconds):"
+            "Тіло запиту:",
+            "Заголовок запиту:",
+            "Слухач запиту:",
+            "Тип слухачу:",
+            "Переадресування:",
+            "Час очікування (секунди):"
         ],
-        "blocks.requestPOST": "Asynchronous POST request",
+        "blocks.requestPOST": "Асинхронний POST запит",
         "blocks.requestPOST.params": [
             "Url:",
-            "Request body:",
-            "Request header:",
-            "Request listener:",
-            "Type listener:",
-            "Redirection:",
-            "Timeout (Seconds):"
+            "Тіло запиту:",
+            "Заголовок запиту:",
+            "Слухач запиту:",
+            "Тип слухачу:",
+            "Переадресування:",
+            "Час очікування (секунди):"
         ],
-        "blocks.requestPUT": "Asynchronous PUT request",
+        "blocks.requestPUT": "Асинхронний PUT запит",
         "blocks.requestPUT.params": [
             "Url:",
-            "Request body:",
-            "Request header:",
-            "Request listener:",
-            "Type listener:",
-            "Redirection:",
-            "Timeout (Seconds):"
+            "Тіло запиту:",
+            "Заголовок запиту:",
+            "Слухач запиту:",
+            "Тип слухачу:",
+            "Переадресування:",
+            "Час очікування (секунди):"
         ],
-        "blocks.requestPATCH": "Asynchronous PATCH request",
+        "blocks.requestPATCH": "Асинхронний PATCH запит",
         "blocks.requestPATCH.params": [
             "Url:",
-            "Request body:",
-            "Request header:",
-            "Request listener:",
-            "Type listener:",
-            "Redirection:",
-            "Timeout (Seconds):"
+            "Тіло запиту:",
+            "Заголовок запиту:",
+            "Слухач запиту:",
+            "Тип слухачу:",
+            "Переадресування:",
+            "Час очікування (секунди):"
         ],
-        "blocks.requestHEAD": "Asynchronous HEAD request",
+        "blocks.requestHEAD": "Асинхронний HEAD запит",
         "blocks.requestHEAD.params": [
             "Url:",
-            "Request body:",
-            "Request header:",
-            "Request listener:",
-            "Type listener:",
-            "Redirection:",
-            "Timeout (Seconds):"
+            "Тіло запиту:",
+            "Заголовок запиту:",
+            "Слухач запиту:",
+            "Тип слухачу:",
+            "Переадресування:",
+            "Час очікування (секунди):"
         ],
-        "blocks.requestDELETE": "Asynchronous DELETE request",
+        "blocks.requestDELETE": "Асинхронний DELETE запит",
         "blocks.requestDELETE.params": [
             "Url:",
-            "Request body:",
-            "Request header:",
-            "Request listener:",
-            "Type listener:",
-            "Redirection:",
-            "Timeout (Seconds):"
+            "Тіло запиту:",
+            "Заголовок запиту:",
+            "Слухач запиту:",
+            "Тип слухача:",
+            "Переадресування:",
+            "Час очікування (секунди):"
         ],
-        "blocks.firebasePUT": "Write to Firebase",
+        "blocks.firebasePUT": "Переписати до Firebase",
         "blocks.firebasePUT.params": [
-            "Token:",
-            "Value:",
-            "Key:",
-            "Request listener:"
+            "Токен:",
+            "Значення:",
+            "Ключ:",
+            "Слухач запиту:"
         ],
-        "blocks.firebasePATCH": "Update in Firebase",
+        "blocks.firebasePATCH": "Оновити в Firebase",
         "blocks.firebasePATCH.params": [
-            "Token:",
-            "Value:",
-            "Key:",
-            "Request listener:"
+            "Токен:",
+            "Значення:",
+            "Ключ:",
+            "Слухач запиту:"
         ],
-        "blocks.firebaseGET": "Get from Firebase",
+        "blocks.firebaseGET": "Отримати з Firebase",
         "blocks.firebaseGET.params": [
-            "Token:",
-            "Key:",
-            "Request listener:"
+            "Токен:",
+            "Ключ:",
+            "Слухач запиту:"
         ],
-        "blocks.firebaseDELETE": "Remove from Firebase",
+        "blocks.firebaseDELETE": "Видалити з Firebase",
         "blocks.firebaseDELETE.params": [
-            "Token:",
-            "Key:",
-            "Request listener:"
+            "Токен:",
+            "Ключ:",
+            "Слухач запиту:"
         ]
     },
     "transition": {
-        "blocks.transition": "Transitions\n& Particles",
-        "blocks.setTransitionTo": "Start transition",
+        "blocks.transition": "Переходи\n& частинки",
+        "blocks.setTransitionTo": "Почати перехід",
         "blocks.setTransitionTo.params": [
-            "Name:",
-            "Type:",
-            "Animation type:",
-            "Number repetitions:",
-            "Time (Seconds):",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):",
-            "Scale (X):",
-            "Scale (Y):",
-            "Opacity (0-100):",
-            "Rotation (0-360):",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Назва:",
+            "Тип:",
+            "Тип анімації:",
+            "Кількість повторень:",
+            "Час (секунди):",
+            "Ширина:",
+            "Висота:",
+            "Позиція (X):",
+            "Позиція (Y):",
+            "Масштаб (X):",
+            "Масштаб (Y):",
+            "Непрозорість (0-100):",
+            "Оберт(0-360):",
+            "Графік переходу:",
+            "Після виконання:",
+            "При призупинці:",
+            "Після призупинки:",
+            "Після зупинки:",
+            "При повтору:"
         ],
-        "blocks.setTransitionPos": "Set position transition",
+        "blocks.setTransitionPos": "Плавно встановити позицію",
         "blocks.setTransitionPos.params": [
-            "Name:",
-            "Type:",
-            "Animation type:",
-            "Number repetitions:",
-            "Time (Seconds):",
-            "Position (X):",
-            "Position (Y):",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Назва:",
+            "Тип:",
+            "Тип анімації:",
+            "Кількість повторень:",
+            "Час (секунди):",
+            "Позиція (X):",
+            "Позиція (Y):",
+            "Графік переходу:",
+            "Після виконання:",
+            "При призупинці:",
+            "Після призупинки:",
+            "При зупинці:",
+            "При повтору:"
         ],
-        "blocks.setTransitionSize": "Set size transition",
+        "blocks.setTransitionSize": "Плавно встановити розмір",
         "blocks.setTransitionSize.params": [
-            "Name:",
-            "Type:",
-            "Animation type:",
-            "Number repetitions:",
-            "Time (Seconds):",
-            "Width:",
-            "Height:",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Назва:",
+            "Тип:",
+            "Тип анімації:",
+            "Кількість повторень:",
+            "Час (секунди):",
+            "Ширина:",
+            "Висота:",
+            "Графік переходу:",
+            "Після виконання:",
+            "При призупинці:",
+            "Після призупинки:",
+            "При зупинці:",
+            "При повтору:"
         ],
-        "blocks.setTransitionScale": "Set scale transition",
+        "blocks.setTransitionScale": "Плавно встановити масштаб",
         "blocks.setTransitionScale.params": [
-            "Name:",
-            "Type:",
-            "Animation type:",
-            "Number repetitions:",
-            "Time (Seconds):",
-            "Scale (X):",
-            "Scale (Y):",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Назва:",
+            "Тип:",
+            "Тип анімації:",
+            "Кількість повторень:",
+            "Час (секунди):",
+            "Масштаб (X):",
+            "Масштаб (Y):",
+            "Графік переходу:",
+            "Після виконання:",
+            "При призупинці:",
+            "Після призупинки:",
+            "При зупинці:",
+            "При повтору:"
         ],
-        "blocks.setTransitionRotation": "Set rotation transition",
+        "blocks.setTransitionRotation": "Плавно встановити оберт",
         "blocks.setTransitionRotation.params": [
-            "Name:",
-            "Animation type:",
-            "Type:",
-            "Time (Seconds):",
-            "Number repetitions:",
-            "Rotation (0-360):",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Назва:",
+            "Тип анімації:",
+            "Тип:",
+            "Час (секунди):",
+            "Кількість повторень:",
+            "Оберт(0-360):",
+            "Графік переходу:",
+            "Після виконання:",
+            "При призупинці:",
+            "Після призупинки:",
+            "Після зупинці:",
+            "При повтору:"
         ],
-        "blocks.setTransitionAlpha": "Set alpha transition",
+        "blocks.setTransitionAlpha": "Плавно встановити прозорість",
         "blocks.setTransitionAlpha.params": [
-            "Name:",
-            "Animation type:",
-            "Type:",
-            "Time (Seconds):",
-            "Number repetitions:",
-            "Opacity (0-100):",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Назва:",
+            "Тип анімації:",
+            "Тип:",
+            "Час (секунди):",
+            "Кількість повторень:",
+            "Непрозорість (0-100):",
+            "Графік переходу:",
+            "Після виконання:",
+            "При призупинці:",
+            "Після призупинки:",
+            "При зупинці:",
+            "При повтору:"
         ],
-        "blocks.setTransitionAngles": "Set angles transition",
+        "blocks.setTransitionAngles": "Плавно встановити кути",
         "blocks.setTransitionAngles.params": [
-            "Name:",
-            "Animation type:",
-            "Type:",
-            "Time (Seconds):",
-            "Number repetitions:",
-            "Angles table:",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Назва:",
+            "Тип анімації:",
+            "Тип:",
+            "Час (секунди):",
+            "Кількість повторень:",
+            "Таблиця кутів:",
+            "Графік переходу:",
+            "Після виконання:",
+            "При призупинці:",
+            "Після призупинки:",
+            "При зупинці:",
+            "При повтору:"
         ],
-        "blocks.setTransitionPause": "Pause transition",
+        "blocks.setTransitionPause": "Призупинити перехід",
         "blocks.setTransitionPause.params": [
-            "Name:",
-            "Type:"
+            "Назва:",
+            "Тип:"
         ],
-        "blocks.setTransitionResume": "Resume transition",
+        "blocks.setTransitionResume": "Відновити перехід",
         "blocks.setTransitionResume.params": [
-            "Name:",
-            "Type:"
+            "Назва:",
+            "Тип:"
         ],
-        "blocks.setTransitionCancel": "Cancel transition",
+        "blocks.setTransitionCancel": "Призупинити перехід",
         "blocks.setTransitionCancel.params": [
-            "Name:",
-            "Type:"
+            "Назва:",
+            "Тип:"
         ],
-        "blocks.setTransitionPauseAll": "Pause all transition",
-        "blocks.setTransitionResumeAll": "Resume all transition",
-        "blocks.setTransitionCancelAll": "Cancel all transition"
+        "blocks.setTransitionPauseAll": "Призупинити всі переходи",
+        "blocks.setTransitionResumeAll": "Відновити всі переходи",
+        "blocks.setTransitionCancelAll": "Відмінити всі переходи"
     },
     "objectsNoob": {
-        "blocks.newObjectNoob": "Создать картинку",
+        "blocks.newObjectNoob": "Створити зображення",
         "blocks.newObjectNoob.params": [
-            "Имя картинки:",
-            "Позиция (X):",
-            "Позиция (Y):"
+            "Назва зображення:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.setPosNoob": "Установить позицию картинки",
+        "blocks.setPosNoob": "Встановити позицію зображення",
         "blocks.setPosNoob.params": [
-            "Имя картинки:",
-            "Позиция (X):",
-            "Позиция (Y):"
+            "Назва зображення:",
+            "Позиція (X):",
+            "Позиція (Y):"
         ],
-        "blocks.setPosXNoob": "Установить позицию X картинки",
+        "blocks.setPosXNoob": "Встановити позицію X зображення",
         "blocks.setPosXNoob.params": [
-            "Имя картинки:",
-            "Позиция (X):"
+            "Назва зображення:",
+            "Позиція (X):"
         ],
-        "blocks.setPosYNoob": "Установить позицию Y картинки",
+        "blocks.setPosYNoob": "Встановити позицію Y зображення",
         "blocks.setPosYNoob.params": [
-            "Имя картинки:",
-            "Позиция (Y):"
+            "Назва зображення:",
+            "Позиція (Y):"
         ],
-        "blocks.setSizeNoob": "Установить размер картинки",
+        "blocks.setSizeNoob": "Встановити розмір зображення",
         "blocks.setSizeNoob.params": [
-            "Имя картинки:",
-            "Размер (%):"
+            "Назва зображення:",
+            "Розмір (%):"
         ],
-        "blocks.setRotationNoob": "Установить вращение картинки",
+        "blocks.setRotationNoob": "Встановити оберт зображення",
         "blocks.setRotationNoob.params": [
-            "Имя картинки:",
-            "Вращение (0-360):"
+            "Назва зображення:",
+            "Оберт (0-360):"
         ],
-        "blocks.setAlphaNoob": "Установить непрозрачность картинки",
+        "blocks.setAlphaNoob": "Встановити непрозорість зображення",
         "blocks.setAlphaNoob.params": [
-            "Имя картинки:",
-            "Непрозрачность (0-100):"
+            "Назва зображення:",
+            "Непрозорість (0-100):"
         ],
-        "blocks.setWidthNoob": "Установить ширину картинки",
+        "blocks.setWidthNoob": "Встановити ширину зображення",
         "blocks.setWidthNoob.params": [
-            "Имя картинки:",
+            "Назва зображення:",
             "Ширина:"
         ],
-        "blocks.setHeightNoob": "Установить высоту картинки",
+        "blocks.setHeightNoob": "Встановити висоту зображення",
         "blocks.setHeightNoob.params": [
-            "Имя картинки:",
-            "Высота:"
+            "Назва зображення:",
+            "Висота:"
         ],
-        "blocks.updPosXNoob": "Изменить позицию X картинки",
+        "blocks.updPosXNoob": "Змінити позицію X зображення",
         "blocks.updPosXNoob.params": [
-            "Имя картинки:",
-            "Позиция (X):"
+            "Назва зображення:",
+            "Позиція (X):"
         ],
-        "blocks.updPosYNoob": "Изменить позицию Y картинки",
+        "blocks.updPosYNoob": "Змінити позицію Y зображення",
         "blocks.updPosYNoob.params": [
-            "Имя картинки:",
-            "Позиция (Y):"
+            "Назва зображення:",
+            "Позиція (Y):"
         ],
-        "blocks.updSizeNoob": "Изменить размер картинки",
+        "blocks.updSizeNoob": "Змінити розмір зображення",
         "blocks.updSizeNoob.params": [
-            "Имя картинки:",
-            "Размер (%):"
+            "Назва зображення:",
+            "Розмір (%):"
         ],
-        "blocks.updRotationNoob": "Изменить вращение картинки",
+        "blocks.updRotationNoob": "Змінити оберт зображення",
         "blocks.updRotationNoob.params": [
-            "Имя картинки:",
-            "Вращение (0-360):"
+            "Назва зображення:",
+            "Оберт (0-360):"
         ],
-        "blocks.updAlphaNoob": "Изменить непрозрачность картинки",
+        "blocks.updAlphaNoob": "Змінити непрозорість зображення",
         "blocks.updAlphaNoob.params": [
-            "Имя картинки:",
-            "Непрозрачность (0-100):"
+            "Назва зображення:",
+            "Непрозорість (0-100):"
         ],
-        "blocks.updWidthNoob": "Изменить ширину картинки",
+        "blocks.updWidthNoob": "Змінити ширину зображення",
         "blocks.updWidthNoob.params": [
-            "Имя картинки:",
+            "Назва зображення:",
             "Ширина:"
         ],
-        "blocks.updHeightNoob": "Изменить высоту картинки",
+        "blocks.updHeightNoob": "Змінити висоту зображення",
         "blocks.updHeightNoob.params": [
-            "Имя картинки:",
-            "Высота:"
+            "Назва зображення:",
+            "Висота:"
         ],
-        "blocks.hideObjectNoob": "Скрыть картинку",
+        "blocks.hideObjectNoob": "Приховати зображення",
         "blocks.hideObjectNoob.params": [
-            "Имя картинки:"
+            "Назва зображення:"
         ],
-        "blocks.showObjectNoob": "Показать картинку",
+        "blocks.showObjectNoob": "Показати зображення",
         "blocks.showObjectNoob.params": [
-            "Имя картинки:"
+            "Назва зображення:"
         ],
-        "blocks.removeObjectNoob": "Удалить картинку",
+        "blocks.removeObjectNoob": "Видалити зображення",
         "blocks.removeObjectNoob.params": [
-            "Имя картинки:"
+            "Назва зображення:"
         ],
-        "blocks.frontObjectNoob": "Разместить картинку на слой выше",
+        "blocks.frontObjectNoob": "Розмістити зображення на шарі вище",
         "blocks.frontObjectNoob.params": [
-            "Имя картинки:"
+            "Назва зображення:"
         ],
-        "blocks.backObjectNoob": "Разместить картинку на слой ниже",
+        "blocks.backObjectNoob": "Розмістити зображення на шарі нижче",
         "blocks.backObjectNoob.params": [
-            "Имя картинки:"
+            "Назва зображення:"
         ]
     },
     "eventsNoob": {
-        "blocks.onConditionNoob": "Повторять пока условие истинно",
+        "blocks.onConditionNoob": "Повторювати поки умова істина",
         "blocks.onConditionNoob.params": [
-            "Условие:"
+            "Умова:"
         ],
-        "blocks.onFunNoob": "Создать действие",
+        "blocks.onFunNoob": "Створити дію",
         "blocks.onFunNoob.params": [
-            "Действие:"
+            "Дія:"
         ],
-        "blocks.onTouchBeganNoob": "Палец прикасается к картинке",
+        "blocks.onTouchBeganNoob": "Палець торкається зображення",
         "blocks.onTouchBeganNoob.params": [
-            "Имя картинки:"
+            "Назва зображення:"
         ],
-        "blocks.onTouchEndedNoob": "Палец отпускает картинку",
+        "blocks.onTouchEndedNoob": "Палець відпускає зображення",
         "blocks.onTouchEndedNoob.params": [
-            "Имя картинки:"
+            "Назва зображення:"
         ],
-        "blocks.onTouchMovedNoob": "Пока палец перемещается по картинке",
+        "blocks.onTouchMovedNoob": "Поки палець рухається по зображенню",
         "blocks.onTouchMovedNoob.params": [
-            "Имя картинки:"
+            "Назва зображення:"
         ],
-        "blocks.onLocalCollisionBeganNoob": "Как только картинки столкнулись",
+        "blocks.onLocalCollisionBeganNoob": "Як тільки зображення зіткнулися",
         "blocks.onLocalCollisionBeganNoob.params": [
-            "Имя картинки1:",
-            "Имя картинки2:"
+            "Назва зображення1:",
+            "Назва зображення2:"
         ],
-        "blocks.requestFunNoob": "Выполнить действие",
+        "blocks.requestFunNoob": "Виконати дію",
         "blocks.requestFunNoob.params": [
-            "Действие:"
+            "Дія:"
         ]
     },
     "editor.interface": {
-        "editor.window.error": "Error in expression",
-        "editor.button.error": "Fix",
-        "editor.button.text": "Text",
+        "editor.window.error": "Помилка в умові",
+        "editor.button.error": "Виправити",
+        "editor.button.text": "Текст",
         "editor.button.local": "{ }",
-        "editor.button.hide": "Hide",
-        "editor.list.var": "Variables",
-        "editor.list.table": "Tables",
-        "editor.list.funs": "Functions",
-        "editor.list.fun": "Methods",
-        "editor.list.math": "Mathematics",
-        "editor.list.prop": "Properties",
-        "editor.list.log": "Logic",
-        "editor.list.device": "Device",
-        "editor.list.custom": "Custom",
-        "editor.list.event": "Event",
-        "editor.list.script": "Script",
-        "editor.list.project": "Project",
-        "editor.list.prop.obj": "Object",
-        "editor.list.prop.text": "Text",
-        "editor.list.prop.media": "Media",
-        "editor.list.prop.group": "Group",
-        "editor.list.prop.widget": "Widget"
+        "editor.button.hide": "Сховати",
+        "editor.list.var": "Змінні",
+        "editor.list.table": "Таблиці",
+        "editor.list.funs": "Функції",
+        "editor.list.fun": "Методи",
+        "editor.list.math": "Математика",
+        "editor.list.prop": "Властивості",
+        "editor.list.log": "Логіка",
+        "editor.list.device": "Пристрій",
+        "editor.list.custom": "Власні",
+        "editor.list.event": "Подія",
+        "editor.list.script": "Скрипт",
+        "editor.list.project": "Проєкт",
+        "editor.list.prop.obj": "Об'єкт",
+        "editor.list.prop.text": "Текст",
+        "editor.list.prop.media": "Медіа",
+        "editor.list.prop.group": "Групи",
+        "editor.list.prop.widget": "Віджети"
     },
     "editor.fun": {
-        "editor.list.fun.get_text": "get_text",
-        "editor.list.fun.read_save": "read_save",
-        "editor.list.fun.random_str": "random_string",
-        "editor.list.fun.concat": "concat_string",
-        "editor.list.fun.tonumber": "to_number",
-        "editor.list.fun.tostring": "to_text",
-        "editor.list.fun.totable": "to_table",
-        "editor.list.fun.len_table": "len_table",
-        "editor.list.fun.unix_time": "unix_time",
-        "editor.list.fun.encode": "encode_json",
-        "editor.list.fun.gsub": "replace_in_text",
-        "editor.list.fun.sub": "character_from_text",
-        "editor.list.fun.len": "length_text",
-        "editor.list.fun.find": "find_in_text",
-        "editor.list.fun.split": "split_text",
-        "editor.list.fun.match": "regular_expression",
-        "editor.list.fun.color_pixel": "color_pixel",
-        "editor.list.fun.get_ip": "get_own_ip",
-        "editor.list.fun.noise": "noise"
+        "editor.list.fun.get_text": "отримати_текст",
+        "editor.list.fun.read_save": "прочитати_збереження",
+        "editor.list.fun.random_str": "випадкова_строка",
+        "editor.list.fun.concat": "з'єднати_строки",
+        "editor.list.fun.tonumber": "в_число",
+        "editor.list.fun.tostring": "в_текст",
+        "editor.list.fun.totable": "в_таблицю",
+        "editor.list.fun.len_table": "довжина_таблиці",
+        "editor.list.fun.unix_time": "unix_час",
+        "editor.list.fun.encode": "закодувати_json",
+        "editor.list.fun.gsub": "замінити_в_тексті",
+        "editor.list.fun.sub": "символ_з_тексту",
+        "editor.list.fun.len": "довжина_тексту",
+        "editor.list.fun.find": "знайти_в_тексті",
+        "editor.list.fun.split": "поєднати_тексти",
+        "editor.list.fun.match": "регулярний_вираз",
+        "editor.list.fun.color_pixel": "колір_пікселя",
+        "editor.list.fun.get_ip": "отримати_власний_IP",
+        "editor.list.fun.noise": "шум"
     },
     "editor.math": {
-        "editor.list.math.random": "random",
-        "editor.list.math.radical": "radical",
-        "editor.list.math.power": "power",
-        "editor.list.math.round": "round",
-        "editor.list.math.remainder": "remainder",
-        "editor.list.math.module": "module",
-        "editor.list.math.max": "max",
-        "editor.list.math.min": "min",
-        "editor.list.math.sin": "sin",
-        "editor.list.math.cos": "cos",
-        "editor.list.math.tan": "tan",
-        "editor.list.math.ctan": "ctan",
-        "editor.list.math.pi": "pi",
-        "editor.list.math.exp": "exponent",
-        "editor.list.math.factorial": "factorial",
-        "editor.list.math.log": "log",
-        "editor.list.math.log10": "log10",
-        "editor.list.math.asin": "asin",
-        "editor.list.math.acos": "acos",
-        "editor.list.math.atan": "atan",
-        "editor.list.math.atan2": "atan2",
-        "editor.list.math.raycast": "raycast"
+        "editor.list.math.random": "випадкове",
+        "editor.list.math.radical": "корінь",
+        "editor.list.math.power": "степінь",
+        "editor.list.math.round": "округлити",
+        "editor.list.math.remainder": "остача",
+        "editor.list.math.module": "модуль",
+        "editor.list.math.max": "максимум",
+        "editor.list.math.min": "мінімум",
+        "editor.list.math.sin": "синус",
+        "editor.list.math.cos": "косинус",
+        "editor.list.math.tan": "тангенс",
+        "editor.list.math.ctan": "котангенс",
+        "editor.list.math.pi": "пі",
+        "editor.list.math.exp": "експонента",
+        "editor.list.math.factorial": "факторіал",
+        "editor.list.math.log": "логарифм",
+        "editor.list.math.log10": "логарифм 10",
+        "editor.list.math.asin": "арксинус",
+        "editor.list.math.acos": "арккосинус",
+        "editor.list.math.atan": "арктангенс",
+        "editor.list.math.atan2": "арктангенс 2",
+        "editor.list.math.raycast": "промінь"
     },
     "editor.prop": {
-        "editor.list.prop.obj.touch": "touch",
-        "editor.list.prop.obj.tag": "tag",
-        "editor.list.prop.obj.var": "variables",
-        "editor.list.prop.obj.pos_x": "pos_x",
-        "editor.list.prop.obj.pos_y": "pos_y",
-        "editor.list.prop.obj.width": "width",
-        "editor.list.prop.obj.height": "height",
-        "editor.list.prop.obj.rotation": "rotation",
-        "editor.list.prop.obj.alpha": "opacity",
-        "editor.list.prop.obj.name_texture": "name_texture",
-        "editor.list.prop.obj.velocity_x": "velocity_x",
-        "editor.list.prop.obj.velocity_y": "velocity_y",
-        "editor.list.prop.obj.angular_velocity": "angular_velocity",
-        "editor.list.prop.text.tag": "text_tag",
-        "editor.list.prop.text.pos_x": "text_x_position",
-        "editor.list.prop.text.pos_y": "text_y_position",
-        "editor.list.prop.text.width": "text_width",
-        "editor.list.prop.text.height": "text_height",
-        "editor.list.prop.text.rotation": "text_rotation",
-        "editor.list.prop.text.alpha": "text_opacity",
-        "editor.list.prop.group.tag": "group_tag",
-        "editor.list.prop.group.pos_x": "group_x_position",
-        "editor.list.prop.group.pos_y": "group_y_position",
-        "editor.list.prop.group.width": "group_width",
-        "editor.list.prop.group.height": "group_height",
-        "editor.list.prop.group.rotation": "group_rotation",
-        "editor.list.prop.group.alpha": "group_opacity",
-        "editor.list.prop.widget.tag": "widget_tag",
-        "editor.list.prop.widget.pos_x": "widget_x_position",
-        "editor.list.prop.widget.pos_y": "widget_y_position",
-        "editor.list.prop.widget.value": "slider_value",
-        "editor.list.prop.widget.state": "switch_state",
-        "editor.list.prop.widget.text": "text_from_field",
-        "editor.list.prop.widget.link": "web_view_url",
-        "editor.list.prop.media.current_time": "current_video_time",
-        "editor.list.prop.media.total_time": "total_video_time",
-        "editor.list.prop.media.sound_volume": "sound_volume",
-        "editor.list.prop.media.sound_total_time": "total_sound_time",
-        "editor.list.prop.media.sound_pause": "sound_is_paused",
-        "editor.list.prop.media.sound_play": "sound_is_played"
+        "editor.list.prop.obj.touch": "дотик",
+        "editor.list.prop.obj.tag": "тег",
+        "editor.list.prop.obj.var": "змінні",
+        "editor.list.prop.obj.pos_x": "позиція_x",
+        "editor.list.prop.obj.pos_y": "позиція_y",
+        "editor.list.prop.obj.width": "ширина",
+        "editor.list.prop.obj.height": "висота",
+        "editor.list.prop.obj.rotation": "оберт",
+        "editor.list.prop.obj.alpha": "непрозорість",
+        "editor.list.prop.obj.name_texture": "назва_текстури",
+        "editor.list.prop.obj.velocity_x": "швидкість_х",
+        "editor.list.prop.obj.velocity_y": "швидкість_у",
+        "editor.list.prop.obj.angular_velocity": "кутова_швидкість",
+        "editor.list.prop.text.tag": "тег_тексту",
+        "editor.list.prop.text.pos_x": "позиція тексту X",
+        "editor.list.prop.text.pos_y": "позиція_y_тексту",
+        "editor.list.prop.text.width": "ширина тексту",
+        "editor.list.prop.text.height": "висота_тексту",
+        "editor.list.prop.text.rotation": "оберт_тексту",
+        "editor.list.prop.text.alpha": "непрозорість_тексту",
+        "editor.list.prop.group.tag": "тег_групи",
+        "editor.list.prop.group.pos_x": "позиція_x_групи",
+        "editor.list.prop.group.pos_y": "позиція_группи_Y",
+        "editor.list.prop.group.width": "ширина_группи",
+        "editor.list.prop.group.height": "висота_групи",
+        "editor.list.prop.group.rotation": "обертання_групи",
+        "editor.list.prop.group.alpha": "непрозорість_групи",
+        "editor.list.prop.widget.tag": "тег_віджету",
+        "editor.list.prop.widget.pos_x": "віджет_позиція_X",
+        "editor.list.prop.widget.pos_y": "віджет_позиція_Y",
+        "editor.list.prop.widget.value": "значення_повзунка",
+        "editor.list.prop.widget.state": "перемикнути_стан",
+        "editor.list.prop.widget.text": "текст_для_поля",
+        "editor.list.prop.widget.link": "url_webview'а",
+        "editor.list.prop.media.current_time": "поточний_час_відео",
+        "editor.list.prop.media.total_time": "загальний_час_відео",
+        "editor.list.prop.media.sound_volume": "гучність_звуку",
+        "editor.list.prop.media.sound_total_time": "довжина_відео",
+        "editor.list.prop.media.sound_pause": "звук_призупинено",
+        "editor.list.prop.media.sound_play": "звук_відтворюється"
     },
     "editor.log": {
-        "editor.list.log.true": "true",
-        "editor.list.log.false": "false",
-        "editor.list.log.nil": "nil",
+        "editor.list.log.true": "істина",
+        "editor.list.log.false": "хибність",
+        "editor.list.log.nil": "нічого",
         "editor.list.log.>": ">",
         "editor.list.log.<": "<",
         "editor.list.log.>=": "≥",
         "editor.list.log.<=": "≤",
-        "editor.list.log.~=": "≠",
-        "editor.list.log.and": "and",
-        "editor.list.log.or": "or",
-        "editor.list.log.not": "not"
+        "editor.list.log.~=": "≠",
+        "editor.list.log.and": "та",
+        "editor.list.log.or": "або",
+        "editor.list.log.not": "не"
     },
     "editor.device": {
-        "editor.list.device.fps": "fps",
-        "editor.list.device.read_save": "read_save",
-        "editor.list.device.device_id": "device_id",
-        "editor.list.device.width_screen": "width_screen",
-        "editor.list.device.height_screen": "height_screen",
-        "editor.list.device.top_point_screen": "top_point_screen",
-        "editor.list.device.bottom_point_screen": "bottom_point_screen",
-        "editor.list.device.right_point_screen": "right_point_screen",
-        "editor.list.device.left_point_screen": "left_point_screen",
-        "editor.list.device.height_top": "top_border_height",
-        "editor.list.device.height_bottom": "bottom_border_height",
-        "editor.list.device.finger_touching_screen": "finger_touching_screen",
-        "editor.list.device.finger_touching_screen_x": "finger_touching_screen_x",
-        "editor.list.device.finger_touching_screen_y": "finger_touching_screen_y",
-        "editor.list.device.get_ip": "get_own_ip"
+        "editor.list.device.fps": "фпс",
+        "editor.list.device.read_save": "прочитати_збереження",
+        "editor.list.device.device_id": "id_пристрою",
+        "editor.list.device.width_screen": "ширина_екрану",
+        "editor.list.device.height_screen": "висота_екрану",
+        "editor.list.device.top_point_screen": "верхня_точка_екрану",
+        "editor.list.device.bottom_point_screen": "нижня_точка_екрану",
+        "editor.list.device.right_point_screen": "права_точка_екрану",
+        "editor.list.device.left_point_screen": "ліва_точка_екрану",
+        "editor.list.device.height_top": "висота_верхньої_межи",
+        "editor.list.device.height_bottom": "висота_нижньої_мережи",
+        "editor.list.device.finger_touching_screen": "палець_торкається_екрану",
+        "editor.list.device.finger_touching_screen_x": "палець_торкається_екрану_x",
+        "editor.list.device.finger_touching_screen_y": "палець_торкається_екрану_y",
+        "editor.list.device.get_ip": "отримати_власний_IP"
     }
 }

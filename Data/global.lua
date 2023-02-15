@@ -47,10 +47,11 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1233
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1234
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
+BOTTOM_HEIGHT = system.getInfo('deviceID') == 'd5e815039ddf2736' and 90 or BOTTOM_HEIGHT
 ZERO_X = CENTER_X - DISPLAY_WIDTH / 2 + LEFT_HEIGHT
 ZERO_Y = CENTER_Y - DISPLAY_HEIGHT / 2 + TOP_HEIGHT
 MAX_X = CENTER_X + DISPLAY_WIDTH / 2 - RIGHT_HEIGHT
@@ -59,19 +60,19 @@ MASK = graphics.newMask('Sprites/mask.png')
 SOLAR = _G.B .. _G.D .. _G.A .. _G.C
 KEYORDER = {
     'build', 'version', 'package', 'orientation', 'title', 'link', 'resources', 'scripts',
-    'settings', 'fonts', 'videos', 'sounds', 'images', 'funs', 'tables', 'len',
-    'vars', 'name', 'custom', 'event', 'nested', 'comment', 'params'
+    'settings', 'fonts', 'others', 'videos', 'sounds', 'images', 'funs', 'tables',
+    'len', 'vars', 'name', 'custom', 'event', 'nested', 'comment', 'params'
 } for i = 10000, 1, -1 do table.insert(KEYORDER, 1, tostring(i)) end
 
 if IS_SIM or IS_WIN then
     FILEPICKER = require 'plugin.tinyfiledialogs'
 
     FILE.pickFile = function(path, listener, file, p1, mime)
-        local filter_patterns = mime == 'image/*' and {'*.png', '*.jpg', '*.jpeg'} or mime == 'audio/*' and {'*.wav', '*.mp3', '*.ogg'}
-        or mime == 'ccode/*' and {'*.ccode', '*.zip'} or mime == 'text/x-lua' and {'*.lua', '*.txt'}
-        or mime == 'video/*' and {'*.mov', '*.mp4', '*.m4v', '*.3gp'} or nil
+        local filter_patterns = mime == 'image/*' and {'*.png', '*.jpg', '*.jpeg', '*.gif'}
+        or mime == 'audio/*' and {'*.wav', '*.mp3', '*.ogg'} or mime == 'ccode/*' and {'*.ccode', '*.zip'}
+        or mime == 'text/x-lua' and {'*.lua', '*.txt'} or mime == 'video/*' and {'*.mov', '*.mp4', '*.m4v', '*.3gp'} or nil
         local pathToFile, path = path .. '/' .. file, FILEPICKER.openFileDialog({filter_patterns = filter_patterns})
-        if path then OS_COPY(path, pathToFile) end listener({done = path and 'ok' or 'error'})
+        if path then OS_COPY(path, pathToFile) end listener({done = path and 'ok' or 'error', destFileName = path})
     end
 
     EXPORT.export = function(config)
@@ -212,9 +213,9 @@ COPY_TABLE = function(t, isSim)
 
     pcall(function() if t then
         for key, value in pairs(t) do
-            if type(value) == 'table' and key ~= '_class' and key ~= '_tableListeners' then
+            if type(value) == 'table' and key ~= '_class' and key ~= '_tableListeners' and key ~= 'target' then
                 result[key] = COPY_TABLE(value, isSim)
-            elseif (not isSim) or (key ~= '_tableListeners' and key ~= '_class') then
+            elseif (not isSim) or (key ~= '_tableListeners' and key ~= '_class' and key ~= 'target') then
                 result[key] = value
             end
         end
@@ -355,6 +356,7 @@ NEW_APP_CODE = function(title, link, checkbox)
             images = {},
             sounds = {},
             videos = {},
+            others = {},
             fonts = {}
         },
         scripts = {}
@@ -364,8 +366,7 @@ end
 PHYSICS.setAverageCollisionPositions(true)
 WIDGET.setTheme('widget_theme_android_holo_dark')
 display.setDefault('background', 0.15, 0.15, 0.17)
-PHYSICS.setReportCollisionsInContentCoordinates(true)
-display.setStatusBar(display.HiddenStatusBar) math.randomseed(os.time())
+PHYSICS.setReportCollisionsInContentCoordinates(true) math.randomseed(os.time())
 DEVELOPERS = {['Ganin'] = true, ['Danil Nik'] = true, ['Terra'] = true}
 
 JSON.encode3 = require('Data.json').encode
@@ -386,10 +387,12 @@ table.len, math.round, table.merge = function(t)
     or (function() local i = 0 for k in pairs(t) do i = i + 1 end return i end)()) or 0
 end, function(num, exp)
     if (not exp) or (not tonumber(exp)) then return tonumber(string.match(tostring(num), '(.*)%.')) or num
-    else local exps, factor = string.match(tostring(num), '%.(.*)'), tonumber(exp) == 0 and '0.' or '0.0' if not exps then
-    return num end for i = 1, tonumber(exp) - 1 do factor = factor .. '0' end factor = factor .. '5' num = tonumber(num) and num + factor
-    or 0 exp = string.match(tostring(num), '%.(.*)') and string.match(tostring(num), '%.(.*)'):sub(1, tonumber(exp)) or '0'
-    num = string.match(tostring(num), '(.*)%.') or tostring(num) return tonumber(num .. '.' .. exp) end
+    else local isMinus, oldNum = tonumber(num) and tonumber(num) < 0, tonumber(num) or 0
+    local exps, factor = string.match(tostring(num), '%.(.*)'), tonumber(exp) == 0 and '0.' or '0.0'
+    if not exps then return num end for i = 1, tonumber(exp) - 1 do factor = factor .. '0' end factor = factor .. '5' num = tonumber(num)
+    and num + factor or 0 exp = string.match(tostring(num), '%.(.*)') and string.match(tostring(num), '%.(.*)'):sub(1, tonumber(exp))
+    or '0' num = string.match(tostring(num), '(.*)%.') or tostring(num) num = tonumber(num .. '.' .. exp)
+    return isMinus and (oldNum > -0.5 and 0 or num - 1) or num end
 end, function(t1, t2)
     for k, v in pairs(t2) do if (type(v) == 'table') and (type(t1[k] or false) == 'table')
     then merge(t1[k], t2[k]) else t1[k] = v end end return t1
@@ -418,12 +421,6 @@ for i = 1, #LANGS do
     local langData = JSON.decode(READ_FILE(system.pathForFile('Strings/' .. LANGS[i] .. '.json')))
     if langData then for _, langT in pairs(langData) do for key, str in pairs(langT) do LANG[LANGS[i]][key] = str end end end
 end
-
-if LOCAL.back == 'System' then native.setProperty('androidSystemUiVisibility', 'default')
-else native.setProperty('androidSystemUiVisibility', 'immersiveSticky') end
-
-BOTTOM_HEIGHT = LOCAL.back == 'CCode' and 100 or BOTTOM_HEIGHT
-MAX_Y = CENTER_Y + DISPLAY_HEIGHT / 2 - BOTTOM_HEIGHT
 
 for i = 1, #LANGS do if LANGS[i] == LOCAL.lang then break elseif i == #LANGS then LOCAL.lang = 'en' end end
 STR = LANG[LOCAL.lang] for k, v in pairs(LANG.ru) do if not STR[k] then STR[k] = LANG.en[k] or v
@@ -457,6 +454,6 @@ GET_GLOBAL_TABLE = function()
         al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, DOC_DIR = DOC_DIR,
         LEFT_HEIGHT = LEFT_HEIGHT, cloneArray = cloneArray, DISPLAY_WIDTH = DISPLAY_WIDTH, type = type,
         audio = audio, pairs = pairs, select = select, rawget = rawget, Runtime = Runtime, error = error,
-        fun = G_fun, math = G_math, other = G_other, device = G_device, prop = G_prop
+        fun = G_fun, math = G_math, other = G_other, device = G_device, prop = G_prop, PASTEBOARD = PASTEBOARD
     }
 end

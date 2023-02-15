@@ -3,7 +3,7 @@ local listeners = {}
 listeners.but_myprogram = function(target)
     MENU.group.isVisible = false
     PROGRAMS = require 'Interfaces.programs'
-    PROGRAMS.create() BACK.front()
+    PROGRAMS.create()
     PROGRAMS.group.isVisible = true
 end
 
@@ -11,13 +11,13 @@ listeners.but_continue = function(target)
     if LOCAL.last == '' then
         MENU.group.isVisible = false
         PROGRAMS = require 'Interfaces.programs'
-        PROGRAMS.create() BACK.front()
+        PROGRAMS.create()
         PROGRAMS.group.isVisible = true
     else
         local data = GET_GAME_CODE(LOCAL.last_link)
 
         if tonumber(data.build) < 1215 then
-            local scripts = COPY_TABLE(data.scripts) data.build = BUILD
+            local scripts = COPY_TABLE(data.scripts) data.build = tostring(BUILD)
             LFS.mkdir(DOC_DIR .. '/' .. LOCAL.last_link .. '/Scripts')
 
             for i = 1, #scripts do
@@ -31,10 +31,14 @@ listeners.but_continue = function(target)
         if tonumber(data.build) > 1170 then
             local script = GET_GAME_SCRIPT(LOCAL.last_link, 1, data)
 
-            if not data.created then
-                data.created = '1223'
-                data.noobmode = false
-                SET_GAME_CODE(LOCAL.last_link, data)
+            if not data.resources.others then
+                data.resources.others = {}
+
+                if not data.created then
+                    data.created = '1223'
+                    data.noobmode = false
+                    SET_GAME_CODE(LOCAL.last_link, data)
+                end
             end
 
             if script and script.custom then
@@ -45,13 +49,13 @@ listeners.but_continue = function(target)
 
             MENU.group.isVisible = false
             PROGRAMS = require 'Interfaces.programs'
-            PROGRAMS.create() BACK.front()
+            PROGRAMS.create()
             CURRENT_LINK = LOCAL.last_link
 
             PROGRAMS.group.isVisible = false
             PROGRAM = require 'Interfaces.program'
             PROGRAM.create(LOCAL.last, data.noobmode)
-            PROGRAM.group.isVisible = true BACK.front()
+            PROGRAM.group.isVisible = true
         end
     end
 end
@@ -59,7 +63,7 @@ end
 listeners.but_settings = function(target)
     MENU.group.isVisible = false
     SETTINGS = require 'Interfaces.settings'
-    SETTINGS.create() BACK.front()
+    SETTINGS.create()
     SETTINGS.group.isVisible = true
 end
 

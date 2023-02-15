@@ -1,4 +1,5 @@
-return function(params, default, withoutBrackets)
+return function(params, default, withoutBrackets, isApi)
+    if not params then return default or '0' end
     local result, index = #params == 0 and ' 0' or ''
 
     for i = 1, #params do
@@ -6,8 +7,13 @@ return function(params, default, withoutBrackets)
             index = UTF8.len(result)
         end
 
-        if params[i][2] ~= 's' then
-            params[i][1] = params[i][1]:gsub('\\', '\\\\'):gsub('\n', '\\n'):gsub('\r', ''):gsub('\'', '\\\'')
+        if params[i][2] ~= 's' and (params[i][2] ~= 't' or not isApi) then
+            params[i][1] = params[i][1]:gsub('\\\'', '\\\\\''):gsub('\n', '\\n'):gsub('\r', ''):gsub('\'', '\\\'')
+
+            local len = UTF8.len(params[i][1])
+            if UTF8.sub(params[i][1], len) == '\\' then
+                params[i][1] = UTF8.sub(params[i][1], 1, len - 1)
+            end
         end
 
         if params[i][2] == 'n' then
@@ -40,6 +46,7 @@ return function(params, default, withoutBrackets)
                 end
             end
         elseif params[i][2] == 't' then
+            if isApi then params[i][1] = params[i][1]:gsub('\n', '\\n'):gsub('\r', ''):gsub('\'', '\\\'') end
             result = result .. ' \'' .. params[i][1] .. '\''
         elseif params[i][2] == 'tE' then
             result = result .. ' tablesE[\'' .. params[i][1] .. '\']'

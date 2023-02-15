@@ -9,7 +9,7 @@ M.cancel = function() pcall(function()
     if M.isEditor then
         EDITOR.group:removeSelf() EDITOR.group = nil
         EDITOR.create(unpack(M.isEditor))
-        EDITOR.group.isVisible = true BACK.front()
+        EDITOR.group.isVisible = true
     else
         BLOCKS.group[8]:setIsLocked(false, 'vertical')
     end
@@ -131,11 +131,11 @@ M.renameProject = function(data, text, name, type)
                             if script.params[k].params[u][o][2] == type
                             and script.params[k].params[u][o][1] == text then
                                 if name == '' then
-                                    if INFO.listName[script.params[k].name][u + 1] == 'var'
-                                    or INFO.listName[script.params[k].name][u + 1] == 'fun'
-                                    or INFO.listName[script.params[k].name][u + 1] == 'table'
-                                    or INFO.listName[script.params[k].name][u + 1] == 'localvar'
-                                    or INFO.listName[script.params[k].name][u + 1] == 'localtable' then
+                                    if INFO.listName[script.params[k].name][u + 1][1] == 'var'
+                                    or INFO.listName[script.params[k].name][u + 1][1] == 'fun'
+                                    or INFO.listName[script.params[k].name][u + 1][1] == 'table'
+                                    or INFO.listName[script.params[k].name][u + 1][1] == 'localvar'
+                                    or INFO.listName[script.params[k].name][u + 1][1] == 'localtable' then
                                         table.remove(script.params[k].params[u], o) isChange = true
                                     else
                                         script.params[k].params[u][o] = {'0', 'n'} isChange = true
@@ -199,11 +199,11 @@ M.renameScript = function(data, text, name, type)
                         if script.params[k].params[u][o][2] == type
                         and script.params[k].params[u][o][1] == text then
                             if name == '' then
-                                if INFO.listName[script.params[k].name][u + 1] == 'var'
-                                or INFO.listName[script.params[k].name][u + 1] == 'fun'
-                                or INFO.listName[script.params[k].name][u + 1] == 'table'
-                                or INFO.listName[script.params[k].name][u + 1] == 'localvar'
-                                or INFO.listName[script.params[k].name][u + 1] == 'localtable' then
+                                if INFO.listName[script.params[k].name][u + 1][1] == 'var'
+                                or INFO.listName[script.params[k].name][u + 1][1] == 'fun'
+                                or INFO.listName[script.params[k].name][u + 1][1] == 'table'
+                                or INFO.listName[script.params[k].name][u + 1][1] == 'localvar'
+                                or INFO.listName[script.params[k].name][u + 1][1] == 'localtable' then
                                     table.remove(script.params[k].params[u], o)
                                 else
                                     script.params[k].params[u][o] = {'0', 'n'}
@@ -270,10 +270,10 @@ M.renameEvent = function(data, text, name, type, eventIndex)
                         if script.params[k].params[u][o][2] == type
                         and script.params[k].params[u][o][1] == text then
                             if name == '' then
-                                if INFO.listName[script.params[k].name][u + 1] == 'var'
-                                or INFO.listName[script.params[k].name][u + 1] == 'table'
-                                or INFO.listName[script.params[k].name][u + 1] == 'localvar'
-                                or INFO.listName[script.params[k].name][u + 1] == 'localtable' then
+                                if INFO.listName[script.params[k].name][u + 1][1] == 'var'
+                                or INFO.listName[script.params[k].name][u + 1][1] == 'table'
+                                or INFO.listName[script.params[k].name][u + 1][1] == 'localvar'
+                                or INFO.listName[script.params[k].name][u + 1][1] == 'localtable' then
                                     table.remove(script.params[k].params[u], o)
                                 else
                                     script.params[k].params[u][o] = {'0', 'n'}
@@ -360,11 +360,11 @@ end
 
 M.gen = function(mode, scroll)
     local vars = COPY_TABLE(mode == 'event' and M.vars.event or mode == 'script' and M.vars.script or M.vars.project)
-    local buttons, buttonsY = {}, 35 table.insert(vars, 1, STR['blocks.create.var'])
+    local buttons, buttonsY = {}, 35 table.insert(vars, 1, STR['blocks.create.var' .. (NOOBMODE and '.noob' or '')])
 
     if M.params[1] == 'funs' then
         vars = COPY_TABLE(mode == 'script' and M.funs.script or M.funs.project)
-        table.insert(vars, 1, STR['blocks.create.fun'])
+        table.insert(vars, 1, STR['blocks.create.fun' .. (NOOBMODE and '.noob' or '')])
     elseif M.params[1] == 'tables' then
         vars = COPY_TABLE(mode == 'event' and M.tables.event or mode == 'script' and M.tables.script or M.tables.project)
         table.insert(vars, 1, STR['blocks.create.table'])
@@ -433,7 +433,7 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor)
             ALERT = false
             M.alert = true
             M.isEditor = isEditor
-            M.active = mode == 'funs' and 'script' or 'event'
+            M.active = NOOBMODE and 'project' or isLocal and 'event' or 'script'
             M.group = display.newGroup()
             M.data = GET_GAME_CODE(CURRENT_LINK)
             M.script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, M.data)
@@ -548,13 +548,15 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor)
             end
 
             if not isLocal then
-                buttonScript = display.newRect(bg.x, y, width, 70)
-                    buttonScript:addEventListener('touch', M.select)
-                M.group:insert(buttonScript)
+                if not NOOBMODE then
+                    buttonScript = display.newRect(bg.x, y, width, 70)
+                        buttonScript:addEventListener('touch', M.select)
+                    M.group:insert(buttonScript)
 
-                textScript = display.newText(STR['editor.list.script'], buttonScript.x, buttonScript.y, 'ubuntu', 26)
-                    buttonScript.id = 'script'
-                M.group:insert(textScript)
+                    textScript = display.newText(STR['editor.list.script'], buttonScript.x, buttonScript.y, 'ubuntu', 26)
+                        buttonScript.id = 'script'
+                    M.group:insert(textScript)
+                end
 
                 if not BLOCKS.custom then
                     buttonProject = display.newRect(bg.x + width, y, width, 70)
@@ -568,11 +570,11 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor)
             end
 
             M.clear = function()
-                if mode ~= 'funs' then buttonEvent:setFillColor(0.26, 0.26, 0.28) end
-                if not isLocal then buttonScript:setFillColor(0.26, 0.26, 0.28) end
+                if mode ~= 'funs' and not NOOBMODE then buttonEvent:setFillColor(0.26, 0.26, 0.28) end
+                if not isLocal and not NOOBMODE then buttonScript:setFillColor(0.26, 0.26, 0.28) end
                 if not isLocal and not BLOCKS.custom then buttonProject:setFillColor(0.26, 0.26, 0.28) end
-                if M.active == 'event' and mode ~= 'funs' then buttonEvent:setFillColor(0.2, 0.2, 0.22) end
-                if M.active == 'script' and not isLocal then buttonScript:setFillColor(0.2, 0.2, 0.22) end
+                if M.active == 'event' and mode ~= 'funs' and not NOOBMODE then buttonEvent:setFillColor(0.2, 0.2, 0.22) end
+                if M.active == 'script' and not isLocal and not NOOBMODE then buttonScript:setFillColor(0.2, 0.2, 0.22) end
                 if M.active == 'project' and not isLocal and not BLOCKS.custom then buttonProject:setFillColor(0.2, 0.2, 0.22) end
             end
 
@@ -588,7 +590,13 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor)
                 delimiter3:setFillColor(0.6)
             M.group:insert(delimiter3)
 
-            if mode == 'funs' then
+            if NOOBMODE then
+                delimiter1:removeSelf()
+                delimiter2:removeSelf()
+                buttonProject.width = bg.width
+                buttonProject.x = CENTER_X
+                textProject.x = CENTER_X
+            elseif mode == 'funs' then
                 delimiter1:removeSelf()
                 delimiter2.x = CENTER_X
                 buttonScript.width = BLOCKS.custom and bg.width or bg.width / 2

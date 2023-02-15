@@ -45,7 +45,7 @@ local listener = function(e, scroll, group, type)
                     local data = GET_GAME_CODE(e.target.link)
 
                     if tonumber(data.build) < 1215 then
-                        local scripts = COPY_TABLE(data.scripts) data.build = BUILD
+                        local scripts = COPY_TABLE(data.scripts) data.build = tostring(BUILD)
                         LFS.mkdir(DOC_DIR .. '/' .. e.target.link .. '/Scripts')
 
                         for i = 1, #scripts do
@@ -58,11 +58,17 @@ local listener = function(e, scroll, group, type)
 
                     if tonumber(data.build) > 1170 then
                         local script = GET_GAME_SCRIPT(e.target.link, 1, data)
+                        local index = table.indexOf(LOCAL.apps, e.target.link)
+                        local app = LOCAL.apps[index]
 
-                        if not data.created then
-                            data.created = '1223'
-                            data.noobmode = false
-                            SET_GAME_CODE(e.target.link, data)
+                        if not data.resources.others then
+                            data.resources.others = {}
+
+                            if not data.created then
+                                data.created = '1223'
+                                data.noobmode = false
+                                SET_GAME_CODE(e.target.link, data)
+                            end
                         end
 
                         if script and script.custom then
@@ -71,7 +77,14 @@ local listener = function(e, scroll, group, type)
                             SET_GAME_CODE(e.target.link, data)
                         end
 
-                        group.isVisible = false
+                        table.remove(LOCAL.apps, index)
+                        table.insert(LOCAL.apps, app)
+
+                        PROGRAMS.group:removeSelf()
+                        PROGRAMS.group = nil
+                        PROGRAMS.create()
+
+                        PROGRAMS.isVisible = false
                         PROGRAM = require 'Interfaces.program'
                         PROGRAM.create(e.target.text.text, data.noobmode)
                         PROGRAM.group.isVisible = true
@@ -80,38 +93,43 @@ local listener = function(e, scroll, group, type)
                         LOCAL.last = e.target.text.text
                         LOCAL.last_link = CURRENT_LINK
                         MENU.group[9].text = LOCAL.last
-                        NEW_DATA() BACK.front()
+                        NEW_DATA()
                     end
                 elseif type == 'program' and ALERT then
                     if e.target.text.text == STR['program.scripts'] or e.target.text.text == STR['program.scenarios'] then
                         group.isVisible = false
                         SCRIPTS = require 'Interfaces.scripts'
-                        SCRIPTS.create() BACK.front()
+                        SCRIPTS.create()
                         SCRIPTS.group.isVisible = true
                     elseif e.target.text.text == STR['program.images'] or e.target.text.text == STR['program.pictures'] then
                         group.isVisible = false
                         IMAGES = require 'Interfaces.images'
-                        IMAGES.create() BACK.front()
+                        IMAGES.create()
                         IMAGES.group.isVisible = true
                     elseif e.target.text.text == STR['program.sounds'] then
                         group.isVisible = false
                         SOUNDS = require 'Interfaces.sounds'
-                        SOUNDS.create() BACK.front()
+                        SOUNDS.create()
                         SOUNDS.group.isVisible = true
                     elseif e.target.text.text == STR['program.videos'] then
                         group.isVisible = false
                         VIDEOS = require 'Interfaces.videos'
-                        VIDEOS.create() BACK.front()
+                        VIDEOS.create()
                         VIDEOS.group.isVisible = true
                     elseif e.target.text.text == STR['program.fonts'] then
                         group.isVisible = false
                         FONTS = require 'Interfaces.fonts'
-                        FONTS.create() BACK.front()
+                        FONTS.create()
                         FONTS.group.isVisible = true
+                    elseif e.target.text.text == STR['program.resources'] then
+                        group.isVisible = false
+                        RESOURCES = require 'Interfaces.resources'
+                        RESOURCES.create()
+                        RESOURCES.group.isVisible = true
                     elseif e.target.text.text == STR['menu.settings'] then
                         group.isVisible = false
                         PSETTINGS = require 'Interfaces.program-settings'
-                        PSETTINGS.create() BACK.front()
+                        PSETTINGS.create()
                         PSETTINGS.group.isVisible = true
                     elseif e.target.text.text == STR['program.export'] then
                         group:removeSelf() group = nil
@@ -131,7 +149,7 @@ local listener = function(e, scroll, group, type)
                         CURRENT_SCRIPT = e.target.getIndex(e.target)
                         group.isVisible = false
                         BLOCKS = require 'Interfaces.blocks'
-                        BLOCKS.create() BACK.front()
+                        BLOCKS.create()
                         BLOCKS.group.isVisible = true
                     end
 
@@ -196,7 +214,7 @@ local listener = function(e, scroll, group, type)
                             end
                         end
 
-                        Runtime:addEventListener('key', keyMaster) BACK.front()
+                        Runtime:addEventListener('key', keyMaster)
                     end
 
                     if e.target.timer then
@@ -240,7 +258,7 @@ local listener = function(e, scroll, group, type)
                             end
                         end
 
-                        Runtime:addEventListener('key', keyMaster) BACK.front()
+                        Runtime:addEventListener('key', keyMaster)
                     end
 
                     if e.target.timer then
@@ -280,7 +298,7 @@ local listener = function(e, scroll, group, type)
                             end
                         end
 
-                        Runtime:addEventListener('key', keyMaster) BACK.front()
+                        Runtime:addEventListener('key', keyMaster)
                     end
 
                     if e.target.timer then
@@ -327,7 +345,7 @@ local listener = function(e, scroll, group, type)
                             end
                         end
 
-                        Runtime:addEventListener('key', keyMaster) BACK.front()
+                        Runtime:addEventListener('key', keyMaster)
                     end
 
                     if e.target.timer then
@@ -348,6 +366,8 @@ local listener = function(e, scroll, group, type)
                     group = SOUNDS.group
                 elseif type == 'videos' then
                     group = VIDEOS.group
+                elseif type == 'resources' then
+                    group = RESOURCES.group
                 elseif type == 'fonts' then
                     group = FONTS.group
                 end
@@ -372,6 +392,7 @@ end
 
 M.new = function(text, scroll, group, type, index, filter, link)
     local y = index == 1 and 75 or group.data[index - 1].y + 150
+    local text, type = tostring(text), tostring(type)
     table.insert(group.blocks, index, {})
 
     for i = index + 1, #group.blocks do
@@ -434,10 +455,14 @@ M.new = function(text, scroll, group, type, index, filter, link)
         display.setDefault('magTextureFilter', 'linear')
         display.setDefault('minTextureFilter', 'linear')
     elseif type == 'program' then
-        local path = index == 1 and 'Script' or index == 2 and 'Sprite'
+        local path = NOOBMODE and (index == 1 and 'Script' or index == 2 and 'Sprite'
+        or index == 3 and 'Sound' or index == 4 and 'Font'
+        or index == 5 and 'Setting' or index == 6 and 'Export'
+        or index == 7 and 'Build' or '') or (index == 1 and 'Script' or index == 2 and 'Sprite'
         or index == 3 and 'Sound' or index == 4 and 'Video'
-        or index == 5 and 'Font' or index == 6 and 'Setting'
-        or index == 7 and 'Export' or index == 8 and 'Build' or ''
+        or index == 5 and 'Font' or index == 6 and 'Res'
+        or index == 7 and 'Setting' or index == 8 and 'Export'
+        or index == 9 and 'Build' or '')
 
         if path ~= '' then
             group.blocks[index].icon = display.newImage('Sprites/icon' .. path .. '.png')
@@ -451,6 +476,9 @@ M.new = function(text, scroll, group, type, index, filter, link)
         group.blocks[index].container:insert(group.blocks[index].icon, true)
     elseif type == 'videos' then
         group.blocks[index].icon = display.newImage('Sprites/iconVideo.png')
+        group.blocks[index].container:insert(group.blocks[index].icon, true)
+    elseif type == 'resources' then
+        group.blocks[index].icon = display.newImage('Sprites/iconRes.png')
         group.blocks[index].container:insert(group.blocks[index].icon, true)
     elseif type == 'fonts' then
         group.blocks[index].icon = display.newImage('Sprites/iconFont.png')

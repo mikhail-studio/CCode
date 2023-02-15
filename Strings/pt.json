@@ -4,12 +4,12 @@
         "lang.en": "English",
         "lang.pt": "Brasileiro",
         "lang.pl": "Polski",
-        "lang.ua": "Український",
+        "lang.ua": "Українська",
         "lang.cn": "中文",
         "lang.custom": "Customizado",
         "button.yes": "Sim",
         "button.no": "Não",
-        "button.okay": "Ok",
+        "button.okay": "Confirmar",
         "button.close": "Fechar",
         "button.download": "Baixar",
         "button.change": "Editar bloco",
@@ -131,10 +131,10 @@
         "blocks.select.ruleTrue": "Pode",
         "blocks.select.ruleFalse": "Não pode",
         "blocks.select.switchRadio": "Radio",
-        "blocks.select.switchCheckbox": "Checkbox",
-        "blocks.select.switchToggle": "Toggle",
-        "blocks.select.switchOn": "On",
-        "blocks.select.switchOff": "Off",
+        "blocks.select.switchCheckbox": "Caixa de seleção",
+        "blocks.select.switchToggle": "Altera",
+        "blocks.select.switchOn": "Ativado",
+        "blocks.select.switchOff": "Desativado",
         "blocks.select.obj": "Objeto",
         "blocks.select.text": "Texto",
         "blocks.select.group": "Grupo",
@@ -187,7 +187,7 @@
         "blocks.onTouchBegan": "Tocar no objeto",
         "blocks.onTouchBegan.params": [
             "Nome da função:",
-            "Table name:"
+            "Nome da tabela:"
         ],
         "blocks.onTouchEnded": "Não toca no objeto",
         "blocks.onTouchEnded.params": [
@@ -197,7 +197,7 @@
         "blocks.onTouchMoved": "dedo move sobre objeto",
         "blocks.onTouchMoved.params": [
             "Nome da função:",
-            "Table name:"
+            "Nome da tabela:"
         ],
         "blocks.onTouchDisplayBegan": "dedo toca na tela",
         "blocks.onTouchDisplayBegan.params": [
@@ -221,12 +221,12 @@
         "blocks.onResume": "Voltar do modo janela",
         "blocks.onLocalCollisionBegan": "Começado colisão local",
         "blocks.onLocalCollisionBegan.params": [
-            "Function name:",
+            "Nome da função:",
             "Nome da tabela:"
         ],
         "blocks.onLocalCollisionEnded": "Terminando Colisão local",
         "blocks.onLocalCollisionEnded.params": [
-            "Function name:",
+            "Nome da função:",
             "Nome da tabela:"
         ],
         "blocks.onLocalPreCollision": "Antes da colisão local",

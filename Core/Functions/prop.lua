@@ -83,6 +83,12 @@ if 'Объект' then
 end
 
 if 'Текст' then
+    M['text.get_text'] = function(name)
+        local isComplete, result = pcall(function()
+            return GAME.group.texts[name or '0'] and GAME.group.texts[name or '0'].text or ''
+        end) return isComplete and result or ''
+    end
+
     M['text.tag'] = function(name)
         local isComplete, result = pcall(function()
             return GAME.group.texts[name] and GAME.group.texts[name]._tag or ''
@@ -199,7 +205,7 @@ if 'Виджет' then
         local isComplete, result = pcall(function()
             return GAME.group.widgets[name]
                 and (GAME.group.widgets[name].wtype == 'switch' and GAME.group.widgets[name].isOn or false) or false
-        end) return isComplete and result or 50
+        end) return isComplete and result
     end
 
     M['widget.text'] = function(name)

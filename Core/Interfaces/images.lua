@@ -32,13 +32,28 @@ listeners.but_add = function(target)
                     if import.done and import.done == 'ok' then
                         local data = GET_GAME_CODE(CURRENT_LINK)
                         local path = path .. '/Image' .. numImage
+                        local isGif = UTF8.sub(import.destFileName, UTF8.len(import.destFileName) - 3) == '.gif'
 
-                        if IS_IMAGE(CURRENT_LINK .. '/Images/Image' .. numImage) then
-                            table.insert(data.resources.images, 1, {e.text, e.checkbox and 'nearest' or 'linear', 'Image' .. numImage})
-                            SET_GAME_CODE(CURRENT_LINK, data) IMAGES.new(e.text, 1, e.checkbox and 'nearest' or 'linear', 'Image' .. numImage)
+                        local function insertPicture()
+                            if IS_IMAGE(CURRENT_LINK .. '/Images/Image' .. numImage) then
+                                table.insert(data.resources.images, 1, {
+                                    e.text, e.checkbox and 'nearest' or 'linear', 'Image' .. numImage
+                                }) SET_GAME_CODE(CURRENT_LINK, data)
+                                IMAGES.new(e.text, 1, e.checkbox and 'nearest' or 'linear', 'Image' .. numImage)
+                            else
+                                table.insert(data.resources.images, 1, {e.text, 'vector', 'Image' .. numImage})
+                                SET_GAME_CODE(CURRENT_LINK, data) IMAGES.new(e.text, 1, 'vector', 'Image' .. numImage)
+                            end
+                        end
+
+                        if isGif then
+                            WINDOW.new(STR['images.gif.convert'], {STR['button.close'], STR['images.gif.okay']}, function(e)
+                                if e.index == 2 then
+                                    GANIN.convert(CURRENT_LINK .. '/Images/Image' .. numImage, CURRENT_LINK .. '/Images/Image' .. numImage)
+                                end insertPicture()
+                            end, 4)
                         else
-                            table.insert(data.resources.images, 1, {e.text, 'vector', 'Image' .. numImage})
-                            SET_GAME_CODE(CURRENT_LINK, data) IMAGES.new(e.text, 1, 'vector', 'Image' .. numImage)
+                            insertPicture()
                         end
                     end
                 end

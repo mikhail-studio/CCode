@@ -80,6 +80,8 @@ local getFontSize getFontSize = function(width, text, size, isData)
 end
 
 listeners.set = function(target, buttons, isData, isList, buttonId)
+    -- print(target, buttons, isData, isList, buttonId)
+
     if buttons and (buttons.names and #buttons.names > 0 or #buttons > 0) then
         target.isOpen = not target.isOpen
         target.polygon.yScale = target.isOpen and -1 or 1
@@ -111,10 +113,15 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
 
                 listScroll.buttons[i].text = display.newText(text, 20, listButtonsY, 'ubuntu', getFontSize(listScroll.width, text, 24, isData))
                     if isData then local id = buttonId or getId(target.y)
-                        listScroll.buttons[i].text.id = id == 1 and (j == 1 and 'event' or j == 2 and 'script' or 'project')
-                        or (id == 2 and (j == 1 and 'tevent' or j == 2 and 'tscript' or 'tproject')
-                        or (id == 3 and (j == 1 and 'fcustom' or j == 2 and 'fscript' or 'fproject')
-                        or (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup' or j == 4 and 'pwidget' or 'pmedia')))
+                        if NOOBMODE then
+                            listScroll.buttons[i].text.id = id == 1 and 'project' or id == 2 and 'tproject' or id == 3 and 'fproject'
+                            or (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup' or 'pmedia')
+                        else
+                            listScroll.buttons[i].text.id = id == 1 and (j == 1 and 'event' or j == 2 and 'script' or 'project')
+                            or (id == 2 and (j == 1 and 'tevent' or j == 2 and 'tscript' or 'tproject')
+                            or (id == 3 and (j == 1 and 'fcustom' or j == 2 and 'fscript' or 'fproject')
+                            or (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup' or j == 4 and 'pwidget' or 'pmedia')))
+                        end
                     elseif isList then
                         listScroll.buttons[i].text.id = buttons.keys[j]
                         listScroll.buttons[i].text.ID = target.text.id
@@ -245,22 +252,41 @@ listeners.fun = function(target)
 end
 
 listeners.var = function(target)
-    listeners.set(target, {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}, true, nil, 1)
+    if NOOBMODE then
+        listeners.set(target, {STR['editor.list.project']}, true, nil, 1)
+    else
+        listeners.set(target, {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}, true, nil, 1)
+    end
 end
 
 listeners.table = function(target)
-    listeners.set(target, {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}, true, nil, 2)
+    if NOOBMODE then
+        listeners.set(target, {STR['editor.list.project']}, true, nil, 2)
+    else
+        listeners.set(target, {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}, true, nil, 2)
+    end
 end
 
 listeners.funs = function(target)
-    listeners.set(target, {STR['editor.list.custom'], STR['editor.list.script'], STR['editor.list.project']}, true, nil, 3)
+    if NOOBMODE then
+        listeners.set(target, {STR['editor.list.project']}, true, nil, 3)
+    else
+        listeners.set(target, {STR['editor.list.custom'], STR['editor.list.script'], STR['editor.list.project']}, true, nil, 3)
+    end
 end
 
 listeners.prop = function(target)
-    listeners.set(target, {
-        STR['editor.list.prop.obj'], STR['editor.list.prop.text'], STR['editor.list.prop.group'],
-        STR['editor.list.prop.widget'], STR['editor.list.prop.media']
-    }, true, nil, 4)
+    if NOOBMODE then
+        listeners.set(target, {
+            STR['editor.list.prop.obj.noob'], STR['editor.list.prop.text'],
+            STR['editor.list.prop.group'], STR['editor.list.prop.media']
+        }, true, nil, 4)
+    else
+        listeners.set(target, {
+            STR['editor.list.prop.obj'], STR['editor.list.prop.text'], STR['editor.list.prop.group'],
+            STR['editor.list.prop.widget'], STR['editor.list.prop.media']
+        }, true, nil, 4)
+    end
 end
 
 return listeners

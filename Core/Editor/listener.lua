@@ -16,36 +16,58 @@ end
 
 M.rect = function(target, restart, data)
     local index = target.index
-    local type = INFO.listName[restart[1]][index + 1]
+    local type = restart[6] and 'value' or INFO.listName[restart[1]][index + 1][1]
 
     if type == 'value' and ALERT then
         if TEXT.check(COPY_TABLE(data)) then
             local param = TEXT.number(data, true)
             local data = GET_GAME_CODE(CURRENT_LINK)
             local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
-            local blockIndex, paramsIndex = restart[2], restart[4]
-            local params = script.params[blockIndex].params
 
-            EDITOR.rScrollParams = {}
-            params[paramsIndex] = COPY_TABLE(param)
-            BLOCKS.group.blocks[blockIndex].data.params = COPY_TABLE(params)
-            BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(params, paramsIndex)
-            SET_GAME_CODE(CURRENT_LINK, data)
-            SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
+            if not EDITOR.restart[6] then
+                local blockIndex, paramsIndex = restart[2], restart[4]
+                local params = script.params[blockIndex].params
 
-            for i = #EDITOR.group[66].buttons, 1, -1 do
-                if EDITOR.group[66].buttons[i].isOpen then
-                    table.insert(EDITOR.rScrollParams, 1, i)
+                EDITOR.rScrollParams = {}
+                params[paramsIndex] = COPY_TABLE(param)
+                BLOCKS.group.blocks[blockIndex].data.params = COPY_TABLE(params)
+                BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(params, paramsIndex)
+                SET_GAME_CODE(CURRENT_LINK, data)
+                SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
+
+                for i = #EDITOR.group[66].buttons, 1, -1 do
+                    if EDITOR.group[66].buttons[i].isOpen then
+                        table.insert(EDITOR.rScrollParams, 1, i)
+                    end
                 end
-            end
 
-            restart[5], restart[4] = true, index
-            restart[3] = COPY_TABLE(script.params[restart[2]].params[restart[4]])
-            table.insert(EDITOR.rScrollParams, select(2, EDITOR.group[66]:getContentPosition()))
-            EDITOR.scrollY = select(2, EDITOR.group[8]:getContentPosition())
-            EDITOR.group:removeSelf() EDITOR.group = nil
-            EDITOR.create(unpack(restart))
-            EDITOR.group.isVisible = true
+                restart[5], restart[4] = true, index
+                restart[3] = COPY_TABLE(script.params[restart[2]].params[restart[4]])
+                table.insert(EDITOR.rScrollParams, select(2, EDITOR.group[66]:getContentPosition()))
+                EDITOR.scrollY = select(2, EDITOR.group[8]:getContentPosition())
+                EDITOR.group:removeSelf() EDITOR.group = nil
+                EDITOR.create(unpack(restart))
+                EDITOR.group.isVisible = true
+            else
+                local CUSTOM = require 'Core.Modules.custom-block'
+                local params = EDITOR.restart[8]
+
+                EDITOR.rScrollParams = {}
+                params[EDITOR.restart[4]] = COPY_TABLE(param)
+
+                for i = #EDITOR.group[66].buttons, 1, -1 do
+                    if EDITOR.group[66].buttons[i].isOpen then
+                        table.insert(EDITOR.rScrollParams, 1, i)
+                    end
+                end
+
+                restart[5], restart[4], restart[3] = true, index, COPY_TABLE(params)
+                table.insert(EDITOR.rScrollParams, select(2, EDITOR.group[66]:getContentPosition()))
+                EDITOR.scrollY = select(2, EDITOR.group[8]:getContentPosition())
+                EDITOR.group:removeSelf() EDITOR.group = nil
+                EDITOR.create(unpack(restart))
+                EDITOR.group.isVisible = true
+            end
         else
             EDITOR.group[9]:setIsLocked(true, 'vertical')
             EDITOR.group[66]:setIsLocked(true, 'vertical')
@@ -312,18 +334,39 @@ M['Ok'] = function(data, cursor, backup)
         local param = TEXT.number(data, true)
         local data = GET_GAME_CODE(CURRENT_LINK)
         local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
-        local blockIndex, paramsIndex = EDITOR.restart[2], EDITOR.restart[4]
-        local params = script.params[blockIndex].params
 
-        params[paramsIndex] = COPY_TABLE(param)
-        BLOCKS.group.blocks[blockIndex].data.params = COPY_TABLE(params)
-        BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(params, paramsIndex)
-        SET_GAME_CODE(CURRENT_LINK, data)
-        SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
+        if not EDITOR.restart[6] then
+            local blockIndex, paramsIndex = EDITOR.restart[2], EDITOR.restart[4]
+            local params = script.params[blockIndex].params
 
-        EDITOR.group:removeSelf()
-        EDITOR.group = nil
-        BLOCKS.group.isVisible = true
+            params[paramsIndex] = COPY_TABLE(param)
+            BLOCKS.group.blocks[blockIndex].data.params = COPY_TABLE(params)
+            BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(params, paramsIndex)
+            SET_GAME_CODE(CURRENT_LINK, data)
+            SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
+
+            EDITOR.group:removeSelf()
+            EDITOR.group = nil
+            BLOCKS.group.isVisible = true
+        else
+            local CUSTOM = require 'Core.Modules.custom-block'
+            local params = EDITOR.restart[8]
+
+            params[EDITOR.restart[4]] = COPY_TABLE(param)
+            EDITOR.group:removeSelf()
+            EDITOR.group = nil
+
+            ALERT = false CUSTOM.alert = true
+            CUSTOM.scroll:setIsLocked(false, 'vertical')
+            CUSTOM.scroll:remove(M.block) CUSTOM.block:removeSelf()
+            CUSTOM.genBlock(COPY_TABLE(params), EDITOR.restart[7])
+
+            for i = 2, 12 do
+                CUSTOM.group[i].isVisible = true
+            end
+
+            EXITS.add(CUSTOM.removeOverlay, EDITOR.restart[7])
+        end
     else
         EDITOR.group[9]:setIsLocked(true, 'vertical')
         EDITOR.group[66]:setIsLocked(true, 'vertical')

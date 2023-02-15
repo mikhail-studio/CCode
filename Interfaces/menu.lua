@@ -5,9 +5,9 @@ M.create = function()
     M.group.isVisible = false
 
     local bg = display.newImage('Sprites/menu.png', CENTER_X, CENTER_Y)
-        bg.width = CENTER_X == 640 and DISPLAY_HEIGHT or DISPLAY_WIDTH
-        bg.height = CENTER_X == 640 and DISPLAY_WIDTH or DISPLAY_HEIGHT
-        bg.rotation = CENTER_X == 640 and 90 or 0
+        bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
+        bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
+        bg.rotation = CENTER_X == 641 and 90 or 0
     M.group:insert(bg)
 
     local title = display.newText('CCode', CENTER_X, ZERO_Y + 182, 'ubuntu', 70)
@@ -99,7 +99,7 @@ M.create = function()
     -- snowflakes:toBack()
     -- bg:toBack()
 
-    if CENTER_X == 640 then
+    if CENTER_X == 641 then
         title.y = ZERO_Y + 82 + 220
         title.x = CENTER_X - 350
         but_social.y = ZERO_Y + 45
@@ -125,9 +125,6 @@ M.create = function()
         -- hat.x = title.x - title.width / 2 + 20
         -- hat.y = title.y - title.height + 30
     end
-
-    BACK = require 'Interfaces.back'
-    BACK.create() BACK.front()
 end
 
 return M

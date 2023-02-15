@@ -4,13 +4,13 @@ local M = {}
 local genBlocks = function()
     local data = GET_GAME_CODE(CURRENT_LINK)
 
-    for i = 1, #data.resources.images do
-        M.new(data.resources.images[i][1], #M.group.blocks + 1, data.resources.images[i][2], data.resources.images[i][3])
+    for i = 1, #data.resources.others do
+        M.new(data.resources.others[i][1], #M.group.blocks + 1, data.resources.others[i][2])
     end
 end
 
-M.new = function(title, index, filter, link)
-    BLOCK.new(title, M.scroll, M.group, 'images', index, filter, link)
+M.new = function(title, index, link)
+    BLOCK.new(title, M.scroll, M.group, 'resources', index, nil, link)
 end
 
 M.create = function()
@@ -25,11 +25,11 @@ M.create = function()
         bg.rotation = CENTER_X == 641 and 90 or 0
     M.group:insert(bg)
 
-    local title = display.newText(STR['program.' .. (NOOBMODE and 'pictures' or 'images')], ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)
+    local title = display.newText(STR['program.resources'], ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)
         title.anchorX = 0
         title.anchorY = 0
         title.button = 'but_title'
-        title:addEventListener('touch', require 'Core.Interfaces.images')
+        title:addEventListener('touch', require 'Core.Interfaces.resources')
     M.group:insert(title)
 
     local title_list = display.newText('', CENTER_X, ZERO_Y + 62, 'ubuntu', 26)
@@ -40,26 +40,26 @@ M.create = function()
     local but_add = display.newImage('Sprites/add.png', ZERO_X + 190, MAX_Y - 95)
         but_add.alpha = 0.9
         but_add.button = 'but_add'
-        but_add:addEventListener('touch', require 'Core.Interfaces.images')
+        but_add:addEventListener('touch', require 'Core.Interfaces.resources')
     M.group:insert(but_add)
 
     local but_play = display.newImage('Sprites/play.png', MAX_X - 190, MAX_Y - 95)
         but_play.alpha = 0.9
         but_play.button = 'but_play'
-        but_play:addEventListener('touch', require 'Core.Interfaces.images')
+        but_play:addEventListener('touch', require 'Core.Interfaces.resources')
     M.group:insert(but_play)
 
     local but_list = display.newImage('Sprites/listopenbut.png', MAX_X - 80, ZERO_Y + 62)
         but_list.width, but_list.height = 60, 60
         but_list.button = 'but_list'
-        but_list:addEventListener('touch', require 'Core.Interfaces.images')
+        but_list:addEventListener('touch', require 'Core.Interfaces.resources')
     M.group:insert(but_list)
 
     local but_okay = display.newImage('Sprites/okay.png', MAX_X - 190, MAX_Y - 95)
         but_okay.alpha = 0.9
         but_okay.isVisible = false
         but_okay.button = 'but_okay'
-        but_okay:addEventListener('touch', require 'Core.Interfaces.images')
+        but_okay:addEventListener('touch', require 'Core.Interfaces.resources')
     M.group:insert(but_okay)
 
     M.scroll = WIDGET.newScrollView({

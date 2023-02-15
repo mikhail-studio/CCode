@@ -36,6 +36,12 @@ listeners.videos = function()
     PROGRAM.group.isVisible = true
 end
 
+listeners.resources = function()
+    RESOURCES.group:removeSelf()
+    RESOURCES.group = nil
+    PROGRAM.group.isVisible = true
+end
+
 listeners.fonts = function()
     FONTS.group:removeSelf()
     FONTS.group = nil
@@ -62,7 +68,7 @@ listeners.blocks = function()
             if e.index == 2 then
                 local custom = GET_GAME_CUSTOM() custom[BLOCKS.custom.index] = {
                     BLOCKS.custom.name, COPY_TABLE(BLOCKS.custom.params), COPY_TABLE(GET_GAME_SCRIPT(CURRENT_LINK, 1, data)),
-                    os.time(), COPY_TABLE(BLOCKS.custom.color)
+                    os.time(), COPY_TABLE(BLOCKS.custom.color), (EDITOR and EDITOR.restart) and COPY_TABLE(EDITOR.restart[8]) or nil
                 } custom.len = custom.len + (BLOCKS.custom.isChange and 0 or 1) SET_GAME_CUSTOM(custom)
 
                 if BLOCKS.custom.isChange then
@@ -81,7 +87,7 @@ listeners.blocks = function()
                             if script.params[j].name == 'custom' .. BLOCKS.custom.index then
                                 local block = custom[BLOCKS.custom.index]
                                 local typeBlock = 'custom' .. BLOCKS.custom.index
-                                local blockParams = {} for i = 1, #block[2] do blockParams[i] = 'value' end
+                                local blockParams = {} for i = 1, #block[2] do blockParams[i] = {'value', block[6] and block[6][i] or nil} end
 
                                 INFO.listName[typeBlock] = {'custom', unpack(blockParams)}
 
@@ -114,7 +120,7 @@ listeners.blocks = function()
                 BLOCKS.group:removeSelf() BLOCKS.group = nil
                 BLOCKS.create() BLOCKS.custom = nil
                 BLOCKS.group.isVisible = false
-                NEW_BLOCK.custom(2) BACK.front()
+                NEW_BLOCK.custom(2)
             end
         end, 4) require('Core.Modules.logic-list').remove()
     else
@@ -131,9 +137,25 @@ listeners.new_block = function()
 end
 
 listeners.editor = function()
-    EDITOR.group:removeSelf()
-    EDITOR.group = nil
-    BLOCKS.group.isVisible = true
+    if type(EDITOR.restart) == 'table' and EDITOR.restart[6] then
+        local CUSTOM = require 'Core.Modules.custom-block'
+
+        EDITOR.group:removeSelf()
+        EDITOR.group = nil
+
+        ALERT = false CUSTOM.alert = true
+        CUSTOM.scroll:setIsLocked(false, 'vertical')
+
+        for i = 2, 12 do
+            CUSTOM.group[i].isVisible = true
+        end
+
+        EXITS.add(CUSTOM.removeOverlay, EDITOR.restart[7])
+    else
+        EDITOR.group:removeSelf()
+        EDITOR.group = nil
+        BLOCKS.group.isVisible = true
+    end
 end
 
 listeners.game = function()
@@ -165,6 +187,8 @@ listeners.lis = function(event)
             listeners.sounds()
         elseif VIDEOS and VIDEOS.group and VIDEOS.group.isVisible then
             listeners.videos()
+        elseif RESOURCES and RESOURCES.group and RESOURCES.group.isVisible then
+            listeners.resources()
         elseif FONTS and FONTS.group and FONTS.group.isVisible then
             listeners.fonts()
         elseif PSETTINGS and PSETTINGS.group and PSETTINGS.group.isVisible then
@@ -173,10 +197,10 @@ listeners.lis = function(event)
             listeners.settings()
         elseif BLOCKS and BLOCKS.group and BLOCKS.group.isVisible then
             listeners.blocks()
-        elseif NEW_BLOCK and NEW_BLOCK.group and NEW_BLOCK.group.isVisible then
-            listeners.new_block()
         elseif EDITOR and EDITOR.group and EDITOR.group.isVisible then
             listeners.editor()
+        elseif NEW_BLOCK and NEW_BLOCK.group and NEW_BLOCK.group.isVisible then
+            listeners.new_block()
         end
     elseif (event.keyName == 'back' or event.keyName == 'escape') and event.phase == 'up' then
         if listeners.listener then listeners.listener() end

@@ -76,31 +76,39 @@ M['insertTable'] = function(params)
     local key = CALC(params[1], '\'KEY\'', true)
     local table, value = CALC(params[2], 'a', true), CALC(params[3])
     local key = UTF8.sub(key, 1, 2) ~= 't[' and '[' .. key .. ']' or UTF8.sub(key, 2)
-    local temp_key = key
+    local temp_key, nestedI, countI, keys = key, 0, 0, {}
 
     while true do
-        local _key = UTF8.match(key, '^%[(.-)%]%[')
-        if not _key then break end table = table .. '[' .. _key .. ']'
-        key = UTF8.sub(key, UTF8.find(key, '%]') + 1, UTF8.len(key))
-        if (not key) or key == '' then break end
-    end key = UTF8.match(temp_key, '%[(.-)%]$') or '(' .. table .. ') and (#' .. table .. ' + 1) or 1'
+        local sym = UTF8.sub(key, 1, 1) key, countI = UTF8.sub(key, 2), countI + 1
+        if sym == '[' then nestedI = nestedI + 1 elseif sym == ']' then nestedI = nestedI - 1 end
+        if nestedI == 0 then _G.table.insert(keys, UTF8.sub(temp_key, 2, countI - 1) or '')
+        temp_key = UTF8.sub(temp_key, countI + 1) key, countI = temp_key, 0 end if key == '' then break end
+    end
+
+    for i = 1, #keys - 1 do
+        table = table .. '[' .. keys[i] .. ']'
+    end key = keys[#keys]
 
     GAME.lua = GAME.lua .. ' pcall(function() if ' .. table .. ' then table.insert(' .. table .. ', ' .. key .. ', ' .. value .. ')'
     GAME.lua = GAME.lua .. ' else ' .. table .. ' = {} table.insert(' .. table .. ', ' .. key .. ', ' .. value .. ') end end)'
 end
 
 M['removeTable'] = function(params)
-    local key = CALC(params[1], '\'KEY\'', true)
+    local key = CALC(params[2], '\'KEY\'', true)
     local table = CALC(params[1], 'a', true)
     local key = UTF8.sub(key, 1, 2) ~= 't[' and '[' .. key .. ']' or UTF8.sub(key, 2)
-    local temp_key = key
+    local temp_key, nestedI, countI, keys = key, 0, 0, {}
 
     while true do
-        local _key = UTF8.match(key, '^%[(.-)%]%[')
-        if not _key then break end table = table .. '[' .. _key .. ']'
-        key = UTF8.sub(key, UTF8.find(key, '%]') + 1, UTF8.len(key))
-        if (not key) or key == '' then break end
-    end key = UTF8.match(temp_key, '%[(.-)%]$') or '(' .. table .. ') and (#' .. table .. ') or 1'
+        local sym = UTF8.sub(key, 1, 1) key, countI = UTF8.sub(key, 2), countI + 1
+        if sym == '[' then nestedI = nestedI + 1 elseif sym == ']' then nestedI = nestedI - 1 end
+        if nestedI == 0 then _G.table.insert(keys, UTF8.sub(temp_key, 2, countI - 1) or '')
+        temp_key = UTF8.sub(temp_key, countI + 1) key, countI = temp_key, 0 end if key == '' then break end
+    end
+
+    for i = 1, #keys - 1 do
+        table = table .. '[' .. keys[i] .. ']'
+    end key = keys[#keys]
 
     GAME.lua = GAME.lua .. ' pcall(function() table.remove(' .. table .. ', ' .. key .. ') end)'
 end

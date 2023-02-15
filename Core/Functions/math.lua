@@ -7,24 +7,73 @@ local asin = math.asin
 local acos = math.acos
 local atan = math.atan
 local atan2 = math.atan2
+local random = math.random
+local factorial = math.factorial
+local radical = math.sqrt
+local log10 = math.log10
+local log0 = math.log
+local getMaskBits = math.getMaskBits
+local getBit = math.getBit
+local round = math.round
 
-M.getMaskBits = math.getMaskBits
 M.randomseed = math.randomseed
-M.factorial = math.factorial
-M.random = math.random
-M.getBit = math.getBit
-M.radical = math.sqrt
-M.log10 = math.log10
-M.round = math.round
+M.sum = math.sum
+M.pi = math.pi
+
 M.module = math.abs
 M.power = math.pow
-M.log0 = math.log
 M.hex = math.hex
 M.exp = math.exp
-M.sum = math.sum
 M.max = math.max
 M.min = math.min
-M.pi = math.pi
+
+M['round'] = function(num, exp)
+    local isComplete, result = pcall(function()
+        return round(num, exp)
+    end) return isComplete and result or 0
+end
+
+M['getMaskBits'] = function(t)
+    local isComplete, result = pcall(function()
+        return getMaskBits(t)
+    end) return isComplete and result or 0
+end
+
+M['getBit'] = function(num)
+    local isComplete, result = pcall(function()
+        return getBit(num)
+    end) return isComplete and result or 0
+end
+
+M['log10'] = function(num)
+    local isComplete, result = pcall(function()
+        return log10(num)
+    end) return isComplete and result or 0
+end
+
+M['log0'] = function(num)
+    local isComplete, result = pcall(function()
+        return log0(num)
+    end) return isComplete and result or 0
+end
+
+M['radical'] = function(num)
+    local isComplete, result = pcall(function()
+        return radical(num)
+    end) return isComplete and result or 0
+end
+
+M['factorial'] = function(num)
+    local isComplete, result = pcall(function()
+        return factorial(num)
+    end) return isComplete and result or 0
+end
+
+M['random'] = function(num1, num2)
+    local isComplete, result = pcall(function()
+        return random(num1, num2)
+    end) return isComplete and result or 0
+end
 
 M['remainder'] = function(num, count)
     local isComplete, result = pcall(function()

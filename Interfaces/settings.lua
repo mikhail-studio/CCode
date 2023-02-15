@@ -6,9 +6,9 @@ M.create = function()
     M.group.isVisible = false
 
     local bg = display.newImage('Sprites/bg.png', CENTER_X, CENTER_Y)
-        bg.width = CENTER_X == 640 and DISPLAY_HEIGHT or DISPLAY_WIDTH
-        bg.height = CENTER_X == 640 and DISPLAY_WIDTH or DISPLAY_HEIGHT
-        bg.rotation = CENTER_X == 640 and 90 or 0
+        bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
+        bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
+        bg.rotation = CENTER_X == 641 and 90 or 0
     M.group:insert(bg)
 
     -- local lineH = display.newRect(MAX_X - 250, CENTER_Y, 10, DISPLAY_HEIGHT)
@@ -47,19 +47,6 @@ M.create = function()
         confirm_button.text.text = LOCAL.confirm and STR['button.yes'] or STR['button.no']
     M.group:insert(confirm_button)
     M.group:insert(confirm_button.text)
-
-    local back_text = display.newText({
-            text = STR['settings.back'], x = ZERO_X + 20, y = confirm_text.y + 70,
-            font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
-        }) back_text.anchorX = 0
-    M.group:insert(back_text)
-
-    local back_button = display.newRect(rCenterX, back_text.y, rMaxWidth, 60)
-        back_button:setFillColor(0, 0, 0, 0.005)
-        back_button.text = display.newText('', back_button.x, back_button.y, 'ubuntu', 30)
-        back_button.text.text = STR['settings.back' .. LOCAL.back]
-    M.group:insert(back_button)
-    M.group:insert(back_button.text)
 
     local show_ads_text = display.newText({
             text = STR['settings.showads'], x = ZERO_X + 20, y = confirm_button.y + 70,
@@ -136,7 +123,6 @@ M.create = function()
     title:addEventListener('touch', function(e) LISTENER(e, 'title') end)
     lang_button:addEventListener('touch', function(e) LISTENER(e, 'lang') end)
     confirm_button:addEventListener('touch', function(e) LISTENER(e, 'confirm') end)
-    back_button:addEventListener('touch', function(e) LISTENER(e, 'back') end)
     -- show_ads_button:addEventListener('touch', function(e) LISTENER(e, 'show') end)
     -- pos_top_ads_button:addEventListener('touch', function(e) LISTENER(e, 'pos') end)
     -- orientation_group:addEventListener('touch', function(e) LISTENER(e, 'orientation') end)

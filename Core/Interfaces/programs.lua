@@ -22,7 +22,7 @@ listeners.but_add = function(target)
                     numApp = numApp + 1
                     io.close(file)
                 else
-                    LOCAL.apps[#LOCAL.apps + 1] = 'App' .. numApp
+                    table.insert(LOCAL.apps, 'App' .. numApp)
                     LFS.mkdir(DOC_DIR .. '/App' .. numApp)
                     LFS.mkdir(DOC_DIR .. '/App' .. numApp .. '/Resources')
                     LFS.mkdir(DOC_DIR .. '/App' .. numApp .. '/Documents')
@@ -35,14 +35,14 @@ listeners.but_add = function(target)
 
                     NEW_DATA()
                     SET_GAME_SAVE('App' .. numApp, {})
-                    SET_GAME_CODE('App' .. numApp, NEW_APP_CODE(e.text, 'App' .. numApp, false)) -- e.checkbox))
+                    SET_GAME_CODE('App' .. numApp, NEW_APP_CODE(e.text, 'App' .. numApp, e.checkbox))
                     PROGRAMS.new(e.text, 'App' .. numApp)
 
                     break
                 end
             end
         end
-    end) --, nil, STR['programs.noobmode'])
+    end, nil, STR['programs.noobmode'])
 end
 
 listeners.but_import = function(target)

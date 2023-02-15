@@ -3,8 +3,8 @@ local M = {}
 M.fun = {
     names = {},
     keys = {
-        'get_text', 'read_save', 'concat', 'tonumber', 'tostring', 'totable', 'len_table', 'unix_time',
-        'encode', 'noise', 'gsub', 'sub', 'len', 'find', 'split', 'random_str', 'match', 'color_pixel', 'get_ip'
+        'read_save', 'encode', 'len_table', 'concat', 'totable', 'tostring', 'tonumber', 'len', 'find',
+        'sub', 'gsub', 'split', 'unix_time', 'color_pixel', 'get_ip', 'random_str', 'match', 'noise'
     }
 }
 
@@ -29,7 +29,7 @@ M.prop = {
     text = {
         names = {},
         keys = {
-            'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation', 'alpha'
+            'get_text', 'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation', 'alpha'
         }
     },
 
@@ -57,7 +57,7 @@ M.prop = {
 
 M.log = {
     names = {},
-    keys = {'true', 'false', 'nil', '~=', '>', '<', '>=', '<=', 'and', 'or', 'not'}
+    keys = {'true', 'false', 'nil', 'or', 'and', '~=', '>', '<', '>=', '<=', 'not'}
 }
 
 M.device = {
@@ -70,7 +70,8 @@ M.device = {
 }
 
 M.set = function(key, name)
-    if (not (EDITOR.data[EDITOR.cursor[1] + 1] and EDITOR.data[EDITOR.cursor[1] + 1][1] == '(' and EDITOR.data[EDITOR.cursor[1] + 1][2] == 's'))
+    if (not (EDITOR.data[EDITOR.cursor[1] + 1] and EDITOR.data[EDITOR.cursor[1] + 1][1] == '('
+    and EDITOR.data[EDITOR.cursor[1] + 1][2] == 's'))
     and (key == 'fC' or key == 'fS' or key == 'fP' or key == 'f' or key == 'm' or key == 'p'
     --[[or name == 'finger_touching_screen_x' or name == 'finger_touching_screen_y']]) and name ~= 'unix_time' and name ~= 'pi' then
         EDITOR.cursor[1] = EDITOR.cursor[1] + 1
@@ -87,13 +88,16 @@ M.set = function(key, name)
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
         elseif name == 'find' or name == 'match' or name == 'color_pixel' or name == 'random'
-        or name == 'power' or name == 'remainder' or name == 'atan2' or name == 'noise' then
+        or name == 'power' or name == 'remainder' or name == 'atan2' or name == 'noise' or name == 'round' then
+            if name == 'round' then table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {'0', 'n'}) end
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
         end
     end
 end
 
 M.new = function()
+    M.prop.obj.names, M.fun.names = {}, {}
+
     for i = 1, #M.prop.text.keys do
         M.prop.text.names[i] = STR['editor.list.prop.text.' .. M.prop.text.keys[i]]
     end
@@ -110,12 +114,21 @@ M.new = function()
         M.prop.widget.names[i] = STR['editor.list.prop.widget.' .. M.prop.widget.keys[i]]
     end
 
-    for i = 1, #M.prop.obj.keys do
-        M.prop.obj.names[i] = STR['editor.list.prop.obj.' .. M.prop.obj.keys[i]]
+    for i = #M.prop.obj.keys, 1, -1 do
+        table.insert(M.prop.obj.names, 1, STR['editor.list.prop.obj.' .. M.prop.obj.keys[i]])
+
+        if NOOBMODE and (M.prop.obj.keys[i] == 'var' or M.prop.obj.keys[i] == 'name_texture') then
+            table.remove(M.prop.obj.names, 1)
+        end
     end
 
-    for i = 1, #M.fun.keys do
-        M.fun.names[i] = STR['editor.list.fun.' .. M.fun.keys[i]]
+    for i = #M.fun.keys, 1, -1 do
+        table.insert(M.fun.names, 1, STR['editor.list.fun.' .. M.fun.keys[i]])
+
+        if NOOBMODE and (M.fun.keys[i] == 'read_save' or M.fun.keys[i] == 'noise'
+        or M.fun.keys[i] == 'split' or M.fun.keys[i] == 'get_ip' or M.fun.keys[i] == 'match') then
+            table.remove(M.fun.names, 1)
+        end
     end
 
     for i = 1, #M.math.keys do

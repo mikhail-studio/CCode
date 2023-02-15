@@ -60,6 +60,11 @@ end
 
 M['encode'] = function(t, prettify, validate)
     local isComplete, result = pcall(function()
+        if type(t) == 'table' and t._ccode_event then
+            t = COPY_TABLE(t)
+            t._ccode_event = nil
+        end
+
         if validate then
             local t = COPY_TABLE(t)
 
@@ -69,10 +74,10 @@ M['encode'] = function(t, prettify, validate)
                 end
             end
 
-            return JSON[prettify and 'prettify' or 'encode'](t)
+            return JSON[prettify and 'encode' or 'prettify'](t)
         end
 
-        return JSON[prettify and 'prettify' or 'encode'](t)
+        return JSON[prettify and 'encode' or 'prettify'](t)
     end) return isComplete and result or '{}'
 end
 
@@ -97,7 +102,7 @@ end
 M['find'] = function(str, pattern, i, plain)
     local isComplete, result = pcall(function()
         return UTF8.find(str, pattern, i, plain)
-    end) return isComplete and result or str
+    end) return isComplete and result or nil
 end
 
 M['split'] = function(str, sep)
