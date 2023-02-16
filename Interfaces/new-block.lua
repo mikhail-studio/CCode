@@ -187,14 +187,22 @@ local function newBlockListener(event)
                     }
 
                     for i = 1, #INFO.listName[blockName] - 1 do
-                        if type(INFO.listName[blockName][i + 1][2]) == 'table' and type(INFO.listName[blockName][i + 1][2][1]) == 'table' then
-                            blockParams.params[i] = {}
+                        if LOCAL.autoplace then
+                            if type(INFO.listName[blockName][i + 1][2]) == 'table' and type(INFO.listName[blockName][i + 1][2][1]) == 'table' then
+                                blockParams.params[i] = {}
 
-                            for j = 1, #INFO.listName[blockName][i + 1][2] do
-                                blockParams.params[i][j] = INFO.listName[blockName][i + 1][2][j] or {}
+                                for j = 1, #INFO.listName[blockName][i + 1][2] do
+                                    blockParams.params[i][j] = INFO.listName[blockName][i + 1][2][j] or {}
+                                end
+                            else
+                                if type(INFO.listName[blockName][i + 1][2]) == 'table' and #INFO.listName[blockName][i + 1][2] == 0 then
+                                    blockParams.params[i] = {}
+                                else
+                                    blockParams.params[i] = {INFO.listName[blockName][i + 1][2]} or {}
+                                end
                             end
                         else
-                            blockParams.params[i] = {INFO.listName[blockName][i + 1][2]} or {}
+                            blockParams.params[i] = {}
                         end
                     end
 

@@ -3,6 +3,7 @@ local CALC = require 'Core.Simulation.calc'
 local M = {}
 
 M['newObjectNoob'] = EVENTS.BLOCKS['newObject']
+M['newGifNoob'] = EVENTS.BLOCKS['newGif']
 M['setPosNoob'] = EVENTS.BLOCKS['setPos']
 M['setPosXNoob'] = EVENTS.BLOCKS['setPosX']
 M['setPosYNoob'] = EVENTS.BLOCKS['setPosY']

@@ -153,21 +153,25 @@ if 'Теги' then
 
     M['removeTag'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
-        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else GAME.group[child[2]][child[1]]:removeSelf()'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else if child[2] == \'widgets\' then'
+        GAME.lua = GAME.lua .. ' timer.new(1, 1, function() pcall(function() GAME.group[child[2]][child[1]]:removeSelf() end) end)'
+        GAME.lua = GAME.lua .. ' else GAME.group[child[2]][child[1]]:removeSelf() end'
         GAME.lua = GAME.lua .. ' end end GAME.group.tags[tag] = nil end doTag(' .. CALC(params[1]) .. ') end)'
     end
 
     M['showTag'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
-        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else'
-        GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].isVisible = true'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else if child[2] == \'widgets\' then'
+        GAME.lua = GAME.lua .. ' timer.new(1, 1, function() pcall(function() GAME.group[child[2]][child[1]].isVisible = true end) end)'
+        GAME.lua = GAME.lua .. ' else GAME.group[child[2]][child[1]].isVisible = true end'
         GAME.lua = GAME.lua .. ' end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 
     M['hideTag'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
-        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else'
-        GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].isVisible = false'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else if child[2] == \'widgets\' then'
+        GAME.lua = GAME.lua .. ' timer.new(1, 1, function() pcall(function() GAME.group[child[2]][child[1]].isVisible = false end) end)'
+        GAME.lua = GAME.lua .. ' else GAME.group[child[2]][child[1]].isVisible = false end'
         GAME.lua = GAME.lua .. ' end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 
@@ -181,41 +185,41 @@ if 'Теги' then
 
     M['addTagText'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local name, tag = ' .. CALC(params[2]) .. ', ' .. CALC(params[1])
-        GAME.lua = GAME.lua .. ' if GAME.group.objects[name]._tag ~= \'TAG\' then for index, info in'
-        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.objects[name]._tag]) do if info[1] == name and info[2] == \'texts\''
-        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.objects[name]._tag], index) break end end end'
+        GAME.lua = GAME.lua .. ' if GAME.group.texts[name]._tag ~= \'TAG\' then for index, info in'
+        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.texts[name]._tag]) do if info[1] == name and info[2] == \'texts\''
+        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.texts[name]._tag], index) break end end end'
         GAME.lua = GAME.lua .. ' table.insert(GAME.group.tags[tag], {name, \'texts\'}) GAME.group.texts[name]._tag = tag end)'
     end
 
     M['addTagWidget'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local name, tag = ' .. CALC(params[2]) .. ', ' .. CALC(params[1])
-        GAME.lua = GAME.lua .. ' if GAME.group.objects[name]._tag ~= \'TAG\' then for index, info in'
-        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.objects[name]._tag]) do if info[1] == name and info[2] == \'widgets\''
-        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.objects[name]._tag], index) break end end end'
+        GAME.lua = GAME.lua .. ' if GAME.group.widgets[name]._tag ~= \'TAG\' then for index, info in'
+        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.widgets[name]._tag]) do if info[1] == name and info[2] == \'widgets\''
+        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.widgets[name]._tag], index) break end end end'
         GAME.lua = GAME.lua .. ' table.insert(GAME.group.tags[tag], {name, \'widgets\'}) GAME.group.widgets[name]._tag = tag end)'
     end
 
     M['addTagMedia'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local name, tag = ' .. CALC(params[2]) .. ', ' .. CALC(params[1])
-        GAME.lua = GAME.lua .. ' if GAME.group.objects[name]._tag ~= \'TAG\' then for index, info in'
-        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.objects[name]._tag]) do if info[1] == name and info[2] == \'media\''
-        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.objects[name]._tag], index) break end end end'
+        GAME.lua = GAME.lua .. ' if GAME.group.media[name]._tag ~= \'TAG\' then for index, info in'
+        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.media[name]._tag]) do if info[1] == name and info[2] == \'media\''
+        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.media[name]._tag], index) break end end end'
         GAME.lua = GAME.lua .. ' table.insert(GAME.group.tags[tag], {name, \'media\'}) GAME.group.media[name]._tag = tag end)'
     end
 
     M['addTagGroup'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local name, tag = ' .. CALC(params[2]) .. ', ' .. CALC(params[1])
-        GAME.lua = GAME.lua .. ' if GAME.group.objects[name]._tag ~= \'TAG\' then for index, info in'
-        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.objects[name]._tag]) do if info[1] == name and info[2] == \'groups\''
-        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.objects[name]._tag], index) break end end end'
+        GAME.lua = GAME.lua .. ' if GAME.group.groups[name]._tag ~= \'TAG\' then for index, info in'
+        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.groups[name]._tag]) do if info[1] == name and info[2] == \'groups\''
+        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.groups[name]._tag], index) break end end end'
         GAME.lua = GAME.lua .. ' table.insert(GAME.group.tags[tag], {name, \'groups\'}) GAME.group.groups[name]._tag = tag end)'
     end
 
     M['addTagTag'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local name, tag = ' .. CALC(params[2]) .. ', ' .. CALC(params[1])
-        GAME.lua = GAME.lua .. ' if GAME.group.objects[name]._tag ~= \'TAG\' then for index, info in'
-        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.objects[name]._tag]) do if info[1] == name and info[2] == \'tags\''
-        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.objects[name]._tag], index) break end end end'
+        GAME.lua = GAME.lua .. ' if GAME.group.tags[name]._tag ~= \'TAG\' then for index, info in'
+        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.tags[name]._tag]) do if info[1] == name and info[2] == \'tags\''
+        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.tags[name]._tag], index) break end end end'
         GAME.lua = GAME.lua .. ' table.insert(GAME.group.tags[tag], {name, \'tags\'}) end)'
     end
 

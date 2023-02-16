@@ -61,6 +61,23 @@ listeners.confirm = function(e)
     end, nil, nil, 0.5)
 end
 
+listeners.autoplace = function(e)
+    local list = LOCAL.autoplace and {STR['button.yes'], STR['button.no']} or {STR['button.no'], STR['button.yes']}
+
+    LIST.new(list, e.target.x, e.target.y - e.target.height / 2, 'down', function(e)
+        if e.index > 0 then
+            LOCAL.autoplace = e.text == STR['button.yes']
+
+            SETTINGS.group:removeSelf()
+            SETTINGS.group = nil
+            SETTINGS.create()
+            SETTINGS.group.isVisible = true
+
+            NEW_DATA()
+        end
+    end, nil, nil, 0.5)
+end
+
 listeners.lang = function(e)
     local list = {{STR['lang.' .. LOCAL.lang]}, {LOCAL.lang}}
 

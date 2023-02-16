@@ -43,6 +43,7 @@ M.upd = function(e, scroll, group, type)
                 local diffY = math.round((e.target.y - group.data[M.index].y) / 150)
                 local x, y, text = group.data[M.index].x, group.data[M.index].y, group.data[M.index].text
                 local script = M.data.scripts[M.index]
+                local resource = M.data.resources.others[M.index]
                 local image = M.data.resources.images[M.index]
                 local sound = M.data.resources.sounds[M.index]
                 local video = M.data.resources.videos[M.index]
@@ -65,6 +66,7 @@ M.upd = function(e, scroll, group, type)
                 end
 
                 if type == 'scripts' then table.remove(M.data.scripts, M.index) end
+                if type == 'resources' then table.remove(M.data.resources.others, M.index) end
                 if type == 'images' then table.remove(M.data.resources.images, M.index) end
                 if type == 'sounds' then table.remove(M.data.resources.sounds, M.index) end
                 if type == 'videos' then table.remove(M.data.resources.videos, M.index) end
@@ -76,6 +78,7 @@ M.upd = function(e, scroll, group, type)
                 table.remove(group.blocks, M.index - diffY)
 
                 if type == 'scripts' then table.insert(M.data.scripts, M.index, script) end
+                if type == 'resources' then table.insert(M.data.resources.others, M.index, resource) end
                 if type == 'images' then table.insert(M.data.resources.images, M.index, image) end
                 if type == 'sounds' then table.insert(M.data.resources.sounds, M.index, sound) end
                 if type == 'videos' then table.insert(M.data.resources.videos, M.index, video) end
@@ -87,6 +90,7 @@ M.upd = function(e, scroll, group, type)
                 local diffY = math.round((group.data[M.index].y - e.target.y) / 150)
                 local x, y, text = group.data[M.index].x, group.data[M.index].y, group.data[M.index].text
                 local script = M.data.scripts[M.index]
+                local resource = M.data.resources.others[M.index]
                 local image = M.data.resources.images[M.index]
                 local sound = M.data.resources.sounds[M.index]
                 local video = M.data.resources.videos[M.index]
@@ -109,6 +113,7 @@ M.upd = function(e, scroll, group, type)
                 end
 
                 if type == 'scripts' then table.remove(M.data.scripts, M.index) end
+                if type == 'resources' then table.remove(M.data.resources.others, M.index) end
                 if type == 'images' then table.remove(M.data.resources.images, M.index) end
                 if type == 'sounds' then table.remove(M.data.resources.sounds, M.index) end
                 if type == 'videos' then table.remove(M.data.resources.videos, M.index) end
@@ -120,6 +125,7 @@ M.upd = function(e, scroll, group, type)
                 table.remove(group.blocks, M.index + diffY + 1)
 
                 if type == 'scripts' then table.insert(M.data.scripts, M.index, script) end
+                if type == 'resources' then table.insert(M.data.resources.others, M.index, resource) end
                 if type == 'images' then table.insert(M.data.resources.images, M.index, image) end
                 if type == 'sounds' then table.insert(M.data.resources.sounds, M.index, sound) end
                 if type == 'videos' then table.insert(M.data.resources.videos, M.index, video) end

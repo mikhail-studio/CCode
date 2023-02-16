@@ -96,7 +96,7 @@ M.set = function(key, name)
 end
 
 M.new = function()
-    M.prop.obj.names, M.fun.names = {}, {}
+    M.prop.obj.names, M.prop.media.names, M.fun.names = {}, {}, {}
 
     for i = 1, #M.prop.text.keys do
         M.prop.text.names[i] = STR['editor.list.prop.text.' .. M.prop.text.keys[i]]

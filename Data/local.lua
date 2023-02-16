@@ -2,7 +2,8 @@ local data, custom = {}, {}
 local file = io.open(system.pathForFile('local.json', system.DocumentsDirectory), 'r')
 
 if file then
-    data = JSON.decode(file:read('*a')) io.close(file) data.back = 'System'
+    data = JSON.decode(file:read('*a')) io.close(file)
+    if data.autoplace == nil then data.autoplace = true end data.back = 'System'
     WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), JSON.encode(data))
 else
     data, custom = {
@@ -11,6 +12,7 @@ else
         last_link = '',
         orientation = 'portrait',
         back = 'System',
+        autoplace = true,
         show_ads = true,
         pos_top_ads = true,
         confirm = true,

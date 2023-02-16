@@ -10,7 +10,7 @@ end
 listeners.but_add = function(target)
     IMAGES.group[8]:setIsLocked(true, 'vertical')
     if IMAGES.group.isVisible then
-        INPUT.new(STR['images.entername'], function(event)
+        INPUT.new(STR['images.entername' .. (NOOBMODE and '.noob' or '')], function(event)
             if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
                 FILTER.check(event.target.text, function(ev)
                     if ev.isError then
@@ -46,13 +46,16 @@ listeners.but_add = function(target)
                             end
                         end
 
-                        if isGif then
+                        if isGif and not NOOBMODE then
                             WINDOW.new(STR['images.gif.convert'], {STR['button.close'], STR['images.gif.okay']}, function(e)
                                 if e.index == 2 then
                                     local width, height, count = GANIN.convert(
-                                            DOC_DIR .. '/' .. CURRENT_LINK .. '/Images/Image' .. numImage,
-                                            DOC_DIR .. '/' .. CURRENT_LINK .. '/Images/Image' .. numImage
-                                    ) local info = STR['images.gif.complete'] .. '\n'
+                                        DOC_DIR .. '/' .. CURRENT_LINK .. '/Images/Image' .. numImage,
+                                        DOC_DIR .. '/' .. CURRENT_LINK .. '/Images/Image' .. numImage
+                                    ) width, height, count = unpack(GET_SIZE(
+                                        DOC_DIR .. '/' .. CURRENT_LINK .. '/Images/Image' .. numImage,
+                                        system.DocumentsDirectory, width, height, count
+                                    )) local info = STR['images.gif.complete'] .. '\n'
                                     local info = info .. STR['blocks.newSprite.params'][3] .. ' ' .. width .. '\n'
                                     local info = info .. STR['blocks.newSprite.params'][4] .. ' ' .. height .. '\n'
                                     local info = info .. STR['blocks.newSprite.params'][5] .. ' ' .. count
@@ -87,7 +90,7 @@ listeners.but_add = function(target)
                     end
                 end
             end
-        end, nil, STR['images.pixel'])
+        end, nil, STR['images.pixel' .. (NOOBMODE and '.noob' or '')])
     else
         IMAGES.group[8]:setIsLocked(false, 'vertical')
     end
@@ -135,7 +138,7 @@ listeners.but_list = function(target)
                 end
             elseif e.text == STR['button.find'] then
                 IMAGES.group[8]:setIsLocked(true, 'vertical')
-                INPUT.new(STR['images.entername'], function(event)
+                INPUT.new(STR['images.entername' .. (NOOBMODE and '.noob' or '')], function(event)
                     if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
                         INPUT.remove(true, event.target.text)
                     end
@@ -220,7 +223,7 @@ listeners.but_okay = function(target)
 
             if IMAGES.group.blocks[i].checkbox.isOn then
                 IMAGES.group.blocks[i].checkbox:setState({isOn = false})
-                INPUT.new(STR['images.changename'], function(event)
+                INPUT.new(STR['images.changename' .. (NOOBMODE and '.noob' or '')], function(event)
                     if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
                         FILTER.check(event.target.text, function(ev)
                             if ev.isError then

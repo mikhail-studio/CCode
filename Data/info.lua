@@ -681,6 +681,10 @@ M.listName = {
             ['frontTag'] = {'groups', {'value'}},
             ['backTag'] = {'groups', {'value'}},
 
+        -- noob 
+        ['addGroupObjectNoob'] = {'groups', {'value'}, {'value'}},
+        ['addTagObjectNoob'] = {'groups', {'value'}, {'value'}},
+
     -- physics
     ['setBodyType'] = {'physics', {'value'}, {'body', {'dynamic', 'sl'}}},
         ['setBody'] = {'physics', {'value'}, {'body', {'dynamic', 'sl'}},
@@ -914,8 +918,17 @@ for type, blocks in pairs(M.listBlock) do
     if type ~= 'everyone' and type ~= '_everyone' then
         for index, block in pairs(blocks) do
             if M.listName[block .. 'Noob'] then
-                M.listBlockNoob.everyone[table.indexOf(M.listBlockNoob.everyone, block)] = block .. 'Noob'
-                M.listBlockNoob[type][table.indexOf(M.listBlockNoob[type], block)] = block .. 'Noob'
+                for index, name in ipairs(M.listBlockNoob.everyone) do
+                    if name == block then
+                        M.listBlockNoob.everyone[index] = block .. 'Noob'
+                    end
+                end
+
+                for index, name in ipairs(M.listBlockNoob[type]) do
+                    if name == block and M.listName[block .. 'Noob'] and M.listName[block .. 'Noob'][1] == type then
+                        M.listBlockNoob[type][index] = block .. 'Noob'
+                    end
+                end
             end
         end
     end
@@ -1046,8 +1059,17 @@ for index, type in pairs(M.listDeleteType) do
 end
 
 for block, type in pairs(blocksDelete) do
-    table.remove(M.listBlockNoob.everyone, table.indexOf(M.listBlockNoob.everyone, block))
-    table.remove(M.listBlockNoob[type], table.indexOf(M.listBlockNoob[type], block))
+    for index, name in ipairs(M.listBlockNoob.everyone) do
+        if name == block then
+            table.remove(M.listBlockNoob.everyone, index)
+        end
+    end
+
+    for index, name in ipairs(M.listBlockNoob[type]) do
+        if name == block then
+            table.remove(M.listBlockNoob[type], index)
+        end
+    end
 end
 
 table.remove(M.listBlockNoob.everyone, 4)

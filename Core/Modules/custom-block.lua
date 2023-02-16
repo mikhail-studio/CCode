@@ -222,6 +222,10 @@ M.removeOverlay = function(index)
                 LANG.ru['blocks.custom' .. index] = STR['blocks.']
                 LANG.ru['blocks.custom' .. index .. '.params'] = COPY_TABLE(STR['blocks..params'])
 
+                local blockParams = {} for i = 1, #custom[index][2]
+                do blockParams[i] = {'value', custom[index][6] and custom[index][6][i] or nil} end
+                INFO.listName['custom' .. index] = {'custom', unpack(blockParams)}
+
                 for id, type in ipairs(INFO.listBlock.custom) do
                     if type == 'custom' .. index then
                         table.remove(INFO.listBlock.custom, id)
@@ -231,15 +235,11 @@ M.removeOverlay = function(index)
                 end
 
                 for i = 1, #data.scripts do
-                    local script = GET_GAME_SCRIPT(CURRENT_LINK, i, data)
+                    local script, nestedInfo = GET_FULL_DATA(GET_GAME_SCRIPT(CURRENT_LINK, i, data))
 
                     for j = 1, #script.params do
                         if script.params[j].name == 'custom' .. index then
                             local block = custom[index]
-                            local typeBlock = 'custom' .. index
-                            local blockParams = {} for i = 1, #block[2] do blockParams[i] = {'value', block[6] and block[6][i] or nil} end
-
-                            INFO.listName[typeBlock] = {'custom', unpack(blockParams)}
 
                             if #script.params[j].params >= #block[2] then
                                 for k = #script.params[j].params, #block[2] + 1, -1 do
@@ -253,7 +253,7 @@ M.removeOverlay = function(index)
                         end
                     end
 
-                    SET_GAME_SCRIPT(CURRENT_LINK, script, i, data)
+                    SET_GAME_SCRIPT(CURRENT_LINK, GET_NESTED_DATA(script, nestedInfo, INFO), i, data)
                 end
 
                 SET_GAME_CODE(CURRENT_LINK, data)

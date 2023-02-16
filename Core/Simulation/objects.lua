@@ -78,12 +78,13 @@ M['newGif'] = function(params)
 
     GAME.lua = GAME.lua .. ' pcall(function() local _link = ' .. link .. ' local name = ' .. (#params == 3 and '_link' or name)
     GAME.lua = GAME.lua .. ' local link, filter = other.getImage(_link) local width, height, count ='
-    GAME.lua = GAME.lua .. ' GANIN.convert(DOC_DIR .. \'/\' .. link, system.pathForFile(link, system.TemporaryDirectory))'
+    GAME.lua = GAME.lua .. ' GANIN.convert(DOC_DIR .. \'/\' .. link, system.pathForFile(\'gif.png\', system.TemporaryDirectory))'
+    GAME.lua = GAME.lua .. ' width, height, count = unpack(GET_SIZE(link, system.TemporaryDirectory, width, height, count))'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name]:removeSelf() GAME.group.objects[name] = nil end)'
     GAME.lua = GAME.lua .. ' local animations = {name = \'\', start = 1, count = count}'
     GAME.lua = GAME.lua .. ' display.setDefault(\'magTextureFilter\', filter ~= \'linear\' and \'nearest\' or \'linear\')'
     GAME.lua = GAME.lua .. ' display.setDefault(\'minTextureFilter\', filter ~= \'linear\' and \'nearest\' or \'linear\')'
-    GAME.lua = GAME.lua .. ' local imageSheet = graphics.newImageSheet(link, system.TemporaryDirectory,'
+    GAME.lua = GAME.lua .. ' local imageSheet = graphics.newImageSheet(\'gif.png\', system.TemporaryDirectory,'
     GAME.lua = GAME.lua .. ' {width = width, height = height, numFrames = count})'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name] = display.newSprite(GAME.group, imageSheet, animations)'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name].x, GAME.group.objects[name].y = ' .. posX .. ', ' .. posY

@@ -71,6 +71,10 @@ listeners.blocks = function()
                     os.time(), COPY_TABLE(BLOCKS.custom.color), (EDITOR and EDITOR.restart) and COPY_TABLE(EDITOR.restart[8]) or nil
                 } custom.len = custom.len + (BLOCKS.custom.isChange and 0 or 1) SET_GAME_CUSTOM(custom)
 
+                local blockParams = {} for i = 1, #custom[BLOCKS.custom.index][2]
+                do blockParams[i] = {'value', custom[BLOCKS.custom.index][6] and custom[BLOCKS.custom.index][6][i] or nil} end
+                INFO.listName['custom' .. BLOCKS.custom.index] = {'custom', unpack(blockParams)}
+
                 if BLOCKS.custom.isChange then
                     for id, type in ipairs(INFO.listBlock.custom) do
                         if type == 'custom' .. BLOCKS.custom.index then
@@ -81,15 +85,11 @@ listeners.blocks = function()
                     end
 
                     for i = 1, #data.scripts do
-                        local script = GET_GAME_SCRIPT(CURRENT_LINK, i, data)
+                        local script, nestedInfo = GET_FULL_DATA(GET_GAME_SCRIPT(CURRENT_LINK, i, data))
 
                         for j = 1, #script.params do
                             if script.params[j].name == 'custom' .. BLOCKS.custom.index then
                                 local block = custom[BLOCKS.custom.index]
-                                local typeBlock = 'custom' .. BLOCKS.custom.index
-                                local blockParams = {} for i = 1, #block[2] do blockParams[i] = {'value', block[6] and block[6][i] or nil} end
-
-                                INFO.listName[typeBlock] = {'custom', unpack(blockParams)}
 
                                 if #script.params[j].params >= #block[2] then
                                     for k = #script.params[j].params, #block[2] + 1, -1 do
@@ -103,7 +103,7 @@ listeners.blocks = function()
                             end
                         end
 
-                        SET_GAME_SCRIPT(CURRENT_LINK, script, i, data)
+                        SET_GAME_SCRIPT(CURRENT_LINK, GET_NESTED_DATA(script, nestedInfo, INFO), i, data)
                     end
                 else
                     table.insert(INFO.listBlock.custom, 1, 'custom' .. BLOCKS.custom.index)

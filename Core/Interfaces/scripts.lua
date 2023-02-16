@@ -10,7 +10,7 @@ end
 listeners.but_add = function(target)
     SCRIPTS.group[8]:setIsLocked(true, 'vertical')
     if SCRIPTS.group.isVisible then
-        INPUT.new(STR['scripts.entername'], function(event)
+        INPUT.new(STR['scripts.entername' .. (NOOBMODE and '.noob' or '')], function(event)
             if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
                 FILTER.check(event.target.text, function(ev)
                     if ev.isError then
@@ -97,7 +97,7 @@ listeners.but_list = function(target)
                         end
                     elseif e.index == 5 then
                         SCRIPTS.group[8]:setIsLocked(true, 'vertical')
-                        INPUT.new(STR['scripts.entername'], function(event)
+                        INPUT.new(STR['scripts.entername' .. (NOOBMODE and '.noob' or '')], function(event)
                             if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
                                 INPUT.remove(true, event.target.text)
                             end
@@ -206,7 +206,7 @@ listeners.but_okay = function(target)
 
             if SCRIPTS.group.blocks[i].checkbox.isOn then
                 SCRIPTS.group.blocks[i].checkbox:setState({isOn = false})
-                INPUT.new(STR['scripts.changename'], function(event)
+                INPUT.new(STR['scripts.changename' .. (NOOBMODE and '.noob' or '')], function(event)
                     if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
                         FILTER.check(event.target.text, function(ev)
                             if ev.isError then
@@ -232,7 +232,7 @@ listeners.but_okay = function(target)
 
             if SCRIPTS.group.blocks[i].checkbox.isOn then
                 SCRIPTS.group.blocks[i].checkbox:setState({isOn = false})
-                INPUT.new(STR['scripts.entername'], function(event)
+                INPUT.new(STR['scripts.entername' .. (NOOBMODE and '.noob' or '')], function(event)
                     if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
                         FILTER.check(event.target.text, function(ev)
                             if ev.isError then

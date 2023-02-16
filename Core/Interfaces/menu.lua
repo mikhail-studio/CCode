@@ -16,41 +16,6 @@ listeners.but_continue = function(target)
     else
         local data = GET_GAME_CODE(LOCAL.last_link)
 
-        if tonumber(data.build) > 1215 and tonumber(data.build) < 1234 then
-            for i = 1, #data.scripts do
-                local script, nestedInfo = GET_FULL_DATA(GET_GAME_SCRIPT(LOCAL.last_link, i, data))
-
-                for j = 1, #script.params do
-                    if script.params[j].name == 'setTransitionTo' then
-                        if #script.params[j].params[8] ~= 0 then
-                            table.insert(script.params[j].params[8], {"+", "s"})
-                            table.insert(script.params[j].params[8], {"360", "n"})
-                        end
-
-                        if #script.params[j].params[9] ~= 0 then
-                            table.insert(script.params[j].params[9], {"-", "s"})
-                            table.insert(script.params[j].params[9], {"640", "n"})
-                        end
-                    elseif script.params[j].name == 'setTransitionPos' then
-                        if #script.params[j].params[6] ~= 0 then
-                            table.insert(script.params[j].params[6], {"+", "s"})
-                            table.insert(script.params[j].params[6], {"360", "n"})
-                        end
-
-                        if #script.params[j].params[7] ~= 0 then
-                            table.insert(script.params[j].params[7], {"-", "s"})
-                            table.insert(script.params[j].params[7], {"640", "n"})
-                        end
-                    end
-                end
-
-                SET_GAME_SCRIPT(LOCAL.last_link, GET_NESTED_DATA(script, nestedInfo, INFO), i, data)
-            end
-
-            data.build = tostring(BUILD)
-            SET_GAME_CODE(LOCAL.last_link, data)
-        end
-
         if tonumber(data.build) < 1215 then
             local scripts = COPY_TABLE(data.scripts) data.build = tostring(BUILD)
             LFS.mkdir(DOC_DIR .. '/' .. LOCAL.last_link .. '/Scripts')

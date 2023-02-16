@@ -51,7 +51,7 @@ local function getStartLua(linkBuild)
     local cod16 = ' #GAME.group.suspends do GAME.group.suspends[i]() end elseif e.type == \'applicationResume\' then for i = 1,'
     local cod17 = ' #GAME.group.resumes do GAME.group.resumes[i]() end end end Runtime:addEventListener(\'system\', GAME.group.const.system)'
     local cod18 = ' GAME.group.textures = {} GAME.group.accelerometers = {} GAME.hash = CRYPTO.digest(CRYPTO.md5, math.random(1, 999999999))'
-    local cod19 = ' local hash = GAME.hash GAME.group.networks = {}'
+    local cod19 = ' local hash = GAME.hash GAME.group.networks = {} GAME.group.const.touch_x, GAME.group.const.touch_y = 0, 0'
 
     if linkBuild then
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. require 'Data.build'
@@ -261,7 +261,7 @@ M.new = function(linkBuild, isDebug)
 
     if linkBuild or isDebug then
         M.remove()
-        return M.lua
+        return M.lua .. (linkBuild and ' end)' or '')
     else
         display.setDefault('background', 0)
         timer.performWithDelay(1, function()
