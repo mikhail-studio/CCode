@@ -63,6 +63,7 @@
         "images.pixel": "Pixel sprite",
         "images.gif.convert": "Convert gif to sprite sheet?",
         "images.gif.okay": "Convert",
+        "images.gif.complete": "Conversion is finished, remember the values:",
         "sounds.entername": "Enter sound name",
         "sounds.changename": "Change sound name",
         "videos.entername": "Enter video name",
@@ -847,6 +848,17 @@
         "blocks.setTransitionCancelAll": "Cancel all transition"
     },
 
+    "varsNoob": {
+        "blocks.setVarNoob": "Create value",
+        "blocks.setVarNoob.params": ["Value name:", "Value:"],
+        "blocks.updVarNoob": "Add value",
+        "blocks.updVarNoob.params": ["Value name:", "Value:"],
+        "blocks.saveValueNoob": "Save value",
+        "blocks.saveValueNoob.params": ["Value name:"],
+        "blocks.readValueNoob": "Read value from saves",
+        "blocks.readValueNoob.params": ["Value name:"]
+    },
+
     "mediaNoob": {
         "blocks.mediaNoob": "Sounds",
         "blocks.playSoundNoob": "Play sound",
@@ -864,17 +876,15 @@
         "blocks.stopSoundNoob": "Stop sound",
         "blocks.stopSoundNoob.params": ["Sound name:"],
         "blocks.stopTimerSoundNoob": "Stop sound with timer",
-        "blocks.stopTimerSoundNoob.params": ["Sound name:", "Time (Seconds):"],
-        "blocks.setVarNoob": "Create value",
-        "blocks.setVarNoob.params": ["Value name:", "Value:"],
-        "blocks.updVarNoob": "Add value",
-        "blocks.updVarNoob.params": ["Value name:", "Value:"]
+        "blocks.stopTimerSoundNoob.params": ["Sound name:", "Time (Seconds):"]
     },
 
     "objectsNoob": {
         "blocks.objectsNoob": "Pictures",
         "blocks.newObjectNoob": "Create picture",
         "blocks.newObjectNoob.params": ["Picture name:", "Position (X):", "Position (Y):"],
+        "blocks.newGifNoob": "Create gif picture",
+        "blocks.newGifNoob.params": ["Picture name:", "Position (X):", "Position (Y):"],
         "blocks.setPosNoob": "Set picture position",
         "blocks.setPosNoob.params": ["Picture name:", "Position (X):", "Position (Y):"],
         "blocks.setPosXNoob": "Set picture position X",

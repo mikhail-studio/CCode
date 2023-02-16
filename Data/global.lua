@@ -47,7 +47,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1234
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1235
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
@@ -72,7 +72,7 @@ if IS_SIM or IS_WIN then
         or mime == 'audio/*' and {'*.wav', '*.mp3', '*.ogg'} or mime == 'ccode/*' and {'*.ccode', '*.zip'}
         or mime == 'text/x-lua' and {'*.lua', '*.txt'} or mime == 'video/*' and {'*.mov', '*.mp4', '*.m4v', '*.3gp'} or nil
         local pathToFile, path = path .. '/' .. file, FILEPICKER.openFileDialog({filter_patterns = filter_patterns})
-        if path then OS_COPY(path, pathToFile) end listener({done = path and 'ok' or 'error', destFileName = path})
+        if path then OS_COPY(path, pathToFile) end listener({done = path and 'ok' or 'error', origFileName = path})
     end
 
     EXPORT.export = function(config)
@@ -213,9 +213,9 @@ COPY_TABLE = function(t, isSim)
 
     pcall(function() if t then
         for key, value in pairs(t) do
-            if type(value) == 'table' and key ~= '_class' and key ~= '_tableListeners' and key ~= 'target' then
+            if type(value) == 'table' and key ~= '_class' and key ~= '_tableListeners' then
                 result[key] = COPY_TABLE(value, isSim)
-            elseif (not isSim) or (key ~= '_tableListeners' and key ~= '_class' and key ~= 'target') then
+            elseif (not isSim) or (key ~= '_tableListeners' and key ~= '_class') then
                 result[key] = value
             end
         end
@@ -341,6 +341,7 @@ NEW_APP_CODE = function(title, link, checkbox)
         build = tostring(BUILD),
         created = tostring(BUILD),
         noobmode = checkbox,
+        id = DEVICE_ID,
         title = title,
         link = link,
         tables = {},

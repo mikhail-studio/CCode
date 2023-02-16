@@ -81,12 +81,15 @@ end
 M['setListener'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1])
     GAME.lua = GAME.lua .. ' table.insert(GAME.group.objects[name]._listeners, ' .. CALC(params[2], 'a', true) .. ')'
-    GAME.lua = GAME.lua .. ' if not GAME.group.objects[name].hasListener then GAME.group.objects[name]:addEventListener(\'touch\','
+    GAME.lua = GAME.lua .. ' if not GAME.group.objects[name].hasListener then GAME.group.objects[name].hasListener = true'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]:addEventListener(\'touch\','
     GAME.lua = GAME.lua .. ' function(e) local isComplete, result = pcall(function() if GAME.hash == hash then'
-    GAME.lua = GAME.lua .. ' e.isTouch = e.target._touch if e.phase == \'began\' then e.target._touch = true'
+    GAME.lua = GAME.lua .. ' e.isTouch = e.target._touch GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y'
+    GAME.lua = GAME.lua .. ' if e.phase == \'began\' then e.target._touch, GAME.group.const.touch = true, true'
     GAME.lua = GAME.lua .. ' if GAME.multi then display.getCurrentStage():setFocus(e.target, e.id)'
     GAME.lua = GAME.lua .. ' else display.getCurrentStage():setFocus(e.target) end'
-    GAME.lua = GAME.lua .. ' elseif e.phase == \'ended\' or e.phase == \'cancelled\' then e.target._touch = false'
+    GAME.lua = GAME.lua .. ' elseif e.phase == \'ended\' or e.phase == \'cancelled\' then'
+    GAME.lua = GAME.lua .. ' e.target._touch, GAME.group.const.touch = false, false'
     GAME.lua = GAME.lua .. ' if GAME.multi then display.getCurrentStage():setFocus(e.target, nil) else'
     GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(nil) for name, object in pairs(GAME.group.objects) do'
     GAME.lua = GAME.lua .. ' if object._touch then GAME.group.objects[name]._touch = false end end end end'

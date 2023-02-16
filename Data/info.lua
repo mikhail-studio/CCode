@@ -464,6 +464,8 @@ M.listName = {
         -- noob
         ['setVarNoob'] = {'vars', {'var'}, {'value'}},
             ['updVarNoob'] = {'vars', {'var'}, {'value'}},
+            ['saveValueNoob'] = {'vars', {'var'}},
+            ['readValueNoob'] = {'vars', {'var'}},
 
     -- objects
     ['newObject'] = {'objects', {'value'}, {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
@@ -494,6 +496,7 @@ M.listName = {
 
         -- noob
         ['newObjectNoob'] = {'objects', {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
+            ['newGifNoob'] = {'objects', {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
             ['setPosNoob'] = {'objects', {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
             ['setPosXNoob'] = {'objects', {'value'}, {'value', {'0', 'n'}}},
             ['setPosYNoob'] = {'objects', {'value'}, {'value', {'0', 'n'}}},
@@ -946,7 +949,10 @@ local blocksDelete = {
         ['backObject'] = 'objects',
         ['addGroupWidget'] = 'groups',
         ['addTagWidget'] = 'groups',
-        ['newPolygon'] = 'shapes',
+        ['addGroupMedia'] = 'groups',
+        ['addTagMedia'] = 'groups',
+
+    ['newPolygon'] = 'shapes',
         ['newLine'] = 'shapes',
         ['appendLine'] = 'shapes',
         ['setRGB'] = 'shapes',
@@ -1052,6 +1058,10 @@ table.remove(M.listBlockNoob.everyone, 4)
     table.insert(M.listBlockNoob.control, 1, 'setBackgroundColor')
     table.remove(M.listBlockNoob.vars, table.indexOf(M.listBlockNoob.vars, 'addTable'))
     table.insert(M.listBlockNoob.vars, 3, 'addTable')
+    table.remove(M.listBlockNoob.vars, table.indexOf(M.listBlockNoob.vars, 'saveValueNoob'))
+    table.insert(M.listBlockNoob.vars, 11, 'saveValueNoob')
+    table.insert(M.listBlockNoob.everyone, table.indexOf(M.listBlockNoob.everyone, 'saveValueNoob') + 1, 'readValueNoob')
+    table.insert(M.listBlockNoob.vars, 12, 'readValueNoob')
 
     table.insert(M.listBlockNoob.shapes, 'hideObjectNoob')
     table.insert(M.listBlockNoob.shapes, 'showObjectNoob')

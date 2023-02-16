@@ -98,12 +98,15 @@ local listener = function(e, scroll, group, type)
 
                         if not data.resources.others then
                             data.resources.others = {}
+                            data.build = tostring(BUILD)
+                            data.id = DEVICE_ID
 
                             if not data.created then
                                 data.created = '1223'
                                 data.noobmode = false
-                                SET_GAME_CODE(e.target.link, data)
                             end
+
+                            SET_GAME_CODE(e.target.link, data)
                         end
 
                         if script and script.custom then

@@ -124,7 +124,7 @@ M['saveValue'] = function(params)
     local key = CALC(params[1])
     local value = CALC(params[2])
 
-    GAME.lua = GAME.lua .. ' pcall(function() local data =  GET_GAME_SAVE(CURRENT_LINK)'
+    GAME.lua = GAME.lua .. ' pcall(function() local data = GET_GAME_SAVE(CURRENT_LINK)'
     GAME.lua = GAME.lua .. ' data[tostring(' .. key .. ')] = ' .. value .. ' SET_GAME_SAVE(CURRENT_LINK, data) end)'
 end
 
@@ -278,5 +278,24 @@ end
 M['backText'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[' .. CALC(params[1]) .. ']:toBack() end)'
 end
+
+M['saveValueNoob'] = function(params)
+    local key = CALC(params[1], 'a', true)
+    local value, key = CALC(params[1]), UTF8.sub(key, 7, UTF8.len(key) - 1)
+
+    GAME.lua = GAME.lua .. ' pcall(function() local data = GET_GAME_SAVE(CURRENT_LINK)'
+    GAME.lua = GAME.lua .. ' data[' .. key .. '] = ' .. value .. ' SET_GAME_SAVE(CURRENT_LINK, data) end)'
+end
+
+M['readValueNoob'] = function(params)
+    local key = CALC(params[1], 'a', true)
+    local var, key = key, UTF8.sub(key, 7, UTF8.len(key) - 1)
+
+    GAME.lua = GAME.lua .. ' pcall(function() local data = GET_GAME_SAVE(CURRENT_LINK) ' .. var
+    GAME.lua = GAME.lua .. ' = data[' .. key .. '] or ' .. var .. ' end)'
+end
+
+M['setVarNoob'] = M['setVar']
+M['updVarNoob'] = M['updVar']
 
 return M

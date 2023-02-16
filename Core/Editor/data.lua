@@ -106,8 +106,12 @@ M.new = function()
         M.prop.group.names[i] = STR['editor.list.prop.group.' .. M.prop.group.keys[i]]
     end
 
-    for i = 1, #M.prop.media.keys do
-        M.prop.media.names[i] = STR['editor.list.prop.media.' .. M.prop.media.keys[i]]
+    for i = #M.prop.media.keys, 1, -1 do
+        table.insert(M.prop.media.names, 1, STR['editor.list.prop.media.' .. M.prop.media.keys[i]])
+
+        if NOOBMODE and (M.prop.media.keys[i] == 'current_time' or M.prop.media.keys[i] == 'total_time') then
+            table.remove(M.prop.media.names, 1)
+        end
     end
 
     for i = 1, #M.prop.widget.keys do
@@ -129,6 +133,21 @@ M.new = function()
         or M.fun.keys[i] == 'split' or M.fun.keys[i] == 'get_ip' or M.fun.keys[i] == 'match') then
             table.remove(M.fun.names, 1)
         end
+    end
+
+    if NOOBMODE then
+        local index = table.indexOf(M.fun.names, STR['editor.list.fun.random_str'])
+            table.insert(M.fun.names, table.indexOf(M.fun.names, STR['editor.list.fun.concat']) + 1, M.fun.names[index])
+            table.remove(M.fun.names, index + 1)
+        local index = table.indexOf(M.fun.names, STR['editor.list.fun.totable'])
+            table.insert(M.fun.names, M.fun.names[index])
+            table.remove(M.fun.names, index)
+        local index = table.indexOf(M.fun.names, STR['editor.list.fun.len_table'])
+            table.insert(M.fun.names, M.fun.names[index])
+            table.remove(M.fun.names, index)
+        local index = table.indexOf(M.fun.names, STR['editor.list.fun.encode'])
+            table.insert(M.fun.names, M.fun.names[index])
+            table.remove(M.fun.names, index)
     end
 
     for i = 1, #M.math.keys do

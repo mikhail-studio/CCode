@@ -9,7 +9,7 @@ listeners.but_add = function(target)
     PROGRAMS.group[8]:setIsLocked(true, 'vertical')
     INPUT.new(STR['programs.entername'], function(event)
         if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
-            INPUT.remove(true, event.target.text)
+            INPUT.remove(true, event.target.text:gsub('\'', ''):gsub('%{', ''):gsub('%(', ''):gsub('%}', ''):gsub('%)', ''))
         end
     end, function(e)
         PROGRAMS.group[8]:setIsLocked(false, 'vertical')

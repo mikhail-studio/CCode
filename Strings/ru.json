@@ -63,6 +63,7 @@
         "images.pixel": "Пиксельный спрайт",
         "images.gif.convert": "Конвертировать gif в лист спрайтов?",
         "images.gif.okay": "Конвертировать",
+        "images.gif.complete": "Конвертирование закончено, запомните значения:",
         "sounds.entername": "Введите имя звука",
         "sounds.changename": "Измените имя звука",
         "videos.entername": "Введите имя видео",
@@ -847,6 +848,17 @@
         "blocks.setTransitionCancelAll": "Отключить все плавные блоки"
     },
 
+    "varsNoob": {
+        "blocks.setVarNoob": "Создать значение",
+        "blocks.setVarNoob.params": ["Имя значения:", "Значение:"],
+        "blocks.updVarNoob": "Добавить значение",
+        "blocks.updVarNoob.params": ["Имя значения:", "Значение:"],
+        "blocks.saveValueNoob": "Сохранить значение",
+        "blocks.saveValueNoob.params": ["Имя значения:"],
+        "blocks.readValueNoob": "Считать значение из сохранений",
+        "blocks.readValueNoob.params": ["Имя значения:"]
+    },
+
     "mediaNoob": {
         "blocks.mediaNoob": "Звуки",
         "blocks.playSoundNoob": "Проиграть звук",
@@ -864,17 +876,15 @@
         "blocks.stopSoundNoob": "Остановить звук",
         "blocks.stopSoundNoob.params": ["Имя звука:"],
         "blocks.stopTimerSoundNoob": "Остановить звук по таймеру",
-        "blocks.stopTimerSoundNoob.params": ["Имя звука:", "Время (Секунды):"],
-        "blocks.setVarNoob": "Создать значение",
-        "blocks.setVarNoob.params": ["Имя значения:", "Значение:"],
-        "blocks.updVarNoob": "Добавить значение",
-        "blocks.updVarNoob.params": ["Имя значения:", "Значение:"]
+        "blocks.stopTimerSoundNoob.params": ["Имя звука:", "Время (Секунды):"]
     },
 
     "objectsNoob": {
         "blocks.objectsNoob": "Картинки",
         "blocks.newObjectNoob": "Создать картинку",
         "blocks.newObjectNoob.params": ["Имя картинки:", "Позиция (X):", "Позиция (Y):"],
+        "blocks.newGifNoob": "Создать гиф картинку",
+        "blocks.newGifNoob.params": ["Имя картинки:", "Позиция (X):", "Позиция (Y):"],
         "blocks.setPosNoob": "Установить позицию картинки",
         "blocks.setPosNoob.params": ["Имя картинки:", "Позиция (X):", "Позиция (Y):"],
         "blocks.setPosXNoob": "Установить позицию X картинки",

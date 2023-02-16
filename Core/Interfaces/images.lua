@@ -32,7 +32,7 @@ listeners.but_add = function(target)
                     if import.done and import.done == 'ok' then
                         local data = GET_GAME_CODE(CURRENT_LINK)
                         local path = path .. '/Image' .. numImage
-                        local isGif = UTF8.sub(import.destFileName, UTF8.len(import.destFileName) - 3) == '.gif'
+                        local isGif = UTF8.sub(import.origFileName, UTF8.len(import.origFileName) - 3) == '.gif'
 
                         local function insertPicture()
                             if IS_IMAGE(CURRENT_LINK .. '/Images/Image' .. numImage) then
@@ -49,8 +49,25 @@ listeners.but_add = function(target)
                         if isGif then
                             WINDOW.new(STR['images.gif.convert'], {STR['button.close'], STR['images.gif.okay']}, function(e)
                                 if e.index == 2 then
-                                    GANIN.convert(CURRENT_LINK .. '/Images/Image' .. numImage, CURRENT_LINK .. '/Images/Image' .. numImage)
-                                end insertPicture()
+                                    local width, height, count = GANIN.convert(
+                                            DOC_DIR .. '/' .. CURRENT_LINK .. '/Images/Image' .. numImage,
+                                            DOC_DIR .. '/' .. CURRENT_LINK .. '/Images/Image' .. numImage
+                                    ) local info = STR['images.gif.complete'] .. '\n'
+                                    local info = info .. STR['blocks.newSprite.params'][3] .. ' ' .. width .. '\n'
+                                    local info = info .. STR['blocks.newSprite.params'][4] .. ' ' .. height .. '\n'
+                                    local info = info .. STR['blocks.newSprite.params'][5] .. ' ' .. count
+
+                                    timer.performWithDelay(1, function()
+                                        WINDOW.new(info, {STR['button.close']}, function(e)
+                                            insertPicture()
+                                        end, 2)
+
+                                        WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                                        WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                                    end)
+                                else
+                                    insertPicture()
+                                end
                             end, 4)
                         else
                             insertPicture()

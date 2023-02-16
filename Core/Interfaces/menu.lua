@@ -18,7 +18,7 @@ listeners.but_continue = function(target)
 
         if tonumber(data.build) > 1215 and tonumber(data.build) < 1234 then
             for i = 1, #data.scripts do
-                local script = GET_FULL_DATA(GET_GAME_SCRIPT(LOCAL.last_link, i, data))
+                local script, nestedInfo = GET_FULL_DATA(GET_GAME_SCRIPT(LOCAL.last_link, i, data))
 
                 for j = 1, #script.params do
                     if script.params[j].name == 'setTransitionTo' then
@@ -68,12 +68,15 @@ listeners.but_continue = function(target)
 
             if not data.resources.others then
                 data.resources.others = {}
+                data.build = tostring(BUILD)
+                data.id = DEVICE_ID
 
                 if not data.created then
                     data.created = '1223'
                     data.noobmode = false
-                    SET_GAME_CODE(LOCAL.last_link, data)
                 end
+
+                SET_GAME_CODE(LOCAL.last_link, data)
             end
 
             if script and script.custom then

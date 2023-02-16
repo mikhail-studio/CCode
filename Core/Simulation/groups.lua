@@ -173,106 +173,124 @@ if 'Теги' then
 
     M['addTagObject'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local name, tag = ' .. CALC(params[2]) .. ', ' .. CALC(params[1])
+        GAME.lua = GAME.lua .. ' if GAME.group.objects[name]._tag ~= \'TAG\' then for index, info in'
+        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.objects[name]._tag]) do if info[1] == name and info[2] == \'objects\''
+        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.objects[name]._tag], index) break end end end'
         GAME.lua = GAME.lua .. ' table.insert(GAME.group.tags[tag], {name, \'objects\'}) GAME.group.objects[name]._tag = tag end)'
     end
 
     M['addTagText'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local name, tag = ' .. CALC(params[2]) .. ', ' .. CALC(params[1])
+        GAME.lua = GAME.lua .. ' if GAME.group.objects[name]._tag ~= \'TAG\' then for index, info in'
+        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.objects[name]._tag]) do if info[1] == name and info[2] == \'texts\''
+        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.objects[name]._tag], index) break end end end'
         GAME.lua = GAME.lua .. ' table.insert(GAME.group.tags[tag], {name, \'texts\'}) GAME.group.texts[name]._tag = tag end)'
     end
 
     M['addTagWidget'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local name, tag = ' .. CALC(params[2]) .. ', ' .. CALC(params[1])
+        GAME.lua = GAME.lua .. ' if GAME.group.objects[name]._tag ~= \'TAG\' then for index, info in'
+        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.objects[name]._tag]) do if info[1] == name and info[2] == \'widgets\''
+        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.objects[name]._tag], index) break end end end'
         GAME.lua = GAME.lua .. ' table.insert(GAME.group.tags[tag], {name, \'widgets\'}) GAME.group.widgets[name]._tag = tag end)'
     end
 
     M['addTagMedia'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local name, tag = ' .. CALC(params[2]) .. ', ' .. CALC(params[1])
+        GAME.lua = GAME.lua .. ' if GAME.group.objects[name]._tag ~= \'TAG\' then for index, info in'
+        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.objects[name]._tag]) do if info[1] == name and info[2] == \'media\''
+        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.objects[name]._tag], index) break end end end'
         GAME.lua = GAME.lua .. ' table.insert(GAME.group.tags[tag], {name, \'media\'}) GAME.group.media[name]._tag = tag end)'
     end
 
     M['addTagGroup'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local name, tag = ' .. CALC(params[2]) .. ', ' .. CALC(params[1])
+        GAME.lua = GAME.lua .. ' if GAME.group.objects[name]._tag ~= \'TAG\' then for index, info in'
+        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.objects[name]._tag]) do if info[1] == name and info[2] == \'groups\''
+        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.objects[name]._tag], index) break end end end'
         GAME.lua = GAME.lua .. ' table.insert(GAME.group.tags[tag], {name, \'groups\'}) GAME.group.groups[name]._tag = tag end)'
     end
 
     M['addTagTag'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local name, tag = ' .. CALC(params[2]) .. ', ' .. CALC(params[1])
+        GAME.lua = GAME.lua .. ' if GAME.group.objects[name]._tag ~= \'TAG\' then for index, info in'
+        GAME.lua = GAME.lua .. ' ipairs(GAME.group.tags[GAME.group.objects[name]._tag]) do if info[1] == name and info[2] == \'tags\''
+        GAME.lua = GAME.lua .. ' then table.remove(GAME.group.tags[GAME.group.objects[name]._tag], index) break end end end'
         GAME.lua = GAME.lua .. ' table.insert(GAME.group.tags[tag], {name, \'tags\'}) end)'
     end
 
     M['setTagPos'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
-        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else pcall(function()'
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].x = SET_X(' .. CALC(params[2]) .. ','
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]]._scroll)'
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].y = SET_Y(' .. CALC(params[3]) .. ','
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]]._scroll)'
-        GAME.lua = GAME.lua .. ' end end end doTag(' .. CALC(params[1]) .. ') end)'
+        GAME.lua = GAME.lua .. ' end) end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 
     M['setTagSize'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
         GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else local w, h = ' .. CALC(params[2]) .. ', ' .. CALC(params[3])
-        GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].width = w == 0 and GAME.group[child[2]][child[1]].width or w'
+        GAME.lua = GAME.lua .. ' pcall(function() GAME.group[child[2]][child[1]].width = w == 0 and GAME.group[child[2]][child[1]].width or w'
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].height = h == 0 and GAME.group[child[2]][child[1]].height or h'
-        GAME.lua = GAME.lua .. ' end end end doTag(' .. CALC(params[1]) .. ') end)'
+        GAME.lua = GAME.lua .. ' end) end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 
     M['setTagRotation'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
-        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else pcall(function()'
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].rotation = ' .. CALC(params[2])
-        GAME.lua = GAME.lua .. ' end end end doTag(' .. CALC(params[1]) .. ') end)'
+        GAME.lua = GAME.lua .. ' end) end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 
     M['setTagAlpha'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
-        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else pcall(function()'
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].alpha = (' .. CALC(params[2]) .. ') / 100'
-        GAME.lua = GAME.lua .. ' end end end doTag(' .. CALC(params[1]) .. ') end)'
+        GAME.lua = GAME.lua .. ' end) end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 
     M['updTagPosX'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
-        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else pcall(function()'
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].x = GAME.group[child[2]][child[1]].x + (' .. CALC(params[2]) .. ')'
-        GAME.lua = GAME.lua .. ' end end end doTag(' .. CALC(params[1]) .. ') end)'
+        GAME.lua = GAME.lua .. ' end) end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 
     M['updTagPosY'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
-        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else pcall(function()'
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].y = GAME.group[child[2]][child[1]].y - (' .. CALC(params[2]) .. ')'
-        GAME.lua = GAME.lua .. ' end end end doTag(' .. CALC(params[1]) .. ') end)'
+        GAME.lua = GAME.lua .. ' end) end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 
     M['updTagWidth'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
-        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else pcall(function()'
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].width = GAME.group[child[2]][child[1]].width + (' .. CALC(params[2]) .. ')'
-        GAME.lua = GAME.lua .. ' end end end doTag(' .. CALC(params[1]) .. ') end)'
+        GAME.lua = GAME.lua .. ' end) end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 
     M['updTagHeight'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
-        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else pcall(function()'
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].height = GAME.group[child[2]][child[1]].height + (' .. CALC(params[2]) .. ')'
-        GAME.lua = GAME.lua .. ' end end end doTag(' .. CALC(params[1]) .. ') end)'
+        GAME.lua = GAME.lua .. ' end) end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 
     M['updTagRotation'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
-        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else pcall(function()'
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].rotation = GAME.group[child[2]][child[1]].rotation +'
-        GAME.lua = GAME.lua .. ' (' .. CALC(params[2]) .. ') end end end doTag(' .. CALC(params[1]) .. ') end)'
+        GAME.lua = GAME.lua .. ' (' .. CALC(params[2]) .. ') end) end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 
     M['updTagAlpha'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
-        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else pcall(function()'
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].alpha = GAME.group[child[2]][child[1]].alpha +'
-        GAME.lua = GAME.lua .. ' ((' .. CALC(params[2]) .. ') / 100) end end end doTag(' .. CALC(params[1]) .. ') end)'
+        GAME.lua = GAME.lua .. ' ((' .. CALC(params[2]) .. ') / 100) end) end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 end
 
