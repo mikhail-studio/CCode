@@ -364,6 +364,26 @@ return ' ' .. UTF8.trimFull([===[
             MAX_X = CENTER_X + DISPLAY_WIDTH / 2 - RIGHT_HEIGHT
             MAX_Y = CENTER_Y + DISPLAY_HEIGHT / 2 - BOTTOM_HEIGHT
 
+            READ_FILE = function(path, bin)
+                local file, data = io.open(path or '', bin and 'rb' or 'r'), nil
+
+                if file then
+                    data = file:read('*a')
+                    io.close(file)
+                end
+
+                return data
+            end
+
+            WRITE_FILE = function(path, data, bin)
+                local file = io.open(path, bin and 'wb' or 'w')
+
+                if file then
+                    file:write(tostring(data))
+                    io.close(file)
+                end
+            end
+
             GIVE_PERMISSION_DATA = function()
                 native.showPopup('requestAppPermission', {appPermission = 'Storage', urgency = 'normal'})
             end

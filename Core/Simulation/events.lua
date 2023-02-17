@@ -267,6 +267,15 @@ M['onTouchEndedNoob'] = function(nested, params)
     GAME.lua = GAME.lua .. ' end end)(e) == false)) end end) if isComplete then return result end return true end) end) end)'
 end
 
+M['onLocalCollisionBeganNoob'] = function(nested, params)
+    GAME.lua = GAME.lua .. ' pcall(function() timer.new(1, 1, function() local name, name2 = ' .. CALC(params[1]) .. ', ' .. CALC(params[2])
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].collision = function(s, e) if GAME.hash == hash then local isComplete, result ='
+    GAME.lua = GAME.lua .. ' pcall(function() return (function(p) if GAME.hash == hash then if p.phase == \'began\' then'
+    GAME.lua = GAME.lua .. ' if p.other.name == name2 then' M.requestNestedBlock(nested)
+    GAME.lua = GAME.lua .. ' end end end end)(e) end) return isComplete and result or false'
+    GAME.lua = GAME.lua .. ' end end GAME.group.objects[name]:addEventListener(\'collision\') end) end)'
+end
+
 M['onFunNoob'] = M['onFun']
 M['onConditionNoob'] = M['onCondition']
 M['onTouchDisplayBeganNoob'] = M['onTouchDisplayBegan']

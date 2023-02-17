@@ -288,6 +288,10 @@ M['scheduleNotification'] = function(params)
     GAME.lua = GAME.lua .. ' {alert = ' .. CALC(params[1]) .. '}) end)'
 end
 
+M['cancelNotification'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() NOTIFICATIONS.cancelNotification() end)'
+end
+
 M['turnOnAccelerometer'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.accelerometers, function(e) pcall(function()'
     GAME.lua = GAME.lua .. ' if GAME.hash == hash then ' .. CALC(params[1], 'a', true) .. '(e) end end) end)'
@@ -296,6 +300,24 @@ end
 
 M['setAccelerometerFrequency'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() system.setAccelerometerInterval(' .. CALC(params[1], '10') .. ') end)'
+end
+
+M['readFileRes'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local link = other.getResource(' .. CALC(params[2]) .. ') ' .. CALC(params[1], 'a', true)
+    GAME.lua = GAME.lua .. ' = READ_FILE(DOC_DIR .. \'/\' .. link) end)'
+end
+
+M['pasteboardCopy'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() PASTEBOARD.copy(\'string\', tostring(' .. CALC(params[1]) .. ')) end)'
+end
+
+M['pasteboardPaste'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() PASTEBOARD.paste(function(e) ' .. CALC(params[1], 'a', true)
+    GAME.lua = GAME.lua .. ' = e.string or e.url or ' .. CALC(params[1], 'a', true) .. ' end) end)'
+end
+
+M['pasteboardClear'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() PASTEBOARD.clear() end)'
 end
 
 return M

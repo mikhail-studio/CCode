@@ -450,7 +450,15 @@
             "blocks.setAccelerometerFrequency": "Установить частоту акселерометра",
             "blocks.setAccelerometerFrequency.params": ["Частота (Hz):"],
             "blocks.scheduleNotification": "Зарегистрировать уведомление",
-            "blocks.scheduleNotification.params": ["Текст:", "Время (Секунды):"]
+            "blocks.scheduleNotification.params": ["Текст:", "Время (Секунды):"],
+            "blocks.cancelNotification": "Отменить все уведомления",
+            "blocks.readFileRes": "Прочитать файл из ресурсов",
+            "blocks.readFileRes.params": ["Имя переменной:", "Имя ресурса:"],
+            "blocks.pasteboardCopy": "Скопировать в буфер обмена",
+            "blocks.pasteboardCopy.params": ["Текст:"],
+            "blocks.pasteboardPaste": "Прочитать из буфера обмена",
+            "blocks.pasteboardPaste.params": ["Имя переменной:"],
+            "blocks.pasteboardClear": "Очистить буфер обмена"
     },
 
     "shapes": {
@@ -894,7 +902,7 @@
         "blocks.newObjectNoob": "Создать картинку",
         "blocks.newObjectNoob.params": ["Имя картинки:", "Позиция (X):", "Позиция (Y):"],
         "blocks.newGifNoob": "Создать гиф картинку",
-        "blocks.newGifNoob.params": ["Имя картинки:", "Позиция (X):", "Позиция (Y):"],
+        "blocks.newGifNoob.params": ["Имя картинки:", "Время (Секунды):", "Позиция (X):", "Позиция (Y):"],
         "blocks.setPosNoob": "Установить позицию картинки",
         "blocks.setPosNoob.params": ["Имя картинки:", "Позиция (X):", "Позиция (Y):"],
         "blocks.setPosXNoob": "Установить позицию X картинки",

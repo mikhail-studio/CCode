@@ -164,8 +164,13 @@ M.listBlock = {
             'setPortraitOrientation',
             'setLandscapeOrientation',
             'scheduleNotification',
+            'cancelNotification',
             'setAccelerometerFrequency',
-            'turnOnAccelerometer'
+            'turnOnAccelerometer',
+            'readFileRes',
+            'pasteboardCopy',
+            'pasteboardPaste',
+            'pasteboardClear'
     },
 
     ['shapes'] = {
@@ -496,7 +501,7 @@ M.listName = {
 
         -- noob
         ['newObjectNoob'] = {'objects', {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
-            ['newGifNoob'] = {'objects', {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
+            ['newGifNoob'] = {'objects', {'value'}, {'value', {'1', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
             ['setPosNoob'] = {'objects', {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
             ['setPosXNoob'] = {'objects', {'value'}, {'value', {'0', 'n'}}},
             ['setPosYNoob'] = {'objects', {'value'}, {'value', {'0', 'n'}}},
@@ -567,8 +572,13 @@ M.listName = {
             ['setPortraitOrientation'] = {'control', {'fun'}},
             ['setLandscapeOrientation'] = {'control', {'fun'}},
             ['scheduleNotification'] = {'control', {'value'}, {'value', {'1', 'n'}}},
+            ['cancelNotification'] = {'control'},
             ['setAccelerometerFrequency'] = {'control', {'value', {'10', 'n'}}},
             ['turnOnAccelerometer'] = {'control', {'fun'}},
+            ['readFileRes'] = {'control', {'var'}, {'value'}},
+            ['pasteboardCopy'] = {'control', {'value'}},
+            ['pasteboardPaste'] = {'control', {'var'}},
+            ['pasteboardClear'] = {'control'},
 
     -- shapes
     ['newCircle'] = {'shapes', {'value'}, {'value', {'50', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
@@ -681,7 +691,7 @@ M.listName = {
             ['frontTag'] = {'groups', {'value'}},
             ['backTag'] = {'groups', {'value'}},
 
-        -- noob 
+        -- noob
         ['addGroupObjectNoob'] = {'groups', {'value'}, {'value'}},
         ['addTagObjectNoob'] = {'groups', {'value'}, {'value'}},
 
@@ -1006,8 +1016,13 @@ local blocksDelete = {
         ['setPortraitOrientation'] = 'control',
         ['setLandscapeOrientation'] = 'control',
         ['scheduleNotification'] = 'control',
+        ['cancelNotification'] = 'control',
         ['setAccelerometerFrequency'] = 'control',
         ['turnOnAccelerometer'] = 'control',
+        ['readFileRes'] = 'control',
+        ['pasteboardCopy'] = 'control',
+        ['pasteboardPaste'] = 'control',
+        ['pasteboardClear'] = 'control',
 
     ['setObjVar'] = 'vars',
         ['insertTable'] = 'vars',

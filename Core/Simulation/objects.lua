@@ -72,11 +72,11 @@ end
 
 M['newGif'] = function(params)
     local name = CALC(params[1])
-    local link = #params == 3 and name or CALC(params[2])
-    local posX = '(SET_X(' .. CALC(#params == 3 and params[2] or params[3]) .. '))'
-    local posY = '(SET_Y(' .. CALC(#params == 3 and params[3] or params[4]) .. '))'
+    local link = CALC(params[2])
+    local posX = '(SET_X(' .. CALC(params[3]) .. '))'
+    local posY = '(SET_Y(' .. CALC(params[4]) .. '))'
 
-    GAME.lua = GAME.lua .. ' pcall(function() local _link = ' .. link .. ' local name = ' .. (#params == 3 and '_link' or name)
+    GAME.lua = GAME.lua .. ' pcall(function() local _link = ' .. link .. ' local name = ' .. name
     GAME.lua = GAME.lua .. ' local link, filter = other.getImage(_link) local width, height, count ='
     GAME.lua = GAME.lua .. ' GANIN.convert(DOC_DIR .. \'/\' .. link, system.pathForFile(\'gif.png\', system.TemporaryDirectory))'
     GAME.lua = GAME.lua .. ' width, height, count = unpack(GET_SIZE(link, system.TemporaryDirectory, width, height, count))'
