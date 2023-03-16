@@ -142,6 +142,10 @@ local listener = function(e, scroll, group, type)
                         group:removeSelf() group = nil
                         PROGRAMS.group.isVisible = true
                         require('Core.Share.build').new(CURRENT_LINK)
+                    elseif e.target.text.text == STR['program.aab'] then
+                        group:removeSelf() group = nil
+                        PROGRAMS.group.isVisible = true
+                        require('Core.Share.build').new(CURRENT_LINK, true)
                     end
                 elseif type == 'scripts' then
                     if e.target.move then
@@ -184,6 +188,9 @@ local listener = function(e, scroll, group, type)
                             shadow.color = 0
                             shadow:setFillColor(0)
                         group_image:insert(shadow)
+
+                        display.setDefault('magTextureFilter', e.target.filter ~= 'linear' and 'nearest' or 'linear')
+                        display.setDefault('minTextureFilter', e.target.filter ~= 'linear' and 'nearest' or 'linear')
 
                         local icon = display.newImage(CURRENT_LINK .. '/Images/' .. e.target.link, system.DocumentsDirectory)
                             local diffSize = icon.height / icon.width
@@ -442,6 +449,10 @@ M.new = function(text, scroll, group, type, index, filter, link)
         group.blocks[index].link = link
     end
 
+    if filter then
+        group.blocks[index].filter = filter
+    end
+
     if filter and (filter == 'linear' or filter == 'nearest' or filter == 'vector') then
         display.setDefault('magTextureFilter', filter ~= 'linear' and 'nearest' or 'linear')
         display.setDefault('minTextureFilter', filter ~= 'linear' and 'nearest' or 'linear')
@@ -469,14 +480,10 @@ M.new = function(text, scroll, group, type, index, filter, link)
         display.setDefault('magTextureFilter', 'linear')
         display.setDefault('minTextureFilter', 'linear')
     elseif type == 'program' then
-        local path = NOOBMODE and (index == 1 and 'Script' or index == 2 and 'Sprite'
-        or index == 3 and 'Sound' or index == 4 and 'Font'
-        or index == 5 and 'Setting' or index == 6 and 'Export'
-        or index == 7 and 'Build' or '') or (index == 1 and 'Script' or index == 2 and 'Sprite'
-        or index == 3 and 'Sound' or index == 4 and 'Video'
-        or index == 5 and 'Font' or index == 6 and 'Res'
-        or index == 7 and 'Setting' or index == 8 and 'Export'
-        or index == 9 and 'Build' or '')
+        local paths = {
+            default = {'Script', 'Sprite', 'Level', 'Sound', 'Video', 'Font', 'Res', 'Setting', 'Export', 'Build', 'Aab'},
+            noob = {'Script', 'Sprite', 'Level', 'Sound', 'Font', 'Setting', 'Export', 'Build'}
+        } local path = NOOBMODE and paths.noob[index] or paths.default[index]
 
         if path ~= '' then
             group.blocks[index].icon = display.newImage('Sprites/icon' .. path .. '.png')

@@ -28,7 +28,7 @@ M['newGifNoob'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = link GAME.group.objects[name]._name = _link'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._touch = false GAME.group.objects[name]._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {} GAME.group.objects[name]._baseDir = system.TemporaryDirectory'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._listeners = {} GAME.group.objects[name]:play()'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._listeners = {} GAME.group.objects[name]._gif = true GAME.group.objects[name]:play()'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._size, GAME.group.objects[name].name = 1, name end)'
 end
 
@@ -37,9 +37,10 @@ M['setSizeNoob'] = function(params)
     local size = '((' .. CALC(params[2]) .. ') / 100)'
 
     GAME.lua = GAME.lua .. ' pcall(function() local name, size = ' .. name .. ', ' .. size .. ' if GAME.group.objects[name]._radius then'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name].path.radius = GAME.group.objects[name]._radius * size'
-    GAME.lua = GAME.lua .. ' else GAME.group.objects[name].xScale = GAME.group.objects[name].xScale * size'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name].yScale = GAME.group.objects[name].yScale * size'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].path.radius = GAME.group.objects[name]._radius * size elseif'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._gif then GAME.group.objects[name].xScale = size GAME.group.objects[name].yScale = size'
+    GAME.lua = GAME.lua .. ' else GAME.group.objects[name].width = GAME.group.objects[name]._width * size'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].height = GAME.group.objects[name]._height * size'
     GAME.lua = GAME.lua .. ' end GAME.group.objects[name]._size = size end)'
 end
 
@@ -48,9 +49,10 @@ M['updSizeNoob'] = function(params)
     local size = '((' .. CALC(params[2]) .. ') / 100 + GAME.group.objects[name]._size)'
 
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' local size = ' .. size .. ' if GAME.group.objects[name]._radius'
-    GAME.lua = GAME.lua .. ' then GAME.group.objects[name].path.radius = GAME.group.objects[name]._radius * size'
-    GAME.lua = GAME.lua .. ' else GAME.group.objects[name].xScale = GAME.group.objects[name].xScale * size'
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name].yScale = GAME.group.objects[name].yScale * size'
+    GAME.lua = GAME.lua .. ' then GAME.group.objects[name].path.radius = GAME.group.objects[name]._radius * size elseif'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]._gif then GAME.group.objects[name].xScale = size GAME.group.objects[name].yScale = size'
+    GAME.lua = GAME.lua .. ' else GAME.group.objects[name].width = GAME.group.objects[name]._width * size'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name].height = GAME.group.objects[name]._height * size'
     GAME.lua = GAME.lua .. ' end GAME.group.objects[name]._size = size end)'
 end
 

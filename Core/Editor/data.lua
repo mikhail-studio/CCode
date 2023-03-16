@@ -2,9 +2,14 @@ local M = {}
 
 M.fun = {
     names = {},
-    keys = {
+    keys = {},
+    default = {
         'read_save', 'encode', 'len_table', 'concat', 'totable', 'tostring', 'tonumber', 'len', 'find',
         'sub', 'gsub', 'split', 'unix_time', 'color_pixel', 'get_ip', 'random_str', 'match', 'noise'
+    },
+    noob = {
+        'concat', 'random_str', 'tostring', 'tonumber', 'len', 'find', 'sub', 'gsub',
+        'unix_time', 'color_pixel', 'totable', 'len_table', 'encode'
     }
 }
 
@@ -20,9 +25,14 @@ M.math = {
 M.prop = {
     obj = {
         names = {},
-        keys = {
+        keys = {},
+        default = {
             'touch', 'var', 'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation',
             'alpha', 'name_texture', 'velocity_x', 'velocity_y', 'angular_velocity'
+        },
+        noob = {
+            'touch', 'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation',
+            'alpha', 'velocity_x', 'velocity_y', 'angular_velocity'
         }
     },
 
@@ -49,8 +59,12 @@ M.prop = {
 
     media = {
         names = {},
-        keys = {
+        keys = {},
+        default = {
             'current_time', 'total_time', 'sound_volume', 'sound_total_time', 'sound_pause', 'sound_play'
+        },
+        noob = {
+            'sound_volume', 'sound_total_time', 'sound_pause', 'sound_play'
         }
     }
 }
@@ -98,6 +112,12 @@ end
 M.new = function()
     M.prop.obj.names, M.prop.media.names, M.fun.names = {}, {}, {}
 
+    if NOOBMODE then
+        M.prop.obj.keys, M.prop.media.keys, M.fun.keys = M.prop.obj.noob, M.prop.media.noob, M.fun.noob
+    else
+        M.prop.obj.keys, M.prop.media.keys, M.fun.keys = M.prop.obj.default, M.prop.media.default, M.fun.default
+    end
+
     for i = 1, #M.prop.text.keys do
         M.prop.text.names[i] = STR['editor.list.prop.text.' .. M.prop.text.keys[i]]
     end
@@ -106,48 +126,20 @@ M.new = function()
         M.prop.group.names[i] = STR['editor.list.prop.group.' .. M.prop.group.keys[i]]
     end
 
-    for i = #M.prop.media.keys, 1, -1 do
-        table.insert(M.prop.media.names, 1, STR['editor.list.prop.media.' .. M.prop.media.keys[i]])
-
-        if NOOBMODE and (M.prop.media.keys[i] == 'current_time' or M.prop.media.keys[i] == 'total_time') then
-            table.remove(M.prop.media.names, 1)
-        end
+    for i = 1, #M.prop.media.keys do
+        M.prop.media.names[i] = STR['editor.list.prop.media.' .. M.prop.media.keys[i]]
     end
 
     for i = 1, #M.prop.widget.keys do
         M.prop.widget.names[i] = STR['editor.list.prop.widget.' .. M.prop.widget.keys[i]]
     end
 
-    for i = #M.prop.obj.keys, 1, -1 do
-        table.insert(M.prop.obj.names, 1, STR['editor.list.prop.obj.' .. M.prop.obj.keys[i]])
-
-        if NOOBMODE and (M.prop.obj.keys[i] == 'var' or M.prop.obj.keys[i] == 'name_texture') then
-            table.remove(M.prop.obj.names, 1)
-        end
+    for i = 1, #M.prop.obj.keys do
+        M.prop.obj.names[i] = STR['editor.list.prop.obj.' .. M.prop.obj.keys[i]]
     end
 
-    for i = #M.fun.keys, 1, -1 do
-        table.insert(M.fun.names, 1, STR['editor.list.fun.' .. M.fun.keys[i]])
-
-        if NOOBMODE and (M.fun.keys[i] == 'read_save' or M.fun.keys[i] == 'noise'
-        or M.fun.keys[i] == 'split' or M.fun.keys[i] == 'get_ip' or M.fun.keys[i] == 'match') then
-            table.remove(M.fun.names, 1)
-        end
-    end
-
-    if NOOBMODE then
-        local index = table.indexOf(M.fun.names, STR['editor.list.fun.random_str'])
-            table.insert(M.fun.names, table.indexOf(M.fun.names, STR['editor.list.fun.concat']) + 1, M.fun.names[index])
-            table.remove(M.fun.names, index + 1)
-        local index = table.indexOf(M.fun.names, STR['editor.list.fun.totable'])
-            table.insert(M.fun.names, M.fun.names[index])
-            table.remove(M.fun.names, index)
-        local index = table.indexOf(M.fun.names, STR['editor.list.fun.len_table'])
-            table.insert(M.fun.names, M.fun.names[index])
-            table.remove(M.fun.names, index)
-        local index = table.indexOf(M.fun.names, STR['editor.list.fun.encode'])
-            table.insert(M.fun.names, M.fun.names[index])
-            table.remove(M.fun.names, index)
+    for i = 1, #M.fun.keys do
+        M.fun.names[i] = STR['editor.list.fun.' .. M.fun.keys[i]]
     end
 
     for i = 1, #M.math.keys do

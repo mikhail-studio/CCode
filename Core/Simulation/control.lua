@@ -93,8 +93,8 @@ M['setListener'] = function(params)
     GAME.lua = GAME.lua .. ' if GAME.multi then display.getCurrentStage():setFocus(e.target, nil) else'
     GAME.lua = GAME.lua .. ' display.getCurrentStage():setFocus(nil) for name, object in pairs(GAME.group.objects) do'
     GAME.lua = GAME.lua .. ' if object._touch then GAME.group.objects[name]._touch = false end end end end'
-    GAME.lua = GAME.lua .. ' e = {_ccode_event = e, name = e.target.name, x = GET_X(e.x, e.target._scroll), y = GET_Y(e.y, e.target._scroll),'
-    GAME.lua = GAME.lua .. ' xStart = GET_X(e.xStart, e.target._scroll), yStart = GET_Y(e.yStart, e.target._scroll),'
+    GAME.lua = GAME.lua .. ' e = {_ccode_event = e, name = e.target.name, x = GET_X(e.x, e.target), y = GET_Y(e.y, e.target),'
+    GAME.lua = GAME.lua .. ' xStart = GET_X(e.xStart, e.target), yStart = GET_Y(e.yStart, e.target),'
     GAME.lua = GAME.lua .. ' id = e.id, xDelta = e.xDelta, yDelta = e.yDelta, phase = e.phase}'
     GAME.lua = GAME.lua .. ' local responses = {} for i = 1, #GAME.group.objects[name]._listeners do'
     GAME.lua = GAME.lua .. ' local response = GAME.group.objects[name]._listeners[i](e) if response ~= nil then'
@@ -166,7 +166,7 @@ M['timerNameEnd'] = function(params)
 end
 
 M['if'] = function(params)
-    GAME.lua = GAME.lua .. ' local onComplete, result = pcall(function() if ' .. CALC(params[1]) .. ' then'
+    GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() if ' .. CALC(params[1]) .. ' then'
 end
 
 M['ifElse'] = function(params)
@@ -174,7 +174,7 @@ M['ifElse'] = function(params)
 end
 
 M['ifEnd'] = function(params)
-    GAME.lua = GAME.lua .. ' end end) if onComplete and result ~= nil then return result end'
+    GAME.lua = GAME.lua .. ' end end) if isComplete and result ~= nil then if result == \'_ccode_break\' then return end return result end'
 end
 
 M['forever'] = function(params)
@@ -194,16 +194,16 @@ M['for'] = function(params)
 end
 
 M['forEnd'] = function(params)
-    GAME.lua = GAME.lua .. ' end end) if onComplete and result ~= nil then return result end'
+    GAME.lua = GAME.lua .. ' end end) if isComplete and result ~= nil then return result end'
 end
 
 M['foreach'] = function(params)
-    GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() for _, value in pairs(' .. CALC(params[1], 'a', true) .. ')'
-    GAME.lua = GAME.lua .. ' do ' .. CALC(params[2], 'a', true) .. ' = value'
+    GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() for key, value in pairs(' .. CALC(params[1], 'a', true) .. ')'
+    GAME.lua = GAME.lua .. ' do ' .. CALC(params[2], 'a', true) .. ' = value ' .. CALC(params[3], 'a', true) .. ' = key'
 end
 
 M['foreachEnd'] = function(params)
-    GAME.lua = GAME.lua .. ' end end) if onComplete and result ~= nil then return result end'
+    GAME.lua = GAME.lua .. ' end end) if isComplete and result ~= nil then return result end'
 end
 
 M['while'] = function(params)
@@ -211,7 +211,7 @@ M['while'] = function(params)
 end
 
 M['whileEnd'] = function(params)
-    GAME.lua = GAME.lua .. ' end end) if onComplete and result ~= nil then return result end'
+    GAME.lua = GAME.lua .. ' end end) if isComplete and result ~= nil then return result end'
 end
 
 M['repeat'] = function(params)
@@ -219,11 +219,11 @@ M['repeat'] = function(params)
 end
 
 M['repeatEnd'] = function(params)
-    GAME.lua = GAME.lua .. ' end end) if onComplete and result ~= nil then return result end'
+    GAME.lua = GAME.lua .. ' end end) if isComplete and result ~= nil then return result end'
 end
 
 M['break'] = function(params)
-    GAME.lua = GAME.lua .. ' break'
+    GAME.lua = GAME.lua .. ' return \'_ccode_break\''
 end
 
 M['timerPause'] = function(params)

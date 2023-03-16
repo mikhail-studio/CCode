@@ -131,8 +131,8 @@ end
 M['setRandomSeed'] = function(params)
     local seed = CALC(params[1])
 
-    GAME.lua = GAME.lua .. ' pcall(function() local seed = ' .. seed .. ' math.randomseed(math.sum(UTF8.byte(tostring(seed), 1,'
-    GAME.lua = GAME.lua .. ' UTF8.len(tostring(seed))))) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local seed = ' .. seed .. ' SEED = math.sum(UTF8.byte(tostring(seed), 1,'
+    GAME.lua = GAME.lua .. ' UTF8.len(tostring(seed)))) math.randomseed(SEED) end)'
 end
 
 M['setText'] = function(params)
@@ -151,8 +151,8 @@ end
 
 M['setTextPos'] = function(params)
     local name = CALC(params[1])
-    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.texts[name]._scroll))'
-    local posY = '(SET_Y(' .. CALC(params[3]) .. ', GAME.group.texts[name]._scroll))'
+    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.texts[name]))'
+    local posY = '(SET_Y(' .. CALC(params[3]) .. ', GAME.group.texts[name]))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.texts[name].x = ' .. posX
     GAME.lua = GAME.lua .. ' GAME.group.texts[name].y = ' .. posY .. ' end)'
@@ -160,14 +160,14 @@ end
 
 M['setTextPosX'] = function(params)
     local name = CALC(params[1])
-    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.texts[name]._scroll))'
+    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.texts[name]))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.texts[name].x = ' .. posX .. ' end)'
 end
 
 M['setTextPosY'] = function(params)
     local name = CALC(params[1])
-    local posY = '(SET_Y(' .. CALC(params[2]) .. ', GAME.group.texts[name]._scroll))'
+    local posY = '(SET_Y(' .. CALC(params[2]) .. ', GAME.group.texts[name]))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.texts[name].y = ' .. posY .. ' end)'
 end

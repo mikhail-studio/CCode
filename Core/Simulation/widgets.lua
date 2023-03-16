@@ -3,8 +3,8 @@ local M = {}
 
 M['setWidgetPos'] = function(params)
     local name = CALC(params[1])
-    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.widgets[name]._scroll))'
-    local posY = '(SET_Y(' .. CALC(params[3]) .. ', GAME.group.widgets[name]._scroll))'
+    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.widgets[name]))'
+    local posY = '(SET_Y(' .. CALC(params[3]) .. ', GAME.group.widgets[name]))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.widgets[name].x = ' .. posX
     GAME.lua = GAME.lua .. ' GAME.group.widgets[name].y = ' .. posY .. ' end)'
@@ -234,6 +234,8 @@ M['insertToScroll'] = function(params)
 
     if type == '(select[\'obj\']())' then type = 'GAME.group.objects'
     elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
+    elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
+    elseif type == '(select[\'snapshot\']())' then type = 'GAME.group.snapshots'
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups' end
 
     GAME.lua = GAME.lua .. ' pcall(function() local _scroll = ' .. scroll

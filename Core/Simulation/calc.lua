@@ -12,7 +12,19 @@ return function(params, default, withoutBrackets, isApi)
 
             local len = UTF8.len(params[i][1])
             if UTF8.sub(params[i][1], len) == '\\' then
-                params[i][1] = UTF8.sub(params[i][1], 1, len - 1)
+                local factor = 0
+
+                for j = len - 1, 1, -1 do
+                    if UTF8.sub(params[i][1], j, j) == '\\' then
+                        factor = factor + 1
+                    else
+                        break
+                    end
+                end
+
+                if factor % 2 == 0 then
+                    params[i][1] = UTF8.sub(params[i][1], 1, len - 1)
+                end
             end
         end
 

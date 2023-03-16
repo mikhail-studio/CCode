@@ -3,7 +3,8 @@ local file = io.open(system.pathForFile('local.json', system.DocumentsDirectory)
 
 if file then
     data = JSON.decode(file:read('*a')) io.close(file)
-    if data.autoplace == nil then data.autoplace = true end data.back = 'System'
+    if data.autoplace == nil then data.autoplace = true end
+    if data.keystore == nil then data.keystore = {'testkey'} end data.back = 'System'
     WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), JSON.encode(data))
 else
     data, custom = {
@@ -12,6 +13,7 @@ else
         last_link = '',
         orientation = 'portrait',
         back = 'System',
+        keystore = {'testkey'},
         autoplace = true,
         show_ads = true,
         pos_top_ads = true,

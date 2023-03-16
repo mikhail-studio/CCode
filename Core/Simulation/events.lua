@@ -151,7 +151,7 @@ M['onLocalCollisionBegan'] = function(nested, params)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, selfElement = p.selfElement, otherElement = p.otherElement, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction, tangentSpeed'
     GAME.lua = GAME.lua .. ' = p.contact.tangentSpeed}, name = p.target.name, other = p.other.name,'
-    GAME.lua = GAME.lua .. ' x = GET_X(p.x, p.target._scroll), y = GET_Y(p.y, p.target._scroll)}'
+    GAME.lua = GAME.lua .. ' x = GET_X(p.x, p.target), y = GET_Y(p.y, p.target)}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end end)'
 end
 
@@ -169,7 +169,7 @@ M['onLocalPreCollision'] = function(nested, params)
     GAME.lua = GAME.lua .. ' p.phase == \'pre\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, selfElement = p.selfElement, otherElement = p.otherElement, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction},'
-    GAME.lua = GAME.lua .. ' name = p.target.name, other = p.other.name, x = GET_X(p.x, p.target._scroll), y = GET_Y(p.y, p.target._scroll)}'
+    GAME.lua = GAME.lua .. ' name = p.target.name, other = p.other.name, x = GET_X(p.x, p.target), y = GET_Y(p.y, p.target)}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end end)'
 end
 
@@ -178,8 +178,8 @@ M['onLocalPostCollision'] = function(nested, params)
     GAME.lua = GAME.lua .. ' p.phase == \'post\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, selfElement = p.selfElement, otherElement = p.otherElement, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction}, name'
-    GAME.lua = GAME.lua .. ' = p.target.name, other = p.other.name, x = GET_X(p.x, p.target._scroll),'
-    GAME.lua = GAME.lua .. ' y = GET_Y(p.y, p.target._scroll), force = p.force, friction = p.friction}'
+    GAME.lua = GAME.lua .. ' = p.target.name, other = p.other.name, x = GET_X(p.x, p.target),'
+    GAME.lua = GAME.lua .. ' y = GET_Y(p.y, p.target), force = p.force, friction = p.friction}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end end)'
 end
 
@@ -189,7 +189,7 @@ M['onGlobalCollisionBegan'] = function(nested, params)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, element1 = p.element1, element2 = p.element2, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction, tangentSpeed'
     GAME.lua = GAME.lua .. ' = p.contact.tangentSpeed}, name1 = p.object1.name, name2 = p.object2.name,'
-    GAME.lua = GAME.lua .. ' x = GET_X(p.x, p.target._scroll), y = GET_Y(p.y, p.target._scroll)}'
+    GAME.lua = GAME.lua .. ' x = GET_X(p.x, p.target), y = GET_Y(p.y, p.target)}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end end)'
 end
 
@@ -208,7 +208,7 @@ M['onGlobalPreCollision'] = function(nested, params)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, element1 = p.element1, element2 = p.element2, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction},'
     GAME.lua = GAME.lua .. ' name1 = p.object1.name, name2 = p.object2.name,'
-    GAME.lua = GAME.lua .. ' x = GET_X(p.x, p.target._scroll), y = GET_Y(p.y, p.target._scroll)}'
+    GAME.lua = GAME.lua .. ' x = GET_X(p.x, p.target), y = GET_Y(p.y, p.target)}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end end)'
 end
 
@@ -217,13 +217,13 @@ M['onGlobalPostCollision'] = function(nested, params)
     GAME.lua = GAME.lua .. ' p.phase == \'post\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, element1 = p.element1, element2 = p.element2, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction}, name1'
-    GAME.lua = GAME.lua .. ' = p.object1.name, name2 = p.object2.name, x = GET_X(p.x, p.target._scroll),'
-    GAME.lua = GAME.lua .. ' y = GET_Y(p.y, p.target._scroll), force = p.force, friction = p.friction}'
+    GAME.lua = GAME.lua .. ' = p.object1.name, name2 = p.object2.name, x = GET_X(p.x, p.target),'
+    GAME.lua = GAME.lua .. ' y = GET_Y(p.y, p.target), force = p.force, friction = p.friction}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end end)'
 end
 
 M['onTouchBeganNoob'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() timer.new(1, 1, function() local name = ' .. CALC(params[1])
+    GAME.lua = GAME.lua .. ' timer.new(1, 1, function() pcall(function() local name = ' .. CALC(params[1])
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]:addEventListener(\'touch\', function(e)'
     GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' e.target._touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\' GAME.group.const.touch'
@@ -238,7 +238,7 @@ M['onTouchBeganNoob'] = function(nested, params)
 end
 
 M['onTouchMovedNoob'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() timer.new(1, 1, function() local name = ' .. CALC(params[1])
+    GAME.lua = GAME.lua .. ' timer.new(1, 1, function() pcall(function() local name = ' .. CALC(params[1])
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]:addEventListener(\'touch\', function(e)'
     GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' e.target._touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\' GAME.group.const.touch'
@@ -253,7 +253,7 @@ M['onTouchMovedNoob'] = function(nested, params)
 end
 
 M['onTouchEndedNoob'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() timer.new(1, 1, function() local name = ' .. CALC(params[1])
+    GAME.lua = GAME.lua .. ' timer.new(1, 1, function() pcall(function() local name = ' .. CALC(params[1])
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]:addEventListener(\'touch\', function(e)'
     GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' e.target._touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\' GAME.group.const.touch'
@@ -268,7 +268,7 @@ M['onTouchEndedNoob'] = function(nested, params)
 end
 
 M['onLocalCollisionBeganNoob'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() timer.new(1, 1, function() local name, name2 = ' .. CALC(params[1]) .. ', ' .. CALC(params[2])
+    GAME.lua = GAME.lua .. ' timer.new(1, 1, function() pcall(function() local name, name2 = ' .. CALC(params[1]) .. ', ' .. CALC(params[2])
     GAME.lua = GAME.lua .. ' GAME.group.objects[name].collision = function(s, e) if GAME.hash == hash then local isComplete, result ='
     GAME.lua = GAME.lua .. ' pcall(function() return (function(p) if GAME.hash == hash then if p.phase == \'began\' then'
     GAME.lua = GAME.lua .. ' if p.other.name == name2 then' M.requestNestedBlock(nested)

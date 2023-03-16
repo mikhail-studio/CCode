@@ -17,10 +17,16 @@ M.getListButtons = function(type)
         return {STR['blocks.select.switchRadio'], STR['blocks.select.switchCheckbox'], STR['blocks.select.switchToggle']}
     elseif type == 'switchState' then
         return {STR['blocks.select.switchOff'], STR['blocks.select.switchOn']}
+    elseif type == 'adsType' then
+        return {STR['blocks.select.adsInterstitial'], STR['blocks.select.adsRewardedVideo'], STR['blocks.select.adsVideo']}
     elseif type == 'networkProgress' then
         return {STR['blocks.select.progressDefault'], STR['blocks.select.progressDownload'], STR['blocks.select.progressUpload']}
     elseif type == 'networkRedirects' then
         return {STR['blocks.select.redirectsTrue'], STR['blocks.select.redirectsFalse']}
+    elseif type == 'canvasMode' then
+        return {STR['blocks.select.canvasModeAppend'], STR['blocks.select.canvasModeDiscard']}
+    elseif type == 'snapshotType' then
+        return {STR['blocks.select.snapshotGroup'], STR['blocks.select.snapshotCanvas']}
     elseif type == 'inputType' then
         return {
             STR['blocks.select.inputDefault'],
@@ -30,12 +36,6 @@ M.getListButtons = function(type)
             STR['blocks.select.inputUrl'],
             STR['blocks.select.inputEmail'],
             STR['blocks.select.inputNoEmoji']
-        }
-    elseif type == 'scrollType' then
-        return {
-            STR['blocks.select.obj'],
-            STR['blocks.select.text'],
-            STR['blocks.select.widget']
         }
     elseif type == 'noobName' then
         return {
@@ -50,7 +50,8 @@ M.getListButtons = function(type)
             STR['blocks.select.text'],
             STR['blocks.select.group'],
             STR['blocks.select.tag'],
-            STR['blocks.select.widget']
+            STR['blocks.select.widget'],
+            STR['blocks.select.snapshot']
         }
     elseif type == 'transitEasing' then
         return {
@@ -75,6 +76,9 @@ M.getListValue = function(type, text)
         return text == STR['blocks.select.redirectsFalse'] and 'redirectsFalse' or 'redirectsTrue'
     elseif type == 'switchState' then
         return text == STR['blocks.select.switchOff'] and 'switchOff' or 'switchOn'
+    elseif type == 'adsType' then
+        return text == STR['blocks.select.adsRewardedVideo'] and 'adsRewardedVideo'
+            or text == STR['blocks.select.adsVideo'] and 'adsVideo' or 'adsInterstitial'
     elseif type == 'textAlign' then
         return text == STR['blocks.select.alignLeft'] and 'alignLeft'
             or text == STR['blocks.select.alignRight'] and 'alignRight' or 'alignCenter'
@@ -84,6 +88,10 @@ M.getListValue = function(type, text)
     elseif type == 'networkProgress' then
         return text == STR['blocks.select.progressUpload'] and 'progressUpload'
             or text == STR['blocks.select.progressDownload'] and 'progressDownload' or 'progressDefault'
+    elseif type == 'canvasMode' then
+        return text == STR['blocks.select.canvasModeDiscard'] and 'canvasModeDiscard' or 'canvasModeAppend'
+    elseif type == 'snapshotType' then
+        return text == STR['blocks.select.snapshotCanvas'] and 'snapshotCanvas' or 'snapshotGroup'
     elseif type == 'inputType' then
         return text == STR['blocks.select.inputDefault'] and 'inputDefault'
             or text == STR['blocks.select.inputNumber'] and 'inputNumber'
@@ -91,10 +99,6 @@ M.getListValue = function(type, text)
             or text == STR['blocks.select.inputPhone'] and 'inputPhone'
             or text == STR['blocks.select.inputUrl'] and 'inputUrl'
             or text == STR['blocks.select.inputEmail'] and 'inputEmail' or 'inputNoEmoji'
-    elseif type == 'scrollType' then
-        return text == STR['blocks.select.obj'] and 'obj'
-            or text == STR['blocks.select.text'] and 'text'
-            or text == STR['blocks.select.widget'] and 'widget' or 'obj'
     elseif type == 'noobName' then
         return text == STR['blocks.select.pic'] and 'pic'
             or text == STR['blocks.select.text'] and 'text'
@@ -105,6 +109,7 @@ M.getListValue = function(type, text)
             or text == STR['blocks.select.text'] and 'text'
             or text == STR['blocks.select.group'] and 'group'
             or text == STR['blocks.select.tag'] and 'tag'
+            or text == STR['blocks.select.snapshot'] and 'snapshot'
             or text == STR['blocks.select.widget'] and 'widget' or 'obj'
     elseif type == 'transitEasing' then
         return text or 'linear'

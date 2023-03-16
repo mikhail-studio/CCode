@@ -52,15 +52,16 @@ local function getStartLua(linkBuild)
     local cod17 = ' #GAME.group.resumes do GAME.group.resumes[i]() end end end Runtime:addEventListener(\'system\', GAME.group.const.system)'
     local cod18 = ' GAME.group.textures = {} GAME.group.accelerometers = {} GAME.hash = CRYPTO.digest(CRYPTO.md5, math.random(1, 999999999))'
     local cod19 = ' local hash = GAME.hash GAME.group.networks = {} GAME.group.const.touch_x, GAME.group.const.touch_y = 0, 0'
+    local cod20 = ' GAME.group.snapshots = {}'
 
     if linkBuild then
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. require 'Data.build'
             .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10
-            .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19
+            .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19 .. cod20
     else
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. funs1 .. funs2 .. funs3 .. funs4
             .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10
-            .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19
+            .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19 .. cod20
     end
 end
 
@@ -88,7 +89,7 @@ M.remove = function()
     pcall(function() for _, v in pairs(M.group.textures) do v:releaseSelf() v = nil end end)
     pcall(function() for _, v in ipairs(M.group.stops) do v() end end) M.isStarted = nil
     pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
-    pcall(function() M.group:removeSelf() M.group = nil end) M.RESOURCES = nil math.randomseed(os.time())
+    pcall(function() M.group:removeSelf() M.group = nil end) M.RESOURCES = nil SEED = os.time() math.randomseed(SEED)
     pcall(function() for child = display.currentStage.numChildren, 1, -1 do
     if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
     timer.performWithDelay(1, function() if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true})
@@ -97,11 +98,10 @@ end
 
 M.new = function(linkBuild, isDebug)
     M.group = display.newGroup()
-    M.orientation, EVENTS.CUSTOM = CURRENT_ORIENTATION, {}
+    M.orientation, EVENTS.CUSTOM = 'portrait', {}
     M.data = GET_GAME_CODE(linkBuild or CURRENT_LINK) M.needBack, M.scripts = true, {}
     M.scrollY = (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) and select(2, GAME_GROUP_OPEN.scroll:getContentPosition()) or 0
     M.lua = getStartLua(linkBuild) .. ' GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'
-    if linkBuild then M.data.settings.build = M.data.settings.build + 1 SET_GAME_CODE(M.data.link, M.data) end
 
     if M.data.settings.orientation == 'portrait' and CURRENT_ORIENTATION ~= 'portrait' then
         M.lua = M.lua .. ' setOrientationApp({type = \'portrait\', sim = true})'
@@ -260,7 +260,7 @@ M.new = function(linkBuild, isDebug)
     end M.lua = M.lua .. ' end) GAME.isStarted = true'
 
     if linkBuild or isDebug then
-        M.remove()
+        M.remove() if linkBuild then M.data.settings.build = M.data.settings.build + 1 SET_GAME_CODE(M.data.link, M.data) end
         return M.lua .. (linkBuild and ' end)' or '')
     else
         display.setDefault('background', 0)

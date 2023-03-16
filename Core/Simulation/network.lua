@@ -58,5 +58,17 @@ M['openURL'] = function(params, method)
     GAME.lua = GAME.lua .. ' pcall(function() system.openURL(' .. CALC(params[1]) .. ')  end)'
 end
 
+M['initAdsStartApp'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() STARTAPP.init(function(e) if GAME.hash == hash then ' .. CALC(params[2]) .. '(e)'
+    GAME.lua = GAME.lua .. ' end end, {appId = ' .. CALC(params[1]) .. '}) end)'
+end
+
+M['loadAdsStartApp'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() STARTAPP.load(' .. CALC(params[1]) .. ') end)'
+end
+
+M['showAdsStartApp'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() STARTAPP.show(' .. CALC(params[1]) .. ') end)'
+end
 
 return M

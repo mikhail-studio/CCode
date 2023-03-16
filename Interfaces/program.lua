@@ -1,13 +1,15 @@
 local LOCAL_STR = {
     'program.scripts',
     'program.images',
+    'program.levels',
     'program.sounds',
     'program.videos',
     'program.fonts',
     'program.resources',
     'menu.settings',
     'program.export',
-    'program.build'
+    'program.build',
+    'program.aab'
 }
 
 local BLOCK = require 'Core.Modules.interface-block'
@@ -29,9 +31,10 @@ M.create = function(app, noobmode)
         LOCAL_STR[1] = 'program.scenarios'
         LOCAL_STR[2] = 'program.pictures'
 
-        if LOCAL_STR[4] == 'program.videos' then
-            table.remove(LOCAL_STR, 6)
-            table.remove(LOCAL_STR, 4)
+        if LOCAL_STR[5] == 'program.videos' then
+            table.remove(LOCAL_STR, 11)
+            table.remove(LOCAL_STR, 7)
+            table.remove(LOCAL_STR, 5)
         end
 
         if NEW_BLOCK and not NEW_BLOCK.noobmode then
@@ -41,9 +44,10 @@ M.create = function(app, noobmode)
         LOCAL_STR[1] = 'program.scripts'
         LOCAL_STR[2] = 'program.images'
 
-        if LOCAL_STR[4] ~= 'program.videos' then
-            table.insert(LOCAL_STR, 4, 'program.videos')
-            table.insert(LOCAL_STR, 6, 'program.resources')
+        if LOCAL_STR[5] ~= 'program.videos' then
+            table.insert(LOCAL_STR, 5, 'program.videos')
+            table.insert(LOCAL_STR, 7, 'program.resources')
+            table.insert(LOCAL_STR, 11, 'program.aab')
         end
 
         if NEW_BLOCK and NEW_BLOCK.noobmode then

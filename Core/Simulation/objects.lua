@@ -102,8 +102,8 @@ end
 
 M['setPos'] = function(params)
     local name = CALC(params[1])
-    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.objects[name]._scroll))'
-    local posY = '(SET_Y(' .. CALC(params[3]) .. ', GAME.group.objects[name]._scroll))'
+    local posX = '(SET_X(' .. CALC(params[2]) .. ', GAME.group.objects[name]))'
+    local posY = '(SET_Y(' .. CALC(params[3]) .. ', GAME.group.objects[name]))'
 
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.objects[name].x = ' .. posX
     GAME.lua = GAME.lua .. ' GAME.group.objects[name].y = ' .. posY .. ' end)'
@@ -111,12 +111,12 @@ end
 
 M['setPosX'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1]) .. ' GAME.group.objects[name].x ='
-    GAME.lua = GAME.lua .. ' SET_X(' .. CALC(params[2]) .. ', GAME.group.objects[name]._scroll) end)'
+    GAME.lua = GAME.lua .. ' SET_X(' .. CALC(params[2]) .. ', GAME.group.objects[name]) end)'
 end
 
 M['setPosY'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1]) .. ' GAME.group.objects[name].y ='
-    GAME.lua = GAME.lua .. ' SET_Y(' .. CALC(params[2]) .. ', GAME.group.objects[name]._scroll) end)'
+    GAME.lua = GAME.lua .. ' SET_Y(' .. CALC(params[2]) .. ', GAME.group.objects[name]) end)'
 end
 
 M['setWidth'] = function(params)

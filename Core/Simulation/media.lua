@@ -26,7 +26,7 @@ M['newRemoteVideo'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.media[name]:load(link, media.RemoteSource) GAME.group.media[name]:play()'
     GAME.lua = GAME.lua .. ' GAME.group.media[name]:addEventListener(\'video\', function(e) if GAME.hash == hash'
     GAME.lua = GAME.lua .. ' then pcall(function() e.name = name ' .. fun .. '(e)'
-    GAME.lua = GAME.lua .. ' end) end) GAME.group.media[name]:setNativeProperty(\'IgnoreErrors\', true) end)'
+    GAME.lua = GAME.lua .. ' end) end end) GAME.group.media[name]:setNativeProperty(\'IgnoreErrors\', true) end)'
 end
 
 M['loadSound'] = function(params)

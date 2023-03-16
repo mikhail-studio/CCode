@@ -1,7 +1,7 @@
 local LAST_CURRENT_LINK
 
 return {
-    new = function(link)
+    new = function(link, isAab)
         if (pcall(function()
             LAST_CURRENT_LINK = CURRENT_LINK
             GAME = require 'Core.Simulation.start'
@@ -15,7 +15,7 @@ return {
             LFS.mkdir(DOC_DIR .. '/Build/Fonts')
 
             PROGRAMS.group[8]:setIsLocked(true, 'vertical')
-            WINDOW.new(STR['build.start'], {}, function() PROGRAMS.group[8]:setIsLocked(false, 'vertical') end, 1)
+            WINDOW.new(STR['build.start' .. (isAab and '.aab' or '')], {}, function() PROGRAMS.group[8]:setIsLocked(false, 'vertical') end, 1)
 
             timer.performWithDelay(1, function()
                 local folders = {'Resources', 'Images', 'Sounds', 'Videos', 'Fonts'}
@@ -36,6 +36,8 @@ return {
                 local build = GAME.data.settings.build
                 local version = GAME.data.settings.version
                 local package = GAME.data.settings.package
+                local alias = LOCAL.keystore[1] == 'custom' and LOCAL.keystore[2] or 'testkey'
+                local pass = LOCAL.keystore[1] == 'custom' and LOCAL.keystore[3] or 'androidkey'
 
                 GAME = nil
                 GANIN.compress(DOC_DIR .. '/Build', DOC_DIR .. '/game.cc', SOLAR .. _G.A .. _G.C, function()
@@ -50,7 +52,7 @@ return {
                     end
 
                     CURRENT_LINK = LAST_CURRENT_LINK
-                    GANIN.build(MY_PATH, package, title, build, version)
+                    GANIN.build(MY_PATH, package, title, build, version, isAab, DOC_DIR, alias, pass)
                 end, true)
             end)
         end)) == false then

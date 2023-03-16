@@ -79,6 +79,8 @@ local function SampleNoise(x, y, seed)
     local xi = x0 > y0 and 1 or 0
     local n1 = GetN(ix + xi, iy + (1 - xi), x0 + G - xi, y0 + G - (1 - xi))
 
+	rseed(SEED)
+
     return 70.1480580019 * (n0 + n1 + n2)
 end
 

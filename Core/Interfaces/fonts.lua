@@ -153,14 +153,13 @@ listeners.but_okay = function(target)
     FONTS.group[7].isVisible = false
 
     if INDEX_LIST == 1 then
+        local data = GET_GAME_CODE(CURRENT_LINK)
+
         for i = #FONTS.group.data, 1, -1 do
             FONTS.group.blocks[i].checkbox.isVisible = false
 
             if FONTS.group.blocks[i].checkbox.isOn then
-                local data = GET_GAME_CODE(CURRENT_LINK)
                 table.remove(data.resources.fonts, i)
-
-                SET_GAME_CODE(CURRENT_LINK, data)
                 OS_REMOVE(RES_PATH .. '/' .. FONTS.group.blocks[i].link)
                 OS_REMOVE(DOC_DIR .. '/' .. CURRENT_LINK .. '/Fonts/' .. FONTS.group.blocks[i].link)
                 FONTS.group.blocks[i].remove(i)
@@ -176,6 +175,7 @@ listeners.but_okay = function(target)
             FONTS.group.data[j].y = y
         end
 
+        SET_GAME_CODE(CURRENT_LINK, data)
         FONTS.group[8]:setScrollHeight(150 * #FONTS.group.data)
 
         WINDOW.new(STR['fonts.needexit'], {STR['button.close'], STR['button.okay']}, function(e)

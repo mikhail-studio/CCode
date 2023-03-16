@@ -7,7 +7,7 @@ if 'Группы' then
 
         GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() GAME.group.groups[name]:removeSelf() end)'
         GAME.lua = GAME.lua .. ' GAME.group.groups[name] = display.newGroup() GAME.group.groups[name]._tag = \'TAG\''
-        GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.groups[name]) end)'
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name]._isGroup = true GAME.group:insert(GAME.group.groups[name]) end)'
     end
 
     M['removeGroup'] = function(params)
@@ -144,6 +144,16 @@ if 'Группы' then
         GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.groups[name].alpha ='
         GAME.lua = GAME.lua .. ' GAME.group.groups[name].alpha + ' .. alpha .. ' end)'
     end
+
+    M['frontGroup'] = function(params)
+        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. CALC(params[1]) .. ']:toFront() end)'
+    end
+
+    M['backGroup'] = function(params)
+        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. CALC(params[1]) .. ']:toBack() end)'
+    end
+
+    M['addGroupObjectNoob'] = M['addGroupObject']
 end
 
 if 'Теги' then
@@ -227,9 +237,9 @@ if 'Теги' then
         GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
         GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else pcall(function()'
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].x = SET_X(' .. CALC(params[2]) .. ','
-        GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]]._scroll)'
+        GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]])'
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].y = SET_Y(' .. CALC(params[3]) .. ','
-        GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]]._scroll)'
+        GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]])'
         GAME.lua = GAME.lua .. ' end) end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
 
@@ -296,6 +306,24 @@ if 'Теги' then
         GAME.lua = GAME.lua .. ' GAME.group[child[2]][child[1]].alpha = GAME.group[child[2]][child[1]].alpha +'
         GAME.lua = GAME.lua .. ' ((' .. CALC(params[2]) .. ') / 100) end) end end end doTag(' .. CALC(params[1]) .. ') end)'
     end
+
+    M['frontTag'] = function(params)
+        GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else if child[2] == \'widgets\' then'
+        GAME.lua = GAME.lua .. ' timer.new(1, 1, function() pcall(function() GAME.group[child[2]][child[1]]:toFront() end) end)'
+        GAME.lua = GAME.lua .. ' else GAME.group[child[2]][child[1]].isVisible = true end'
+        GAME.lua = GAME.lua .. ' end end end doTag(' .. CALC(params[1]) .. ') end)'
+    end
+
+    M['backTag'] = function(params)
+        GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(GAME.group.tags[tag]) do'
+        GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else if child[2] == \'widgets\' then'
+        GAME.lua = GAME.lua .. ' timer.new(1, 1, function() pcall(function() GAME.group[child[2]][child[1]]:toBack() end) end)'
+        GAME.lua = GAME.lua .. ' else GAME.group[child[2]][child[1]].isVisible = true end'
+        GAME.lua = GAME.lua .. ' end end end doTag(' .. CALC(params[1]) .. ') end)'
+    end
+
+    M['addTagObjectNoob'] = M['addTagObject']
 end
 
 return M

@@ -24,6 +24,22 @@ M['backgroundFalse'] = function()
     return false
 end
 
+M['canvasModeAppend'] = function()
+    return 'append'
+end
+
+M['canvasModeDiscard'] = function()
+    return 'discard'
+end
+
+M['snapshotGroup'] = function()
+    return 'group'
+end
+
+M['snapshotCanvas'] = function()
+    return 'canvas'
+end
+
 M['ruleTrue'] = function()
     return true
 end
@@ -92,6 +108,10 @@ M['widget'] = function()
     return 'widgets'
 end
 
+M['snapshot'] = function()
+    return 'snapshots'
+end
+
 M['tag'] = function()
     return 'tags'
 end
@@ -114,6 +134,18 @@ end
 
 M['switchOff'] = function()
     return false
+end
+
+M['adsInterstitial'] = function()
+    return 'interstitial'
+end
+
+M['adsRewardedVideo'] = function()
+    return 'rewardedVideo'
+end
+
+M['adsVideo'] = function()
+    return 'video'
 end
 
 return M

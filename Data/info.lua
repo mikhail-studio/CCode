@@ -161,6 +161,10 @@ M.listBlock = {
         'setBackgroundColor',
             'setBackgroundRGB',
             'setBackgroundHEX',
+            'newLevel',
+            'removeLevel',
+            'showLevel',
+            'hideLevel',
             'setPortraitOrientation',
             'setLandscapeOrientation',
             'scheduleNotification',
@@ -353,6 +357,29 @@ M.listBlock = {
         'removeVideo'
     },
 
+    ['snapshot'] = {
+        'newSnapshot',
+        'invalidateSnapshot',
+        'addToSnapshot',
+        'removeFromSnapshot',
+        'setSnapshotColor',
+        'setSnapshotPos',
+        'setSnapshotSize',
+        'setSnapshotRotation',
+        'setSnapshotAlpha',
+        'updSnapshotPosX',
+        'updSnapshotPosY',
+        'updSnapshotWidth',
+        'updSnapshotHeight',
+        'updSnapshotRotation',
+        'updSnapshotAlpha',
+        'frontSnapshot',
+        'backSnapshot',
+        'removeSnapshot',
+        'showSnapshot',
+        'hideSnapshot'
+    },
+
     ['transition'] = {
         'setTransitionTo',
         'setTransitionPos',
@@ -382,10 +409,12 @@ M.listBlock = {
         'firebasePUT',
         'firebasePATCH',
         'firebaseGET',
-        'firebaseDELETE'
+        'firebaseDELETE',
+        'initAdsStartApp',
+        'loadAdsStartApp',
+        'showAdsStartApp'
     },
 
-    ['snapshot'] = {},
     ['custom'] = {}
 }
 
@@ -545,7 +574,7 @@ M.listName = {
         ['forEnd'] = {'control'},
         ['while'] = {'control', {'value'}},
         ['whileEnd'] = {'control'},
-        ['foreach'] = {'control', {'table'}, {'localvar'}},
+        ['foreach'] = {'control', {'table'}, {'localvar'}, {'localvar'}},
         ['foreachEnd'] = {'control'},
         ['break'] = {'control'},
         ['setListener'] = {'control', {'value'}, {'fun'}},
@@ -569,6 +598,10 @@ M.listName = {
         ['setBackgroundColor'] = {'control', {'color', {'[0, 0, 0]', 'c'}}},
             ['setBackgroundRGB'] = {'control', {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
             ['setBackgroundHEX'] = {'control', {'value', {'#000000', 't'}}},
+            ['newLevel'] = {'control', {'value'}},
+            ['removeLevel'] = {'control', {'value'}},
+            ['showLevel'] = {'control', {'value'}},
+            ['hideLevel'] = {'control', {'value'}},
             ['setPortraitOrientation'] = {'control', {'fun'}},
             ['setLandscapeOrientation'] = {'control', {'fun'}},
             ['scheduleNotification'] = {'control', {'value'}, {'value', {'1', 'n'}}},
@@ -783,7 +816,7 @@ M.listName = {
                 {'value', {'100', 'n'}}, {'value', {'100', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
             ['newSwitch'] = {'widgets', {'value'}, {'switchType', {'switchCheckbox', 'sl'}}, {'switchState', {'switchOff', 'sl'}},
                 {'value', {'100', 'n'}}, {'value', {'100', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'fun'}, {'fun'}},
-            ['insertToScroll'] = {'widgets', {'value'}, {'value'}, {'scrollType', 'obj'}},
+            ['insertToScroll'] = {'widgets', {'value'}, {'value'}, {'transitName', {'obj', 'sl'}}},
             ['takeFocusScroll'] = {'widgets', {'value'}, {'value'}},
             ['removeWidget'] = {'widgets', {'value'}},
             ['showWidget'] = {'widgets', {'value'}},
@@ -815,6 +848,31 @@ M.listName = {
             ['fadeVolumeNoob'] = {'media', {'value'}, {'value', {'5', 'n'}}, {'value', {'10', 'n'}}},
             ['stopSoundNoob'] = {'media', {'value'}},
             ['stopTimerSoundNoob'] = {'media', {'value'}, {'value', {'5', 'n'}}},
+
+    -- snapshot
+    ['invalidateSnapshot'] = {'snapshot', {'value'}, {'snapshotType', {'snapshotGroup', 'sl'}}},
+        ['newSnapshot'] = {'snapshot', {'value'}, {'canvasMode', {'canvasModeAppend', 'sl'}},
+            {'value', {'100', 'n'}}, {'value', {'100', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
+        ['addToSnapshot'] = {'snapshot', {'value'}, {'snapshotType', {'snapshotGroup', 'sl'}},
+            {'value'}, {'transitName', {'obj', 'sl'}}},
+        ['removeFromSnapshot'] = {'snapshot', {'value'}, {'snapshotType', {'snapshotGroup', 'sl'}},
+            {'value'}, {'transitName', {'obj', 'sl'}}},
+        ['setSnapshotColor'] = {'snapshot', {'value'}, {'color', {'[0, 0, 0]', 'c'}}},
+        ['setSnapshotPos'] = {'snapshot', {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
+        ['setSnapshotSize'] = {'snapshot', {'value'}, {'value', {'100', 'n'}}, {'value', {'100', 'n'}}},
+        ['setSnapshotRotation'] = {'snapshot', {'value'}, {'value', {'0', 'n'}}},
+        ['setSnapshotAlpha'] = {'snapshot', {'value'}, {'value', {'100', 'n'}}},
+        ['updSnapshotPosX'] = {'snapshot', {'value'}, {'value', {'0', 'n'}}},
+        ['updSnapshotPosY'] = {'snapshot', {'value'}, {'value', {'0', 'n'}}},
+        ['updSnapshotWidth'] = {'snapshot', {'value'}, {'value', {'0', 'n'}}},
+        ['updSnapshotHeight'] = {'snapshot', {'value'}, {'value', {'0', 'n'}}},
+        ['updSnapshotRotation'] = {'snapshot', {'value'}, {'value', {'0', 'n'}}},
+        ['updSnapshotAlpha'] = {'snapshot', {'value'}, {'value', {'0', 'n'}}},
+        ['frontSnapshot'] = {'snapshot', {'value'}},
+        ['backSnapshot'] = {'snapshot', {'value'}},
+        ['removeSnapshot'] = {'snapshot', {'value'}},
+        ['showSnapshot'] = {'snapshot', {'value'}},
+        ['hideSnapshot'] = {'snapshot', {'value'}},
 
     -- transition
     ['setTransitionPause'] = {'transition', {'value'}, {'transitName', {'obj', 'sl'}}},
@@ -876,6 +934,9 @@ M.listName = {
         ['firebasePATCH'] = {'network', {'value'}, {'value'}, {'value', {'KEY', 't'}}, {'fun'}},
         ['firebaseGET'] = {'network', {'value'}, {'value', {'KEY', 't'}}, {'fun'}},
         ['firebaseDELETE'] = {'network', {'value'}, {'value', {'KEY', 't'}}, {'fun'}},
+        ['initAdsStartApp'] = {'network', {'value'}, {'fun'}},
+        ['loadAdsStartApp'] = {'network', {'adsType'}},
+        ['showAdsStartApp'] = {'network', {'adsType'}},
 
     -- custom
     ['_custom'] = {'custom'}

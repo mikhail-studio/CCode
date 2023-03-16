@@ -61,6 +61,19 @@ M.create = function()
     M.group:insert(autoplace_button)
     M.group:insert(autoplace_button.text)
 
+    local keystore_text = display.newText({
+            text = STR['settings.keystore'], x = ZERO_X + 20, y = autoplace_text.y + 70,
+            font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
+        }) keystore_text.anchorX = 0
+    M.group:insert(keystore_text)
+
+    local keystore_button = display.newRect(rCenterX, keystore_text.y, rMaxWidth, 60)
+        keystore_button:setFillColor(0, 0, 0, 0.005)
+        keystore_button.text = display.newText('', keystore_button.x, keystore_button.y, 'ubuntu', 30)
+        keystore_button.text.text = LOCAL.keystore[1] == 'testkey' and STR['settings.keystore.testkey'] or STR['settings.keystore.custom']
+    M.group:insert(keystore_button)
+    M.group:insert(keystore_button.text)
+
     local show_ads_text = display.newText({
             text = STR['settings.showads'], x = ZERO_X + 20, y = confirm_button.y + 70,
             font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
@@ -136,6 +149,7 @@ M.create = function()
     title:addEventListener('touch', function(e) LISTENER(e, 'title') end)
     lang_button:addEventListener('touch', function(e) LISTENER(e, 'lang') end)
     confirm_button:addEventListener('touch', function(e) LISTENER(e, 'confirm') end)
+    keystore_button:addEventListener('touch', function(e) LISTENER(e, 'keystore') end)
     autoplace_button:addEventListener('touch', function(e) LISTENER(e, 'autoplace') end)
     -- show_ads_button:addEventListener('touch', function(e) LISTENER(e, 'show') end)
     -- pos_top_ads_button:addEventListener('touch', function(e) LISTENER(e, 'pos') end)

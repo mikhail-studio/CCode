@@ -114,7 +114,7 @@ end
 M['match'] = function(str, pattern, i)
     local isComplete, result = pcall(function()
         return UTF8.match(str, pattern, i)
-    end) return isComplete and result or str
+    end) return isComplete and result or nil
 end
 
 M['get_ip'] = function(any)

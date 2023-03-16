@@ -14,6 +14,7 @@ FILE = require 'plugin.cnkFileManager'
 EXPORT = require 'plugin.exportFile'
 PASTEBOARD = require 'plugin.pasteboard'
 ORIENTATION = require 'plugin.orientation'
+STARTAPP = require 'plugin.startapp'
 IMPACK = require 'plugin.impack'
 SVG = require 'plugin.nanosvg'
 UTF8 = require 'plugin.utf8'
@@ -29,6 +30,7 @@ BUFFER = {}
 LIVE = false
 ALERT = true
 INDEX_LIST = 0
+SEED = os.time()
 NOOBMODE = false
 MORE_LIST = true
 LAST_CHECKBOX = 0
@@ -47,7 +49,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1237
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1241
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
@@ -246,21 +248,24 @@ GET_SIZE = function(path, baseDir, width, height, count)
     end) if onComplete then return result end return {width, height, count}
 end
 
-SET_X = function(x, scrollName)
-    return type(x) == 'number' and ((scrollName and GAME.group.widgets[scrollName]
-    and GAME.group.widgets[scrollName].wtype == 'scroll')
-    and x + GAME.group.widgets[scrollName].width / 2 or CENTER_X + x) or 0
+SET_X = function(x, obj)
+    if obj and obj._isGroup then return x end
+    return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+    and GAME.group.widgets[obj._scroll].wtype == 'scroll')
+    and x + GAME.group.widgets[obj._scroll].width / 2 or CENTER_X + x) or 0
 end
 
-SET_Y = function(y, scrollName)
-    return type(y) == 'number' and ((scrollName and GAME.group.widgets[scrollName]
-    and GAME.group.widgets[scrollName].wtype == 'scroll') and 0 - y or CENTER_Y - y) or 0
+SET_Y = function(y, obj)
+    if obj and obj._isGroup then return 0 - y end
+    return type(y) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+    and GAME.group.widgets[obj._scroll].wtype == 'scroll') and 0 - y or CENTER_Y - y) or 0
 end
 
-GET_X = function(x, scrollName)
-    return type(x) == 'number' and ((scrollName and GAME.group.widgets[scrollName]
-    and GAME.group.widgets[scrollName].wtype == 'scroll')
-    and x - GAME.group.widgets[scrollName].width / 2 or x - CENTER_X) or 0
+GET_X = function(x, obj)
+    if obj and obj._isGroup then return x end
+    return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+    and GAME.group.widgets[obj._scroll].wtype == 'scroll')
+    and x - GAME.group.widgets[obj._scroll].width / 2 or x - CENTER_X) or 0
 end
 
 GET_Y = SET_Y
@@ -375,7 +380,7 @@ end
 PHYSICS.setAverageCollisionPositions(true)
 WIDGET.setTheme('widget_theme_android_holo_dark')
 display.setDefault('background', 0.15, 0.15, 0.17)
-PHYSICS.setReportCollisionsInContentCoordinates(true) math.randomseed(os.time())
+PHYSICS.setReportCollisionsInContentCoordinates(true) math.randomseed(SEED)
 DEVELOPERS = {['Ganin'] = true, ['Danil Nik'] = true, ['Terra'] = true}
 
 JSON.encode3 = require('Data.json').encode
@@ -422,9 +427,9 @@ display.newImage2, display.newImage = display.newImage, function(link, ...)
 end
 
 LOCAL = require 'Data.local'
-LANGS = {'en', 'ru', 'pt', 'pl', 'ua', 'cn', 'custom'}
+LANGS = {'en', 'ru', 'pt', 'pl', 'ua', 'by', 'cn', 'jp', 'custom'}
 LANG.custom = {} LANG.ru = {} LANG.en = {} LANG.pt = {}
-LANG.pl = {} LANG.ua = {} LANG.cn = {}
+LANG.pl = {} LANG.ua = {} LANG.by = {} LANG.cn = {} LANG.jp = {}
 
 for i = 1, #LANGS do
     local langData = JSON.decode(READ_FILE(system.pathForFile('Strings/' .. LANGS[i] .. '.json')))
@@ -445,7 +450,7 @@ end
 
 INFO = require('Data.info') require('Core.Modules.custom-block').getBlocks()
 if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'}) end
--- Runtime:addEventListener('unhandledError', function(event) return true end)
+Runtime:addEventListener('unhandledError', function(event) return GAME and GAME.hash ~= '' end)
 
 GET_GLOBAL_TABLE = function()
     return {
@@ -458,7 +463,7 @@ GET_GLOBAL_TABLE = function()
         xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, print = print, OS_MOVE = OS_MOVE,
         table = table, lpeg = lpeg, COPY_TABLE = COPY_TABLE, DISPLAY_HEIGHT = DISPLAY_HEIGHT, OS_COPY = OS_COPY,
         unpack = unpack, print5 = require, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
-        graphics = graphics, system = system, rawequal = rawequal,  getmetatable = getmetatable,
+        graphics = graphics, system = system, rawequal = rawequal,  getmetatable = getmetatable, FILE = FILE,
         timer = timer, BOTTOM_HEIGHT = BOTTOM_HEIGHT, newproxy = newproxy, metatable = metatable, NOISE = NOISE,
         al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, DOC_DIR = DOC_DIR,
         LEFT_HEIGHT = LEFT_HEIGHT, cloneArray = cloneArray, DISPLAY_WIDTH = DISPLAY_WIDTH, type = type,

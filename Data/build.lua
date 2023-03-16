@@ -341,6 +341,7 @@ return ' ' .. UTF8.trimFull([===[
             EXPORT = require 'plugin.exportFile'
             PASTEBOARD = require 'plugin.pasteboard'
             ORIENTATION = require 'plugin.orientation'
+            STARTAPP = require 'plugin.startapp'
             IMPACK = require 'plugin.impack'
             SVG = require 'plugin.nanosvg'
             UTF8 = require 'plugin.utf8'
@@ -351,6 +352,7 @@ return ' ' .. UTF8.trimFull([===[
             WIDGET = require 'widget'
             CRYPTO = require 'crypto'
 
+            SEED = os.time()
             ORIENTATION.init()
             CURRENT_LINK = 'App'
             CURRENT_ORIENTATION = 'portrait'
@@ -439,21 +441,21 @@ return ' ' .. UTF8.trimFull([===[
                 end) if onComplete then return result end return {width, height, count}
             end
 
-            SET_X = function(x, scrollName)
-                return type(x) == 'number' and ((scrollName and GAME.group.widgets[scrollName]
-                and GAME.group.widgets[scrollName].wtype == 'scroll')
-                and x + GAME.group.widgets[scrollName].width / 2 or CENTER_X + x) or 0
+            SET_X = function(x, obj)
+                return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+                and GAME.group.widgets[obj._scroll].wtype == 'scroll')
+                and x + GAME.group.widgets[obj._scroll].width / 2 or CENTER_X + x) or 0
             end
 
-            SET_Y = function(y, scrollName)
-                return type(y) == 'number' and ((scrollName and GAME.group.widgets[scrollName]
-                and GAME.group.widgets[scrollName].wtype == 'scroll') and y or CENTER_Y - y) or 0
+            SET_Y = function(y, obj)
+                return type(y) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+                and GAME.group.widgets[obj._scroll].wtype == 'scroll') and 0 - y or CENTER_Y - y) or 0
             end
 
-            GET_X = function(x, scrollName)
-                return type(x) == 'number' and ((scrollName and GAME.group.widgets[scrollName]
-                and GAME.group.widgets[scrollName].wtype == 'scroll')
-                and x - GAME.group.widgets[scrollName].width / 2 or x - CENTER_X) or 0
+            GET_X = function(x, obj)
+                return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+                and GAME.group.widgets[obj._scroll].wtype == 'scroll')
+                and x - GAME.group.widgets[obj._scroll].width / 2 or x - CENTER_X) or 0
             end
 
             GET_Y = SET_Y
@@ -492,7 +494,7 @@ return ' ' .. UTF8.trimFull([===[
 
             PHYSICS.setAverageCollisionPositions(true)
             WIDGET.setTheme('widget_theme_android_holo_dark')
-            PHYSICS.setReportCollisionsInContentCoordinates(true) math.randomseed(os.time())
+            PHYSICS.setReportCollisionsInContentCoordinates(true) math.randomseed(SEED)
             JSON.decode2, JSON.decode = JSON.decode, function(str) return type(str) == 'string' and (JSON.decode2(str) or {}) or nil end
             math.factorial = function(num) if num == 0 then return 1 else return num * math.factorial(num - 1) end end
             math.hex = function(hex) local r, g, b = hex:match('(..)(..)(..)') return {tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)} end
@@ -546,7 +548,7 @@ return ' ' .. UTF8.trimFull([===[
                     xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, print = print, OS_MOVE = OS_MOVE,
                     table = table, lpeg = lpeg, COPY_TABLE = COPY_TABLE, DISPLAY_HEIGHT = DISPLAY_HEIGHT, OS_COPY = OS_COPY,
                     unpack = unpack, print5 = require, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
-                    graphics = graphics, system = system, rawequal = rawequal,  getmetatable = getmetatable,
+                    graphics = graphics, system = system, rawequal = rawequal,  getmetatable = getmetatable, FILE = FILE,
                     timer = timer, BOTTOM_HEIGHT = BOTTOM_HEIGHT, newproxy = newproxy, metatable = metatable, NOISE = NOISE,
                     al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, DOC_DIR = DOC_DIR,
                     LEFT_HEIGHT = LEFT_HEIGHT, cloneArray = cloneArray, DISPLAY_WIDTH = DISPLAY_WIDTH, type = type,
@@ -739,7 +741,7 @@ return ' ' .. UTF8.trimFull([===[
             M['match'] = function(str, pattern, i)
                 local isComplete, result = pcall(function()
                     return UTF8.match(str, pattern, i)
-                end) return isComplete and result or str
+                end) return isComplete and result or nil
             end
 
             M['get_ip'] = function(any)
@@ -948,13 +950,13 @@ return ' ' .. UTF8.trimFull([===[
 
                 M['obj.pos_x'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.objects[name] and GET_X(GAME.group.objects[name].x, GAME.group.objects[name]._scroll) or 0
+                        return GAME.group.objects[name] and GET_X(GAME.group.objects[name].x, GAME.group.objects[name]) or 0
                     end) return isComplete and result or 0
                 end
 
                 M['obj.pos_y'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.objects[name] and GET_Y(GAME.group.objects[name].y, GAME.group.objects[name]._scroll) or 0
+                        return GAME.group.objects[name] and GET_Y(GAME.group.objects[name].y, GAME.group.objects[name]) or 0
                     end) return isComplete and result or 0
                 end
 
@@ -1024,13 +1026,13 @@ return ' ' .. UTF8.trimFull([===[
 
                 M['text.pos_x'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.texts[name] and GET_X(GAME.group.texts[name].x, GAME.group.texts[name]._scroll) or 0
+                        return GAME.group.texts[name] and GET_X(GAME.group.texts[name].x, GAME.group.texts[name]) or 0
                     end) return isComplete and result or 0
                 end
 
                 M['text.pos_y'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.texts[name] and GET_Y(GAME.group.texts[name].y, GAME.group.texts[name]._scroll) or 0
+                        return GAME.group.texts[name] and GET_Y(GAME.group.texts[name].y, GAME.group.texts[name]) or 0
                     end) return isComplete and result or 0
                 end
 
@@ -1112,13 +1114,13 @@ return ' ' .. UTF8.trimFull([===[
 
                 M['widget.pos_x'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.widgets[name] and GET_X(GAME.group.widgets[name].x, GAME.group.widgets[name]._scroll) or 0
+                        return GAME.group.widgets[name] and GET_X(GAME.group.widgets[name].x, GAME.group.widgets[name]) or 0
                     end) return isComplete and result or 0
                 end
 
                 M['widget.pos_y'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.widgets[name] and GET_Y(GAME.group.widgets[name].y, GAME.group.widgets[name]._scroll) or 0
+                        return GAME.group.widgets[name] and GET_Y(GAME.group.widgets[name].y, GAME.group.widgets[name]) or 0
                     end) return isComplete and result or 0
                 end
 
@@ -1216,6 +1218,22 @@ return ' ' .. UTF8.trimFull([===[
                 return false
             end
 
+            M['canvasModeAppend'] = function()
+                return 'append'
+            end
+
+            M['canvasModeDiscard'] = function()
+                return 'discard'
+            end
+
+            M['snapshotGroup'] = function()
+                return 'group'
+            end
+
+            M['snapshotCanvas'] = function()
+                return 'canvas'
+            end
+
             M['ruleTrue'] = function()
                 return true
             end
@@ -1284,6 +1302,10 @@ return ' ' .. UTF8.trimFull([===[
                 return 'widgets'
             end
 
+            M['snapshot'] = function()
+                return 'snapshots'
+            end
+
             M['tag'] = function()
                 return 'tags'
             end
@@ -1306,6 +1328,18 @@ return ' ' .. UTF8.trimFull([===[
 
             M['switchOff'] = function()
                 return false
+            end
+
+            M['adsInterstitial'] = function()
+                return 'interstitial'
+            end
+
+            M['adsRewardedVideo'] = function()
+                return 'rewardedVideo'
+            end
+
+            M['adsVideo'] = function()
+                return 'video'
             end
 
             return M

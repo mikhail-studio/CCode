@@ -214,7 +214,7 @@ M.removeOverlay = function(index)
                     custom[index][2] = COPY_TABLE(STR['blocks..params'])
                     custom[index][4] = os.time()
                     custom[index][5] = M.color
-                    custom[index][6] = EDITOR.restart[8]
+                    custom[index][6] = (EDITOR and EDITOR.restart and EDITOR.restart[6]) and EDITOR.restart[8] or nil
                 SET_GAME_CUSTOM(custom)
 
                 STR['blocks.custom' .. index] = STR['blocks.']
@@ -286,6 +286,9 @@ M.removeOverlay = function(index)
 end
 
 M.newBlock = function(name, params, str, index, color)
+    local params = params and COPY_TABLE(params) or nil
+    local str = str and COPY_TABLE(str) or nil
+
     M.color = color or {0.36 * 255, 0.47 * 255, 0.5 * 255}
     M.group = display.newGroup()
         ALERT = false

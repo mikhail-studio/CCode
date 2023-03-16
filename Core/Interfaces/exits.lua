@@ -67,8 +67,9 @@ listeners.blocks = function()
         WINDOW.new(STR['scripts.sandbox.exit'], {STR['scripts.sandbox.not.save'], STR['scripts.sandbox.save']}, function(e)
             if e.index == 2 then
                 local custom = GET_GAME_CUSTOM() custom[BLOCKS.custom.index] = {
-                    BLOCKS.custom.name, COPY_TABLE(BLOCKS.custom.params), COPY_TABLE(GET_GAME_SCRIPT(CURRENT_LINK, 1, data)),
-                    os.time(), COPY_TABLE(BLOCKS.custom.color), (EDITOR and EDITOR.restart) and COPY_TABLE(EDITOR.restart[8]) or nil
+                    BLOCKS.custom.name, COPY_TABLE(BLOCKS.custom.params),
+                    COPY_TABLE(GET_GAME_SCRIPT(CURRENT_LINK, 1, data)), os.time(), COPY_TABLE(BLOCKS.custom.color),
+                    (EDITOR and EDITOR.restart and EDITOR.restart[6]) and COPY_TABLE(EDITOR.restart[8]) or nil
                 } custom.len = custom.len + (BLOCKS.custom.isChange and 0 or 1) SET_GAME_CUSTOM(custom)
 
                 local blockParams = {} for i = 1, #custom[BLOCKS.custom.index][2]

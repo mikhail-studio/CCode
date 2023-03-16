@@ -1,4 +1,5 @@
 local LIST = require 'Core.Modules.interface-list'
+local FILTER = require 'Core.Modules.keystore-filter'
 local listeners = {}
 
 listeners.title = function(target)
@@ -10,8 +11,109 @@ listeners.orientation = function(e)
     e.target.rotation = e.target.rotation + 90 NEW_DATA() native.requestExit()
 end
 
+listeners.keystore = function(e)
+    local list = LOCAL.keystore[1] == 'testkey'
+    and {STR['settings.keystore.testkey'], STR['settings.keystore.custom']}
+    or {STR['settings.keystore.custom'], STR['settings.keystore.testkey']}
+
+    local function inputValue(index, mode, alias)
+        timer.new(1, 1, function()
+            INPUT.new(STR['settings.keystore.enter' .. mode], function(event)
+                if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
+                    FILTER.check(event.target.text, function(ev)
+                        if ev.isError then
+                            INPUT.remove(false)
+                            WINDOW.new(STR['errors.' .. ev.typeError], {STR['button.close'], STR['button.okay']})
+                        else
+                            INPUT.remove(true, ev.text)
+                        end
+                    end)
+                end
+            end, function(e)
+                if e.input then
+                    if not alias then
+                        inputValue(index, 'pass', e.text)
+                    else
+                        LOCAL.keystore = {'custom', alias, e.text}
+
+                        SETTINGS.group:removeSelf()
+                        SETTINGS.group = nil
+                        SETTINGS.create()
+                        SETTINGS.group.isVisible = true
+
+                        NEW_DATA()
+
+                        timer.new(1, 1, function()
+                            if index == 1 then
+                                timer.new(1, 1, function()
+                                    local info = STR['settings.keystore.import.successfully'] .. '\n'
+                                    local info = info .. STR['settings.keystore.alias'] .. ': ' .. alias .. '\n'
+                                    local info = info .. STR['settings.keystore.pass'] .. ': ' .. e.text
+
+                                    WINDOW.new(info, {STR['button.close']}, function(e) end, 2)
+                                    WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                                    WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                                end)
+                            elseif index == 2 then
+                                pcall(function() GANIN.keystore(DOC_DIR, alias, e.text) end)
+
+                                timer.new(1, 1, function()
+                                    local info = STR['settings.keystore.create.successfully'] .. '\n'
+                                    local info = info .. STR['settings.keystore.alias'] .. ': ' .. alias .. '\n'
+                                    local info = info .. STR['settings.keystore.pass'] .. ': ' .. e.text
+
+                                    WINDOW.new(info, {STR['button.close']}, function(e)
+                                        GIVE_PERMISSION_DATA()
+                                        EXPORT.export({
+                                            path = DOC_DIR .. '/cbuilder.jks', name = alias .. '.jks',
+                                            listener = function(event) end
+                                        })
+                                    end, 2)
+
+                                    WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                                    WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                                end)
+                            end
+                        end)
+                    end
+                end
+            end)
+        end)
+    end
+
+    LIST.new(list, e.target.x, e.target.y - e.target.height / 2, 'down', function(e)
+        if e.index > 0 then
+            if e.text == STR['settings.keystore.custom'] then
+                WINDOW.new(STR['scripts.sandbox.exit'], {STR['settings.keystore.import'], STR['settings.keystore.create']}, function(e)
+                    if e.index == 1 then
+                        GIVE_PERMISSION_DATA()
+                        FILE.pickFile(DOC_DIR, function(import)
+                            if type(import) == 'table' and import.done and import.done == 'ok' then
+                                inputValue(1, 'alias')
+                            end
+                        end, 'cbuilder.jks', '', '*/*', nil, nil, nil)
+                    elseif e.index == 2 then
+                        inputValue(2, 'alias')
+                    end
+                end, 3)
+            elseif e.text == STR['settings.keystore.testkey'] then
+                LOCAL.keystore = {'testkey'}
+
+                SETTINGS.group:removeSelf()
+                SETTINGS.group = nil
+                SETTINGS.create()
+                SETTINGS.group.isVisible = true
+
+                NEW_DATA()
+            end
+        end
+    end, nil, nil, 0.5)
+end
+
 listeners.pos = function(e)
-    local list = LOCAL.pos_top_ads and {STR['settings.topads'], STR['settings.bottomads']} or {STR['settings.bottomads'], STR['settings.topads']}
+    local list = LOCAL.pos_top_ads
+    and {STR['settings.topads'], STR['settings.bottomads']}
+    or {STR['settings.bottomads'], STR['settings.topads']}
 
     LIST.new(list, e.target.x, e.target.y - e.target.height / 2, 'down', function(e)
         if e.index > 0 then

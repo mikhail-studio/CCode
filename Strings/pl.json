@@ -5,7 +5,9 @@
         "lang.pt": "Brasileiro",
         "lang.pl": "Polski",
         "lang.ua": "Українська",
+        "lang.by": "Беларускі",
         "lang.cn": "中文",
+        "lang.jp": "日本語",
         "lang.custom": "Niestandardowy",
         "button.yes": "Tak",
         "button.no": "Nie",
@@ -44,31 +46,56 @@
         "program.pictures": "Zdjęcia",
         "program.scripts": "Skrypty",
         "program.scenarios": "Sceny",
+        "program.levels": "Levels",
         "program.sounds": "Dźwięki",
         "program.videos": "Filmy",
         "program.fonts": "Czcionki",
+        "program.resources": "Zasoby",
         "program.psettings": "Ustawienia projektu",
         "program.export": "Eksportuj",
-        "program.build": "Kompiluj",
+        "program.build": "Build APK",
+        "program.aab": "Build AAB",
         "program.editor": "Edytor wyrażeń",
         "scripts.entername": "Wpisz nazwę skryptu",
+        "scripts.entername.noob": "Wprowadź nazwę sceny",
         "scripts.changename": "Zmień nazwę skryptu",
+        "scripts.changename.noob": "Zmień nazwę sceny",
         "scripts.sandbox": "Piaskownica",
         "scripts.sandbox.exit": "Wyjdź z piaskownicy, wybierz żądaną akcję",
         "scripts.sandbox.save": "Zapisz",
         "scripts.sandbox.not.save": "Nie zapisuj",
         "images.entername": "Wprowadź nazwę duszka",
+        "images.entername.noob": "Wprowadź nazwę zdjęcia",
         "images.changename": "Zmień nazwę duszka",
+        "images.changename.noob": "Zmień nazwę zdjęcia",
         "images.pixel": "Pikselowy duszek",
+        "images.pixel.noob": "Zdjęcie pikselowe",
+        "images.gif.convert": "Konwertować gif na arkusz duszka?",
+        "images.gif.okay": "Konwertuj",
+        "images.gif.complete": "Konwersja została zakończona, zapamiętaj wartości:",
         "sounds.entername": "Wprowadź nazwę dźwięku",
         "sounds.changename": "Zmień nazwę dźwięku",
         "videos.entername": "Wprowadź nazwę wideo",
         "videos.changename": "Zmień nazwę wideo",
+        "resources.entername": "Wprowadź nazwę zasobu",
+        "resources.changename": "Zmień nazwę zasobu",
         "fonts.entername": "Wprowadź nazwę czcionki",
         "fonts.changename": "Zmień nazwę czcionki",
         "fonts.needexit": "CCode wymusza wyłączenie, ponieważ czcionka nie jest usunięta, dopóki program nie zostanie zamknięty",
         "settings.applang": "Język aplikacji:",
         "settings.confirmdelete": "Potwierdzanie usunięcia:",
+        "settings.autoplace": "Autouzupełniaj parametry:",
+        "settings.keystore": "Developer Key:",
+        "settings.keystore.testkey": "Testkey",
+        "settings.keystore.custom": "Custom",
+        "settings.keystore.alias": "Key alias",
+        "settings.keystore.pass": "Key password",
+        "settings.keystore.create": "Create",
+        "settings.keystore.import": "Import",
+        "settings.keystore.enteralias": "Enter key alias",
+        "settings.keystore.enterpass": "Enter key password",
+        "settings.keystore.create.successfully": "Key was successfully created",
+        "settings.keystore.import.successfully": "Key was successfully imported",
         "settings.back": "Dolny panel:",
         "settings.backCCode": "Aplikacja",
         "settings.backSystem": "System",
@@ -90,7 +117,10 @@
         "errors.package": "Błąd, wprowadź poprawną nazwę pakietu (package)",
         "errors.name": "Błąd, nazwa jest już używana",
         "errors.filter": "Błąd, pusta nazwa nie może być użyta",
+        "errors.min8sym": "Error, at least 8 characters are required",
+        "errors.max32sym": "Error, maximum 32 characters allowed",
         "build.start": "Rozpoczęto kompilowanie APK, proszę czekać",
+        "build.start.aab": "AAB build started, please wait",
         "export.start": "Eksport rozpoczęty, proszę czekać",
         "import.error": "Błąd importu #",
         "game.debug": "Kod lua programu został zapisany w schowku",
@@ -98,15 +128,17 @@
     },
     "blocks": {
         "blocks.create.var": "Utwórz zmienną",
+        "blocks.create.var.noob": "Utwórz wartość",
         "blocks.create.table": "Utwórz tabelę",
         "blocks.create.fun": "Utwórz funkcję",
+        "blocks.create.fun.noob": "Utwórz akcję",
         "blocks.create.objects": "Obiekty",
         "blocks.create.filters": "Filtry",
         "blocks.create.groups": "Grupy",
         "blocks.create.tags": "Tagi",
         "blocks.create.transition": "Przejścia",
         "blocks.create.particle": "Cząsteczki",
-        "blocks.create.block": "Utwórz blok",
+        "blocks.create.block": "Utwórz",
         "blocks.create.color": "Kolor",
         "blocks.create.copy": "Kopiuj",
         "blocks.create.block.save.lua": "Zapisz (kod Lua)",
@@ -135,16 +167,25 @@
         "blocks.select.switchToggle": "Przełącz",
         "blocks.select.switchOn": "Wł.",
         "blocks.select.switchOff": "Wył.",
+        "blocks.select.adsInterstitial": "Banner",
+        "blocks.select.adsRewardedVideo": "RewardedVideo",
+        "blocks.select.adsVideo": "Video",
+        "blocks.select.pic": "Zdjęcie",
         "blocks.select.obj": "Obiekt",
         "blocks.select.text": "Tekst",
         "blocks.select.group": "Grupa",
         "blocks.select.tag": "Tag",
         "blocks.select.widget": "Widżet",
+        "blocks.select.snapshot": "Snapshot",
         "blocks.select.progressDefault": "Domyślnie",
         "blocks.select.progressDownload": "Pobierz",
         "blocks.select.progressUpload": "Prześlij",
         "blocks.select.redirectsTrue": "Automatycznie",
         "blocks.select.redirectsFalse": "Ręcznie",
+        "blocks.select.canvasModeAppend": "Append",
+        "blocks.select.canvasModeDiscard": "Discard",
+        "blocks.select.snapshotGroup": "Group",
+        "blocks.select.snapshotCanvas": "Canvas",
         "blocks.color.red": "Czerwony",
         "blocks.color.green": "Zielony",
         "blocks.color.blue": "Niebieski",
@@ -184,12 +225,12 @@
         "blocks.onCondition.params": [
             "Warunek:"
         ],
-        "blocks.onTouchBegan": "Gdy palec dotyka obiektu",
+        "blocks.onTouchBegan": "Gdy palec dotknie obiektu",
         "blocks.onTouchBegan.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onTouchEnded": "Kiedy palec opuszcza obiekt",
+        "blocks.onTouchEnded": "Gdy palec puści obiekt",
         "blocks.onTouchEnded.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
@@ -483,6 +524,13 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
+        "blocks.newGif": "Utwórz obiekt z duszka gif",
+        "blocks.newGif.params": [
+            "Nazwa obiektu:",
+            "Nazwa duszka:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
+        ],
         "blocks.setPos": "Ustaw pozycję obiektu",
         "blocks.setPos.params": [
             "Nazwa obiektu:",
@@ -654,7 +702,8 @@
         "blocks.foreach": "Pomiń wszystkie elementy tabeli",
         "blocks.foreach.params": [
             "Nazwa tabeli:",
-            "Nazwa zmiennej:"
+            "Element:",
+            "Key:"
         ],
         "blocks.break": "Zatrzymaj cykl",
         "blocks.requestFun": "Zażądaj funkcji",
@@ -669,6 +718,13 @@
         "blocks.setListener": "Ustaw funkcję dotyku",
         "blocks.setListener.params": [
             "Nazwa obiektu:",
+            "Nazwa funkcji:"
+        ],
+        "blocks.setListener3": "Ustaw wszystkie funkcje dotyku",
+        "blocks.setListener3.params": [
+            "Nazwa obiektu:",
+            "Nazwa funkcji:",
+            "Nazwa funkcji:",
             "Nazwa funkcji:"
         ],
         "blocks.setLocalCollision": "Ustaw funkcję kolizji",
@@ -717,6 +773,10 @@
         "blocks.requestApi.params": [
             "Kod Lua:"
         ],
+        "blocks.requestApiRes": "Żądaj metody API z zasobu",
+        "blocks.requestApiRes.params": [
+            "Nazwa zasobu:"
+        ],
         "blocks.toastShort": "Krótkie powiadomienie pop-up",
         "blocks.toastShort.params": [
             "Tekst:"
@@ -744,6 +804,22 @@
         "blocks.setBackgroundHEX.params": [
             "Kolor (Hex):"
         ],
+        "blocks.newLevel": "Load level",
+        "blocks.newLevel.params": [
+            "Level name:"
+        ],
+        "blocks.removeLevel": "Unload level",
+        "blocks.removeLevel.params": [
+            "Level name:"
+        ],
+        "blocks.showLevel": "Show level",
+        "blocks.showLevel.params": [
+            "Level name:"
+        ],
+        "blocks.hideLevel": "Hide level",
+        "blocks.hideLevel.params": [
+            "Level name:"
+        ],
         "blocks.setPortraitOrientation": "Ustaw orientację pionową",
         "blocks.setPortraitOrientation.params": [
             "Nazwa funkcji:"
@@ -764,7 +840,22 @@
         "blocks.scheduleNotification.params": [
             "Tekst:",
             "Czas (sekundy):"
-        ]
+        ],
+        "blocks.cancelNotification": "Cancel all notifications",
+        "blocks.readFileRes": "Read file from resources",
+        "blocks.readFileRes.params": [
+            "Variable name:",
+            "Resource name:"
+        ],
+        "blocks.pasteboardCopy": "Copy to Clipboard",
+        "blocks.pasteboardCopy.params": [
+            "Текст:"
+        ],
+        "blocks.pasteboardPaste": "Read from Clipboard",
+        "blocks.pasteboardPaste.params": [
+            "Variable name:"
+        ],
+        "blocks.pasteboardClear": "Clear the Clipboard"
     },
     "shapes": {
         "blocks.shapes": "Tekstury\ni kształty",
@@ -878,1187 +969,1542 @@
             "Nazwa obiektu:",
             "Kolor (Hex):"
         ],
-        "blocks.setStrokeWidth": "Set stroke width",
+        "blocks.setStrokeWidth": "Ustaw szerokość kreski",
         "blocks.setStrokeWidth.params": [
-            "Object name:",
-            "Width:"
+            "Nazwa obiektu:",
+            "Szerokość:"
         ],
-        "blocks.updStrokeWidth": "Change stroke width",
+        "blocks.updStrokeWidth": "Zmień szerokość kreski",
         "blocks.updStrokeWidth.params": [
-            "Object name:",
-            "Width:"
+            "Nazwa obiektu:",
+            "Szerokość:"
         ],
-        "blocks.setStrokeColor": "Set stroke color",
+        "blocks.setStrokeColor": "Ustaw kolor kreski",
         "blocks.setStrokeColor.params": [
-            "Object name:",
-            "Color:"
+            "Nazwa obiektu:",
+            "Kolor:"
         ],
-        "blocks.setStrokeRGB": "Set RGB stroke color",
+        "blocks.setStrokeRGB": "Ustaw kolor RGB kreski",
         "blocks.setStrokeRGB.params": [
-            "Object name:",
-            "Color (R):",
-            "Color (G):",
-            "Color (B):"
+            "Nazwa obiektu:",
+            "Kolor (R):",
+            "Kolor (G):",
+            "Kolor (B):"
         ],
-        "blocks.setGradientPaint": "Set gradient paint",
+        "blocks.setGradientPaint": "Ustaw farbę gradientu",
         "blocks.setGradientPaint.params": [
-            "Object name:",
-            "Color1:",
-            "Color2:",
-            "Opacity1 (0-100):",
-            "Opacity2 (0-100):"
+            "Nazwa obiektu:",
+            "Kolor1:",
+            "Kolor2:",
+            "Przezroczystość1 (0-100):",
+            "Przezroczystość2 (0-100):"
         ]
     },
     "objects2": {
-        "blocks.objects2": "Animation\n& Masks",
-        "blocks.setScale": "Set object scale",
+        "blocks.objects2": "Animacja\ni maski",
+        "blocks.setScale": "Ustaw rozmiar obiektu",
         "blocks.setScale.params": [
-            "Object name:",
-            "Scale (%):"
+            "Nazwa obiektu:",
+            "Skala (%):"
         ],
-        "blocks.setScaleX": "Set object scale X",
+        "blocks.setScaleX": "Ustaw skalę X obiektu",
         "blocks.setScaleX.params": [
-            "Object name:",
-            "Scale (%):"
+            "Nazwa obiektu:",
+            "Skala (%):"
         ],
-        "blocks.setScaleY": "Set object scale Y",
+        "blocks.setScaleY": "Ustaw skalę Y obiektu",
         "blocks.setScaleY.params": [
-            "Object name:",
-            "Scale (%):"
+            "Nazwa obiektu:",
+            "Skala (%):"
         ],
-        "blocks.newSeqAnimation": "Create sequence animation",
+        "blocks.newSeqAnimation": "Utwórz sekwencję animacji",
         "blocks.newSeqAnimation.params": [
-            "Animation name:",
-            "Animation type:",
-            "Starting frame:",
-            "Number frames:",
-            "Number repetitions:",
-            "Time (Seconds):"
+            "Nazwa animacji:",
+            "Typ animacji:",
+            "Klatka początkowa:",
+            "Ilość klatek:",
+            "Liczba powtórzeń:",
+            "Czas (sekundy):"
         ],
-        "blocks.newParAnimation": "Create parallel animation",
+        "blocks.newParAnimation": "Utwórz animację równoległą",
         "blocks.newParAnimation.params": [
-            "Frames table:",
-            "Animation name:",
-            "Animation type:",
-            "Number repetitions:",
-            "Time (Seconds):"
+            "Tabela klatek:",
+            "Nazwa animacji:",
+            "Typ animacji:",
+            "Liczba powtórzeń:",
+            "Czas (sekundy):"
         ],
-        "blocks.playAnimation": "Play animation",
+        "blocks.playAnimation": "Odtwórz animację",
         "blocks.playAnimation.params": [
-            "Object name:",
-            "Animation name:"
+            "Nazwa obiektu:",
+            "Nazwa animacji:"
         ],
-        "blocks.pauseAnimation": "Pause animation",
+        "blocks.pauseAnimation": "Wstrzymaj animację",
         "blocks.pauseAnimation.params": [
-            "Object name:",
-            "Animation name:"
+            "Nazwa obiektu:",
+            "Nazwa animacji:"
         ],
-        "blocks.setFrame": "Set object frame",
+        "blocks.setFrame": "Ustaw ramkę obiektu",
         "blocks.setFrame.params": [
-            "Object name:",
-            "Frame:"
+            "Nazwa obiektu:",
+            "Ramka:"
         ],
-        "blocks.newMask": "Create mask",
+        "blocks.newMask": "Utwórz maskę",
         "blocks.newMask.params": [
-            "Mask name:",
-            "Sprite name:"
+            "Nazwa maski:",
+            "Nazwa duszka:"
         ],
-        "blocks.addMaskToObject": "Add mask to object",
+        "blocks.addMaskToObject": "Dodaj maskę do obiektu",
         "blocks.addMaskToObject.params": [
-            "Object name:",
-            "Mask name:"
+            "Nazwa obiektu:",
+            "Nazwa maski:"
         ],
-        "blocks.setMaskPos": "Set mask position",
+        "blocks.setMaskPos": "Ustaw pozycję maski",
         "blocks.setMaskPos.params": [
-            "Object name:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa obiektu:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.setMaskScale": "Set mask scale",
+        "blocks.setMaskScale": "Ustaw skalę maski",
         "blocks.setMaskScale.params": [
-            "Object name:",
-            "Scale (%):"
+            "Nazwa obiektu:",
+            "Skala (%):"
         ],
-        "blocks.setMaskScaleX": "Set mask scale X",
+        "blocks.setMaskScaleX": "Ustaw skalę X maski",
         "blocks.setMaskScaleX.params": [
-            "Object name:",
-            "Scale (%):"
+            "Nazwa obiektu:",
+            "Skala (%):"
         ],
-        "blocks.setMaskScaleY": "Set mask scale Y",
+        "blocks.setMaskScaleY": "Ustaw skalę Y maski",
         "blocks.setMaskScaleY.params": [
-            "Object name:",
-            "Scale (%):"
+            "Nazwa obiektu:",
+            "Skala (%):"
         ],
-        "blocks.setMaskHitTrue": "Set mask non-clickability",
+        "blocks.setMaskHitTrue": "Ustaw maskę nieklikalności",
         "blocks.setMaskHitTrue.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.setMaskHitFalse": "Set mask clickability",
+        "blocks.setMaskHitFalse": "Ustaw maskę klikalności",
         "blocks.setMaskHitFalse.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ]
     },
     "groups": {
-        "blocks.groups": "Groups\n& Tags",
-        "blocks.newGroup": "Create group",
+        "blocks.groups": "Grupy\ni tagi",
+        "blocks.newGroup": "Utwórz grupę",
         "blocks.newGroup.params": [
-            "Group name:"
+            "Nazwa grupy:"
         ],
-        "blocks.removeGroup": "Remove group",
+        "blocks.removeGroup": "Usuń grupę",
         "blocks.removeGroup.params": [
-            "Group name:"
+            "Nazwa grupy:"
         ],
-        "blocks.showGroup": "Show group",
+        "blocks.showGroup": "Pokaż grupę",
         "blocks.showGroup.params": [
-            "Group name:"
+            "Nazwa grupy:"
         ],
-        "blocks.hideGroup": "Hide group",
+        "blocks.hideGroup": "Ukryj grupę",
         "blocks.hideGroup.params": [
-            "Group name:"
+            "Nazwa grupy:"
         ],
-        "blocks.addGroupObject": "Insert object to group",
+        "blocks.addGroupObject": "Wstaw obiekt do grupy",
         "blocks.addGroupObject.params": [
-            "Group name:",
-            "Object name:"
+            "Nazwa grupy:",
+            "Nazwa obiektu:"
         ],
-        "blocks.addGroupText": "Insert text to group",
+        "blocks.addGroupText": "Wstaw tekst do grupy",
         "blocks.addGroupText.params": [
-            "Group name:",
-            "Text name:"
+            "Nazwa grupy:",
+            "Nazwa tekstu:"
         ],
-        "blocks.addGroupWidget": "Insert widget to group",
+        "blocks.addGroupWidget": "Wstaw widżet do grupy",
         "blocks.addGroupWidget.params": [
-            "Group name:",
-            "Widget name:"
+            "Nazwa grupy:",
+            "Nazwa widżetu:"
         ],
-        "blocks.addGroupMedia": "Insert media to group",
+        "blocks.addGroupMedia": "Wstaw media do grupy",
         "blocks.addGroupMedia.params": [
-            "Group name:",
-            "Media name:"
+            "Nazwa grupy:",
+            "Nazwa media:"
         ],
-        "blocks.addGroupTag": "Insert tag to group",
+        "blocks.addGroupTag": "Wstaw tag do grupy",
         "blocks.addGroupTag.params": [
-            "Tag name:",
-            "Group name:"
+            "Nazwa tagu:",
+            "Nazwa grupy:"
         ],
-        "blocks.addGroupGroup": "Insert group2 to group1",
+        "blocks.addGroupGroup": "Wstaw grupę2 do grupy1",
         "blocks.addGroupGroup.params": [
-            "Group1 name:",
-            "Group2 name:"
+            "Nazwa grupy1:",
+            "Nazwa grupy2:"
         ],
-        "blocks.setGroupPos": "Set group position",
+        "blocks.setGroupPos": "Ustaw pozycję grupy",
         "blocks.setGroupPos.params": [
-            "Group name:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa grupy:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.setGroupSize": "Set group size",
+        "blocks.setGroupSize": "Ustaw rozmiar grupy",
         "blocks.setGroupSize.params": [
-            "Group name:",
-            "Width:",
-            "Height:"
+            "Nazwa grupy:",
+            "Szerokość:",
+            "Wysokość:"
         ],
-        "blocks.setGroupRotation": "Set group rotation",
+        "blocks.setGroupRotation": "Ustaw rotację grupy",
         "blocks.setGroupRotation.params": [
-            "Group name:",
-            "Rotation (0-360):"
+            "Nazwa grupy:",
+            "Rotacja (0-360):"
         ],
-        "blocks.setGroupAlpha": "Set group opacity",
+        "blocks.setGroupAlpha": "Ustaw przezroczystość grupy",
         "blocks.setGroupAlpha.params": [
-            "Group name:",
-            "Opacity (0-100):"
+            "Nazwa grupy:",
+            "Przezroczystość (0-100):"
         ],
-        "blocks.updGroupPosX": "Change group position X",
+        "blocks.updGroupPosX": "Zmień pozycję X grupy",
         "blocks.updGroupPosX.params": [
-            "Group name:",
-            "Position (X):"
+            "Nazwa grupy:",
+            "Pozycja (X):"
         ],
-        "blocks.updGroupPosY": "Change group position Y",
+        "blocks.updGroupPosY": "Zmień pozycję Y grupy",
         "blocks.updGroupPosY.params": [
-            "Group name:",
-            "Position (Y):"
+            "Nazwa grupy:",
+            "Pozycja (Y):"
         ],
-        "blocks.updGroupWidth": "Change group width",
+        "blocks.updGroupWidth": "Zmień szerokość grupy",
         "blocks.updGroupWidth.params": [
-            "Group name:",
-            "Width:"
+            "Nazwa grupy:",
+            "Szerokość:"
         ],
-        "blocks.updGroupHeight": "Change group height",
+        "blocks.updGroupHeight": "Zmień wysokość grupy",
         "blocks.updGroupHeight.params": [
-            "Group name:",
-            "Height:"
+            "Nazwa grupy:",
+            "Wysokość:"
         ],
-        "blocks.updGroupRotation": "Change group rotation",
+        "blocks.updGroupRotation": "Zmień rotację grupy",
         "blocks.updGroupRotation.params": [
-            "Group name:",
-            "Rotation (0-360):"
+            "Nazwa grupy:",
+            "Rotacja (0-360):"
         ],
-        "blocks.updGroupAlpha": "Change group opacity",
+        "blocks.updGroupAlpha": "Zmiana przezroczystość grupy",
         "blocks.updGroupAlpha.params": [
-            "Group name:",
-            "Opacity (0-100):"
+            "Nazwa grupy:",
+            "Przezroczystość (0-100):"
         ],
-        "blocks.newTag": "Create tag",
+        "blocks.frontGroup": "Umieść grupę na warstwie powyżej",
+        "blocks.frontGroup.params": [
+            "Nazwa grupy:"
+        ],
+        "blocks.backGroup": "Umieść grupę na warstwie poniżej",
+        "blocks.backGroup.params": [
+            "Nazwa grupy:"
+        ],
+        "blocks.newTag": "Utwórz tag",
         "blocks.newTag.params": [
-            "Tag name:"
+            "Nazwa tagu:"
         ],
-        "blocks.removeTag": "Remove tag",
+        "blocks.removeTag": "Usuń wszystkich z tagiem",
         "blocks.removeTag.params": [
-            "Tag name:"
+            "Nazwa tagu:"
         ],
-        "blocks.showTag": "Show tag",
+        "blocks.showTag": "Pokaż wszystkich z tagiem",
         "blocks.showTag.params": [
-            "Tag name:"
+            "Nazwa tagu:"
         ],
-        "blocks.hideTag": "Hide tag",
+        "blocks.hideTag": "Ukryj wszystkich z tagiem",
         "blocks.hideTag.params": [
-            "Tag name:"
+            "Nazwa tagu:"
         ],
-        "blocks.addTagObject": "Add tag to object",
+        "blocks.addTagObject": "Dodaj tag do obiektu",
         "blocks.addTagObject.params": [
-            "Tag name:",
-            "Object name:"
+            "Nazwa tagu:",
+            "Nazwa obiektu:"
         ],
-        "blocks.addTagText": "Add tag to text",
+        "blocks.addTagText": "Dodaj tag do tekstu",
         "blocks.addTagText.params": [
-            "Tag name:",
-            "Text name:"
+            "Nazwa tagu:",
+            "Nazwa tekstu:"
         ],
-        "blocks.addTagWidget": "Add tag to widget",
+        "blocks.addTagWidget": "Dodaj tag do widżetu",
         "blocks.addTagWidget.params": [
-            "Tag name:",
-            "Widget name:"
+            "Nazwa tagu:",
+            "Nazwa widżetu:"
         ],
-        "blocks.addTagMedia": "Add tag to media",
+        "blocks.addTagMedia": "Dodaj tag do media",
         "blocks.addTagMedia.params": [
-            "Tag name:",
-            "Media name:"
+            "Nazwa tagu:",
+            "Nazwa media:"
         ],
-        "blocks.addTagGroup": "Add tag to group",
+        "blocks.addTagGroup": "Dodaj tag do grupy",
         "blocks.addTagGroup.params": [
-            "Tag name:",
-            "Group name:"
+            "Nazwa tagu:",
+            "Nazwa grupy:"
         ],
-        "blocks.addTagTag": "Add tag1 to tag2",
+        "blocks.addTagTag": "Dodaj tag1 do tag2",
         "blocks.addTagTag.params": [
-            "Tag name1:",
-            "Tag name2:"
+            "Nazwa tagu1:",
+            "Nazwa tagu2:"
         ],
-        "blocks.setTagPos": "Set tag position",
+        "blocks.setTagPos": "Ustaw pozycję wszystkich z tagiem",
         "blocks.setTagPos.params": [
-            "Tag name:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa tagu:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.setTagSize": "Set tag size",
+        "blocks.setTagSize": "Ustaw rozmiar wszystkich z tagiem",
         "blocks.setTagSize.params": [
-            "Tag name:",
-            "Width:",
-            "Height:"
+            "Nazwa tagu:",
+            "Szerokość:",
+            "Wysokość:"
         ],
-        "blocks.setTagRotation": "Set tag rotation",
+        "blocks.setTagRotation": "Ustaw rotację wszystkich z tagiem",
         "blocks.setTagRotation.params": [
-            "Tag name:",
-            "Rotation (0-360):"
+            "Nazwa tagu:",
+            "Rotacja (0-360):"
         ],
-        "blocks.setTagAlpha": "Set tag alpha",
+        "blocks.setTagAlpha": "Ustaw przezroczystość wszystkich z tagiem",
         "blocks.setTagAlpha.params": [
-            "Tag name:",
-            "Opacity (0-100):"
+            "Nazwa tagu:",
+            "Przezroczystość (0-100):"
         ],
-        "blocks.updTagPosX": "Change tag position X",
+        "blocks.updTagPosX": "Zmień pozycję X dla wszystkich z tagiem",
         "blocks.updTagPosX.params": [
-            "Tag name:",
-            "Position (X):"
+            "Nazwa tagu:",
+            "Pozycja (X):"
         ],
-        "blocks.updTagPosY": "Change tag position Y",
+        "blocks.updTagPosY": "Zmień pozycję Y dla wszystkich z tagiem",
         "blocks.updTagPosY.params": [
-            "Tag name:",
-            "Position (Y):"
+            "Nazwa tagu:",
+            "Pozycja (Y):"
         ],
-        "blocks.updTagWidth": "Change tag width",
+        "blocks.updTagWidth": "Zmień szerokość dla wszystkich z tagiem",
         "blocks.updTagWidth.params": [
-            "Tag name:",
-            "Width:"
+            "Nazwa tagu:",
+            "Szerokość:"
         ],
-        "blocks.updTagHeight": "Change tag height",
+        "blocks.updTagHeight": "Zmień wysokość dla wszystkich z tagiem",
         "blocks.updTagHeight.params": [
-            "Tag name:",
-            "Height:"
+            "Nazwa tagu:",
+            "Wysokość:"
         ],
-        "blocks.updTagRotation": "Change tag rotation",
+        "blocks.updTagRotation": "Zmień rotację wszystkich z tagiem",
         "blocks.updTagRotation.params": [
-            "Tag name:",
-            "Rotation (0-360):"
+            "Nazwa tagu:",
+            "Rotacja (0-360):"
         ],
-        "blocks.updTagAlpha": "Change tag opacity",
+        "blocks.updTagAlpha": "Zmień przezroczystość wszystkich z tagiem",
         "blocks.updTagAlpha.params": [
-            "Tag name:",
-            "Opacity (0-100):"
+            "Nazwa tagu:",
+            "Przezroczystość (0-100):"
+        ],
+        "blocks.frontTag": "Umieść wszystkich z tagiem na warstwie powyżej",
+        "blocks.frontTag.params": [
+            "Nazwa tagu:"
+        ],
+        "blocks.backTag": "Umieść wszystkich z tagiem na warstwie poniżej",
+        "blocks.backTag.params": [
+            "Nazwa tagu:"
         ]
     },
     "physics": {
-        "blocks.physics": "Physics",
-        "blocks.setBody": "Set physical body of object",
+        "blocks.physics": "Fizyki",
+        "blocks.setBody": "Ustaw fizyczne ciało obiektu",
         "blocks.setBody.params": [
-            "Object name:",
-            "Type:",
-            "Density:",
-            "Bounce:",
-            "Friction:",
-            "Gravity:",
-            "Collision filter:",
-            "Collision table:"
+            "Nazwa obiektu:",
+            "Typ:",
+            "Gęstość:",
+            "Odbijanie:",
+            "Tarcie:",
+            "Grawitacja:",
+            "Filtr kolizji:",
+            "Tabela kolizji:"
         ],
-        "blocks.removeBody": "Delete physical body of object",
+        "blocks.removeBody": "Usuń fizyczne ciało obiektu",
         "blocks.removeBody.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.setBodyType": "Set object type",
+        "blocks.setBodyType": "Ustaw typ obiektu",
         "blocks.setBodyType.params": [
-            "Object name:",
-            "Type:"
+            "Nazwa obiektu:",
+            "Typ:"
         ],
-        "blocks.setHitboxBox": "Set rectangular hitbox",
+        "blocks.setHitboxBox": "Ustaw prostokątny hitbox",
         "blocks.setHitboxBox.params": [
-            "Object name:",
-            "Rotation:",
-            "Width:",
-            "Height:",
-            "Offset (X):",
-            "Offset (Y):"
+            "Nazwa obiektu:",
+            "Rotacja:",
+            "Szerokość:",
+            "Wysokość:",
+            "Przesunięcie (X):",
+            "Przesunięcie (Y):"
         ],
-        "blocks.setHitboxCircle": "Set round hitbox",
+        "blocks.setHitboxCircle": "Ustaw zaokrąglony hitbox",
         "blocks.setHitboxCircle.params": [
-            "Object name:",
-            "Radius:"
+            "Nazwa obiektu:",
+            "Promień:"
         ],
-        "blocks.setHitboxMesh": "Set mesh hitbox (by sprite)",
+        "blocks.setHitboxMesh": "Ustaw mesh hitbox (według duszka)",
         "blocks.setHitboxMesh.params": [
-            "Object name:",
-            "Coarseness texels:"
+            "Nazwa obiektu:",
+            "Szorstkość tekseli:"
         ],
-        "blocks.setHitboxPolygon": "Set polygonal hitbox",
+        "blocks.setHitboxPolygon": "Ustaw wielokątowy hitbox",
         "blocks.setHitboxPolygon.params": [
-            "Object name:",
+            "Nazwa obiektu:",
             "Hitbox:"
         ],
-        "blocks.updHitbox": "Update object hitbox",
+        "blocks.updHitbox": "Aktualizuj hitbox obiektu",
         "blocks.updHitbox.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.setGravity": "Set object gravity",
+        "blocks.setGravity": "Ustaw grawitację obiektu",
         "blocks.setGravity.params": [
-            "Object name:",
-            "Gravity:"
+            "Nazwa obiektu:",
+            "Grawitacja:"
         ],
-        "blocks.setLinearVelocity": "Make a jump",
+        "blocks.setLinearVelocity": "Wykonaj skok",
         "blocks.setLinearVelocity.params": [
-            "Object name:",
-            "Speed (X):",
-            "Speed (Y):"
+            "Nazwa obiektu:",
+            "Prędkość (X):",
+            "Prędkość (Y):"
         ],
-        "blocks.setLinearVelocityX": "Make a jump along X",
+        "blocks.setLinearVelocityX": "Zrób skok wzdłuż X",
         "blocks.setLinearVelocityX.params": [
-            "Object name:",
-            "Speed (X):"
+            "Nazwa obiektu:",
+            "Prędkość (X):"
         ],
-        "blocks.setLinearVelocityY": "Make a jump along Y",
+        "blocks.setLinearVelocityY": "Zrób skok wzdłuż Y",
         "blocks.setLinearVelocityY.params": [
-            "Object name:",
-            "Speed (Y):"
+            "Nazwa obiektu:",
+            "Prędkość (Y):"
         ],
-        "blocks.setSensor": "Set sensor mode",
+        "blocks.setSensor": "Ustaw tryb czujnika",
         "blocks.setSensor.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.removeSensor": "Remove sensor mode",
+        "blocks.removeSensor": "Usuń tryb czujnika",
         "blocks.removeSensor.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.setFixedRotation": "Make body non-rotatable",
+        "blocks.setFixedRotation": "Zablokuj rotację ciała",
         "blocks.setFixedRotation.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.removeFixedRotation": "Make body can rotate",
+        "blocks.removeFixedRotation": "Odblokuj rotację ciała",
         "blocks.removeFixedRotation.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.setBullet": "Set bullet mode",
+        "blocks.setBullet": "Ustaw tryb pocisku",
         "blocks.setBullet.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.removeBullet": "Remove bullet mode",
+        "blocks.removeBullet": "Usuń tryb pocisku",
         "blocks.removeBullet.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.setWorldGravity": "Set world gravity",
+        "blocks.setWorldGravity": "Ustaw grawitację świata",
         "blocks.setWorldGravity.params": [
-            "Gravity (X):",
-            "Gravity (Y):"
+            "Grawitacja (X):",
+            "Grawitacja (Y):"
         ],
-        "blocks.setAwake": "Wake body up",
+        "blocks.setAwake": "Obudź ciało",
         "blocks.setAwake.params": [
-            "Object name:"
+            "Nazwa obiektu:"
         ],
-        "blocks.setBounce": "Set coefficient of bounce",
+        "blocks.setBounce": "Ustaw współczynnik odbicia",
         "blocks.setBounce.params": [
-            "Physical contact:",
-            "Bounce:"
+            "Kontakt fizyczny:",
+            "Odbijanie:"
         ],
-        "blocks.setFriction": "Set coefficient of friction",
+        "blocks.setFriction": "Ustaw współczynnik tarcia",
         "blocks.setFriction.params": [
-            "Physical contact:",
-            "Friction:"
+            "Kontakt fizyczny:",
+            "Tarcie:"
         ],
-        "blocks.setTangentSpeed": "Set tangential velocity",
+        "blocks.setTangentSpeed": "Ustaw prędkość styczną",
         "blocks.setTangentSpeed.params": [
-            "Physical contact:",
-            "Velocity:"
+            "Kontakt fizyczny:",
+            "Prędkość:"
         ],
-        "blocks.disableCollision": "Disable physical collision",
+        "blocks.disableCollision": "Wyłącz kolizję fizyczną",
         "blocks.disableCollision.params": [
-            "Physical contact:"
+            "Kontakt fizyczny:"
         ],
-        "blocks.setAngularVelocity": "Set angular velocity",
+        "blocks.setAngularVelocity": "Ustaw prędkość kątową",
         "blocks.setAngularVelocity.params": [
-            "Object name:",
-            "Speed:"
+            "Nazwa obiektu:",
+            "Prędkość:"
         ],
-        "blocks.setAngularDamping": "Set angular damping",
+        "blocks.setAngularDamping": "Ustaw tłumienie kątowe",
         "blocks.setAngularDamping.params": [
-            "Object name:",
-            "Damping:"
+            "Nazwa obiektu:",
+            "Tłumienie:"
         ],
-        "blocks.setLinearDamping": "Set linear damping",
+        "blocks.setLinearDamping": "Ustaw tłumienie liniowe",
         "blocks.setLinearDamping.params": [
-            "Object name:",
-            "Damping:"
+            "Nazwa obiektu:",
+            "Tłumienie:"
         ],
-        "blocks.setForce": "Apply force",
+        "blocks.setForce": "Zastosuj siłę",
         "blocks.setForce.params": [
-            "Object name:",
-            "Force (X):",
-            "Force (Y):",
-            "Offset (X):",
-            "Offset (Y):"
+            "Nazwa obiektu:",
+            "Siła (X):",
+            "Siła (Y):",
+            "Przesunięcie (X):",
+            "Przesunięcie (Y):"
         ],
-        "blocks.setTorque": "Apply torque",
+        "blocks.setTorque": "Zastosuj moment obrotowy",
         "blocks.setTorque.params": [
-            "Object name:",
-            "Force:"
+            "Nazwa obiektu:",
+            "Siła:"
         ],
-        "blocks.setLinearImpulse": "Apply linear impulse",
+        "blocks.setLinearImpulse": "Zastosuj impuls liniowy",
         "blocks.setLinearImpulse.params": [
-            "Object name:",
-            "Force (X):",
-            "Force (Y):",
-            "Offset (X):",
-            "Offset (Y):"
+            "Nazwa obiektu:",
+            "Siła (X):",
+            "Siła (Y):",
+            "Przesunięcie (X):",
+            "Przesunięcie (Y):"
         ],
-        "blocks.setAngularImpulse": "Apply angular impulse",
+        "blocks.setAngularImpulse": "Zastosuj impuls kątowy",
         "blocks.setAngularImpulse.params": [
-            "Object name:",
-            "Force:"
+            "Nazwa obiektu:",
+            "Siła:"
         ],
-        "blocks.setHitboxVisible": "Show hitboxes",
-        "blocks.removeHitboxVisible": "Hide hitboxes",
-        "blocks.startPhysics": "Enable physics engine",
-        "blocks.pausePhysics": "Pause physics engine",
-        "blocks.stopPhysics": "Disable physics engine",
-        "blocks.setTextBody": "Set physical body of text",
+        "blocks.setHitboxVisible": "Pokaż hitboxy",
+        "blocks.removeHitboxVisible": "Ukryj hitboxy",
+        "blocks.startPhysics": "Włącz silnik fizyczny",
+        "blocks.pausePhysics": "Wstrzymaj silnik fizyczny",
+        "blocks.stopPhysics": "Wyłącz silnik fizyczny",
+        "blocks.setTextBody": "Ustaw fizyczne ciało tekstu",
         "blocks.setTextBody.params": [
-            "Object name:",
-            "Type:",
-            "Density:",
-            "Bounce:",
-            "Friction:",
-            "Gravity:"
+            "Nazwa obiektu:",
+            "Typ:",
+            "Gęstość:",
+            "Odbijanie:",
+            "Tarcie:",
+            "Grawitacja:"
         ]
     },
     "widgets": {
-        "blocks.widgets": "Widgets",
-        "blocks.newWebView": "Create web view",
+        "blocks.widgets": "Widżety",
+        "blocks.newWebView": "Utwórz widok internetowy",
         "blocks.newWebView.params": [
-            "Widget name:",
-            "Url:",
-            "Width:",
-            "Height:"
+            "Nazwa widżetu:",
+            "Adres URL:",
+            "Szerokość:",
+            "Wysokość:"
         ],
-        "blocks.newHSlider": "Create horizontal slider",
+        "blocks.newHSlider": "Utwórz poziomy suwak",
         "blocks.newHSlider.params": [
-            "Widget name:",
-            "Width:",
-            "Listener:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa widżetu:",
+            "Szerokość:",
+            "Słuchacz:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.newVSlider": "Create vertical slider",
+        "blocks.newVSlider": "Utwórz pionowy suwak",
         "blocks.newVSlider.params": [
-            "Widget name:",
-            "Height:",
-            "Listener:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa widżetu:",
+            "Wysokość:",
+            "Słuchacz:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.newField": "Create single line textfield",
+        "blocks.newField": "Utwórz jednoliniowe pole tekstowe",
         "blocks.newField.params": [
-            "Widget name:",
-            "Text:",
-            "Input type:",
-            "Text color:",
-            "Size:",
-            "Field background:",
-            "Align:",
-            "Font:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa widżetu:",
+            "Tekst:",
+            "Typ wejścia:",
+            "Kolor tekstu:",
+            "Rozmiar:",
+            "Kolor tła pola:",
+            "Wyrównanie:",
+            "Czcionka:",
+            "Szerokość:",
+            "Wysokość:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.newBox": "Create multiline textfield",
+        "blocks.newBox": "Utwórz wieloliniowe pole tekstowe",
         "blocks.newBox.params": [
-            "Widget name:",
-            "Text:",
-            "Text color:",
-            "Size:",
-            "Field background:",
-            "Align:",
-            "Font:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa widżetu:",
+            "Tekst:",
+            "Kolor tekstu:",
+            "Rozmiar:",
+            "Tło pola:",
+            "Wyrównanie:",
+            "Czcionka:",
+            "Szerokość:",
+            "Wysokość:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.removeWidget": "Remove widget",
-        "blocks.removeWidget.params": [
-            "Widget name:"
-        ],
-        "blocks.setWidgetPos": "Set widget position",
+        "blocks.setWidgetPos": "Ustaw pozycję widżetu",
         "blocks.setWidgetPos.params": [
-            "Widget name:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa widżetu:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.setWidgetSize": "Set widget size",
+        "blocks.setWidgetSize": "Ustaw rozmiar widżetu",
         "blocks.setWidgetSize.params": [
-            "Widget name:",
-            "Width:",
-            "Height:"
+            "Nazwa widżetu:",
+            "Szerokość:",
+            "Wysokość:"
         ],
-        "blocks.setWidgetListener": "Set change function",
+        "blocks.setWidgetListener": "Ustaw zmianę funkcji",
         "blocks.setWidgetListener.params": [
-            "Widget name:",
-            "Function name:"
+            "Nazwa widżetu:",
+            "Nazwa funkcji:"
         ],
-        "blocks.setWebViewFront": "Go to website ahead",
+        "blocks.setWebViewFront": "Przejdź do strony do przodu",
         "blocks.setWebViewFront.params": [
-            "Widget name:"
+            "Nazwa widżetu:"
         ],
-        "blocks.setWebViewBack": "Go to website back",
+        "blocks.setWebViewBack": "Przejdź do strony z powrotem",
         "blocks.setWebViewBack.params": [
-            "Widget name:"
+            "Nazwa widżetu:"
         ],
-        "blocks.updWebViewSite": "Update site in web view",
+        "blocks.updWebViewSite": "Aktualizuj stronę w widoku sieci",
         "blocks.updWebViewSite.params": [
-            "Widget name:"
+            "Nazwa widżetu:"
         ],
-        "blocks.setWebViewLink": "Set url in web view",
+        "blocks.setWebViewLink": "Ustaw adres Url w widoku sieci",
         "blocks.setWebViewLink.params": [
-            "Widget name:",
-            "Url:"
+            "Nazwa widżetu:",
+            "Adres URL:"
         ],
-        "blocks.setSliderValue": "Set value to slider",
+        "blocks.setSliderValue": "Ustaw wartość suwaka",
         "blocks.setSliderValue.params": [
-            "Widget name:",
-            "Value (0-100):"
+            "Nazwa widżetu:",
+            "Wartość (0-100):"
         ],
-        "blocks.setFieldSecure": "Set password mode",
+        "blocks.setFieldSecure": "Ustaw tryb hasła",
         "blocks.setFieldSecure.params": [
-            "Widget name:"
+            "Nazwa widżetu:"
         ],
-        "blocks.removeFieldSecure": "Remove password mode",
+        "blocks.removeFieldSecure": "Usuń tryb hasła",
         "blocks.removeFieldSecure.params": [
-            "Widget name:"
+            "Nazwa widżetu:"
         ],
-        "blocks.setFieldRule": "Permission to enter in textfield",
+        "blocks.setFieldRule": "Pozwolenie na wprowadzenie w polu tekstowym",
         "blocks.setFieldRule.params": [
-            "Widget name:",
-            "Rule:"
+            "Nazwa widżetu:",
+            "Zasada:"
         ],
-        "blocks.setFieldText": "Set text in textfield",
+        "blocks.setFieldText": "Ustaw tekst w polu tekstowym",
         "blocks.setFieldText.params": [
-            "Widget name:",
-            "Text:"
+            "Nazwa widżetu:",
+            "Tekst:"
         ],
-        "blocks.setFieldFocus": "Set focus on textfield",
+        "blocks.setFieldFocus": "Ustaw skupienie na pole tekstowe",
         "blocks.setFieldFocus.params": [
-            "Widget name:"
+            "Nazwa widżetu:"
         ],
-        "blocks.setFieldFocusNil": "Turn off keyboard",
-        "blocks.hidePanelInterface": "Hide Interface Panels",
-        "blocks.showPanelInterface": "Show Interface Panels",
-        "blocks.newScrollView": "Create scroll view",
+        "blocks.setFieldFocusNil": "Wyłącz klawiaturę",
+        "blocks.hidePanelInterface": "Ukryj panele interfejsu",
+        "blocks.showPanelInterface": "Pokaż panele interfejsu",
+        "blocks.newScrollView": "Utwórz widok przewijania",
         "blocks.newScrollView.params": [
-            "Widget name:",
-            "Scroll Bar:",
-            "Listener:",
-            "Bounce:",
-            "Friction:",
-            "Scrolling on the X:",
-            "Scrolling on the Y:",
-            "Color:",
-            "Background:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):"
+            "Nazwa widżetu:",
+            "Pasek przewijania:",
+            "Słuchacz:",
+            "Odbijanie:",
+            "Tarcie:",
+            "Przewijanie X:",
+            "Przewijanie Y:",
+            "Kolor:",
+            "Tło:",
+            "Szerokość:",
+            "Wysokość:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.newSwitch": "Create switch",
+        "blocks.newSwitch": "Utwórz przełącznik",
         "blocks.newSwitch.params": [
-            "Widget name:",
-            "Type:",
-            "State:",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):",
-            "When touching:",
-            "After touching:"
+            "Nazwa widżetu:",
+            "Typ:",
+            "Status:",
+            "Szerokość:",
+            "Wysokość:",
+            "Pozycja (X):",
+            "Pozycja (Y):",
+            "Podczas dotykania:",
+            "Po dotknięciu:"
         ],
-        "blocks.setSwitchState": "Set switch state",
+        "blocks.setSwitchState": "Ustaw stan przełącznika",
         "blocks.setSwitchState.params": [
-            "Widget name:",
-            "State:"
+            "Nazwa widżetu:",
+            "Status:"
         ],
-        "blocks.insertToScroll": "Insert to scroll",
+        "blocks.insertToScroll": "Wstaw do przewijania",
         "blocks.insertToScroll.params": [
-            "Widget name:",
-            "Name:",
-            "Type:"
+            "Nazwa widżetu:",
+            "Nazwa:",
+            "Typ:"
+        ],
+        "blocks.takeFocusScroll": "Ustaw skupienie na przewijaniu",
+        "blocks.takeFocusScroll.params": [
+            "Nazwa widżetu:",
+            "Tabela zdarzeń:"
+        ],
+        "blocks.removeWidget": "Usuń widget",
+        "blocks.removeWidget.params": [
+            "Nazwa widżetu:"
+        ],
+        "blocks.showWidget": "Pokaż widżet",
+        "blocks.showWidget.params": [
+            "Nazwa widżetu:"
+        ],
+        "blocks.hideWidget": "Ukryj widżet",
+        "blocks.hideWidget.params": [
+            "Nazwa widżetu:"
         ]
     },
     "media": {
         "blocks.media": "Media",
-        "blocks.newVideo": "Create video",
+        "blocks.newVideo": "Utwórz wideo",
         "blocks.newVideo.params": [
-            "Media name:",
-            "Video name:",
-            "After execution:",
-            "Position (X):",
-            "Position (Y):",
-            "Width:",
-            "Height:"
+            "Nazwa media:",
+            "Nazwa wideo:",
+            "Po wykonaniu:",
+            "Pozycja (X):",
+            "Pozycja (Y):",
+            "Szerokość:",
+            "Wysokość:"
         ],
-        "blocks.newRemoteVideo": "Create remote video",
+        "blocks.newRemoteVideo": "Utwórz sterowane wideo",
         "blocks.newRemoteVideo.params": [
-            "Media name:",
-            "Url:",
-            "After execution:",
-            "Position (X):",
-            "Position (Y):",
-            "Width:",
-            "Height:"
+            "Nazwa media:",
+            "Adres URL:",
+            "Po wykonaniu:",
+            "Pozycja (X):",
+            "Pozycja (Y):",
+            "Szerokość:",
+            "Wysokość:"
         ],
-        "blocks.loadSound": "Load sound",
+        "blocks.loadSound": "Wczytaj dźwięk",
         "blocks.loadSound.params": [
-            "Media name:",
-            "Sound name:"
+            "Nazwa media:",
+            "Nazwa dźwięku:"
         ],
-        "blocks.loadStream": "Load streaming sound",
+        "blocks.loadStream": "Wczytaj strumieniowy dźwięk",
         "blocks.loadStream.params": [
-            "Media name:",
-            "Sound name:"
+            "Nazwa media:",
+            "Nazwa dźwięku:"
         ],
-        "blocks.playSound": "Play sound",
+        "blocks.playSound": "Odtwórz dźwięk",
         "blocks.playSound.params": [
-            "Media name:",
-            "Number repetitions:",
-            "After execution:",
-            "Time (Seconds):",
-            "Fading (Seconds):"
+            "Nazwa media:",
+            "Liczba powtórzeń:",
+            "Po wykonaniu:",
+            "Czas (sekundy):",
+            "Zanikanie (sekundy):"
         ],
-        "blocks.resumeMedia": "Resume media",
+        "blocks.resumeMedia": "Wznów media",
         "blocks.resumeMedia.params": [
-            "Media name:"
+            "Nazwa media:"
         ],
-        "blocks.pauseMedia": "Pause media",
+        "blocks.pauseMedia": "Wstrzymaj media",
         "blocks.pauseMedia.params": [
-            "Media name:"
+            "Nazwa media:"
         ],
-        "blocks.seekMedia": "Rewind media to timestamp",
+        "blocks.seekMedia": "Przewiń media do znacznika czasu",
         "blocks.seekMedia.params": [
-            "Media name:",
-            "Time (Seconds):"
+            "Nazwa media:",
+            "Czas (sekundy):"
         ],
-        "blocks.setVolume": "Set sound volume",
+        "blocks.setVolume": "Ustaw głośność dźwięku",
         "blocks.setVolume.params": [
-            "Media name:",
-            "Volume:"
+            "Nazwa media:",
+            "Głośność:"
         ],
-        "blocks.fadeVolume": "Fade sound volume",
+        "blocks.fadeVolume": "Głośność zaniku dźwięku",
         "blocks.fadeVolume.params": [
-            "Media name:",
-            "Time (Seconds):",
-            "Volume:"
+            "Nazwa media:",
+            "Czas (sekundy):",
+            "Głośność:"
         ],
-        "blocks.stopSound": "Stop sound",
+        "blocks.stopSound": "Zatrzymaj dźwięk",
         "blocks.stopSound.params": [
-            "Media name:"
+            "Nazwa media:"
         ],
-        "blocks.stopTimerSound": "Stop sound with timer",
+        "blocks.stopTimerSound": "Zatrzymaj dźwięk z timerem",
         "blocks.stopTimerSound.params": [
-            "Media name:",
-            "Time (Seconds):"
+            "Nazwa media:",
+            "Czas (sekundy):"
         ],
-        "blocks.disposeSound": "Dispose sound",
+        "blocks.disposeSound": "Usuń dźwięk",
         "blocks.disposeSound.params": [
-            "Media name:"
+            "Nazwa media:"
         ],
-        "blocks.removeVideo": "Remove video",
+        "blocks.removeVideo": "Usuń wideo",
         "blocks.removeVideo.params": [
-            "Media name:"
+            "Nazwa media:"
         ]
     },
     "snapshot": {
-        "blocks.snapshot": "Snapshots\n& Captures"
+        "blocks.snapshot": "Zrzuty stanu\ni przechwytywania",
+        "blocks.newSnapshot": "Create snapshot",
+        "blocks.newSnapshot.params": [
+            "Snapshot name:",
+            "Snapshot mode:",
+            "Width:",
+            "Height:",
+            "Position (X):",
+            "Position (Y):"
+        ],
+        "blocks.invalidateSnapshot": "Update snapshot",
+        "blocks.invalidateSnapshot.params": [
+            "Snapshot name:",
+            "Snapshot type:"
+        ],
+        "blocks.addToSnapshot": "Add to snapshot",
+        "blocks.addToSnapshot.params": [
+            "Snapshot name:",
+            "Snapshot type:",
+            "Name:",
+            "Type:"
+        ],
+        "blocks.removeFromSnapshot": "Remove from snapshot",
+        "blocks.removeFromSnapshot.params": [
+            "Snapshot name:",
+            "Snapshot type:",
+            "Name:",
+            "Type:"
+        ],
+        "blocks.setSnapshotColor": "Set snapshot color",
+        "blocks.setSnapshotColor.params": [
+            "Snapshot name:",
+            "Color:"
+        ],
+        "blocks.setSnapshotPos": "Set snapshot position",
+        "blocks.setSnapshotPos.params": [
+            "Snapshot name:",
+            "Position (X):",
+            "Position (Y):"
+        ],
+        "blocks.setSnapshotSize": "Set snapshot size",
+        "blocks.setSnapshotSize.params": [
+            "Snapshot name:",
+            "Width:",
+            "Height:"
+        ],
+        "blocks.setSnapshotRotation": "Set snapshot rotation",
+        "blocks.setSnapshotRotation.params": [
+            "Snapshot name:",
+            "Rotation (0-360):"
+        ],
+        "blocks.setSnapshotAlpha": "Set snapshot opacity",
+        "blocks.setSnapshotAlpha.params": [
+            "Snapshot name:",
+            "Opacity (0-100):"
+        ],
+        "blocks.updSnapshotPosX": "Change snapshot position X",
+        "blocks.updSnapshotPosX.params": [
+            "Snapshot name:",
+            "Position (X):"
+        ],
+        "blocks.updSnapshotPosY": "Change snapshot position Y",
+        "blocks.updSnapshotPosY.params": [
+            "Snapshot name:",
+            "Position (Y):"
+        ],
+        "blocks.updSnapshotWidth": "Change snapshot width",
+        "blocks.updSnapshotWidth.params": [
+            "Snapshot name:",
+            "Width:"
+        ],
+        "blocks.updSnapshotHeight": "Change snapshot height",
+        "blocks.updSnapshotHeight.params": [
+            "Snapshot name:",
+            "Height:"
+        ],
+        "blocks.updSnapshotRotation": "Change snapshot rotation",
+        "blocks.updSnapshotRotation.params": [
+            "Snapshot name:",
+            "Rotation (0-360):"
+        ],
+        "blocks.updSnapshotAlpha": "Change snapshot opacity",
+        "blocks.updSnapshotAlpha.params": [
+            "Snapshot name:",
+            "Opacity (0-100):"
+        ],
+        "blocks.frontSnapshot": "Place snapshot on layer above",
+        "blocks.frontSnapshot.params": [
+            "Snapshot name:"
+        ],
+        "blocks.backSnapshot": "Place snapshot on layer below",
+        "blocks.backSnapshot.params": [
+            "Snapshot name:"
+        ],
+        "blocks.removeSnapshot": "Remove snapshot",
+        "blocks.removeSnapshot.params": [
+            "Snapshot name:"
+        ],
+        "blocks.showSnapshot": "Show snapshot",
+        "blocks.showSnapshot.params": [
+            "Snapshot name:"
+        ],
+        "blocks.hideSnapshot": "Hide snapshot",
+        "blocks.hideSnapshot.params": [
+            "Snapshot name:"
+        ]
     },
     "network": {
-        "blocks.network": "Network",
-        "blocks.openURL": "Open url in browser",
+        "blocks.network": "Sieć",
+        "blocks.openURL": "Otwórz adres URL w przeglądarce",
         "blocks.openURL.params": [
-            "Url:"
+            "Adres URL:"
         ],
-        "blocks.createServer": "Create LAN server",
+        "blocks.createServer": "Utwórz serwer LAN",
         "blocks.createServer.params": [
             "Port:",
-            "Server listener:"
+            "Słuchacz serwera:"
         ],
-        "blocks.connectToServer": "Connect to LAN server",
+        "blocks.connectToServer": "Połącz z serwerem LAN",
         "blocks.connectToServer.params": [
-            "IP:",
+            "Adres IP:",
             "Port:",
-            "Client listener:"
+            "Słuchacz klienta:"
         ],
-        "blocks.requestGET": "Asynchronous GET request",
+        "blocks.requestGET": "Asynchroniczne żądanie GET",
         "blocks.requestGET.params": [
-            "Url:",
-            "Request body:",
-            "Request header:",
-            "Request listener:",
-            "Type listener:",
-            "Redirection:",
-            "Timeout (Seconds):"
+            "Adres URL:",
+            "Treść żądania:",
+            "Nagłówek żądania:",
+            "Żądanie słuchacza:",
+            "Typ słuchacza:",
+            "Przekierowanie:",
+            "Limit czasu (sekundy):"
         ],
-        "blocks.requestPOST": "Asynchronous POST request",
+        "blocks.requestPOST": "Asynchroniczne żądanie POST",
         "blocks.requestPOST.params": [
-            "Url:",
-            "Request body:",
-            "Request header:",
-            "Request listener:",
-            "Type listener:",
-            "Redirection:",
-            "Timeout (Seconds):"
+            "Adres URL:",
+            "Treść żądania:",
+            "Nagłówek żądania:",
+            "Żądanie słuchacza:",
+            "Typ słuchacza:",
+            "Przekierowanie:",
+            "Limit czasu (sekundy):"
         ],
-        "blocks.requestPUT": "Asynchronous PUT request",
+        "blocks.requestPUT": "Asynchroniczne żądanie PUT",
         "blocks.requestPUT.params": [
-            "Url:",
-            "Request body:",
-            "Request header:",
-            "Request listener:",
-            "Type listener:",
-            "Redirection:",
-            "Timeout (Seconds):"
+            "Adres URL:",
+            "Treść żądania:",
+            "Nagłówek żądania:",
+            "Żądanie słuchacza:",
+            "Typ słuchacza:",
+            "Przekierowanie:",
+            "Limit czasu (sekundy):"
         ],
-        "blocks.requestPATCH": "Asynchronous PATCH request",
+        "blocks.requestPATCH": "Asynchroniczne żądanie PATCH",
         "blocks.requestPATCH.params": [
-            "Url:",
-            "Request body:",
-            "Request header:",
-            "Request listener:",
-            "Type listener:",
-            "Redirection:",
-            "Timeout (Seconds):"
+            "Adres URL:",
+            "Treść żądania:",
+            "Nagłówek żądania:",
+            "Żądanie słuchacza:",
+            "Typ słuchacza:",
+            "Przekierowanie:",
+            "Limit czasu (sekundy):"
         ],
-        "blocks.requestHEAD": "Asynchronous HEAD request",
+        "blocks.requestHEAD": "Asynchroniczne żądanie HEAD",
         "blocks.requestHEAD.params": [
-            "Url:",
-            "Request body:",
-            "Request header:",
-            "Request listener:",
-            "Type listener:",
-            "Redirection:",
-            "Timeout (Seconds):"
+            "Adres URL:",
+            "Treść żądania:",
+            "Nagłówek żądania:",
+            "Żądanie słuchacza:",
+            "Typ słuchacza:",
+            "Przekierowanie:",
+            "Limit czasu (sekundy):"
         ],
-        "blocks.requestDELETE": "Asynchronous DELETE request",
+        "blocks.requestDELETE": "Asynchroniczne żądanie DELETE",
         "blocks.requestDELETE.params": [
-            "Url:",
-            "Request body:",
-            "Request header:",
-            "Request listener:",
-            "Type listener:",
-            "Redirection:",
-            "Timeout (Seconds):"
+            "Adres URL:",
+            "Treść żądania:",
+            "Nagłówek żądania:",
+            "Żądanie słuchacza:",
+            "Typ słuchacza:",
+            "Przekierowanie:",
+            "Limit czasu (sekundy):"
         ],
-        "blocks.firebasePUT": "Write to Firebase",
+        "blocks.firebasePUT": "Zapisz w Firebase",
         "blocks.firebasePUT.params": [
             "Token:",
-            "Value:",
-            "Key:",
-            "Request listener:"
+            "Wartość:",
+            "Klucz:",
+            "Żądanie słuchacza:"
         ],
-        "blocks.firebasePATCH": "Update in Firebase",
+        "blocks.firebasePATCH": "Aktualizuj w Firebase",
         "blocks.firebasePATCH.params": [
             "Token:",
-            "Value:",
-            "Key:",
-            "Request listener:"
+            "Wartość:",
+            "Klucz:",
+            "Żądanie słuchacza:"
         ],
-        "blocks.firebaseGET": "Get from Firebase",
+        "blocks.firebaseGET": "Pobierz z Firebase",
         "blocks.firebaseGET.params": [
             "Token:",
-            "Key:",
-            "Request listener:"
+            "Klucz:",
+            "Żądanie słuchacza:"
         ],
-        "blocks.firebaseDELETE": "Remove from Firebase",
+        "blocks.firebaseDELETE": "Usuń z Firebase",
         "blocks.firebaseDELETE.params": [
             "Token:",
-            "Key:",
-            "Request listener:"
+            "Klucz:",
+            "Żądanie słuchacza:"
+        ],
+        "blocks.initAdsStartApp": "Initialize StartApp ads",
+        "blocks.initAdsStartApp.params": [
+            "Token:",
+            "Listener:"
+        ],
+        "blocks.loadAdsStartApp": "Load StartApp ads",
+        "blocks.loadAdsStartApp.params": [
+            "Ads type:"
+        ],
+        "blocks.showAdsStartApp": "Show StartApp ads",
+        "blocks.showAdsStartApp.params": [
+            "Ads type:"
         ]
     },
     "transition": {
-        "blocks.transition": "Transitions\n& Particles",
-        "blocks.setTransitionTo": "Start transition",
+        "blocks.transition": "Przejścia\n& Cząsteczki",
+        "blocks.setTransitionTo": "Rozpocznij przejście",
         "blocks.setTransitionTo.params": [
-            "Name:",
-            "Type:",
-            "Animation type:",
-            "Number repetitions:",
-            "Time (Seconds):",
-            "Width:",
-            "Height:",
-            "Position (X):",
-            "Position (Y):",
-            "Scale (X):",
-            "Scale (Y):",
-            "Opacity (0-100):",
-            "Rotation (0-360):",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Nazwa:",
+            "Typ:",
+            "Typ animacji:",
+            "Liczba powtórzeń:",
+            "Czas (sekundy):",
+            "Szerokość:",
+            "Wysokość:",
+            "Pozycja (X):",
+            "Pozycja (Y):",
+            "Skala (X):",
+            "Skala (Y):",
+            "Przezroczystość (0-100):",
+            "Rotacja (0-360):",
+            "Harmonogram przejścia:",
+            "Po wykonaniu:",
+            "Gdy wstrzymano:",
+            "Po wstrzymaniu:",
+            "Podczas przerwania:",
+            "Podczas powtarzania:"
         ],
-        "blocks.setTransitionPos": "Set position transition",
+        "blocks.setTransitionPos": "Ustaw przejście pozycji",
         "blocks.setTransitionPos.params": [
-            "Name:",
-            "Type:",
-            "Animation type:",
-            "Number repetitions:",
-            "Time (Seconds):",
-            "Position (X):",
-            "Position (Y):",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Nazwa:",
+            "Typ:",
+            "Typ animacji:",
+            "Liczba powtórzeń:",
+            "Czas (sekundy):",
+            "Pozycja (X):",
+            "Pozycja (Y):",
+            "Harmonogram przejścia:",
+            "Po wykonaniu:",
+            "Gdy wstrzymano:",
+            "Po wstrzymaniu:",
+            "Podczas przerwania:",
+            "Podczas powtarzania:"
         ],
-        "blocks.setTransitionSize": "Set size transition",
+        "blocks.setTransitionSize": "Ustaw przejście rozmiaru",
         "blocks.setTransitionSize.params": [
-            "Name:",
-            "Type:",
-            "Animation type:",
-            "Number repetitions:",
-            "Time (Seconds):",
-            "Width:",
-            "Height:",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Nazwa:",
+            "Typ:",
+            "Typ animacji:",
+            "Liczba powtórzeń:",
+            "Czas (sekundy):",
+            "Szerokość:",
+            "Wysokość:",
+            "Harmonogram przejścia:",
+            "Po wykonaniu:",
+            "Gdy wstrzymano:",
+            "Po wstrzymaniu:",
+            "Podczas przerwania:",
+            "Podczas powtarzania:"
         ],
-        "blocks.setTransitionScale": "Set scale transition",
+        "blocks.setTransitionScale": "Ustaw skalę przejścia",
         "blocks.setTransitionScale.params": [
-            "Name:",
-            "Type:",
-            "Animation type:",
-            "Number repetitions:",
-            "Time (Seconds):",
-            "Scale (X):",
-            "Scale (Y):",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Nazwa:",
+            "Typ:",
+            "Typ animacji:",
+            "Liczba powtórzeń:",
+            "Czas (sekundy):",
+            "Skala (X):",
+            "Skala (Y):",
+            "Harmonogram przejścia:",
+            "Po wykonaniu:",
+            "Gdy wstrzymano:",
+            "Po wstrzymaniu:",
+            "Podczas przerwania:",
+            "Podczas powtarzania:"
         ],
-        "blocks.setTransitionRotation": "Set rotation transition",
+        "blocks.setTransitionRotation": "Ustaw przejście rotacji",
         "blocks.setTransitionRotation.params": [
-            "Name:",
-            "Animation type:",
-            "Type:",
-            "Time (Seconds):",
-            "Number repetitions:",
-            "Rotation (0-360):",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Nazwa:",
+            "Typ animacji:",
+            "Typ:",
+            "Czas (sekundy):",
+            "Liczba powtórzeń:",
+            "Rotacja (0-360):",
+            "Harmonogram przejścia:",
+            "Po wykonaniu:",
+            "Gdy wstrzymano:",
+            "Po wstrzymaniu:",
+            "Podczas przerwania:",
+            "Podczas powtarzania:"
         ],
-        "blocks.setTransitionAlpha": "Set alpha transition",
+        "blocks.setTransitionAlpha": "Ustaw przejście alpha",
         "blocks.setTransitionAlpha.params": [
-            "Name:",
-            "Animation type:",
-            "Type:",
-            "Time (Seconds):",
-            "Number repetitions:",
-            "Opacity (0-100):",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Nazwa:",
+            "Typ animacji:",
+            "Typ:",
+            "Czas (sekundy):",
+            "Liczba powtórzeń:",
+            "Przezroczystość (0-100):",
+            "Harmonogram przejścia:",
+            "Po wykonaniu:",
+            "Gdy wstrzymano:",
+            "Po wstrzymaniu:",
+            "Podczas przerwania:",
+            "Podczas powtarzania:"
         ],
-        "blocks.setTransitionAngles": "Set angles transition",
+        "blocks.setTransitionAngles": "Ustaw przejście kątów",
         "blocks.setTransitionAngles.params": [
-            "Name:",
-            "Animation type:",
-            "Type:",
-            "Time (Seconds):",
-            "Number repetitions:",
-            "Angles table:",
-            "Transition schedule:",
-            "After execution:",
-            "When paused:",
-            "After pause:",
-            "When stopping:",
-            "When repeating:"
+            "Nazwa:",
+            "Typ animacji:",
+            "Typ:",
+            "Czas (sekundy):",
+            "Liczba powtórzeń:",
+            "Tabela kątów:",
+            "Harmonogram przejścia:",
+            "Po wykonaniu:",
+            "Gdy wstrzymano:",
+            "Po wstrzymaniu:",
+            "Podczas przerwania:",
+            "Podczas powtarzania:"
         ],
-        "blocks.setTransitionPause": "Pause transition",
+        "blocks.setTransitionPause": "Wstrzymaj przejście",
         "blocks.setTransitionPause.params": [
-            "Name:",
-            "Type:"
+            "Nazwa:",
+            "Typ:"
         ],
-        "blocks.setTransitionResume": "Resume transition",
+        "blocks.setTransitionResume": "Wznów przejście",
         "blocks.setTransitionResume.params": [
-            "Name:",
-            "Type:"
+            "Nazwa:",
+            "Typ:"
         ],
-        "blocks.setTransitionCancel": "Cancel transition",
+        "blocks.setTransitionCancel": "Anuluj przejście",
         "blocks.setTransitionCancel.params": [
-            "Name:",
-            "Type:"
+            "Nazwa:",
+            "Typ:"
         ],
-        "blocks.setTransitionPauseAll": "Pause all transition",
-        "blocks.setTransitionResumeAll": "Resume all transition",
-        "blocks.setTransitionCancelAll": "Cancel all transition"
+        "blocks.setTransitionPauseAll": "Wstrzymaj wszystkie przejścia",
+        "blocks.setTransitionResumeAll": "Wznów wszystkie przejścia",
+        "blocks.setTransitionCancelAll": "Anuluj wszystkie przejścia"
+    },
+    "varsNoob": {
+        "blocks.setVarNoob": "Utwórz wartość",
+        "blocks.setVarNoob.params": [
+            "Nazwa wartości:",
+            "Wartość:"
+        ],
+        "blocks.updVarNoob": "Dodaj wartość",
+        "blocks.updVarNoob.params": [
+            "Nazwa wartości:",
+            "Wartość:"
+        ],
+        "blocks.saveValueNoob": "Zapisz wartość",
+        "blocks.saveValueNoob.params": [
+            "Nazwa wartości:"
+        ],
+        "blocks.readValueNoob": "Odczytuj wartość z zapisów",
+        "blocks.readValueNoob.params": [
+            "Nazwa wartości:"
+        ],
+        "blocks.addGroupObjectNoob": "Wstaw zdjęcie do grupy",
+        "blocks.addGroupObjectNoob.params": [
+            "Nazwa grupy:",
+            "Nazwa zdjęcia:"
+        ],
+        "blocks.addTagObjectNoob": "Dodaj tag do zdjęcia",
+        "blocks.addTagObjectNoob.params": [
+            "Nazwa tagu:",
+            "Nazwa zdjęcia:"
+        ]
+    },
+    "mediaNoob": {
+        "blocks.mediaNoob": "Dźwięki",
+        "blocks.playSoundNoob": "Odtwórz dźwięk",
+        "blocks.playSoundNoob.params": [
+            "Nazwa dźwięku:",
+            "Liczba powtórzeń:"
+        ],
+        "blocks.resumeMediaNoob": "Wznów dźwięk",
+        "blocks.resumeMediaNoob.params": [
+            "Nazwa dźwięku:"
+        ],
+        "blocks.pauseMediaNoob": "Wstrzymaj dźwięk",
+        "blocks.pauseMediaNoob.params": [
+            "Nazwa dźwięku:"
+        ],
+        "blocks.seekMediaNoob": "Przewiń dźwięk do znacznika czasu",
+        "blocks.seekMediaNoob.params": [
+            "Nazwa dźwięku:",
+            "Czas (sekundy):"
+        ],
+        "blocks.setVolumeNoob": "Ustaw głośność dźwięku",
+        "blocks.setVolumeNoob.params": [
+            "Nazwa dźwięku:",
+            "Głośność:"
+        ],
+        "blocks.fadeVolumeNoob": "Zanikaj głośność dźwięku",
+        "blocks.fadeVolumeNoob.params": [
+            "Nazwa dźwięku:",
+            "Czas (sekundy):",
+            "Głośność:"
+        ],
+        "blocks.stopSoundNoob": "Zatrzymaj dźwięk",
+        "blocks.stopSoundNoob.params": [
+            "Nazwa dźwięku:"
+        ],
+        "blocks.stopTimerSoundNoob": "Zatrzymaj dźwięk z timerem",
+        "blocks.stopTimerSoundNoob.params": [
+            "Nazwa dźwięku:",
+            "Czas (sekundy):"
+        ]
     },
     "objectsNoob": {
-        "blocks.newObjectNoob": "Создать картинку",
+        "blocks.objectsNoob": "Zdjęcia",
+        "blocks.newObjectNoob": "Utwórz zdjęcie",
         "blocks.newObjectNoob.params": [
-            "Имя картинки:",
-            "Позиция (X):",
-            "Позиция (Y):"
+            "Nazwa zdjęcia:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.setPosNoob": "Установить позицию картинки",
+        "blocks.newGifNoob": "Utwórz zdjęcie gif",
+        "blocks.newGifNoob.params": [
+            "Nazwa zdjęcia:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
+        ],
+        "blocks.setPosNoob": "Ustaw pozycję zdjęcia",
         "blocks.setPosNoob.params": [
-            "Имя картинки:",
-            "Позиция (X):",
-            "Позиция (Y):"
+            "Nazwa zdjęcia:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
         ],
-        "blocks.setPosXNoob": "Установить позицию X картинки",
+        "blocks.setPosXNoob": "Ustaw pozycję X zdjęcia",
         "blocks.setPosXNoob.params": [
-            "Имя картинки:",
-            "Позиция (X):"
+            "Nazwa zdjęcia:",
+            "Pozycja (X):"
         ],
-        "blocks.setPosYNoob": "Установить позицию Y картинки",
+        "blocks.setPosYNoob": "Ustaw pozycję Y zdjęcia",
         "blocks.setPosYNoob.params": [
-            "Имя картинки:",
-            "Позиция (Y):"
+            "Nazwa zdjęcia:",
+            "Pozycja (Y):"
         ],
-        "blocks.setSizeNoob": "Установить размер картинки",
+        "blocks.setSizeNoob": "Ustaw rozmiar zdjęcia",
         "blocks.setSizeNoob.params": [
-            "Имя картинки:",
-            "Размер (%):"
+            "Nazwa zdjęcia:",
+            "Rozmiar (%):"
         ],
-        "blocks.setRotationNoob": "Установить вращение картинки",
+        "blocks.setRotationNoob": "Ustaw rotację zdjęcia",
         "blocks.setRotationNoob.params": [
-            "Имя картинки:",
-            "Вращение (0-360):"
+            "Nazwa zdjęcia:",
+            "Rotacja (0-360):"
         ],
-        "blocks.setAlphaNoob": "Установить непрозрачность картинки",
+        "blocks.setRotationToNoob": "Ustaw rotację na zdjęcie2",
+        "blocks.setRotationToNoob.params": [
+            "Nazwa zdjęcia1:",
+            "Nazwa zdjęcia2:"
+        ],
+        "blocks.setAlphaNoob": "Ustaw przezroczystość zdjęcia",
         "blocks.setAlphaNoob.params": [
-            "Имя картинки:",
-            "Непрозрачность (0-100):"
+            "Nazwa zdjęcia:",
+            "Przezroczystość (0-100):"
         ],
-        "blocks.setWidthNoob": "Установить ширину картинки",
+        "blocks.setWidthNoob": "Ustaw szerokość zdjęcia",
         "blocks.setWidthNoob.params": [
-            "Имя картинки:",
-            "Ширина:"
+            "Nazwa zdjęcia:",
+            "Szerokość:"
         ],
-        "blocks.setHeightNoob": "Установить высоту картинки",
+        "blocks.setHeightNoob": "Ustaw wysokość zdjęcia",
         "blocks.setHeightNoob.params": [
-            "Имя картинки:",
-            "Высота:"
+            "Nazwa zdjęcia:",
+            "Wysokość:"
         ],
-        "blocks.updPosXNoob": "Изменить позицию X картинки",
+        "blocks.updPosXNoob": "Zmień pozycję X zdjęcia",
         "blocks.updPosXNoob.params": [
-            "Имя картинки:",
-            "Позиция (X):"
+            "Nazwa zdjęcia:",
+            "Pozycja (X):"
         ],
-        "blocks.updPosYNoob": "Изменить позицию Y картинки",
+        "blocks.updPosYNoob": "Zmień pozycję Y zdjęcia",
         "blocks.updPosYNoob.params": [
-            "Имя картинки:",
-            "Позиция (Y):"
+            "Nazwa zdjęcia:",
+            "Pozycja (Y):"
         ],
-        "blocks.updSizeNoob": "Изменить размер картинки",
+        "blocks.updSizeNoob": "Zmień rozmiar zdjęcia",
         "blocks.updSizeNoob.params": [
-            "Имя картинки:",
-            "Размер (%):"
+            "Nazwa zdjęcia:",
+            "Rozmiar (%):"
         ],
-        "blocks.updRotationNoob": "Изменить вращение картинки",
+        "blocks.updRotationNoob": "Zmień rotację zdjęcia",
         "blocks.updRotationNoob.params": [
-            "Имя картинки:",
-            "Вращение (0-360):"
+            "Nazwa zdjęcia:",
+            "Rotacja (0-360):"
         ],
-        "blocks.updAlphaNoob": "Изменить непрозрачность картинки",
+        "blocks.updAlphaNoob": "Zmień przezroczystość zdjęcia",
         "blocks.updAlphaNoob.params": [
-            "Имя картинки:",
-            "Непрозрачность (0-100):"
+            "Nazwa zdjęcia:",
+            "Przezroczystość (0-100):"
         ],
-        "blocks.updWidthNoob": "Изменить ширину картинки",
+        "blocks.updWidthNoob": "Zmień szerokość zdjęcia",
         "blocks.updWidthNoob.params": [
-            "Имя картинки:",
-            "Ширина:"
+            "Nazwa zdjęcia:",
+            "Szerokość:"
         ],
-        "blocks.updHeightNoob": "Изменить высоту картинки",
+        "blocks.updHeightNoob": "Zmień wysokość zdjęcia",
         "blocks.updHeightNoob.params": [
-            "Имя картинки:",
-            "Высота:"
+            "Nazwa zdjęcia:",
+            "Wysokość:"
+        ]
+    },
+    "shapesNoob": {
+        "blocks.shapesNoob": "Kształty",
+        "blocks.setSpriteNoob": "Nałóż zdjęcie2 na zdjęcie1",
+        "blocks.setSpriteNoob.params": [
+            "Nazwa zdjęcia1:",
+            "Nazwa zdjęcia2:"
         ],
-        "blocks.hideObjectNoob": "Скрыть картинку",
+        "blocks.newRectNoob": "Utwórz kwadrat z kolorem",
+        "blocks.newRectNoob.params": [
+            "Nazwa zdjęcia:",
+            "Kolor:",
+            "Szerokość:",
+            "Wysokość:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
+        ],
+        "blocks.newRoundedRectNoob": "Utwórz kwadrat z narożnikami",
+        "blocks.newRoundedRectNoob.params": [
+            "Nazwa zdjęcia:",
+            "Zaokrąglone narożniki:",
+            "Szerokość:",
+            "Wysokość:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
+        ],
+        "blocks.newCircleNoob": "Utwórz okrąg",
+        "blocks.newCircleNoob.params": [
+            "Nazwa zdjęcia:",
+            "Promień:",
+            "Pozycja (X):",
+            "Pozycja (Y):"
+        ],
+        "blocks.setColorNoob": "Ustaw kolor zdjęcia",
+        "blocks.setColorNoob.params": [
+            "Nazwa zdjęcia:",
+            "Kolor:"
+        ],
+        "blocks.hideObjectNoob": "Ukryj zdjęcie",
         "blocks.hideObjectNoob.params": [
-            "Имя картинки:"
+            "Nazwa zdjęcia:"
         ],
-        "blocks.showObjectNoob": "Показать картинку",
+        "blocks.showObjectNoob": "Pokaż zdjęcie",
         "blocks.showObjectNoob.params": [
-            "Имя картинки:"
+            "Nazwa zdjęcia:"
         ],
-        "blocks.removeObjectNoob": "Удалить картинку",
+        "blocks.removeObjectNoob": "Usuń zdjęcie",
         "blocks.removeObjectNoob.params": [
-            "Имя картинки:"
+            "Nazwa zdjęcia:"
         ],
-        "blocks.frontObjectNoob": "Разместить картинку на слой выше",
+        "blocks.frontObjectNoob": "Umieść zdjęcie na warstwie powyżej",
         "blocks.frontObjectNoob.params": [
-            "Имя картинки:"
+            "Nazwa zdjęcia:"
         ],
-        "blocks.backObjectNoob": "Разместить картинку на слой ниже",
+        "blocks.backObjectNoob": "Umieść zdjęcie na warstwie poniżej",
         "blocks.backObjectNoob.params": [
-            "Имя картинки:"
+            "Nazwa zdjęcia:"
+        ]
+    },
+    "physicsNoob": {
+        "blocks.setBodyNoob": "Ustaw fizyczne ciało zdjęcia",
+        "blocks.setBodyNoob.params": [
+            "Nazwa zdjęcia:",
+            "Typ:",
+            "Odbijanie:",
+            "Grawitacja:"
+        ],
+        "blocks.removeBodyNoob": "Usuń ciało fizyczne zdjęcia",
+        "blocks.removeBodyNoob.params": [
+            "Nazwa zdjęcia:"
+        ],
+        "blocks.setLinearVelocityXNoob": "Zrób skok wzdłuż X",
+        "blocks.setLinearVelocityXNoob.params": [
+            "Nazwa zdjęcia:",
+            "Prędkość (X):"
+        ],
+        "blocks.setLinearVelocityYNoob": "Zrób skok wzdłuż Y",
+        "blocks.setLinearVelocityYNoob.params": [
+            "Nazwa zdjęcia:",
+            "Prędkość (Y):"
+        ],
+        "blocks.setSensorNoob": "Usuń możliwość kolizji zdjęcia",
+        "blocks.setSensorNoob.params": [
+            "Nazwa zdjęcia:"
+        ],
+        "blocks.removeSensorNoob": "Przywróć możliwość kolizji zdjęcia",
+        "blocks.removeSensorNoob.params": [
+            "Nazwa zdjęcia:"
+        ],
+        "blocks.setFixedRotationNoob": "Zablokuj rotację zdjęcia",
+        "blocks.setFixedRotationNoob.params": [
+            "Nazwa zdjęcia:"
+        ],
+        "blocks.removeFixedRotationNoob": "Odblokuj rotację zdjęcia",
+        "blocks.removeFixedRotationNoob.params": [
+            "Nazwa zdjęcia:"
+        ]
+    },
+    "transitionNoob": {
+        "blocks.transitionNoob": "Przejścia",
+        "blocks.setTransitionPosNoob": "Ustaw przejście pozycji",
+        "blocks.setTransitionPosNoob.params": [
+            "Nazwa:",
+            "Typ:",
+            "Czas (sekundy):",
+            "Pozycja (X):",
+            "Pozycja (Y):"
+        ],
+        "blocks.setTransitionSizeNoob": "Ustaw przejście rozmiaru",
+        "blocks.setTransitionSizeNoob.params": [
+            "Nazwa:",
+            "Typ:",
+            "Czas (sekundy):",
+            "Szerokość:",
+            "Wysokość:"
+        ],
+        "blocks.setTransitionScaleNoob": "Ustaw skalę przejścia",
+        "blocks.setTransitionScaleNoob.params": [
+            "Nazwa:",
+            "Typ:",
+            "Czas (sekundy):",
+            "Skala (X):",
+            "Skala (Y):"
+        ],
+        "blocks.setTransitionRotationNoob": "Ustaw przejście rotacji",
+        "blocks.setTransitionRotationNoob.params": [
+            "Nazwa:",
+            "Typ:",
+            "Czas (sekundy):",
+            "Rotacja (0-360):"
+        ],
+        "blocks.setTransitionAlphaNoob": "Ustaw przejście przezroczystości",
+        "blocks.setTransitionAlphaNoob.params": [
+            "Nazwa:",
+            "Typ:",
+            "Czas (sekundy):",
+            "Przezroczystość (0-100):"
         ]
     },
     "eventsNoob": {
-        "blocks.onConditionNoob": "Повторять пока условие истинно",
+        "blocks.onConditionNoob": "Powtarzaj aż warunek będzie prawdziwy",
         "blocks.onConditionNoob.params": [
-            "Условие:"
+            "Warunek:"
         ],
-        "blocks.onFunNoob": "Создать действие",
+        "blocks.onFunNoob": "Utwórz akcję",
         "blocks.onFunNoob.params": [
-            "Действие:"
+            "Akcja:"
         ],
-        "blocks.onTouchBeganNoob": "Палец прикасается к картинке",
+        "blocks.onTouchBeganNoob": "Gdy palec dotknie zdjęcia",
         "blocks.onTouchBeganNoob.params": [
-            "Имя картинки:"
+            "Nazwa zdjęcia:"
         ],
-        "blocks.onTouchEndedNoob": "Палец отпускает картинку",
+        "blocks.onTouchEndedNoob": "Gdy palec puści zdjęcie",
         "blocks.onTouchEndedNoob.params": [
-            "Имя картинки:"
+            "Nazwa zdjęcia:"
         ],
-        "blocks.onTouchMovedNoob": "Пока палец перемещается по картинке",
+        "blocks.onTouchMovedNoob": "Kiedy palec porusza się po zdjęciu",
         "blocks.onTouchMovedNoob.params": [
-            "Имя картинки:"
+            "Nazwa zdjęcia:"
         ],
-        "blocks.onLocalCollisionBeganNoob": "Как только картинки столкнулись",
+        "blocks.onTouchDisplayBeganNoob": "Gdy palec dotknie ekranu",
+        "blocks.onTouchDisplayEndedNoob": "Kiedy palec opuści ekran",
+        "blocks.onTouchDisplayMovedNoob": "Kiedy palec porusza się po ekranie",
+        "blocks.onLocalCollisionBeganNoob": "Gdy zdjęcia kolidują",
         "blocks.onLocalCollisionBeganNoob.params": [
-            "Имя картинки1:",
-            "Имя картинки2:"
+            "Nazwa zdjęcia1:",
+            "Nazwa zdjęcia2:"
         ],
-        "blocks.requestFunNoob": "Выполнить действие",
+        "blocks.requestFunNoob": "Wykonaj akcję",
         "blocks.requestFunNoob.params": [
-            "Действие:"
+            "Akcja:"
         ]
     },
     "editor.interface": {
-        "editor.window.error": "Error in expression",
-        "editor.button.error": "Fix",
-        "editor.button.text": "Text",
+        "editor.window.error": "Błąd w wyrażeniu",
+        "editor.button.error": "Napraw",
+        "editor.button.text": "Tekst",
         "editor.button.local": "{ }",
-        "editor.button.hide": "Hide",
-        "editor.list.var": "Variables",
-        "editor.list.table": "Tables",
-        "editor.list.funs": "Functions",
-        "editor.list.fun": "Methods",
-        "editor.list.math": "Mathematics",
-        "editor.list.prop": "Properties",
-        "editor.list.log": "Logic",
-        "editor.list.device": "Device",
-        "editor.list.custom": "Custom",
-        "editor.list.event": "Event",
-        "editor.list.script": "Script",
-        "editor.list.project": "Project",
-        "editor.list.prop.obj": "Object",
-        "editor.list.prop.text": "Text",
+        "editor.button.hide": "Ukryj",
+        "editor.list.var": "Zmienne",
+        "editor.list.var.noob": "Wartości",
+        "editor.list.table": "Tabele",
+        "editor.list.funs": "Funkcje",
+        "editor.list.funs.noob": "Akcje",
+        "editor.list.fun": "Metody",
+        "editor.list.fun.noob": "Narzędzia",
+        "editor.list.math": "Matematyka",
+        "editor.list.prop": "Właściwości",
+        "editor.list.log": "Logika",
+        "editor.list.device": "Urządzenie",
+        "editor.list.custom": "Niestandardowe",
+        "editor.list.event": "Wydarzenie",
+        "editor.list.script": "Skrypt",
+        "editor.list.project": "Projekt",
+        "editor.list.prop.obj": "Obiekt",
+        "editor.list.prop.obj.noob": "Zdjęcie",
+        "editor.list.prop.text": "Tekst",
         "editor.list.prop.media": "Media",
-        "editor.list.prop.group": "Group",
-        "editor.list.prop.widget": "Widget"
+        "editor.list.prop.group": "Grupa",
+        "editor.list.prop.widget": "Widżet"
     },
     "editor.fun": {
-        "editor.list.fun.get_text": "get_text",
-        "editor.list.fun.read_save": "read_save",
-        "editor.list.fun.random_str": "random_string",
-        "editor.list.fun.concat": "concat_string",
-        "editor.list.fun.tonumber": "to_number",
-        "editor.list.fun.tostring": "to_text",
-        "editor.list.fun.totable": "to_table",
-        "editor.list.fun.len_table": "len_table",
-        "editor.list.fun.unix_time": "unix_time",
-        "editor.list.fun.encode": "encode_json",
-        "editor.list.fun.gsub": "replace_in_text",
-        "editor.list.fun.sub": "character_from_text",
-        "editor.list.fun.len": "length_text",
-        "editor.list.fun.find": "find_in_text",
-        "editor.list.fun.split": "split_text",
-        "editor.list.fun.match": "regular_expression",
-        "editor.list.fun.color_pixel": "color_pixel",
-        "editor.list.fun.get_ip": "get_own_ip",
-        "editor.list.fun.noise": "noise"
+        "editor.list.fun.get_text": "pobierz_tekst",
+        "editor.list.fun.read_save": "odczytaj_zapisz",
+        "editor.list.fun.random_str": "losowy_tekst",
+        "editor.list.fun.concat": "konkatowy_string",
+        "editor.list.fun.tonumber": "do_numeru",
+        "editor.list.fun.tostring": "do_tekstu",
+        "editor.list.fun.totable": "do_tabeli",
+        "editor.list.fun.len_table": "długość_tabeli",
+        "editor.list.fun.unix_time": "unikalny_czas",
+        "editor.list.fun.encode": "enkoduj_json",
+        "editor.list.fun.gsub": "zamień_w_tekście",
+        "editor.list.fun.sub": "znak_z_tekstu",
+        "editor.list.fun.len": "długość_tekstu",
+        "editor.list.fun.find": "znajdź_w_tekście",
+        "editor.list.fun.split": "rozdziel_tekst",
+        "editor.list.fun.match": "wyrażenie_regularne",
+        "editor.list.fun.color_pixel": "kolor_piksela",
+        "editor.list.fun.get_ip": "pobierz_własne_ip",
+        "editor.list.fun.noise": "szum_perlina"
     },
     "editor.math": {
-        "editor.list.math.random": "random",
-        "editor.list.math.radical": "radical",
-        "editor.list.math.power": "power",
-        "editor.list.math.round": "round",
-        "editor.list.math.remainder": "remainder",
-        "editor.list.math.module": "module",
-        "editor.list.math.max": "max",
+        "editor.list.math.random": "losowa",
+        "editor.list.math.radical": "pierwiastek",
+        "editor.list.math.power": "potęga",
+        "editor.list.math.round": "zaokrąglij",
+        "editor.list.math.remainder": "reszta",
+        "editor.list.math.module": "moduł",
+        "editor.list.math.max": "maks",
         "editor.list.math.min": "min",
         "editor.list.math.sin": "sin",
         "editor.list.math.cos": "cos",
         "editor.list.math.tan": "tan",
-        "editor.list.math.ctan": "ctan",
-        "editor.list.math.pi": "pi",
-        "editor.list.math.exp": "exponent",
-        "editor.list.math.factorial": "factorial",
+        "editor.list.math.ctan": "ktan",
+        "editor.list.math.pi": "π",
+        "editor.list.math.exp": "wykładnik",
+        "editor.list.math.factorial": "silnia",
         "editor.list.math.log": "log",
         "editor.list.math.log10": "log10",
         "editor.list.math.asin": "asin",
@@ -2068,75 +2514,76 @@
         "editor.list.math.raycast": "raycast"
     },
     "editor.prop": {
-        "editor.list.prop.obj.touch": "touch",
+        "editor.list.prop.obj.touch": "dotyk",
         "editor.list.prop.obj.tag": "tag",
-        "editor.list.prop.obj.var": "variables",
-        "editor.list.prop.obj.pos_x": "pos_x",
-        "editor.list.prop.obj.pos_y": "pos_y",
-        "editor.list.prop.obj.width": "width",
-        "editor.list.prop.obj.height": "height",
-        "editor.list.prop.obj.rotation": "rotation",
-        "editor.list.prop.obj.alpha": "opacity",
-        "editor.list.prop.obj.name_texture": "name_texture",
-        "editor.list.prop.obj.velocity_x": "velocity_x",
-        "editor.list.prop.obj.velocity_y": "velocity_y",
-        "editor.list.prop.obj.angular_velocity": "angular_velocity",
-        "editor.list.prop.text.tag": "text_tag",
-        "editor.list.prop.text.pos_x": "text_x_position",
-        "editor.list.prop.text.pos_y": "text_y_position",
-        "editor.list.prop.text.width": "text_width",
-        "editor.list.prop.text.height": "text_height",
-        "editor.list.prop.text.rotation": "text_rotation",
-        "editor.list.prop.text.alpha": "text_opacity",
-        "editor.list.prop.group.tag": "group_tag",
-        "editor.list.prop.group.pos_x": "group_x_position",
-        "editor.list.prop.group.pos_y": "group_y_position",
-        "editor.list.prop.group.width": "group_width",
-        "editor.list.prop.group.height": "group_height",
-        "editor.list.prop.group.rotation": "group_rotation",
-        "editor.list.prop.group.alpha": "group_opacity",
-        "editor.list.prop.widget.tag": "widget_tag",
-        "editor.list.prop.widget.pos_x": "widget_x_position",
-        "editor.list.prop.widget.pos_y": "widget_y_position",
-        "editor.list.prop.widget.value": "slider_value",
-        "editor.list.prop.widget.state": "switch_state",
-        "editor.list.prop.widget.text": "text_from_field",
-        "editor.list.prop.widget.link": "web_view_url",
-        "editor.list.prop.media.current_time": "current_video_time",
-        "editor.list.prop.media.total_time": "total_video_time",
-        "editor.list.prop.media.sound_volume": "sound_volume",
-        "editor.list.prop.media.sound_total_time": "total_sound_time",
-        "editor.list.prop.media.sound_pause": "sound_is_paused",
-        "editor.list.prop.media.sound_play": "sound_is_played"
+        "editor.list.prop.obj.var": "zmienne",
+        "editor.list.prop.obj.pos_x": "poz_x",
+        "editor.list.prop.obj.pos_y": "poz_y",
+        "editor.list.prop.obj.width": "szerokość",
+        "editor.list.prop.obj.height": "wysokość",
+        "editor.list.prop.obj.rotation": "rotacja",
+        "editor.list.prop.obj.alpha": "przezroczystość",
+        "editor.list.prop.obj.name_texture": "nazwa_tekstury",
+        "editor.list.prop.obj.velocity_x": "prędkość_x",
+        "editor.list.prop.obj.velocity_y": "prędkość_y",
+        "editor.list.prop.obj.angular_velocity": "kątowa_prędkość",
+        "editor.list.prop.text.get_text": "pobierz_tekst",
+        "editor.list.prop.text.tag": "tag_tekstu",
+        "editor.list.prop.text.pos_x": "pozycja_x_tekstu",
+        "editor.list.prop.text.pos_y": "pozycja_y_tekstu",
+        "editor.list.prop.text.width": "szerokość_tekstu",
+        "editor.list.prop.text.height": "wysokość_tekstu",
+        "editor.list.prop.text.rotation": "rotacja_tekstu",
+        "editor.list.prop.text.alpha": "przezroczystość_tekstu",
+        "editor.list.prop.group.tag": "tag_grupy",
+        "editor.list.prop.group.pos_x": "pozycja_x_grupy",
+        "editor.list.prop.group.pos_y": "pozycja_y_grupy",
+        "editor.list.prop.group.width": "szerokość_grupy",
+        "editor.list.prop.group.height": "wysokość_grupy",
+        "editor.list.prop.group.rotation": "rotacja_grupy",
+        "editor.list.prop.group.alpha": "przezroczystość_grupy",
+        "editor.list.prop.widget.tag": "tag_widżetu",
+        "editor.list.prop.widget.pos_x": "pozycja_x_widżetu",
+        "editor.list.prop.widget.pos_y": "pozycja_y_widżetu",
+        "editor.list.prop.widget.value": "wartość_suwaka",
+        "editor.list.prop.widget.state": "stan_przełącznika",
+        "editor.list.prop.widget.text": "tekst_z_pola",
+        "editor.list.prop.widget.link": "widok_internetowy_url",
+        "editor.list.prop.media.current_time": "obecny_czas_wideo",
+        "editor.list.prop.media.total_time": "łączny_czas_wideo",
+        "editor.list.prop.media.sound_volume": "głośność_dźwięku",
+        "editor.list.prop.media.sound_total_time": "łączny_czas_dźwięku",
+        "editor.list.prop.media.sound_pause": "dźwięk_wstrzymany",
+        "editor.list.prop.media.sound_play": "dźwięk_odtwarzany"
     },
     "editor.log": {
-        "editor.list.log.true": "true",
-        "editor.list.log.false": "false",
-        "editor.list.log.nil": "nil",
+        "editor.list.log.true": "prawda",
+        "editor.list.log.false": "fałsz",
+        "editor.list.log.nil": "puste",
         "editor.list.log.>": ">",
         "editor.list.log.<": "<",
         "editor.list.log.>=": "≥",
         "editor.list.log.<=": "≤",
-        "editor.list.log.~=": "≠",
-        "editor.list.log.and": "and",
-        "editor.list.log.or": "or",
-        "editor.list.log.not": "not"
+        "editor.list.log.~=": "≠",
+        "editor.list.log.and": "i",
+        "editor.list.log.or": "lub",
+        "editor.list.log.not": "nie"
     },
     "editor.device": {
         "editor.list.device.fps": "fps",
-        "editor.list.device.read_save": "read_save",
-        "editor.list.device.device_id": "device_id",
-        "editor.list.device.width_screen": "width_screen",
-        "editor.list.device.height_screen": "height_screen",
-        "editor.list.device.top_point_screen": "top_point_screen",
-        "editor.list.device.bottom_point_screen": "bottom_point_screen",
-        "editor.list.device.right_point_screen": "right_point_screen",
-        "editor.list.device.left_point_screen": "left_point_screen",
-        "editor.list.device.height_top": "top_border_height",
-        "editor.list.device.height_bottom": "bottom_border_height",
-        "editor.list.device.finger_touching_screen": "finger_touching_screen",
-        "editor.list.device.finger_touching_screen_x": "finger_touching_screen_x",
-        "editor.list.device.finger_touching_screen_y": "finger_touching_screen_y",
-        "editor.list.device.get_ip": "get_own_ip"
+        "editor.list.device.read_save": "odczytaj_zapisz",
+        "editor.list.device.device_id": "ID_urządzenia",
+        "editor.list.device.width_screen": "szerokość_ekranu",
+        "editor.list.device.height_screen": "wysokość_ekranu",
+        "editor.list.device.top_point_screen": "górny_punkt_ekranu",
+        "editor.list.device.bottom_point_screen": "dolny_punkt_ekranu",
+        "editor.list.device.right_point_screen": "prawy_punkt_ekranu",
+        "editor.list.device.left_point_screen": "lewy_punkt_ekranu",
+        "editor.list.device.height_top": "górna_wysokość_ramki",
+        "editor.list.device.height_bottom": "dolna_wysokość_ramki",
+        "editor.list.device.finger_touching_screen": "palec_dotyka_ekranu",
+        "editor.list.device.finger_touching_screen_x": "x_dotknięcia_ekranu",
+        "editor.list.device.finger_touching_screen_y": "y_dotknięcia_ekranu",
+        "editor.list.device.get_ip": "pobierz_własne_ip"
     }
 }

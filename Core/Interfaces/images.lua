@@ -194,14 +194,13 @@ listeners.but_okay = function(target)
     IMAGES.group[7].isVisible = false
 
     if INDEX_LIST == 1 then
+        local data = GET_GAME_CODE(CURRENT_LINK)
+
         for i = #IMAGES.group.data, 1, -1 do
             IMAGES.group.blocks[i].checkbox.isVisible = false
 
             if IMAGES.group.blocks[i].checkbox.isOn then
-                local data = GET_GAME_CODE(CURRENT_LINK)
                 table.remove(data.resources.images, i)
-
-                SET_GAME_CODE(CURRENT_LINK, data)
                 OS_REMOVE(DOC_DIR .. '/' .. CURRENT_LINK .. '/Images/' .. IMAGES.group.blocks[i].link)
                 IMAGES.group.blocks[i].remove(i)
             end
@@ -216,6 +215,7 @@ listeners.but_okay = function(target)
             IMAGES.group.data[j].y = y
         end
 
+        SET_GAME_CODE(CURRENT_LINK, data)
         IMAGES.group[8]:setScrollHeight(150 * #IMAGES.group.data)
     elseif INDEX_LIST == 2 then
         for i = #IMAGES.group.blocks, 1, -1 do

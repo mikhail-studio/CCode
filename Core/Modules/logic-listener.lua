@@ -150,7 +150,7 @@ function newMoveLogicBlock(e, group, scroll, isNewBlock, isCopy)
                     local name = group.blocks[i].data.name
                     local isEnd = UTF8.sub(name, UTF8.len(name) - 2, UTF8.len(name)) == 'End'
                     local notNested = not (group.blocks[i].data.nested and #group.blocks[i].data.nested > 0)
-                    if name == 'ifElse' and e.target.data.name ~= 'ifElse' then isEnd = true end
+                    -- if name == 'ifElse' and e.target.data.name ~= 'ifElse' then isEnd = true end
 
                     if INFO.listNested[name] and notNested then
                         nestedEndIndex = nestedEndIndex + 1

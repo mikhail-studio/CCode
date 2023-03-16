@@ -2,8 +2,8 @@ local M = {}
 
 M.new = function(title, buttons, listener, dog)
     if not M.group then
-        ALERT = false
-        M.listener = listener
+        ALERT, dog = false, dog or 5
+        M.listener = listener or (function() end)
         M.group, M.buttons = display.newGroup(), {}
 
         M.bg = display.newRoundedRect(CENTER_X, CENTER_Y - 100, DISPLAY_WIDTH - 100, #buttons > 0 and 110 or 36, 20)
