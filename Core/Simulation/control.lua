@@ -303,8 +303,8 @@ M['setAccelerometerFrequency'] = function(params)
 end
 
 M['readFileRes'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() local link = other.getResource(' .. CALC(params[2]) .. ') ' .. CALC(params[1], 'a', true)
-    GAME.lua = GAME.lua .. ' = READ_FILE(DOC_DIR .. \'/\' .. link) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local link = other.getResource(' .. CALC(params[1]) .. ') ' .. CALC(params[2], 'a', true)
+    GAME.lua = GAME.lua .. ' = READ_FILE(DOC_DIR .. \'/\' .. link, ' .. CALC(params[3]) .. ') end)'
 end
 
 M['pasteboardCopy'] = function(params)

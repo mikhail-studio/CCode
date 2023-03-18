@@ -136,6 +136,22 @@ M['switchOff'] = function()
     return false
 end
 
+M['fileTypeBin'] = function()
+    return true
+end
+
+M['inputDefault'] = function()
+    return nil
+end
+
+M['docTypeDocs'] = function()
+    return 'Documents'
+end
+
+M['docTypeTemps'] = function()
+    return 'Temps'
+end
+
 M['adsInterstitial'] = function()
     return 'interstitial'
 end

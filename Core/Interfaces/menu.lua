@@ -7,6 +7,59 @@ listeners.but_myprogram = function(target)
     PROGRAMS.group.isVisible = true
 end
 
+function _supportOldestVersion(data, link)
+    if tonumber(data.build) < BUILD then
+        data.build = tostring(BUILD)
+        SET_GAME_CODE(link, data)
+    end
+
+    if tonumber(data.build) < 1215 then
+        local scripts = COPY_TABLE(data.scripts)
+        LFS.mkdir(DOC_DIR .. '/' .. link .. '/Scripts')
+
+        for i = 1, #scripts do
+            data.scripts[i] = i
+            SET_GAME_SCRIPT(link, scripts[i], i, data)
+        end
+
+        SET_GAME_CODE(link, data)
+    end
+
+    local script = GET_GAME_SCRIPT(link, 1, data)
+
+    if tonumber(data.build) > 1232 and tonumber(data.build) < 1242 then
+        for i = 1, #data.scripts do
+            local script, nestedInfo, isChange = GET_FULL_DATA(GET_GAME_SCRIPT(link, i, data))
+            for j = 1, #script.params do
+                local name = script.params[j].name
+
+                if name == 'readFileRes' then
+                    script.params[j].params[1], script.params[j].params[2] = script.params[j].params[2], script.params[j].params[1]
+                    script.params[j].params[3], isChange = {{'inputDefault', 'sl'}}, true
+                end
+            end if isChange then SET_GAME_SCRIPT(link, GET_NESTED_DATA(script, nestedInfo, INFO), i, data) end
+        end
+    end
+
+    if not data.resources.others then
+        data.resources.others = {}
+        data.id = DEVICE_ID
+
+        if not data.created then
+            data.created = '1223'
+            data.noobmode = false
+        end
+
+        SET_GAME_CODE(link, data)
+    end
+
+    if script and script.custom then
+        DEL_GAME_SCRIPT(link, 1, data)
+        table.remove(data.scripts, 1)
+        SET_GAME_CODE(link, data)
+    end
+end
+
 listeners.but_continue = function(target)
     if LOCAL.last == '' then
         MENU.group.isVisible = false
@@ -16,39 +69,8 @@ listeners.but_continue = function(target)
     else
         local data = GET_GAME_CODE(LOCAL.last_link)
 
-        if tonumber(data.build) < 1215 then
-            local scripts = COPY_TABLE(data.scripts) data.build = tostring(BUILD)
-            LFS.mkdir(DOC_DIR .. '/' .. LOCAL.last_link .. '/Scripts')
-
-            for i = 1, #scripts do
-                data.scripts[i] = i
-                SET_GAME_SCRIPT(LOCAL.last_link, scripts[i], i, data)
-            end
-
-            SET_GAME_CODE(LOCAL.last_link, data)
-        end
-
         if tonumber(data.build) > 1170 then
-            local script = GET_GAME_SCRIPT(LOCAL.last_link, 1, data)
-
-            if not data.resources.others then
-                data.resources.others = {}
-                data.build = tostring(BUILD)
-                data.id = DEVICE_ID
-
-                if not data.created then
-                    data.created = '1223'
-                    data.noobmode = false
-                end
-
-                SET_GAME_CODE(LOCAL.last_link, data)
-            end
-
-            if script and script.custom then
-                DEL_GAME_SCRIPT(LOCAL.last_link, 1, data)
-                table.remove(data.scripts, 1)
-                SET_GAME_CODE(LOCAL.last_link, data)
-            end
+            _supportOldestVersion(data, LOCAL.last_link)
 
             MENU.group.isVisible = false
             PROGRAMS = require 'Interfaces.programs'

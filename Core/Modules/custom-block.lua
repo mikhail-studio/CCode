@@ -289,6 +289,11 @@ M.newBlock = function(name, params, str, index, color)
     local params = params and COPY_TABLE(params) or nil
     local str = str and COPY_TABLE(str) or nil
 
+    pcall(function()
+        EDITOR.group:removeSelf()
+        EDITOR.group = nil
+    end) EDITOR = nil
+
     M.color = color or {0.36 * 255, 0.47 * 255, 0.5 * 255}
     M.group = display.newGroup()
         ALERT = false
