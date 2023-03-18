@@ -33,7 +33,7 @@ local function showTypeScroll(event)
 
                 M.group[4].isVisible = event.target.index == 1
                 M.group[3].isVisible = event.target.index == 1 or event.target.index == 15 or event.target.index == 5
-                or event.target.index == 9 or event.target.index == 6 or event.target.index == 7
+                or event.target.index == 9 or event.target.index == 6 or event.target.index == 7 or event.target.index == 4
                 or event.target.index == 2 or event.target.index == 3 or event.target.index == 11
                 for i = 5, 10 do M.group[i].isVisible = event.target.index == 15 end
                 for i = 19, 20 do M.group[i].isVisible = event.target.index == 15 end
@@ -45,14 +45,16 @@ local function showTypeScroll(event)
                 for i = 29, 32 do M.group[i].isVisible = event.target.index == 7 end
                 for i = 35, 38 do M.group[i].isVisible = event.target.index == 11 end
                 for i = 39, 42 do M.group[i].isVisible = event.target.index == 5 end
+                for i = 43, 46 do M.group[i].isVisible = event.target.index == 4 end
                 M.group.currentIndex = event.target.index
 
-                if NOOBMODE and (event.target.index == 2 or event.target.index == 5 or event.target.index == 6 or event.target.index == 7) then
+                if NOOBMODE and (event.target.index == 2 or event.target.index == 4 or event.target.index == 5 or event.target.index == 6 or event.target.index == 7) then
                     for i = 25, 28 do M.group[i].isVisible = false end
                     for i = 15, 18 do M.group[i].isVisible = false end
                     for i = 33, 34 do M.group[i].isVisible = false end
                     for i = 29, 32 do M.group[i].isVisible = false end
                     for i = 39, 42 do M.group[i].isVisible = false end
+                    for i = 43, 46 do M.group[i].isVisible = false end
                     M.group[3].isVisible = false
                 end
             elseif NOOBMODE and INFO.listDeleteType[event.target.index] and M.group.isVisible then
@@ -347,6 +349,7 @@ M.custom = function(i)
         for i = 29, 32 do M.group[i].isVisible = M.group.currentIndex == 7 end
         for i = 35, 38 do M.group[i].isVisible = M.group.currentIndex == 11 end
         for i = 39, 42 do M.group[i].isVisible = M.group.currentIndex == 5 end
+        for i = 43, 46 do M.group[i].isVisible = M.group.currentIndex == 4 end
 
         M.group.types[15].scroll:removeSelf()
         M.group.types[15].scroll = WIDGET.newScrollView({
@@ -419,7 +422,7 @@ M.create = function()
         end
 
         M.group[3].isVisible = M.group.currentIndex == 1 or M.group.currentIndex == 15 or M.group.currentIndex == 5
-        or M.group.currentIndex == 9 or M.group.currentIndex == 6 or M.group.currentIndex == 7
+        or M.group.currentIndex == 9 or M.group.currentIndex == 6 or M.group.currentIndex == 7 or M.group.currentIndex == 4
         or M.group.currentIndex == 3 or M.group.currentIndex == 2 or M.group.currentIndex == 11
         M.group[4].isVisible, M.group[5].alpha = M.group.currentIndex == 1, 0.1
         M.group[7].alpha, M.group[7].isOn = 0.1, false
@@ -436,13 +439,15 @@ M.create = function()
         for i = 29, 32 do M.group[i].isVisible = M.group.currentIndex == 7 end
         for i = 35, 38 do M.group[i].isVisible = M.group.currentIndex == 11 end
         for i = 39, 42 do M.group[i].isVisible = M.group.currentIndex == 5 end
+        for i = 43, 46 do M.group[i].isVisible = M.group.currentIndex == 4 end
 
-        if NOOBMODE and (M.group.currentIndex == 2 or M.group.currentIndex == 5 or M.group.currentIndex == 6 or M.group.currentIndex == 7) then
+        if NOOBMODE and (M.group.currentIndex == 2 or M.group.currentIndex == 4 or M.group.currentIndex == 5 or M.group.currentIndex == 6 or M.group.currentIndex == 7) then
             for i = 25, 28 do M.group[i].isVisible = false end
             for i = 15, 18 do M.group[i].isVisible = false end
             for i = 33, 34 do M.group[i].isVisible = false end
             for i = 29, 32 do M.group[i].isVisible = false end
             for i = 39, 42 do M.group[i].isVisible = false end
+            for i = 43, 46 do M.group[i].isVisible = false end
             M.group[3].isVisible = false
         end
 
@@ -504,6 +509,7 @@ M.create = function()
                     or e.target.tag == 'control2' or e.target.tag == 'control1' or e.target.tag == 'physics1' or e.target.tag == 'physics2'
                     or e.target.tag == 'events2' or e.target.tag == 'events1' or e.target.tag == 'control3'
                     or e.target.tag == 'widgets1' or e.target.tag == 'widgets2' or e.target.tag == 'media' or e.target.tag == 'files'
+                    or e.target.tag == 'objects' or e.target.tag == 'filters'
                 end
 
                 if e.phase == 'began' then
@@ -594,6 +600,12 @@ M.create = function()
                         elseif e.target.tag == 'media' and not e.target.isOn then
                             e.target.isOn = true e.target.alpha = 0.3 M.group[41].isOn = false M.group[41].alpha = 0.1
                             M.group.types[5].scroll.isVisible = true M.group.types[5].scroll2.isVisible = false M.group.types[5].currentScroll = 1
+                        elseif e.target.tag == 'filters' and not e.target.isOn then
+                            e.target.isOn = true e.target.alpha = 0.3 M.group[43].isOn = false M.group[43].alpha = 0.1
+                            M.group.types[4].scroll.isVisible = false M.group.types[4].scroll2.isVisible = true M.group.types[4].currentScroll = 2
+                        elseif e.target.tag == 'objects' and not e.target.isOn then
+                            e.target.isOn = true e.target.alpha = 0.3 M.group[45].isOn = false M.group[45].alpha = 0.1
+                            M.group.types[4].scroll.isVisible = true M.group.types[4].scroll2.isVisible = false M.group.types[4].currentScroll = 1
                         end
                     end
                 end
@@ -835,6 +847,30 @@ M.create = function()
             buttonFilesText.isVisible = false
         M.group:insert(buttonFilesText)
 
+        local buttonObjects = display.newRect(find.x - find.width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
+            buttonObjects.isOn = true
+            buttonObjects.alpha = 0.3
+            buttonObjects.tag = 'objects'
+            buttonObjects:addEventListener('touch', buttonListeners)
+        M.group:insert(buttonObjects)
+
+        local buttonObjectsText = display.newText(STR['blocks.create.objects'], buttonObjects.x, buttonObjects.y, 'ubuntu', 28)
+            buttonObjects.isVisible = false
+            buttonObjectsText.isVisible = false
+        M.group:insert(buttonObjectsText)
+
+        local buttonFilters = display.newRect(buttonObjects.x + width3, ZERO_Y + 50, width3, 56)
+            buttonFilters.isOn = false
+            buttonFilters.alpha = 0.1
+            buttonFilters.tag = 'filters'
+            buttonFilters:addEventListener('touch', buttonListeners)
+        M.group:insert(buttonFilters)
+
+        local buttonFiltersText = display.newText(STR['blocks.create.filters'], buttonFilters.x, buttonFilters.y, 'ubuntu', 28)
+            buttonFilters.isVisible = false
+            buttonFiltersText.isVisible = false
+        M.group:insert(buttonFiltersText)
+
         local width = CENTER_X == 360 and DISPLAY_WIDTH / 5 - 24 or DISPLAY_WIDTH / 6
         local x, y = ZERO_X + 20, MAX_Y - 220
         local custom = GET_GAME_CUSTOM()
@@ -852,8 +888,8 @@ M.create = function()
             if NOOBMODE and (i == 4 or i == 5 or i == 8 or i == 10) then typeName = typeName .. 'Noob' end
             local text = display.newText({text = STR[typeName], x = 0, y = 0, width = width - 5, font = 'sans.ttf', fontSize = 19})
             local textheight = text.height > 48 and 48 or text.height text:removeSelf()
-            local allowedIndex = i == 1 or i == 15 or i == 9 or i == 6 or i == 3 or i == 2 or i == 7 or i == 11 or i == 5
-            if NOOBMODE and (i == 2 or i == 5 or i == 6 or i == 7) then allowedIndex = false end
+            local allowedIndex = i == 1 or i == 15 or i == 9 or i == 6 or i == 3 or i == 2 or i == 7 or i == 11 or i == 5 or i == 4
+            if NOOBMODE and (i == 2 or i == 4 or i == 5 or i == 6 or i == 7) then allowedIndex = false end
 
             M.group.types[i].text = display.newText({
                     text = STR[typeName], font = 'ubuntu', fontSize = 19, align = 'center',

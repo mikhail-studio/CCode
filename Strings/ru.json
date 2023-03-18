@@ -337,7 +337,7 @@
     },
 
     "objects": {
-        "blocks.objects": "Объекты",
+        "blocks.objects": "Объекты\n& Фильтры",
         "blocks.newObject": "Создать объект",
         "blocks.newObject.params": ["Имя объекта:", "Имя спрайта:", "Позиция (X):", "Позиция (Y):"],
         "blocks.newSprite": "Создать объект из частей спрайта",

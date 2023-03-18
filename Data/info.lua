@@ -987,6 +987,7 @@ M.listDelimiter = {
     ['vars'] = {'setTextPos'},
     ['events'] = {'onLocalCollisionBegan'},
     ['physics'] = {'setWorldGravity'},
+    ['objects'] = {'backObject'},
     ['media'] = {'newFolder'},
     ['widgets'] = {'newScrollView'}
 }
