@@ -28,9 +28,11 @@ M.getListButtons = function(type)
     elseif type == 'snapshotType' then
         return {STR['blocks.select.snapshotGroup'], STR['blocks.select.snapshotCanvas']}
     elseif type == 'fileType' then
-        return {STR['blocks.select.inputDefault'], STR['blocks.select.fileTypeBin']}
+        return {STR['blocks.select.fileTypeNonBin'], STR['blocks.select.fileTypeBin']}
     elseif type == 'docType' then
         return {STR['blocks.select.docTypeDocs'], STR['blocks.select.docTypeTemps']}
+    elseif type == 'spriteType' then
+        return {STR['blocks.select.spriteTypePixel'], STR['blocks.select.spriteTypeLinear']}
     elseif type == 'inputType' then
         return {
             STR['blocks.select.inputDefault'],
@@ -97,9 +99,11 @@ M.getListValue = function(type, text)
     elseif type == 'snapshotType' then
         return text == STR['blocks.select.snapshotCanvas'] and 'snapshotCanvas' or 'snapshotGroup'
     elseif type == 'fileType' then
-        return text == STR['blocks.select.fileTypeBin'] and 'fileTypeBin' or 'inputDefault'
+        return text == STR['blocks.select.fileTypeBin'] and 'fileTypeBin' or 'fileTypeNonBin'
     elseif type == 'docType' then
         return text == STR['blocks.select.docTypeTemps'] and 'docTypeTemps' or 'docTypeDocs'
+    elseif type == 'spriteType' then
+        return text == STR['blocks.select.spriteTypeLinear'] and 'spriteTypeLinear' or 'spriteTypePixel'
     elseif type == 'inputType' then
         return text == STR['blocks.select.inputDefault'] and 'inputDefault'
             or text == STR['blocks.select.inputNumber'] and 'inputNumber'

@@ -46,7 +46,7 @@ listeners.but_add = function(target)
                         io.close(file)
                     else
                         GIVE_PERMISSION_DATA()
-                        FILE.pickFile(path, completeImportPicture, 'Font' .. numFont, '', '*/*', nil, nil, nil)
+                        FILE.pickFile(path, completeImportPicture, 'Font' .. numFont, '', '*/*')
                         break
                     end
                 end

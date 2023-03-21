@@ -50,6 +50,11 @@ M.getPhysicsParams = function(friction, bounce, density, hitbox, filter)
     return params
 end
 
+M.getPath = function(path, docType, isShort, isFolder)
+    if UTF8.find(path, '%.%.') then return nil end
+    return (isShort and '' or (DOC_DIR .. '/')) .. CURRENT_LINK .. '/' .. docType .. (isFolder and '' or '/' .. path)
+end
+
 M.getResource = function(link)
     for i = 1, #GAME.RESOURCES.others do
         if GAME.RESOURCES.others[i][1] == link then
@@ -78,6 +83,8 @@ M.getImage = function(link)
     for i = 1, #GAME.RESOURCES.images do
         if GAME.RESOURCES.images[i][1] == link then
             return CURRENT_LINK .. '/Images/' .. GAME.RESOURCES.images[i][3], GAME.RESOURCES.images[i][2] or 'nearest'
+        elseif GAME.RESOURCES.images[i][1] == 'Documents:' .. link or GAME.RESOURCES.images[i][1] == 'Temps:' .. link then
+            return GAME.RESOURCES.images[i][3], GAME.RESOURCES.images[i][2] or 'nearest'
         end
     end
 end

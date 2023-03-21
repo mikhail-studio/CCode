@@ -140,8 +140,8 @@ M['fileTypeBin'] = function()
     return true
 end
 
-M['inputDefault'] = function()
-    return nil
+M['fileTypeNonBin'] = function()
+    return false
 end
 
 M['docTypeDocs'] = function()
@@ -150,6 +150,14 @@ end
 
 M['docTypeTemps'] = function()
     return 'Temps'
+end
+
+M['spriteTypeLinear'] = function()
+    return 'linear'
+end
+
+M['spriteTypePixel'] = function()
+    return 'nearest'
 end
 
 M['adsInterstitial'] = function()

@@ -1330,6 +1330,30 @@ return ' ' .. UTF8.trimFull([===[
                 return false
             end
 
+            M['fileTypeBin'] = function()
+                return true
+            end
+
+            M['fileTypeNonBin'] = function()
+                return false
+            end
+
+            M['docTypeDocs'] = function()
+                return 'Documents'
+            end
+
+            M['docTypeTemps'] = function()
+                return 'Temps'
+            end
+
+            M['spriteTypeLinear'] = function()
+                return 'linear'
+            end
+
+            M['spriteTypePixel'] = function()
+                return 'nearest'
+            end
+
             M['adsInterstitial'] = function()
                 return 'interstitial'
             end
@@ -1398,6 +1422,11 @@ return ' ' .. UTF8.trimFull([===[
                 return params
             end
 
+            M.getPath = function(path, docType, isShort, isFolder)
+                if UTF8.find(path, '%.%.') then return nil end
+                return (isShort and '' or (DOC_DIR .. '/')) .. CURRENT_LINK .. '/' .. docType .. (isFolder and '' or '/' .. path)
+            end
+
             M.getResource = function(link)
                 for i = 1, #GAME.RESOURCES.others do
                     if GAME.RESOURCES.others[i][1] == link then
@@ -1426,6 +1455,8 @@ return ' ' .. UTF8.trimFull([===[
                 for i = 1, #GAME.RESOURCES.images do
                     if GAME.RESOURCES.images[i][1] == link then
                         return CURRENT_LINK .. '/Images/' .. GAME.RESOURCES.images[i][3], GAME.RESOURCES.images[i][2] or 'nearest'
+                    elseif GAME.RESOURCES.images[i][1] == 'Documents:' .. link or GAME.RESOURCES.images[i][1] == 'Temps:' .. link then
+                        return GAME.RESOURCES.images[i][3], GAME.RESOURCES.images[i][2] or 'nearest'
                     end
                 end
             end
@@ -1454,5 +1485,6 @@ return ' ' .. UTF8.trimFull([===[
             return M
         end
 
+        DEVICE_ID = CRYPTO.hmac(CRYPTO.sha256, system.getInfo('deviceID'), system.getInfo('deviceID') .. 'md5')
         local fun, device, other, select, math, prop = getFun(), getDevice(), getOther(), getSelect(), getMath(), getProp()
 ]===])

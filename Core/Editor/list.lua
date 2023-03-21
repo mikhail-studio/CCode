@@ -116,6 +116,10 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
                         if NOOBMODE then
                             listScroll.buttons[i].text.id = id == 1 and 'project' or id == 2 and 'tproject' or id == 3 and 'fproject'
                             or (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup' or 'pmedia')
+                        elseif BLOCKS.custom then
+                            listScroll.buttons[i].text.id = id == 1 and (j == 1 and 'event' or 'script')
+                            or (id == 2 and (j == 1 and 'tevent' or 'tscript') or (id == 3 and (j == 1 and 'fcustom' or 'fscript')
+                            or (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup' or j == 4 and 'pwidget' or 'pmedia')))
                         else
                             listScroll.buttons[i].text.id = id == 1 and (j == 1 and 'event' or j == 2 and 'script' or 'project')
                             or (id == 2 and (j == 1 and 'tevent' or j == 2 and 'tscript' or 'tproject')
@@ -180,7 +184,10 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
 end
 
 listeners.fcustom = function(target)
-    if not BLOCKS.custom then listeners.set(target, EDITOR.funs.custom) end
+    if BLOCKS.custom then
+        EDITOR.funs._custom = {BLOCKS.custom.index}
+        EDITOR.funs.custom = {BLOCKS.custom.name}
+    end listeners.set(target, EDITOR.funs.custom)
 end
 
 listeners.pobj = function(target)
@@ -254,6 +261,8 @@ end
 listeners.var = function(target)
     if NOOBMODE then
         listeners.set(target, {STR['editor.list.project']}, true, nil, 1)
+    elseif BLOCKS.custom then
+        listeners.set(target, {STR['editor.list.event'], STR['editor.list.script']}, true, nil, 1)
     else
         listeners.set(target, {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}, true, nil, 1)
     end
@@ -262,6 +271,8 @@ end
 listeners.table = function(target)
     if NOOBMODE then
         listeners.set(target, {STR['editor.list.project']}, true, nil, 2)
+    elseif BLOCKS.custom then
+        listeners.set(target, {STR['editor.list.event'], STR['editor.list.script']}, true, nil, 2)
     else
         listeners.set(target, {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}, true, nil, 2)
     end
@@ -270,6 +281,8 @@ end
 listeners.funs = function(target)
     if NOOBMODE then
         listeners.set(target, {STR['editor.list.project']}, true, nil, 3)
+    elseif BLOCKS.custom then
+        listeners.set(target, {STR['editor.list.custom'], STR['editor.list.script']}, true, nil, 3)
     else
         listeners.set(target, {STR['editor.list.custom'], STR['editor.list.script'], STR['editor.list.project']}, true, nil, 3)
     end

@@ -65,7 +65,7 @@ M.gen = function(params, mode)
         elseif params[i][2] == 'fS' or params[i][2] == 'fP' then
             text = text .. '$' .. params[i][1]
         elseif params[i][2] == 'fC' then
-            text = text .. '$' .. STR['blocks.' .. params[i][1]]
+            text = text .. '$' .. (STR['blocks.' .. params[i][1]] or (BLOCKS.custom and BLOCKS.custom.name or 'a'))
         elseif params[i][2] == 'u' then
             text = text .. params[i][1]
         elseif params[i][2] == 't' then
