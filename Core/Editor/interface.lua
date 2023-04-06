@@ -31,8 +31,10 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         M.vars = {project = COPY_TABLE(data.vars), script = COPY_TABLE(script.vars), event = {}}
         M.tables = {project = COPY_TABLE(data.tables), script = COPY_TABLE(script.tables), event = {}}
         M.funs = {project = COPY_TABLE(data.funs), script = COPY_TABLE(script.funs), custom = {}, _custom = {}}
-        M.prop = {obj = DATA.prop.obj, text = DATA.prop.text, group = DATA.prop.group, widget = DATA.prop.widget, media = DATA.prop.media}
-        M.fun, M.math, M.log, M.device = DATA.fun, DATA.math, DATA.log, DATA.device
+        M.fun, M.math, M.log, M.device, M.prop = DATA.fun, DATA.math, DATA.log, DATA.device, {
+            obj = DATA.prop.obj, text = DATA.prop.text, group = DATA.prop.group,
+            widget = DATA.prop.widget, media = DATA.prop.media, files = DATA.prop.files
+        }
 
     if blockName ~= 'customDefault' then
         for i = blockIndex, 1, -1 do

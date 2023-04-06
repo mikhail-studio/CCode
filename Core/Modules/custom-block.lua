@@ -139,7 +139,10 @@ M.addBlock = function(params, _index)
 
     if params.string then
         custom.len = custom.len + (_index and 0 or 1)
-        custom[index] = {STR['blocks.'], COPY_TABLE(STR['blocks..params']), params.string, os.time(), M.color}
+        custom[index] = {
+            STR['blocks.'], COPY_TABLE(STR['blocks..params']), params.string, os.time(), M.color,
+            _index and (custom[index] and custom[index][6] or nil) or nil
+        }
 
         local block = custom[index]
         local typeBlock = 'custom' .. index
@@ -214,7 +217,7 @@ M.removeOverlay = function(index)
                     custom[index][2] = COPY_TABLE(STR['blocks..params'])
                     custom[index][4] = os.time()
                     custom[index][5] = M.color
-                    custom[index][6] = (EDITOR and EDITOR.restart and EDITOR.restart[6]) and EDITOR.restart[8] or nil
+                    custom[index][6] = (EDITOR and EDITOR.restart and EDITOR.restart[6]) and EDITOR.restart[8] or custom[index][6]
                 SET_GAME_CUSTOM(custom)
 
                 STR['blocks.custom' .. index] = STR['blocks.']

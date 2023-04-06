@@ -46,6 +46,7 @@ local function showTypeScroll(event)
                 for i = 35, 38 do M.group[i].isVisible = event.target.index == 11 end
                 for i = 39, 42 do M.group[i].isVisible = event.target.index == 5 end
                 for i = 43, 46 do M.group[i].isVisible = event.target.index == 4 end
+                for i = 47, 48 do M.group[i].isVisible = event.target.index == 7 end
                 M.group.currentIndex = event.target.index
 
                 if NOOBMODE and (event.target.index == 2 or event.target.index == 4 or event.target.index == 5 or event.target.index == 6 or event.target.index == 7) then
@@ -55,6 +56,7 @@ local function showTypeScroll(event)
                     for i = 29, 32 do M.group[i].isVisible = false end
                     for i = 39, 42 do M.group[i].isVisible = false end
                     for i = 43, 46 do M.group[i].isVisible = false end
+                    for i = 47, 48 do M.group[i].isVisible = false end
                     M.group[3].isVisible = false
                 end
             elseif NOOBMODE and INFO.listDeleteType[event.target.index] and M.group.isVisible then
@@ -350,6 +352,7 @@ M.custom = function(i)
         for i = 35, 38 do M.group[i].isVisible = M.group.currentIndex == 11 end
         for i = 39, 42 do M.group[i].isVisible = M.group.currentIndex == 5 end
         for i = 43, 46 do M.group[i].isVisible = M.group.currentIndex == 4 end
+        for i = 47, 48 do M.group[i].isVisible = M.group.currentIndex == 7 end
 
         M.group.types[15].scroll:removeSelf()
         M.group.types[15].scroll = WIDGET.newScrollView({
@@ -440,6 +443,7 @@ M.create = function()
         for i = 35, 38 do M.group[i].isVisible = M.group.currentIndex == 11 end
         for i = 39, 42 do M.group[i].isVisible = M.group.currentIndex == 5 end
         for i = 43, 46 do M.group[i].isVisible = M.group.currentIndex == 4 end
+        for i = 47, 48 do M.group[i].isVisible = M.group.currentIndex == 7 end
 
         if NOOBMODE and (M.group.currentIndex == 2 or M.group.currentIndex == 4 or M.group.currentIndex == 5 or M.group.currentIndex == 6 or M.group.currentIndex == 7) then
             for i = 25, 28 do M.group[i].isVisible = false end
@@ -448,6 +452,7 @@ M.create = function()
             for i = 29, 32 do M.group[i].isVisible = false end
             for i = 39, 42 do M.group[i].isVisible = false end
             for i = 43, 46 do M.group[i].isVisible = false end
+            for i = 47, 48 do M.group[i].isVisible = false end
             M.group[3].isVisible = false
         end
 
@@ -509,7 +514,7 @@ M.create = function()
                     or e.target.tag == 'control2' or e.target.tag == 'control1' or e.target.tag == 'physics1' or e.target.tag == 'physics2'
                     or e.target.tag == 'events2' or e.target.tag == 'events1' or e.target.tag == 'control3'
                     or e.target.tag == 'widgets1' or e.target.tag == 'widgets2' or e.target.tag == 'media' or e.target.tag == 'files'
-                    or e.target.tag == 'objects' or e.target.tag == 'filters'
+                    or e.target.tag == 'objects' or e.target.tag == 'filters' or e.target.tag == 'physics3'
                 end
 
                 if e.phase == 'began' then
@@ -582,12 +587,21 @@ M.create = function()
                         elseif e.target.tag == 'events1' and not e.target.isOn then
                             e.target.isOn = true e.target.alpha = 0.3 M.group[27].isOn = false M.group[27].alpha = 0.1
                             M.group.types[2].scroll.isVisible = true M.group.types[2].scroll2.isVisible = false M.group.types[2].currentScroll = 1
+                        elseif e.target.tag == 'physics3' and not e.target.isOn then
+                            e.target.isOn = true e.target.alpha = 0.3
+                            M.group[29].isOn = false M.group[29].alpha = 0.1 M.group[31].isOn = false M.group[31].alpha = 0.1
+                            M.group.types[7].scroll.isVisible = false M.group.types[7].scroll2.isVisible = false
+                            M.group.types[7].scroll3.isVisible = true M.group.types[7].currentScroll = 3
                         elseif e.target.tag == 'physics2' and not e.target.isOn then
-                            e.target.isOn = true e.target.alpha = 0.3 M.group[29].isOn = false M.group[29].alpha = 0.1
-                            M.group.types[7].scroll.isVisible = false M.group.types[7].scroll2.isVisible = true M.group.types[7].currentScroll = 2
+                            e.target.isOn = true e.target.alpha = 0.3
+                            M.group[29].isOn = false M.group[29].alpha = 0.1 M.group[47].isOn = false M.group[47].alpha = 0.1
+                            M.group.types[7].scroll.isVisible = false M.group.types[7].scroll2.isVisible = true
+                            M.group.types[7].scroll3.isVisible = false M.group.types[7].currentScroll = 2
                         elseif e.target.tag == 'physics1' and not e.target.isOn then
-                            e.target.isOn = true e.target.alpha = 0.3 M.group[31].isOn = false M.group[31].alpha = 0.1
-                            M.group.types[7].scroll.isVisible = true M.group.types[7].scroll2.isVisible = false M.group.types[7].currentScroll = 1
+                            e.target.isOn = true e.target.alpha = 0.3
+                            M.group[31].isOn = false M.group[31].alpha = 0.1 M.group[47].isOn = false M.group[47].alpha = 0.1
+                            M.group.types[7].scroll.isVisible = true M.group.types[7].scroll2.isVisible = false
+                            M.group.types[7].scroll3.isVisible = false M.group.types[7].currentScroll = 1
                         elseif e.target.tag == 'widgets2' and not e.target.isOn then
                             e.target.isOn = true e.target.alpha = 0.3 M.group[35].isOn = false M.group[35].alpha = 0.1
                             M.group.types[11].scroll.isVisible = false M.group.types[11].scroll2.isVisible = true M.group.types[11].currentScroll = 2
@@ -763,7 +777,7 @@ M.create = function()
             buttonEvents2Text.isVisible = false
         M.group:insert(buttonEvents2Text)
 
-        local buttonPhysics1 = display.newRect(find.x - find.width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
+        local buttonPhysics1 = display.newRect(find.x - find.width / 2 + width2 / 2, ZERO_Y + 50, width2, 56)
             buttonPhysics1.isOn = true
             buttonPhysics1.alpha = 0.3
             buttonPhysics1.tag = 'physics1'
@@ -775,7 +789,7 @@ M.create = function()
             buttonPhysics1Text.isVisible = false
         M.group:insert(buttonPhysics1Text)
 
-        local buttonPhysics2 = display.newRect(buttonPhysics1.x + width3, ZERO_Y + 50, width3, 56)
+        local buttonPhysics2 = display.newRect(buttonPhysics1.x + width2, ZERO_Y + 50, width2, 56)
             buttonPhysics2.isOn = false
             buttonPhysics2.alpha = 0.1
             buttonPhysics2.tag = 'physics2'
@@ -870,6 +884,18 @@ M.create = function()
             buttonFilters.isVisible = false
             buttonFiltersText.isVisible = false
         M.group:insert(buttonFiltersText)
+
+        local buttonPhysics3 = display.newRect(buttonPhysics2.x + width2, ZERO_Y + 50, width2, 56)
+            buttonPhysics3.isOn = false
+            buttonPhysics3.alpha = 0.1
+            buttonPhysics3.tag = 'physics3'
+            buttonPhysics3:addEventListener('touch', buttonListeners)
+        M.group:insert(buttonPhysics3)
+
+        local buttonPhysics3Text = display.newText('3', buttonPhysics3.x, buttonPhysics3.y, 'ubuntu', 28)
+            buttonPhysics3.isVisible = false
+            buttonPhysics3Text.isVisible = false
+        M.group:insert(buttonPhysics3Text)
 
         local width = CENTER_X == 360 and DISPLAY_WIDTH / 5 - 24 or DISPLAY_WIDTH / 6
         local x, y = ZERO_X + 20, MAX_Y - 220

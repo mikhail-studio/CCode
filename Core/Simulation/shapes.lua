@@ -237,6 +237,43 @@ M['setGradientPaint'] = function(params)
     GAME.lua = GAME.lua .. ' color2 = {colors2[1]/255, colors2[2]/255, colors2[3]/255, ' .. alpha2 .. '/100}} end)'
 end
 
+M['setLinearGradient'] = function(params)
+    local name = CALC(params[1])
+    local angle = '(' .. CALC(params[2], '0') .. ' * -1)'
+    local colorD = '(not ' .. CALC(params[3], 'true') .. ')'
+    local colors1, colors2 = CALC(params[4], '{255, 255, 255}'), CALC(params[5], '{255, 255, 255}')
+
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' local object = GAME.group.objects[name]'
+    GAME.lua = GAME.lua .. ' object._effect = \'generator.linearGradient\' object.fill.effect = \'generator.linearGradient\''
+    GAME.lua = GAME.lua .. ' if ' .. colorD .. ' then object:setFillColor(1, 1, 1) end'
+    GAME.lua = GAME.lua .. ' local colors1, colors2 = ' .. colors1 .. ', ' .. colors2
+    GAME.lua = GAME.lua .. ' local pos1 = {(_G.math.sin(_G.math.rad(' .. angle .. ')) + 1) / 2,'
+    GAME.lua = GAME.lua .. ' (_G.math.cos(_G.math.rad(' .. angle .. ')) + 1) / 2}'
+    GAME.lua = GAME.lua .. ' local pos2 = {(_G.math.sin(_G.math.rad(' .. angle .. ' - 180)) + 1) / 2,'
+    GAME.lua = GAME.lua .. ' (_G.math.cos(_G.math.rad(' .. angle .. ' - 180)) + 1) / 2}'
+    GAME.lua = GAME.lua .. ' object.fill.effect.color1 = {colors1[1]/255, colors1[2]/255, colors1[3]/255, 1}'
+    GAME.lua = GAME.lua .. ' object.fill.effect.color2 = {colors2[1]/255, colors2[2]/255, colors2[3]/255, 1}'
+    GAME.lua = GAME.lua .. ' object.fill.effect.position1 = pos1 object.fill.effect.position2 = pos2 end)'
+end
+
+M['setRadialGradient'] = function(params)
+    local name = CALC(params[1])
+    local ratio = CALC(params[2])
+    local colorD = '(not ' .. CALC(params[3], 'true') .. ')'
+    local colors1, colors2 = CALC(params[4], '{255, 255, 255}'), CALC(params[5], '{255, 255, 255}')
+    local center_and_radiuses = '{' .. CALC(params[6]) .. ' / 100, 1 - ' .. CALC(params[7]) .. ' / 100, ' .. CALC(params[8])
+    local center_and_radiuses = center_and_radiuses .. '/ 100, ' .. CALC(params[9]) .. ' / 100}'
+
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' local object = GAME.group.objects[name]'
+    GAME.lua = GAME.lua .. ' object._effect = \'generator.radialGradient\' object.fill.effect = \'generator.radialGradient\''
+    GAME.lua = GAME.lua .. ' if ' .. colorD .. ' then object:setFillColor(1, 1, 1) end'
+    GAME.lua = GAME.lua .. ' local colors1, colors2 = ' .. colors1 .. ', ' .. colors2
+    GAME.lua = GAME.lua .. ' object.fill.effect.color1 = {colors1[1]/255, colors1[2]/255, colors1[3]/255, 1}'
+    GAME.lua = GAME.lua .. ' object.fill.effect.color2 = {colors2[1]/255, colors2[2]/255, colors2[3]/255, 1}'
+    GAME.lua = GAME.lua .. ' object.fill.effect.center_and_radiuses = ' .. center_and_radiuses
+    GAME.lua = GAME.lua .. ' object.fill.effect.aspectRatio = ' .. ratio .. ' end)'
+end
+
 M['setStrokeWidth'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].strokeWidth =' .. CALC(params[2]) .. ' end)'
 end

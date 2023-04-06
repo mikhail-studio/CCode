@@ -5,12 +5,13 @@ local genBlocks = function()
     local data = GET_GAME_CODE(CURRENT_LINK)
 
     for i = 1, #data.scripts do
-        M.new(GET_GAME_SCRIPT(CURRENT_LINK, i, data).title, #M.group.blocks + 1)
+        local script = GET_GAME_SCRIPT(CURRENT_LINK, i, data)
+        M.new(script.title, #M.group.blocks + 1, script.comment)
     end
 end
 
-M.new = function(title, index)
-    BLOCK.new(title, M.scroll, M.group, 'scripts', index)
+M.new = function(title, index, comment)
+    BLOCK.new(title, M.scroll, M.group, 'scripts', index, nil, nil, comment)
 end
 
 M.create = function()

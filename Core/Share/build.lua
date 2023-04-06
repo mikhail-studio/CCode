@@ -18,14 +18,14 @@ return {
             WINDOW.new(STR['build.start' .. (isAab and '.aab' or '')], {}, function() PROGRAMS.group[8]:setIsLocked(false, 'vertical') end, 1)
 
             timer.performWithDelay(1, function()
-                local folders = {'Resources', 'Images', 'Sounds', 'Videos', 'Fonts'}
-                local icons = {'mipmap-hdpi-v4', 'mipmap-mdpi-v4', 'mipmap-xhdpi-v4', 'mipmap-xxhdpi-v4', 'mipmap-xxxhdpi-v4'}
+                local flds = {'Resources', 'Images', 'Sounds', 'Videos', 'Fonts'}
+                local icons = {'mipmap-hdpi-v4', 'mipmap-mdpi-v4', 'mipmap-ldpi-v4', 'mipmap-xhdpi-v4', 'mipmap-xxhdpi-v4', 'mipmap-xxxhdpi-v4'}
                 -- local icons = {'mipmap-hdpi', 'mipmap-mdpi', 'mipmap-xhdpi', 'mipmap-xxhdpi', 'mipmap-xxxhdpi'}
 
-                for i = 1, #folders do
-                    for file in LFS.dir(DOC_DIR .. '/' .. link .. '/' .. folders[i]) do
+                for i = 1, #flds do
+                    for file in LFS.dir(DOC_DIR .. '/' .. link .. '/' .. flds[i]) do
                         if file ~= '.' and file ~= '..' then
-                            OS_COPY(DOC_DIR .. '/' .. link .. '/' .. folders[i] .. '/' .. file, DOC_DIR .. '/Build/' .. folders[i] .. '/' .. file)
+                            OS_COPY(DOC_DIR .. '/' .. link .. '/' .. flds[i] .. '/' .. file, DOC_DIR .. '/Build/' .. flds[i] .. '/' .. file)
                         end
                     end
                 end
@@ -81,6 +81,7 @@ return {
 
         LFS.mkdir(MY_PATH .. '/res/mipmap-hdpi-v4')
         LFS.mkdir(MY_PATH .. '/res/mipmap-mdpi-v4')
+        LFS.mkdir(MY_PATH .. '/res/mipmap-ldpi-v4')
         LFS.mkdir(MY_PATH .. '/res/mipmap-xhdpi-v4')
         LFS.mkdir(MY_PATH .. '/res/mipmap-xxhdpi-v4')
         LFS.mkdir(MY_PATH .. '/res/mipmap-xxxhdpi-v4')

@@ -50,6 +50,14 @@ M.getListButtons = function(type)
             STR['blocks.select.group'],
             STR['blocks.select.tag']
         }
+    elseif type == 'snapshotName' then
+        return {
+            STR['blocks.select.obj'],
+            STR['blocks.select.text'],
+            STR['blocks.select.group'],
+            STR['blocks.select.tag'],
+            STR['blocks.select.snapshot']
+        }
     elseif type == 'transitName' then
         return {
             STR['blocks.select.obj'],
@@ -116,6 +124,12 @@ M.getListValue = function(type, text)
             or text == STR['blocks.select.text'] and 'text'
             or text == STR['blocks.select.group'] and 'group'
             or text == STR['blocks.select.tag'] and 'tag' or 'pic'
+    elseif type == 'snapshotName' then
+        return text == STR['blocks.select.obj'] and 'obj'
+            or text == STR['blocks.select.text'] and 'text'
+            or text == STR['blocks.select.group'] and 'group'
+            or text == STR['blocks.select.tag'] and 'tag'
+            or text == STR['blocks.select.snapshot'] and 'snapshot' or 'obj'
     elseif type == 'transitName' then
         return text == STR['blocks.select.obj'] and 'obj'
             or text == STR['blocks.select.text'] and 'text'

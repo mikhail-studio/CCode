@@ -42,23 +42,17 @@ M['setWidgetListener'] = function(params)
 end
 
 M['removeWidget'] = function(params)
-    local name = CALC(params[1])
-
-    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' timer.new(10, 1, function() pcall(function()'
-    GAME.lua = GAME.lua .. ' GAME.group.widgets[name]:removeSelf() GAME.group.widgets[name] = nil end) end) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1]) .. ' '
+    GAME.lua = GAME.lua .. ' GAME.group.widgets[name]:removeSelf() GAME.group.widgets[name] = nil end)'
 end
 
 M['showWidget'] = function(params)
-    local name = CALC(params[1])
-
-    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' timer.new(10, 1, function()'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1]) .. ' timer.new(10, 1, function()'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[name].isVisible = true end) end) end)'
 end
 
 M['hideWidget'] = function(params)
-    local name = CALC(params[1])
-
-    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' timer.new(10, 1, function()'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1]) .. ' timer.new(10, 1, function()'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[name].isVisible = false end) end) end)'
 end
 
@@ -229,19 +223,22 @@ end
 
 M['insertToScroll'] = function(params)
     local scroll = CALC(params[1])
-    local object = CALC(params[2])
+    local name = CALC(params[2])
     local type = CALC(params[3], 'GAME.group.objects')
 
     if type == '(select[\'obj\']())' then type = 'GAME.group.objects'
     elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
     elseif type == '(select[\'snapshot\']())' then type = 'GAME.group.snapshots'
-    elseif type == '(select[\'group\']())' then type = 'GAME.group.groups' end
+    elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
+    elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
 
-    GAME.lua = GAME.lua .. ' pcall(function() local _scroll = ' .. scroll
-    GAME.lua = GAME.lua .. ' local obj, scroll = ' .. type .. '[' .. object .. '], GAME.group.widgets[_scroll]'
-    GAME.lua = GAME.lua .. ' obj.x, obj.y = GET_X(obj.x) + scroll.width / 2, 0 - GET_Y(obj.y)'
-    GAME.lua = GAME.lua .. ' scroll:insert(obj) obj._scroll = _scroll end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local _scroll, name = ' .. scroll .. ', ' .. name
+    GAME.lua = GAME.lua .. ' local obj, scroll = ' .. type .. '[name], GAME.group.widgets[_scroll] local function doTo(obj)'
+    GAME.lua = GAME.lua .. ' local _x, _y = GET_X(obj.x, obj), GET_Y(obj.y, obj) scroll:insert(obj) obj._scroll = _scroll'
+    GAME.lua = GAME.lua .. ' obj.x = SET_X(_x, obj) obj.y = SET_Y(_y, obj) end if \'' .. type .. '\' == \'GAME.group.tags\' then'
+    GAME.lua = GAME.lua .. ' pcall(function() local function doTag(tag) for _, child in ipairs(obj) do if child[2] == \'tags\' then'
+    GAME.lua = GAME.lua .. ' doTag(child[1]) else doTo(GAME.group[child[2]][child[1]]) end end end doTag(name) end) else doTo(obj) end end)'
 end
 
 M['takeFocusScroll'] = function(params)
@@ -251,6 +248,10 @@ end
 
 M['setFieldSecure'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. CALC(params[1]) .. '].isSecure = true end)'
+end
+
+M['removeFieldSecure'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.widgets[' .. CALC(params[1]) .. '].isSecure = false end)'
 end
 
 M['setFieldText'] = function(params)

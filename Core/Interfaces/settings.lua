@@ -1,5 +1,4 @@
 local LIST = require 'Core.Modules.interface-list'
-local FILTER = require 'Core.Modules.keystore-filter'
 local listeners = {}
 
 listeners.title = function(target)
@@ -11,7 +10,45 @@ listeners.orientation = function(e)
     e.target.rotation = e.target.rotation + 90 NEW_DATA() native.requestExit()
 end
 
+listeners.bottom_height = function(e)
+    local FILTER = require 'Core.Modules.height-filter'
+
+    INPUT.new(STR['settings.bottom_height.enterheight'], function(event)
+        if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
+            FILTER.check(event.target.text, function(ev)
+                if ev.isError then
+                    INPUT.remove(false)
+                    WINDOW.new(STR['errors.' .. ev.typeError], {STR['button.close'], STR['button.okay']})
+                else
+                    INPUT.remove(true, ev.text)
+                end
+            end)
+        end
+    end, function(e)
+        if e.input then
+            LOCAL.bottom_height = e.text
+            GET_SAFE_AREA()
+
+            MENU.group:removeSelf()
+            MENU.group = nil
+            MENU.create()
+
+            pcall(function()
+                NEW_BLOCK.remove()
+            end)
+
+            SETTINGS.group:removeSelf()
+            SETTINGS.group = nil
+            SETTINGS.create()
+            SETTINGS.group.isVisible = true
+
+            NEW_DATA()
+        end
+    end, LOCAL.bottom_height)
+end
+
 listeners.keystore = function(e)
+    local FILTER = require 'Core.Modules.keystore-filter'
     local list = LOCAL.keystore[1] == 'testkey'
     and {STR['settings.keystore.testkey'], STR['settings.keystore.custom']}
     or {STR['settings.keystore.custom'], STR['settings.keystore.testkey']}
@@ -197,7 +234,13 @@ listeners.lang = function(e)
 
             for k, v in pairs(LANG.ru) do
                 if not STR[k] then
-                    STR[k] = v
+                    STR[k] = LANG.en[k] or v
+                elseif type(STR[k]) == 'table' then
+                    for k2, v2 in ipairs(LANG.ru[k]) do
+                        if not STR[k][k2] then
+                            STR[k][k2] = (LANG.en[k] and LANG.en[k][k2]) and LANG.en[k][k2] or v2
+                        end
+                    end
                 end
             end
 

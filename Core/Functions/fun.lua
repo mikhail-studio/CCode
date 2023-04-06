@@ -141,4 +141,18 @@ M['unix_time'] = function()
     return os.time()
 end
 
+M['parameter'] = function(name, type, parameter)
+    local isComplete, result = pcall(function()
+        if name == nil and type ~= nil then
+            return GAME.group[type]
+        elseif name == nil then
+            return GAME.group
+        elseif parameter == nil then
+            return GAME.group[type][name or '0']
+        else
+            return GAME.group[type][name or '0'] and GAME.group[type][name or '0'][parameter] or nil
+        end
+    end) return isComplete and result or nil
+end
+
 return M

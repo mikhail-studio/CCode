@@ -5,7 +5,7 @@ M.fun = {
     keys = {},
     default = {
         'read_save', 'encode', 'len_table', 'concat', 'totable', 'tostring', 'tonumber', 'len', 'find',
-        'sub', 'gsub', 'split', 'unix_time', 'color_pixel', 'get_ip', 'random_str', 'match', 'noise'
+        'sub', 'gsub', 'split', 'unix_time', 'color_pixel', 'get_ip', 'random_str', 'match', 'noise', 'parameter'
     },
     noob = {
         'concat', 'random_str', 'tostring', 'tonumber', 'len', 'find', 'sub', 'gsub',
@@ -66,6 +66,13 @@ M.prop = {
         noob = {
             'sound_volume', 'sound_total_time', 'sound_pause', 'sound_play'
         }
+    },
+
+    files = {
+        names = {},
+        keys = {
+            'length', 'is_file', 'is_folder', 'last_modified'
+        }
     }
 }
 
@@ -98,8 +105,10 @@ M.set = function(key, name)
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
-        elseif name == 'gsub' or name == 'sub' then
+        elseif name == 'gsub' or name == 'sub' or name == 'parameter' then
+            if name == 'parameter' then table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {'_link', 't'}) end
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
+            if name == 'parameter' then table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {'objects', 't'}) end
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
         elseif name == 'find' or name == 'match' or name == 'color_pixel' or name == 'random'
         or name == 'power' or name == 'remainder' or name == 'atan2' or name == 'noise' or name == 'round' then
@@ -124,6 +133,10 @@ M.new = function()
 
     for i = 1, #M.prop.group.keys do
         M.prop.group.names[i] = STR['editor.list.prop.group.' .. M.prop.group.keys[i]]
+    end
+
+    for i = 1, #M.prop.files.keys do
+        M.prop.files.names[i] = STR['editor.list.prop.files.' .. M.prop.files.keys[i]]
     end
 
     for i = 1, #M.prop.media.keys do

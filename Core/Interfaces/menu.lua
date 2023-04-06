@@ -8,11 +8,6 @@ listeners.but_myprogram = function(target)
 end
 
 function _supportOldestVersion(data, link)
-    if tonumber(data.build) < BUILD then
-        data.build = tostring(BUILD)
-        SET_GAME_CODE(link, data)
-    end
-
     if tonumber(data.build) < 1215 then
         local scripts = COPY_TABLE(data.scripts)
         LFS.mkdir(DOC_DIR .. '/' .. link .. '/Scripts')
@@ -27,17 +22,27 @@ function _supportOldestVersion(data, link)
 
     local script = GET_GAME_SCRIPT(link, 1, data)
 
-    if tonumber(data.build) > 1232 and tonumber(data.build) < 1242 then
+    if tonumber(data.build) > 1232 and tonumber(data.build) < 1244 then
         for i = 1, #data.scripts do
             local script, nestedInfo, isChange = GET_FULL_DATA(GET_GAME_SCRIPT(link, i, data))
-            for j = 1, #script.params do
-                local name = script.params[j].name
 
-                if name == 'readFileRes' then
-                    script.params[j].params[1], script.params[j].params[2] = script.params[j].params[2], script.params[j].params[1]
-                    script.params[j].params[3], isChange = {{'inputDefault', 'sl'}}, true
+            if tonumber(data.build) < 1244 then
+                script.comment = false
+                isChange = true
+            end
+
+            if tonumber(data.build) < 1242 then
+                for j = 1, #script.params do
+                    local name = script.params[j].name
+
+                    if name == 'readFileRes' then
+                        script.params[j].params[1], script.params[j].params[2] = script.params[j].params[2], script.params[j].params[1]
+                        script.params[j].params[3], isChange = {{'inputDefault', 'sl'}}, true
+                    end
                 end
-            end if isChange then SET_GAME_SCRIPT(link, GET_NESTED_DATA(script, nestedInfo, INFO), i, data) end
+            end
+
+            if isChange then SET_GAME_SCRIPT(link, GET_NESTED_DATA(script, nestedInfo, INFO), i, data) end
         end
     end
 
@@ -56,6 +61,11 @@ function _supportOldestVersion(data, link)
     if script and script.custom then
         DEL_GAME_SCRIPT(link, 1, data)
         table.remove(data.scripts, 1)
+        SET_GAME_CODE(link, data)
+    end
+
+    if tonumber(data.build) < BUILD then
+        data.build = tostring(BUILD)
         SET_GAME_CODE(link, data)
     end
 end
@@ -94,6 +104,10 @@ end
 
 listeners.but_social = function(target)
     system.openURL('https://discord.gg/7eYnvAgXdX')
+end
+
+listeners.but_dogs = function(target)
+    native.showAlert('CCode', 'Временно недоступно/Temporarily unavailable', {'Ok'})
 end
 
 return function(e)

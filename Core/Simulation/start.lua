@@ -52,16 +52,17 @@ local function getStartLua(linkBuild)
     local cod17 = ' #GAME.group.resumes do GAME.group.resumes[i]() end end end Runtime:addEventListener(\'system\', GAME.group.const.system)'
     local cod18 = ' GAME.group.textures = {} GAME.group.accelerometers = {} GAME.hash = CRYPTO.digest(CRYPTO.md5, math.random(1, 999999999))'
     local cod19 = ' local hash = GAME.hash GAME.group.networks = {} GAME.group.const.touch_x, GAME.group.const.touch_y = 0, 0'
-    local cod20 = ' GAME.group.snapshots = {}'
+    local cod20 = ' local tmp = DOC_DIR .. \'/\' .. CURRENT_LINK .. \'/Temps\' OS_REMOVE(tmp, true) LFS.mkdir(tmp)'
+    local cod21 = ' GAME.group.snapshots = {} GAME.group.joints = {}'
 
     if linkBuild then
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. require 'Data.build'
-            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10
-            .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19 .. cod20
+            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10 .. cod11
+            .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19 .. cod20 .. cod21
     else
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. funs1 .. funs2 .. funs3 .. funs4
-            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10
-            .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19 .. cod20
+            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10 .. cod11
+            .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19 .. cod20 .. cod21
     end
 end
 
@@ -90,7 +91,8 @@ M.remove = function()
     pcall(function() for _, v in ipairs(M.group.stops) do v() end end) M.isStarted = nil
     pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
     pcall(function() M.group:removeSelf() M.group = nil end) M.RESOURCES = nil SEED = os.time() math.randomseed(SEED)
-    pcall(function() for child = display.currentStage.numChildren, 1, -1 do
+    pcall(function() for child = display.currentStage.numChildren, 1, -1 do if display.currentStage[child].wtype
+    then timer.new(1, 1, function() pcall(function() display.currentStage[child]:removeSelf() end) end) end
     if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
     timer.performWithDelay(1, function() if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true})
     if (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) then GAME_GROUP_OPEN.scroll:scrollToPosition({y = M.scrollY, time = 0}) end end end)
@@ -118,20 +120,24 @@ M.new = function(linkBuild, isDebug)
     local eventComment = false
     local custom = GET_GAME_CUSTOM()
 
-    for i = 1, #M.data.scripts do
-        M.scripts[i] = GET_FULL_DATA(GET_GAME_SCRIPT(linkBuild or CURRENT_LINK, i, M.data))
+    for index = 1, #M.data.scripts do local i = #M.scripts + 1
+        M.scripts[i] = GET_FULL_DATA(GET_GAME_SCRIPT(linkBuild or CURRENT_LINK, index, M.data))
 
-        for j = 1, #M.scripts[i].params do
-            local name = M.scripts[i].params[j].name
-            local index = UTF8.sub(name, 7, UTF8.len(name))
-            dataCustom[index] = UTF8.sub(name, 1, 6) == 'custom'
+        if M.scripts[i].comment then
+            table.remove(M.scripts, i)
+        else
+            for j = 1, #M.scripts[i].params do
+                local name = M.scripts[i].params[j].name
+                local index = UTF8.sub(name, 7, UTF8.len(name))
+                dataCustom[index] = UTF8.sub(name, 1, 6) == 'custom'
 
-            if not dataCustom[index] then
-                for u = 1, #M.scripts[i].params[j].params do
-                    for o = #M.scripts[i].params[j].params[u], 1, -1 do
-                        if M.scripts[i].params[j].params[u][o][2] == 'fC' then
-                            local name = M.scripts[i].params[j].params[u][o][1]
-                            dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = true
+                if not dataCustom[index] then
+                    for u = 1, #M.scripts[i].params[j].params do
+                        for o = #M.scripts[i].params[j].params[u], 1, -1 do
+                            if M.scripts[i].params[j].params[u][o][2] == 'fC' then
+                                local name = M.scripts[i].params[j].params[u][o][1]
+                                dataCustom[UTF8.sub(name, 7, UTF8.len(name))] = true
+                            end
                         end
                     end
                 end

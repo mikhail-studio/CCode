@@ -69,7 +69,8 @@ listeners.blocks = function()
                 local custom = GET_GAME_CUSTOM() custom[BLOCKS.custom.index] = {
                     BLOCKS.custom.name, COPY_TABLE(BLOCKS.custom.params),
                     COPY_TABLE(GET_GAME_SCRIPT(CURRENT_LINK, 1, data)), os.time(), COPY_TABLE(BLOCKS.custom.color),
-                    (EDITOR and EDITOR.restart and EDITOR.restart[6]) and COPY_TABLE(EDITOR.restart[8]) or nil
+                    (EDITOR and EDITOR.restart and EDITOR.restart[6]) and COPY_TABLE(EDITOR.restart[8])
+                    or (custom[BLOCKS.custom.index] and custom[BLOCKS.custom.index][6] or nil)
                 } custom.len = custom.len + (BLOCKS.custom.isChange and 0 or 1) SET_GAME_CUSTOM(custom)
 
                 local blockParams = {} for i = 1, #custom[BLOCKS.custom.index][2]

@@ -26,9 +26,10 @@ M['addToSnapshot'] = function(params)
 
     GAME.lua = GAME.lua .. ' pcall(function() local name, snapshot = ' .. name .. ', ' .. snapshot .. ' local obj = ' .. type .. '[name]'
     GAME.lua = GAME.lua .. ' local function doTo(obj) GAME.group.snapshots[snapshot][' .. mode .. ']:insert(obj)'
-    GAME.lua = GAME.lua .. ' obj._snapshot, obj.x, obj.y = snapshot, GET_X(obj.x), GET_Y(obj.y) end if \'' .. type .. '\' =='
+    GAME.lua = GAME.lua .. ' obj._snapshot, obj.x, obj.y = snapshot, GET_X(obj.x, obj), GET_Y(obj.y, obj) end if \'' .. type .. '\' =='
     GAME.lua = GAME.lua .. ' \'GAME.group.tags\' then pcall(function() local function doTag(tag) for _, child in ipairs(obj) do if child[2]'
-    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(child[1]) end end end doTag(name) end) else doTo(obj) end end)'
+    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(GAME.group[child[2]][child[1]])'
+    GAME.lua = GAME.lua .. ' end end end doTag(name) end) else doTo(obj) end end)'
 end
 
 M['removeFromSnapshot'] = function(params)

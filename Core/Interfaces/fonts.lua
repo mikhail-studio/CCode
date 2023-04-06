@@ -160,7 +160,7 @@ listeners.but_okay = function(target)
 
             if FONTS.group.blocks[i].checkbox.isOn then
                 table.remove(data.resources.fonts, i)
-                OS_REMOVE(RES_PATH .. '/' .. FONTS.group.blocks[i].link)
+                OS_REMOVE(RES_PATH .. '/' .. CURRENT_LINK .. '_' .. FONTS.group.blocks[i].link)
                 OS_REMOVE(DOC_DIR .. '/' .. CURRENT_LINK .. '/Fonts/' .. FONTS.group.blocks[i].link)
                 FONTS.group.blocks[i].remove(i)
             end

@@ -73,10 +73,11 @@ if 'Группы' then
     M['setGroupPos'] = function(params)
         local name = CALC(params[1])
         local posX = CALC(params[2])
-        local posY = '0 - (' .. CALC(params[3]) .. ')'
+        local posY = CALC(params[3])
 
-        GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' GAME.group.groups[name].x = ' .. posX
-        GAME.lua = GAME.lua .. ' GAME.group.groups[name].y = ' .. posY .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name].x = SET_X(' .. posX .. ', GAME.group.groups[name])'
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name].y =  SET_Y(' .. posY .. ', GAME.group.groups[name]) end)'
     end
 
     M['setGroupSize'] = function(params)

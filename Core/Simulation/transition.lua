@@ -42,7 +42,8 @@ M['setTransitionTo'] = function(params)
     GAME.lua = GAME.lua .. ' width = ' .. width .. ', height = ' .. height .. ', rotation = ' .. rotation .. ', alpha = ' .. alpha .. ','
     GAME.lua = GAME.lua .. ' xScale = ' .. scaleX .. ', yScale = ' .. scaleY .. ', y = ' .. posY .. '}) end if \'' .. type .. '\' =='
     GAME.lua = GAME.lua .. ' \'GAME.group.tags\' then pcall(function() local function doTag(tag) for _, child in ipairs(obj) do if child[2]'
-    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(child[1]) end end end doTag(name) end) else doTo(obj) end end)'
+    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(GAME.group[child[2]][child[1]])'
+    GAME.lua = GAME.lua .. ' end end end doTag(name) end) else doTo(obj) end end)'
 end
 
 M['setTransitionPos'] = function(params)
@@ -76,7 +77,8 @@ M['setTransitionPos'] = function(params)
     GAME.lua = GAME.lua .. ' time = ' .. time .. ' * 1000, iterations = ' .. count .. ', transition = easing.' .. easing .. ','
     GAME.lua = GAME.lua .. ' x = ' .. posX .. ', y = ' .. posY .. '}) end if \'' .. type .. '\' == \'GAME.group.tags\''
     GAME.lua = GAME.lua .. ' then pcall(function() local function doTag(tag) for _, child in ipairs(obj) do if child[2]'
-    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(child[1]) end end end doTag(name) end) else doTo(obj) end end)'
+    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(GAME.group[child[2]][child[1]])'
+    GAME.lua = GAME.lua .. ' end end end doTag(name) end) else doTo(obj) end end)'
 end
 
 M['setTransitionSize'] = function(params)
@@ -112,7 +114,8 @@ M['setTransitionSize'] = function(params)
     GAME.lua = GAME.lua .. ' time = ' .. time .. ' * 1000, iterations = ' .. count .. ', transition = easing.' .. easing .. ','
     GAME.lua = GAME.lua .. ' width = ' .. width .. ', height = ' .. height .. '}) end if \'' .. type .. '\' == \'GAME.group.tags\''
     GAME.lua = GAME.lua .. ' then pcall(function() local function doTag(tag) for _, child in ipairs(obj) do if child[2]'
-    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(child[1]) end end end doTag(name) end) else doTo(obj) end end)'
+    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(GAME.group[child[2]][child[1]])'
+    GAME.lua = GAME.lua .. ' end end end doTag(name) end) else doTo(obj) end end)'
 end
 
 M['setTransitionScale'] = function(params)
@@ -146,7 +149,8 @@ M['setTransitionScale'] = function(params)
     GAME.lua = GAME.lua .. ' time = ' .. time .. ' * 1000, iterations = ' .. count .. ', transition = easing.' .. easing .. ','
     GAME.lua = GAME.lua .. ' xScale = ' .. scaleX .. ', yScale = ' .. scaleY .. '}) end if \'' .. type .. '\' == \'GAME.group.tags\''
     GAME.lua = GAME.lua .. ' then pcall(function() local function doTag(tag) for _, child in ipairs(obj) do if child[2]'
-    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(child[1]) end end end doTag(name) end) else doTo(obj) end end)'
+    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(GAME.group[child[2]][child[1]])'
+    GAME.lua = GAME.lua .. ' end end end doTag(name) end) else doTo(obj) end end)'
 end
 
 M['setTransitionRotation'] = function(params)
@@ -178,7 +182,8 @@ M['setTransitionRotation'] = function(params)
     GAME.lua = GAME.lua .. ' time = ' .. time .. ' * 1000, iterations = ' .. count .. ', transition = easing.' .. easing .. ','
     GAME.lua = GAME.lua .. ' rotation = ' .. rotation .. '}) end if \'' .. type .. '\' == \'GAME.group.tags\''
     GAME.lua = GAME.lua .. ' then pcall(function() local function doTag(tag) for _, child in ipairs(obj) do if child[2]'
-    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(child[1]) end end end doTag(name) end) else doTo(obj) end end)'
+    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(GAME.group[child[2]][child[1]])'
+    GAME.lua = GAME.lua .. ' end end end doTag(name) end) else doTo(obj) end end)'
 end
 
 M['setTransitionAlpha'] = function(params)
@@ -211,7 +216,8 @@ M['setTransitionAlpha'] = function(params)
     GAME.lua = GAME.lua .. ' time = ' .. time .. ' * 1000, iterations = ' .. count .. ', transition = easing.' .. easing .. ','
     GAME.lua = GAME.lua .. ' alpha = ' .. alpha .. '}) end if \'' .. type .. '\' == \'GAME.group.tags\''
     GAME.lua = GAME.lua .. ' then pcall(function() local function doTag(tag) for _, child in ipairs(obj) do if child[2]'
-    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(child[1]) end end end doTag(name) end) else doTo(obj) end end)'
+    GAME.lua = GAME.lua .. ' == \'tags\' then doTag(child[1]) else doTo(GAME.group[child[2]][child[1]])'
+    GAME.lua = GAME.lua .. ' end end end doTag(name) end) else doTo(obj) end end)'
 end
 
 M['setTransitionAngles'] = function(params)
@@ -242,7 +248,8 @@ M['setTransitionAngles'] = function(params)
         GAME.lua = GAME.lua .. ' x3 = p.x3, y3 = p.y3, x4 = p.x4, y4 = p.y4, time = ' .. time .. ' * 1000, iterations = ' .. count .. ','
         GAME.lua = GAME.lua .. ' transition = easing.' .. easing .. '}) end if \'' .. type .. '\' == \'GAME.group.tags\''
         GAME.lua = GAME.lua .. ' then pcall(function() local function doTag(tag) for _, child in ipairs(obj) do if child[2] == \'tags\''
-        GAME.lua = GAME.lua .. ' then doTag(child[1]) else doTo(child[1]) end end end doTag(name) end) else doTo(obj) end end)'
+        GAME.lua = GAME.lua .. ' then doTag(child[1]) else doTo(GAME.group[child[2]][child[1]])'
+        GAME.lua = GAME.lua .. ' end end end doTag(name) end) else doTo(obj) end end)'
     end
 end
 

@@ -159,8 +159,8 @@ local listener = function(e, scroll, group, type)
                             shadow:setFillColor(0)
                         group_image:insert(shadow)
 
-                        display.setDefault('magTextureFilter', e.target.filter ~= 'linear' and 'nearest' or 'linear')
-                        display.setDefault('minTextureFilter', e.target.filter ~= 'linear' and 'nearest' or 'linear')
+                        display.setDefault('magTextureFilter', e.target.filter == 'linear' and 'linear' or 'nearest')
+                        display.setDefault('minTextureFilter', e.target.filter == 'linear' and 'linear' or 'nearest')
 
                         local icon = display.newImage(CURRENT_LINK .. '/Images/' .. e.target.link, system.DocumentsDirectory)
                             local diffSize = icon.height / icon.width
@@ -311,7 +311,7 @@ local listener = function(e, scroll, group, type)
                         group_font:insert(shadow)
 
                         local new_font = io.open(DOC_DIR .. '/' .. CURRENT_LINK .. '/Fonts/' .. e.target.link, 'rb')
-                        local main_font = io.open(RES_PATH .. '/' .. e.target.link, 'wb')
+                        local main_font = io.open(RES_PATH .. '/' .. CURRENT_LINK .. '_' .. e.target.link, 'wb')
 
                         if main_font and new_font then
                             main_font:write(new_font:read('*a'))
@@ -381,7 +381,7 @@ local listener = function(e, scroll, group, type)
     end
 end
 
-M.new = function(text, scroll, group, type, index, filter, link)
+M.new = function(text, scroll, group, type, index, filter, link, comment)
     local y = index == 1 and 75 or group.data[index - 1].y + 150
     local text, type = tostring(text), tostring(type)
     table.insert(group.blocks, index, {})
@@ -460,7 +460,8 @@ M.new = function(text, scroll, group, type, index, filter, link)
             group.blocks[index].container:insert(group.blocks[index].icon, true)
         end
     elseif type == 'scripts' then
-        group.blocks[index].icon = display.newImage('Sprites/iconScript.png')
+        group.blocks[index].turn = not comment
+        group.blocks[index].icon = display.newImage('Sprites/icon' .. (group.blocks[index].turn and 'Script' or 'Comment') .. '.png')
         group.blocks[index].container:insert(group.blocks[index].icon, true)
     elseif type == 'sounds' then
         group.blocks[index].icon = display.newImage('Sprites/iconSound.png')

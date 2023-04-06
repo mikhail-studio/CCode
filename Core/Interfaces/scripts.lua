@@ -33,14 +33,16 @@ listeners.but_add = function(target)
                 for i = 1, #SCRIPTS.group.data do
                     if SCRIPTS.group.data[i].y > targetY then
                         table.insert(data.scripts, i, GET_INDEX_SCRIPT(CURRENT_LINK))
-                        SET_GAME_SCRIPT(CURRENT_LINK, {title = e.text, params = {}, vars = {}, tables = {}, funs = {}}, i, data)
-                        SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(e.text, i) return
+                        SET_GAME_SCRIPT(CURRENT_LINK, {
+                            title = e.text, params = {}, vars = {}, tables = {}, funs = {}, comment = false
+                        }, i, data) SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(e.text, i, false) return
                     end
                 end
 
                 table.insert(data.scripts, #data.scripts + 1, GET_INDEX_SCRIPT(CURRENT_LINK))
-                SET_GAME_SCRIPT(CURRENT_LINK, {title = e.text, params = {}, vars = {}, tables = {}, funs = {}}, #data.scripts, data)
-                SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(e.text, #SCRIPTS.group.blocks + 1)
+                SET_GAME_SCRIPT(CURRENT_LINK, {
+                    title = e.text, params = {}, vars = {}, tables = {}, funs = {}, comment = false
+                }, #data.scripts, data) SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(e.text, #SCRIPTS.group.blocks + 1, false)
             end
         end)
     else
@@ -59,11 +61,12 @@ listeners.but_list = function(target)
     if #SCRIPTS.group.blocks > 0 then
         SCRIPTS.group[8]:setIsLocked(true, 'vertical')
         if SCRIPTS.group.isVisible then
-            LIST.new({STR['button.remove'], STR['button.rename'], STR['button.copy'], STR['button.from.buffer']},
+            LIST.new({STR['button.remove'], STR['button.rename'], STR['button.copy'], STR['button.from.buffer'], STR['button.comment']},
                 MAX_X, target.y - target.height / 2, 'down', function(e)
                     SCRIPTS.group[8]:setIsLocked(false, 'vertical')
 
-                    if e.index ~= 0 and e.index < 4 then
+                    if e.index == 5 then e.index = 6 end
+                    if e.index ~= 0 and e.index ~= 4 then
                         ALERT = false
                         INDEX_LIST = e.index
                         EXITS.add(listeners.but_okay_end)
@@ -74,7 +77,14 @@ listeners.but_list = function(target)
                         SCRIPTS.group[7].isVisible = true
                     end
 
-                    if e.index == 1 then
+                    if e.index == 6 then
+                        MORE_LIST = true
+                        SCRIPTS.group[3].text = '(' .. STR['button.comment'] .. ')'
+
+                        for i = 1, #SCRIPTS.group.blocks do
+                            SCRIPTS.group.blocks[i].checkbox.isVisible = true
+                        end
+                    elseif e.index == 1 then
                         MORE_LIST = true
                         SCRIPTS.group[3].text = '(' .. STR['button.remove'] .. ')'
 
@@ -115,7 +125,7 @@ listeners.but_list = function(target)
                                     for index, _ in ipairs(data.scripts) do
                                         local script_config = GET_GAME_SCRIPT(CURRENT_LINK, index, data)
                                         if UTF8.find(UTF8.lower(script_config.title), UTF8.lower(e.text)) then
-                                            SCRIPTS.new(script_config.title, #SCRIPTS.group.blocks + 1)
+                                            SCRIPTS.new(script_config.title, #SCRIPTS.group.blocks + 1, script_config.comment)
                                         end
                                     end
                                 end)
@@ -135,13 +145,13 @@ listeners.but_list = function(target)
                                     if SCRIPTS.group.data[i].y > targetY then
                                         table.insert(data.scripts, i, GET_INDEX_SCRIPT(CURRENT_LINK))
                                         SET_GAME_SCRIPT(CURRENT_LINK, COPY_TABLE(BUFFER), i, data)
-                                        SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(BUFFER.title, i) BUFFER = {} return
+                                        SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(BUFFER.title, i, BUFFER.comment) BUFFER = {} return
                                     end
                                 end
 
                                 table.insert(data.scripts, #data.scripts + 1, GET_INDEX_SCRIPT(CURRENT_LINK))
-                                SET_GAME_SCRIPT(CURRENT_LINK, COPY_TABLE(BUFFER), #data.scripts, data)
-                                SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(BUFFER.title, #SCRIPTS.group.blocks + 1) BUFFER = {}
+                                SET_GAME_SCRIPT(CURRENT_LINK, COPY_TABLE(BUFFER), #data.scripts, data) SET_GAME_CODE(CURRENT_LINK, data)
+                                SCRIPTS.new(BUFFER.title, #SCRIPTS.group.blocks + 1, BUFFER.comment) BUFFER = {}
                             end
                         end, SCRIPTS.group.blocks)
                     end
@@ -256,18 +266,44 @@ listeners.but_okay = function(target)
                                 table.insert(data.scripts, j, GET_INDEX_SCRIPT(CURRENT_LINK))
                                 SET_GAME_SCRIPT(CURRENT_LINK, {
                                     title = e.text, params = script.params,
-                                    vars = script.vars, tables = script.tables, funs = script.funs
-                                }, j, data) SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(e.text, j) return
+                                    vars = script.vars, tables = script.tables, funs = script.funs, comment = script.comment
+                                }, j, data) SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(e.text, j, script.comment) return
                             end
                         end
 
                         table.insert(data.scripts, #data.scripts + 1, GET_INDEX_SCRIPT(CURRENT_LINK))
                         SET_GAME_SCRIPT(CURRENT_LINK, {
                             title = e.text, params = script.params,
-                            vars = script.vars, tables = script.tables, funs = script.funs
-                        }, #data.scripts, data) SET_GAME_CODE(CURRENT_LINK, data) SCRIPTS.new(e.text, #SCRIPTS.group.blocks + 1)
+                            vars = script.vars, tables = script.tables, funs = script.funs, comment = script.comment
+                        }, #data.scripts, data) SET_GAME_CODE(CURRENT_LINK, data)
+                        SCRIPTS.new(e.text, #SCRIPTS.group.blocks + 1, script.comment)
                     end
                 end, SCRIPTS.group.blocks[i].text.text)
+            end
+        end
+    elseif INDEX_LIST == 6 then
+        local data = GET_GAME_CODE(CURRENT_LINK)
+
+        for i = #SCRIPTS.group.data, 1, -1 do
+            SCRIPTS.group.blocks[i].checkbox.isVisible = false
+
+            if SCRIPTS.group.blocks[i].checkbox.isOn then
+                SCRIPTS.group.blocks[i].checkbox:setState({isOn = false})
+                SCRIPTS.group.blocks[i].icon:removeSelf()
+
+                if SCRIPTS.group.blocks[i].turn then
+                    SCRIPTS.group.blocks[i].turn = false
+                    SCRIPTS.group.blocks[i].icon = display.newImage('Sprites/iconComment.png')
+                else
+                    SCRIPTS.group.blocks[i].turn = true
+                    SCRIPTS.group.blocks[i].icon = display.newImage('Sprites/iconScript.png')
+                end
+
+                local script = GET_GAME_SCRIPT(CURRENT_LINK, i, data)
+                script.comment = not SCRIPTS.group.blocks[i].turn
+                SET_GAME_SCRIPT(CURRENT_LINK, script, i, data)
+
+                SCRIPTS.group.blocks[i].container:insert(SCRIPTS.group.blocks[i].icon, true)
             end
         end
     end

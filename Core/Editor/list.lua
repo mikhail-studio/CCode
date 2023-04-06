@@ -35,6 +35,7 @@ listeners.listener = function(e)
                     e.target.text.id == '/pobj' and 'p' or
                     e.target.text.id == '/ptext' and 'p' or
                     e.target.text.id == '/pmedia' and 'p' or
+                    e.target.text.id == '/pfiles' and 'p' or
                     e.target.text.id == '/pgroup' and 'p' or
                     e.target.text.id == '/pwidget' and 'p' or 't'
 
@@ -104,7 +105,7 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
                     or target.text.id == 'tevent' or target.text.id == 'tscript' or target.text.id == 'tproject'
                     or target.text.id == 'pobj' or target.text.id == 'ptext' or target.text.id == 'pgroup'
                     or target.text.id == 'pwidget' or target.text.id == 'pmedia' or target.text.id == 'fcustom'
-                    or target.text.id == 'fscript' or target.text.id == 'fproject' then
+                    or target.text.id == 'fscript' or target.text.id == 'fproject' or target.text.id == 'pfiles' then
                         listScroll.buttons[i]:setFillColor(0.17, 0.17, 0.19)
                     else
                         listScroll.buttons[i]:setFillColor(0.14, 0.14, 0.16)
@@ -119,12 +120,14 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
                         elseif BLOCKS.custom then
                             listScroll.buttons[i].text.id = id == 1 and (j == 1 and 'event' or 'script')
                             or (id == 2 and (j == 1 and 'tevent' or 'tscript') or (id == 3 and (j == 1 and 'fcustom' or 'fscript')
-                            or (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup' or j == 4 and 'pwidget' or 'pmedia')))
+                            or (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup'
+                            or j == 4 and 'pwidget' or j == 5 and 'pmedia' or 'pfiles')))
                         else
                             listScroll.buttons[i].text.id = id == 1 and (j == 1 and 'event' or j == 2 and 'script' or 'project')
                             or (id == 2 and (j == 1 and 'tevent' or j == 2 and 'tscript' or 'tproject')
                             or (id == 3 and (j == 1 and 'fcustom' or j == 2 and 'fscript' or 'fproject')
-                            or (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup' or j == 4 and 'pwidget' or 'pmedia')))
+                            or (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup'
+                            or j == 4 and 'pwidget' or j == 5 and 'pmedia' or 'pfiles')))
                         end
                     elseif isList then
                         listScroll.buttons[i].text.id = buttons.keys[j]
@@ -136,7 +139,8 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
                         or target.text.id == 'ptext' and 'text.' .. buttons.keys[j]
                         or target.text.id == 'pgroup' and 'group.' .. buttons.keys[j]
                         or target.text.id == 'pmedia' and 'media.' .. buttons.keys[j]
-                        or target.text.id == 'pwidget' and 'widget.' .. buttons.keys[j] or nil
+                        or target.text.id == 'pwidget' and 'widget.' .. buttons.keys[j]
+                        or target.text.id == 'pfiles' and 'files.' .. buttons.keys[j] or nil
                     end
                     listScroll.buttons[i].text.anchorX = 0
                 listScroll:insert(listScroll.buttons[i].text)
@@ -204,6 +208,10 @@ end
 
 listeners.pmedia = function(target)
     listeners.set(target, EDITOR.prop.media)
+end
+
+listeners.pfiles = function(target)
+    listeners.set(target, EDITOR.prop.files)
 end
 
 listeners.pwidget = function(target)
@@ -297,7 +305,7 @@ listeners.prop = function(target)
     else
         listeners.set(target, {
             STR['editor.list.prop.obj'], STR['editor.list.prop.text'], STR['editor.list.prop.group'],
-            STR['editor.list.prop.widget'], STR['editor.list.prop.media']
+            STR['editor.list.prop.widget'], STR['editor.list.prop.media'], STR['editor.list.prop.files']
         }, true, nil, 4)
     end
 end

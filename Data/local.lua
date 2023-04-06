@@ -4,6 +4,7 @@ local file = io.open(system.pathForFile('local.json', system.DocumentsDirectory)
 if file then
     data = JSON.decode(file:read('*a')) io.close(file)
     if data.autoplace == nil then data.autoplace = true end
+    if data.bottom_height == nil then data.bottom_height = 0 end
     if data.keystore == nil then data.keystore = {'testkey'} end data.back = 'System'
     WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), JSON.encode(data))
 else
@@ -14,6 +15,7 @@ else
         orientation = 'portrait',
         back = 'System',
         keystore = {'testkey'},
+        bottom_height = 0,
         autoplace = true,
         show_ads = true,
         pos_top_ads = true,

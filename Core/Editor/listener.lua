@@ -92,7 +92,8 @@ M.rect = function(target, restart, data)
             if e.input then
                 script.params[blockIndex].params[paramsIndex][1] = {e.rgb, 'c'}
                 BLOCKS.group.blocks[blockIndex].data.params[paramsIndex][1] = {e.rgb, 'c'}
-                BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[blockIndex].data.params, paramsIndex)
+                BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text =
+                BLOCK.getParamsValueText(BLOCKS.group.blocks[blockIndex].data.params, paramsIndex)
                 SET_GAME_CODE(CURRENT_LINK, data)
                 SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
             end
@@ -127,7 +128,8 @@ M.rect = function(target, restart, data)
             if e.index > 0 then
                 script.params[blockIndex].params[paramsIndex][1] = {PARAMS.getListValue(type, e.text), 'sl'}
                 BLOCKS.group.blocks[blockIndex].data.params[paramsIndex][1] = {PARAMS.getListValue(type, e.text), 'sl'}
-                BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text = BLOCK.getParamsValueText(BLOCKS.group.blocks[blockIndex].data.params, paramsIndex)
+                BLOCKS.group.blocks[blockIndex].params[paramsIndex].value.text =
+                BLOCK.getParamsValueText(BLOCKS.group.blocks[blockIndex].data.params, paramsIndex)
                 SET_GAME_CODE(CURRENT_LINK, data)
                 SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
             end
@@ -310,18 +312,26 @@ M['Local'] = function(data, cursor, backup)
 end
 
 M['Hide'] = function(data, cursor, backup)
-    local list = require 'Core.Editor.list'
+    local list, buttons = require 'Core.Editor.list'
     EDITOR.group[66]:scrollToPosition({y = 0, time = 0})
 
     for i = 1, 8 do
         if EDITOR.group[66].buttons[i].isOpen then
-            local buttons = i < 3 and {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}
-            or i == 4 and {
-                STR['editor.list.prop.obj'], STR['editor.list.prop.text'], STR['editor.list.prop.group'],
-                STR['editor.list.prop.widget'], STR['editor.list.prop.media']
-            }
-            or i == 3 and {STR['editor.list.custom'], STR['editor.list.script'], STR['editor.list.project']} or i == 5 and EDITOR.fun
-            or i == 6 and EDITOR.math or i == 7 and EDITOR.log or EDITOR.device
+            if NOOBMODE then
+                buttons = i < 3 and {STR['editor.list.project']} or i == 4 and {
+                    STR['editor.list.prop.obj.noob'], STR['editor.list.prop.text'], STR['editor.list.prop.group'],STR['editor.list.prop.media']
+                } or i == 3 and {STR['editor.list.project']} or i == 5 and EDITOR.fun
+                or i == 6 and EDITOR.math or i == 7 and EDITOR.log or EDITOR.device
+            else
+                buttons = i < 3 and {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}
+                or i == 4 and {
+                    STR['editor.list.prop.obj'], STR['editor.list.prop.text'], STR['editor.list.prop.group'],
+                    STR['editor.list.prop.widget'], STR['editor.list.prop.media'], STR['editor.list.prop.files']
+                }
+                or i == 3 and {STR['editor.list.custom'], STR['editor.list.script'], STR['editor.list.project']} or i == 5 and EDITOR.fun
+                or i == 6 and EDITOR.math or i == 7 and EDITOR.log or EDITOR.device
+            end
+
             list.set(EDITOR.group[66].buttons[i], buttons, i < 5, i > 4)
         end
     end

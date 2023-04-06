@@ -442,19 +442,23 @@ return ' ' .. UTF8.trimFull([===[
             end
 
             SET_X = function(x, obj)
-                return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-                and GAME.group.widgets[obj._scroll].wtype == 'scroll')
+                if obj and obj._isGroup then return x end
+                return type(x) == 'number' and (((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+                and GAME.group.widgets[obj._scroll].wtype == 'scroll') or (obj and obj._snapshot))
                 and x + GAME.group.widgets[obj._scroll].width / 2 or CENTER_X + x) or 0
             end
 
             SET_Y = function(y, obj)
-                return type(y) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-                and GAME.group.widgets[obj._scroll].wtype == 'scroll') and 0 - y or CENTER_Y - y) or 0
+                if obj and obj._isGroup then return type(y) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+                and GAME.group.widgets[obj._scroll].wtype == 'scroll') and 0 - y - CENTER_Y or 0 - y ) or 0 end
+                return type(y) == 'number' and (((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+                and GAME.group.widgets[obj._scroll].wtype == 'scroll') or (obj and obj._snapshot)) and 0 - y or CENTER_Y - y) or 0
             end
 
             GET_X = function(x, obj)
-                return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-                and GAME.group.widgets[obj._scroll].wtype == 'scroll')
+                if obj and obj._isGroup then return x end
+                return type(x) == 'number' and (((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+                and GAME.group.widgets[obj._scroll].wtype == 'scroll') or (obj and obj._snapshot))
                 and x - GAME.group.widgets[obj._scroll].width / 2 or x - CENTER_X) or 0
             end
 
@@ -766,6 +770,20 @@ return ' ' .. UTF8.trimFull([===[
 
             M['unix_time'] = function()
                 return os.time()
+            end
+
+            M['parameter'] = function(name, type, parameter)
+                local isComplete, result = pcall(function()
+                    if name == nil and type ~= nil then
+                        return GAME.group[type]
+                    elseif name == nil then
+                        return GAME.group
+                    elseif parameter == nil then
+                        return GAME.group[type][name or '0']
+                    else
+                        return GAME.group[type][name or '0'] and GAME.group[type][name or '0'][parameter] or nil
+                    end
+                end) return isComplete and result or nil
             end
 
             return M
@@ -1188,6 +1206,32 @@ return ' ' .. UTF8.trimFull([===[
                 end
             end
 
+            if 'Файлы' then
+                M['files.length'] = function(path, isTemp) print(path, isTemp)
+                    local isComplete, result = pcall(function()
+                        return GANIN.file('length', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)
+                    end) return isComplete and result or 0
+                end
+
+                M['files.is_file'] = function(path, isTemp)
+                    local isComplete, result = pcall(function()
+                        return GANIN.file('is_file', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)
+                    end) return isComplete and result or false
+                end
+
+                M['files.is_folder'] = function(path, isTemp)
+                    local isComplete, result = pcall(function()
+                        return GANIN.file('is_folder', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)
+                    end) return isComplete and result or false
+                end
+
+                M['files.last_modified'] = function(path, isTemp)
+                    local isComplete, result = pcall(function()
+                        return GANIN.file('last_modified', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)
+                    end) return isComplete and result or 0
+                end
+            end
+
             return M
         end
 
@@ -1466,7 +1510,7 @@ return ' ' .. UTF8.trimFull([===[
                     if GAME.RESOURCES.fonts[i][1] == font then
                         if CURRENT_LINK ~= 'App' then
                             local new_font = io.open(DOC_DIR .. '/' .. CURRENT_LINK .. '/Fonts/' .. GAME.RESOURCES.fonts[i][2], 'rb')
-                            local main_font = io.open(RES_PATH .. '/' .. GAME.RESOURCES.fonts[i][2], 'wb')
+                            local main_font = io.open(RES_PATH .. '/' .. CURRENT_LINK .. '_' .. GAME.RESOURCES.fonts[i][2], 'wb')
 
                             if new_font and main_font then
                                 main_font:write(new_font:read('*a'))

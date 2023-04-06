@@ -259,4 +259,30 @@ if 'Медиа' then
     end
 end
 
+if 'Файлы' then
+    M['files.length'] = function(path, isTemp) print(path, isTemp)
+        local isComplete, result = pcall(function()
+            return GANIN.file('length', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)
+        end) return isComplete and result or 0
+    end
+
+    M['files.is_file'] = function(path, isTemp)
+        local isComplete, result = pcall(function()
+            return GANIN.file('is_file', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)
+        end) return isComplete and result or false
+    end
+
+    M['files.is_folder'] = function(path, isTemp)
+        local isComplete, result = pcall(function()
+            return GANIN.file('is_folder', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)
+        end) return isComplete and result or false
+    end
+
+    M['files.last_modified'] = function(path, isTemp)
+        local isComplete, result = pcall(function()
+            return GANIN.file('last_modified', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)
+        end) return isComplete and result or 0
+    end
+end
+
 return M

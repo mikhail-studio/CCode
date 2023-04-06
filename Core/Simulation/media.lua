@@ -153,6 +153,26 @@ if 'Файлы' then
         GAME.lua = GAME.lua .. ' other.getPath(' .. CALC(params[1]) .. ', docType, true)}) end)'
     end
 
+    M['convertFileToVideo'] = function(params)
+        GAME.lua = GAME.lua .. ' pcall(function() local docType = ' .. CALC(params[3]) .. ' table.insert(GAME.RESOURCES.videos, 1, {docType'
+        GAME.lua = GAME.lua .. ' .. \':\' .. ' .. CALC(params[1]) .. ', other.getPath(' .. CALC(params[2]) .. ', docType, true)}) end)'
+    end
+
+    M['convertFileToSound'] = function(params)
+        GAME.lua = GAME.lua .. ' pcall(function() local docType = ' .. CALC(params[3]) .. ' table.insert(GAME.RESOURCES.sounds, 1, {docType'
+        GAME.lua = GAME.lua .. ' .. \':\' .. ' .. CALC(params[1]) .. ', other.getPath(' .. CALC(params[2]) .. ', docType, true)}) end)'
+    end
+
+    M['convertFileToFont'] = function(params)
+        GAME.lua = GAME.lua .. ' pcall(function() local docType = ' .. CALC(params[3]) .. ' table.insert(GAME.RESOURCES.fonts, 1, {docType'
+        GAME.lua = GAME.lua .. ' .. \':\' .. ' .. CALC(params[1]) .. ', other.getPath(' .. CALC(params[2]) .. ', docType, true)}) end)'
+    end
+
+    M['convertFileToRes'] = function(params)
+        GAME.lua = GAME.lua .. ' pcall(function() local docType = ' .. CALC(params[3]) .. ' table.insert(GAME.RESOURCES.others, 1, {docType'
+        GAME.lua = GAME.lua .. ' .. \':\' .. ' .. CALC(params[1]) .. ', other.getPath(' .. CALC(params[2]) .. ', docType, true)}) end)'
+    end
+
     M['foreachFolder'] = function(params)
         GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() local path ='
         GAME.lua = GAME.lua .. ' other.getPath(' .. CALC(params[2]) .. ', ' .. CALC(params[3]) .. ') for file in LFS.dir(path)'
@@ -166,19 +186,19 @@ if 'Файлы' then
     M['compressZipFile'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() GANIN.zip(\'compress\', \'file\', other.getPath('
         GAME.lua = GAME.lua .. CALC(params[1]) .. ', ' .. CALC(params[2]) .. '), other.getPath(' .. CALC(params[3]) .. ', '
-        GAME.lua = GAME.lua .. CALC(params[4]) .. '), ' .. CALC(params[5]) .. ', tostring(' .. CALC(params[6]) .. ')) end)'
+        GAME.lua = GAME.lua .. CALC(params[4]) .. '), ' .. CALC(params[5]) .. ', ' .. CALC(params[6]) .. ') end)'
     end
 
     M['compressZipFolder'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() GANIN.zip(\'compress\', \'folder\', other.getPath('
         GAME.lua = GAME.lua .. CALC(params[1]) .. ', ' .. CALC(params[2]) .. '), other.getPath(' .. CALC(params[3]) .. ', '
-        GAME.lua = GAME.lua .. CALC(params[4]) .. '), ' .. CALC(params[5]) .. ', tostring(' .. CALC(params[6]) .. ')) end)'
+        GAME.lua = GAME.lua .. CALC(params[4]) .. '), ' .. CALC(params[5]) .. ', ' .. CALC(params[6]) .. ') end)'
     end
 
     M['uncompressZip'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local path = other.getPath(' .. CALC(params[4]) .. ', ' .. CALC(params[5]) .. ')'
         GAME.lua = GAME.lua .. ' LFS.mkdir(path) GANIN.zip(\'uncompress\', other.getPath(' .. CALC(params[2]) .. ', '
-        GAME.lua = GAME.lua .. CALC(params[3]) .. '), path, tostring(' .. CALC(params[1]) .. ')) end)'
+        GAME.lua = GAME.lua .. CALC(params[3]) .. '), path, ' .. CALC(params[1]) .. ') end)'
     end
 
     M['importFile'] = function(params)

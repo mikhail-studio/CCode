@@ -1,8 +1,12 @@
 local CALC = require 'Core.Simulation.calc'
-local M = {BLOCKS = {}}
+local M, LIST_TYPES  = {BLOCKS = {}}, {'filters'}
 
 for i = 3, 14 do
     M.BLOCKS = table.merge(M.BLOCKS, require('Core.Simulation.' .. INFO.listType[i]))
+end
+
+for i = 1, #LIST_TYPES do
+    M.BLOCKS = table.merge(M.BLOCKS, require('Core.Simulation.' .. LIST_TYPES[i]))
 end
 
 M.requestNestedBlock = function(nested)

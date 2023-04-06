@@ -94,7 +94,7 @@ M.getFont = function(font)
         if GAME.RESOURCES.fonts[i][1] == font then
             if CURRENT_LINK ~= 'App' then
                 local new_font = io.open(DOC_DIR .. '/' .. CURRENT_LINK .. '/Fonts/' .. GAME.RESOURCES.fonts[i][2], 'rb')
-                local main_font = io.open(RES_PATH .. '/' .. GAME.RESOURCES.fonts[i][2], 'wb')
+                local main_font = io.open(RES_PATH .. '/' .. CURRENT_LINK .. '_' .. GAME.RESOURCES.fonts[i][2], 'wb')
 
                 if new_font and main_font then
                     main_font:write(new_font:read('*a'))

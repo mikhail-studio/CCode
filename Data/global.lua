@@ -49,15 +49,9 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1242
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1244
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
-TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
-BOTTOM_HEIGHT = system.getInfo('deviceID') == 'd5e815039ddf2736' and 90 or BOTTOM_HEIGHT
-ZERO_X = CENTER_X - DISPLAY_WIDTH / 2 + LEFT_HEIGHT
-ZERO_Y = CENTER_Y - DISPLAY_HEIGHT / 2 + TOP_HEIGHT
-MAX_X = CENTER_X + DISPLAY_WIDTH / 2 - RIGHT_HEIGHT
-MAX_Y = CENTER_Y + DISPLAY_HEIGHT / 2 - BOTTOM_HEIGHT
 MASK = graphics.newMask('Sprites/mask.png')
 SOLAR = _G.B .. _G.D .. _G.A .. _G.C
 KEYORDER = {
@@ -65,6 +59,15 @@ KEYORDER = {
     'settings', 'fonts', 'others', 'videos', 'sounds', 'images', 'funs', 'tables',
     'len', 'vars', 'name', 'custom', 'event', 'nested', 'comment', 'params'
 } for i = 10000, 1, -1 do table.insert(KEYORDER, 1, tostring(i)) end
+
+GET_SAFE_AREA = function()
+    TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
+    BOTTOM_HEIGHT = (system.getInfo('deviceID') == 'd5e815039ddf2736' and 90 or BOTTOM_HEIGHT) + LOCAL.bottom_height
+    ZERO_X = CENTER_X - DISPLAY_WIDTH / 2 + LEFT_HEIGHT
+    ZERO_Y = CENTER_Y - DISPLAY_HEIGHT / 2 + TOP_HEIGHT
+    MAX_X = CENTER_X + DISPLAY_WIDTH / 2 - RIGHT_HEIGHT
+    MAX_Y = CENTER_Y + DISPLAY_HEIGHT / 2 - BOTTOM_HEIGHT
+end
 
 if IS_SIM or IS_WIN then
     FILEPICKER = require 'plugin.tinyfiledialogs'
@@ -250,21 +253,22 @@ end
 
 SET_X = function(x, obj)
     if obj and obj._isGroup then return x end
-    return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-    and GAME.group.widgets[obj._scroll].wtype == 'scroll')
+    return type(x) == 'number' and (((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+    and GAME.group.widgets[obj._scroll].wtype == 'scroll') or (obj and obj._snapshot))
     and x + GAME.group.widgets[obj._scroll].width / 2 or CENTER_X + x) or 0
 end
 
 SET_Y = function(y, obj)
-    if obj and obj._isGroup then return 0 - y end
-    return type(y) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-    and GAME.group.widgets[obj._scroll].wtype == 'scroll') and 0 - y or CENTER_Y - y) or 0
+    if obj and obj._isGroup then return type(y) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+    and GAME.group.widgets[obj._scroll].wtype == 'scroll') and 0 - y - CENTER_Y or 0 - y ) or 0 end
+    return type(y) == 'number' and (((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+    and GAME.group.widgets[obj._scroll].wtype == 'scroll') or (obj and obj._snapshot)) and 0 - y or CENTER_Y - y) or 0
 end
 
 GET_X = function(x, obj)
     if obj and obj._isGroup then return x end
-    return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-    and GAME.group.widgets[obj._scroll].wtype == 'scroll')
+    return type(x) == 'number' and (((obj and obj._scroll and GAME.group.widgets[obj._scroll]
+    and GAME.group.widgets[obj._scroll].wtype == 'scroll') or (obj and obj._snapshot))
     and x - GAME.group.widgets[obj._scroll].width / 2 or x - CENTER_X) or 0
 end
 
@@ -426,9 +430,9 @@ display.newImage2, display.newImage = display.newImage, function(link, ...)
     return (type(image) == 'table' and image.width > 0 and image.height > 0) and image or nil
 end
 
-LOCAL = require 'Data.local'
-LANGS = {'en', 'ru', 'pt', 'pl', 'ua', 'by', 'cn', 'jp', 'custom'}
-LANG.custom = {} LANG.ru = {} LANG.en = {} LANG.pt = {}
+LOCAL = require 'Data.local' GET_SAFE_AREA()
+LANGS = {'en', 'ru', 'pt', 'es', 'pl', 'ua', 'by', 'cn', 'jp', 'custom'}
+LANG.custom = {} LANG.ru = {} LANG.en = {} LANG.pt = {} LANG.es = {}
 LANG.pl = {} LANG.ua = {} LANG.by = {} LANG.cn = {} LANG.jp = {}
 
 for i = 1, #LANGS do

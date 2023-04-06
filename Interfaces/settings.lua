@@ -74,6 +74,19 @@ M.create = function()
     M.group:insert(keystore_button)
     M.group:insert(keystore_button.text)
 
+    local bottom_height_text = display.newText({
+            text = STR['settings.bottom_height'], x = ZERO_X + 20, y = keystore_text.y + 70,
+            font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
+        }) bottom_height_text.anchorX = 0
+    M.group:insert(bottom_height_text)
+
+    local bottom_height_button = display.newRect(rCenterX, bottom_height_text.y, rMaxWidth, 60)
+        bottom_height_button:setFillColor(0, 0, 0, 0.005)
+        bottom_height_button.text = display.newText('', bottom_height_button.x, bottom_height_button.y, 'ubuntu', 30)
+        bottom_height_button.text.text = LOCAL.bottom_height or 0
+    M.group:insert(bottom_height_button)
+    M.group:insert(bottom_height_button.text)
+
     local show_ads_text = display.newText({
             text = STR['settings.showads'], x = ZERO_X + 20, y = confirm_button.y + 70,
             font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
@@ -151,6 +164,7 @@ M.create = function()
     confirm_button:addEventListener('touch', function(e) LISTENER(e, 'confirm') end)
     keystore_button:addEventListener('touch', function(e) LISTENER(e, 'keystore') end)
     autoplace_button:addEventListener('touch', function(e) LISTENER(e, 'autoplace') end)
+    bottom_height_button:addEventListener('touch', function(e) LISTENER(e, 'bottom_height') end)
     -- show_ads_button:addEventListener('touch', function(e) LISTENER(e, 'show') end)
     -- pos_top_ads_button:addEventListener('touch', function(e) LISTENER(e, 'pos') end)
     -- orientation_group:addEventListener('touch', function(e) LISTENER(e, 'orientation') end)
