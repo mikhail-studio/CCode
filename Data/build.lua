@@ -1517,6 +1517,8 @@ return ' ' .. UTF8.trimFull([===[
                                 io.close(main_font)
                                 io.close(new_font)
                             end
+
+                            return CURRENT_LINK .. '_' .. GAME.RESOURCES.fonts[i][2]
                         end
 
                         return GAME.RESOURCES.fonts[i][2]

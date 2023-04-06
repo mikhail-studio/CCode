@@ -283,6 +283,12 @@ M['setLandscapeOrientation'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() setOrientationApp({type = \'landscape\', lis = ' .. CALC(params[1], 'a', true) .. '}) end)'
 end
 
+M['newAlert'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() native.showAlert(' .. CALC(params[1]) .. ', ' .. CALC(params[2]) .. ', '
+    GAME.lua = GAME.lua .. CALC(params[3]) .. ', function(e) pcall(function() if GAME.hash == hash then '
+    GAME.lua = GAME.lua .. CALC(params[4], 'a', true) .. '(e) end end) end) end)'
+end
+
 M['scheduleNotification'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() NOTIFICATIONS.scheduleNotification(' .. CALC(params[2]) .. ','
     GAME.lua = GAME.lua .. ' {alert = ' .. CALC(params[1]) .. '}) end)'

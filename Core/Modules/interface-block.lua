@@ -302,6 +302,7 @@ local listener = function(e, scroll, group, type)
                         e.target.move = false
                         MOVE.stop(e, scroll, group, type)
                     elseif ALERT then
+                        local font_link = CURRENT_LINK .. '_' .. e.target.link
                         local group_font = display.newGroup() ALERT = false
                         FONTS.group[8]:setIsLocked(true, 'vertical')
 
@@ -311,7 +312,7 @@ local listener = function(e, scroll, group, type)
                         group_font:insert(shadow)
 
                         local new_font = io.open(DOC_DIR .. '/' .. CURRENT_LINK .. '/Fonts/' .. e.target.link, 'rb')
-                        local main_font = io.open(RES_PATH .. '/' .. CURRENT_LINK .. '_' .. e.target.link, 'wb')
+                        local main_font = io.open(RES_PATH .. '/' .. font_link, 'wb')
 
                         if main_font and new_font then
                             main_font:write(new_font:read('*a'))
@@ -321,7 +322,7 @@ local listener = function(e, scroll, group, type)
 
                         local text = display.newText({
                                 text = '1234567890\nabcdefghijklmnopqrstuvwxyz',
-                                x = CENTER_X, y = CENTER_Y, width = 600, font = e.target.link, fontSize = 60, align = 'center'
+                                x = CENTER_X, y = CENTER_Y, width = 600, font = font_link, fontSize = 60, align = 'center'
                             }) text:setFillColor(1)
                         group_font:insert(text)
 

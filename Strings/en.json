@@ -41,6 +41,7 @@
         "menu.developers": "Developers Version:",
         "menu.version.new": "New test version released!",
         "menu.version.wait": "Please wait, don't close the app!",
+        "menu.version.download": "Downloaded",
         "programs.entername": "Enter program name",
         "programs.changename": "Change program name",
         "programs.noobmode": "Simplified mode",
