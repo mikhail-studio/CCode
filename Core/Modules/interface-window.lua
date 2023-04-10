@@ -27,7 +27,7 @@ M.new = function(title, buttons, listener, dog)
                 M.dog0.isVisible = false
             M.group:insert(M.dog0)
 
-            M.dog = ROBODOG.getDog(CENTER_X, M.bg.y - M.bg.height / 2 - 75, 250, 250)
+            M.dog = ROBODOG.getDog(CENTER_X, M.bg.y - M.bg.height / 2 - 75, 250, 250, dog)
             M.dog:addEventListener('touch', function(e)
                 if e.phase == 'began' then
                     display.getCurrentStage():setFocus(e.target)

@@ -7,19 +7,24 @@ M.getPath = function(type, id)
     return 'Sprites/' .. ids[type] .. '/cdog' .. ids[type] .. id .. '.png'
 end
 
-M.getDog = function(x, y, width, height)
+M.getDog = function(x, y, width, height, num)
     local dog, a = display.newGroup()
 
-    a = display.newImage(dog, M.getPath(1), x, y)
-    pcall(function() a.width, a.height = width, height end)
-    a = display.newImage(dog, M.getPath(2), x, y)
-    pcall(function() a.width, a.height = width, height end)
-    a = display.newImage(dog, M.getPath(3), x, y)
-    pcall(function() a.width, a.height = width, height end)
-    a = display.newImage(dog, M.getPath(4), x, y)
-    pcall(function() a.width, a.height = width, height end)
-    a = display.newImage(dog, M.getPath(5), x, y)
-    pcall(function() a.width, a.height = width, height end)
+    if LOCAL.old_dog then
+        a = display.newImage(dog, 'Sprites/ccdog' .. num .. '.png', x, y)
+        pcall(function() a.width, a.height = width, height end)
+    else
+        a = display.newImage(dog, M.getPath(1), x, y)
+        pcall(function() a.width, a.height = width, height end)
+        a = display.newImage(dog, M.getPath(2), x, y)
+        pcall(function() a.width, a.height = width, height end)
+        a = display.newImage(dog, M.getPath(3), x, y)
+        pcall(function() a.width, a.height = width, height end)
+        a = display.newImage(dog, M.getPath(4), x, y)
+        pcall(function() a.width, a.height = width, height end)
+        a = display.newImage(dog, M.getPath(5), x, y)
+        pcall(function() a.width, a.height = width, height end)
+    end
 
     return dog
 end

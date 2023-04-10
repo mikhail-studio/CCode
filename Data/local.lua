@@ -5,6 +5,7 @@ if file then
     data = JSON.decode(file:read('*a')) io.close(file)
     if data.autoplace == nil then data.autoplace = true end
     if data.bottom_height == nil then data.bottom_height = 0 end
+    if data.old_dog == nil then data.old_dog = false end
     if data.keystore == nil then data.keystore = {'testkey'} end data.back = 'System'
     if data.dog == nil then
         data.dog = {face = 1, ears = 1, eyes = 1, mouth =  1, accessories = 1}
@@ -28,6 +29,7 @@ else
         apps = {},
         repository = {},
         name_tester = '',
+        old_dog = false,
         dog = {face = 1, ears = 1, eyes = 1, mouth =  1, accessories = 1},
         dogs = {face = {true}, ears = {true}, eyes = {true}, mouth = {true}, accessories = {}}
     }, {len = 0}

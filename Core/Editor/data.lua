@@ -111,7 +111,7 @@ M.set = function(key, name)
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
             if name == 'parameter' then table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {'objects', 't'}) end
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
-        elseif name == 'find' or name == 'match' or name == 'color_pixel' or name == 'random' or name == 'rep' or name == 'distance'
+        elseif name == 'find' or name == 'match' or name == 'color_pixel' or name == 'random' or name == 'rep' or name == 'obj.distance'
         or name == 'power' or name == 'remainder' or name == 'atan2' or name == 'noise' or name == 'round' then
             if name == 'round' then table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {'0', 'n'}) end
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})

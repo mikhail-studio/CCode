@@ -10,6 +10,14 @@ if 'Группы' then
         GAME.lua = GAME.lua .. ' GAME.group.groups[name]._isGroup = true GAME.group:insert(GAME.group.groups[name]) end)'
     end
 
+    M['newContainer'] = function(params)
+        local name = CALC(params[1])
+
+        GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() GAME.group.groups[name]:removeSelf() end)'
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name] = display.newContainer() GAME.group.groups[name]._tag = \'TAG\''
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name]._isGroup = true GAME.group:insert(GAME.group.groups[name]) end)'
+    end
+
     M['removeGroup'] = function(params)
         local name = CALC(params[1])
 
@@ -61,6 +69,13 @@ if 'Группы' then
         GAME.lua = GAME.lua .. ' if child[2] == \'tags\' then doTag(child[1]) else'
         GAME.lua = GAME.lua .. ' GAME.group.groups[' .. nameGroup .. ']:insert(GAME.group[child[2]][child[1]])'
         GAME.lua = GAME.lua .. ' end end end doTag(' .. nameTag .. ') end)'
+    end
+
+    M['addGroupSnapshot'] = function(params)
+        local nameGroup = CALC(params[1])
+        local nameSnap = CALC(params[2])
+
+        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. nameGroup .. ']:insert(GAME.group.snapshots[' .. nameSnap .. ']) end)'
     end
 
     M['addGroupGroup'] = function(params)

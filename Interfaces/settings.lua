@@ -35,8 +35,21 @@ M.create = function()
     M.group:insert(lang_button)
     M.group:insert(lang_button.text)
 
+    local dog_text = display.newText({
+            text = STR['settings.old_dog'], x = ZERO_X + 20, y = lang_text.y + 70,
+            font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
+        }) dog_text.anchorX = 0
+    M.group:insert(dog_text)
+
+    local dog_button = display.newRect(rCenterX, dog_text.y, rMaxWidth, 60)
+        dog_button:setFillColor(0, 0, 0, 0.005)
+        dog_button.text = display.newText('', dog_button.x, dog_button.y, 'ubuntu', 30)
+        dog_button.text.text = LOCAL.old_dog and STR['button.yes'] or STR['button.no']
+    M.group:insert(dog_button)
+    M.group:insert(dog_button.text)
+
     local confirm_text = display.newText({
-            text = STR['settings.confirmdelete'], x = ZERO_X + 20, y = lang_text.y + 70,
+            text = STR['settings.confirmdelete'], x = ZERO_X + 20, y = dog_text.y + 70,
             font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
         }) confirm_text.anchorX = 0
     M.group:insert(confirm_text)
@@ -160,6 +173,7 @@ M.create = function()
     -- orientation_group.y = orientation_text.y
 
     title:addEventListener('touch', function(e) LISTENER(e, 'title') end)
+    dog_button:addEventListener('touch', function(e) LISTENER(e, 'dog') end)
     lang_button:addEventListener('touch', function(e) LISTENER(e, 'lang') end)
     confirm_button:addEventListener('touch', function(e) LISTENER(e, 'confirm') end)
     keystore_button:addEventListener('touch', function(e) LISTENER(e, 'keystore') end)

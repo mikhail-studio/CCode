@@ -267,6 +267,7 @@ M.listBlock = {
 
     ['groups'] = {
         'newGroup',
+        'newContainer',
         'removeGroup',
         'showGroup',
         'hideGroup',
@@ -275,6 +276,7 @@ M.listBlock = {
         'addGroupWidget',
         'addGroupMedia',
         'addGroupTag',
+        'addGroupSnapshot',
         'addGroupGroup',
         'setGroupPos',
         'setGroupSize',
@@ -896,6 +898,7 @@ M.listName = {
 
     -- groups
     ['newGroup'] = {'groups', {'value'}},
+        ['newContainer'] = {'groups', {'value'}},
         ['removeGroup'] = {'groups', {'value'}},
         ['showGroup'] = {'groups', {'value'}},
         ['hideGroup'] = {'groups', {'value'}},
@@ -904,6 +907,7 @@ M.listName = {
         ['addGroupWidget'] = {'groups', {'value'}, {'value'}},
         ['addGroupMedia'] = {'groups', {'value'}, {'value'}},
         ['addGroupTag'] = {'groups', {'value'}, {'value'}},
+        ['addGroupSnapshot'] = {'groups', {'value'}, {'value'}},
         ['addGroupGroup'] = {'groups', {'value'}, {'value'}},
         ['setGroupPos'] = {'groups', {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
         ['setGroupSize'] = {'groups', {'value'}, {'value', {'100', 'n'}}, {'value', {'100', 'n'}}},
