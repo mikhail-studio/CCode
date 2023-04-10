@@ -86,7 +86,7 @@ M.remove = function()
     pcall(function() v:removeEventListener('collision') end) pcall(function() v:removeEventListener('preCollision') end)
     pcall(function() v:removeEventListener('postCollision') end) pcall(function() PHYSICS.removeBody(v) end) end end)
     pcall(function() for _, v in pairs(M.group.texts) do pcall(function() PHYSICS.removeBody(v) end) end end)
-    pcall(function() for _, v in pairs(M.group.joints) do pcall(function() v:releaseSelf() v = nil end) end end)
+    pcall(function() for _, v in pairs(M.group.joints) do pcall(function() v:removeSelf() v = nil end) end end)
     pcall(function() for _, v in pairs(M.group.bitmaps) do pcall(function() v:releaseSelf() v = nil end) end end)
     pcall(function() for _, v in pairs(M.group.textures) do pcall(function() v:releaseSelf() v = nil end) end end)
     pcall(function() for _, v in ipairs(M.group.stops) do v() end end) M.isStarted = nil
