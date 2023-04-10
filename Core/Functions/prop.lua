@@ -57,6 +57,13 @@ if 'Объект' then
         end) return isComplete and result or 100
     end
 
+    M['obj.distance'] = function(name1, name2)
+        local isComplete, result = pcall(function()
+            return _G.math.sqrt(((GAME.group.objects[name1].x - GAME.group.objects[name2].x) ^ 2)
+            + ((GAME.group.objects[name1].y - GAME.group.objects[name2].y) ^ 2))
+        end) return isComplete and result or 0
+    end
+
     M['obj.name_texture'] = function(name)
         local isComplete, result = pcall(function()
             return GAME.group.objects[name] and GAME.group.objects[name]._name or ''

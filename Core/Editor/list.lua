@@ -42,7 +42,7 @@ listeners.listener = function(e)
                     EDITOR.cursor[1] = EDITOR.cursor[1] + 1
                     table.insert(EDITOR.data, EDITOR.cursor[1] - 1, {
                         thisData and ((type == 'p' or type == 'fC') and e.target.text.ID or e.target.text.text) or e.target.text.id, type
-                    }) DATA.set(type, e.target.text.id)
+                    }) DATA.set(type, type == 'p' and e.target.text._id or e.target.text.id)
                     EDITOR.backup = LISTENER.backup(EDITOR.backup, 'add', EDITOR.data)
 
                     TEXT.set(TEXT.gen(EDITOR.data, EDITOR.cursor[2]), EDITOR.group[9])
@@ -138,6 +138,7 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
                     else
                         listScroll.buttons[i].text.id = '/' .. target.text.id
                         listScroll.buttons[i].text.ID = target.text.id == 'pobj' and 'obj.' .. buttons.keys[j]
+                        listScroll.buttons[i].text._id = buttons.keys[j]
                         or target.text.id == 'fcustom' and EDITOR.funs._custom[j]
                         or target.text.id == 'ptext' and 'text.' .. buttons.keys[j]
                         or target.text.id == 'pgroup' and 'group.' .. buttons.keys[j]

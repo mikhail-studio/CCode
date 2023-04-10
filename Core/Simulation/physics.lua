@@ -446,7 +446,7 @@ if 'Физика 3' then
 
         GAME.lua = GAME.lua .. ' pcall(function() GAME.group.joints[' .. joint .. ']:removeSelf() end)'
         GAME.lua = GAME.lua .. ' pcall(function() local objects = GAME.group.objects'
-        GAME.lua = GAME.lua .. ' local piston = ' .. wheel .. ' local base = ' .. base
+        GAME.lua = GAME.lua .. ' local wheel = ' .. wheel .. ' local base = ' .. base
         GAME.lua = GAME.lua .. ' if objects[base]._body ~= \'\' and objects[wheel]._body ~= \'\' then'
         GAME.lua = GAME.lua .. ' GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint( \'wheel\', objects[base],'
         GAME.lua = GAME.lua .. ' objects[wheel], ' .. anchorX .. ' + objects[wheel].x, -' .. anchorY
@@ -529,13 +529,13 @@ if 'Физика 3' then
         local maxTorque = '(' .. CALC(params[2]) .. ')'
         local maxForce = '(' .. CALC(params[3]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() frictionJoint = GAME.group.joints[' .. joint .. ']'
+        GAME.lua = GAME.lua .. ' pcall(function() local frictionJoint = GAME.group.joints[' .. joint .. ']'
         GAME.lua = GAME.lua .. ' frictionJoint.maxTorque = ' .. maxTorque
         GAME.lua = GAME.lua .. ' frictionJoint.maxForce = ' .. maxForce .. ' end)'
     end
 
     M['setPulleyJoint'] = function(params)
-        local joint, bodyA, bodyB, statXA, statYA, statXB, statYB, bodyXA, bodyYA, bodyXB, bodyYB, ratio =
+        local joint, ratio, bodyA, bodyB, statXA, statYA, statXB, statYB, bodyXA, bodyYA, bodyXB, bodyYB =
         CALC(params[1]), CALC(params[2]), CALC(params[3]), CALC(params[4]), CALC(params[5]), CALC(params[6]),
         CALC(params[7]), CALC(params[8]), CALC(params[9]), CALC(params[10]), CALC(params[11]), CALC(params[12])
 

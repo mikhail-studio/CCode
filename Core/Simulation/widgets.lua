@@ -62,9 +62,9 @@ M['newWebView'] = function(params)
     local width = CALC(params[3])
     local height = CALC(params[4])
 
-    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() local random_name = \'CCODE_FIELD\' ..'
-    GAME.lua = GAME.lua .. ' math.random(111111, 999999) GAME.group.widgets[random_name] = GAME.group.widgets[name] GAME.group.widgets[name]'
-    GAME.lua = GAME.lua .. ' = nil timer.new(1, 1, function() pcall(function() GAME.group.widgets[random_name]:removeSelf() end) end) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function()'
+    GAME.lua = GAME.lua .. ' local random_widget = GAME.group.widgets[name] GAME.group.widgets[name]'
+    GAME.lua = GAME.lua .. ' = nil timer.new(20, 1, function() pcall(function() random_widget:removeSelf() end) end) end)'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[name] = native.newWebView(CENTER_X, CENTER_Y, '
     GAME.lua = GAME.lua .. width .. ', ' .. height .. ') GAME.group.widgets[name]:request(' .. link .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[name]:addEventListener(\'urlRequest\', function(e)'
@@ -158,9 +158,9 @@ M['newField'] = function(params)
     local posY = '(SET_Y(' .. CALC(params[12]) .. '))'
     local width, height = CALC(params[9], '400'), CALC(params[10], '80')
 
-    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() local random_name = \'CCODE_FIELD\' ..'
-    GAME.lua = GAME.lua .. ' math.random(111111, 999999) GAME.group.widgets[random_name] = GAME.group.widgets[name] GAME.group.widgets[name]'
-    GAME.lua = GAME.lua .. ' = nil timer.new(1, 1, function() pcall(function() GAME.group.widgets[random_name]:removeSelf() end) end) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function()'
+    GAME.lua = GAME.lua .. ' local random_widget = GAME.group.widgets[name] GAME.group.widgets[name]'
+    GAME.lua = GAME.lua .. ' = nil timer.new(20, 1, function() pcall(function() random_widget:removeSelf() end) end) end)'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[name] = native.newTextField(' .. posX .. ', ' .. posY .. ', ' .. width .. ','
     GAME.lua = GAME.lua .. ' ' .. height .. ') GAME.group.widgets[name].placeholder = tostring' .. placeholder
     GAME.lua = GAME.lua .. ' GAME.group.widgets[name].font = native.newFont(other.getFont(' .. font .. '), ' .. fontSize .. ')'
@@ -184,9 +184,9 @@ M['newBox'] = function(params)
     local posY = '(SET_Y(' .. CALC(params[11]) .. '))'
     local width, height = CALC(params[8], '400'), CALC(params[9], '80')
 
-    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() local random_name = \'CCODE_FIELD\' ..'
-    GAME.lua = GAME.lua .. ' math.random(111111, 999999) GAME.group.widgets[random_name] = GAME.group.widgets[name] GAME.group.widgets[name]'
-    GAME.lua = GAME.lua .. ' = nil timer.new(1, 1, function() pcall(function() GAME.group.widgets[random_name]:removeSelf() end) end) end)'
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function()'
+    GAME.lua = GAME.lua .. ' local random_widget = GAME.group.widgets[name] GAME.group.widgets[name]'
+    GAME.lua = GAME.lua .. ' = nil timer.new(20, 1, function() pcall(function() random_widget:removeSelf() end) end) end)'
     GAME.lua = GAME.lua .. ' GAME.group.widgets[name] = native.newTextBox(' .. posX .. ', ' .. posY .. ','
     GAME.lua = GAME.lua .. ' ' .. width .. ', ' .. height .. ') GAME.group.widgets[name].placeholder = tostring' .. placeholder
     GAME.lua = GAME.lua .. ' GAME.group.widgets[name].font = native.newFont(other.getFont(' .. font .. '), ' .. fontSize .. ')'

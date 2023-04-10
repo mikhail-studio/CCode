@@ -22,7 +22,7 @@ function _supportOldestVersion(data, link)
 
     local script = GET_GAME_SCRIPT(link, 1, data)
 
-    if tonumber(data.build) > 1232 and tonumber(data.build) < 1244 then
+    if tonumber(data.build) > 1232 and tonumber(data.build) < 1250 then
         for i = 1, #data.scripts do
             local script, nestedInfo, isChange = GET_FULL_DATA(GET_GAME_SCRIPT(link, i, data))
 
@@ -31,14 +31,17 @@ function _supportOldestVersion(data, link)
                 isChange = true
             end
 
-            if tonumber(data.build) < 1242 then
-                for j = 1, #script.params do
-                    local name = script.params[j].name
+            for j = 1, #script.params do
+                local name = script.params[j].name
 
-                    if name == 'readFileRes' then
-                        script.params[j].params[1], script.params[j].params[2] = script.params[j].params[2], script.params[j].params[1]
-                        script.params[j].params[3], isChange = {{'inputDefault', 'sl'}}, true
-                    end
+                if tonumber(data.build) < 1242 and name == 'readFileRes' then
+                    script.params[j].params[1], script.params[j].params[2] = script.params[j].params[2], script.params[j].params[1]
+                    script.params[j].params[3], isChange = {{'inputDefault', 'sl'}}, true
+                end
+
+                if tonumber(data.build) < 1250 and name == 'setPulleyJoint' then
+                    table.insert(script.params[j].params, 2, script.params[j].params[12])
+                    script.params[j].params[13], isChange = nil, true
                 end
             end
 

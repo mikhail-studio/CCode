@@ -14,39 +14,61 @@ listeners.face = function()
         pcall(function() transition.to(ROBODOG.frames[i].content, {y = y_frame - 3}) end)
         y_frame = i % 5 == 0 and y_frame + DISPLAY_WIDTH / 6 or y_frame
 
-        for j = 1, 25 do
+        for j = 1, 40 do
             pcall(function()
                 transition.to(ROBODOG['frames' .. i][j], {y = _y_frame})
                 transition.to(ROBODOG['frames' .. i][j].content, {y = _y_frame})
-                _y_frame = j % 5 == 0 and _y_frame + DISPLAY_WIDTH / 6 or _y_frame
+                _y_frame = j % 6 == 0 and _y_frame + DISPLAY_WIDTH / 7 or _y_frame
             end)
         end
     end ROBODOG.group.isOpen = false
 end
 
 listeners.frame = function(e)
-    local y_frame = ROBODOG.face.y + ROBODOG.face.height / 2 + 50
+    if not ((LOCAL.dog.face == 3 or LOCAL.dog.face == 6 or LOCAL.dog.face == 15) and e.i == 3) then
+        local y_frame = ROBODOG.face.y + ROBODOG.face.height / 2 + 50
 
-    for i = 1, 5 do
-        pcall(function() transition.to(ROBODOG.frames[i], {y = MAX_Y + DISPLAY_HEIGHT / 2}) end)
-        pcall(function() transition.to(ROBODOG.frames[i].content, {y = MAX_Y + DISPLAY_HEIGHT / 2}) end)
+        for i = 1, 5 do
+            pcall(function() transition.to(ROBODOG.frames[i], {y = MAX_Y + DISPLAY_HEIGHT / 2}) end)
+            pcall(function() transition.to(ROBODOG.frames[i].content, {y = MAX_Y + DISPLAY_HEIGHT / 2}) end)
+        end
+
+        for i = 1, 40 do
+            pcall(function()
+                transition.to(ROBODOG['frames' .. e.i][i], {y = y_frame})
+                transition.to(ROBODOG['frames' .. e.i][i].content, {y = y_frame - 3})
+                y_frame = i % 6 == 0 and y_frame + DISPLAY_WIDTH / 7 or y_frame
+            end)
+        end ROBODOG.group.isOpen = true
     end
-
-    for i = 1, 25 do
-        pcall(function()
-            transition.to(ROBODOG['frames' .. e.i][i], {y = y_frame})
-            transition.to(ROBODOG['frames' .. e.i][i].content, {y = y_frame - 3})
-            y_frame = i % 5 == 0 and y_frame + DISPLAY_WIDTH / 6 or y_frame
-        end)
-    end ROBODOG.group.isOpen = true
 end
 
 listeners.frames = function(e)
+    if (LOCAL.dog.face == 3 or LOCAL.dog.face == 6 or LOCAL.dog.face == 15) then
+        if not (e.i == 1 and (e.j == 3 or e.j == 6 or e.j == 15)) then
+            ROBODOG.ears.fill = {
+                type = 'image', filename = ROBODOG.getPath(3, 1)
+            } ROBODOG.frames[3].content.fill = {
+                type = 'image', filename = ROBODOG.getPath(3, 1)
+            } LOCAL.dog.ears = 1
+        end
+    end
+
     ROBODOG[({'face', 'eyes', 'ears', 'mouth', 'accessories'})[e.i]].fill = {
         type = 'image', filename = ROBODOG.getPath(e.i, e.j)
     } ROBODOG.frames[e.i].content.fill = {
         type = 'image', filename = ROBODOG.getPath(e.i, e.j)
-    } LOCAL.dog[({'face', 'eyes', 'ears', 'mouth', 'accessories'})[e.i]] = e.j NEW_DATA()
+    } LOCAL.dog[({'face', 'eyes', 'ears', 'mouth', 'accessories'})[e.i]] = e.j
+
+    if e.i == 1 and (e.j == 3 or e.j == 6 or e.j == 15) then
+        ROBODOG.ears.fill = {
+            type = 'image', filename = ROBODOG.getPath(3, 36)
+        } ROBODOG.frames[3].content.fill = {
+            type = 'image', filename = ROBODOG.getPath(3, 36)
+        } LOCAL.dog.ears = 36
+    end
+
+    NEW_DATA()
 end
 
 return function(e, type)

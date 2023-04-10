@@ -1016,9 +1016,9 @@ M.listName = {
             ['setRopeSettings'] = {'physics', {'value'}, {'value', {'0', 'n'}}},
             ['setFrictionJoint'] = {'physics', {'value'}, {'value'}, {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
             ['setFrictionSettings'] = {'physics', {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
-            ['setPulleyJoint'] = {'physics', {'value'}, {'value'}, {'value'}, {'value', {'0', 'n'}},
-                {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}},
-                {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'1', 'n'}}},
+            ['setPulleyJoint'] = {'physics', {'value'}, {'value', {'1', 'n'}}, {'value'}, {'value'},
+                {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}},
+                {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
 
         -- noob
         ['setBodyNoob'] = {'physics', {'value'}, {'body', {'dynamic', 'sl'}}, {'value', {'0', 'n'}}, {'value', {'-1', 'n'}}},

@@ -29,11 +29,11 @@ M.prop = {
         keys = {},
         default = {
             'touch', 'var', 'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation',
-            'alpha', 'name_texture', 'velocity_x', 'velocity_y', 'angular_velocity'
+            'alpha', 'distance', 'name_texture', 'velocity_x', 'velocity_y', 'angular_velocity'
         },
         noob = {
             'touch', 'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation',
-            'alpha', 'velocity_x', 'velocity_y', 'angular_velocity'
+            'alpha', 'distance', 'velocity_x', 'velocity_y', 'angular_velocity'
         }
     },
 
@@ -111,7 +111,7 @@ M.set = function(key, name)
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
             if name == 'parameter' then table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {'objects', 't'}) end
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
-        elseif name == 'find' or name == 'match' or name == 'color_pixel' or name == 'random' or name == 'rep'
+        elseif name == 'find' or name == 'match' or name == 'color_pixel' or name == 'random' or name == 'rep' or name == 'distance'
         or name == 'power' or name == 'remainder' or name == 'atan2' or name == 'noise' or name == 'round' then
             if name == 'round' then table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {'0', 'n'}) end
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})

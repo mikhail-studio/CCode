@@ -883,7 +883,7 @@
             "blocks.setFrictionSettings": "Set friction settings",
             "blocks.setFrictionSettings.params": ["Joint name:", "Damping:", "Frequency:"],
             "blocks.setPulleyJoint": "Set distance joint",
-            "blocks.setPulleyJoint.params": ["Joint name:", "Object1 name:", "Object2 name:", "Stationary X1:", "Stationary Y1:", "Stationary X2:", "Stationary Y2:", "Body X1:", "Body Y1:", "Body X2:", "Body Y2:", "Ratio of forces:"]
+            "blocks.setPulleyJoint.params": ["Joint name:", "Ratio of forces:", "Object1 name:", "Object2 name:", "Stationary X1:", "Stationary Y1:", "Stationary X2:", "Stationary Y2:", "Body X1:", "Body Y1:", "Body X2:", "Body Y2:"]
     },
 
     "widgets": {
@@ -1385,6 +1385,7 @@
             "editor.list.prop.obj.height": "height",
             "editor.list.prop.obj.rotation": "rotation",
             "editor.list.prop.obj.alpha": "opacity",
+            "editor.list.prop.obj.distance": "distance",
             "editor.list.prop.obj.name_texture": "name_texture",
             "editor.list.prop.obj.velocity_x": "velocity_x",
             "editor.list.prop.obj.velocity_y": "velocity_y",

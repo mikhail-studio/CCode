@@ -883,7 +883,7 @@
             "blocks.setFrictionSettings": "Установить настройки трения",
             "blocks.setFrictionSettings.params": ["Имя соединения:", "Гашение:", "Частота:"],
             "blocks.setPulleyJoint": "Установить соединение шкивом",
-            "blocks.setPulleyJoint.params": ["Имя соединения:", "Имя объекта1:", "Имя объекта2:", "Смещение по X1:", "Смещение по Y1:", "Смещение по X2:", "Смещение по Y2:", "Смещение тела по X1:", "Смещение тела по Y1:", "Смещение тела по X2:", "Смещение тела по Y2:", "Соотношение сил:"]
+            "blocks.setPulleyJoint.params": ["Имя соединения:", "Соотношение сил:", "Имя объекта1:", "Имя объекта2:", "Смещение по X1:", "Смещение по Y1:", "Смещение по X2:", "Смещение по Y2:", "Смещение тела по X1:", "Смещение тела по Y1:", "Смещение тела по X2:", "Смещение тела по Y2:"]
     },
 
     "widgets": {
@@ -1385,6 +1385,7 @@
             "editor.list.prop.obj.height": "высота",
             "editor.list.prop.obj.rotation": "вращение",
             "editor.list.prop.obj.alpha": "непрозрачность",
+            "editor.list.prop.obj.distance": "расстояние",
             "editor.list.prop.obj.name_texture": "имя_текстуры",
             "editor.list.prop.obj.velocity_x": "скорость_x",
             "editor.list.prop.obj.velocity_y": "скорость_y",

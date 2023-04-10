@@ -41,11 +41,11 @@ M.create = function()
     M.group:insert(title)
 
     M.dog = {LOCAL.dog.face, LOCAL.dog.eyes, LOCAL.dog.ears, LOCAL.dog.mouth, LOCAL.dog.accessories}
-    M.face = display.newImage(M.getPath(1), CENTER_X - 18, CENTER_Y - 200)
-    M.eyes = display.newImage(M.getPath(2), CENTER_X - 18, CENTER_Y - 200)
-    M.ears = display.newImage(M.getPath(3), CENTER_X - 18, CENTER_Y - 200)
-    M.mouth = display.newImage(M.getPath(4), CENTER_X - 18, CENTER_Y - 200)
-    M.accessories = display.newImage(M.getPath(5), CENTER_X - 18, CENTER_Y - 200)
+    M.face = display.newImage(M.getPath(1), CENTER_X - 18, title.y + 300)
+    M.eyes = display.newImage(M.getPath(2), CENTER_X - 18, title.y + 300)
+    M.ears = display.newImage(M.getPath(3), CENTER_X - 18, title.y + 300)
+    M.mouth = display.newImage(M.getPath(4), CENTER_X - 18, title.y + 300)
+    M.accessories = display.newImage(M.getPath(5), CENTER_X - 18, title.y + 300)
 
     if M.face then M.group:insert(M.face) end
     if M.eyes then M.group:insert(M.eyes) end
@@ -72,10 +72,10 @@ M.create = function()
         M.frames[i]:addEventListener('touch', function(e) e.i = i LISTENER(e, 'frame') end)
 
         M['frames' .. i] = {}
-        local _x_frame = DISPLAY_WIDTH / 6
+        local _x_frame = DISPLAY_WIDTH / 7
         local _y_frame = MAX_Y + DISPLAY_HEIGHT / 2
 
-        for j = 1, (i == 1 and 25 or i == 2 and 23 or i == 3 and 22 or i == 4 and 24 or 11) do
+        for j = 1, (i == 1 and 25 or i == 2 and 38 or i == 3 and 35 or i == 4 and 35 or 11) do
             M['frames' .. i][j] = display.newImage('Sprites/ccdogBg.png', _x_frame, _y_frame)
                 M['frames' .. i][j].width = 100
                 M['frames' .. i][j].height = 100
@@ -86,8 +86,8 @@ M.create = function()
                 if M['frames' .. i][j].content then M['frames' .. i][j].content.height = 100 end
             if M['frames' .. i][j].content then M.group:insert(M['frames' .. i][j].content) end
 
-            _x_frame = j % 5 == 0 and DISPLAY_WIDTH / 6 or _x_frame + DISPLAY_WIDTH / 6
-            _y_frame = j % 5 == 0 and _y_frame + DISPLAY_WIDTH / 6 or _y_frame
+            _x_frame = j % 6 == 0 and DISPLAY_WIDTH / 7 or _x_frame + DISPLAY_WIDTH / 7
+            _y_frame = j % 6 == 0 and _y_frame + DISPLAY_WIDTH / 7 or _y_frame
             M['frames' .. i][j]:addEventListener('touch', function(e) e.j, e.i = j, i LISTENER(e, 'frames') end)
         end
     end

@@ -748,6 +748,48 @@ return ' ' .. UTF8.trimFull([===[
                 end) return isComplete and result or nil
             end
 
+            M['rep'] = function(str, count)
+                local isComplete, result = pcall(function()
+                    return str:rep(count)
+                end) return isComplete and result or str
+            end
+
+            M['reverse'] = function(str)
+                local isComplete, result = pcall(function()
+                    return UTF8.reverse(str)
+                end) return isComplete and result or str
+            end
+
+            M['upper'] = function(str)
+                local isComplete, result = pcall(function()
+                    return UTF8.upper(str)
+                end) return isComplete and result or str
+            end
+
+            M['lower'] = function(str)
+                local isComplete, result = pcall(function()
+                    return UTF8.lower(str)
+                end) return isComplete and result or str
+            end
+
+            M['byte'] = function(str, noSum)
+                local isComplete, result = pcall(function()
+                    if noSum then
+                        return UTF8.trim((function(s) for i = 1, UTF8.len(str) do s = s .. ' ' .. UTF8.byte(UTF8.sub(str, i, i)) end return s end)(''))
+                    end return math.sum(UTF8.byte(str, 1, UTF8.len(str)))
+                end) return isComplete and result or nil
+            end
+
+            M['char'] = function(byte, noSum)
+                local isComplete, result = pcall(function()
+                    if noSum then
+                        local result = '' while UTF8.find(byte, ' ') do
+                            result, byte = result .. UTF8.char(UTF8.sub(byte, 1, UTF8.find(byte, ' ') - 1)), UTF8.sub(byte, UTF8.find(byte, ' ') + 1)
+                        end return result .. UTF8.char(byte)
+                    end return UTF8.char(byte)
+                end) return isComplete and result or nil
+            end
+
             M['get_ip'] = function(any)
                 local isComplete, result = pcall(function()
                     return SERVER.getIP()
@@ -1004,6 +1046,13 @@ return ' ' .. UTF8.trimFull([===[
                     end) return isComplete and result or 100
                 end
 
+                M['obj.distance'] = function(name1, name2)
+                    local isComplete, result = pcall(function()
+                        return _G.math.sqrt(((GAME.group.objects[name1].x - GAME.group.objects[name2].x) ^ 2)
+                        + ((GAME.group.objects[name1].y - GAME.group.objects[name2].y) ^ 2))
+                    end) return isComplete and result or 0
+                end
+
                 M['obj.name_texture'] = function(name)
                     local isComplete, result = pcall(function()
                         return GAME.group.objects[name] and GAME.group.objects[name]._name or ''
@@ -1223,6 +1272,12 @@ return ' ' .. UTF8.trimFull([===[
                     local isComplete, result = pcall(function()
                         return GANIN.file('is_folder', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)
                     end) return isComplete and result or false
+                end
+
+                M['files.length_folder'] = function(path, isTemp)
+                    local isComplete, result = pcall(function()
+                        return GANIN.file('length_folder', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)
+                    end) return isComplete and result or 0
                 end
 
                 M['files.last_modified'] = function(path, isTemp)
@@ -1475,6 +1530,8 @@ return ' ' .. UTF8.trimFull([===[
                 for i = 1, #GAME.RESOURCES.others do
                     if GAME.RESOURCES.others[i][1] == link then
                         return CURRENT_LINK .. '/Resources/' .. GAME.RESOURCES.others[i][2]
+                    elseif GAME.RESOURCES.others[i][1] == 'Documents:' .. link or GAME.RESOURCES.others[i][1] == 'Temps:' .. link then
+                        return GAME.RESOURCES.others[i][2]
                     end
                 end
             end
@@ -1483,6 +1540,8 @@ return ' ' .. UTF8.trimFull([===[
                 for i = 1, #GAME.RESOURCES.sounds do
                     if GAME.RESOURCES.sounds[i][1] == link then
                         return CURRENT_LINK .. '/Sounds/' .. GAME.RESOURCES.sounds[i][2]
+                    elseif GAME.RESOURCES.sounds[i][1] == 'Documents:' .. link or GAME.RESOURCES.sounds[i][1] == 'Temps:' .. link then
+                        return GAME.RESOURCES.sounds[i][2]
                     end
                 end
             end
@@ -1491,6 +1550,8 @@ return ' ' .. UTF8.trimFull([===[
                 for i = 1, #GAME.RESOURCES.videos do
                     if GAME.RESOURCES.videos[i][1] == link then
                         return CURRENT_LINK .. '/Videos/' .. GAME.RESOURCES.videos[i][2]
+                    elseif GAME.RESOURCES.videos[i][1] == 'Documents:' .. link or GAME.RESOURCES.videos[i][1] == 'Temps:' .. link then
+                        return GAME.RESOURCES.videos[i][2]
                     end
                 end
             end
@@ -1522,6 +1583,19 @@ return ' ' .. UTF8.trimFull([===[
                         end
 
                         return GAME.RESOURCES.fonts[i][2]
+                    elseif GAME.RESOURCES.fonts[i][1] == 'Documents:' .. font or GAME.RESOURCES.fonts[i][1] == 'Temps:' .. font then
+                        local rfilename = UTF8.reverse(GAME.RESOURCES.fonts[i][2])
+                        local filename = UTF8.reverse(UTF8.sub(rfilename, 1, UTF8.find(rfilename, '%/') - 1))
+                        local new_font = io.open(GAME.RESOURCES.fonts[i][2], 'rb')
+                        local main_font = io.open(RES_PATH .. '/' .. CURRENT_LINK .. '_' .. filename, 'wb')
+
+                        if new_font and main_font then
+                            main_font:write(new_font:read('*a'))
+                            io.close(main_font)
+                            io.close(new_font)
+                        end
+
+                        return CURRENT_LINK .. '_' .. filename
                     end
                 end
 
