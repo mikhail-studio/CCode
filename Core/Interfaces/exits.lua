@@ -60,6 +60,16 @@ listeners.settings = function()
     MENU.group.isVisible = true
 end
 
+listeners.robodog = function()
+    if ROBODOG.group.isOpen then
+        require('Core.Interfaces.robodog')({phase = 'ended', target = {click = true}}, 'face')
+    else
+        ROBODOG.group:removeSelf()
+        ROBODOG.group = nil
+        MENU.group.isVisible = true
+    end
+end
+
 listeners.blocks = function()
     if BLOCKS.custom then
         local data = GET_GAME_CODE(CURRENT_LINK)
@@ -197,6 +207,8 @@ listeners.lis = function(event)
             listeners.psettings()
         elseif SETTINGS and SETTINGS.group and SETTINGS.group.isVisible then
             listeners.settings()
+        elseif ROBODOG and ROBODOG.group and ROBODOG.group.isVisible then
+            listeners.robodog()
         elseif BLOCKS and BLOCKS.group and BLOCKS.group.isVisible then
             listeners.blocks()
         elseif EDITOR and EDITOR.group and EDITOR.group.isVisible then

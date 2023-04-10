@@ -278,6 +278,12 @@ if 'Файлы' then
         end) return isComplete and result or false
     end
 
+    M['files.length_folder'] = function(path, isTemp)
+        local isComplete, result = pcall(function()
+            return GANIN.file('length_folder', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)
+        end) return isComplete and result or 0
+    end
+
     M['files.last_modified'] = function(path, isTemp)
         local isComplete, result = pcall(function()
             return GANIN.file('last_modified', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)

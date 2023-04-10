@@ -1,7 +1,7 @@
 local LIST = require 'Core.Modules.interface-list'
 local listeners = {}
 
-listeners.title = function(target)
+listeners.title = function()
     EXITS.settings()
 end
 

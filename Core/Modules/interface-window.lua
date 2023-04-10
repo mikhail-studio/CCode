@@ -20,24 +20,28 @@ M.new = function(title, buttons, listener, dog)
         M.bg.height = M.bg.height + M.title.height
         M.title.y = M.bg.y - M.bg.height / 2 + 15
 
-        M.dog = display.newImage('Sprites/ccdog' .. dog .. '.png', CENTER_X, M.bg.y - M.bg.height / 2 - 75)
-            M.dog.width = 250
-            M.dog.height = 250
-        M.group:insert(M.dog)
+        if dog then
+            M.dog0 = display.newImage('Sprites/ccdog0.png', CENTER_X, M.bg.y - M.bg.height / 2 - 75)
+                M.dog0.width = 250
+                M.dog0.height = 250
+                M.dog0.isVisible = false
+            M.group:insert(M.dog0)
 
-        M.dog:addEventListener('touch', function(e)
-            if e.phase == 'began' then
-                display.getCurrentStage():setFocus(e.target)
-                e.target.fill = {type = 'image', filename = 'Sprites/ccdog0.png'}
-                e.target.click = true
-            elseif e.phase == 'ended' or e.phase == 'cancelled' then
-                display.getCurrentStage():setFocus(nil)
-                e.target.fill = {type = 'image', filename = 'Sprites/ccdog' .. dog .. '.png'}
-                if e.target.click then e.target.click = false end
-            end
-
-            return true
-        end)
+            M.dog = ROBODOG.getDog(CENTER_X, M.bg.y - M.bg.height / 2 - 75, 250, 250)
+            M.dog:addEventListener('touch', function(e)
+                if e.phase == 'began' then
+                    display.getCurrentStage():setFocus(e.target)
+                    M.dog.isVisible = false
+                    M.dog0.isVisible = true
+                    e.target.click = true
+                elseif e.phase == 'ended' or e.phase == 'cancelled' then
+                    display.getCurrentStage():setFocus(nil)
+                    M.dog.isVisible = true
+                    M.dog0.isVisible = false
+                    if e.target.click then e.target.click = false end
+                end return true
+            end) M.group:insert(M.dog)
+        end
 
         for i = 1, #buttons do
             M.buttons[i] = display.newRect(M.bg.x - M.bg.width / 4 + 5, M.bg.y + M.bg.height / 2 - 10, M.bg.width / 2 - 30, 60)

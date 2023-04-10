@@ -107,7 +107,10 @@ listeners.but_social = function(target)
 end
 
 listeners.but_dogs = function(target)
-    native.showAlert('CCode', 'Временно недоступно/Temporarily unavailable', {'Ok'})
+    MENU.group.isVisible = false
+    ROBODOG = require 'Interfaces.robodog'
+    ROBODOG.create()
+    ROBODOG.group.isVisible = true
 end
 
 return function(e)

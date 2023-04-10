@@ -123,6 +123,32 @@ if 'Файлы' then
         GAME.lua = GAME.lua .. ' pcall(function() OS_REMOVE(other.getPath(' .. CALC(params[1]) .. ', ' .. CALC(params[2]) .. '), true) end)'
     end
 
+    M['newCapturePNG'] = function(params)
+        local name, type = CALC(params[1]), CALC(params[2], 'GAME.group.objects')
+        local path, docType = CALC(params[3]), CALC(params[4])
+
+        if type == '(select[\'obj\']())' then type = 'GAME.group.objects'
+        elseif type == '(select[\'group\']())' then type = 'GAME.group.groups' end
+
+        GAME.lua = GAME.lua .. ' pcall(function() display.save(' .. type .. '[' .. name .. '], {filename ='
+        GAME.lua = GAME.lua .. ' other.getPath(' .. path .. ', ' .. docType .. ', true),'
+        GAME.lua = GAME.lua .. ' baseDir = system.DocumentsDirectory, captureOffscreenArea = true}) end)'
+    end
+
+    M['newCaptureJPEG'] = function(params)
+        local name, type = CALC(params[1]), CALC(params[2], 'GAME.group.objects')
+        local path, docType, quality = CALC(params[3]), CALC(params[4]), CALC(params[6])
+        local colors = CALC(params[5], '{255, 255, 255}')
+
+        if type == '(select[\'obj\']())' then type = 'GAME.group.objects'
+        elseif type == '(select[\'group\']())' then type = 'GAME.group.groups' end
+
+        GAME.lua = GAME.lua .. ' pcall(function() local colors = ' .. colors .. ' display.save(' .. type .. '[' .. name .. '],'
+        GAME.lua = GAME.lua .. ' {filename = other.getPath(' .. path .. ', ' .. docType .. ', true),'
+        GAME.lua = GAME.lua .. ' jpegQuality = ' .. quality .. '/100, backgroundColor = {colors[1]/255, colors[2]/255, colors[3]/255},'
+        GAME.lua = GAME.lua .. ' baseDir=system.DocumentsDirectory, captureOffscreenArea=true}) end)'
+    end
+
     M['newFile'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() WRITE_FILE(other.getPath(' .. CALC(params[1]) .. ', '
         GAME.lua = GAME.lua .. CALC(params[4]) .. '), ' .. CALC(params[2]) .. ', ' .. CALC(params[3]) .. ') end)'

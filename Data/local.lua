@@ -6,7 +6,10 @@ if file then
     if data.autoplace == nil then data.autoplace = true end
     if data.bottom_height == nil then data.bottom_height = 0 end
     if data.keystore == nil then data.keystore = {'testkey'} end data.back = 'System'
-    WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), JSON.encode(data))
+    if data.dog == nil then
+        data.dog = {face = 1, ears = 1, eyes = 1, mouth =  1, accessories = 1}
+        data.dogs = {face = {true}, ears = {true}, eyes = {true}, mouth = {true}, accessories = {}}
+    end WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), JSON.encode(data))
 else
     data, custom = {
         lang = system.getPreference('locale', 'language'),
@@ -24,7 +27,9 @@ else
         ui = true,
         apps = {},
         repository = {},
-        name_tester = ''
+        name_tester = '',
+        dog = {face = 1, ears = 1, eyes = 1, mouth =  1, accessories = 1},
+        dogs = {face = {true}, ears = {true}, eyes = {true}, mouth = {true}, accessories = {}}
     }, {len = 0}
 
     SET_GAME_CUSTOM(custom)

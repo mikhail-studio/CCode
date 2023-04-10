@@ -59,6 +59,8 @@ M.getResource = function(link)
     for i = 1, #GAME.RESOURCES.others do
         if GAME.RESOURCES.others[i][1] == link then
             return CURRENT_LINK .. '/Resources/' .. GAME.RESOURCES.others[i][2]
+        elseif GAME.RESOURCES.others[i][1] == 'Documents:' .. link or GAME.RESOURCES.others[i][1] == 'Temps:' .. link then
+            return GAME.RESOURCES.others[i][2]
         end
     end
 end
@@ -67,6 +69,8 @@ M.getSound = function(link)
     for i = 1, #GAME.RESOURCES.sounds do
         if GAME.RESOURCES.sounds[i][1] == link then
             return CURRENT_LINK .. '/Sounds/' .. GAME.RESOURCES.sounds[i][2]
+        elseif GAME.RESOURCES.sounds[i][1] == 'Documents:' .. link or GAME.RESOURCES.sounds[i][1] == 'Temps:' .. link then
+            return GAME.RESOURCES.sounds[i][2]
         end
     end
 end
@@ -75,6 +79,8 @@ M.getVideo = function(link)
     for i = 1, #GAME.RESOURCES.videos do
         if GAME.RESOURCES.videos[i][1] == link then
             return CURRENT_LINK .. '/Videos/' .. GAME.RESOURCES.videos[i][2]
+        elseif GAME.RESOURCES.videos[i][1] == 'Documents:' .. link or GAME.RESOURCES.videos[i][1] == 'Temps:' .. link then
+            return GAME.RESOURCES.videos[i][2]
         end
     end
 end
@@ -106,6 +112,19 @@ M.getFont = function(font)
             end
 
             return GAME.RESOURCES.fonts[i][2]
+        elseif GAME.RESOURCES.fonts[i][1] == 'Documents:' .. font or GAME.RESOURCES.fonts[i][1] == 'Temps:' .. font then
+            local rfilename = UTF8.reverse(GAME.RESOURCES.fonts[i][2])
+            local filename = UTF8.reverse(UTF8.sub(rfilename, 1, UTF8.find(rfilename, '%/') - 1))
+            local new_font = io.open(GAME.RESOURCES.fonts[i][2], 'rb')
+            local main_font = io.open(RES_PATH .. '/' .. CURRENT_LINK .. '_' .. filename, 'wb')
+
+            if new_font and main_font then
+                main_font:write(new_font:read('*a'))
+                io.close(main_font)
+                io.close(new_font)
+            end
+
+            return CURRENT_LINK .. '_' .. filename
         end
     end
 

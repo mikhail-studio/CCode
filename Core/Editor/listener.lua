@@ -315,21 +315,25 @@ M['Hide'] = function(data, cursor, backup)
     local list, buttons = require 'Core.Editor.list'
     EDITOR.group[66]:scrollToPosition({y = 0, time = 0})
 
-    for i = 1, 8 do
+    for i = 1, 9 do
         if EDITOR.group[66].buttons[i].isOpen then
             if NOOBMODE then
                 buttons = i < 3 and {STR['editor.list.project']} or i == 4 and {
                     STR['editor.list.prop.obj.noob'], STR['editor.list.prop.text'], STR['editor.list.prop.group'],STR['editor.list.prop.media']
                 } or i == 3 and {STR['editor.list.project']} or i == 5 and EDITOR.fun
-                or i == 6 and EDITOR.math or i == 7 and EDITOR.log or EDITOR.device
+                or i == 6 and EDITOR.math or i == 7 and EDITOR.log or i == 8 and EDITOR.device or {
+                    STR['editor.list.resource.images'], STR['editor.list.resource.sounds'], STR['editor.list.resource.videos'],
+                    STR['editor.list.resource.fonts'], STR['editor.list.resource.others']
+                }
             else
-                buttons = i < 3 and {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']}
-                or i == 4 and {
+                buttons = i < 3 and {STR['editor.list.event'], STR['editor.list.script'], STR['editor.list.project']} or i == 4 and {
                     STR['editor.list.prop.obj'], STR['editor.list.prop.text'], STR['editor.list.prop.group'],
                     STR['editor.list.prop.widget'], STR['editor.list.prop.media'], STR['editor.list.prop.files']
+                } or i == 3 and {STR['editor.list.custom'], STR['editor.list.script'], STR['editor.list.project']} or i == 5 and EDITOR.fun
+                or i == 6 and EDITOR.math or i == 7 and EDITOR.log or i == 8 and EDITOR.device or {
+                    STR['editor.list.resource.images'], STR['editor.list.resource.sounds'], STR['editor.list.resource.videos'],
+                    STR['editor.list.resource.fonts'], STR['editor.list.resource.others']
                 }
-                or i == 3 and {STR['editor.list.custom'], STR['editor.list.script'], STR['editor.list.project']} or i == 5 and EDITOR.fun
-                or i == 6 and EDITOR.math or i == 7 and EDITOR.log or EDITOR.device
             end
 
             list.set(EDITOR.group[66].buttons[i], buttons, i < 5, i > 4)

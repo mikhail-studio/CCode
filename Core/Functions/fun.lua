@@ -117,6 +117,48 @@ M['match'] = function(str, pattern, i)
     end) return isComplete and result or nil
 end
 
+M['rep'] = function(str, count)
+    local isComplete, result = pcall(function()
+        return str:rep(count)
+    end) return isComplete and result or str
+end
+
+M['reverse'] = function(str)
+    local isComplete, result = pcall(function()
+        return UTF8.reverse(str)
+    end) return isComplete and result or str
+end
+
+M['upper'] = function(str)
+    local isComplete, result = pcall(function()
+        return UTF8.upper(str)
+    end) return isComplete and result or str
+end
+
+M['lower'] = function(str)
+    local isComplete, result = pcall(function()
+        return UTF8.lower(str)
+    end) return isComplete and result or str
+end
+
+M['byte'] = function(str, noSum)
+    local isComplete, result = pcall(function()
+        if noSum then
+            return UTF8.trim((function(s) for i = 1, UTF8.len(str) do s = s .. ' ' .. UTF8.byte(UTF8.sub(str, i, i)) end return s end)(''))
+        end return math.sum(UTF8.byte(str, 1, UTF8.len(str)))
+    end) return isComplete and result or nil
+end
+
+M['char'] = function(byte, noSum)
+    local isComplete, result = pcall(function()
+        if noSum then
+            local result = '' while UTF8.find(byte, ' ') do
+                result, byte = result .. UTF8.char(UTF8.sub(byte, 1, UTF8.find(byte, ' ') - 1)), UTF8.sub(byte, UTF8.find(byte, ' ') + 1)
+            end return result .. UTF8.char(byte)
+        end return UTF8.char(byte)
+    end) return isComplete and result or nil
+end
+
 M['get_ip'] = function(any)
     local isComplete, result = pcall(function()
         return SERVER.getIP()

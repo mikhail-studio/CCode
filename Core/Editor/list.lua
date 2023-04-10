@@ -81,8 +81,6 @@ local getFontSize getFontSize = function(width, text, size, isData)
 end
 
 listeners.set = function(target, buttons, isData, isList, buttonId)
-    -- print(target, buttons, isData, isList, buttonId)
-
     if buttons and (buttons.names and #buttons.names > 0 or #buttons > 0) then
         target.isOpen = not target.isOpen
         target.polygon.yScale = target.isOpen and -1 or 1
@@ -105,7 +103,9 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
                     or target.text.id == 'tevent' or target.text.id == 'tscript' or target.text.id == 'tproject'
                     or target.text.id == 'pobj' or target.text.id == 'ptext' or target.text.id == 'pgroup'
                     or target.text.id == 'pwidget' or target.text.id == 'pmedia' or target.text.id == 'fcustom'
-                    or target.text.id == 'fscript' or target.text.id == 'fproject' or target.text.id == 'pfiles' then
+                    or target.text.id == 'fscript' or target.text.id == 'fproject' or target.text.id == 'pfiles'
+                    or target.text.id == 'rimages' or target.text.id == 'rsounds' or target.text.id == 'rvideos'
+                    or target.text.id == 'rfonts' or target.text.id == 'rothers' then
                         listScroll.buttons[i]:setFillColor(0.17, 0.17, 0.19)
                     else
                         listScroll.buttons[i]:setFillColor(0.14, 0.14, 0.16)
@@ -116,7 +116,8 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
                     if isData then local id = buttonId or getId(target.y)
                         if NOOBMODE then
                             listScroll.buttons[i].text.id = id == 1 and 'project' or id == 2 and 'tproject' or id == 3 and 'fproject'
-                            or (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup' or 'pmedia')
+                            or id == 4 and (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup' or 'pmedia')
+                            or (j == 1 and 'rimages' or j == 2 and 'rsounds' or 'rfonts')
                         elseif BLOCKS.custom then
                             listScroll.buttons[i].text.id = id == 1 and (j == 1 and 'event' or 'script')
                             or (id == 2 and (j == 1 and 'tevent' or 'tscript') or (id == 3 and (j == 1 and 'fcustom' or 'fscript')
@@ -126,8 +127,10 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
                             listScroll.buttons[i].text.id = id == 1 and (j == 1 and 'event' or j == 2 and 'script' or 'project')
                             or (id == 2 and (j == 1 and 'tevent' or j == 2 and 'tscript' or 'tproject')
                             or (id == 3 and (j == 1 and 'fcustom' or j == 2 and 'fscript' or 'fproject')
-                            or (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup'
-                            or j == 4 and 'pwidget' or j == 5 and 'pmedia' or 'pfiles')))
+                            or (id == 4 and (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup'
+                            or j == 4 and 'pwidget' or j == 5 and 'pmedia' or 'pfiles')
+                            or (j == 1 and 'rimages' or j == 2 and 'rsounds' or j == 3 and 'rvideos'
+                            or j == 4 and 'rfonts' or 'rothers'))))
                         end
                     elseif isList then
                         listScroll.buttons[i].text.id = buttons.keys[j]
@@ -250,6 +253,26 @@ listeners.event = function(target)
     listeners.set(target, EDITOR.vars.event)
 end
 
+listeners.rimages = function(target)
+    listeners.set(target, EDITOR.resources.images)
+end
+
+listeners.rsounds = function(target)
+    listeners.set(target, EDITOR.resources.sounds)
+end
+
+listeners.rvideos = function(target)
+    listeners.set(target, EDITOR.resources.videos)
+end
+
+listeners.rfonts = function(target)
+    listeners.set(target, EDITOR.resources.fonts)
+end
+
+listeners.rothers = function(target)
+    listeners.set(target, EDITOR.resources.others)
+end
+
 listeners.device = function(target)
     listeners.set(target, EDITOR.device, nil, true)
 end
@@ -300,13 +323,26 @@ listeners.prop = function(target)
     if NOOBMODE then
         listeners.set(target, {
             STR['editor.list.prop.obj.noob'], STR['editor.list.prop.text'],
-            STR['editor.list.prop.group'], STR['editor.list.prop.media']
+            STR['editor.list.prop.group'], STR['editor.list.prop.media.noob']
         }, true, nil, 4)
     else
         listeners.set(target, {
             STR['editor.list.prop.obj'], STR['editor.list.prop.text'], STR['editor.list.prop.group'],
             STR['editor.list.prop.widget'], STR['editor.list.prop.media'], STR['editor.list.prop.files']
         }, true, nil, 4)
+    end
+end
+
+listeners.resource = function(target)
+    if NOOBMODE then
+        listeners.set(target, {
+            STR['editor.list.resource.images.noob'], STR['editor.list.resource.sounds'], STR['editor.list.resource.fonts']
+        }, true, nil, 9)
+    elseif not BLOCKS.custom then
+        listeners.set(target, {
+            STR['editor.list.resource.images'], STR['editor.list.resource.sounds'], STR['editor.list.resource.videos'],
+            STR['editor.list.resource.fonts'], STR['editor.list.resource.others']
+        }, true, nil, 9)
     end
 end
 

@@ -28,6 +28,7 @@ settings = {
 	plugins = {
 		['plugin.cnkFileManager'] = {publisherId = 'es.cnksoft'},
 		['plugin.pasteboard'] = {publisherId = 'com.coronalabs'},
+		['plugin.animation'] = {publisherId = 'com.coronalabs'},
 		['plugin.utf8'] = {publisherId = 'com.coronalabs'},
 		['plugin.zip'] = {publisherId = 'com.coronalabs'},
 		['plugin.notifications.v2'] = {publisherId = 'com.coronalabs'},

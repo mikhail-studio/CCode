@@ -12,9 +12,8 @@ end
 
 return {
     new = function(link)
-        local data, dataCustom, custom = GET_GAME_CODE(link), {}, GET_GAME_CUSTOM()
-        local name, code = data.title, JSON.encode3(data, {keyorder = KEYORDER})
-        local hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, code, '?.cc_ode-123%'), '%^()*cc.ode_?')
+        local data, dataCustom = GET_GAME_CODE(link), {}
+        local name, custom = data.title, GET_GAME_CUSTOM() 
 
         for i = 1, #data.scripts do
             local script = GET_FULL_DATA(GET_GAME_SCRIPT(CURRENT_LINK, i, data))
@@ -46,14 +45,16 @@ return {
 
         PROGRAMS.group[8]:setIsLocked(true, 'vertical')
         WINDOW.new(STR['export.start'], {}, function() PROGRAMS.group[8]:setIsLocked(false, 'vertical') end, 1)
-
-        WRITE_FILE(DOC_DIR .. '/' .. link .. '/hash.txt', hash)
         WRITE_FILE(DOC_DIR .. '/' .. link .. '/custom.json', JSON.encode3(custom, {keyorder = KEYORDER}))
 
         if IS_SIM or IS_WIN then
-            OS_REMOVE(DOC_DIR .. '/' .. link .. '/hash.txt') OS_REMOVE(DOC_DIR .. '/' .. link .. '/custom.json') WINDOW.remove()
+            OS_REMOVE(DOC_DIR .. '/' .. link .. '/custom.json') WINDOW.remove()
         else
-            GANIN.compress(DOC_DIR .. '/' .. link, DOC_DIR .. '/export.zip', 'cc.ode_?-?.cc_ode', function() export(name, link) end)
+            GANIN.compress(DOC_DIR .. '/' .. link, DOC_DIR .. '/export.zip', '', function(code)
+                local hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, code, '?.cc_ode-123%'), '%^()*cc.ode_?')
+                WRITE_FILE(DOC_DIR .. '/' .. link .. '/hash.txt', hash)
+                GANIN.compress(DOC_DIR .. '/' .. link, DOC_DIR .. '/export.zip', '', function() export(name, link) end, '')
+            end)
         end
     end
 }

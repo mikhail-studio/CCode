@@ -74,11 +74,12 @@ M['addMaskToObject'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. nameObject .. ']:setMask(GAME.group.masks[' .. nameMask .. ']) end)'
 end
 
-M['addMaskToGroup'] = function(params)
-    local nameGroup = CALC(params[1])
-    local nameMask = CALC(params[2])
+M['removeMask'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.masks[' .. CALC(params[1]) .. ']:removeSelf() end)'
+end
 
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. nameGroup .. ']:setMask(GAME.group.masks[' .. nameMask .. ']) end)'
+M['removeMaskFromObject'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. ']:setMask(nil) end)'
 end
 
 M['setMaskScale'] = function(params)

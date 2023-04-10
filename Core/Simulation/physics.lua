@@ -310,8 +310,11 @@ if 'Физика 3' then
         local anchorY = '(' .. CALC(params[5]) .. ')'
 
         GAME.lua = GAME.lua .. ' pcall(function() GAME.group.joints[' .. joint .. ']:removeSelf() end)'
-        GAME.lua = GAME.lua .. ' pcall(function() objects = GAME.group.objects joints = GAME.group.joints joints[' .. joint .. '] = PHYSICS.newJoint( \'pivot\', objects[' .. base .. '],'
-        GAME.lua = GAME.lua .. ' objects[' .. pivot .. '], ' .. anchorX .. ' + objects[' .. pivot .. '].x, -' .. anchorY .. ' + objects[' .. pivot .. '].y) end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local objects = GAME.group.objects'
+        GAME.lua = GAME.lua .. ' local pivot = ' .. pivot .. ' local base = ' .. base
+        GAME.lua = GAME.lua .. ' if objects[base]._body ~= \'\' and objects[pivot]._body ~= \'\' then'
+        GAME.lua = GAME.lua .. ' GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint( \'pivot\', objects[base],'
+        GAME.lua = GAME.lua .. ' objects[pivot], ' .. anchorX .. ' + objects[pivot].x, -' .. anchorY .. ' + objects[pivot].y) end end)'
     end
 
     M['setPivotMotor'] = function(params)
@@ -320,8 +323,9 @@ if 'Физика 3' then
         local speed = '(' .. CALC(params[3]) .. ')'
         local maxTorque = '(' .. CALC(params[4]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() pivotJoint = GAME.group.joints[' .. joint .. ']'
-        GAME.lua = GAME.lua .. ' pivotJoint.isMotorEnabled = ' .. state .. ' pivotJoint.motorSpeed = ' .. speed .. ' pivotJoint.maxMotorTorque = ' .. maxTorque .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local pivotJoint = GAME.group.joints[' .. joint .. ']'
+        GAME.lua = GAME.lua .. ' pivotJoint.isMotorEnabled = ' .. state .. ' pivotJoint.motorSpeed = ' .. speed
+        GAME.lua = GAME.lua .. ' pivotJoint.maxMotorTorque = ' .. maxTorque .. ' end)'
     end
 
     M['setPivotLimits'] = function(params)
@@ -330,8 +334,9 @@ if 'Физика 3' then
         local min = '(' .. CALC(params[3]) .. ')'
         local max = '(' .. CALC(params[4]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() pivotJoint = GAME.group.joints[' .. joint .. ']'
-        GAME.lua = GAME.lua .. ' pivotJoint.isLimitEnabled = ' .. state .. ' pivotJoint:setRotationLimits(' .. min .. ', ' .. max .. ') end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local pivotJoint = GAME.group.joints[' .. joint .. ']'
+        GAME.lua = GAME.lua .. ' pivotJoint.isLimitEnabled = ' .. state
+        GAME.lua = GAME.lua .. ' pivotJoint:setRotationLimits(' .. min .. ', ' .. max .. ') end)'
     end
 
     M['setDistanceJoint'] = function(params)
@@ -344,9 +349,11 @@ if 'Физика 3' then
         local anchorYB = '(' .. CALC(params[7]) .. ')'
 
         GAME.lua = GAME.lua .. ' pcall(function() GAME.group.joints[' .. joint .. ']:removeSelf() end)'
-        GAME.lua = GAME.lua .. ' pcall(function() objects = GAME.group.objects GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint( \'distance\', objects[' .. bodyA .. '],'
-        GAME.lua = GAME.lua .. ' objects[' .. bodyB .. '], ' .. anchorXA .. ' + objects[' .. bodyA .. '].x, -' .. anchorYA .. ' + objects[' .. bodyA .. '].y'
-        GAME.lua = GAME.lua .. ', ' .. anchorXB .. ' + objects[' .. bodyB .. '].x, -' .. anchorYB .. ' + objects[' .. bodyB .. '].y) end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local objects, bodyA, bodyB = GAME.group.objects, ' .. bodyA .. ', ' .. bodyB
+        GAME.lua = GAME.lua .. ' if objects[bodyA]._body ~= \'\' and objects[bodyB]._body ~= \'\' then'
+        GAME.lua = GAME.lua .. ' GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint( \'distance\', objects[bodyA],'
+        GAME.lua = GAME.lua .. ' objects[bodyB], ' .. anchorXA .. ' + objects[bodyA].x, -' .. anchorYA .. ' + objects[bodyA].y'
+        GAME.lua = GAME.lua .. ', ' .. anchorXB .. ' + objects[bodyB].x, -' .. anchorYB .. ' + objects[bodyB].y) end end)'
     end
 
     M['setDistanceSettings'] = function(params)
@@ -355,8 +362,10 @@ if 'Физика 3' then
         local frequency = '(' .. CALC(params[3]) .. ')'
         local length = '(' .. CALC(params[4]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() distanceJoint = GAME.group.joints[' .. joint .. ']'
-        GAME.lua = GAME.lua .. ' distanceJoint.dampingRatio = ' .. dampingRatio .. ' distanceJoint.frequency = ' .. frequency .. ' distanceJoint.length = ' .. length .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local distanceJoint = GAME.group.joints[' .. joint .. ']'
+        GAME.lua = GAME.lua .. ' distanceJoint.dampingRatio = ' .. dampingRatio
+        GAME.lua = GAME.lua .. ' distanceJoint.frequency = ' .. frequency
+        GAME.lua = GAME.lua .. ' distanceJoint.length = ' .. length .. ' end)'
     end
 
     M['setPistonJoint'] = function(params)
@@ -369,9 +378,12 @@ if 'Физика 3' then
         local axisY = '(' .. CALC(params[7]) .. ' / 100)'
 
         GAME.lua = GAME.lua .. ' pcall(function() GAME.group.joints[' .. joint .. ']:removeSelf() end)'
-        GAME.lua = GAME.lua .. ' pcall(function() objects = GAME.group.objects joints = GAME.group.joints joints[' .. joint .. '] = PHYSICS.newJoint( \'piston\', objects[' .. base .. '],'
-        GAME.lua = GAME.lua .. ' objects[' .. piston .. '], ' .. anchorX .. ' + objects[' .. piston .. '].x, -' .. anchorY .. ' + objects[' .. piston .. '].y'
-        GAME.lua = GAME.lua .. ', ' .. axisX .. ', -' .. axisY .. ') end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local objects = GAME.group.objects'
+        GAME.lua = GAME.lua .. ' local piston = ' .. piston .. ' local base = ' .. base
+        GAME.lua = GAME.lua .. ' if objects[base]._body ~= \'\' and objects[piston]._body ~= \'\' then'
+        GAME.lua = GAME.lua .. ' GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint( \'piston\', objects[base],'
+        GAME.lua = GAME.lua .. ' objects[piston], ' .. anchorX .. ' + objects[piston].x, -' .. anchorY
+        GAME.lua = GAME.lua .. ' + objects[piston].y, ' .. axisX .. ', -' .. axisY .. ') end end)'
     end
 
     M['setPistonMotor'] = function(params)
@@ -380,8 +392,10 @@ if 'Физика 3' then
         local speed = '(' .. CALC(params[3]) .. ')'
         local maxForce = '(' .. CALC(params[4]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() pistonJoint = GAME.group.joints[' .. joint .. ']'
-        GAME.lua = GAME.lua .. ' pistonJoint.isMotorEnabled = ' .. state .. ' pistonJoint.motorSpeed = ' .. speed .. ' pistonJoint.maxMotorForce = ' .. maxForce .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local pistonJoint = GAME.group.joints[' .. joint .. ']'
+        GAME.lua = GAME.lua .. ' pistonJoint.isMotorEnabled = ' .. state
+        GAME.lua = GAME.lua .. ' pistonJoint.motorSpeed = ' .. speed
+        GAME.lua = GAME.lua .. ' pistonJoint.maxMotorForce = ' .. maxForce .. ' end)'
     end
 
     M['setPistonLimits'] = function(params)
@@ -390,8 +404,9 @@ if 'Физика 3' then
         local min = '(' .. CALC(params[3]) .. ')'
         local max = '(' .. CALC(params[4]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() pistonJoint = GAME.group.joints[' .. joint .. ']'
-        GAME.lua = GAME.lua .. ' pistonJoint.isLimitEnabled = ' .. state .. ' pistonJoint:setLimits(' .. max .. ', ' .. min .. ') end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local pistonJoint = GAME.group.joints[' .. joint .. ']'
+        GAME.lua = GAME.lua .. ' pistonJoint.isLimitEnabled = ' .. state
+        GAME.lua = GAME.lua .. ' pistonJoint:setLimits(' .. max .. ', ' .. min .. ') end)'
     end
 
     M['setWeldJoint'] = function(params)
@@ -402,8 +417,12 @@ if 'Физика 3' then
         local anchorY = '(' .. CALC(params[5]) .. ')'
 
         GAME.lua = GAME.lua .. ' pcall(function() GAME.group.joints[' .. joint .. ']:removeSelf() end)'
-        GAME.lua = GAME.lua .. ' pcall(function() objects = GAME.group.objects GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint( \'weld\', objects[' .. bodyA .. '],'
-        GAME.lua = GAME.lua .. ' objects[' .. bodyB .. '], ' .. anchorX .. ' + objects[' .. bodyA .. '].x, -' .. anchorY .. ' + objects[' .. bodyA .. '].y) end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local objects = GAME.group.objects'
+        GAME.lua = GAME.lua .. ' local bodyA = ' .. bodyA .. ' local bodyB = ' .. bodyB
+        GAME.lua = GAME.lua .. ' if objects[bodyA]._body ~= \'\' and objects[bodyB]._body ~= \'\' then'
+        GAME.lua = GAME.lua .. ' GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint( \'weld\', objects[bodyA],'
+        GAME.lua = GAME.lua .. ' objects[bodyB], ' .. anchorX .. ' + objects[bodyA].x, -' .. anchorY
+        GAME.lua = GAME.lua .. ' + objects[bodyA].y) end end)'
     end
 
     M['setWeldSettings'] = function(params)
@@ -411,23 +430,27 @@ if 'Физика 3' then
         local dampingRatio = '(' .. CALC(params[2]) .. ' / 100)'
         local frequency = '(' .. CALC(params[3]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() weldJoint = GAME.group.joints[' .. joint .. ']'
-        GAME.lua = GAME.lua .. ' weldJoint.dampingRatio = ' .. dampingRatio .. ' weldJoint.frequency = ' .. frequency .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() loacl weldJoint = GAME.group.joints[' .. joint .. ']'
+        GAME.lua = GAME.lua .. ' weldJoint.dampingRatio = ' .. dampingRatio
+        GAME.lua = GAME.lua .. ' weldJoint.frequency = ' .. frequency .. ' end)'
     end
 
     M['setWheelJoint'] = function(params)
         local joint = CALC(params[1])
         local base = CALC(params[2])
-        local piston = CALC(params[3])
+        local wheel = CALC(params[3])
         local anchorX = '(' .. CALC(params[4]) .. ')'
         local anchorY = '(' .. CALC(params[5]) .. ')'
         local axisX = '(' .. CALC(params[6]) .. ' / 100)'
         local axisY = '(' .. CALC(params[7]) .. ' / 100)'
 
         GAME.lua = GAME.lua .. ' pcall(function() GAME.group.joints[' .. joint .. ']:removeSelf() end)'
-        GAME.lua = GAME.lua .. ' pcall(function() objects = GAME.group.objects joints = GAME.group.joints joints[' .. joint .. '] = PHYSICS.newJoint( \'wheel\', objects[' .. base .. '],'
-        GAME.lua = GAME.lua .. ' objects[' .. piston .. '], ' .. anchorX .. ' + objects[' .. piston .. '].x, -' .. anchorY .. ' + objects[' .. piston .. '].y'
-        GAME.lua = GAME.lua .. ', ' .. axisX .. ', -' .. axisY .. ') end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local objects = GAME.group.objects'
+        GAME.lua = GAME.lua .. ' local piston = ' .. wheel .. ' local base = ' .. base
+        GAME.lua = GAME.lua .. ' if objects[base]._body ~= \'\' and objects[wheel]._body ~= \'\' then'
+        GAME.lua = GAME.lua .. ' GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint( \'wheel\', objects[base],'
+        GAME.lua = GAME.lua .. ' objects[wheel], ' .. anchorX .. ' + objects[wheel].x, -' .. anchorY
+        GAME.lua = GAME.lua .. ' + objects[wheel].y, ' .. axisX .. ', -' .. axisY .. ') end end)'
     end
 
     M['setTouchJoint'] = function(params)
@@ -437,8 +460,10 @@ if 'Физика 3' then
         local anchorY = '(' .. CALC(params[4]) .. ')'
 
         GAME.lua = GAME.lua .. ' pcall(function() GAME.group.joints[' .. joint .. ']:removeSelf() end)'
-        GAME.lua = GAME.lua .. ' pcall(function() objects = GAME.group.objects joints = GAME.group.joints joints[' .. joint .. '] = PHYSICS.newJoint(\'touch\','
-        GAME.lua = GAME.lua .. ' objects[' .. obj .. '], ' .. anchorX .. ' + objects[' .. obj .. '].x, -' .. anchorY .. ' + objects[' .. obj .. '].y) end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local objects, obj = GAME.group.objects, ' .. obj
+        GAME.lua = GAME.lua .. ' if objects[obj]._body ~= \'\' then'
+        GAME.lua = GAME.lua .. ' GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint(\'touch\','
+        GAME.lua = GAME.lua .. ' objects[obj], ' .. anchorX .. ' + objects[obj].x, -' .. anchorY .. ' + objects[obj].y) end end)'
     end
 
     M['setTouchTarget'] = function(params)
@@ -455,8 +480,10 @@ if 'Физика 3' then
         local frequency = '(' .. CALC(params[3]) .. ')'
         local maxForce = '(' .. CALC(params[4]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() Joint = GAME.group.joints[' .. joint .. ']'
-        GAME.lua = GAME.lua .. ' Joint.dampingRatio = ' .. dampingRatio .. ' Joint.frequency = ' .. frequency .. ' Joint.maxForce = ' .. maxForce .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local touchJoint = GAME.group.joints[' .. joint .. ']'
+        GAME.lua = GAME.lua .. ' touchJoint.dampingRatio = ' .. dampingRatio
+        GAME.lua = GAME.lua .. ' touchJoint.frequency = ' .. frequency
+        GAME.lua = GAME.lua .. ' touchJoint.maxForce = ' .. maxForce .. ' end)'
     end
 
     M['setRopeJoint'] = function(params)
@@ -469,9 +496,11 @@ if 'Физика 3' then
         local anchorYB = '(' .. CALC(params[7]) .. ')'
 
         GAME.lua = GAME.lua .. ' pcall(function() GAME.group.joints[' .. joint .. ']:removeSelf() end)'
-        GAME.lua = GAME.lua .. ' pcall(function() objects = GAME.group.objects GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint( \'rope\', objects[' .. bodyA .. '],'
-        GAME.lua = GAME.lua .. ' objects[' .. bodyB .. '], ' .. anchorXA .. ', -' .. anchorYA
-        GAME.lua = GAME.lua .. ', ' .. anchorXB .. ', -' .. anchorYB .. ') end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local objects, bodyA, bodyB = GAME.group.objects, ' .. bodyA .. ', ' .. bodyB
+        GAME.lua = GAME.lua .. ' if objects[bodyA]._body ~= \'\' and objects[bodyB]._body ~= \'\' then'
+        GAME.lua = GAME.lua .. ' GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint( \'rope\', objects[bodyA],'
+        GAME.lua = GAME.lua .. ' objects[bodyB], ' .. anchorXA .. ', -' .. anchorYA
+        GAME.lua = GAME.lua .. ', ' .. anchorXB .. ', -' .. anchorYB .. ') end end)'
     end
 
     M['setRopeSettings'] = function(params)
@@ -489,8 +518,10 @@ if 'Физика 3' then
         local anchorY = '(' .. CALC(params[5]) .. ')'
 
         GAME.lua = GAME.lua .. ' pcall(function() GAME.group.joints[' .. joint .. ']:removeSelf() end)'
-        GAME.lua = GAME.lua .. ' pcall(function() objects = GAME.group.objects GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint( \'friction\', objects[' .. bodyA .. '],'
-        GAME.lua = GAME.lua .. ' objects[' .. bodyB .. '], ' .. anchorX .. ' + objects[' .. bodyA .. '].x, -' .. anchorY .. ' + objects[' .. bodyA .. '].y) end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local objects, bodyA, bodyB = GAME.group.objects, ' .. bodyA .. ', ' .. bodyB
+        GAME.lua = GAME.lua .. ' if objects[bodyA]._body ~= \'\' and objects[bodyB]._body ~= \'\' then'
+        GAME.lua = GAME.lua .. ' GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint( \'friction\', objects[bodyA],'
+        GAME.lua = GAME.lua .. ' objects[bodyB], ' .. anchorX .. ' + objects[bodyA].x, -' .. anchorY .. ' + objects[bodyA].y) end end)'
     end
 
     M['setFrictionSettings'] = function(params)
@@ -498,30 +529,24 @@ if 'Физика 3' then
         local maxTorque = '(' .. CALC(params[2]) .. ')'
         local maxForce = '(' .. CALC(params[3]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() Joint = GAME.group.joints[' .. joint .. ']'
-        GAME.lua = GAME.lua .. ' Joint.maxTorque = ' .. maxTorque .. ' Joint.maxForce = ' .. maxForce .. ' end)'
+        GAME.lua = GAME.lua .. ' pcall(function() frictionJoint = GAME.group.joints[' .. joint .. ']'
+        GAME.lua = GAME.lua .. ' frictionJoint.maxTorque = ' .. maxTorque
+        GAME.lua = GAME.lua .. ' frictionJoint.maxForce = ' .. maxForce .. ' end)'
     end
 
     M['setPulleyJoint'] = function(params)
-        local joint = CALC(params[1])
-        local bodyA = CALC(params[2])
-        local bodyB = CALC(params[3])
-        local statXA = CALC(params[4])
-        local statYA = CALC(params[5])
-        local statXB = CALC(params[6])
-        local statYB = CALC(params[7])
-        local bodyXA = CALC(params[8])
-        local bodyYA = CALC(params[9])
-        local bodyXB = CALC(params[10])
-        local bodyYB = CALC(params[11])
-        local ratio = CALC(params[12])
+        local joint, bodyA, bodyB, statXA, statYA, statXB, statYB, bodyXA, bodyYA, bodyXB, bodyYB, ratio =
+        CALC(params[1]), CALC(params[2]), CALC(params[3]), CALC(params[4]), CALC(params[5]), CALC(params[6]),
+        CALC(params[7]), CALC(params[8]), CALC(params[9]), CALC(params[10]), CALC(params[11]), CALC(params[12])
 
         GAME.lua = GAME.lua .. ' pcall(function() GAME.group.joints[' .. joint .. ']:removeSelf() end)'
-        GAME.lua = GAME.lua .. ' pcall(function() objects = GAME.group.objects GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint(\'pulley\','
-        GAME.lua = GAME.lua .. ' objects[' .. bodyA .. '], objects[' .. bodyB .. '], ' .. statXA .. ' + objects[' .. bodyA .. '].x, -' .. statYA .. ' + objects[' .. bodyA .. '].y,'
-        GAME.lua = GAME.lua .. ' ' .. statXB .. ' + objects[' .. bodyB .. '].x, -' .. statYB  .. ' + objects[' .. bodyB .. '].y,'
-        GAME.lua = GAME.lua .. ' ' .. bodyXA .. ' + objects[' .. bodyA .. '].x, -' .. bodyYA .. ' + objects[' .. bodyA .. '].y, ' .. bodyXB
-        GAME.lua = GAME.lua .. ' + objects[' .. bodyB .. '].x, -' .. bodyYB .. ' + objects[' .. bodyB .. '].y, ' .. ratio .. ') end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local objects, bodyA, bodyB = GAME.group.objects, ' .. bodyA .. ', ' .. bodyB
+        GAME.lua = GAME.lua .. ' if objects[bodyA]._body ~= \'\' and objects[bodyB]._body ~= \'\' then'
+        GAME.lua = GAME.lua .. ' GAME.group.joints[' .. joint .. '] = PHYSICS.newJoint(\'pulley\','
+        GAME.lua = GAME.lua .. ' objects[bodyA], objects[bodyB], ' .. statXA .. ' + objects[bodyA].x, -' .. statYA .. ' + objects[bodyA].y,'
+        GAME.lua = GAME.lua .. ' ' .. statXB .. ' + objects[bodyB].x, -' .. statYB  .. ' + objects[bodyB].y,'
+        GAME.lua = GAME.lua .. ' ' .. bodyXA .. ' + objects[bodyA].x, -' .. bodyYA .. ' + objects[bodyA].y, ' .. bodyXB
+        GAME.lua = GAME.lua .. ' + objects[bodyB].x, -' .. bodyYB .. ' + objects[bodyB].y, ' .. ratio .. ') end end)'
     end
 end
 

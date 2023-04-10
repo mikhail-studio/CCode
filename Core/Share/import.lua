@@ -10,11 +10,12 @@ return {
                         io.close(file)
                     else
                         local link = 'App' .. numApp
-                        GANIN.uncompress(DOC_DIR .. '/import.ccode', DOC_DIR .. '/' .. link, function()
+                        GANIN.uncompress(DOC_DIR .. '/import.ccode', DOC_DIR .. '/' .. link, function(code)
                             local changeDataCustom, data = {}, GET_GAME_CODE(link)
                             local hash = READ_FILE(DOC_DIR .. '/' .. link .. '/hash.txt')
                             local new_custom = JSON.decode(READ_FILE(DOC_DIR .. '/' .. link .. '/custom.json'))
-                            local code, custom, dataCustom = JSON.encode3(data, {keyorder = KEYORDER}), GET_GAME_CUSTOM(), {}
+                            local custom, dataCustom = GET_GAME_CUSTOM(), {}
+                            if tonumber(data.build) < 1247 then code = JSON.encode3(data, {keyorder = KEYORDER}) end
                             local older_hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, code, '?.cc_ode'), 'cc.ode_?')
                             local older2_hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, code, '?.cc_ode-'), '*cc.ode_?')
                             local current_hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, code, '?.cc_ode-123%'), '%^()*cc.ode_?')

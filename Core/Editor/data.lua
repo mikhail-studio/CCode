@@ -5,11 +5,12 @@ M.fun = {
     keys = {},
     default = {
         'read_save', 'encode', 'len_table', 'concat', 'totable', 'tostring', 'tonumber', 'len', 'find',
-        'sub', 'gsub', 'split', 'unix_time', 'color_pixel', 'get_ip', 'random_str', 'match', 'noise', 'parameter'
+        'sub', 'gsub', 'split', 'rep', 'reverse', 'upper', 'lower', 'byte', 'char',
+        'unix_time', 'color_pixel', 'get_ip', 'random_str', 'match', 'noise', 'parameter'
     },
     noob = {
-        'concat', 'random_str', 'tostring', 'tonumber', 'len', 'find', 'sub', 'gsub',
-        'unix_time', 'color_pixel', 'totable', 'len_table', 'encode'
+        'concat', 'random_str', 'tostring', 'tonumber', 'len', 'find', 'sub', 'gsub', 'rep', 'reverse',
+        'upper', 'lower', 'unix_time', 'color_pixel', 'totable', 'len_table', 'encode'
     }
 }
 
@@ -71,7 +72,7 @@ M.prop = {
     files = {
         names = {},
         keys = {
-            'length', 'is_file', 'is_folder', 'last_modified'
+            'length', 'is_file', 'is_folder', 'length_folder', 'last_modified'
         }
     }
 }
@@ -110,7 +111,7 @@ M.set = function(key, name)
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
             if name == 'parameter' then table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {'objects', 't'}) end
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})
-        elseif name == 'find' or name == 'match' or name == 'color_pixel' or name == 'random'
+        elseif name == 'find' or name == 'match' or name == 'color_pixel' or name == 'random' or name == 'rep'
         or name == 'power' or name == 'remainder' or name == 'atan2' or name == 'noise' or name == 'round' then
             if name == 'round' then table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {'0', 'n'}) end
             table.insert(EDITOR.data, EDITOR.cursor[1] + 1, {',', 's'})

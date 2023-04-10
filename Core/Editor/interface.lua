@@ -28,6 +28,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
 
     DATA.new()
+        M.resources = {images = {}, sounds = {}, videos = {}, fonts = {}, others = {}}
         M.vars = {project = COPY_TABLE(data.vars), script = COPY_TABLE(script.vars), event = {}}
         M.tables = {project = COPY_TABLE(data.tables), script = COPY_TABLE(script.tables), event = {}}
         M.funs = {project = COPY_TABLE(data.funs), script = COPY_TABLE(script.funs), custom = {}, _custom = {}}
@@ -35,6 +36,12 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
             obj = DATA.prop.obj, text = DATA.prop.text, group = DATA.prop.group,
             widget = DATA.prop.widget, media = DATA.prop.media, files = DATA.prop.files
         }
+
+    for k, v in pairs(data.resources) do
+        for i = 1, #v do
+            M.resources[k][i] = v[i][1]
+        end
+    end
 
     if blockName ~= 'customDefault' then
         for i = blockIndex, 1, -1 do
@@ -59,6 +66,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         M.vars = {project = {}, script = {}, event = {}}
         M.tables = {project = {}, script = {}, event = {}}
         M.funs = {project = {}, script = {}, custom = {}, _custom = {}}
+        M.resources = {images = {}, sounds = {}, videos = {}, fonts = {}, others = {}}
     end
 
     local buttonsText = {
@@ -317,9 +325,9 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     listScroll.buttons = {}
     local listButtonsX = listScroll.width / 2
     local listButtonsY = 35
-    local listButtonsText = {'var', 'table', 'funs', 'prop', 'fun', 'math', 'log', 'device'}
+    local listButtonsText = {'var', 'table', 'funs', 'prop', 'fun', 'math', 'log', 'device', 'resource'}
 
-    for i = 1, 8 do
+    for i = 1, 9 do
         local listButtonName = 'editor.list.' .. listButtonsText[i]
 
         if NOOBMODE and (i == 1 or i == 3 or i == 5) then

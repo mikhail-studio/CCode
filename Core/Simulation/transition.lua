@@ -19,6 +19,7 @@ M['setTransitionTo'] = function(params)
     elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
+    elseif type == '(select[\'snapshot\']())' then type = 'GAME.group.snapshots'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
 
     local easing = easing == '(select[\'loop\']())' and 'continuousLoop' or (UTF8.match(easing, '%(select%[\'(.+)\'%]') or 'linear')
@@ -58,6 +59,7 @@ M['setTransitionPos'] = function(params)
     elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
+    elseif type == '(select[\'snapshot\']())' then type = 'GAME.group.snapshots'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
 
     local easing = easing == '(select[\'loop\']())' and 'continuousLoop' or (UTF8.match(easing, '%(select%[\'(.+)\'%]') or 'linear')
@@ -96,6 +98,7 @@ M['setTransitionSize'] = function(params)
     elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
+    elseif type == '(select[\'snapshot\']())' then type = 'GAME.group.snapshots'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
 
     local onComplete = M['setTransitionListener'](onComplete)
@@ -135,6 +138,7 @@ M['setTransitionScale'] = function(params)
     elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
+    elseif type == '(select[\'snapshot\']())' then type = 'GAME.group.snapshots'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
 
     local onComplete = M['setTransitionListener'](onComplete)
@@ -168,6 +172,7 @@ M['setTransitionRotation'] = function(params)
     elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
+    elseif type == '(select[\'snapshot\']())' then type = 'GAME.group.snapshots'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
 
     local onComplete = M['setTransitionListener'](onComplete)
@@ -202,6 +207,7 @@ M['setTransitionAlpha'] = function(params)
     elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
+    elseif type == '(select[\'snapshot\']())' then type = 'GAME.group.snapshots'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
 
     local onComplete = M['setTransitionListener'](onComplete)
@@ -260,6 +266,7 @@ M['setTransitionPause'] = function(params)
     elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
+    elseif type == '(select[\'snapshot\']())' then type = 'GAME.group.snapshots'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
 
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' local obj = ' .. type .. '[name]'
@@ -275,6 +282,7 @@ M['setTransitionResume'] = function(params)
     elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
+    elseif type == '(select[\'snapshot\']())' then type = 'GAME.group.snapshots'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
 
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' local obj = ' .. type .. '[name]'
@@ -290,6 +298,7 @@ M['setTransitionCancel'] = function(params)
     elseif type == '(select[\'text\']())' then type = 'GAME.group.texts'
     elseif type == '(select[\'group\']())' then type = 'GAME.group.groups'
     elseif type == '(select[\'widget\']())' then type = 'GAME.group.widgets'
+    elseif type == '(select[\'snapshot\']())' then type = 'GAME.group.snapshots'
     elseif type == '(select[\'tag\']())' then type = 'GAME.group.tags' end
 
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' local obj = ' .. type .. '[name]'
