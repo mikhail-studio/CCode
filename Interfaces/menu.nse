@@ -81,7 +81,7 @@ M.create = function()
         })
     M.group:insert(text_settings)
 
-    local build = display.newText('Build: ' .. BUILD, MAX_X - 100, MAX_Y - 40, 'sans', 27)
+    local build = display.newText('Build: ' .. BUILD .. '/' .. LUA_BUILD, MAX_X - 120, MAX_Y - 40, 'sans', 27)
     M.group:insert(build)
 
     local delimiter3 = display.newRect(CENTER_X, title.y + 800, 300, 5)
