@@ -53,7 +53,7 @@ local function getStartLua(linkBuild)
     local cod18 = ' GAME.group.textures = {} GAME.group.accelerometers = {} GAME.hash = CRYPTO.digest(CRYPTO.md5, math.random(1, 999999999))'
     local cod19 = ' local hash = GAME.hash GAME.group.networks = {} GAME.group.const.touch_x, GAME.group.const.touch_y = 0, 0'
     local cod20 = ' local tmp = DOC_DIR .. \'/\' .. CURRENT_LINK .. \'/Temps\' OS_REMOVE(tmp, true) LFS.mkdir(tmp)'
-    local cod21 = ' GAME.group.snapshots = {} GAME.group.joints = {}'
+    local cod21 = ' GAME.group.snapshots = {} GAME.group.joints = {} GAME_DEVICE_ID = \'' .. tostring(DEVICE_ID) .. '\''
 
     if linkBuild then
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = {}, {}, {}, {}' .. require 'Data.build'
@@ -97,11 +97,12 @@ M.remove = function()
     if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
     timer.performWithDelay(1, function() if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true})
     if (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) then GAME_GROUP_OPEN.scroll:scrollToPosition({y = M.scrollY, time = 0}) end end end)
+    pcall(function() _CCODE_UPDATE() end)
 end
 
 M.new = function(linkBuild, isDebug)
     M.group = display.newGroup()
-    M.orientation, EVENTS.CUSTOM = 'portrait', {}
+    M.orientation, EVENTS.CUSTOM = 'portrait', {} timer.cancelAll()
     M.data = GET_GAME_CODE(linkBuild or CURRENT_LINK) M.needBack, M.scripts = true, {}
     M.scrollY = (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) and select(2, GAME_GROUP_OPEN.scroll:getContentPosition()) or 0
     M.lua = getStartLua(linkBuild) .. ' GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'

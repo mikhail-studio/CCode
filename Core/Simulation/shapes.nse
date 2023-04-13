@@ -251,8 +251,8 @@ M['setLinearGradient'] = function(params)
     GAME.lua = GAME.lua .. ' (_G.math.cos(_G.math.rad(' .. angle .. ')) + 1) / 2}'
     GAME.lua = GAME.lua .. ' local pos2 = {(_G.math.sin(_G.math.rad(' .. angle .. ' - 180)) + 1) / 2,'
     GAME.lua = GAME.lua .. ' (_G.math.cos(_G.math.rad(' .. angle .. ' - 180)) + 1) / 2}'
-    GAME.lua = GAME.lua .. ' object.fill.effect.color1 = {colors1[1]/255, colors1[2]/255, colors1[3]/255, 1}'
-    GAME.lua = GAME.lua .. ' object.fill.effect.color2 = {colors2[1]/255, colors2[2]/255, colors2[3]/255, 1}'
+    GAME.lua = GAME.lua .. ' object.fill.effect.color1 = {colors1[1]/255, colors1[2]/255, colors1[3]/255, ' .. CALC(params[6]) .. '/100}'
+    GAME.lua = GAME.lua .. ' object.fill.effect.color2 = {colors2[1]/255, colors2[2]/255, colors2[3]/255, ' .. CALC(params[7]) .. '/100}'
     GAME.lua = GAME.lua .. ' object.fill.effect.position1 = pos1 object.fill.effect.position2 = pos2 end)'
 end
 
@@ -268,8 +268,8 @@ M['setRadialGradient'] = function(params)
     GAME.lua = GAME.lua .. ' object._effect = \'generator.radialGradient\' object.fill.effect = \'generator.radialGradient\''
     GAME.lua = GAME.lua .. ' if ' .. colorD .. ' then object:setFillColor(1, 1, 1) end'
     GAME.lua = GAME.lua .. ' local colors1, colors2 = ' .. colors1 .. ', ' .. colors2
-    GAME.lua = GAME.lua .. ' object.fill.effect.color1 = {colors1[1]/255, colors1[2]/255, colors1[3]/255, 1}'
-    GAME.lua = GAME.lua .. ' object.fill.effect.color2 = {colors2[1]/255, colors2[2]/255, colors2[3]/255, 1}'
+    GAME.lua = GAME.lua .. ' object.fill.effect.color1 = {colors1[1]/255, colors1[2]/255, colors1[3]/255, ' .. CALC(params[10]) .. '/100}'
+    GAME.lua = GAME.lua .. ' object.fill.effect.color2 = {colors2[1]/255, colors2[2]/255, colors2[3]/255, ' .. CALC(params[11]) .. '/100}'
     GAME.lua = GAME.lua .. ' object.fill.effect.center_and_radiuses = ' .. center_and_radiuses
     GAME.lua = GAME.lua .. ' object.fill.effect.aspectRatio = ' .. ratio .. ' end)'
 end
@@ -291,6 +291,14 @@ end
 M['setStrokeRGB'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].stroke ='
     GAME.lua = GAME.lua .. ' {' .. CALC(params[2]) .. '/255, ' .. CALC(params[3]) .. '/255, ' .. CALC(params[4]) .. '/255} end)'
+end
+
+M['setMarchingAnts'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].stroke.effect = \'generator.marchingAnts\' end)'
+end
+
+M['removeMarchingAnts'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].stroke.effect = nil end)'
 end
 
 return M

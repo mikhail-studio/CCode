@@ -430,7 +430,7 @@ if 'Физика 3' then
         local dampingRatio = '(' .. CALC(params[2]) .. ' / 100)'
         local frequency = '(' .. CALC(params[3]) .. ')'
 
-        GAME.lua = GAME.lua .. ' pcall(function() loacl weldJoint = GAME.group.joints[' .. joint .. ']'
+        GAME.lua = GAME.lua .. ' pcall(function() local weldJoint = GAME.group.joints[' .. joint .. ']'
         GAME.lua = GAME.lua .. ' weldJoint.dampingRatio = ' .. dampingRatio
         GAME.lua = GAME.lua .. ' weldJoint.frequency = ' .. frequency .. ' end)'
     end

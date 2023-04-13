@@ -241,7 +241,9 @@ M.listBlock = {
         'setStrokeWidth',
         'updStrokeWidth',
         'setStrokeColor',
-        'setStrokeRGB'
+        'setStrokeRGB',
+        'setMarchingAnts',
+        'removeMarchingAnts'
     },
 
     ['objects2'] = {
@@ -851,15 +853,16 @@ M.listName = {
         ['setGradientPaint'] = {'shapes', {'value'}, {'color', {'[255, 255, 255]', 'c'}}, {'color', {'[255, 255, 255]', 'c'}},
             {'value', {'100', 'n'}}, {'value', {'100', 'n'}}},
         ['setLinearGradient'] = {'shapes', {'value'}, {'value', {'90', 'n'}},
-            {'isBackground', {'backgroundFalse', 'sl'}}, {'color', {'[255, 255, 255]', 'c'}}, {'color', {'[255, 255, 255]', 'c'}}},
+            {'isBackground', {'backgroundFalse', 'sl'}}, {'color', {'[255, 255, 255]', 'c'}}, {'color', {'[255, 255, 255]', 'c'}}, {'value', {'100', 'n'}}, {'value', {'100', 'n'}}},
         ['setRadialGradient'] = {'shapes', {'value'}, {'value', {'1', 'n'}},
             {'isBackground', {'backgroundFalse', 'sl'}}, {'color', {'[255, 255, 255]', 'c'}}, {'color', {'[255, 255, 255]', 'c'}},
-            {'value', {'50', 'n'}}, {'value', {'50', 'n'}}, {'value', {'25', 'n'}}, {'value', {'75', 'n'}}},
+            {'value', {'50', 'n'}}, {'value', {'50', 'n'}}, {'value', {'25', 'n'}}, {'value', {'75', 'n'}}, {'value', {'100', 'n'}}, {'value', {'100', 'n'}}},
         ['setStrokeWidth'] = {'shapes', {'value'}, {'value', {'8', 'n'}}},
         ['updStrokeWidth'] = {'shapes', {'value'}, {'value', {'0', 'n'}}},
         ['setStrokeColor'] = {'shapes', {'value'}, {'color', {'[255, 255, 255]', 'c'}}},
         ['setStrokeRGB'] = {'shapes', {'value'}, {'value', {'255', 'n'}}, {'value', {'255', 'n'}}, {'value', {'255', 'n'}}},
-
+        ['setMarchingAnts'] = {'shapes', {'value'}},
+        ['removeMarchingAnts'] = {'shapes', {'value'}},
         -- noob
         ['newCircleNoob'] = {'shapes', {'value'}, {'value', {'50', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
             ['newRectNoob'] = {'shapes', {'value'}, {'color', {'[255, 255, 255]', 'c'}},

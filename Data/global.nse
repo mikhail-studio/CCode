@@ -30,6 +30,7 @@ SIZE = 1.0
 BUFFER = {}
 LIVE = false
 ALERT = true
+LUA_BUILD = 6
 INDEX_LIST = 0
 SEED = os.time()
 NOOBMODE = false
@@ -50,7 +51,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1252
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1254
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 MASK = graphics.newMask('Sprites/mask.png')
@@ -386,7 +387,7 @@ PHYSICS.setAverageCollisionPositions(true)
 WIDGET.setTheme('widget_theme_android_holo_dark')
 display.setDefault('background', 0.15, 0.15, 0.17)
 PHYSICS.setReportCollisionsInContentCoordinates(true) math.randomseed(SEED)
-DEVELOPERS = {['Ganin'] = true, ['Danil Nik'] = true, ['Terra'] = true}
+DEVELOPERS = {['Ganin'] = true, ['DanilNik'] = true}
 
 JSON.encode3 = require('Data.json').encode
 JSON.decode2, JSON.decode = JSON.decode, function(str) return type(str) == 'string' and (JSON.decode2(str) or {}) or nil end
