@@ -54,7 +54,7 @@ local function getStartLua(linkBuild)
     local cod19 = ' local hash = GAME.hash GAME.group.networks = {} GAME.group.const.touch_x, GAME.group.const.touch_y = 0, 0'
     local cod20 = ' local tmp = DOC_DIR .. \'/\' .. CURRENT_LINK .. \'/Temps\' OS_REMOVE(tmp, true) LFS.mkdir(tmp)'
     local cod21 = ' GAME.group.snapshots = {} GAME.group.joints = {} GAME_DEVICE_ID = \'' .. tostring(DEVICE_ID) .. '\''
-    local cod22 = ' GAME.camera = CAMERA.createView()'
+    local cod22 = ' GAME.group.particles = {}'
 
     if linkBuild then
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = CLASS(), {}, {}, {}' .. require 'Data.build'
@@ -86,7 +86,9 @@ M.remove = function()
     pcall(function() system.deactivate('multitouch') for _, v in pairs(M.group.objects) do
     pcall(function() v:removeEventListener('collision') end) pcall(function() v:removeEventListener('preCollision') end)
     pcall(function() v:removeEventListener('postCollision') end) pcall(function() PHYSICS.removeBody(v) end) end end)
+    pcall(function() if GAME and GAME.camera then GAME.camera:destroy() end end)
     pcall(function() for _, v in pairs(M.group.texts) do pcall(function() PHYSICS.removeBody(v) end) end end)
+    pcall(function() for _, v in pairs(M.group.particles) do pcall(function() v:removeSelf() v = nil end) end end)
     pcall(function() for _, v in pairs(M.group.joints) do pcall(function() v:removeSelf() v = nil end) end end)
     pcall(function() for _, v in pairs(M.group.bitmaps) do pcall(function() v:releaseSelf() v = nil end) end end)
     pcall(function() for _, v in pairs(M.group.textures) do pcall(function() v:releaseSelf() v = nil end) end end)
@@ -95,7 +97,7 @@ M.remove = function()
     pcall(function() M.group:removeSelf() M.group = nil end) M.RESOURCES = nil SEED = os.time() math.randomseed(SEED)
     pcall(function() for child = display.currentStage.numChildren, 1, -1 do if display.currentStage[child].wtype
     then timer.new(1, 1, function() pcall(function() display.currentStage[child]:removeSelf() end) end) end
-    if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end) GAME.camera:destroy()
+    if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
     timer.performWithDelay(1, function() if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true})
     if (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) then GAME_GROUP_OPEN.scroll:scrollToPosition({y = M.scrollY, time = 0}) end end end)
 end
@@ -111,7 +113,7 @@ M.new = function(linkBuild, isDebug)
         M.lua = M.lua .. ' setOrientationApp({type = \'portrait\', sim = true})'
     elseif M.data.settings.orientation == 'landscape' and (linkBuild or CURRENT_ORIENTATION ~= 'landscape') then
         M.lua = M.lua .. ' setOrientationApp({type = \'landscape\', sim = true})'
-    end
+    end M.lua = M.lua .. ' GAME.camera = CAMERA.createView()'
 
     local onStartCount = 0
     local nestedIndex = 0

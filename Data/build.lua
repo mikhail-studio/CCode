@@ -8,30 +8,6 @@ return ' ' .. UTF8.trimFull([===[
         display.setStatusBar(display.TranslucentStatusBar)
         display.setStatusBar(display.HiddenStatusBar)
 
-        local CLASS = (function()
-            return function()
-                local class = setmetatable({}, {
-                    __newindex = function(self, index, value)
-                        if index == '__table__' then
-                            rawset(self, index, value)
-                        else
-                            self.__table__[index] = value
-                            if _G.type(self.__table__[index .. '__set']) == 'function'
-                            then self.__table__[index .. '__set'](value) end
-                        end
-                    end,
-
-                    __index = function(self, index)
-                        if index == '__table__' then
-                            return rawget(self, index)
-                        else
-                            return self.__table__[index]
-                        end
-                    end
-                }) class.__table__ = {} return class
-            end
-        end)()
-
         local CAMERA = (function()
             local lib_perspective = {}
 
@@ -61,8 +37,8 @@ return ' ' .. UTF8.trimFull([===[
             		yScale = 1,
             		xOffset = 0,
             		yOffset = 0,
-            		addX = display.contentCenterX,
-            		addY = display.contentCenterY,
+            		addX = CENTER_X,
+            		addY = CENTER_Y,
             		bounds = {
             			xMin = math_nhuge,
             			xMax = math_huge,
@@ -81,7 +57,7 @@ return ' ' .. UTF8.trimFull([===[
             		viewY = 0,
             		getViewXY = function() if internal.focus then return internal.focus.x, internal.focus.y else return internal.viewX, internal.viewY end end,
             		layer = {},
-            		updateAddXY = function() internal.addX = display.contentCenterX / view.xScale internal.addY = display.contentCenterY / view.yScale end
+            		updateAddXY = function() internal.addX = CENTER_X / view.xScale internal.addY = CENTER_Y / view.yScale end
             	}
 
             	local layers = {}

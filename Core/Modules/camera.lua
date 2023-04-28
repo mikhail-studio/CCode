@@ -26,8 +26,8 @@ lib_perspective.createView = function(layerCount)
 		yScale = 1,
 		xOffset = 0,
 		yOffset = 0,
-		addX = display.contentCenterX,
-		addY = display.contentCenterY,
+		addX = CENTER_X,
+		addY = CENTER_Y,
 		bounds = {
 			xMin = math_nhuge,
 			xMax = math_huge,
@@ -46,7 +46,7 @@ lib_perspective.createView = function(layerCount)
 		viewY = 0,
 		getViewXY = function() if internal.focus then return internal.focus.x, internal.focus.y else return internal.viewX, internal.viewY end end,
 		layer = {},
-		updateAddXY = function() internal.addX = display.contentCenterX / view.xScale internal.addY = display.contentCenterY / view.yScale end
+		updateAddXY = function() internal.addX = CENTER_X / view.xScale internal.addY = CENTER_Y / view.yScale end
 	}
 
 	local layers = {}

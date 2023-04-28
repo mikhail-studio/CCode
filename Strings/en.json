@@ -649,7 +649,7 @@
         "blocks.setMarchingAnts": "Set marching ants to stroke",
         "blocks.setMarchingAnts.params": ["Object name:"],
         "blocks.removeMarchingAnts": "Remove marching ants from stroke",
-        "blocks.removeMarchingAnts.params": ["Object name:"],
+        "blocks.removeMarchingAnts.params": ["Object name:"]
     },
 
     "objects2": {
@@ -1027,6 +1027,8 @@
             "blocks.foreachFolder.params": ["Table name:", "Folder path:", "Storage type:"],
             "blocks.downloadFile": "Download file from internet",
             "blocks.downloadFile.params": ["Url:", "File path:", "After execution:", "File Type:", "Storage type:"],
+            "blocks.uploadFile": "Send file to server",
+            "blocks.uploadFile.params": ["Url:", "Mime type:", "File path:", "After execution:", "File Type:", "Storage type:"],
             "blocks.exportFile": "Export file to phone",
             "blocks.exportFile.params": ["File path:", "Storage type:", "File name:", "After execution:"],
             "blocks.importFile": "Import file from phone",
@@ -1164,7 +1166,32 @@
         "blocks.setTransitionCancel.params": ["Name:", "Type:"],
         "blocks.setTransitionPauseAll": "Pause all transition",
         "blocks.setTransitionResumeAll": "Resume all transition",
-        "blocks.setTransitionCancelAll": "Cancel all transition"
+        "blocks.setTransitionCancelAll": "Cancel all transition",
+        "blocks.newEmitter": "Create particles",
+            "blocks.newEmitter.params": ["Particle name:", "Particle type:"],
+            "blocks.newCustomEmitter": "Create custom particles",
+            "blocks.newCustomEmitter.params": ["Particle name:", "Particle table:", "Sprite name:"],
+            "blocks.removeEmitter": "Remove particles",
+            "blocks.removeEmitter.params": ["Particle name:"],
+            "blocks.removeAllEmitter": "Remove all particles",
+            "blocks.setEmitterPos": "Set particles position",
+            "blocks.setEmitterPos.params": ["Particle name:", "Position (X):", "Position (Y):"],
+            "blocks.setEmitterSize": "Set particles size",
+            "blocks.setEmitterSize.params": ["Particle name:", "Size (%):"],
+            "blocks.setEmitterSpeed": "Set particles speed",
+            "blocks.setEmitterSpeed.params": ["Particle name:", "Speed:"],
+            "blocks.setEmitterRotation": "Set particles rotation",
+            "blocks.setEmitterRotation.params": ["Particle name:", "Rotation (0-360):"],
+            "blocks.setEmitterGravity": "Set particles gravity",
+            "blocks.setEmitterGravity.params": ["Particle name:", "Gravity (X):", "Gravity (Y):"],
+            "blocks.setEmitterStartColor": "Set particles start color",
+            "blocks.setEmitterStartColor.params": ["Particle name:", "Color:", "Opacity (0-100):"],
+            "blocks.setEmitterStartRGB": "Set particles RGB start color",
+            "blocks.setEmitterStartRGB.params": ["Particle name:", "Color (R):", "Color (G):", "Color (B):", "Opacity (0-100):"],
+            "blocks.setEmitterFinishColor": "Set particles finite color",
+            "blocks.setEmitterFinishColor.params": ["Particle name:", "Color:", "Opacity (0-100):"],
+            "blocks.setEmitterFinishRGB": "Set particles RGB finite color",
+            "blocks.setEmitterFinishRGB.params": ["Particle name:", "Color (R):", "Color (G):", "Color (B):", "Opacity (0-100):"]
     },
 
     "varsNoob": {

@@ -79,6 +79,13 @@ M.getListButtons = function(type)
             STR['blocks.select.widget'],
             STR['blocks.select.snapshot']
         }
+    elseif type == 'particlesName' then
+        return {
+            'air_stars', 'aurora', 'orange_flame', 'blood', 'blue_galaxy', 'blue_vortex',
+            'bp_firefly', 'comet', 'crazy_blue', 'electrons', 'fireplace_flame', 'giving',
+            'heart', 'hongshizi', 'im_seeing_stars', 'lava_flow', 'my_galaxy',
+            'smoke', 'trippy', 'water_fountain', 'waterfall', 'wdemitter'
+        }
     elseif type == 'transitEasing' then
         return {
             'linear', 'loop', 'inQuad', 'outQuad', 'inOutQuad', 'outInQuad',
@@ -156,6 +163,8 @@ M.getListValue = function(type, text)
             or text == STR['blocks.select.tag'] and 'tag'
             or text == STR['blocks.select.snapshot'] and 'snapshot'
             or text == STR['blocks.select.widget'] and 'widget' or 'obj'
+    elseif type == 'particlesName' then
+        return text or 'air_stars'
     elseif type == 'transitEasing' then
         return text or 'linear'
     else

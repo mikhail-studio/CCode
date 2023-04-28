@@ -250,6 +250,17 @@ if 'Файлы' then
         GAME.lua = GAME.lua .. CALC(params[5]) .. ', true), system.DocumentsDirectory)) end)'
     end
 
+    M['uploadFile'] = function(params)
+        GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.networks, network.upload(' .. CALC(params[1]) .. ','
+        GAME.lua = GAME.lua .. ' \'POST\', function(e) pcall(function() if GAME.hash == hash'
+        GAME.lua = GAME.lua .. ' then ' .. CALC(params[4], 'a', true) .. '({phase = e.phase,'
+        GAME.lua = GAME.lua .. ' status = e.status, isError = e.isError, url = e.url, responseType = e.responseType,'
+        GAME.lua = GAME.lua .. ' bytesEstimated = e.bytesEstimated, bytesTransferred = e.bytesTransferred})'
+        GAME.lua = GAME.lua .. ' end end) end, {progress = true, bodyType = (' .. CALC(params[5]) .. ')'
+        GAME.lua = GAME.lua .. ' and \'binary\' or \'text\'}, other.getPath(' .. CALC(params[3]) .. ', ' .. CALC(params[6]) .. ', true),'
+        GAME.lua = GAME.lua .. ' system.DocumentsDirectory, ' .. CALC(params[2], 'multipart/aplication') .. ')) end)'
+    end
+
     M['installApk'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() GIVE_PERMISSION_DATA() OS_COPY(other.getPath(' .. CALC(params[1]) .. ', '
         GAME.lua = GAME.lua .. CALC(params[2]) .. '), MY_PATH .. \'/game.apk\') GANIN.update(MY_PATH .. \'/game.apk\') end)'
