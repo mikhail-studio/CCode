@@ -18,6 +18,7 @@ EXPORT = require 'plugin.exportFile'
 PASTEBOARD = require 'plugin.pasteboard'
 ORIENTATION = require 'plugin.orientation'
 STARTAPP = require 'plugin.startapp'
+VIDEO = require 'plugin.videoEditor'
 IMPACK = require 'plugin.impack'
 SVG = require 'plugin.nanosvg'
 UTF8 = require 'plugin.utf8'
@@ -52,7 +53,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1262
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1264
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 MASK = graphics.newMask('Sprites/mask.png')
@@ -393,12 +394,13 @@ NEW_APP_CODE = function(title, link, checkbox)
     }
 end
 
+audio.setVolume(1)
 PHYSICS.setAverageCollisionPositions(true)
 WIDGET.setTheme('widget_theme_android_holo_dark')
 display.setDefault('background', 0.15, 0.15, 0.17)
 UNPACK = function(t) if #t > 0 then return unpack(t) end return t end
 PHYSICS.setReportCollisionsInContentCoordinates(true) math.randomseed(SEED)
-DEVELOPERS = {['Ganin'] = true, ['DanilNik'] = true}
+DEVELOPERS = {['Ganin'] = true, ['DanilNik'] = true, ['MikhailStudio'] = true}
 
 JSON.encode3 = require('Data.json').encode
 JSON.decode2, JSON.decode = JSON.decode, function(str) return type(str) == 'string' and (JSON.decode2(str) or {}) or nil end
@@ -473,13 +475,13 @@ GET_GLOBAL_TABLE = function()
     return {
         sendLaunchAnalytics = sendLaunchAnalytics, transition = transition, tostring = tostring, tonumber = tonumber,
         gcinfo = gcinfo, assert = assert, debug = debug, GAME = GAME, collectgarbage = collectgarbage, GANIN = GANIN,
-        print2 = io, os = os, display = display, print4 = dofile, module = module, media = media, OS_REMOVE = OS_REMOVE,
+        os = os, display = display, module = module, media = media, OS_REMOVE = OS_REMOVE,
         native = native, coroutine = coroutine, CENTER_X = CENTER_X, CENTER_Y = CENTER_Y, JSON = JSON, ipairs = ipairs,
-        TOP_HEIGHT = TOP_HEIGHT, network = network, print3 = lfs, _network_pathForFile = _network_pathForFile,
+        TOP_HEIGHT = TOP_HEIGHT, network = network, _network_pathForFile = _network_pathForFile,
         pcall = pcall, BUILD = BUILD, MAX_Y = MAX_Y, MAX_X = MAX_X, string = string, SIZE = SIZE,
-        xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, print = print, OS_MOVE = OS_MOVE,
+        xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, OS_MOVE = OS_MOVE,
         table = table, lpeg = lpeg, COPY_TABLE = COPY_TABLE, DISPLAY_HEIGHT = DISPLAY_HEIGHT, OS_COPY = OS_COPY,
-        unpack = unpack, print5 = require, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
+        unpack = unpack, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
         graphics = graphics, system = system, rawequal = rawequal,  getmetatable = getmetatable, FILE = FILE,
         timer = timer, BOTTOM_HEIGHT = BOTTOM_HEIGHT, newproxy = newproxy, metatable = metatable, NOISE = NOISE,
         al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, DOC_DIR = DOC_DIR,

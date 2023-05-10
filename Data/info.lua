@@ -502,6 +502,8 @@ M.listBlock = {
         'setTransitionCancelAll',
         'newEmitter',
             'newCustomEmitter',
+            'newLinearEmitter',
+            'newRadialEmitter',
             'removeEmitter',
             'removeAllEmitter',
             'setEmitterPos',
@@ -1244,6 +1246,25 @@ M.listName = {
             {'transitEasing', {'linear', 'sl'}}, {'fun'}, {'fun'}, {'fun'}, {'fun'}, {'fun'}},
         ['newEmitter'] = {'transition', {'value'}, {'particlesName'}},
             ['newCustomEmitter'] = {'transition', {'value'}, {'value'}, {'value'}},
+            ['newLinearEmitter'] = {'transition', {'value'}, {'value'}, {'value', {'500', 'n'}}, {'value', {'true', 'l'}},
+                {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}},
+                {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}},
+                {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}},
+                {'value', {'2', 'n'}}, {'value', {'0', 'n'}},
+                {'value', {'20', 'n'}}, {'value', {'0', 'n'}}, {'value', {'5', 'n'}}, {'value', {'0', 'n'}},
+                {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}},
+                {'color', {'[255, 255, 255]', 'c'}}, {'color', {'[0, 0, 0]', 'c'}},
+                {'color', {'[0, 0, 0]', 'c'}}, {'color', {'[0, 0, 0]', 'c'}},
+                {'particlesGL', {'GL770', 'sl'}}, {'particlesGL', {'GL1', 'sl'}}},
+            ['newRadialEmitter'] = {'transition', {'value'}, {'value'}, {'value', {'500', 'n'}}, {'value', {'true', 'l'}},
+                {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}},
+                {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}},
+                {'value', {'2', 'n'}}, {'value', {'0', 'n'}},
+                {'value', {'20', 'n'}}, {'value', {'0', 'n'}}, {'value', {'5', 'n'}}, {'value', {'0', 'n'}},
+                {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}},
+                {'color', {'[255, 255, 255]', 'c'}}, {'color', {'[0, 0, 0]', 'c'}},
+                {'color', {'[0, 0, 0]', 'c'}}, {'color', {'[0, 0, 0]', 'c'}},
+                {'particlesGL', {'GL770', 'sl'}}, {'particlesGL', {'GL1', 'sl'}}},
             ['removeEmitter'] = {'transition', {'value'}},
             ['removeAllEmitter'] = {'transition'},
             ['setEmitterPos'] = {'transition', {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
@@ -1312,7 +1333,9 @@ M.listDelimiter = {
 
 M.listDelimiterNoob = {
     ['groups'] = {'newTag'},
-    ['vars'] = {'setTextPos'}
+    ['vars'] = {'setTextPos'},
+    ['transition'] = {'newEmitter'},
+    ['snapshot'] = {'addCamera'}
 }
 
 M.listNested = {
@@ -1485,6 +1508,7 @@ local blocksDelete = {
         ['pasteboardCopy'] = 'control',
         ['pasteboardPaste'] = 'control',
         ['pasteboardClear'] = 'control',
+        ['newAlert'] = 'control',
 
     ['setObjVar'] = 'vars',
         ['insertTable'] = 'vars',
@@ -1527,6 +1551,8 @@ local blocksDelete = {
         ['compressZipFile'] = 'media',
         ['compressZipFolder'] = 'media',
         ['uncompressZip'] = 'media',
+        ['uploadFile'] = 'media',
+        ['installApk'] = 'media',
 
     ['setBodyType'] = 'physics',
         ['setHitboxBox'] = 'physics',
