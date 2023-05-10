@@ -3,6 +3,7 @@ local M = {}
 
 local genBlocks = function()
     local data, index = GET_GAME_CODE(CURRENT_LINK), 0
+    local rightScripts = {}
 
     for i = 1, #data.folders.scripts do
         M.folder(data.folders.scripts[i][1], #M.group.blocks + 1, i, data.folders.scripts[i][3])
@@ -10,11 +11,18 @@ local genBlocks = function()
         if not data.folders.scripts[i][3] then
             for j = 1, #data.folders.scripts[i][2] do
                 local script = GET_GAME_SCRIPT(CURRENT_LINK, index + j, data)
+                table.insert(rightScripts, data.folders.scripts[i][2][j])
                 M.new(script.title, #M.group.blocks + 1, script.comment)
             end
         end
 
         index = index + #data.folders.scripts[i][2]
+    end
+
+    if JSON.encode(rightScripts) ~= JSON.encode(data.scripts) then
+        data.scripts = rightScripts SET_GAME_CODE(CURRENT_LINK, data)
+        SCRIPTS.group:removeSelf() SCRIPTS.group = nil
+        SCRIPTS.create() SCRIPTS.group.isVisible = true
     end
 end
 

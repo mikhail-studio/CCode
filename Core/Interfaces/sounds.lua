@@ -68,7 +68,7 @@ listeners.but_add = function(target)
                     SOUNDS.folder(e.text, #SOUNDS.group.blocks + 1, #data.folders.sounds, false)
                 end
             end
-        end)
+        end, nil, STR['scripts.folder'])
     else
         SOUNDS.group[8]:setIsLocked(false, 'vertical')
     end

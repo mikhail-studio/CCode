@@ -99,7 +99,7 @@ M['newSwitch'] = function(params)
     local style = CALC(params[2], '\'checkbox\'')
     local state = CALC(params[3], 'false')
     local width = style == '(select[\'switchToggle\']())' and CALC(params[4], '250') or CALC(params[4], '100')
-    local height = style == '(select[\'switchToggle\']())' and CALC(params[4], '50') or CALC(params[4], '100')
+    local height = style == '(select[\'switchToggle\']())' and CALC(params[5], '50') or CALC(params[5], '100')
     local posX = '(SET_X(' .. CALC(params[6]) .. '))'
     local posY = '(SET_Y(' .. CALC(params[7]) .. '))'
     local onPress = CALC(params[8], 'a', true)

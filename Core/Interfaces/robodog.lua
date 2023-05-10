@@ -4,6 +4,43 @@ listeners.title = function()
     EXITS.robodog()
 end
 
+listeners.toolbar = function(e)
+    if e.target.tag then
+        local index = ({dogs = 2, ach = 4, shop = 6, learn = 8})[e.target.tag]
+
+        for i = 2, 8, 2 do
+            if ROBODOG.group[i].isOn and i ~= index then
+                ROBODOG.group[i].isOn = false
+                ROBODOG.group[i].alpha = 0.1
+                break
+            elseif ROBODOG.group[i].isOn and i == index then
+                return
+            end
+        end
+
+        e.target.isOn = true
+        e.target.alpha = 0.3
+
+        listeners[e.target.tag](e)
+    end
+end
+
+listeners.dogs = function(e)
+    print(1)
+end
+
+listeners.ach = function(e)
+    print(2)
+end
+
+listeners.shop = function(e)
+    print(3)
+end
+
+listeners.learn = function(e)
+    print(4)
+end
+
 listeners.face = function()
     local y_frame = ROBODOG.face.y + ROBODOG.face.height / 2 + 50
 

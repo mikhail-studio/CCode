@@ -267,7 +267,7 @@ if 'Медиа' then
 end
 
 if 'Файлы' then
-    M['files.length'] = function(path, isTemp) print(path, isTemp)
+    M['files.length'] = function(path, isTemp)
         local isComplete, result = pcall(function()
             return GANIN.file('length', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)
         end) return isComplete and result or 0

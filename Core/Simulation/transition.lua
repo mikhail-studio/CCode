@@ -324,7 +324,7 @@ end
 if 'Частицы' then
     M['newEmitter'] = function(params)
         local name = CALC(params[1])
-        local type = UTF8.match(CALC(params[2], 'nil'), '%(select%[\'(.+)\'%]') or 'air_stars'
+        local type = UTF8.match(CALC(params[2]), '%(select%[\'(.+)\'%]') or 'air_stars'
 
         GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() GAME.group.particles[name]:removeSelf() end)'
         GAME.lua = GAME.lua .. ' GAME.group.particles[name] = PARTICLE.newEmitter(\'Emitter/' .. type .. '.json\', nil, \'Emitter/\')'
@@ -341,6 +341,126 @@ if 'Частицы' then
 
         GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() GAME.group.particles[name]:removeSelf() end)'
         GAME.lua = GAME.lua .. ' local params = ' .. emitter .. ' params.textureFileName = other.getImage(' .. link .. ')'
+        GAME.lua = GAME.lua .. ' GAME.group.particles[name] = display.newEmitter(params, system.DocumentsDirectory)'
+        GAME.lua = GAME.lua .. ' GAME.group.particles[name].x, GAME.group.particles[name].y = CENTER_X, CENTER_Y'
+        GAME.lua = GAME.lua .. ' GAME.group.particles[name]._height = GAME.group.particles[name].height'
+        GAME.lua = GAME.lua .. ' GAME.group.particles[name]._width = GAME.group.particles[name].width'
+        GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.particles[name]) end)'
+    end
+
+    M['newLinearEmitter'] = function(params)
+        local name, link = CALC(params[1]), CALC(params[2])
+        local maxParticles, absolutePosition = CALC(params[3], '500'), CALC(params[4], 'nil')
+        local angle, angleVariance = CALC(params[5], '0'), CALC(params[6], '0')
+        local speed, speedVariance = CALC(params[7], '0'), CALC(params[8], '0')
+        local sourcePositionVariancex, sourcePositionVariancey = CALC(params[9], '0'), CALC(params[10], '0')
+        local gravityx, gravityy = CALC(params[11], '0'), CALC(params[12], '0')
+        local radialAcceleration, radialAccelVariance = CALC(params[13], 'nil'), CALC(params[14], 'nil')
+        local tangentialAcceleration, tangentialAccelVariance = CALC(params[15], 'nil'), CALC(params[16], 'nil')
+        local particleLifespan, particleLifespanVariance = CALC(params[17], '2'), CALC(params[18], '0')
+        local startParticleSize, startParticleSizeVariance = CALC(params[19], '20'), CALC(params[20], '0')
+        local finishParticleSize, finishParticleSizeVariance = CALC(params[21], '5'), CALC(params[22], '0')
+        local rotationStart, rotationStartVariance = CALC(params[23], '0'), CALC(params[24], '0')
+        local rotationEnd, rotationEndVariance = CALC(params[25], '0'), CALC(params[26], '0')
+        local startColor, startColorVariance = CALC(params[27], '{255, 255, 255}'), CALC(params[28], '{0, 0, 0}')
+        local finishColor, finishColorVariance = CALC(params[29], '{0, 0, 0}'), CALC(params[30], '{0, 0, 0}')
+        local blendFuncSource = UTF8.match(CALC(params[31]), '%(select%[\'GL(.+)\'%]') or '770'
+        local blendFuncDestination = UTF8.match(CALC(params[32]), '%(select%[\'GL(.+)\'%]') or '1'
+
+        GAME.lua = GAME.lua .. ' pcall(function() local name, params = ' .. name .. ', {emitterType = 0,'
+        GAME.lua = GAME.lua .. ' textureFileName = other.getImage(' .. link .. '), duration = -1,'
+        GAME.lua = GAME.lua .. ' absolutePosition = not ' .. absolutePosition .. ', maxParticles = ' .. maxParticles .. ','
+        GAME.lua = GAME.lua .. ' angle = ' .. angle .. ', angleVariance = ' .. angleVariance .. ','
+        GAME.lua = GAME.lua .. ' speed = ' .. speed .. ', speedVariance = ' .. speedVariance .. ','
+        GAME.lua = GAME.lua .. ' sourcePositionVariancex = ' .. sourcePositionVariancex .. ','
+        GAME.lua = GAME.lua .. ' sourcePositionVariancey = 0 - ' .. sourcePositionVariancey .. ','
+        GAME.lua = GAME.lua .. ' gravityx = ' .. gravityx .. ', gravityy = 0 - ' .. gravityy .. ','
+        GAME.lua = GAME.lua .. ' radialAcceleration = ' .. radialAcceleration .. ','
+        GAME.lua = GAME.lua .. ' radialAccelVariance = ' .. radialAccelVariance .. ','
+        GAME.lua = GAME.lua .. ' tangentialAcceleration = ' .. tangentialAcceleration .. ','
+        GAME.lua = GAME.lua .. ' tangentialAccelVariance = ' .. tangentialAccelVariance .. ','
+        GAME.lua = GAME.lua .. ' particleLifespan = ' .. particleLifespan .. ','
+        GAME.lua = GAME.lua .. ' particleLifespanVariance = ' .. particleLifespanVariance .. ','
+        GAME.lua = GAME.lua .. ' startParticleSize = ' .. startParticleSize .. ','
+        GAME.lua = GAME.lua .. ' startParticleSizeVariance = ' .. startParticleSizeVariance .. ','
+        GAME.lua = GAME.lua .. ' finishParticleSize = ' .. finishParticleSize .. ','
+        GAME.lua = GAME.lua .. ' finishParticleSizeVariance = ' .. finishParticleSizeVariance .. ','
+        GAME.lua = GAME.lua .. ' rotationStart = ' .. rotationStart .. ', rotationEnd = ' .. rotationEnd .. ','
+        GAME.lua = GAME.lua .. ' blendFuncSource = ' .. blendFuncSource .. ', blendFuncDestination = ' .. blendFuncDestination .. '}'
+        GAME.lua = GAME.lua .. ' local startColor, startColorVariance = ' .. startColor .. ', ' .. startColorVariance
+        GAME.lua = GAME.lua .. ' local finishColor, finishColorVariance = ' .. finishColor .. ', ' .. finishColorVariance
+        GAME.lua = GAME.lua .. ' params.startColorRed = startColor and startColor[1] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.startColorGreen = startColor and startColor[2] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.startColorBlue = startColor and startColor[3] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.startColorVarianceRed = startColorVariance and startColorVariance[1] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.startColorVarianceGreen = startColorVariance and startColorVariance[2] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.startColorVarianceBlue = startColorVariance and startColorVariance[3] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.startColorAlpha = 1 params.startColorVarianceAlpha = 0'
+        GAME.lua = GAME.lua .. ' params.finishColorRed = finishColor and finishColor[1] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.finishColorGreen = finishColor and finishColor[2] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.finishColorBlue = finishColor and finishColor[3] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.finishColorVarianceRed = finishColorVariance and finishColorVariance[1] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.finishColorVarianceGreen = finishColorVariance and finishColorVariance[2] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.finishColorVarianceBlue = finishColorVariance and finishColorVariance[3] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.finishColorAlpha = 1 params.finishColorVarianceAlpha = 0'
+        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.particles[name]:removeSelf() end)'
+        GAME.lua = GAME.lua .. ' GAME.group.particles[name] = display.newEmitter(params, system.DocumentsDirectory)'
+        GAME.lua = GAME.lua .. ' GAME.group.particles[name].x, GAME.group.particles[name].y = CENTER_X, CENTER_Y'
+        GAME.lua = GAME.lua .. ' GAME.group.particles[name]._height = GAME.group.particles[name].height'
+        GAME.lua = GAME.lua .. ' GAME.group.particles[name]._width = GAME.group.particles[name].width'
+        GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.particles[name]) end)'
+    end
+
+    M['newRadialEmitter'] = function(params)
+        local name, link = CALC(params[1]), CALC(params[2])
+        local maxParticles, absolutePosition = CALC(params[3], '500'), CALC(params[4], 'nil')
+        local angle, angleVariance = CALC(params[5], '0'), CALC(params[6], '0')
+        local maxRadius, maxRadiusVariance = CALC(params[7], '0'), CALC(params[8], '0')
+        local minRadius, minRadiusVariance = CALC(params[9], '0'), CALC(params[10], '0')
+        local rotatePerSecond, rotatePerSecondVariance = CALC(params[11], '0'), CALC(params[12], '0')
+        local particleLifespan, particleLifespanVariance = CALC(params[13], '2'), CALC(params[14], '0')
+        local startParticleSize, startParticleSizeVariance = CALC(params[15], '20'), CALC(params[16], '0')
+        local finishParticleSize, finishParticleSizeVariance = CALC(params[17], '5'), CALC(params[18], '0')
+        local rotationStart, rotationStartVariance = CALC(params[19], '0'), CALC(params[20], '0')
+        local rotationEnd, rotationEndVariance = CALC(params[21], '0'), CALC(params[22], '0')
+        local startColor, startColorVariance = CALC(params[23], '{255, 255, 255}'), CALC(params[24], '{0, 0, 0}')
+        local finishColor, finishColorVariance = CALC(params[25], '{0, 0, 0}'), CALC(params[26], '{0, 0, 0}')
+        local blendFuncSource = UTF8.match(CALC(params[27]), '%(select%[\'GL(.+)\'%]') or '770'
+        local blendFuncDestination = UTF8.match(CALC(params[28]), '%(select%[\'GL(.+)\'%]') or '1'
+
+        GAME.lua = GAME.lua .. ' pcall(function() local name, params = ' .. name .. ', {emitterType = 1,'
+        GAME.lua = GAME.lua .. ' textureFileName = other.getImage(' .. link .. '), duration = -1,'
+        GAME.lua = GAME.lua .. ' absolutePosition = not ' .. absolutePosition .. ', maxParticles = ' .. maxParticles .. ','
+        GAME.lua = GAME.lua .. ' angle = ' .. angle .. ', angleVariance = ' .. angleVariance .. ','
+        GAME.lua = GAME.lua .. ' maxRadius = ' .. maxRadius .. ', maxRadiusVariance = ' .. maxRadiusVariance .. ','
+        GAME.lua = GAME.lua .. ' minRadius = ' .. minRadius .. ', minRadiusVariance = ' .. minRadiusVariance .. ','
+        GAME.lua = GAME.lua .. ' rotatePerSecond = ' .. rotatePerSecond .. ','
+        GAME.lua = GAME.lua .. ' rotatePerSecondVariance = ' .. rotatePerSecondVariance .. ','
+        GAME.lua = GAME.lua .. ' particleLifespan = ' .. particleLifespan .. ','
+        GAME.lua = GAME.lua .. ' particleLifespanVariance = ' .. particleLifespanVariance .. ','
+        GAME.lua = GAME.lua .. ' startParticleSize = ' .. startParticleSize .. ','
+        GAME.lua = GAME.lua .. ' startParticleSizeVariance = ' .. startParticleSizeVariance .. ','
+        GAME.lua = GAME.lua .. ' finishParticleSize = ' .. finishParticleSize .. ','
+        GAME.lua = GAME.lua .. ' finishParticleSizeVariance = ' .. finishParticleSizeVariance .. ','
+        GAME.lua = GAME.lua .. ' rotationStart = ' .. rotationStart .. ', rotationEnd = ' .. rotationEnd .. ','
+        GAME.lua = GAME.lua .. ' blendFuncSource = ' .. blendFuncSource .. ', blendFuncDestination = ' .. blendFuncDestination .. '}'
+        GAME.lua = GAME.lua .. ' local startColor, startColorVariance = ' .. startColor .. ', ' .. startColorVariance
+        GAME.lua = GAME.lua .. ' local finishColor, finishColorVariance = ' .. finishColor .. ', ' .. finishColorVariance
+        GAME.lua = GAME.lua .. ' params.startColorRed = startColor and startColor[1] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.startColorGreen = startColor and startColor[2] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.startColorBlue = startColor and startColor[3] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.startColorVarianceRed = startColorVariance and startColorVariance[1] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.startColorVarianceGreen = startColorVariance and startColorVariance[2] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.startColorVarianceBlue = startColorVariance and startColorVariance[3] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.startColorAlpha = 1 params.startColorVarianceAlpha = 0'
+        GAME.lua = GAME.lua .. ' params.finishColorRed = finishColor and finishColor[1] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.finishColorGreen = finishColor and finishColor[2] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.finishColorBlue = finishColor and finishColor[3] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.finishColorVarianceRed = finishColorVariance and finishColorVariance[1] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.finishColorVarianceGreen = finishColorVariance and finishColorVariance[2] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.finishColorVarianceBlue = finishColorVariance and finishColorVariance[3] / 255 or nil'
+        GAME.lua = GAME.lua .. ' params.finishColorAlpha = 1 params.finishColorVarianceAlpha = 0'
+        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.particles[name]:removeSelf() end)'
         GAME.lua = GAME.lua .. ' GAME.group.particles[name] = display.newEmitter(params, system.DocumentsDirectory)'
         GAME.lua = GAME.lua .. ' GAME.group.particles[name].x, GAME.group.particles[name].y = CENTER_X, CENTER_Y'
         GAME.lua = GAME.lua .. ' GAME.group.particles[name]._height = GAME.group.particles[name].height'

@@ -70,17 +70,20 @@ end
 M.remove = function()
     display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll()
     transition.cancelAll() native.setProperty('androidSystemUiVisibility', 'default') GAME.hash = ''
-    pcall(function() for _, v in ipairs(M.group.networks) do pcall(function() network.cancel(v) end) end end)
-    pcall(function() for _, v in pairs(M.group.timers) do pcall(function() timer.cancel(v) end) end end)
-    pcall(function() for _, v in ipairs(M.group.ts) do pcall(function() timer.cancel(v) end) end end)
+    pcall(function() for _, v in ipairs(M.group.networks) do pcall(function() network.cancel(v) v = nil end) end end)
+    pcall(function() for _, v in pairs(M.group.timers) do pcall(function() timer.cancel(v) v = nil end) end end)
+    pcall(function() for _, v in ipairs(M.group.ts) do pcall(function() timer.cancel(v) v = nil end) end end)
     pcall(function() for _, v in pairs(M.group.widgets) do timer.new(20, 1, function()
-    pcall(function() v:removeSelf() v = nil end) end) end end) pcall(function() for _, v in ipairs(M.group.accelerometers) do
-    pcall(function() Runtime:removeEventListener('accelerometer', v) end) end end)
-    pcall(function() Runtime:removeEventListener('key', M.group.const.keyBack) end)
+    pcall(function() v:removeSelf() v = nil end) end) end end) pcall(function() audio.setVolume(1) end)
+    pcall(function() for _, v in pairs(M.group.media) do timer.new(20, 1, function()
+    pcall(function() audio.stop(v[2]) v[2] = nil end) pcall(function() audio.dispose(v[1]) v[1] = nil end)
+    pcall(function() v:removeSelf() end) pcall(function() v = nil end) end) end end)
+    pcall(function() Runtime:removeEventListener('enterFrame', M.group.const.enterFrame) end)
     pcall(function() Runtime:removeEventListener('system', M.group.const.system) end)
     pcall(function() Runtime:removeEventListener('touch', M.group.const.touch_fun) end)
-    pcall(function() Runtime:removeEventListener('enterFrame', M.group.const.enterFrame) end)
-    pcall(function() audio.stop() end) pcall(function() for _, v in ipairs(M.group.collis) do
+    pcall(function() Runtime:removeEventListener('key', M.group.const.keyBack) end)
+    pcall(function() for _, v in ipairs(M.group.accelerometers) do
+    pcall(function() Runtime:removeEventListener('accelerometer', v) end) end end) pcall(function() for _, v in ipairs(M.group.collis) do
     pcall(function() Runtime:removeEventListener('collision', v) end) pcall(function() Runtime:removeEventListener('preCollision', v) end)
     pcall(function() Runtime:removeEventListener('postCollision', v) end) end end)
     pcall(function() system.deactivate('multitouch') for _, v in pairs(M.group.objects) do
@@ -113,7 +116,7 @@ M.new = function(linkBuild, isDebug)
         M.lua = M.lua .. ' setOrientationApp({type = \'portrait\', sim = true})'
     elseif M.data.settings.orientation == 'landscape' and (linkBuild or CURRENT_ORIENTATION ~= 'landscape') then
         M.lua = M.lua .. ' setOrientationApp({type = \'landscape\', sim = true})'
-    end M.lua = M.lua .. ' GAME.camera = CAMERA.createView()'
+    end M.lua = M.lua .. ' GAME.camera = CAMERA.createView() GAME.group:insert(GAME.camera)'
 
     local onStartCount = 0
     local nestedIndex = 0

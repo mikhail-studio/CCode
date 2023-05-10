@@ -68,7 +68,7 @@ listeners.but_add = function(target)
                     VIDEOS.folder(e.text, #VIDEOS.group.blocks + 1, #data.folders.videos, false)
                 end
             end
-        end)
+        end, nil, STR['scripts.folder'])
     else
         VIDEOS.group[8]:setIsLocked(false, 'vertical')
     end

@@ -73,17 +73,17 @@ if 'Медиа' then
     end
 
     M['setVolume'] = function(params)
-        GAME.lua = GAME.lua .. ' pcall(function() local name, volume = ' .. CALC(params[1]) .. ', ' .. CALC(params[2], '1')
-        GAME.lua = GAME.lua .. ' audio.setVolume(volume, {channel = GAME.group.media[name][2]}) end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local name, volume = ' .. CALC(params[1]) .. ', ' .. CALC(params[2], '100')
+        GAME.lua = GAME.lua .. ' audio.setVolume(volume / 100, {channel = GAME.group.media[name][2]}) end)'
     end
 
     M['fadeVolume'] = function(params)
         local name = CALC(params[1])
         local time = CALC(params[2], '1')
-        local volume = CALC(params[3], '1')
+        local volume = CALC(params[3], '100')
 
         GAME.lua = GAME.lua .. ' pcall(function() local name, time, volume = ' .. name .. ', ' .. time .. ', ' .. volume
-        GAME.lua = GAME.lua .. ' audio.fade({channel = GAME.group.media[name][2], time = time, volume = volume}) end)'
+        GAME.lua = GAME.lua .. ' audio.fade({channel = GAME.group.media[name][2], time = time, volume = volume / 100}) end)'
     end
 
     M['stopSound'] = function(params)

@@ -68,7 +68,7 @@ listeners.but_add = function(target)
                     RESOURCES.folder(e.text, #RESOURCES.group.blocks + 1, #data.folders.others, false)
                 end
             end
-        end)
+        end, nil, STR['scripts.folder'])
     else
         RESOURCES.group[8]:setIsLocked(false, 'vertical')
     end

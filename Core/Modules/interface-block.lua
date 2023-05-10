@@ -68,7 +68,7 @@ local listener = function(e, scroll, group, type)
                     local data = GET_GAME_CODE(e.target.link)
 
                     if tonumber(data.build) > 1170 then
-                        _supportOldestVersion(data, e.target.link)
+                        data = _supportOldestVersion(data, e.target.link)
 
                         local index = table.indexOf(LOCAL.apps, e.target.link)
                         local app = LOCAL.apps[index]
@@ -444,8 +444,8 @@ M.new = function(text, scroll, group, type, index, filter, link, comment, indexF
         local polygonY = group.blocks[index].y
 
         group.blocks[index].polygon = display.newPolygon(polygonX, polygonY, {0, 0, 10, 10, -10, 10})
-            group.blocks[index].polygon.yScale = (commentFolder and 1.4 or -1.4)
-            group.blocks[index].polygon:setFillColor(1)
+            group.blocks[index].polygon.yScale = commentFolder and 1.4 or -1.4
+            group.blocks[index].polygon:setFillColor(commentFolder and 0.4 or 1)
         scroll:insert(group.blocks[index].polygon)
     else
         group.blocks[index] = display.newRoundedRect(scroll.width / 2, y, scroll.width - RIGHT_HEIGHT - 100, 125, 20)

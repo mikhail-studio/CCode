@@ -55,6 +55,8 @@ listeners.but_import = function(target)
 
         if e.isError then
             WINDOW.new(STR['import.error'] .. e.idError, {STR['button.close'], STR['button.okay']}, function() end, 5)
+        else
+            WINDOW.new(STR['import.successfully'], {STR['button.close'], STR['button.okay']}, function() end, 2)
         end
     end)
 end

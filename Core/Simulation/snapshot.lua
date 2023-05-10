@@ -57,6 +57,13 @@ M['removeSnapshot'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.snapshots[name]:removeSelf() end) GAME.group.snapshots[name] = nil end)'
 end
 
+M['invalidateSnapshot'] = function(params)
+    local name, mode = CALC(params[1]), CALC(params[2])
+    local mode = mode == '(select[\'snapshotCanvas\']())' and '\'canvas\'' or 'nil'
+
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.snapshots[' .. name .. ']:invalidate(' .. mode .. ') end)'
+end
+
 M['showSnapshot'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.snapshots[' .. CALC(params[1]) .. '].isVisible = true end)'
 end

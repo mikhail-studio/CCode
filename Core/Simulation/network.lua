@@ -19,7 +19,7 @@ M['requestFirebase'] = function(params, method)
     local link = '\'https://\' .. tostring(' .. link .. ') .. \'.firebaseio.com/\' .. tostring(' .. key .. ') .. \'.json\''
     local listener = (method == 'GET' or method == 'DELETE') and CALC(params[3], 'a', true)  or CALC(params[4], 'a', true)
 
-    GAME.lua = GAME.lua .. ' pcall(function() local value = ' .. value .. ' print(tostring(' .. link .. '))'
+    GAME.lua = GAME.lua .. ' pcall(function() local value = ' .. value
     GAME.lua = GAME.lua .. ' if type(value) == \'number\' or type(value) == \'boolean\' then value = tostring(value)'
     GAME.lua = GAME.lua .. ' elseif type(value) == \'string\' then value = \'"\' .. value .. \'"\''
     GAME.lua = GAME.lua .. ' elseif type(value) == \'table\' then value = JSON.encode(value) end'

@@ -40,17 +40,63 @@ M.create = function()
         bg.rotation = CENTER_X == 641 and 90 or 0
     M.group:insert(bg)
 
-    local title = display.newText(STR['menu.dogs'], ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)
-        title.anchorX = 0
-        title.anchorY = 0
-    M.group:insert(title)
+    local width = DISPLAY_WIDTH - RIGHT_HEIGHT - 60
+    local width3 = (DISPLAY_WIDTH - RIGHT_HEIGHT - 60) / 2
+
+    local buttonDogs = display.newRect(CENTER_X - width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
+        buttonDogs.isOn = true
+        buttonDogs.alpha = 0.3
+        buttonDogs.tag = 'dogs'
+        buttonDogs:addEventListener('touch', function(e) LISTENER(e, 'toolbar') end)
+    M.group:insert(buttonDogs)
+
+    local buttonDogsText = display.newText(STR['menu.dogs'], buttonDogs.x, buttonDogs.y, 'ubuntu', 28)
+    M.group:insert(buttonDogsText)
+
+    local buttonAch = display.newRect(buttonDogs.x + width3, ZERO_Y + 50, width3, 56)
+        buttonAch.isOn = false
+        buttonAch.alpha = 0.1
+        buttonAch.tag = 'ach'
+        buttonAch:addEventListener('touch', function(e) LISTENER(e, 'toolbar') end)
+    M.group:insert(buttonAch)
+
+    local buttonAchText = display.newText(STR['robodog.achievements'], buttonAch.x, buttonAch.y, 'ubuntu', 28)
+    M.group:insert(buttonAchText)
+
+    local buttonShop = display.newRect(CENTER_X - width / 2 + width3 / 2, ZERO_Y + 106, width3, 56)
+        buttonShop.isOn = false
+        buttonShop.alpha = 0.1
+        buttonShop.tag = 'shop'
+        buttonShop:addEventListener('touch', function(e) LISTENER(e, 'toolbar') end)
+    M.group:insert(buttonShop)
+
+    local buttonShopText = display.newText(STR['robodog.shop'], buttonShop.x, buttonShop.y, 'ubuntu', 28)
+    M.group:insert(buttonShopText)
+
+    local buttonLearn = display.newRect(buttonShop.x + width3, ZERO_Y + 106, width3, 56)
+        buttonLearn.isOn = false
+        buttonLearn.alpha = 0.1
+        buttonLearn.tag = 'learn'
+        buttonLearn:addEventListener('touch', function(e) LISTENER(e, 'toolbar') end)
+    M.group:insert(buttonLearn)
+
+    local buttonLearnText = display.newText(STR['robodog.learning'], buttonLearn.x, buttonLearn.y, 'ubuntu', 28)
+    M.group:insert(buttonLearnText)
+
+    local buttonLine1 = display.newRect(CENTER_X, ZERO_Y + 78, 3, 112)
+        buttonLine1:setFillColor(0.6)
+    M.group:insert(buttonLine1)
+
+    local buttonLine2 = display.newRect(CENTER_X, ZERO_Y + 78, width3 * 2, 3)
+        buttonLine2:setFillColor(0.6)
+    M.group:insert(buttonLine2)
 
     M.dog = {LOCAL.dog.face, LOCAL.dog.eyes, LOCAL.dog.ears, LOCAL.dog.mouth, LOCAL.dog.accessories}
-    M.face = display.newImage(M.getPath(1), CENTER_X - 18, title.y + 300)
-    M.eyes = display.newImage(M.getPath(2), CENTER_X - 18, title.y + 300)
-    M.ears = display.newImage(M.getPath(3), CENTER_X - 18, title.y + 300)
-    M.mouth = display.newImage(M.getPath(4), CENTER_X - 18, title.y + 300)
-    M.accessories = display.newImage(M.getPath(5), CENTER_X - 18, title.y + 300)
+    M.face = display.newImage(M.getPath(1), CENTER_X - 18, buttonShop.y + 300)
+    M.eyes = display.newImage(M.getPath(2), CENTER_X - 18, buttonShop.y + 300)
+    M.ears = display.newImage(M.getPath(3), CENTER_X - 18, buttonShop.y + 300)
+    M.mouth = display.newImage(M.getPath(4), CENTER_X - 18, buttonShop.y + 300)
+    M.accessories = display.newImage(M.getPath(5), CENTER_X - 18, buttonShop.y + 300)
 
     if M.face then M.group:insert(M.face) end
     if M.eyes then M.group:insert(M.eyes) end
@@ -80,7 +126,7 @@ M.create = function()
         local _x_frame = DISPLAY_WIDTH / 7
         local _y_frame = MAX_Y + DISPLAY_HEIGHT / 2
 
-        for j = 1, (i == 1 and 25 or i == 2 and 38 or i == 3 and 35 or i == 4 and 35 or 11) do
+        for j = 1, (i == 1 and 25 or i == 2 and 38 or i == 3 and 35 or i == 4 and 34 or 11) do
             M['frames' .. i][j] = display.newImage('Sprites/ccdogBg.png', _x_frame, _y_frame)
                 M['frames' .. i][j].width = 100
                 M['frames' .. i][j].height = 100
@@ -97,7 +143,6 @@ M.create = function()
         end
     end
 
-    title:addEventListener('touch', function(e) LISTENER(e, 'title') end)
     M.face:addEventListener('touch', function(e) LISTENER(e, 'face') end)
 end
 

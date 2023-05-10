@@ -68,7 +68,7 @@ listeners.but_add = function(target)
                     FONTS.folder(e.text, #FONTS.group.blocks + 1, #data.folders.fonts, false)
                 end
             end
-        end)
+        end, nil, STR['scripts.folder'])
     else
         FONTS.group[8]:setIsLocked(false, 'vertical')
     end

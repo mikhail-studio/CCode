@@ -8,6 +8,8 @@ listeners.but_myprogram = function(target)
 end
 
 function _supportOldestVersion(data, link)
+    local script = GET_GAME_SCRIPT(link, 1, data)
+
     if not data.folders then
         data.folders = {
             scripts = {{'1', data.scripts, false}},
@@ -29,6 +31,8 @@ function _supportOldestVersion(data, link)
         data.build = tostring(BUILD)
         SET_GAME_CODE(link, data)
     end
+
+    return data
 end
 
 listeners.but_continue = function(target)
@@ -41,7 +45,7 @@ listeners.but_continue = function(target)
         local data = GET_GAME_CODE(LOCAL.last_link)
 
         if tonumber(data.build) > 1170 then
-            _supportOldestVersion(data, LOCAL.last_link)
+            data = _supportOldestVersion(data, LOCAL.last_link)
 
             MENU.group.isVisible = false
             PROGRAMS = require 'Interfaces.programs'
