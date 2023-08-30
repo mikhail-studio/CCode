@@ -552,7 +552,6 @@ return ' ' .. UTF8.trimFull([===[
                 appResize(event.type, event.lis)
             end
 
-            ANIMATION = require 'plugin.animation'
             NOTIFICATIONS = require 'plugin.notifications.v2'
             BITMAP = require 'plugin.memoryBitmap'
             FILE = require 'plugin.cnkFileManager'
@@ -800,6 +799,7 @@ return ' ' .. UTF8.trimFull([===[
                 }
             end
 
+            OS_REMOVE(MY_PATH, true) LFS.mkdir(MY_PATH)
             Runtime:addEventListener('unhandledError', function(event) return true end)
         end getGlobal()
 

@@ -37,6 +37,12 @@ listeners.videos = function()
     PROGRAM.group.isVisible = true
 end
 
+listeners.levels = function()
+    LEVELS.group:removeSelf()
+    LEVELS.group = nil
+    PROGRAM.group.isVisible = true
+end
+
 listeners.resources = function()
     RESOURCES.group:removeSelf()
     RESOURCES.group = nil
@@ -200,6 +206,8 @@ listeners.lis = function(event)
             listeners.sounds()
         elseif VIDEOS and VIDEOS.group and VIDEOS.group.isVisible then
             listeners.videos()
+        elseif LEVELS and LEVELS.group and LEVELS.group.isVisible then
+            listeners.levels()
         elseif RESOURCES and RESOURCES.group and RESOURCES.group.isVisible then
             listeners.resources()
         elseif FONTS and FONTS.group and FONTS.group.isVisible then

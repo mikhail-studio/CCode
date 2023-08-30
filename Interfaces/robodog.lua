@@ -136,9 +136,12 @@ M.create = function()
                 WINDOW.new(STR['robodog.showAd.title'], {STR['robodog.showAd.promo'], STR['robodog.showAd.watch']},
                 function(e)
                     if e.index == 1 then
-                        -- if DEVELOPERS[LOCAL.name_tester] then
+                        if DEVELOPERS[LOCAL.name_tester] 
+                        or DEVICE_ID == '120065e30b7f8ae6c187defebf408f39f1b5c2266e4d161ac0f340a710a9a884'
+                        or DEVICE_ID == 'd9d5f682f19992801fb415b9606858ecb78cd7d63dbb48f058aac601e7c27777'
+                        or DEVICE_ID == '1aed517f38d1c4b360ef68fb8572a9074a4f2102c2b8d579152ce61bea6d77eb' then
                             CCOIN.set(tonumber(LOCAL.ccoin) + 1000)
-                        -- end
+                        end
                     elseif e.index == 2 then
                         GET_UNIX_MINUTE(function(minutes)
                             if minutes == 0 then

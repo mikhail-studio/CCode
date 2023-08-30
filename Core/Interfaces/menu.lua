@@ -21,6 +21,12 @@ function _supportOldestVersion(data, link)
         }
     end
 
+    if not data.resources.levels then
+        data.resources.levels = {}
+        data.folders.levels = {{'1', {}, false}}
+        LFS.mkdir(DOC_DIR .. '/' .. link .. '/Levels')
+    end
+
     if script and script.custom then
         DEL_GAME_SCRIPT(link, 1, data)
         table.remove(data.scripts, 1)

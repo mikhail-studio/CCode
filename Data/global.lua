@@ -410,6 +410,7 @@ NEW_APP_CODE = function(title, link, checkbox)
         },
         folders = {
             scripts = {{'1', {}, false}},
+            levels = {{'1', {}, false}},
             images = {{'1', {}, false}},
             sounds = {{'1', {}, false}},
             videos = {{'1', {}, false}},
@@ -418,6 +419,7 @@ NEW_APP_CODE = function(title, link, checkbox)
         },
         resources = {
             images = {},
+            levels = {},
             sounds = {},
             videos = {},
             others = {},

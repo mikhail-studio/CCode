@@ -103,6 +103,11 @@ local listener = function(e, scroll, group, type)
                         IMAGES = require 'Interfaces.images'
                         IMAGES.create()
                         IMAGES.group.isVisible = true
+                    elseif e.target.text.text == STR['program.levels'] then
+                        group.isVisible = false
+                        LEVELS = require 'Interfaces.levels'
+                        LEVELS.create()
+                        LEVELS.group.isVisible = true
                     elseif e.target.text.text == STR['program.sounds'] then
                         group.isVisible = false
                         SOUNDS = require 'Interfaces.sounds'
@@ -166,6 +171,19 @@ local listener = function(e, scroll, group, type)
                         BLOCKS = require 'Interfaces.blocks'
                         BLOCKS.create()
                         BLOCKS.group.isVisible = true
+                    end
+
+                    if e.target.timer then
+                        if not e.target.timer._removed then
+                            timer.cancel(e.target.timer)
+                        end
+                    end
+                elseif type == 'levels' then
+                    if e.target.move then
+                        e.target.move = false
+                        MOVE.stop(e, scroll, group, type)
+                    elseif ALERT then
+                        native.showAlert('Мне лень', 'Не успел реализовать', {'Ок'})
                     end
 
                     if e.target.timer then
@@ -398,6 +416,8 @@ local listener = function(e, scroll, group, type)
                     group = VIDEOS.group
                 elseif type == 'resources' then
                     group = RESOURCES.group
+                elseif type == 'levels' then
+                    group = LEVELS.group
                 elseif type == 'fonts' then
                     group = FONTS.group
                 end
@@ -537,6 +557,9 @@ M.new = function(text, scroll, group, type, index, filter, link, comment, indexF
             group.blocks[index].container:insert(group.blocks[index].icon, true)
         elseif type == 'videos' then
             group.blocks[index].icon = display.newImage(THEMES.iconVideo())
+            group.blocks[index].container:insert(group.blocks[index].icon, true)
+        elseif type == 'levels' then
+            group.blocks[index].icon = display.newImage(THEMES.iconLevel())
             group.blocks[index].container:insert(group.blocks[index].icon, true)
         elseif type == 'resources' then
             group.blocks[index].icon = display.newImage(THEMES.iconRes())
