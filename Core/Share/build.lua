@@ -62,6 +62,7 @@ return {
             OS_REMOVE(DOC_DIR .. '/list.json')
             OS_REMOVE(DOC_DIR .. '/Build', true)
             CURRENT_LINK = LAST_CURRENT_LINK or CURRENT_LINK
+            CCOIN.set(tonumber(LOCAL.ccoin) + (isAab and 100 or 10))
             pcall(function() PROGRAMS.group[8]:setIsLocked(false, 'vertical') end)
         end
     end,

@@ -13,7 +13,7 @@ M.new = function(rgb, listener)
         M.group = display.newGroup()
 
         local bg = display.newRoundedRect(CENTER_X, CENTER_Y - 120, 500, 700, 20)
-            bg:setFillColor(0.18, 0.18, 0.2)
+            bg:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
         M.group:insert(bg)
 
         local block = display.newRoundedRect(CENTER_X, 320, 200, 200, 10)
@@ -21,11 +21,12 @@ M.new = function(rgb, listener)
         M.group:insert(block)
 
         local colorText = display.newText('', CENTER_X, 470, 'ubuntu', 26)
+            colorText:setFillColor(unpack(LOCAL.themes.text))
             colorText.text = getTextColor(rgb)
         M.group:insert(colorText)
 
         local red = display.newText(STR['blocks.color.red'], CENTER_X - 120, CENTER_Y - 100, 'ubuntu', 26)
-            red:setFillColor(1, 0, 0)
+            red:setFillColor(unpack(LOCAL.themes.interfaceColors.r))
             red.anchorX = 1
         M.group:insert(red)
 
@@ -47,7 +48,7 @@ M.new = function(rgb, listener)
         M.group:insert(redSlider)
 
         local redPlus = display.newRoundedRect(580, CENTER_Y - 100, 30, 30, 3)
-            redPlus:setFillColor(0.18, 0.18, 0.2)
+            redPlus:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
             redPlus.line1 = display.newRect(580, CENTER_Y - 100, 20, 3)
             redPlus.line2 = display.newRect(580, CENTER_Y - 100, 3, 20)
         M.group:insert(redPlus)
@@ -55,13 +56,13 @@ M.new = function(rgb, listener)
         M.group:insert(redPlus.line2)
 
         local redMinus = display.newRoundedRect(270, CENTER_Y - 100, 30, 30, 3)
-            redMinus:setFillColor(0.18, 0.18, 0.2)
+            redMinus:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
             redMinus.line1 = display.newRect(270, CENTER_Y - 100, 20, 3)
         M.group:insert(redMinus)
         M.group:insert(redMinus.line1)
 
         local green = display.newText(STR['blocks.color.green'], CENTER_X - 120, CENTER_Y - 50, 'ubuntu', 26)
-            green:setFillColor(0, 1, 0)
+            green:setFillColor(unpack(LOCAL.themes.interfaceColors.g))
             green.anchorX = 1
         M.group:insert(green)
 
@@ -83,7 +84,7 @@ M.new = function(rgb, listener)
         M.group:insert(greenSlider)
 
         local greenPlus = display.newRoundedRect(580, CENTER_Y - 50, 30, 30, 3)
-            greenPlus:setFillColor(0.18, 0.18, 0.2)
+            greenPlus:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
             greenPlus.line1 = display.newRect(580, CENTER_Y - 50, 20, 3)
             greenPlus.line2 = display.newRect(580, CENTER_Y - 50, 3, 20)
         M.group:insert(greenPlus)
@@ -91,13 +92,13 @@ M.new = function(rgb, listener)
         M.group:insert(greenPlus.line2)
 
         local greenMinus = display.newRoundedRect(270, CENTER_Y - 50, 30, 30, 3)
-            greenMinus:setFillColor(0.18, 0.18, 0.2)
+            greenMinus:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
             greenMinus.line1 = display.newRect(270, CENTER_Y - 50, 20, 3)
         M.group:insert(greenMinus)
         M.group:insert(greenMinus.line1)
 
         local blue = display.newText(STR['blocks.color.blue'], CENTER_X - 120, CENTER_Y, 'ubuntu', 26)
-            blue:setFillColor(0, 0, 1)
+            blue:setFillColor(unpack(LOCAL.themes.interfaceColors.b))
             blue.anchorX = 1
         M.group:insert(blue)
 
@@ -119,7 +120,7 @@ M.new = function(rgb, listener)
         M.group:insert(blueSlider)
 
         local bluePlus = display.newRoundedRect(580, CENTER_Y, 30, 30, 3)
-            bluePlus:setFillColor(0.18, 0.18, 0.2)
+            bluePlus:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
             bluePlus.line1 = display.newRect(580, CENTER_Y, 20, 3)
             bluePlus.line2 = display.newRect(580, CENTER_Y, 3, 20)
         M.group:insert(bluePlus)
@@ -127,7 +128,7 @@ M.new = function(rgb, listener)
         M.group:insert(bluePlus.line2)
 
         local blueMinus = display.newRoundedRect(270, CENTER_Y, 30, 30, 3)
-            blueMinus:setFillColor(0.18, 0.18, 0.2)
+            blueMinus:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
             blueMinus.line1 = display.newRect(270, CENTER_Y, 20, 3)
         M.group:insert(blueMinus)
         M.group:insert(blueMinus.line1)
@@ -150,7 +151,7 @@ M.new = function(rgb, listener)
         -- M.group:insert(alphaSlider)
         --
         -- local alphaPlus = display.newRoundedRect(580, CENTER_Y + 50, 30, 30, 3)
-        --     alphaPlus:setFillColor(0.18, 0.18, 0.2)
+        --     alphaPlus:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
         --     alphaPlus.line1 = display.newRect(580, CENTER_Y + 50, 20, 3)
         --     alphaPlus.line2 = display.newRect(580, CENTER_Y + 50, 3, 20)
         -- M.group:insert(alphaPlus)
@@ -158,16 +159,17 @@ M.new = function(rgb, listener)
         -- M.group:insert(alphaPlus.line2)
         --
         -- local alphaMinus = display.newRoundedRect(270, CENTER_Y + 50, 30, 30, 3)
-        --     alphaMinus:setFillColor(0.18, 0.18, 0.2)
+        --     alphaMinus:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
         --     alphaMinus.line1 = display.newRect(270, CENTER_Y + 50, 20, 3)
         -- M.group:insert(alphaMinus)
         -- M.group:insert(alphaMinus.line1)
 
         local colorHexRect = display.newRect(CENTER_X, CENTER_Y + 120 - 50, 300, 50)
-            colorHexRect:setFillColor(0.18, 0.18, 0.2)
+            colorHexRect:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
         M.group:insert(colorHexRect)
 
         local colorHex = display.newText('HEX', CENTER_X, CENTER_Y + 120 - 50, 'ubuntu', 26)
+            colorHex:setFillColor(unpack(LOCAL.themes.text))
             colorHex:toFront()
         M.group:insert(colorHex)
 
@@ -175,15 +177,15 @@ M.new = function(rgb, listener)
             if M.hexAlert then
                 if e.phase == 'began' then
                     display.getCurrentStage():setFocus(e.target)
-                    e.target:setFillColor(0.16, 0.16, 0.18)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAdd4Color))
                     e.target.click = true
                 elseif e.phase == 'moved' and (math.abs(e.x - e.xStart) > 30 or math.abs(e.y - e.yStart) > 30) then
                     display.getCurrentStage():setFocus(nil)
-                    e.target:setFillColor(0.18, 0.18, 0.2)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
                     e.target.click = false
                 elseif e.phase == 'ended' or e.phase == 'cancelled' then
                     display.getCurrentStage():setFocus(nil)
-                    e.target:setFillColor(0.18, 0.18, 0.2)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
                     if e.target.click then
                         e.target.click, M.hexAlert = false, false
                         M.slidersValue = {redSlider.value, greenSlider.value, blueSlider.value}
@@ -216,28 +218,28 @@ M.new = function(rgb, listener)
         end)
 
         local colorButton = display.newRect(CENTER_X + 120, CENTER_Y + 210 - 50, 248, 101.6)
-            colorButton:setFillColor(0.18, 0.18, 0.2)
+            colorButton:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
         M.group:insert(colorButton)
 
         local colorButtonText = display.newText({
                 font = 'ubuntu.ttf', width = 180, height = 80, text = STR['button.okay'],
                 x = CENTER_X + 120, y = CENTER_Y + 232 - 50, fontSize = 26, align = 'center'
-            })
+            }) colorButtonText:setFillColor(unpack(LOCAL.themes.text))
         M.group:insert(colorButtonText)
 
         colorButton:addEventListener('touch', function(e)
             if M.hexAlert then
                 if e.phase == 'began' then
                     display.getCurrentStage():setFocus(e.target)
-                    e.target:setFillColor(0.16, 0.16, 0.18)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAdd4Color))
                     e.target.click = true
                 elseif e.phase == 'moved' and (math.abs(e.x - e.xStart) > 30 or math.abs(e.y - e.yStart) > 30) then
                     display:getCurrentStage():setFocus(nil)
-                    e.target:setFillColor(0.18, 0.18, 0.2)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
                     e.target.click = false
                 elseif e.phase == 'ended' or e.phase == 'cancelled' then
                     display.getCurrentStage():setFocus(nil)
-                    e.target:setFillColor(0.18, 0.18, 0.2)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
                     if e.target.click then
                         e.target.click = false
                         M.remove(true, getTextColor(rgb))
@@ -250,15 +252,15 @@ M.new = function(rgb, listener)
             if M.hexAlert then
                 if e.phase == 'began' then
                     display.getCurrentStage():setFocus(e.target)
-                    e.target:setFillColor(0.16, 0.16, 0.18)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAdd4Color))
                     e.target.click = true
                 elseif e.phase == 'moved' and (math.abs(e.x - e.xStart) > 30 or math.abs(e.y - e.yStart) > 30) then
                     display:getCurrentStage():setFocus(nil)
-                    e.target:setFillColor(0.18, 0.18, 0.2)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
                     e.target.click = false
                 elseif e.phase == 'ended' or e.phase == 'cancelled' then
                     display.getCurrentStage():setFocus(nil)
-                    e.target:setFillColor(0.18, 0.18, 0.2)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
                     if e.target.click then
                         e.target.click = false
                         if colorName == 'red' then
@@ -284,15 +286,15 @@ M.new = function(rgb, listener)
             if M.hexAlert then
                 if e.phase == 'began' then
                     display.getCurrentStage():setFocus(e.target)
-                    e.target:setFillColor(0.16, 0.16, 0.18)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAdd4Color))
                     e.target.click = true
                 elseif e.phase == 'moved' and (math.abs(e.x - e.xStart) > 30 or math.abs(e.y - e.yStart) > 30) then
                     display:getCurrentStage():setFocus(nil)
-                    e.target:setFillColor(0.18, 0.18, 0.2)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
                     e.target.click = false
                 elseif e.phase == 'ended' or e.phase == 'cancelled' then
                     display.getCurrentStage():setFocus(nil)
-                    e.target:setFillColor(0.18, 0.18, 0.2)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
                     if e.target.click then
                         e.target.click = false
                         if colorName == 'red' then

@@ -9,6 +9,8 @@ M['requestApi'] = function(params)
     GAME.lua = GAME.lua .. ' p1 = UTF8.gsub(p1, \'setfenv\', \'print\') p1 = UTF8.gsub(p1, \'loadstring\', \'print\')'
     GAME.lua = GAME.lua .. ' p1 = UTF8.gsub(p1, \'currentStage\', \'fps\') p1 = UTF8.gsub(p1, \'getCurrentStage\', \'getDefault\')'
     GAME.lua = GAME.lua .. ' G_fun, G_device, G_other, G_math, G_prop = fun, device, other, math, prop'
+    GAME.lua = GAME.lua .. ' G_varsE, G_varsS, G_varsP, G_funsS, G_funsP = varsE, varsS, varsP, funsS, funsP'
+    GAME.lua = GAME.lua .. ' G_tablesE, G_tablesS, G_tablesP = tablesE, tablesS, tablesP'
     GAME.lua = GAME.lua .. ' return loadstring(\'local G = {} G.args = JSON.decode(\\\'\' .. args .. \'\\\') for key, value in'
     GAME.lua = GAME.lua .. ' pairs(GET_GLOBAL_TABLE()) do G[key] = value end setfenv(1, G) require = function(path)'
     GAME.lua = GAME.lua .. ' return (path:find(\\\'%.\\\') or path:find(\\\'io\\\') or path:find(\\\'os\\\') or path:find(\\\'lfs\\\')'
@@ -23,10 +25,19 @@ M['requestApiRes'] = function(params)
     GAME.lua = GAME.lua .. ' p1 = UTF8.gsub(p1, \'setfenv\', \'print\') p1 = UTF8.gsub(p1, \'loadstring\', \'print\')'
     GAME.lua = GAME.lua .. ' p1 = UTF8.gsub(p1, \'currentStage\', \'fps\') p1 = UTF8.gsub(p1, \'getCurrentStage\', \'getDefault\')'
     GAME.lua = GAME.lua .. ' G_fun, G_device, G_other, G_math, G_prop = fun, device, other, math, prop'
+    GAME.lua = GAME.lua .. ' G_varsE, G_varsS, G_varsP, G_funsS, G_funsP = varsE, varsS, varsP, funsS, funsP'
+    GAME.lua = GAME.lua .. ' G_tablesE, G_tablesS, G_tablesP = tablesE, tablesS, tablesP'
     GAME.lua = GAME.lua .. ' return loadstring(\'local G = {} G.args = JSON.decode(\\\'\' .. args .. \'\\\') for key, value in'
     GAME.lua = GAME.lua .. ' pairs(GET_GLOBAL_TABLE()) do G[key] = value end setfenv(1, G) require = function(path)'
     GAME.lua = GAME.lua .. ' return (path:find(\\\'%.\\\') or path:find(\\\'io\\\') or path:find(\\\'os\\\') or path:find(\\\'lfs\\\')'
     GAME.lua = GAME.lua .. ' or path:find(\\\'starter\\\')) and {} or print5(path) end \' .. p1)() end)'
+end
+
+M['requestApiThread'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local luaCode = \'local json = dofile("' .. system.pathForFile('json.nse') .. '")'
+    GAME.lua = GAME.lua .. ' local _, result = pcall(function() \' .. ' .. CALC(params[1]) .. ' .. \' end) print(result)\''
+    GAME.lua = GAME.lua .. ' GANIN.thread(DOC_DIR, luaCode, function(e) if GAME.hash == hash'
+    GAME.lua = GAME.lua .. ' then ' .. CALC(params[2], 'a', true) .. '({result = e.result}) end end) end)'
 end
 
 M['requestFun'] = function(params)
@@ -38,7 +49,7 @@ M['requestFunNoob'] = function(params)
 end
 
 M['requestFunParams'] = function(params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. '(' .. CALC(params[2]) .. ') end)'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. '(' .. CALC(params[2], nil, true) .. ') end)'
 end
 
 M['setFocus'] = function(params)

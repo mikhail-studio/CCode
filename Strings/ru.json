@@ -10,6 +10,9 @@
         "lang.cn": "中文",
         "lang.jp": "日本語",
         "lang.custom": "Свой",
+        "backup.title": "Хотите заменить текущие скрипты на более старое сохранение?\n\nНажмите 'Следующий бэкап', чтобы выбрать более старый бэкап по времени, или, нажмите 'Установить бэкап', чтобы заменить текущие скрипты на бэкап по данному времени\n\nТекущий последний бэкап: ",
+        "backup.continue": "Следующий бэкап",
+        "backup.install": "Установить бэкап",
         "button.yes": "Да",
         "button.no": "Нет",
         "button.okay": "Ок",
@@ -19,6 +22,7 @@
         "button.remove": "Удалить",
         "button.rename": "Переименовать",
         "button.copy": "Копировать",
+        "button.backup": "Бэкапы",
         "button.to.buffer": "В буфер",
         "button.from.buffer": "Из буфера",
         "button.paste": "Вставить",
@@ -33,9 +37,6 @@
         "button.block.find": "Найти блок",
         "button.pasteFromClipboard": "Вставить из буфера обмена",
         "button.importLuaFile": "Импортировать .lua файл",
-        "robodog.shop": "Магазин",
-        "robodog.learning": "Обучение",
-        "robodog.achievements": "Достижения",
         "menu.myprogram": "Мои программы",
         "menu.continue": "Продолжить",
         "menu.settings": "Настройки",
@@ -138,6 +139,46 @@
         "import.successfully": "Проект успешно импортирован",
         "game.debug": "В буфер обмена сохранён lua код программы",
         "game.isbug": "Не удалось запустить симуляцию"
+    },
+
+    "beginner": {
+        "beginner.start.message": "Привет, вижу ты тут впервые? Я - сидог, а ты? Давай узнаем твой возраст, пол и имя, ты согласен?",
+        "beginner.start.button.anonim": "Аноним",
+        "beginner.gender.what": "И так, узнаем кто вы, мужчина или женщина?",
+        "beginner.gender.man": "Мужчина",
+        "beginner.gender.woman": "Женщина",
+        "beginner.age.what": "Теперь, узнаем ваш возраст, напоминаю, пользоваться CCode можно людям с возрастом от 13 до 90 лет",
+        "beginner.age": "Возраст",
+        "beginner.age.banned": "Вам запрещено пользоваться CCode по возрастным ограничениям",
+        "beginner.name.what": "Ну и последнее, узнаем ваше имя",
+        "beginner.name": "Имя",
+        "beginner.entrance": "Спасибо, теперь можешь начать пользоваться CCode, маленькие подсказки: \n\nВо вкладке 'Мой робопёс' есть вкладка для обучения\n\nПо кнопке 'Дискорд' слева снизу меню можно перейти в Discord сервер, где можно задавать вопросы и отправлять баги\n\nCCode сейчас не самое простое приложение, поэтому множество видеороликов на ютубе и помощь в дискорде - будут очень полезны для тебя\n\nНу и кнопка 'Уровни' пока что не работает"
+    },
+
+    "robodog": {
+        "robodog.showAd.title": "Чтобы получить 10 сикоинов нужно посмотреть видеорекламу",
+        "robodog.showAd.time": "Посмотреть рекламу ещё раз вы сможете через минуты: ",
+        "robodog.showAd.error": "Ошибка загрузки рекламы",
+        "robodog.showAd.promo": "Промокод",
+        "robodog.showAd.watch": "Смотреть",
+        "robodog.showAd": "Получить ccoin",
+        "robodog.learning": "Обучение",
+        "robodog.themes": "Темы",
+        "robodog.buy": "Купить",
+        "robodog.count.ccoin": "Количество ccoin: ",
+        "robodog.not.enough.ccoin": "У вас недостаточно ccoin",
+        "robodog.successful.purchase.1": "Вы купили новое лицо",
+        "robodog.successful.purchase.2": "Вы купили новые глаза",
+        "robodog.successful.purchase.3": "Вы купили новые уши",
+        "robodog.successful.purchase.4": "Вы купили новый рот",
+        "robodog.successful.purchase.5": "Вы купили новый аксессуар",
+        "robodog.want.buy.1": "Хотите купить данное лицо?\nСтоимость: ",
+        "robodog.want.buy.2": "Хотите купить данные глаза?\nСтоимость: ",
+        "robodog.want.buy.3": "Хотите купить данные уши?\nСтоимость: ",
+        "robodog.want.buy.4": "Хотите купить данный рот?\nСтоимость: ",
+        "robodog.want.buy.5": "Хотите купить данный аксессуар?\nСтоимость: ",
+        "robodog.want.set.theme": "Хотите установить данную тему?",
+        "robodog.need.ccoin": "Необходимое количество: "
     },
 
     "blocks": {
@@ -557,6 +598,8 @@
             "blocks.requestApi.params": ["Lua код:"],
             "blocks.requestApiRes": "Вызвать API метод из ресурса",
             "blocks.requestApiRes.params": ["Имя ресурса:"],
+            "blocks.requestApiThread": "Вызвать lua5.3 метод в новом потоке",
+            "blocks.requestApiThread.params": ["Lua код:", "Имя функции:"],
             "blocks.toastShort": "Короткое всплывающее уведомление",
             "blocks.toastShort.params": ["Текст:"],
             "blocks.toastLong": "Длинное всплывающее уведомление",
@@ -1107,7 +1150,22 @@
             "blocks.setParallaxCamera": "Установить параллакс на слой камеры",
             "blocks.setParallaxCamera.params": ["Слой:", "Параллакс по X (0-100):", "Параллакс по Y (0-100):"],
             "blocks.setOffsetLayerCamera": "Сместить слой камеры",
-            "blocks.setOffsetLayerCamera.params": ["Слой:", "Смещение по X:", "Смещение по Y:"]
+            "blocks.setOffsetLayerCamera.params": ["Слой:", "Смещение по X:", "Смещение по Y:"],
+            "blocks.new3dScene": "Создать 3д сцену",
+            "blocks.new3dScene.params": ["Ширина:", "Высота:"],
+            "blocks.upd3dScene": "Обновить 3д сцену",
+            "blocks.eye3dScene": "Установить позицию камеры 3д сцены",
+            "blocks.eye3dScene.params": ["Позиция (X):", "Позиция (Y):", "Позиция (Z):"],
+            "blocks.center3dScene": "Установить центровку камеры 3д сцены",
+            "blocks.center3dScene.params": ["Позиция (X):", "Позиция (Y):", "Позиция (Z):"],
+            "blocks.new3dObject": "Создать 3д объект",
+            "blocks.new3dObject.params": ["Имя 3д объекта:", "Имя ресурса:"],
+            "blocks.move3dObject": "Установить позицию 3д объекта",
+            "blocks.move3dObject.params": ["Имя 3д объекта:", "Позиция (X):", "Позиция (Y):", "Позиция (Z):"],
+            "blocks.scale3dObject": "Установить масштаб 3д объекта",
+            "blocks.scale3dObject.params": ["Имя 3д объекта:", "Масштаб (X):", "Масштаб (Y):", "Масштаб (Z):"],
+            "blocks.rotate3dObject": "Установить вращение 3д объекта",
+            "blocks.rotate3dObject.params": ["Имя 3д объекта:", "Вращение (X):", "Вращение (Y):", "Вращение (Z):"]
     },
 
     "network": {
@@ -1213,8 +1271,7 @@
                 "Конечное вращение:", "Отклонение вращения:",
                 "Начальный цвет:", "Отклонение цвета:",
                 "Конечный цвет:", "Отклонение цвета:",
-                "Исходный цвет GL:", "Целевой цвет GL:"
-            ],
+                "Исходный цвет GL:", "Целевой цвет GL:"],
             "blocks.newRadialEmitter": "Создать радиальные частицы",
             "blocks.newRadialEmitter.params": [
                 "Имя частиц:", "Имя спрайта:",
@@ -1230,8 +1287,7 @@
                 "Конечное вращение:", "Отклонение вращения:",
                 "Начальный цвет:", "Отклонение цвета:",
                 "Конечный цвет:", "Отклонение цвета:",
-                "Исходный цвет GL:", "Целевой цвет GL:"
-            ]
+                "Исходный цвет GL:", "Целевой цвет GL:"]
     },
 
     "varsNoob": {

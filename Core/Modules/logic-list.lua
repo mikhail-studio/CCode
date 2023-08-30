@@ -45,14 +45,14 @@ M.create = function(data, size, twidth, tsize, needParams)
 
     block.block = display.newPolygon(0, 0, polygon)
         block.block:setFillColor(INFO.getBlockColor(data.name, data.comment, nil, color))
-        block.block:setStrokeColor(0.3)
+        block.block:setStrokeColor(INFO.getBlockColor(data.name, data.comment, nil, color, nil, true))
         block.block.strokeWidth = 4
     block:insert(block.block)
 
     block.text = display.newText({
             text = STR['blocks.' .. data.name], width = block.block.width - 20, height = 38 / size, fontSize = 30 / size,
             align = 'left', x = 10 / size, y = BLOCK.getTextY(lengthParams) / size, font = 'ubuntu'
-        })
+        }) block.text:setFillColor(unpack(LOCAL.themes.blockText))
     block:insert(block.text)
 
     block.rects = display.newGroup()
@@ -81,10 +81,11 @@ M.create = function(data, size, twidth, tsize, needParams)
                 text = name, align = 'left', height = textGetHeight.height / size, width = 143 / size,
                 fontSize = 22 / size, x = nameX / size, y = nameY / size, font = 'ubuntu'
             }) textGetHeight:removeSelf()
+            block.params[i].name:setFillColor(unpack(LOCAL.themes.blockText))
         block:insert(block.params[i].name)
 
         block.params[i].line = display.newRect(lineX / size, lineY / size, lineWidth / size, 3 / size)
-            block.params[i].line:setFillColor(0.3)
+            block.params[i].line:setFillColor(INFO.getBlockColor(data.name, data.comment, nil, color, nil, true))
             block.params[i].line.anchorX = 0
         block:insert(block.params[i].line)
 
@@ -92,6 +93,7 @@ M.create = function(data, size, twidth, tsize, needParams)
                 text = BLOCK.getParamsValueText(data.params, i), width = (lineWidth - 5) / size, height = 26 / size,
                 y = (lineY - 15) / size, x = lineX / size, font = 'ubuntu', fontSize = 20 / size, align = 'center'
             }) block.params[i].value.anchorX = 0
+            block.params[i].value:setFillColor(unpack(LOCAL.themes.blockText))
         block:insert(block.params[i].value)
 
         if twidth then
@@ -124,7 +126,7 @@ M.new = function(target)
         M.group:insert(bg)
 
         local rect = display.newRoundedRect(CENTER_X, CENTER_Y, width, height, 20)
-            rect:setFillColor(0.2, 0.2, 0.22)
+            rect:setFillColor(unpack(LOCAL.themes.bgAddColor))
         M.group:insert(rect)
 
         local comment = target.data.comment
@@ -153,27 +155,28 @@ M.new = function(target)
 
         for i = 1, #getButtonText(comment, nested, name) do
             local button = display.newRect(CENTER_X, y, width - 25, 66)
-                button:setFillColor(0.2, 0.2, 0.22)
+                button:setFillColor(unpack(LOCAL.themes.bgAddColor))
             M.group:insert(button)
 
             button.text = display.newText({
                     text = getButtonText(comment, nested, name)[i], align = 'left', fontSize = 24,
                     x = CENTER_X + 10, y = y, font = 'ubuntu', height = 28, width = width - 40
                 }) button.text.id = i
+                button.text:setFillColor(unpack(LOCAL.themes.text))
             M.group:insert(button.text)
 
             button:addEventListener('touch', function(e)
                 if e.phase == 'began' then
                     display.getCurrentStage():setFocus(e.target)
-                    e.target:setFillColor(0.22, 0.22, 0.24)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAdd2Color))
                     e.target.click = true
                 elseif e.phase == 'moved' and math.abs(e.y - e.yStart) > 20 then
                     display.getCurrentStage():setFocus(nil)
-                    e.target:setFillColor(0.2, 0.2, 0.22)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAddColor))
                     e.target.click = false
                 elseif e.phase == 'ended' or e.phase == 'cancelled' then
                     display.getCurrentStage():setFocus(nil)
-                    e.target:setFillColor(0.2, 0.2, 0.22)
+                    e.target:setFillColor(unpack(LOCAL.themes.bgAddColor))
                     if e.target.click then
                         e.target.click = false
                         INDEX_LIST = e.target.text.id

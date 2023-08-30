@@ -79,6 +79,12 @@ M.getListButtons = function(type)
             STR['blocks.select.widget'],
             STR['blocks.select.snapshot']
         }
+    elseif type == 'particlesGL' then
+        return {
+            'GL_ZERO', 'GL_ONE', 'GL_DST_COLOR', 'GL_ONE_MINUS_DST_COLOR', 'GL_SRC_ALPHA',
+            'GL_ONE_MINUS_SRC_ALPHA', 'GL_DST_ALPHA', 'GL_ONE_MINUS_DST_ALPHA',
+            'GL_SRC_ALPHA_SATURATE', 'GL_SRC_COLOR', 'GL_ONE_MINUS_SRC_COLOR'
+        }
     elseif type == 'particlesName' then
         return {
             'air_stars', 'aurora', 'orange_flame', 'blood', 'blue_galaxy', 'blue_vortex',
@@ -165,6 +171,8 @@ M.getListValue = function(type, text)
             or text == STR['blocks.select.widget'] and 'widget' or 'obj'
     elseif type == 'particlesName' then
         return text or 'air_stars'
+    elseif type == 'particlesGL' then
+        return text or 'GL_ZERO'
     elseif type == 'transitEasing' then
         return text or 'linear'
     else

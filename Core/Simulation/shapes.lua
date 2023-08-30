@@ -206,7 +206,7 @@ M['setBitmapSprite'] = function(params)
 
     GAME.lua = GAME.lua .. ' pcall(function() local _link, name = ' .. link .. ', ' .. name
     GAME.lua = GAME.lua .. ' local image = display.newImage(GAME.group.bitmaps[_link].filename,'
-    GAME.lua = GAME.lua .. ' GAME.group.bitmaps[_link].baseDir)'
+    GAME.lua = GAME.lua .. ' GAME.group.bitmaps[_link].baseDir, 10000, 10000)'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._width = image.width'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._height = image.height'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._link = GAME.group.bitmaps[_link].filename'

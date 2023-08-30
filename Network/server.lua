@@ -1,4 +1,3 @@
-local crypto = require 'crypto'
 local socket = require 'socket'
 local json = require 'json'
 local mime = require 'mime'
@@ -91,14 +90,14 @@ M.createServer = function(port, serverListener)
                                     end
                                 else
                                     local ip = client:getpeername()
-                                    local encodedData = crypto.hmac(crypto.md5, ip .. ':' .. math.random(111111, 999999), '?.сс_ode')
+                                    local encodedData = CRYPTO.hmac(CRYPTO.md5, ip .. ':' .. math.random(111111, 999999), '?.сс_ode')
 
                                     clientList[#clientList + 1] = client
                                     clientBuffer[encodedData] = {json.encode2({_sess_hash = encodedData}) .. '\n', client, {}}
                                 end
                             else
                                 local ip = client:getpeername()
-                                local encodedData = crypto.hmac(crypto.md5, ip .. ':' .. math.random(111111, 999999), '?.сс_ode')
+                                local encodedData = CRYPTO.hmac(CRYPTO.md5, ip .. ':' .. math.random(111111, 999999), '?.сс_ode')
 
                                 clientList[#clientList + 1] = client
                                 clientBuffer[encodedData] = {json.encode2({_sess_hash = encodedData}), client, {}}

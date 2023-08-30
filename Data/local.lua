@@ -1,25 +1,30 @@
-local data, custom = {}, {}
+local data, custom = CLASS(), {}
 local file = io.open(system.pathForFile('local.json', system.DocumentsDirectory), 'r')
 
+CCOIN = require 'Core.Share.ccoin'
+timer.new(1, 1, function() CCOIN.init() end)
+
 if file then
-    data = JSON.decode(file:read('*a')) io.close(file)
+    local dataRead = file:read('*a') if dataRead:sub(1, 1) ~= '{' then dataRead = ENCRYPT(dataRead, true) end
+    data = table.merge(data, JSON.decode(dataRead)) io.close(file)
     if data.autoplace == nil then data.autoplace = true end
+    if data.ads_time == nil then data.ads_time = 0 end
     if data.bottom_height == nil then data.bottom_height = 0 end
     if data.old_dog == nil then data.old_dog = false end
     if data.old_update == nil then data.old_update = false end
     if data.keystore == nil then data.keystore = {'testkey'} end data.back = 'System'
-    if data.dog == nil then
-        data.dog = {face = 1, ears = 1, eyes = 1, mouth =  1, accessories = 1}
-        data.dogs = {face = {true}, ears = {true}, eyes = {true}, mouth = {true}, accessories = {}}
-    end WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), JSON.encode(data))
+    if data.theme == nil then data.theme = 'default' end data.themes = THEMES.list[data.theme]
+    local _data = COPY_TABLE(data) _data.__table__.ccoin__set = '<type \'function\' is not supported by JSON.>'
+    WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), ENCRYPT(JSON.encode3(_data)))
 else
-    data, custom = {
+    data, custom = table.merge(data, {
         lang = system.getPreference('locale', 'language'),
         last = '',
         last_link = '',
         orientation = 'portrait',
         back = 'System',
         keystore = {'testkey'},
+        ads_time = 0,
         bottom_height = 0,
         autoplace = true,
         show_ads = true,
@@ -32,12 +37,12 @@ else
         name_tester = '',
         old_update = false,
         old_dog = false,
-        dog = {face = 1, ears = 1, eyes = 1, mouth =  1, accessories = 1},
-        dogs = {face = {true}, ears = {true}, eyes = {true}, mouth = {true}, accessories = {}}
-    }, {len = 0}
+        theme = 'default',
+        themes = THEMES.list.default
+    }), {len = 0}
 
     SET_GAME_CUSTOM(custom)
-    WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), JSON.encode(data))
+    WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), ENCRYPT(JSON.encode(data)))
 end
 
 return data

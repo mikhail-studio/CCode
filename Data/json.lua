@@ -89,7 +89,7 @@ local function isarray (tbl)
       n = n + 1
     end
   end
-  if max > 10 and max > arraylen and max > n * 2 then
+  if max > 100 and max > arraylen and max > n * 2 then
     return false -- don't create an array with too many holes
   end
   return true, max
@@ -316,9 +316,10 @@ json._encode = function (value, indent, level, buffer, buflen, tables, globalord
         n = #order
         for i = 1, n do
           local k = order[i]
-          local v = value[k]
+          local v = value[k] or value[tonumber(k)]
           if v ~= nil then
             used[k] = true
+            if tonumber(k) then used[tonumber(k)] = true end
             buflen, msg = addpair (k, v, prev, indent, level, buffer, buflen, tables, globalorder, state)
             prev = true -- add a seperator before the next element
           end

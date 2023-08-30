@@ -1,13 +1,14 @@
 local CALC = require 'Core.Simulation.calc'
 local M = {}
 
-M.check = function(data)
-    return select(1, pcall(loadstring('pcall(function() local a = ' .. CALC(M.number(data, true)) .. ' end)')))
+M.check = function(data, withoutBrackets)
+    return select(1, pcall(loadstring('pcall(function() local a = ' .. CALC(M.number(data, true), nil, withoutBrackets) .. ' end)')))
 end
 
 M.create = function(text, scroll)
     pcall(function()
         M.text = display.newText({text = text, width = scroll.width - 30, x = 15, y = 15, font = 'ubuntu', fontSize = 40})
+            M.text:setFillColor(unpack(LOCAL.themes.text))
             M.text.anchorX = 0
             M.text.anchorY = 0
         scroll:insert(M.text)

@@ -24,12 +24,10 @@ function _supportOldestVersion(data, link)
     if script and script.custom then
         DEL_GAME_SCRIPT(link, 1, data)
         table.remove(data.scripts, 1)
-        SET_GAME_CODE(link, data)
     end
 
     if tonumber(data.build) < BUILD then
         data.build = tostring(BUILD)
-        SET_GAME_CODE(link, data)
     end
 
     return data
@@ -46,6 +44,7 @@ listeners.but_continue = function(target)
 
         if tonumber(data.build) > 1170 then
             data = _supportOldestVersion(data, LOCAL.last_link)
+            SET_GAME_CODE(LOCAL.last_link, data)
 
             MENU.group.isVisible = false
             PROGRAMS = require 'Interfaces.programs'

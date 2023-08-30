@@ -79,7 +79,7 @@ M.hide = function(target, group, type, isShow, indexFolder, index, data)
 
     if not isShow then
         group.blocks[index].polygon.yScale = 1.4
-        group.blocks[index].polygon:setFillColor(0.4)
+        group.blocks[index].polygon:setFillColor(unpack(LOCAL.themes.folderClose))
         group[8]:setScrollHeight(150 * #group.data)
     end
 end
@@ -116,7 +116,7 @@ M.show = function(target, group, type, data, indexFolder, index)
     end
 
     group.blocks[index].polygon.yScale = -1.4
-    group.blocks[index].polygon:setFillColor(1)
+    group.blocks[index].polygon:setFillColor(unpack(LOCAL.themes.folderOpen))
     group[8]:setScrollHeight(150 * #group.data)
 end
 

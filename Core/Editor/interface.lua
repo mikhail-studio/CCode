@@ -77,28 +77,32 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     }
 
     local title = display.newText(STR['program.editor'], ZERO_X + 10, ZERO_Y + 10, 'ubuntu', 32)
+        title:setFillColor(unpack(LOCAL.themes.text))
         title.anchorX = 0
         title.anchorY = 0
         title.id = 'title'
     M.group:insert(title)
 
     local list = display.newRoundedRect(MAX_X - 50, ZERO_Y + 34, 80, 60, 10)
-        list:setFillColor(0.15, 0.15, 0.17)
+        list:setFillColor(unpack(LOCAL.themes.bg))
         list.text = display.newText('⋮', list.x, list.y - 2, 'ubuntu', 40)
+        list.text:setFillColor(unpack(LOCAL.themes.text))
         list.text.id = 'list'
     M.group:insert(list)
     M.group:insert(list.text)
 
     local undo = display.newRoundedRect(MAX_X - 250, ZERO_Y + 34, 80, 60, 10)
-        undo:setFillColor(0.15, 0.15, 0.17)
+        undo:setFillColor(unpack(LOCAL.themes.bg))
         undo.text = display.newText('⤺', undo.x, undo.y - 18, 'ubuntu', 80)
+        undo.text:setFillColor(unpack(LOCAL.themes.text))
         undo.text.id = 'undo'
     M.group:insert(undo)
     M.group:insert(undo.text)
 
     local redo = display.newRoundedRect(MAX_X - 150, ZERO_Y + 34, 80, 60, 10)
-        redo:setFillColor(0.15, 0.15, 0.17)
+        redo:setFillColor(unpack(LOCAL.themes.bg))
         redo.text = display.newText('⤺', redo.x, redo.y - 18, 'ubuntu', 80)
+        redo.text:setFillColor(unpack(LOCAL.themes.text))
         redo.text.id = 'redo'
         redo.text.xScale = -1
     M.group:insert(redo)
@@ -140,8 +144,10 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
             end
         end
     else
-        targetWidth, length = BLOCKS.group.blocks[1].block.width, #paramsData
-        targetData = {event = false, name = '', params = paramsData, color = blockIndex}
+        if not BLOCKS.group.blocks[1]
+        then targetWidth = DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60
+        else targetWidth = BLOCKS.group.blocks[1].block.width end
+        targetData, length = {event = false, name = '', params = paramsData, color = blockIndex}, #paramsData
         twidth, size = CENTER_X == 641 and (MAX_X - ZERO_X - 844) * 1.5 or targetWidth * 1.0, CENTER_X == 641 and 1.5 or 1.0
     end
 
@@ -219,16 +225,17 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
             x = scrollX, y = scrollY,
             width = scrollWidth, height = scrollHeight,
             hideScrollBar = false, horizontalScrollDisabled = true,
-            isBounceEnabled = true, backgroundColor = {0.11, 0.11, 0.13}
+            isBounceEnabled = true, backgroundColor = LOCAL.themes.editor
         })
     M.group:insert(scroll)
 
     for i = 1, 28 do
         buttons[i] = display.newRoundedRect(buttonsX, buttonsY, 90, 90, 10)
-            buttons[i]:setFillColor(0.15, 0.15, 0.17)
+            buttons[i]:setFillColor(unpack(LOCAL.themes.bg))
         M.group:insert(buttons[i])
 
         buttons[i].text = display.newText(buttonsText[i], buttonsX, buttonsY, 'ubuntu', getFontSize(i))
+            buttons[i].text:setFillColor(unpack(LOCAL.themes.text))
             buttons[i].text.id = i == 28 and 'Ok' or i == 1 and 'Text' or i == 2 and 'Hide' or i == 6 and 'Local' or buttons[i].text.text
         M.group:insert(buttons[i].text)
 
@@ -251,7 +258,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
 
             if e.phase == 'began' and ALERT then
                 display.getCurrentStage():setFocus(e.target)
-                e.target:setFillColor(0.18, 0.18, 0.2)
+                e.target:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
                 e.target.click = true
 
                 if isSpeedID then
@@ -275,12 +282,12 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
                 pcall(function() if e.target.timer2 then timer.cancel(e.target.timer2) e.target.timer2 = nil end end)
                 pcall(function() if e.target.timer then timer.cancel(e.target.timer) e.target.timer = nil end end)
                 display.getCurrentStage():setFocus(nil)
-                e.target:setFillColor(0.15, 0.15, 0.17)
+                e.target:setFillColor(unpack(LOCAL.themes.bg))
                 e.target.click = false
             elseif (e.phase == 'ended' or e.phase == 'cancelled') and ALERT then
                 local notHasTimer = true
                 display.getCurrentStage():setFocus(nil)
-                e.target:setFillColor(0.15, 0.15, 0.17)
+                e.target:setFillColor(unpack(LOCAL.themes.bg))
 
                 pcall(function()
                     if e.target.timer2 then
@@ -318,7 +325,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
             x = (buttons[28].x + 45 + MAX_X) / 2, y = (buttons[1].y - 45 + MAX_Y - 10) / 2,
             width = MAX_X - buttons[28].x - 65, height = MAX_Y - buttons[1].y + 25,
             hideScrollBar = true, horizontalScrollDisabled = true,
-            isBounceEnabled = true, backgroundColor = {0.15, 0.15, 0.17},
+            isBounceEnabled = true, backgroundColor = LOCAL.themes.bg,
         }) listScroll.scrollHeight = 0
     M.group:insert(listScroll)
 
@@ -335,17 +342,19 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         end
 
         listScroll.buttons[i] = display.newRect(listButtonsX, listButtonsY, listScroll.width, 70)
-            listScroll.buttons[i]:setFillColor(0.11, 0.11, 0.13)
+            listScroll.buttons[i]:setFillColor(unpack(LOCAL.themes.editor))
             listScroll.buttons[i].isOpen = false
             listScroll.buttons[i].count = 0
         listScroll:insert(listScroll.buttons[i])
 
         listScroll.buttons[i].text = display.newText(STR[listButtonName], 20, listButtonsY, 'ubuntu', 28)
+            listScroll.buttons[i].text:setFillColor(unpack(LOCAL.themes.text))
             listScroll.buttons[i].text.id = listButtonsText[i]
             listScroll.buttons[i].text.anchorX = 0
         listScroll:insert(listScroll.buttons[i].text)
 
         listScroll.buttons[i].polygon = display.newPolygon(listScroll.width - 30, listButtonsY, {0, 0, 10, 10, -10, 10})
+            listScroll.buttons[i].polygon:setFillColor(unpack(LOCAL.themes.text))
             listButtonsY = listButtonsY + 70
         listScroll:insert(listScroll.buttons[i].polygon)
 
@@ -366,16 +375,16 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
             display.getCurrentStage():setFocus(e.target)
             e.target.click = true
             if e.target.id == 'title' then e.target.alpha = 0.6
-            else e.target:setFillColor(0.18, 0.18, 0.2) end
+            else e.target:setFillColor(unpack(LOCAL.themes.bgAdd3Color)) end
         elseif e.phase == 'moved' and (math.abs(e.y - e.yStart) > 30 or math.abs(e.x - e.xStart) > 60) and ALERT then
             display.getCurrentStage():setFocus(nil)
             e.target.click = false
             if e.target.id == 'title' then e.target.alpha = 1
-            else e.target:setFillColor(0.15, 0.15, 0.17) end
+            else e.target:setFillColor(unpack(LOCAL.themes.bg)) end
         elseif (e.phase == 'ended' or e.phase == 'cancelled') and ALERT then
             display.getCurrentStage():setFocus(nil)
             if e.target.id == 'title' then e.target.alpha = 1
-            else e.target:setFillColor(0.15, 0.15, 0.17) end
+            else e.target:setFillColor(unpack(LOCAL.themes.bg)) end
             if e.target.click then
                 e.target.click = false
                 if e.target.id == 'title' then

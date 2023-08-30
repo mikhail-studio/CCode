@@ -206,7 +206,7 @@ listeners.but_okay = function(target)
         FONTS.group[8]:setScrollHeight(150 * #FONTS.group.data)
 
         WINDOW.new(STR['fonts.needexit'], {STR['button.close'], STR['button.okay']}, function(e)
-            native.requestExit()
+            GANIN.relaunch()
         end, 3)
     elseif INDEX_LIST == 2 then
         local data = GET_GAME_CODE(CURRENT_LINK)

@@ -54,7 +54,7 @@ local function getStartLua(linkBuild)
     local cod19 = ' local hash = GAME.hash GAME.group.networks = {} GAME.group.const.touch_x, GAME.group.const.touch_y = 0, 0'
     local cod20 = ' local tmp = DOC_DIR .. \'/\' .. CURRENT_LINK .. \'/Temps\' OS_REMOVE(tmp, true) LFS.mkdir(tmp)'
     local cod21 = ' GAME.group.snapshots = {} GAME.group.joints = {} GAME_DEVICE_ID = \'' .. tostring(DEVICE_ID) .. '\''
-    local cod22 = ' GAME.group.particles = {}'
+    local cod22 = ' GAME.group.particles = {} GAME.group.objects3d = {}'
 
     if linkBuild then
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = CLASS(), {}, {}, {}' .. require 'Data.build'
@@ -68,10 +68,11 @@ local function getStartLua(linkBuild)
 end
 
 M.remove = function()
-    display.setDefault('background', 0.15, 0.15, 0.17) timer.cancelAll()
+    display.setDefault('background', unpack(LOCAL.themes.bg)) timer.cancelAll()
     transition.cancelAll() native.setProperty('androidSystemUiVisibility', 'default') GAME.hash = ''
     pcall(function() for _, v in ipairs(M.group.networks) do pcall(function() network.cancel(v) v = nil end) end end)
     pcall(function() for _, v in pairs(M.group.timers) do pcall(function() timer.cancel(v) v = nil end) end end)
+    pcall(function() for _, v in pairs(M.group.objects3d) do pcall(function() v = nil end) end end)
     pcall(function() for _, v in ipairs(M.group.ts) do pcall(function() timer.cancel(v) v = nil end) end end)
     pcall(function() for _, v in pairs(M.group.widgets) do timer.new(20, 1, function()
     pcall(function() v:removeSelf() v = nil end) end) end end) pcall(function() audio.setVolume(1) end)
@@ -82,7 +83,7 @@ M.remove = function()
     pcall(function() Runtime:removeEventListener('system', M.group.const.system) end)
     pcall(function() Runtime:removeEventListener('touch', M.group.const.touch_fun) end)
     pcall(function() Runtime:removeEventListener('key', M.group.const.keyBack) end)
-    pcall(function() for _, v in ipairs(M.group.accelerometers) do
+    pcall(function() RENDER.removeScene() end) pcall(function() for _, v in ipairs(M.group.accelerometers) do
     pcall(function() Runtime:removeEventListener('accelerometer', v) end) end end) pcall(function() for _, v in ipairs(M.group.collis) do
     pcall(function() Runtime:removeEventListener('collision', v) end) pcall(function() Runtime:removeEventListener('preCollision', v) end)
     pcall(function() Runtime:removeEventListener('postCollision', v) end) end end)
@@ -103,6 +104,7 @@ M.remove = function()
     if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
     timer.performWithDelay(1, function() if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true})
     if (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) then GAME_GROUP_OPEN.scroll:scrollToPosition({y = M.scrollY, time = 0}) end end end)
+    pcall(function() PROGRAM.startTimer() end)
 end
 
 M.new = function(linkBuild, isDebug)
@@ -282,7 +284,7 @@ M.new = function(linkBuild, isDebug)
                 pcall(function() M.group:removeSelf() M.group, M.isStarted = nil, nil end)
 
                 WINDOW.new(STR['game.isbug'], {STR['button.close']}, function()
-                    display.setDefault('background', 0.15, 0.15, 0.17)
+                    display.setDefault('background', unpack(LOCAL.themes.bg))
                     if (GAME_GROUP_OPEN and GAME_GROUP_OPEN.group) then GAME_GROUP_OPEN.group.isVisible = true end
                 end, 5)
 

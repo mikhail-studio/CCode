@@ -1,3 +1,5 @@
+ARGS = ...
+
 display.setStatusBar(display.HiddenStatusBar)
 display.setStatusBar(display.TranslucentStatusBar)
 display.setStatusBar(display.HiddenStatusBar)

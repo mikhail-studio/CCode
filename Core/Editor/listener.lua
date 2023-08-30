@@ -19,7 +19,9 @@ M.rect = function(target, restart, data)
     local type = restart[6] and 'value' or INFO.listName[restart[1]][index + 1][1]
 
     if type == 'value' and ALERT then
-        if TEXT.check(COPY_TABLE(data)) then
+        local checkCondition = BLOCKS.group.blocks[EDITOR.restart[2]] and BLOCKS.group.blocks[EDITOR.restart[2]].data.name == 'requestFunParams'
+
+        if TEXT.check(COPY_TABLE(data), checkCondition) then
             local param = TEXT.number(data, true)
             local data = GET_GAME_CODE(CURRENT_LINK)
             local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
@@ -351,7 +353,9 @@ M['Hide'] = function(data, cursor, backup)
 end
 
 M['Ok'] = function(data, cursor, backup)
-    if TEXT.check(COPY_TABLE(data)) then
+    local checkCondition = BLOCKS.group.blocks[EDITOR.restart[2]] and BLOCKS.group.blocks[EDITOR.restart[2]].data.name == 'requestFunParams'
+
+    if TEXT.check(COPY_TABLE(data), checkCondition) then
         local param = TEXT.number(data, true)
         local data = GET_GAME_CODE(CURRENT_LINK)
         local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)

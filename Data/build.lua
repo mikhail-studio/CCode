@@ -315,7 +315,6 @@ return ' ' .. UTF8.trimFull([===[
         end)()
 
         local SERVER = (function()
-            local crypto = require 'crypto'
             local socket = require 'socket'
             local json = require 'json'
             local mime = require 'mime'
@@ -408,14 +407,14 @@ return ' ' .. UTF8.trimFull([===[
                                                 end
                                             else
                                                 local ip = client:getpeername()
-                                                local encodedData = crypto.hmac(crypto.md5, ip .. ':' .. math.random(111111, 999999), '?.сс_ode')
+                                                local encodedData = CRYPTO.hmac(CRYPTO.md5, ip .. ':' .. math.random(111111, 999999), '?.сс_ode')
 
                                                 clientList[#clientList + 1] = client
                                                 clientBuffer[encodedData] = {json.encode2({_sess_hash = encodedData}) .. '\n', client, {}}
                                             end
                                         else
                                             local ip = client:getpeername()
-                                            local encodedData = crypto.hmac(crypto.md5, ip .. ':' .. math.random(111111, 999999), '?.сс_ode')
+                                            local encodedData = CRYPTO.hmac(CRYPTO.md5, ip .. ':' .. math.random(111111, 999999), '?.сс_ode')
 
                                             clientList[#clientList + 1] = client
                                             clientBuffer[encodedData] = {json.encode2({_sess_hash = encodedData}), client, {}}
@@ -553,13 +552,13 @@ return ' ' .. UTF8.trimFull([===[
                 appResize(event.type, event.lis)
             end
 
+            ANIMATION = require 'plugin.animation'
             NOTIFICATIONS = require 'plugin.notifications.v2'
             BITMAP = require 'plugin.memoryBitmap'
             FILE = require 'plugin.cnkFileManager'
             EXPORT = require 'plugin.exportFile'
             PASTEBOARD = require 'plugin.pasteboard'
             ORIENTATION = require 'plugin.orientation'
-            STARTAPP = require 'plugin.startapp'
             IMPACK = require 'plugin.impack'
             SVG = require 'plugin.nanosvg'
             UTF8 = require 'plugin.utf8'
@@ -583,6 +582,22 @@ return ' ' .. UTF8.trimFull([===[
             ZERO_Y = CENTER_Y - DISPLAY_HEIGHT / 2 + TOP_HEIGHT
             MAX_X = CENTER_X + DISPLAY_WIDTH / 2 - RIGHT_HEIGHT
             MAX_Y = CENTER_Y + DISPLAY_HEIGHT / 2 - BOTTOM_HEIGHT
+
+            GET_GL_NUM = function(name)
+                return ({
+                    GL_ZERO = 0,
+                    GL_ONE = 1,
+                    GL_DST_COLOR = 774,
+                    GL_ONE_MINUS_DST_COLOR = 775,
+                    GL_SRC_ALPHA = 770,
+                    GL_ONE_MINUS_SRC_ALPHA = 771,
+                    GL_DST_ALPHA = 772,
+                    GL_ONE_MINUS_DST_ALPHA = 773,
+                    GL_SRC_ALPHA_SATURATE = 776,
+                    GL_SRC_COLOR = 768,
+                    GL_ONE_MINUS_SRC_COLOR = 769
+                })[name] or 0
+            end
 
             READ_FILE = function(path, bin)
                 local file, data = io.open(path or '', bin and 'rb' or 'r'), nil
@@ -664,7 +679,7 @@ return ' ' .. UTF8.trimFull([===[
             end
 
             SET_X = function(x, obj)
-                if obj and (obj._isGroup or obj._snapshot) then return x end
+                if obj and (obj._isGroup or obj._snapshot or obj._container) then return x end
                 return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
                 and GAME.group.widgets[obj._scroll].wtype == 'scroll')
                 and x + GAME.group.widgets[obj._scroll].width / 2 or CENTER_X + x) or 0
@@ -674,11 +689,11 @@ return ' ' .. UTF8.trimFull([===[
                 if obj and obj._isGroup then return type(y) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
                 and GAME.group.widgets[obj._scroll].wtype == 'scroll') and 0 - y - CENTER_Y or 0 - y ) or 0 end
                 return type(y) == 'number' and (((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-                and GAME.group.widgets[obj._scroll].wtype == 'scroll') or (obj and obj._snapshot)) and 0 - y or CENTER_Y - y) or 0
+                and GAME.group.widgets[obj._scroll].wtype == 'scroll') or (obj and (obj._snapshot or obj._container))) and 0 - y or CENTER_Y - y) or 0
             end
 
             GET_X = function(x, obj)
-                if obj and (obj._isGroup or obj._snapshot) then return x end
+                if obj and (obj._isGroup or obj._snapshot or obj._container) then return x end
                 return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
                 and GAME.group.widgets[obj._scroll].wtype == 'scroll')
                 and x - GAME.group.widgets[obj._scroll].width / 2 or x - CENTER_X) or 0
@@ -747,7 +762,7 @@ return ' ' .. UTF8.trimFull([===[
                 return isMinus and (oldNum > -0.5 and 0 or num - 1) or num end
             end, function(t1, t2)
                 for k, v in pairs(t2) do if (type(v) == 'table') and (type(t1[k] or false) == 'table')
-                then merge(t1[k], t2[k]) else t1[k] = v end end return t1
+                then table.merge(t1[k], t2[k]) else t1[k] = v end end return t1
             end
 
             display.newImage2, display.newImage = display.newImage, function(link, ...)
@@ -768,19 +783,20 @@ return ' ' .. UTF8.trimFull([===[
                 return {
                     sendLaunchAnalytics = sendLaunchAnalytics, transition = transition, tostring = tostring, tonumber = tonumber,
                     gcinfo = gcinfo, assert = assert, debug = debug, GAME = GAME, collectgarbage = collectgarbage, GANIN = GANIN,
-                    print2 = io, os = os, display = display, print4 = dofile, module = module, media = media, OS_REMOVE = OS_REMOVE,
+                    os = os, display = display, module = module, media = media, OS_REMOVE = OS_REMOVE, funsS = G_funsS, funsP = G_funsP,
                     native = native, coroutine = coroutine, CENTER_X = CENTER_X, CENTER_Y = CENTER_Y, JSON = JSON, ipairs = ipairs,
-                    TOP_HEIGHT = TOP_HEIGHT, network = network, print3 = lfs, _network_pathForFile = _network_pathForFile,
+                    TOP_HEIGHT = TOP_HEIGHT, network = network, _network_pathForFile = _network_pathForFile,
                     pcall = pcall, BUILD = BUILD, MAX_Y = MAX_Y, MAX_X = MAX_X, string = string, SIZE = SIZE,
-                    xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, print = print, OS_MOVE = OS_MOVE,
+                    xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, OS_MOVE = OS_MOVE, RENDER = RENDER,
                     table = table, lpeg = lpeg, COPY_TABLE = COPY_TABLE, DISPLAY_HEIGHT = DISPLAY_HEIGHT, OS_COPY = OS_COPY,
-                    unpack = unpack, print5 = require, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
+                    unpack = unpack, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
                     graphics = graphics, system = system, rawequal = rawequal,  getmetatable = getmetatable, FILE = FILE,
                     timer = timer, BOTTOM_HEIGHT = BOTTOM_HEIGHT, newproxy = newproxy, metatable = metatable, NOISE = NOISE,
                     al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, DOC_DIR = DOC_DIR,
                     LEFT_HEIGHT = LEFT_HEIGHT, cloneArray = cloneArray, DISPLAY_WIDTH = DISPLAY_WIDTH, type = type,
                     audio = audio, pairs = pairs, select = select, rawget = rawget, Runtime = Runtime, error = error,
-                    fun = G_fun, math = G_math, other = G_other, device = G_device, prop = G_prop, PASTEBOARD = PASTEBOARD
+                    fun = G_fun, math = G_math, other = G_other, device = G_device, prop = G_prop, PASTEBOARD = PASTEBOARD,
+                    varsE = G_varsE, varsS = G_varsS, varsP = G_varsP, tablesE = G_tablesE, tablesS = G_tablesS, tablesP = G_tablesP
                 }
             end
 
@@ -1720,6 +1736,7 @@ return ' ' .. UTF8.trimFull([===[
 
             M.getPhysicsParams = function(friction, bounce, density, hitbox, filter)
                 local params = {friction = friction, bounce = bounce, density = density}
+                local hitbox = COPY_TABLE(hitbox)
 
                 if filter and filter[1] and filter[2] then
                     params.filter = {

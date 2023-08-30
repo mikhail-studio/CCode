@@ -364,8 +364,9 @@ if 'Частицы' then
         local rotationEnd, rotationEndVariance = CALC(params[25], '0'), CALC(params[26], '0')
         local startColor, startColorVariance = CALC(params[27], '{255, 255, 255}'), CALC(params[28], '{0, 0, 0}')
         local finishColor, finishColorVariance = CALC(params[29], '{0, 0, 0}'), CALC(params[30], '{0, 0, 0}')
-        local blendFuncSource = UTF8.match(CALC(params[31]), '%(select%[\'GL(.+)\'%]') or '770'
-        local blendFuncDestination = UTF8.match(CALC(params[32]), '%(select%[\'GL(.+)\'%]') or '1'
+        local blendFuncSource = UTF8.match(CALC(params[31]), '%(select%[\'(.+)\'%]') or 'GL_SRC_ALPHA'
+        local blendFuncDestination = UTF8.match(CALC(params[32]), '%(select%[\'(.+)\'%]') or 'GL_ONE'
+        local blendFuncSource, blendFuncDestination = GET_GL_NUM(blendFuncSource), GET_GL_NUM(blendFuncDestination)
 
         GAME.lua = GAME.lua .. ' pcall(function() local name, params = ' .. name .. ', {emitterType = 0,'
         GAME.lua = GAME.lua .. ' textureFileName = other.getImage(' .. link .. '), duration = -1,'
@@ -425,8 +426,9 @@ if 'Частицы' then
         local rotationEnd, rotationEndVariance = CALC(params[21], '0'), CALC(params[22], '0')
         local startColor, startColorVariance = CALC(params[23], '{255, 255, 255}'), CALC(params[24], '{0, 0, 0}')
         local finishColor, finishColorVariance = CALC(params[25], '{0, 0, 0}'), CALC(params[26], '{0, 0, 0}')
-        local blendFuncSource = UTF8.match(CALC(params[27]), '%(select%[\'GL(.+)\'%]') or '770'
-        local blendFuncDestination = UTF8.match(CALC(params[28]), '%(select%[\'GL(.+)\'%]') or '1'
+        local blendFuncSource = UTF8.match(CALC(params[27]), '%(select%[\'(.+)\'%]') or 'GL_SRC_ALPHA'
+        local blendFuncDestination = UTF8.match(CALC(params[28]), '%(select%[\'(.+)\'%]') or 'GL_ONE'
+        local blendFuncSource, blendFuncDestination = GET_GL_NUM(blendFuncSource), GET_GL_NUM(blendFuncDestination)
 
         GAME.lua = GAME.lua .. ' pcall(function() local name, params = ' .. name .. ', {emitterType = 1,'
         GAME.lua = GAME.lua .. ' textureFileName = other.getImage(' .. link .. '), duration = -1,'

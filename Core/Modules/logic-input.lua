@@ -19,16 +19,16 @@ M.listener = function(e)
     if e.phase == 'began' then
         display.getCurrentStage():setFocus(e.target)
         e.target.click = true
-        e.target:setFillColor(0.16, 0.16, 0.18)
+        e.target:setFillColor(unpack(LOCAL.themes.bgAdd4Color))
     elseif e.phase == 'moved' and (math.abs(e.x - e.xStart) > 30 or math.abs(e.y - e.yStart) > 30) then
         M.scroll:takeFocus(e)
         e.target.click = false
-        e.target:setFillColor(0.14, 0.14, 0.16)
+        e.target:setFillColor(unpack(LOCAL.themes.editorAddColor))
     elseif e.phase == 'ended' or e.phase == 'cancelled' then
         display.getCurrentStage():setFocus(nil)
         if e.target.click then
             e.target.click = false
-            e.target:setFillColor(0.14, 0.14, 0.16)
+            e.target:setFillColor(unpack(LOCAL.themes.editorAddColor))
             if e.target.isList and not e.target.isNew and M.alert then
                 M.alert = false
                 M.scroll:setIsLocked(true, 'vertical')
@@ -372,7 +372,7 @@ M.gen = function(mode, scroll)
 
     for i = 1, #vars do
         buttons[i] = display.newRect(scroll.width / 2, buttonsY, scroll.width, 70)
-            buttons[i]:setFillColor(0.14, 0.14, 0.16)
+            buttons[i]:setFillColor(unpack(LOCAL.themes.editorAddColor))
             buttons[i]:addEventListener('touch', M.listener)
         scroll:insert(buttons[i])
 
@@ -380,13 +380,14 @@ M.gen = function(mode, scroll)
                 width = buttons[i].width - 70, x = buttons[i].width / 2 - 15, y = buttonsY + 2,
                 text = vars[i], font = 'ubuntu', fontSize = 26, height = 40
             }) buttons[i].text.isNew = i == 1
+            buttons[i].text:setFillColor(unpack(LOCAL.themes.text))
         scroll:insert(buttons[i].text)
 
         buttons[i].plus = display.newRect(scroll.width - 35, buttonsY, 70, 70)
             buttons[i].plus.isList = true
             buttons[i].plus.text = vars[i]
             buttons[i].plus.isNew = i == 1
-            buttons[i].plus:setFillColor(0.14, 0.14, 0.16)
+            buttons[i].plus:setFillColor(unpack(LOCAL.themes.editorAddColor))
             buttons[i].plus:addEventListener('touch', M.listener)
         scroll:insert(buttons[i].plus)
 
@@ -524,7 +525,7 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor, i
             local bg = display.newRect(CENTER_X, CENTER_Y - 100, DISPLAY_WIDTH / 1.5, DISPLAY_HEIGHT / 2)
                 bg.y = bg.height < 400 and CENTER_Y or CENTER_Y - 100
                 bg.height = bg.height < 400 and DISPLAY_HEIGHT / 1.5 or DISPLAY_HEIGHT / 2
-                bg:setFillColor(0.18, 0.18, 0.2)
+                bg:setFillColor(unpack(LOCAL.themes.bgAdd3Color))
             M.group:insert(bg)
 
             M.scroll = WIDGET.newScrollView({
@@ -543,6 +544,7 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor, i
                 M.group:insert(buttonEvent)
 
                 textEvent = display.newText(STR['editor.list.event'], buttonEvent.x, buttonEvent.y, 'ubuntu', 26)
+                    textEvent:setFillColor(unpack(LOCAL.themes.text))
                     buttonEvent.id = 'event'
                 M.group:insert(textEvent)
             end
@@ -554,6 +556,7 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor, i
                     M.group:insert(buttonScript)
 
                     textScript = display.newText(STR['editor.list.script'], buttonScript.x, buttonScript.y, 'ubuntu', 26)
+                        textScript:setFillColor(unpack(LOCAL.themes.text))
                         buttonScript.id = 'script'
                     M.group:insert(textScript)
                 end
@@ -564,6 +567,7 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor, i
                     M.group:insert(buttonProject)
 
                     textProject = display.newText(STR['editor.list.project'], buttonProject.x, buttonProject.y, 'ubuntu', 26)
+                        textProject:setFillColor(unpack(LOCAL.themes.text))
                         buttonProject.id = 'project'
                     M.group:insert(textProject)
                 end
@@ -575,11 +579,11 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor, i
                 if not isLocal and not BLOCKS.custom then buttonProject:setFillColor(0.26, 0.26, 0.28) end
 
                 if M.active == 'event' and mode ~= 'funs' and (not NOOBMODE) and not isNoLocal
-                    then buttonEvent:setFillColor(0.2, 0.2, 0.22) end
+                    then buttonEvent:setFillColor(unpack(LOCAL.themes.bgAddColor)) end
                 if M.active == 'script' and not isLocal and not NOOBMODE
-                    then buttonScript:setFillColor(0.2, 0.2, 0.22) end
+                    then buttonScript:setFillColor(unpack(LOCAL.themes.bgAddColor)) end
                 if M.active == 'project' and not isLocal and not BLOCKS.custom
-                    then buttonProject:setFillColor(0.2, 0.2, 0.22) end
+                    then buttonProject:setFillColor(unpack(LOCAL.themes.bgAddColor)) end
             end
 
             local delimiter1 = display.newRect(bg.x - width / 2, y, 3, 70)

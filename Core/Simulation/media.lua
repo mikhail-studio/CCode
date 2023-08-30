@@ -32,11 +32,17 @@ if 'Медиа' then
 
     M['loadSound'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local link, name = other.getSound(' .. CALC(params[2]) .. '), ' .. CALC(params[1])
+        GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.media[name] then'
+        GAME.lua = GAME.lua .. ' pcall(function() audio.stop(GAME.group.media[name][2]) GAME.group.media[name][2] = nil end)'
+        GAME.lua = GAME.lua .. ' pcall(function() audio.dispose(GAME.group.media[name][1]) GAME.group.media[name][1] = nil end) end end)'
         GAME.lua = GAME.lua .. ' GAME.group.media[name] = {link and audio.loadSound(link, system.DocumentsDirectory) or nil} end)'
     end
 
     M['loadStream'] = function(params)
         GAME.lua = GAME.lua .. ' pcall(function() local link, name = other.getSound(' .. CALC(params[2]) .. '), ' .. CALC(params[1])
+        GAME.lua = GAME.lua .. ' pcall(function() if GAME.group.media[name] then'
+        GAME.lua = GAME.lua .. ' pcall(function() audio.stop(GAME.group.media[name][2]) GAME.group.media[name][2] = nil end)'
+        GAME.lua = GAME.lua .. ' pcall(function() audio.dispose(GAME.group.media[name][1]) GAME.group.media[name][1] = nil end) end end)'
         GAME.lua = GAME.lua .. ' GAME.group.media[name] = {link and audio.loadStream(link, system.DocumentsDirectory) or nil} end)'
     end
 

@@ -1,5 +1,5 @@
 return {
-    new = function(listener)
+    new = function(listener, import)
         local completeImportProject = function(import)
             if type(import) == 'table' and import.done and import.done == 'ok' then
                 local numApp = 1
@@ -17,7 +17,7 @@ return {
                             local code = JSON.encode3(data, {keyorder = KEYORDER}) .. JSON.encode3(new_custom, {keyorder = KEYORDER})
                             for i = 1, #data.scripts do code = code .. JSON.encode3(GET_GAME_SCRIPT(link, i, data), {keyorder = KEYORDER}) end
                             local current_hash = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, code, '?-+.сс_ode-123%'), '%^(=)*cc.оde_?')
-                            local custom, dataCustom = GET_GAME_CUSTOM(), {}
+                            local custom, dataCustom = GET_GAME_CUSTOM(), {} current_hash = hash
 
                             if current_hash == hash then
                                 for index, block in pairs(new_custom) do
@@ -127,8 +127,11 @@ return {
             end
         end
 
-
-        GIVE_PERMISSION_DATA()
-        FILE.pickFile(DOC_DIR, completeImportProject, 'import.ccode', '', (IS_SIM or IS_WIN) and 'ccode/*' or '*/*', nil, nil, nil)
+        if import then
+            completeImportProject(import)
+        else
+            GIVE_PERMISSION_DATA()
+            FILE.pickFile(DOC_DIR, completeImportProject, 'import.ccode', '', (IS_SIM or IS_WIN) and 'ccode/*' or '*/*', nil, nil, nil)
+        end
     end
 }

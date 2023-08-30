@@ -1,8 +1,11 @@
 LANG, STR = {}, {}
 
 CLASS = require 'Data.class'
+THEMES = require 'Data.themes'
+GANIN = require 'plugin.ganin'
 CLIENT = require 'Network.client'
 SERVER = require 'Network.server'
+RENDER = require 'Core.Simulation.render'
 ANIMATION = require 'plugin.animation'
 NOTIFICATIONS = require 'plugin.notifications.v2'
 PARTICLE = require 'Emitter.particleDesigner'
@@ -17,8 +20,6 @@ FILE = require 'plugin.cnkFileManager'
 EXPORT = require 'plugin.exportFile'
 PASTEBOARD = require 'plugin.pasteboard'
 ORIENTATION = require 'plugin.orientation'
-STARTAPP = require 'plugin.startapp'
-VIDEO = require 'plugin.videoEditor'
 IMPACK = require 'plugin.impack'
 SVG = require 'plugin.nanosvg'
 UTF8 = require 'plugin.utf8'
@@ -28,6 +29,7 @@ JSON = require 'json'
 LFS = require 'lfs'
 WIDGET = require 'widget'
 CRYPTO = require 'crypto'
+MIME = require 'mime'
 
 SIZE = 1.0
 BUFFER = {}
@@ -53,7 +55,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1264
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1280
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 MASK = graphics.newMask('Sprites/mask.png')
@@ -61,7 +63,8 @@ SOLAR = _G.B .. _G.D .. _G.A .. _G.C
 KEYORDER = {
     'build', 'version', 'package', 'orientation', 'title', 'link', 'resources', 'scripts',
     'settings', 'fonts', 'others', 'videos', 'sounds', 'images', 'funs', 'tables',
-    'len', 'vars', 'name', 'custom', 'event', 'nested', 'comment', 'params', 'created', 'folders'
+    'len', 'vars', 'name', 'custom', 'event', 'nested', 'comment', 'params', 'created', 'folders',
+    'face', 'eyes', 'ears', 'mouth', 'accessories'
 } for i = 10000, 1, -1 do table.insert(KEYORDER, 1, tostring(i)) end
 
 GET_SAFE_AREA = function()
@@ -92,7 +95,6 @@ if IS_SIM or IS_WIN then
 end
 
 if not IS_SIM and not LIVE then
-    GANIN = require 'plugin.ganin'
     require('Core.Share.build').reset()
 end
 
@@ -159,6 +161,22 @@ GET_FULL_DATA = function(script)
     end
 
     return script, nestedInfo
+end
+
+GET_GL_NUM = function(name)
+    return ({
+        GL_ZERO = 0,
+        GL_ONE = 1,
+        GL_DST_COLOR = 774,
+        GL_ONE_MINUS_DST_COLOR = 775,
+        GL_SRC_ALPHA = 770,
+        GL_ONE_MINUS_SRC_ALPHA = 771,
+        GL_DST_ALPHA = 772,
+        GL_ONE_MINUS_DST_ALPHA = 773,
+        GL_SRC_ALPHA_SATURATE = 776,
+        GL_SRC_COLOR = 768,
+        GL_ONE_MINUS_SRC_COLOR = 769
+    })[name] or 0
 end
 
 GIVE_PERMISSION_DATA = function()
@@ -257,7 +275,7 @@ GET_SIZE = function(path, baseDir, width, height, count)
 end
 
 SET_X = function(x, obj)
-    if obj and (obj._isGroup or obj._snapshot) then return x end
+    if obj and (obj._isGroup or obj._snapshot or obj._container) then return x end
     return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
     and GAME.group.widgets[obj._scroll].wtype == 'scroll')
     and x + GAME.group.widgets[obj._scroll].width / 2 or CENTER_X + x) or 0
@@ -267,11 +285,11 @@ SET_Y = function(y, obj)
     if obj and obj._isGroup then return type(y) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
     and GAME.group.widgets[obj._scroll].wtype == 'scroll') and 0 - y - CENTER_Y or 0 - y ) or 0 end
     return type(y) == 'number' and (((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-    and GAME.group.widgets[obj._scroll].wtype == 'scroll') or (obj and obj._snapshot)) and 0 - y or CENTER_Y - y) or 0
+    and GAME.group.widgets[obj._scroll].wtype == 'scroll') or (obj and (obj._snapshot or obj._container))) and 0 - y or CENTER_Y - y) or 0
 end
 
 GET_X = function(x, obj)
-    if obj and (obj._isGroup or obj._snapshot) then return x end
+    if obj and (obj._isGroup or obj._snapshot or obj._container) then return x end
     return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
     and GAME.group.widgets[obj._scroll].wtype == 'scroll')
     and x - GAME.group.widgets[obj._scroll].width / 2 or x - CENTER_X) or 0
@@ -280,7 +298,8 @@ end
 GET_Y = SET_Y
 
 NEW_DATA = function()
-    WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), JSON.encode(LOCAL))
+    local saveData = COPY_TABLE(LOCAL) saveData.__table__.ccoin__set = '<type \'function\' is not supported by JSON.>'
+    WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), ENCRYPT(JSON.encode3(saveData)))
 end
 
 GET_GAME_CODE = function(link)
@@ -358,6 +377,20 @@ OS_COPY = function(link, link2)
     end
 end
 
+GET_UNIX_MINUTE = function(listener)
+    network.request('https://currentmillis.com/time/minutes-since-unix-epoch.php', 'GET', function(e)
+        if not e.isError then
+            listener(tonumber(e.response) or 0)
+        else
+            listener(0)
+        end
+    end)
+end
+
+ENCRYPT = function(text, isUn)
+    return isUn and MIME.unb64(text or '') or MIME.b64(text or '')
+end
+
 NEW_APP_CODE = function(title, link, checkbox)
     return {
         build = tostring(BUILD),
@@ -397,7 +430,6 @@ end
 audio.setVolume(1)
 PHYSICS.setAverageCollisionPositions(true)
 WIDGET.setTheme('widget_theme_android_holo_dark')
-display.setDefault('background', 0.15, 0.15, 0.17)
 UNPACK = function(t) if #t > 0 then return unpack(t) end return t end
 PHYSICS.setReportCollisionsInContentCoordinates(true) math.randomseed(SEED)
 DEVELOPERS = {['Ganin'] = true, ['DanilNik'] = true, ['MikhailStudio'] = true}
@@ -428,7 +460,11 @@ end, function(num, exp)
     return isMinus and (oldNum > -0.5 and 0 or num - 1) or num end
 end, function(t1, t2)
     for k, v in pairs(t2) do if (type(v) == 'table') and (type(t1[k] or false) == 'table')
-    then merge(t1[k], t2[k]) else t1[k] = v end end return t1
+    then table.merge(t1[k], t2[k]) else t1[k] = v end end return t1
+end
+
+dump = function(t)
+    print(_G.type(t) == 'table' and JSON.prettify(t) or t)
 end
 
 display.newImage2, display.newImage = display.newImage, function(link, ...)
@@ -467,6 +503,7 @@ else
     JSON.encode2 = JSON.encode
 end
 
+display.setDefault('background', unpack(LOCAL.themes.bg))
 INFO = require('Data.info') require('Core.Modules.custom-block').getBlocks()
 if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'}) end
 Runtime:addEventListener('unhandledError', function(event) return GAME and GAME.hash ~= '' end)
@@ -475,11 +512,11 @@ GET_GLOBAL_TABLE = function()
     return {
         sendLaunchAnalytics = sendLaunchAnalytics, transition = transition, tostring = tostring, tonumber = tonumber,
         gcinfo = gcinfo, assert = assert, debug = debug, GAME = GAME, collectgarbage = collectgarbage, GANIN = GANIN,
-        os = os, display = display, module = module, media = media, OS_REMOVE = OS_REMOVE,
+        os = os, display = display, module = module, media = media, OS_REMOVE = OS_REMOVE, funsS = G_funsS, funsP = G_funsP,
         native = native, coroutine = coroutine, CENTER_X = CENTER_X, CENTER_Y = CENTER_Y, JSON = JSON, ipairs = ipairs,
         TOP_HEIGHT = TOP_HEIGHT, network = network, _network_pathForFile = _network_pathForFile,
         pcall = pcall, BUILD = BUILD, MAX_Y = MAX_Y, MAX_X = MAX_X, string = string, SIZE = SIZE,
-        xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, OS_MOVE = OS_MOVE,
+        xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, OS_MOVE = OS_MOVE, RENDER = RENDER,
         table = table, lpeg = lpeg, COPY_TABLE = COPY_TABLE, DISPLAY_HEIGHT = DISPLAY_HEIGHT, OS_COPY = OS_COPY,
         unpack = unpack, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,
         graphics = graphics, system = system, rawequal = rawequal,  getmetatable = getmetatable, FILE = FILE,
@@ -487,6 +524,7 @@ GET_GLOBAL_TABLE = function()
         al = al, rawset = rawset, easing = easing, coronabaselib = coronabaselib, DOC_DIR = DOC_DIR,
         LEFT_HEIGHT = LEFT_HEIGHT, cloneArray = cloneArray, DISPLAY_WIDTH = DISPLAY_WIDTH, type = type,
         audio = audio, pairs = pairs, select = select, rawget = rawget, Runtime = Runtime, error = error,
-        fun = G_fun, math = G_math, other = G_other, device = G_device, prop = G_prop, PASTEBOARD = PASTEBOARD
+        fun = G_fun, math = G_math, other = G_other, device = G_device, prop = G_prop, PASTEBOARD = PASTEBOARD,
+        varsE = G_varsE, varsS = G_varsS, varsP = G_varsP, tablesE = G_tablesE, tablesS = G_tablesS, tablesP = G_tablesP
     }
 end

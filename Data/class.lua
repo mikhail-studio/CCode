@@ -1,3 +1,17 @@
+local function a()
+    if b == 1 then
+        local b = 10
+    elseif b == 2 then
+        return b
+    elseif b == 3 then
+        a()
+    elseif b == 4 then
+        local c = 20
+    end
+end
+
+a()
+
 return function()
     local class = setmetatable({}, {
         __newindex = function(self, index, value)

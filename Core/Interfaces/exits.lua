@@ -7,6 +7,7 @@ listeners.programs = function()
 end
 
 listeners.program = function()
+    pcall(function() timer.cancel(PROGRAM.backupTimer) end)
     PROGRAM.group:removeSelf()
     PROGRAM.group = nil
     PROGRAMS.group.isVisible = true

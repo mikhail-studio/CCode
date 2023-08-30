@@ -223,4 +223,47 @@ M['setOffsetLayerCamera'] = function(params)
     GAME.lua = GAME.lua .. ' layer:setCameraOffset(' .. CALC(params[2], '0') .. ', 0 - ' .. CALC(params[3], '0') .. ') end)'
 end
 
+M['new3dScene'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() RENDER.createScene(' .. CALC(params[1], '500') .. ', '
+    GAME.lua = GAME.lua .. CALC(params[2], '500') .. ')' .. ' end)'
+end
+
+M['eye3dScene'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() RENDER.eyeScene(' .. CALC(params[1], '1') .. ', '
+    GAME.lua = GAME.lua .. CALC(params[2], '0') .. ', ' .. CALC(params[3], '1') .. ')' .. ' end)'
+end
+
+M['center3dScene'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() RENDER.centerScene(' .. CALC(params[1], '0') .. ', '
+    GAME.lua = GAME.lua .. CALC(params[2], '0') .. ', ' .. CALC(params[3], '0') .. ')' .. ' end)'
+end
+
+M['upd3dScene'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() RENDER.updateScene() end)'
+end
+
+M['new3dObject'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local name, link = ' .. CALC(params[1]) .. ', ' .. CALC(params[2])
+    GAME.lua = GAME.lua .. ' GAME.group.objects3d[name] = RENDER.createObject(DOC_DIR .. \'/\' .. other.getResource(link),'
+    GAME.lua = GAME.lua .. ' CURRENT_LINK .. \'/Resources\', system.DocumentsDirectory) end)'
+end
+
+M['move3dObject'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1]) .. ' local x, y, z'
+    GAME.lua = GAME.lua .. ' = ' .. CALC(params[2], '0') .. ', ' .. CALC(params[3], '0') .. ', ' .. CALC(params[4], '0')
+    GAME.lua = GAME.lua .. ' RENDER.moveObject(GAME.group.objects3d[name], x, y, z) end)'
+end
+
+M['scale3dObject'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1]) .. ' local x, y, z'
+    GAME.lua = GAME.lua .. ' = ' .. CALC(params[2], '0') .. ', ' .. CALC(params[3], '0') .. ', ' .. CALC(params[4], '0')
+    GAME.lua = GAME.lua .. ' RENDER.scaleObject(GAME.group.objects3d[name], x, y, z) end)'
+end
+
+M['rotate3dObject'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. CALC(params[1]) .. ' local x, y, z'
+    GAME.lua = GAME.lua .. ' = ' .. CALC(params[2], '0') .. ', ' .. CALC(params[3], '0') .. ', ' .. CALC(params[4], '0')
+    GAME.lua = GAME.lua .. ' RENDER.rotateObject(GAME.group.objects3d[name], x, y, z) end)'
+end
+
 return M

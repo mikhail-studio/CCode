@@ -303,16 +303,18 @@ M.newBlock = function(name, params, str, index, color)
     M.alert = true
 
     local shadow = display.newRect(CENTER_X, CENTER_Y, DISPLAY_WIDTH * 2, DISPLAY_HEIGHT * 2)
-        shadow:setFillColor(0.15, 0.15, 0.17, 1)
+        shadow:setFillColor(unpack(LOCAL.themes.bg))
         shadow:addEventListener('touch', function(e) return true end)
     M.group:insert(shadow)
 
     local title = display.newText(STR['blocks.create.block'], ZERO_X + 10, ZERO_Y + 10, 'ubuntu', 32)
+        title:setFillColor(unpack(LOCAL.themes.text))
         title.anchorX = 0
         title.anchorY = 0
     M.group:insert(title)
 
     local buttonColor = display.newText(STR['blocks.create.color'], MAX_X - 10, ZERO_Y + 10, 'ubuntu', 32)
+        buttonColor:setFillColor(unpack(LOCAL.themes.text))
         buttonColor.anchorX = 1
         buttonColor.anchorY = 0
     M.group:insert(buttonColor)
@@ -460,6 +462,7 @@ M.newBlock = function(name, params, str, index, color)
     M.group:insert(buttonPlus)
 
     local textPlus = display.newText(STR['blocks.params.add'], buttonPlus.x, buttonPlus.y, 'ubuntu', 28)
+        textPlus:setFillColor(unpack(LOCAL.themes.text))
         buttonPlus:addEventListener('touch', buttonListeners)
     M.group:insert(textPlus)
 
@@ -469,6 +472,7 @@ M.newBlock = function(name, params, str, index, color)
     M.group:insert(buttonMinus)
 
     local textMinus = display.newText(STR['blocks.params.remove'], buttonMinus.x, buttonMinus.y, 'ubuntu', 28)
+        textMinus:setFillColor(unpack(LOCAL.themes.text))
         buttonMinus:addEventListener('touch', buttonListeners)
     M.group:insert(textMinus)
 
@@ -478,6 +482,7 @@ M.newBlock = function(name, params, str, index, color)
     M.group:insert(buttonLua)
 
     local textLua = display.newText(STR['blocks.create.block.save.lua'], buttonLua.x, buttonLua.y, 'ubuntu', 28)
+        textLua:setFillColor(unpack(LOCAL.themes.text))
         buttonLua:addEventListener('touch', buttonListeners)
     M.group:insert(textLua)
 
@@ -487,6 +492,7 @@ M.newBlock = function(name, params, str, index, color)
     M.group:insert(buttonSandbox)
 
     local textSandbox = display.newText(STR['blocks.create.block.save.sandbox'], buttonSandbox.x, buttonSandbox.y, 'ubuntu', 28)
+        textSandbox:setFillColor(unpack(LOCAL.themes.text))
         buttonSandbox:addEventListener('touch', buttonListeners)
     M.group:insert(textSandbox)
 

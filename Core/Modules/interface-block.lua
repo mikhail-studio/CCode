@@ -69,6 +69,7 @@ local listener = function(e, scroll, group, type)
 
                     if tonumber(data.build) > 1170 then
                         data = _supportOldestVersion(data, e.target.link)
+                        SET_GAME_CODE(e.target.link, data)
 
                         local index = table.indexOf(LOCAL.apps, e.target.link)
                         local app = LOCAL.apps[index]
@@ -132,13 +133,27 @@ local listener = function(e, scroll, group, type)
                         PROGRAMS.group.isVisible = true
                         require('Core.Share.export').new(CURRENT_LINK)
                     elseif e.target.text.text == STR['program.build'] then
-                        group:removeSelf() group = nil
-                        PROGRAMS.group.isVisible = true
-                        require('Core.Share.build').new(CURRENT_LINK)
+                        if CCOIN.buy('10') then
+                            group:removeSelf() group = nil
+                            PROGRAMS.group.isVisible = true
+                            require('Core.Share.build').new(CURRENT_LINK)
+                        else
+                            local message = STR['robodog.not.enough.ccoin'] .. '\n' .. STR['robodog.need.ccoin'] .. '10'
+                            WINDOW.new(message, {STR['button.close']}, function(ev) end, 3)
+                            WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                            WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                        end
                     elseif e.target.text.text == STR['program.aab'] then
-                        group:removeSelf() group = nil
-                        PROGRAMS.group.isVisible = true
-                        require('Core.Share.build').new(CURRENT_LINK, true)
+                        if CCOIN.buy('100') then
+                            group:removeSelf() group = nil
+                            PROGRAMS.group.isVisible = true
+                            require('Core.Share.build').new(CURRENT_LINK, true)
+                        else
+                            local message = STR['robodog.not.enough.ccoin'] .. '\n' .. STR['robodog.need.ccoin'] .. '100'
+                            WINDOW.new(message, {STR['button.close']}, function(ev) end, 3)
+                            WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                            WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                        end
                     end
                 elseif type == 'scripts' then
                     if e.target.move then
@@ -252,7 +267,7 @@ local listener = function(e, scroll, group, type)
                         local text = display.newText({
                                 text = e.target.text.text, x = CENTER_X, y = CENTER_Y,
                                 width = 600, font = 'ubuntu', fontSize = 50, align = 'center'
-                            }) text:setFillColor(1)
+                            })
                         group_sound:insert(text)
 
                         local musicStream = audio.loadStream(CURRENT_LINK .. '/Sounds/' .. e.target.link, system.DocumentsDirectory)
@@ -346,7 +361,7 @@ local listener = function(e, scroll, group, type)
                         local text = display.newText({
                                 text = '1234567890\nabcdefghijklmnopqrstuvwxyz',
                                 x = CENTER_X, y = CENTER_Y, width = 600, font = font_link, fontSize = 60, align = 'center'
-                            }) text:setFillColor(1)
+                            })
                         group_font:insert(text)
 
                         local keyMaster
@@ -430,7 +445,8 @@ M.new = function(text, scroll, group, type, index, filter, link, comment, indexF
         group.blocks[index].text = display.newText({
                 text = text, x = scroll.width / 2, y = y,
                 font = 'ubuntu', fontSize = 40, align = 'left', width = blockWidth - 40, height = 54
-            }) group.blocks[index].indexFolder = indexFolder
+            }) group.blocks[index].text:setFillColor(unpack(LOCAL.themes.text))
+            group.blocks[index].indexFolder = indexFolder
             group.blocks[index].commentFolder = commentFolder
         scroll:insert(group.blocks[index].text)
 
@@ -445,20 +461,20 @@ M.new = function(text, scroll, group, type, index, filter, link, comment, indexF
 
         group.blocks[index].polygon = display.newPolygon(polygonX, polygonY, {0, 0, 10, 10, -10, 10})
             group.blocks[index].polygon.yScale = commentFolder and 1.4 or -1.4
-            group.blocks[index].polygon:setFillColor(commentFolder and 0.4 or 1)
+            group.blocks[index].polygon:setFillColor(unpack(LOCAL.themes[commentFolder and 'folderClose' or 'folderOpen']))
         scroll:insert(group.blocks[index].polygon)
     else
         group.blocks[index] = display.newRoundedRect(scroll.width / 2, y, scroll.width - RIGHT_HEIGHT - 100, 125, 20)
             group.blocks[index].alpha = 0.9
             group.blocks[index].index = #group.data + 1
-            group.blocks[index]:setFillColor(25/255, 26/255, 32/255)
+            group.blocks[index]:setFillColor(unpack(LOCAL.themes.block))
         scroll:insert(group.blocks[index])
 
         group.blocks[index].text = display.newText({
                 text = text, x = scroll.width / 2 + 64, y = y,
                 font = 'ubuntu', fontSize = 40, align = 'left',
                 width = group.blocks[index].width - 160, height = 50
-            })
+            }) group.blocks[index].text:setFillColor(unpack(LOCAL.themes.text))
         scroll:insert(group.blocks[index].text)
 
         group.blocks[index].container = display.newContainer(94, 94)
@@ -509,28 +525,28 @@ M.new = function(text, scroll, group, type, index, filter, link, comment, indexF
             } local path = NOOBMODE and paths.noob[index] or paths.default[index]
 
             if path ~= '' then
-                group.blocks[index].icon = display.newImage('Sprites/icon' .. path .. '.png')
+                group.blocks[index].icon = display.newImage(THEMES['icon' .. path]())
                 group.blocks[index].container:insert(group.blocks[index].icon, true)
             end
         elseif type == 'scripts' then
             group.blocks[index].turn = not comment
-            group.blocks[index].icon = display.newImage('Sprites/icon' .. (group.blocks[index].turn and 'Script' or 'Comment') .. '.png')
+            group.blocks[index].icon = display.newImage(THEMES['icon' .. (group.blocks[index].turn and 'Script' or 'Comment')]())
             group.blocks[index].container:insert(group.blocks[index].icon, true)
         elseif type == 'sounds' then
-            group.blocks[index].icon = display.newImage('Sprites/iconSound.png')
+            group.blocks[index].icon = display.newImage(THEMES.iconSound())
             group.blocks[index].container:insert(group.blocks[index].icon, true)
         elseif type == 'videos' then
-            group.blocks[index].icon = display.newImage('Sprites/iconVideo.png')
+            group.blocks[index].icon = display.newImage(THEMES.iconVideo())
             group.blocks[index].container:insert(group.blocks[index].icon, true)
         elseif type == 'resources' then
-            group.blocks[index].icon = display.newImage('Sprites/iconRes.png')
+            group.blocks[index].icon = display.newImage(THEMES.iconRes())
             group.blocks[index].container:insert(group.blocks[index].icon, true)
         elseif type == 'fonts' then
-            group.blocks[index].icon = display.newImage('Sprites/iconFont.png')
+            group.blocks[index].icon = display.newImage(THEMES.iconFont())
             group.blocks[index].container:insert(group.blocks[index].icon, true)
         else
             group.blocks[index].icon = display.newRect(group.blocks[index].container.x, y, 94, 94)
-                group.blocks[index].icon:setFillColor(0.15, 0.15, 0.17)
+                group.blocks[index].icon:setFillColor(unpack(LOCAL.themes.bg))
             group.blocks[index].container:insert(group.blocks[index].icon, true)
         end
 

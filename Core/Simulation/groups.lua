@@ -17,7 +17,8 @@ if 'Группы' then
 
         GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() GAME.group.groups[name]:removeSelf() end)'
         GAME.lua = GAME.lua .. ' GAME.group.groups[name] = display.newContainer(' .. width .. ', ' .. height .. ')'
-        GAME.lua = GAME.lua .. ' GAME.group.groups[name]._tag = \'TAG\' GAME.group.groups[name]._isGroup = true'
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name]._tag = \'TAG\' GAME.group.groups[name]._isContainer = true'
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name].x = CENTER_X GAME.group.groups[name].y = CENTER_Y'
         GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.groups[name]) end)'
     end
 
@@ -40,7 +41,11 @@ if 'Группы' then
         local nameGroup = CALC(params[1])
         local nameObject = CALC(params[2])
 
-        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. nameGroup .. ']:insert(GAME.group.objects[' .. nameObject .. ']) end)'
+        GAME.lua = GAME.lua .. ' pcall(function() local nameGroup, nameObject = ' .. nameGroup .. ', ' .. nameObject
+        GAME.lua = GAME.lua .. ' GAME.group.groups[nameGroup]:insert(GAME.group.objects[nameObject])'
+        GAME.lua = GAME.lua .. ' if GAME.group.groups[nameGroup]._isContainer then'
+        GAME.lua = GAME.lua .. ' local obj = GAME.group.objects[nameObject] obj._container = nameGroup'
+        GAME.lua = GAME.lua .. ' obj.x = SET_X(GET_X(obj.x), obj) obj.y = SET_Y(GET_Y(obj.y), obj) end end)'
     end
 
     M['addGroupText'] = function(params)

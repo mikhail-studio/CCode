@@ -21,6 +21,54 @@ local genBlocks = function()
     end
 end
 
+local backupTimerFunc = function()
+    local date = os.date('*t')
+    local hour, minute = date.hour, date.min
+
+    if minute == 0 or minute == 15 or minute == 30 or minute == 45 then
+        local minute = minute == 0 and '00' or minute
+        local path = DOC_DIR .. '/' .. CURRENT_LINK .. '/Backups/' .. hour .. '.' .. minute
+        local pathData = DOC_DIR .. '/' .. CURRENT_LINK .. '/Backups/data.json'
+        local pathScript = DOC_DIR .. '/' .. CURRENT_LINK .. '/Scripts'
+
+        if not IS_FOLDER(DOC_DIR .. '/' .. CURRENT_LINK .. '/Backups') then
+            LFS.mkdir(DOC_DIR .. '/' .. CURRENT_LINK .. '/Backups')
+        end
+
+        if not IS_FOLDER(path) then
+            local data = READ_FILE(pathData) LFS.mkdir(path)
+            local gameData = GET_GAME_CODE(CURRENT_LINK)
+            local scripts = gameData.scripts
+            local folders = gameData.folders.scripts
+
+            for file in LFS.dir(pathScript) do
+                if file ~= '.' and file ~= '..' then
+                    OS_COPY(pathScript .. '/' .. file, path .. '/' .. file)
+                end
+            end
+
+            if data then
+                local data = JSON.decode(data)
+
+                if #data == 8 then
+                    OS_REMOVE(DOC_DIR .. '/' .. CURRENT_LINK .. '/Backups/' .. data[8][1], true)
+                    table.remove(data, 8)
+                end
+
+                table.insert(data, 1, {hour .. '.' .. minute, scripts, folders})
+                WRITE_FILE(pathData, JSON.encode(data))
+            else
+                WRITE_FILE(pathData, JSON.encode({{hour .. '.' .. minute, scripts, folders}}))
+            end
+        end
+    end
+end
+
+M.startTimer = function()
+    M.backupTimer = timer.new(45000, 0, backupTimerFunc)
+    backupTimerFunc()
+end
+
 M.create = function(app, noobmode)
     M.group = display.newGroup()
     M.group.isVisible = false
@@ -55,20 +103,21 @@ M.create = function(app, noobmode)
         end
     end NOOBMODE = noobmode
 
-    local bg = display.newImage('Sprites/bg.png', CENTER_X, CENTER_Y)
+    local bg = display.newImage(THEMES.bg(), CENTER_X, CENTER_Y)
         bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
         bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
         bg.rotation = CENTER_X == 641 and 90 or 0
     M.group:insert(bg)
 
     local title = display.newText(app, ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)
+        title:setFillColor(unpack(LOCAL.themes.text))
         title.anchorX = 0
         title.anchorY = 0
         title.button = 'but_title'
         title:addEventListener('touch', require 'Core.Interfaces.program')
     M.group:insert(title)
 
-    local but_play = display.newImage('Sprites/play.png', MAX_X - 190, MAX_Y - 95)
+    local but_play = display.newImage(THEMES.play(), MAX_X - 190, MAX_Y - 95)
         but_play.alpha = 0.9
         but_play.button = 'but_play'
         but_play:addEventListener('touch', require 'Core.Interfaces.program')
@@ -82,6 +131,7 @@ M.create = function(app, noobmode)
     M.group:insert(M.scroll)
 
     genBlocks()
+    M.startTimer()
 end
 
 return M

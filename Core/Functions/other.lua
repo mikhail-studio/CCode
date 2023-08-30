@@ -18,6 +18,7 @@ end
 
 M.getPhysicsParams = function(friction, bounce, density, hitbox, filter)
     local params = {friction = friction, bounce = bounce, density = density}
+    local hitbox = COPY_TABLE(hitbox)
 
     if filter and filter[1] and filter[2] then
         params.filter = {

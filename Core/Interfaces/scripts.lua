@@ -37,6 +37,7 @@ listeners.but_add = function(target)
                     for i = 1, #SCRIPTS.group.data do
                         if SCRIPTS.group.data[i].y > targetY then
                             local j = SCRIPTS.group.blocks[i].getRealIndex(SCRIPTS.group.blocks[i], data, 'scripts')
+                            local j = SCRIPTS.group.blocks[i].indexFolder and j + 1 or j
                             table.insert(data.scripts, j, GET_INDEX_SCRIPT(CURRENT_LINK))
 
                             local indexInFolder = 1
@@ -116,12 +117,13 @@ listeners.but_list = function(target)
     if #SCRIPTS.group.blocks > 0 then
         SCRIPTS.group[8]:setIsLocked(true, 'vertical')
         if SCRIPTS.group.isVisible then
-            LIST.new({STR['button.remove'], STR['button.rename'], STR['button.copy'], STR['button.from.buffer'], STR['button.comment']},
+            LIST.new({STR['button.remove'], STR['button.rename'], STR['button.copy'], STR['button.from.buffer'], STR['button.comment'], STR['button.backup']},
                 MAX_X, target.y - target.height / 2, 'down', function(e)
                     SCRIPTS.group[8]:setIsLocked(false, 'vertical')
 
+                    if e.index == 6 then e.index = 7 end
                     if e.index == 5 then e.index = 6 end
-                    if e.index ~= 0 and e.index ~= 4 then
+                    if e.index ~= 0 and e.index ~= 4 and e.index ~= 7 then
                         ALERT = false
                         INDEX_LIST = e.index
                         EXITS.add(listeners.but_okay_end)
@@ -132,7 +134,38 @@ listeners.but_list = function(target)
                         SCRIPTS.group[7].isVisible = true
                     end
 
-                    if e.index == 6 then
+                    if e.index == 7 then
+                        local path = DOC_DIR .. '/' .. CURRENT_LINK .. '/Backups/'
+
+                        if IS_FOLDER(path) then
+                            local data = JSON.decode(READ_FILE(DOC_DIR .. '/' .. CURRENT_LINK .. '/Backups/data.json'))
+
+                            local func func = function(index, maxIndex)
+                                local lastAction = index == maxIndex and STR['button.close'] or STR['backup.continue']
+                                WINDOW.new(STR['backup.title'] .. data[index][1], {STR['backup.install'], lastAction}, function(e)
+                                    if e.index == 1 then
+                                        local pathScript = DOC_DIR .. '/' .. CURRENT_LINK .. '/Scripts'
+                                        local gameData = GET_GAME_CODE(CURRENT_LINK)
+                                        gameData.scripts = data[index][2] gameData.folders.scripts = data[index][3]
+                                        SCRIPTS.group:removeSelf() SCRIPTS.group = nil
+                                        SET_GAME_CODE(CURRENT_LINK, gameData) WINDOW.remove()
+                                        OS_REMOVE(pathScript, true) LFS.mkdir(pathScript)
+                                        for file in LFS.dir(path .. data[index][1]) do
+                                            if file ~= '.' and file ~= '..' then
+                                                OS_COPY(path .. data[index][1] .. '/' .. file, pathScript .. '/' .. file)
+                                            end
+                                        end SCRIPTS.create() SCRIPTS.group.isVisible = true
+                                    elseif e.index == 2 and index < maxIndex then
+                                        WINDOW.remove() timer.new(1, 1, function() func(index + 1, maxIndex) end)
+                                    end
+                                end)
+                            end
+
+                            if data and #data > 0 and data[1] then
+                                func(1, #data)
+                            end
+                        end
+                    elseif e.index == 6 then
                         MORE_LIST = true
                         SCRIPTS.group[3].text = '(' .. STR['button.comment'] .. ')'
 
@@ -459,10 +492,10 @@ listeners.but_okay = function(target)
 
                     if SCRIPTS.group.blocks[i].turn then
                         SCRIPTS.group.blocks[i].turn = false
-                        SCRIPTS.group.blocks[i].icon = display.newImage('Sprites/iconComment.png')
+                        SCRIPTS.group.blocks[i].icon = display.newImage(THEMES.iconComment())
                     else
                         SCRIPTS.group.blocks[i].turn = true
-                        SCRIPTS.group.blocks[i].icon = display.newImage('Sprites/iconScript.png')
+                        SCRIPTS.group.blocks[i].icon = display.newImage(THEMES.iconScript())
                     end
 
                     local indexReal = SCRIPTS.group.blocks[i].getRealIndex(SCRIPTS.group.blocks[i], data, 'scripts')

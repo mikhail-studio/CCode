@@ -12,7 +12,10 @@ settings = {
 			'android.permission.READ_EXTERNAL_STORAGE',
 			'android.permission.WRITE_EXTERNAL_STORAGE',
 			'android.permission.RECEIVE_BOOT_COMPLETED',
-			'android.permission.VIBRATE'
+			'android.permission.VIBRATE',
+			'android.permission.GET_ACCOUNTS',
+			'android.permission.ACCESS_COARSE_LOCATION',
+			'android.permission.ACCESS_FINE_LOCATION'
 		}
 	},
 
@@ -38,7 +41,6 @@ settings = {
 		['plugin.memoryBitmap'] = {publisherId = 'com.coronalabs'},
 		['plugin.zeroconf'] = {publisherId = 'com.coronalabs'},
 		['plugin.impack'] = {publisherId = 'com.xibalbastudios'},
-		['plugin.startapp'] = {publisherId = 'com.startapp'},
 		['plugin.tinyfiledialogs'] = {publisherId = 'com.xibalbastudios'}
 	},
 

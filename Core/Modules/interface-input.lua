@@ -13,7 +13,7 @@ M.new = function(title, textListener, inputListener, oldText, textCheckbox, isTe
         local bgHeight = isAddHeight and (#textCheckbox == 2 and 200 or 150) or 100
 
         M.bg = display.newRoundedRect(CENTER_X, bgY, DISPLAY_WIDTH - 100, bgHeight, 20)
-            M.bg:setFillColor(0.2, 0.2, 0.22)
+            M.bg:setFillColor(unpack(LOCAL.themes.bgAddColor))
             M.bg.height = M.bg.height + (IS_SIM and 46 * M.count or 40 * M.count)
         M.group:insert(M.bg)
 
@@ -33,7 +33,7 @@ M.new = function(title, textListener, inputListener, oldText, textCheckbox, isTe
                 M.box.text = type(oldText) == 'string' and oldText or ''
 
                 if system.getInfo 'platform' == 'android' and not IS_SIM then
-                    M.box:setTextColor(0.9)
+                    M.box:setTextColor(unpack(LOCAL.themes.fieldColor))
                 else
                     M.box:setTextColor(0.1)
                 end
@@ -59,6 +59,7 @@ M.new = function(title, textListener, inputListener, oldText, textCheckbox, isTe
                 M.group:insert(M.checkbox[i])
 
                 M.text = display.newText(textCheckbox[i], M.checkbox[i].x + 35, M.checkbox[i].y - 1, 'ubuntu', 28)
+                    M.text:setFillColor(unpack(LOCAL.themes.text))
                     M.text.anchorX = 0
                 M.group:insert(M.text)
 
@@ -67,6 +68,7 @@ M.new = function(title, textListener, inputListener, oldText, textCheckbox, isTe
         elseif isTextEditor then
             M.buttonOK = display.newRoundedRect(M.line.x + M.line.width / 2 - 50, (M.bg.y + M.bg.height / 2 + M.line.y) / 2 + 2, 100, 60, 10)
                 M.text = display.newText(M.group, STR['button.okay'], M.buttonOK.x, M.buttonOK.y, 'ubuntu', 28)
+                M.text:setFillColor(unpack(LOCAL.themes.text))
                 M.buttonOK.alpha = 0.005
             M.group:insert(M.buttonOK)
 

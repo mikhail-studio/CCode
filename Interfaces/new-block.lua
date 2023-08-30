@@ -273,16 +273,17 @@ local function textListener(event)
         local scrollHeight = 50
 
         for j = 1, #M.listBlock.everyone do
-            local notCustom = not (BLOCKS.custom and INFO.getType(M.listBlock.everyone[j]) == 'custom' and j ~= 1)
+            local bType = INFO.getType(M.listBlock.everyone[j])
+            local notCustom = not (BLOCKS.custom and bType == 'custom' and j ~= 1)
 
             if UTF8.find(UTF8.lower(STR['blocks.' .. M.listBlock.everyone[j]]), UTF8.lower(M.boxText), 1, true) and notCustom then
-                local event = INFO.getType(M.listBlock.everyone[j]) == 'events'
+                local event = bType == 'events'
 
                 M.group.types[1].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(event, DISPLAY_WIDTH - RIGHT_HEIGHT - 60, event and 102 or 116))
                     M.group.types[1].blocks[j].x = DISPLAY_WIDTH / 2
                     M.group.types[1].blocks[j].y = lastY
                     M.group.types[1].blocks[j]:setFillColor(INFO.getBlockColor(M.listBlock.everyone[j]))
-                    M.group.types[1].blocks[j]:setStrokeColor(0.3)
+                    M.group.types[1].blocks[j]:setStrokeColor(INFO.getBlockColor(nil, nil, bType, nil, nil, true))
                     M.group.types[1].blocks[j].strokeWidth = 4
                     M.group.types[1].blocks[j].index = {1, j}
                     M.group.types[1].blocks[j]:addEventListener('touch', newBlockListener)
@@ -294,6 +295,7 @@ local function textListener(event)
                         y = lastY, width = M.group.types[1].blocks[j].width - 40,
                         height = 40, font = 'ubuntu', fontSize = 32, align = 'left'
                     }) M.group.types[1].blocks[j].text.anchorX = 0
+                    M.group.types[1].blocks[j].text:setFillColor(unpack(LOCAL.themes.blockText))
                 M.group.types[1].scroll:insert(M.group.types[1].blocks[j].text)
 
                 lastY = lastY + 140
@@ -374,7 +376,9 @@ M.custom = function(i)
         local custom = GET_GAME_CUSTOM()
 
         for j = 1, #M.listBlock.custom do
-            if INFO.getType(M.listBlock.custom[j]) == 'custom' and UTF8.sub(M.listBlock.custom[j], 1, 1) ~= '_' then
+            local bType = INFO.getType(M.listBlock.custom[j])
+
+            if bType == 'custom' and UTF8.sub(M.listBlock.custom[j], 1, 1) ~= '_' then
                 local index = UTF8.gsub(M.listBlock.custom[j], 'custom', '', 1)
                 color = (index and custom[index]) and custom[index][5] or nil
                 color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}
@@ -384,7 +388,7 @@ M.custom = function(i)
                 M.group.types[15].blocks[j].x = DISPLAY_WIDTH / 2
                 M.group.types[15].blocks[j].y = lastY
                 M.group.types[15].blocks[j]:setFillColor(INFO.getBlockColor(M.listBlock.custom[j], nil, nil, color))
-                M.group.types[15].blocks[j]:setStrokeColor(0.3)
+                M.group.types[15].blocks[j]:setStrokeColor(INFO.getBlockColor(nil, nil, bType, nil, nil, true))
                 M.group.types[15].blocks[j].strokeWidth = 4
                 M.group.types[15].blocks[j].index = {15, j}
                 M.group.types[15].blocks[j]:addEventListener('touch', newBlockListener)
@@ -396,6 +400,7 @@ M.custom = function(i)
                     y = lastY, width = M.group.types[15].blocks[j].width - 40,
                     height = 40, font = 'ubuntu', fontSize = 32, align = 'left'
                 }) M.group.types[15].blocks[j].text.anchorX = 0
+                M.group.types[15].blocks[j].text:setFillColor(unpack(LOCAL.themes.blockText))
             M.group.types[15].scroll:insert(M.group.types[15].blocks[j].text)
 
             lastY = lastY + 140
@@ -484,22 +489,22 @@ M.create = function()
             M.listDelimiter = COPY_TABLE(INFO.listDelimiterNoob)
         end
 
-        local bg = display.newImage('Sprites/bg.png', CENTER_X, CENTER_Y)
+        local bg = display.newImage(THEMES.bg(), CENTER_X, CENTER_Y)
             bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
             bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
             bg.rotation = CENTER_X == 641 and 90 or 0
         M.group:insert(bg)
 
         local line = display.newRect(CENTER_X, MAX_Y - 275, DISPLAY_WIDTH, 2)
-            line:setFillColor(0.45)
+            line:setFillColor(unpack(LOCAL.themes.line))
         M.group:insert(line)
 
         local find = display.newRect(CENTER_X, ZERO_Y + 80, DISPLAY_WIDTH - RIGHT_HEIGHT - 60, 2)
-            find:setFillColor(0.9)
+            find:setFillColor(unpack(LOCAL.themes.find))
         M.group:insert(find)
 
         local box = native.newTextField(5000, ZERO_Y + 50, DISPLAY_WIDTH - RIGHT_HEIGHT - 70, not IS_SIM and 28 or 56)
-            timer.performWithDelay(0, function()
+            timer.performWithDelay(1000, function()
                 if M.group and M.group.isVisible and box then
                     box.x = CENTER_X
                     box.isEditable = true
@@ -508,7 +513,7 @@ M.create = function()
                     box.font = native.newFont('ubuntu', 28)
 
                     pcall(function() if system.getInfo 'platform' == 'android' and not IS_SIM and box then
-                        box:setTextColor(0.9)
+                        box:setTextColor(unpack(LOCAL.themes.fieldColor))
                     else
                         box:setTextColor(0.1)
                     end end)
@@ -658,17 +663,20 @@ M.create = function()
         local width3 = (DISPLAY_WIDTH - RIGHT_HEIGHT - 60) / 2
 
         local button = display.newRect(find.x - find.width / 2 + width / 2, ZERO_Y + 50, width, 56)
+            button:setFillColor(unpack(LOCAL.themes.toolbar))
             button.alpha = 0.1
             button.tag = 'create'
             button:addEventListener('touch', buttonListeners)
         M.group:insert(button)
 
         local buttonText = display.newText(STR['blocks.create.block'], button.x, button.y, 'ubuntu', 28)
+            buttonText:setFillColor(unpack(LOCAL.themes.text))
             button.isVisible = false
             buttonText.isVisible = false
         M.group:insert(buttonText)
 
         local button2 = display.newRect(button.x + width / 2 + width / 2, ZERO_Y + 50, width, 56)
+            button2:setFillColor(unpack(LOCAL.themes.toolbar))
             button2.isOn = false
             button2.alpha = 0.1
             button2.tag = 'change'
@@ -676,11 +684,13 @@ M.create = function()
         M.group:insert(button2)
 
         local button2Text = display.newText(STR['button.change'], button2.x, button2.y, 'ubuntu', 28)
+            button2Text:setFillColor(unpack(LOCAL.themes.text))
             button2.isVisible = false
             button2Text.isVisible = false
         M.group:insert(button2Text)
 
         local button3 = display.newRect(button2.x + width, ZERO_Y + 50, width, 56)
+            button3:setFillColor(unpack(LOCAL.themes.toolbar))
             button3.isOn = false
             button3.alpha = 0.1
             button3.tag = 'remove'
@@ -688,11 +698,13 @@ M.create = function()
         M.group:insert(button3)
 
         local button3Text = display.newText(STR['button.remove'], button3.x, button3.y, 'ubuntu', 28)
+            button3Text:setFillColor(unpack(LOCAL.themes.text))
             button3.isVisible = false
             button3Text.isVisible = false
         M.group:insert(button3Text)
 
         local buttonGroup = display.newRect(find.x - find.width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
+            buttonGroup:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonGroup.isOn = true
             buttonGroup.alpha = 0.3
             buttonGroup.tag = 'groups'
@@ -700,11 +712,13 @@ M.create = function()
         M.group:insert(buttonGroup)
 
         local buttonGroupText = display.newText(STR['blocks.create.groups'], buttonGroup.x, buttonGroup.y, 'ubuntu', 28)
+            buttonGroupText:setFillColor(unpack(LOCAL.themes.text))
             buttonGroup.isVisible = false
             buttonGroupText.isVisible = false
         M.group:insert(buttonGroupText)
 
         local buttonTag = display.newRect(buttonGroup.x + width3, ZERO_Y + 50, width3, 56)
+            buttonTag:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonTag.isOn = false
             buttonTag.alpha = 0.1
             buttonTag.tag = 'tags'
@@ -712,11 +726,13 @@ M.create = function()
         M.group:insert(buttonTag)
 
         local buttonTagText = display.newText(STR['blocks.create.tags'], buttonTag.x, buttonTag.y, 'ubuntu', 28)
+            buttonTagText:setFillColor(unpack(LOCAL.themes.text))
             buttonTag.isVisible = false
             buttonTagText.isVisible = false
         M.group:insert(buttonTagText)
 
         local buttonControl1 = display.newRect(find.x - find.width / 2 + width2 / 2, ZERO_Y + 50, width2, 56)
+            buttonControl1:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonControl1.isOn = true
             buttonControl1.alpha = 0.3
             buttonControl1.tag = 'control1'
@@ -724,11 +740,13 @@ M.create = function()
         M.group:insert(buttonControl1)
 
         local buttonControl1Text = display.newText('1', buttonControl1.x, buttonControl1.y, 'ubuntu', 28)
+            buttonControl1Text:setFillColor(unpack(LOCAL.themes.text))
             buttonControl1.isVisible = false
             buttonControl1Text.isVisible = false
         M.group:insert(buttonControl1Text)
 
         local buttonControl2 = display.newRect(buttonControl1.x + width2, ZERO_Y + 50, width2, 56)
+            buttonControl2:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonControl2.isOn = false
             buttonControl2.alpha = 0.1
             buttonControl2.tag = 'control2'
@@ -736,11 +754,13 @@ M.create = function()
         M.group:insert(buttonControl2)
 
         local buttonControl2Text = display.newText('2', buttonControl2.x, buttonControl2.y, 'ubuntu', 28)
+            buttonControl2Text:setFillColor(unpack(LOCAL.themes.text))
             buttonControl2.isVisible = false
             buttonControl2Text.isVisible = false
         M.group:insert(buttonControl2Text)
 
         local button4 = display.newRect(button3.x + width, ZERO_Y + 50, width, 56)
+            button4:setFillColor(unpack(LOCAL.themes.toolbar))
             button4.isOn = false
             button4.alpha = 0.1
             button4.tag = 'copy'
@@ -748,11 +768,13 @@ M.create = function()
         M.group:insert(button4)
 
         local button4Text = display.newText(STR['blocks.create.copy'], button4.x, button4.y, 'ubuntu', 28)
+            button4Text:setFillColor(unpack(LOCAL.themes.text))
             button4.isVisible = false
             button4Text.isVisible = false
         M.group:insert(button4Text)
 
         local buttonVars1 = display.newRect(find.x - find.width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
+            buttonVars1:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonVars1.isOn = true
             buttonVars1.alpha = 0.3
             buttonVars1.tag = 'vars1'
@@ -760,11 +782,13 @@ M.create = function()
         M.group:insert(buttonVars1)
 
         local buttonVars1Text = display.newText('1', buttonVars1.x, buttonVars1.y, 'ubuntu', 28)
+            buttonVars1Text:setFillColor(unpack(LOCAL.themes.text))
             buttonVars1.isVisible = false
             buttonVars1Text.isVisible = false
         M.group:insert(buttonVars1Text)
 
         local buttonVars2 = display.newRect(buttonVars1.x + width3, ZERO_Y + 50, width3, 56)
+            buttonVars2:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonVars2.isOn = false
             buttonVars2.alpha = 0.1
             buttonVars2.tag = 'vars2'
@@ -772,11 +796,13 @@ M.create = function()
         M.group:insert(buttonVars2)
 
         local buttonVars2Text = display.newText('2', buttonVars2.x, buttonVars2.y, 'ubuntu', 28)
+            buttonVars2Text:setFillColor(unpack(LOCAL.themes.text))
             buttonVars2.isVisible = false
             buttonVars2Text.isVisible = false
         M.group:insert(buttonVars2Text)
 
         local buttonEvents1 = display.newRect(find.x - find.width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
+            buttonEvents1:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonEvents1.isOn = true
             buttonEvents1.alpha = 0.3
             buttonEvents1.tag = 'events1'
@@ -784,11 +810,13 @@ M.create = function()
         M.group:insert(buttonEvents1)
 
         local buttonEvents1Text = display.newText('1', buttonEvents1.x, buttonEvents1.y, 'ubuntu', 28)
+            buttonEvents1Text:setFillColor(unpack(LOCAL.themes.text))
             buttonEvents1.isVisible = false
             buttonEvents1Text.isVisible = false
         M.group:insert(buttonEvents1Text)
 
         local buttonEvents2 = display.newRect(buttonEvents1.x + width3, ZERO_Y + 50, width3, 56)
+            buttonEvents2:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonEvents2.isOn = false
             buttonEvents2.alpha = 0.1
             buttonEvents2.tag = 'events2'
@@ -796,11 +824,13 @@ M.create = function()
         M.group:insert(buttonEvents2)
 
         local buttonEvents2Text = display.newText('2', buttonEvents2.x, buttonEvents2.y, 'ubuntu', 28)
+            buttonEvents2Text:setFillColor(unpack(LOCAL.themes.text))
             buttonEvents2.isVisible = false
             buttonEvents2Text.isVisible = false
         M.group:insert(buttonEvents2Text)
 
         local buttonPhysics1 = display.newRect(find.x - find.width / 2 + width2 / 2, ZERO_Y + 50, width2, 56)
+            buttonPhysics1:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonPhysics1.isOn = true
             buttonPhysics1.alpha = 0.3
             buttonPhysics1.tag = 'physics1'
@@ -808,11 +838,13 @@ M.create = function()
         M.group:insert(buttonPhysics1)
 
         local buttonPhysics1Text = display.newText('1', buttonPhysics1.x, buttonPhysics1.y, 'ubuntu', 28)
+            buttonPhysics1Text:setFillColor(unpack(LOCAL.themes.text))
             buttonPhysics1.isVisible = false
             buttonPhysics1Text.isVisible = false
         M.group:insert(buttonPhysics1Text)
 
         local buttonPhysics2 = display.newRect(buttonPhysics1.x + width2, ZERO_Y + 50, width2, 56)
+            buttonPhysics2:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonPhysics2.isOn = false
             buttonPhysics2.alpha = 0.1
             buttonPhysics2.tag = 'physics2'
@@ -820,11 +852,13 @@ M.create = function()
         M.group:insert(buttonPhysics2)
 
         local buttonPhysics2Text = display.newText('2', buttonPhysics2.x, buttonPhysics2.y, 'ubuntu', 28)
+            buttonPhysics2Text:setFillColor(unpack(LOCAL.themes.text))
             buttonPhysics2.isVisible = false
             buttonPhysics2Text.isVisible = false
         M.group:insert(buttonPhysics2Text)
 
         local buttonControl3 = display.newRect(buttonControl2.x + width2, ZERO_Y + 50, width2, 56)
+            buttonControl3:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonControl3.isOn = false
             buttonControl3.alpha = 0.1
             buttonControl3.tag = 'control3'
@@ -832,11 +866,13 @@ M.create = function()
         M.group:insert(buttonControl3)
 
         local buttonControl3Text = display.newText('3', buttonControl3.x, buttonControl3.y, 'ubuntu', 28)
+            buttonControl3Text:setFillColor(unpack(LOCAL.themes.text))
             buttonControl3.isVisible = false
             buttonControl3Text.isVisible = false
         M.group:insert(buttonControl3Text)
 
         local buttonWidgets1 = display.newRect(find.x - find.width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
+            buttonWidgets1:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonWidgets1.isOn = true
             buttonWidgets1.alpha = 0.3
             buttonWidgets1.tag = 'widgets1'
@@ -844,11 +880,13 @@ M.create = function()
         M.group:insert(buttonWidgets1)
 
         local buttonWidgets1Text = display.newText('1', buttonWidgets1.x, buttonWidgets1.y, 'ubuntu', 28)
+            buttonWidgets1Text:setFillColor(unpack(LOCAL.themes.text))
             buttonWidgets1.isVisible = false
             buttonWidgets1Text.isVisible = false
         M.group:insert(buttonWidgets1Text)
 
         local buttonWidgets2 = display.newRect(buttonWidgets1.x + width3, ZERO_Y + 50, width3, 56)
+            buttonWidgets2:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonWidgets2.isOn = false
             buttonWidgets2.alpha = 0.1
             buttonWidgets2.tag = 'widgets2'
@@ -856,11 +894,13 @@ M.create = function()
         M.group:insert(buttonWidgets2)
 
         local buttonWidgets2Text = display.newText('2', buttonWidgets2.x, buttonWidgets2.y, 'ubuntu', 28)
+            buttonWidgets2Text:setFillColor(unpack(LOCAL.themes.text))
             buttonWidgets2.isVisible = false
             buttonWidgets2Text.isVisible = false
         M.group:insert(buttonWidgets2Text)
 
         local buttonMedia = display.newRect(find.x - find.width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
+            buttonMedia:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonMedia.isOn = true
             buttonMedia.alpha = 0.3
             buttonMedia.tag = 'media'
@@ -868,11 +908,13 @@ M.create = function()
         M.group:insert(buttonMedia)
 
         local buttonMediaText = display.newText(STR['blocks.create.media'], buttonMedia.x, buttonMedia.y, 'ubuntu', 28)
+            buttonMediaText:setFillColor(unpack(LOCAL.themes.text))
             buttonMedia.isVisible = false
             buttonMediaText.isVisible = false
         M.group:insert(buttonMediaText)
 
         local buttonFiles = display.newRect(buttonMedia.x + width3, ZERO_Y + 50, width3, 56)
+            buttonFiles:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonFiles.isOn = false
             buttonFiles.alpha = 0.1
             buttonFiles.tag = 'files'
@@ -880,11 +922,13 @@ M.create = function()
         M.group:insert(buttonFiles)
 
         local buttonFilesText = display.newText(STR['blocks.create.files'], buttonFiles.x, buttonFiles.y, 'ubuntu', 28)
+            buttonFilesText:setFillColor(unpack(LOCAL.themes.text))
             buttonFiles.isVisible = false
             buttonFilesText.isVisible = false
         M.group:insert(buttonFilesText)
 
         local buttonObjects = display.newRect(find.x - find.width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
+            buttonObjects:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonObjects.isOn = true
             buttonObjects.alpha = 0.3
             buttonObjects.tag = 'objects'
@@ -892,11 +936,13 @@ M.create = function()
         M.group:insert(buttonObjects)
 
         local buttonObjectsText = display.newText(STR['blocks.create.objects'], buttonObjects.x, buttonObjects.y, 'ubuntu', 28)
+            buttonObjectsText:setFillColor(unpack(LOCAL.themes.text))
             buttonObjects.isVisible = false
             buttonObjectsText.isVisible = false
         M.group:insert(buttonObjectsText)
 
         local buttonFilters = display.newRect(buttonObjects.x + width3, ZERO_Y + 50, width3, 56)
+            buttonFilters:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonFilters.isOn = false
             buttonFilters.alpha = 0.1
             buttonFilters.tag = 'filters'
@@ -904,11 +950,13 @@ M.create = function()
         M.group:insert(buttonFilters)
 
         local buttonFiltersText = display.newText(STR['blocks.create.filters'], buttonFilters.x, buttonFilters.y, 'ubuntu', 28)
+            buttonFiltersText:setFillColor(unpack(LOCAL.themes.text))
             buttonFilters.isVisible = false
             buttonFiltersText.isVisible = false
         M.group:insert(buttonFiltersText)
 
         local buttonPhysics3 = display.newRect(buttonPhysics2.x + width2, ZERO_Y + 50, width2, 56)
+            buttonPhysics3:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonPhysics3.isOn = false
             buttonPhysics3.alpha = 0.1
             buttonPhysics3.tag = 'physics3'
@@ -916,11 +964,13 @@ M.create = function()
         M.group:insert(buttonPhysics3)
 
         local buttonPhysics3Text = display.newText('3', buttonPhysics3.x, buttonPhysics3.y, 'ubuntu', 28)
+            buttonPhysics3Text:setFillColor(unpack(LOCAL.themes.text))
             buttonPhysics3.isVisible = false
             buttonPhysics3Text.isVisible = false
         M.group:insert(buttonPhysics3Text)
 
         local buttonTransition = display.newRect(find.x - find.width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
+            buttonTransition:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonTransition.isOn = true
             buttonTransition.alpha = 0.3
             buttonTransition.tag = 'transition'
@@ -928,11 +978,13 @@ M.create = function()
         M.group:insert(buttonTransition)
 
         local buttonTransitionText = display.newText(STR['blocks.create.transition'], buttonTransition.x, buttonTransition.y, 'ubuntu', 28)
+            buttonTransitionText:setFillColor(unpack(LOCAL.themes.text))
             buttonTransition.isVisible = false
             buttonTransitionText.isVisible = false
         M.group:insert(buttonTransitionText)
 
         local buttonParticles = display.newRect(buttonTransition.x + width3, ZERO_Y + 50, width3, 56)
+            buttonParticles:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonParticles.isOn = false
             buttonParticles.alpha = 0.1
             buttonParticles.tag = 'particles'
@@ -940,11 +992,13 @@ M.create = function()
         M.group:insert(buttonParticles)
 
         local buttonParticlesText = display.newText(STR['blocks.create.particles'], buttonParticles.x, buttonParticles.y, 'ubuntu', 28)
+            buttonParticlesText:setFillColor(unpack(LOCAL.themes.text))
             buttonParticles.isVisible = false
             buttonParticlesText.isVisible = false
         M.group:insert(buttonParticlesText)
 
         local buttonSnapshot = display.newRect(find.x - find.width / 2 + width3 / 2, ZERO_Y + 50, width3, 56)
+            buttonSnapshot:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonSnapshot.isOn = true
             buttonSnapshot.alpha = 0.3
             buttonSnapshot.tag = 'snapshot'
@@ -952,11 +1006,13 @@ M.create = function()
         M.group:insert(buttonSnapshot)
 
         local buttonSnapshotText = display.newText(STR['blocks.create.snapshot'], buttonSnapshot.x, buttonSnapshot.y, 'ubuntu', 28)
+            buttonSnapshotText:setFillColor(unpack(LOCAL.themes.text))
             buttonSnapshot.isVisible = false
             buttonSnapshotText.isVisible = false
         M.group:insert(buttonSnapshotText)
 
         local buttonCamera = display.newRect(buttonSnapshot.x + width3, ZERO_Y + 50, width3, 56)
+            buttonCamera:setFillColor(unpack(LOCAL.themes.toolbar))
             buttonCamera.isOn = false
             buttonCamera.alpha = 0.1
             buttonCamera.tag = 'camera'
@@ -964,6 +1020,7 @@ M.create = function()
         M.group:insert(buttonCamera)
 
         local buttonCameraText = display.newText(STR['blocks.create.camera'], buttonCamera.x, buttonCamera.y, 'ubuntu', 28)
+            buttonCameraText:setFillColor(unpack(LOCAL.themes.text))
             buttonCamera.isVisible = false
             buttonCameraText.isVisible = false
         M.group:insert(buttonCameraText)
@@ -978,6 +1035,8 @@ M.create = function()
                 M.group.types[i].blocks = {}
                 M.group.types[i].anchorX = 0
                 M.group.types[i]:setFillColor(INFO.getBlockColor(nil, nil, INFO.listType[i]))
+                -- M.group.types[i]:setStrokeColor(INFO.getBlockColor(nil, nil, INFO.listType[i], nil, nil, true))
+                -- M.group.types[i].strokeWidth = 2
                 M.group.types[i]:addEventListener('touch', showTypeScroll)
             M.group:insert(M.group.types[i])
 
@@ -992,7 +1051,7 @@ M.create = function()
             M.group.types[i].text = display.newText({
                     text = STR[typeName], font = 'ubuntu', fontSize = 19, align = 'center',
                     x = x + width / 2, y = y, width = width - 5, height = textheight
-                })
+                }) M.group.types[i].text:setFillColor(unpack(LOCAL.themes.blockText))
             M.group:insert(M.group.types[i].text)
 
             M.group.types[i].scroll = WIDGET.newScrollView({
@@ -1035,7 +1094,8 @@ M.create = function()
             if INFO.listType[i] ~= 'none' then
                 for j = 1, #M.listBlock[INFO.listType[i]] do
                     local name = M.listBlock[INFO.listType[i]][j]
-                    local notCustom = not (BLOCKS.custom and INFO.getType(name) == 'custom' and j ~= 1)
+                    local bType = INFO.getType(name)
+                    local notCustom = not (BLOCKS.custom and bType == 'custom' and j ~= 1)
 
                     if M.listDelimiter[INFO.listType[i]] and name == M.listDelimiter[INFO.listType[i]][1] and startDelimiter ~= 2 then
                         startDelimiter = 2
@@ -1046,48 +1106,58 @@ M.create = function()
                     end
 
                     if UTF8.sub(name, UTF8.len(name) - 2, UTF8.len(name)) ~= 'End' and name ~= 'ifElse' and notCustom then
-                        local event, color = INFO.listType[i] == 'events' or INFO.getType(name) == 'events'
+                        local event, color = INFO.listType[i] == 'events' or bType == 'events'
 
-                        if INFO.getType(name) == 'custom' and UTF8.sub(name, 1, 1) ~= '_' then
+                        if bType == 'custom' and UTF8.sub(name, 1, 1) ~= '_' then
                             local index = UTF8.gsub(name, 'custom', '', 1)
                             color = (index and custom[index]) and custom[index][5] or nil
                             color = type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5}
                         end
 
-                        M.group.types[i].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(event, DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60, event and 102 or 116))
-                            M.group.types[i].blocks[j].x = DISPLAY_WIDTH / 2
-                            M.group.types[i].blocks[j].y = lastY
-                            M.group.types[i].blocks[j]:setFillColor(INFO.getBlockColor(name, nil, nil, color))
-                            M.group.types[i].blocks[j]:setStrokeColor(0.3)
-                            M.group.types[i].blocks[j].strokeWidth = 4
-                            M.group.types[i].blocks[j].index = {i, j}
-                        M.group.types[i].blocks[j]:addEventListener('touch', newBlockListener)
+                        local startDelimiter = startDelimiter
 
-                        if startDelimiter == 3 then
-                            M.group.types[i].scroll3:insert(M.group.types[i].blocks[j])
-                        elseif startDelimiter == 2 then
-                            M.group.types[i].scroll2:insert(M.group.types[i].blocks[j])
-                        else
-                            M.group.types[i].scroll:insert(M.group.types[i].blocks[j])
-                        end
+                        timer.new(100 + 10 * j, 1, function()
+                            if M.listDelimiter[INFO.listType[i]] and (name == M.listDelimiter[INFO.listType[i]][1]
+                            or name == M.listDelimiter[INFO.listType[i]][2]) then
+                                lastY = 90
+                            end
 
-                        M.group.types[i].blocks[j].text = display.newText({
-                                text = STR['blocks.' .. name],
-                                x = DISPLAY_WIDTH / 2 - M.group.types[i].blocks[j].width / 2 + 20,
-                                y = lastY, width = M.group.types[i].blocks[j].width - 40,
-                                height = 40, font = 'ubuntu', fontSize = 32, align = 'left'
-                            })
-                        M.group.types[i].blocks[j].text.anchorX = 0
+                            M.group.types[i].blocks[j] = display.newPolygon(0, 0, BLOCK.getPolygonParams(event, DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60, event and 102 or 116))
+                                M.group.types[i].blocks[j].x = DISPLAY_WIDTH / 2
+                                M.group.types[i].blocks[j].y = lastY
+                                M.group.types[i].blocks[j]:setFillColor(INFO.getBlockColor(name, nil, nil, color))
+                                M.group.types[i].blocks[j]:setStrokeColor(INFO.getBlockColor(name, nil, bType, color, nil, true))
+                                M.group.types[i].blocks[j].strokeWidth = 4
+                                M.group.types[i].blocks[j].index = {i, j}
+                            M.group.types[i].blocks[j]:addEventListener('touch', newBlockListener)
 
-                        if startDelimiter == 3 then
-                            M.group.types[i].scroll3:insert(M.group.types[i].blocks[j].text)
-                        elseif startDelimiter == 2 then
-                            M.group.types[i].scroll2:insert(M.group.types[i].blocks[j].text)
-                        else
-                            M.group.types[i].scroll:insert(M.group.types[i].blocks[j].text)
-                        end
+                            if startDelimiter == 3 then
+                                M.group.types[i].scroll3:insert(M.group.types[i].blocks[j])
+                            elseif startDelimiter == 2 then
+                                M.group.types[i].scroll2:insert(M.group.types[i].blocks[j])
+                            else
+                                M.group.types[i].scroll:insert(M.group.types[i].blocks[j])
+                            end
 
-                        lastY = lastY + 140
+                            M.group.types[i].blocks[j].text = display.newText({
+                                    text = STR['blocks.' .. name],
+                                    x = DISPLAY_WIDTH / 2 - M.group.types[i].blocks[j].width / 2 + 20,
+                                    y = lastY, width = M.group.types[i].blocks[j].width - 40,
+                                    height = 40, font = 'ubuntu', fontSize = 32, align = 'left'
+                                }) M.group.types[i].blocks[j].text:setFillColor(unpack(LOCAL.themes.blockText))
+                            M.group.types[i].blocks[j].text.anchorX = 0
+
+                            if startDelimiter == 3 then
+                                M.group.types[i].scroll3:insert(M.group.types[i].blocks[j].text)
+                            elseif startDelimiter == 2 then
+                                M.group.types[i].scroll2:insert(M.group.types[i].blocks[j].text)
+                            else
+                                M.group.types[i].scroll:insert(M.group.types[i].blocks[j].text)
+                            end
+
+                            lastY = lastY + 140
+                        end)
+
                         scrollHeight = startDelimiter == 1 and scrollHeight + 140 or scrollHeight
                         scroll2Height = startDelimiter == 2 and scroll2Height + 140 or scroll2Height
                         scroll3Height = startDelimiter == 3 and scroll3Height + 140 or scroll3Height

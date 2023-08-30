@@ -197,6 +197,7 @@ M.listBlock = {
             'comment',
             'requestApi',
             'requestApiRes',
+            'requestApiThread',
             'requestExit',
         'setBackgroundColor',
             'setBackgroundRGB',
@@ -483,7 +484,15 @@ M.listBlock = {
             'setOffsetCamera',
             'setDampingCamera',
             'setParallaxCamera',
-            'setOffsetLayerCamera'
+            'setOffsetLayerCamera',
+            -- 'new3dScene',
+            -- 'upd3dScene',
+            -- 'eye3dScene',
+            -- 'center3dScene',
+            -- 'new3dObject',
+            -- 'move3dObject',
+            -- 'scale3dObject',
+            -- 'rotate3dObject'
     },
 
     ['transition'] = {
@@ -834,6 +843,7 @@ M.listName = {
             ['requestExit'] = {'control'},
             ['requestApi'] = {'control', {'value', {'display.newText(\'0\', CENTER_X, CENTER_Y, nil, 50)', 't'}}},
             ['requestApiRes'] = {'control', {'value'}},
+            ['requestApiThread'] = {'control', {'value', {'local a = 0 for i = 1, 10000 do a = a + i end return(a)', 't'}}, {'fun'}},
             ['setFocusMultitouch'] = {'control', {'value'}, {'value'}},
             ['activateMultitouch'] = {'control'},
             ['deactivateMultitouch'] = {'control'},
@@ -1215,6 +1225,14 @@ M.listName = {
             ['setDampingCamera'] = {'snapshot', {'value', {'1', 'n'}}},
             ['setParallaxCamera'] = {'snapshot', {'value', {'1', 'n'}}, {'value', {'50', 'n'}}, {'value', {'50', 'n'}}},
             ['setOffsetLayerCamera'] = {'snapshot', {'value', {'1', 'n'}}, {'value', {'0', 'n'}}, {'value', {'300', 'n'}}},
+            ['new3dScene'] = {'snapshot', {'value', {'500', 'n'}}, {'value', {'500', 'n'}}},
+            ['upd3dScene'] = {'snapshot'},
+            ['eye3dScene'] = {'snapshot', {'value', {'1', 'n'}}, {'value', {'0', 'n'}}, {'value', {'1', 'n'}}},
+            ['center3dScene'] = {'snapshot', {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
+            ['new3dObject'] = {'snapshot', {'value'}, {'value'}},
+            ['move3dObject'] = {'snapshot', {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
+            ['scale3dObject'] = {'snapshot', {'value'}, {'value', {'0.1', 'n'}}, {'value', {'0.1', 'n'}}, {'value', {'0.1', 'n'}}},
+            ['rotate3dObject'] = {'snapshot', {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
 
     -- transition
     ['setTransitionPause'] = {'transition', {'value'}, {'transitName', {'obj', 'sl'}}},
@@ -1255,7 +1273,7 @@ M.listName = {
                 {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}},
                 {'color', {'[255, 255, 255]', 'c'}}, {'color', {'[0, 0, 0]', 'c'}},
                 {'color', {'[0, 0, 0]', 'c'}}, {'color', {'[0, 0, 0]', 'c'}},
-                {'particlesGL', {'GL770', 'sl'}}, {'particlesGL', {'GL1', 'sl'}}},
+                {'particlesGL', {'GL_SRC_ALPHA', 'sl'}}, {'particlesGL', {'GL_ONE', 'sl'}}},
             ['newRadialEmitter'] = {'transition', {'value'}, {'value'}, {'value', {'500', 'n'}}, {'value', {'true', 'l'}},
                 {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}},
                 {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}},
@@ -1264,7 +1282,7 @@ M.listName = {
                 {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}},
                 {'color', {'[255, 255, 255]', 'c'}}, {'color', {'[0, 0, 0]', 'c'}},
                 {'color', {'[0, 0, 0]', 'c'}}, {'color', {'[0, 0, 0]', 'c'}},
-                {'particlesGL', {'GL770', 'sl'}}, {'particlesGL', {'GL1', 'sl'}}},
+                {'particlesGL', {'GL_SRC_ALPHA', 'sl'}}, {'particlesGL', {'GL_ONE', 'sl'}}},
             ['removeEmitter'] = {'transition', {'value'}},
             ['removeAllEmitter'] = {'transition'},
             ['setEmitterPos'] = {'transition', {'value'}, {'value', {'0', 'n'}}, {'value', {'0', 'n'}}},
@@ -1646,48 +1664,105 @@ end
 -- local r, g, b = math.random(0, 200) / 255, math.random(0, 200) / 255, math.random(0, 200) / 255
 -- print(r .. ', ' .. g .. ', ' .. b)
 
-M.getBlockColor = function(name, comment, type, color, lock)
-    local type = type or M.getType(name)
-    if lock then return 0.3, 0.3, 0.3 end
+local function getThemeColor(type, i, isStroke)
+    return (LOCAL.themes.logicBlock and LOCAL.themes.logicBlock[type]) and LOCAL.themes.logicBlock[type][i] - (isStroke
+    and ((LOCAL.themes.logicStroke and LOCAL.themes.logicStroke[type]) and LOCAL.themes.logicStroke[type][i] or 0) or 0) or 0
+end
+
+M.getBlockColor = function(name, comment, type, color, lock, isStroke)
+    local type = type or M.getType(name) if lock then return 0.3, 0.3, 0.3 end
+    if isStroke and not LOCAL.themes.logicStroke then return unpack(LOCAL.themes.strokeColor) end
     if comment or type == 'none' then return 0.6 end
 
     if type == 'events' then
-        return 0.1, 0.6, 0.65
+        return 0.1 + getThemeColor(type, 1, isStroke),
+            0.6 + getThemeColor(type, 2, isStroke),
+            0.65 + getThemeColor(type, 3, isStroke)
     elseif type == 'vars' then
-        return 0.75, 0.6, 0.3
+        return 0.75 + getThemeColor(type, 1, isStroke),
+            0.6 + getThemeColor(type, 2, isStroke),
+            0.3 + getThemeColor(type, 3, isStroke)
     elseif type == 'objects' then
-        return 0.41, 0.68, 0.3
+        return 0.41 + getThemeColor(type, 1, isStroke),
+            0.68 + getThemeColor(type, 2, isStroke),
+            0.3 + getThemeColor(type, 3, isStroke)
     elseif type == 'shapes' then
-        return 0.16, 0.66, 0.45
+        return 0.16 + getThemeColor(type, 1, isStroke),
+            0.66 + getThemeColor(type, 2, isStroke),
+            0.45 + getThemeColor(type, 3, isStroke)
     elseif type == 'objects2' then
-        return 0.76, 0.3, 0.4
+        return 0.76 + getThemeColor(type, 1, isStroke),
+            0.3 + getThemeColor(type, 2, isStroke),
+            0.4 + getThemeColor(type, 3, isStroke)
     elseif type == 'groups' then
-        return 0.73, 0.4, 0.28
+        return 0.73 + getThemeColor(type, 1, isStroke),
+            0.4 + getThemeColor(type, 2, isStroke),
+            0.28 + getThemeColor(type, 3, isStroke)
     elseif type == 'physics' then
-        return 0.6, 0.35, 0.75
+        return 0.6 + getThemeColor(type, 1, isStroke),
+            0.35 + getThemeColor(type, 2, isStroke),
+            0.75 + getThemeColor(type, 3, isStroke)
     elseif type == 'transition' then
-        return 0.65, 0.35, 0.5
+        return 0.65 + getThemeColor(type, 1, isStroke),
+            0.35 + getThemeColor(type, 2, isStroke),
+            0.5 + getThemeColor(type, 3, isStroke)
     elseif type == 'control' then
-        return 0.6, 0.55, 0.4
+        return 0.6 + getThemeColor(type, 1, isStroke),
+            0.55 + getThemeColor(type, 2, isStroke),
+            0.4 + getThemeColor(type, 3, isStroke)
     elseif type == 'widgets' then
-        return 0.4, 0.45, 0.6
+        return 0.4 + getThemeColor(type, 1, isStroke),
+            0.45 + getThemeColor(type, 2, isStroke),
+            0.6 + getThemeColor(type, 3, isStroke)
     elseif type == 'media' then
-        return 0.7, 0.5, 0.5
+        return 0.7 + getThemeColor(type, 1, isStroke),
+            0.5 + getThemeColor(type, 2, isStroke),
+            0.5 + getThemeColor(type, 3, isStroke)
     elseif type == 'network' then
-        return 0.2, 0.4, 0.7
+        return 0.2 + getThemeColor(type, 1, isStroke),
+            0.4 + getThemeColor(type, 2, isStroke),
+            0.7 + getThemeColor(type, 3, isStroke)
     elseif type == 'snapshot' then
-        return 0.38, 0.52, 0.46
+        return 0.38 + getThemeColor(type, 1, isStroke),
+            0.52 + getThemeColor(type, 2, isStroke),
+            0.46 + getThemeColor(type, 3, isStroke)
     elseif type == 'everyone' then
-        return 0.15, 0.55, 0.4
+        return 0.15 + getThemeColor(type, 1, isStroke),
+            0.55 + getThemeColor(type, 2, isStroke),
+            0.4 + getThemeColor(type, 3, isStroke)
     elseif type == 'custom' then
-        if color then return unpack(color)
+        if color then
+            return color[1] + getThemeColor(type, 1, isStroke),
+                color[2] + getThemeColor(type, 2, isStroke),
+                color[3] + getThemeColor(type, 3, isStroke)
         elseif name then
-            local custom, name = GET_GAME_CUSTOM(), UTF8.gsub(name, '_', '', 1) local index = UTF8.gsub(name, 'custom', '', 1)
+            local custom, name = GET_GAME_CUSTOM(), UTF8.gsub(name, '_', '', 1)
+            local index = UTF8.gsub(name, 'custom', '', 1)
+
             if index == '' and _G.type(BLOCKS.custom) == 'table' and _G.type(BLOCKS.custom.color) == 'table' then
-            return unpack({BLOCKS.custom.color[1] / 255, BLOCKS.custom.color[2] / 255, BLOCKS.custom.color[3] / 255})
-            end color = index and (custom[index] and custom[index][5] or nil) or nil
-            return unpack(_G.type(color) == 'table' and {color[1] / 255, color[2] / 255, color[3] / 255} or {0.36, 0.47, 0.5})
-        end return 0.36, 0.47, 0.5
+                return unpack({
+                    BLOCKS.custom.color[1] / 255 + getThemeColor(type, 1, isStroke),
+                    BLOCKS.custom.color[2] / 255 + getThemeColor(type, 2, isStroke),
+                    BLOCKS.custom.color[3] / 255 + getThemeColor(type, 3, isStroke)
+                })
+            end
+
+            local color = index and (custom[index] and custom[index][5] or nil) or nil
+
+            return unpack(_G.type(color) == 'table' and {
+                color[1] / 255 + getThemeColor(type, 1, isStroke),
+                color[2] / 255 + getThemeColor(type, 2, isStroke),
+                color[3] / 255 + getThemeColor(type, 3, isStroke)
+            } or {
+                0.36 + getThemeColor(type, 1, isStroke),
+                0.47 + getThemeColor(type, 2, isStroke),
+                0.5 + getThemeColor(type, 3, isStroke)
+            })
+        end
+
+        return 0.36 + getThemeColor(type, 1, isStroke),
+            0.47 + getThemeColor(type, 2, isStroke),
+            0.5 + getThemeColor(type, 3, isStroke)
     end
 end
 

@@ -98,7 +98,7 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
                 listScroll.buttons[i] = display.newRect(listButtonsX, listButtonsY, listScroll.width, 70)
                     if isData then
                         listScroll.buttons[i].isOpen = false
-                        listScroll.buttons[i]:setFillColor(0.14, 0.14, 0.16)
+                        listScroll.buttons[i]:setFillColor(unpack(LOCAL.themes.editorAddColor))
                     elseif target.text.id == 'event' or target.text.id == 'script' or target.text.id == 'project'
                     or target.text.id == 'tevent' or target.text.id == 'tscript' or target.text.id == 'tproject'
                     or target.text.id == 'pobj' or target.text.id == 'ptext' or target.text.id == 'pgroup'
@@ -106,13 +106,14 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
                     or target.text.id == 'fscript' or target.text.id == 'fproject' or target.text.id == 'pfiles'
                     or target.text.id == 'rimages' or target.text.id == 'rsounds' or target.text.id == 'rvideos'
                     or target.text.id == 'rfonts' or target.text.id == 'rothers' then
-                        listScroll.buttons[i]:setFillColor(0.17, 0.17, 0.19)
+                        listScroll.buttons[i]:setFillColor(unpack(LOCAL.themes.editorAdd2Color))
                     else
-                        listScroll.buttons[i]:setFillColor(0.14, 0.14, 0.16)
+                        listScroll.buttons[i]:setFillColor(unpack(LOCAL.themes.editorAddColor))
                     end listScroll.buttons[i].count = 0
                 listScroll:insert(listScroll.buttons[i])
 
                 listScroll.buttons[i].text = display.newText(text, 20, listButtonsY, 'ubuntu', getFontSize(listScroll.width, text, 24, isData))
+                    listScroll.buttons[i].text:setFillColor(unpack(LOCAL.themes.text))
                     if isData then local id = buttonId or getId(target.y)
                         if NOOBMODE then
                             listScroll.buttons[i].text.id = id == 1 and 'project' or id == 2 and 'tproject' or id == 3 and 'fproject'
@@ -150,6 +151,7 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
 
                 if isData then
                     listScroll.buttons[i].polygon = display.newPolygon(listScroll.width - 30, listButtonsY, {0, 0, 10, 10, -10, 10})
+                        listScroll.buttons[i].polygon:setFillColor(unpack(LOCAL.themes.text))
                     listScroll:insert(listScroll.buttons[i].polygon)
                 end
 

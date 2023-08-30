@@ -307,7 +307,7 @@ return function(e, type)
         if e.phase == 'began' then
             display.getCurrentStage():setFocus(e.target)
             if type == 'title' then e.target.alpha = 0.6
-            elseif type ~= 'orientation' then e.target:setFillColor(0.22, 0.22, 0.24) end
+            elseif type ~= 'orientation' then e.target:setFillColor(unpack(LOCAL.themes.bgAdd2Color)) end
             e.target.click = true
         elseif e.phase == 'moved' and (math.abs(e.x - e.xStart) > 30 or math.abs(e.y - e.yStart) > 30) then
             display.getCurrentStage():setFocus(nil)

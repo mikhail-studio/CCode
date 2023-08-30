@@ -162,7 +162,7 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
 
     group.blocks[index].block = display.newPolygon(0, 0, blockParams)
         group.blocks[index].block:setFillColor(INFO.getBlockColor(name, comment, nil, color))
-        group.blocks[index].block:setStrokeColor(0.3)
+        group.blocks[index].block:setStrokeColor(INFO.getBlockColor(name, comment, nil, color, nil, true))
         group.blocks[index].block.strokeWidth = 4
         group.blocks[index]:addEventListener('touch', require 'Core.Modules.logic-listener')
     group.blocks[index]:insert(group.blocks[index].block)
@@ -174,7 +174,7 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
     group.blocks[index].text = display.newText({
             text = STR['blocks.' .. name], width = blockWidth - 20, height = 38 / size, fontSize = 30 / size,
             align = 'left', x = 10 / size, y = M.getTextY(lengthParams) / size, font = 'ubuntu'
-        })
+        }) group.blocks[index].text:setFillColor(unpack(LOCAL.themes.blockText))
     group.blocks[index]:insert(group.blocks[index].text)
 
     if nested then
@@ -214,10 +214,11 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
                 text = STR['blocks.' .. name .. '.params'][i], align = 'left', height = textGetHeight.height, fontSize = 22 / size,
                 x = M.getParamsNameX(lengthParams, width)[i] / size, y = nameY / size, font = 'ubuntu', width = 143 / size
             }) textGetHeight:removeSelf()
+            group.blocks[index].params[i].name:setFillColor(unpack(LOCAL.themes.blockText))
         group.blocks[index]:insert(group.blocks[index].params[i].name)
 
         group.blocks[index].params[i].line = display.newRect(M.getParamsLineX(lengthParams, width)[i] / size, (nameY + 20) / size, M.getParamsLineWidth(lengthParams, width)[i] / size, 3 / size)
-            group.blocks[index].params[i].line:setFillColor(0.3)
+            group.blocks[index].params[i].line:setFillColor(INFO.getBlockColor(name, comment, nil, color, nil, true))
             group.blocks[index].params[i].line.anchorX = 0
         group.blocks[index]:insert(group.blocks[index].params[i].line)
 
@@ -225,6 +226,7 @@ M.new = function(name, scroll, group, index, event, params, comment, nested, var
                 text = M.getParamsValueText(params, i), height = 26 / size, width = (M.getParamsLineWidth(lengthParams, width)[i] - 5) / size,
                 x = M.getParamsLineX(lengthParams, width)[i] / size, y = (nameY + 5) / size, font = 'ubuntu', fontSize = 20 / size, align = 'center'
             }) group.blocks[index].params[i].value.anchorX = 0
+            group.blocks[index].params[i].value:setFillColor(unpack(LOCAL.themes.blockText))
         group.blocks[index]:insert(group.blocks[index].params[i].value)
 
         group.blocks[index].params[i].rect = display.newRect(M.getParamsLineX(lengthParams, width)[i] / size, (nameY + 20) / size, M.getParamsLineWidth(lengthParams, width)[i] / size, 40 / size)
