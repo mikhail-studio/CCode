@@ -172,37 +172,61 @@ listeners.but_okay = function(target)
     SOUNDS.group[7].isVisible = false
 
     if INDEX_LIST == 1 then
-        local data = GET_GAME_CODE(CURRENT_LINK)
+        local function deleteBlock()
+            local data = GET_GAME_CODE(CURRENT_LINK)
 
-        for i = #SOUNDS.group.data, 1, -1 do
-            if not SOUNDS.group.blocks[i].indexFolder then
-                SOUNDS.group.blocks[i].checkbox.isVisible = false
+            for i = #SOUNDS.group.data, 1, -1 do
+                if not SOUNDS.group.blocks[i].indexFolder then
+                    SOUNDS.group.blocks[i].checkbox.isVisible = false
 
-                if SOUNDS.group.blocks[i].checkbox.isOn then
-                    local indexReal, indexInFolder = SOUNDS.group.blocks[i].getRealIndex(SOUNDS.group.blocks[i], data, 'sounds')
-                    local indexFolder = SOUNDS.group.blocks[i].getFolderIndex(SOUNDS.group.blocks[i])
+                    if SOUNDS.group.blocks[i].checkbox.isOn then
+                        local indexReal, indexInFolder = SOUNDS.group.blocks[i].getRealIndex(SOUNDS.group.blocks[i], data, 'sounds')
+                        local indexFolder = SOUNDS.group.blocks[i].getFolderIndex(SOUNDS.group.blocks[i])
 
-                    table.remove(data.resources.sounds, indexReal)
-                    table.remove(data.folders.sounds[indexFolder][2], indexInFolder)
+                        table.remove(data.resources.sounds, indexReal)
+                        table.remove(data.folders.sounds[indexFolder][2], indexInFolder)
 
-                    OS_REMOVE(DOC_DIR .. '/' .. CURRENT_LINK .. '/Sounds/' .. SOUNDS.group.blocks[i].link)
-                    SOUNDS.group.blocks[i].remove(i)
+                        OS_REMOVE(DOC_DIR .. '/' .. CURRENT_LINK .. '/Sounds/' .. SOUNDS.group.blocks[i].link)
+                        SOUNDS.group.blocks[i].remove(i)
+                    end
                 end
             end
+
+            for j = 1, #SOUNDS.group.blocks do
+                local y = j == 1 and 25 or SOUNDS.group.data[j - 1].y + 150
+                pcall(function() SOUNDS.group.blocks[j].y = y end)
+                pcall(function() SOUNDS.group.blocks[j].text.y = y end)
+                pcall(function() SOUNDS.group.blocks[j].polygon.y = y end)
+                pcall(function() SOUNDS.group.blocks[j].checkbox.y = y end)
+                pcall(function() SOUNDS.group.blocks[j].container.y = y end)
+                pcall(function() SOUNDS.group.data[j].y = y end)
+            end
+
+            SET_GAME_CODE(CURRENT_LINK, data)
+            SOUNDS.group[8]:setScrollHeight(150 * #SOUNDS.group.data)
         end
 
-        for j = 1, #SOUNDS.group.blocks do
-            local y = j == 1 and 25 or SOUNDS.group.data[j - 1].y + 150
-            pcall(function() SOUNDS.group.blocks[j].y = y end)
-            pcall(function() SOUNDS.group.blocks[j].text.y = y end)
-            pcall(function() SOUNDS.group.blocks[j].polygon.y = y end)
-            pcall(function() SOUNDS.group.blocks[j].checkbox.y = y end)
-            pcall(function() SOUNDS.group.blocks[j].container.y = y end)
-            pcall(function() SOUNDS.group.data[j].y = y end)
-        end
+        if LOCAL.confirm then
+            SOUNDS.group[8]:setIsLocked(true, 'vertical')
+            WINDOW.new(STR['blocks.sure?'], {STR['blocks.delete.no'], STR['blocks.delete.yes']}, function(e)
+                if e.index == 2 then
+                    deleteBlock()
+                else
+                    SOUNDS.group[8]:setIsLocked(false, 'vertical')
+                    for i = 1, #SOUNDS.group.blocks do
+                        if not SOUNDS.group.blocks[i].indexFolder then
+                            SOUNDS.group.blocks[i].checkbox.isVisible = false
 
-        SET_GAME_CODE(CURRENT_LINK, data)
-        SOUNDS.group[8]:setScrollHeight(150 * #SOUNDS.group.data)
+                            if SOUNDS.group.blocks[i].checkbox.isOn then
+                                SOUNDS.group.blocks[i].checkbox:setState({isOn = false})
+                            end
+                        end
+                    end
+                end
+            end, 4)
+        else
+            deleteBlock()
+        end
     elseif INDEX_LIST == 2 then
         local data = GET_GAME_CODE(CURRENT_LINK)
 

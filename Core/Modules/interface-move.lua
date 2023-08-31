@@ -52,6 +52,7 @@ M.upd = function(e, scroll, group, type)
                 local sound = M.data.resources.sounds[M.indexReal]
                 local video = M.data.resources.videos[M.indexReal]
                 local font = M.data.resources.fonts[M.indexReal]
+                local level = M.data.resources.levels[M.indexReal]
 
                 if not diffY then
                     diffY = math.round((e.target.y - group.data[M.index].y) / 150)
@@ -72,7 +73,7 @@ M.upd = function(e, scroll, group, type)
 
                 local r_type = type == 'resources' and 'others' or type
                 local value = type == 'resources' and resource or type == 'images' and image
-                or type == 'sounds' and sound or type == 'videos' and video or font
+                or type == 'sounds' and sound or type == 'videos' and video or type == 'fonts' and font or level
 
                 if type == 'scripts' then
                     table.remove(M.data.scripts, M.indexReal)
@@ -110,6 +111,7 @@ M.upd = function(e, scroll, group, type)
                 local sound = M.data.resources.sounds[M.indexReal]
                 local video = M.data.resources.videos[M.indexReal]
                 local font = M.data.resources.fonts[M.indexReal]
+                local level = M.data.resources.levels[M.indexReal]
 
                 if not diffY then
                     diffY = math.round((group.data[M.index].y - e.target.y) / 150)
@@ -131,7 +133,7 @@ M.upd = function(e, scroll, group, type)
 
                     local r_type = type == 'resources' and 'others' or type
                     local value = type == 'resources' and resource or type == 'images' and image
-                    or type == 'sounds' and sound or type == 'videos' and video or font
+                    or type == 'sounds' and sound or type == 'videos' and video or type == 'fonts' and font or level
 
                     if type == 'scripts' then
                         table.remove(M.data.scripts, M.indexReal)

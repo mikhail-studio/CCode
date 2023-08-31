@@ -348,8 +348,6 @@ local function stopMoveLogicBlock(e, group, scroll)
             end
         end
 
-        SET_GAME_SCRIPT(CURRENT_LINK, M.script, CURRENT_SCRIPT, M.data)
-
         if M.countClose > 0 then
             for i = #group.blocks, 1, -1 do
                 local oldCountBlocks = 0
@@ -362,7 +360,7 @@ local function stopMoveLogicBlock(e, group, scroll)
                     INDEX_LIST = 4
                     M.nestedClose[tostring(group.blocks[i])] = nil
                     onCheckboxPress({target =  group.blocks[i]}) ALERT = true
-                    LISTENER({target = {button = 'but_okay', click = true}, phase = 'ended'})
+                    M.script = LISTENER({target = {button = 'but_okay', click = true}, phase = 'ended', opt = {script = M.script}})
                 end
 
                 if i < M.index then
@@ -385,8 +383,9 @@ local function stopMoveLogicBlock(e, group, scroll)
                         or INFO.listName[group.blocks[i].data.name][j][1] == 'var'
                         or INFO.listName[group.blocks[i].data.name][j][1] == 'table'
                         or INFO.listName[group.blocks[i].data.name][j][1] == 'value' then
-                            LISTENER({
-                                bIndex = i, pIndex = j - 1, pType = INFO.listName[group.blocks[i].data.name][j][1], data = M.data
+                            M.script = LISTENER({
+                                bIndex = i, pIndex = j - 1, pType = INFO.listName[group.blocks[i].data.name][j][1],
+                                data = M.data, opt = {script = M.script}
                             })
                         end
                     end
@@ -409,11 +408,16 @@ local function stopMoveLogicBlock(e, group, scroll)
                 or INFO.listName[e.target.data.name][i][1] == 'var'
                 or INFO.listName[e.target.data.name][i][1] == 'table'
                 or INFO.listName[e.target.data.name][i][1] == 'value' then
-                    LISTENER({
-                        bIndex = M.index, pIndex = i - 1, pType = INFO.listName[e.target.data.name][i][1], data = M.data
+                    M.script = LISTENER({
+                        bIndex = M.index, pIndex = i - 1, pType = INFO.listName[e.target.data.name][i][1],
+                        data = M.data, opt = {script = M.script}
                     })
                 end
             end
+        end
+
+        if M.countClose > 0 or not e.target.data.nested then
+            SET_GAME_SCRIPT(CURRENT_LINK, M.script, CURRENT_SCRIPT, M.data)
         end
     end
 end

@@ -10,7 +10,8 @@ M['newSnapshot'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() GAME.group.snapshots[name]:removeSelf() end)'
     GAME.lua = GAME.lua .. ' GAME.group.snapshots[name] = display.newSnapshot(' .. width .. ', ' .. height .. ')'
     GAME.lua = GAME.lua .. ' GAME.group.snapshots[name].x, GAME.group.snapshots[name].y = ' .. posX .. ', ' .. posY
-    GAME.lua = GAME.lua .. ' GAME.group.snapshots[name].canvasMode = ' .. mode .. ' GAME.group:insert(GAME.group.snapshots[name]) end)'
+    GAME.lua = GAME.lua .. ' GAME.group.snapshots[name].canvasMode = ' .. mode .. ' GAME.group.snapshots[name].name = name'
+    GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.snapshots[name]) end)'
 end
 
 M['addToSnapshot'] = function(params)

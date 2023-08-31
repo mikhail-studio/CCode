@@ -58,16 +58,31 @@ M.getParamsValueText = function(params, i)
             elseif value[2] == 'n' or value[2] == 'u' or value[2] == 'c' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
                 result = result .. value[1]
-            elseif value[2] == 'fP' or value[2] == 'fS' then
+            elseif value[2] == 'fS' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
-                result = result .. '$' .. value[1]
+                result = result .. '$*' .. value[1]
+            elseif value[2] == 'fP' then
+                if UTF8.len(result) > 0 then result = result .. ' ' end
+                result = result .. '$^' .. value[1]
             elseif value[2] == 'fC' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
                 result = result .. '$' .. (STR['blocks.' .. value[1]] or (BLOCKS.custom and BLOCKS.custom.name or 'a'))
-            elseif value[2] == 'tP' or value[2] == 'tS' or value[2] == 'tE' then
+            elseif value[2] == 'tP' then
+                if UTF8.len(result) > 0 then result = result .. ' ' end
+                result = result .. '{^' .. value[1] .. '}'
+            elseif value[2] == 'tS' then
+                if UTF8.len(result) > 0 then result = result .. ' ' end
+                result = result .. '{*' .. value[1] .. '}'
+            elseif value[2] == 'tE' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
                 result = result .. '{' .. value[1] .. '}'
-            elseif value[2] == 'vP' or value[2] == 'vS' or value[2] == 'vE' then
+            elseif value[2] == 'vP' then
+                if UTF8.len(result) > 0 then result = result .. ' ' end
+                result = result .. '"^' .. value[1] .. '"'
+            elseif value[2] == 'vS' then
+                if UTF8.len(result) > 0 then result = result .. ' ' end
+                result = result .. '"*' .. value[1] .. '"'
+            elseif value[2] == 'vE' then
                 if UTF8.len(result) > 0 then result = result .. ' ' end
                 result = result .. '"' .. value[1] .. '"'
             elseif value[2] == 'f' then

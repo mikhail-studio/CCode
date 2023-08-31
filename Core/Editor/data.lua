@@ -6,7 +6,7 @@ M.fun = {
     default = {
         'read_save', 'encode', 'len_table', 'concat', 'totable', 'tostring', 'tonumber', 'len', 'find',
         'sub', 'gsub', 'split', 'rep', 'reverse', 'upper', 'lower', 'byte', 'char', 'exists_in_table',
-        'unix_time', 'color_pixel', 'get_ip', 'random_str', 'match', 'noise', 'parameter'
+        'unix_time', 'unix_ms', 'color_pixel', 'get_ip', 'random_str', 'match', 'noise', 'parameter'
     },
     noob = {
         'concat', 'random_str', 'tostring', 'tonumber', 'len', 'find', 'sub', 'gsub', 'rep', 'reverse',
@@ -28,7 +28,7 @@ M.prop = {
         names = {},
         keys = {},
         default = {
-            'touch', 'var', 'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation',
+            'touch', 'var', 'tag', 'group', 'pos_x', 'pos_y', 'width', 'height', 'rotation',
             'alpha', 'distance', 'name_texture', 'velocity_x', 'velocity_y', 'angular_velocity'
         },
         noob = {
@@ -47,7 +47,7 @@ M.prop = {
     group = {
         names = {},
         keys = {
-            'tag', 'pos_x', 'pos_y', 'width', 'height', 'rotation', 'alpha'
+            'tag', 'table', 'pos_x', 'pos_y', 'width', 'height', 'rotation', 'alpha'
         }
     },
 
@@ -95,7 +95,8 @@ M.set = function(key, name)
     if (not (EDITOR.data[EDITOR.cursor[1] + 1] and EDITOR.data[EDITOR.cursor[1] + 1][1] == '('
     and EDITOR.data[EDITOR.cursor[1] + 1][2] == 's'))
     and (key == 'fC' or key == 'fS' or key == 'fP' or key == 'f' or key == 'm' or key == 'p'
-    --[[or name == 'finger_touching_screen_x' or name == 'finger_touching_screen_y']]) and name ~= 'unix_time' and name ~= 'pi' then
+    --[[or name == 'finger_touching_screen_x' or name == 'finger_touching_screen_y']])
+    and name ~= 'unix_ms' and name ~= 'unix_time' and name ~= 'pi' then
         EDITOR.cursor[1] = EDITOR.cursor[1] + 1
         table.remove(EDITOR.data, EDITOR.cursor[1] - 1)
         table.insert(EDITOR.data, EDITOR.cursor[1] - 1, {'(', 's'})

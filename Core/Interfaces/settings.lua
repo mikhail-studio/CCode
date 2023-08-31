@@ -10,6 +10,66 @@ listeners.orientation = function(e)
     e.target.rotation = e.target.rotation + 90 NEW_DATA() native.requestExit()
 end
 
+listeners.scroll_friction = function(e)
+    local FILTER = require 'Core.Modules.friction-filter'
+
+    INPUT.new(STR['settings.scroll_friction.enterheight'], function(event)
+        if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
+            FILTER.check(event.target.text, function(ev)
+                if ev.isError then
+                    INPUT.remove(false)
+                    WINDOW.new(STR['errors.' .. ev.typeError], {STR['button.close'], STR['button.okay']})
+                else
+                    INPUT.remove(true, ev.text)
+                end
+            end)
+        end
+    end, function(e)
+        if e.input then
+            LOCAL.scroll_friction = e.text
+
+            pcall(function()
+                NEW_BLOCK.remove()
+            end)
+
+            SETTINGS.group:removeSelf()
+            SETTINGS.group = nil
+            SETTINGS.create()
+            SETTINGS.group.isVisible = true
+
+            NEW_DATA()
+        end
+    end, LOCAL.scroll_friction)
+end
+
+listeners.backup_frequency = function(e)
+    local FILTER = require 'Core.Modules.frequency-filter'
+
+    INPUT.new(STR['settings.backup_frequency.enterheight'], function(event)
+        if (event.phase == 'ended' or event.phase == 'submitted') and not ALERT then
+            FILTER.check(event.target.text, function(ev)
+                if ev.isError then
+                    INPUT.remove(false)
+                    WINDOW.new(STR['errors.' .. ev.typeError], {STR['button.close'], STR['button.okay']})
+                else
+                    INPUT.remove(true, ev.text)
+                end
+            end)
+        end
+    end, function(e)
+        if e.input then
+            LOCAL.backup_frequency = e.text
+
+            SETTINGS.group:removeSelf()
+            SETTINGS.group = nil
+            SETTINGS.create()
+            SETTINGS.group.isVisible = true
+
+            NEW_DATA()
+        end
+    end, LOCAL.backup_frequency)
+end
+
 listeners.bottom_height = function(e)
     local FILTER = require 'Core.Modules.height-filter'
 

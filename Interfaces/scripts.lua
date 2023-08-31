@@ -89,7 +89,7 @@ M.create = function()
     M.scroll = WIDGET.newScrollView({
             x = CENTER_X, y = (but_add.y - but_add.height / 2 - 30 + but_list.y + 72) / 2,
             width = DISPLAY_WIDTH, height = but_add.y - but_add.height / 2 - but_list.y - 102,
-            hideBackground = true, hideScrollBar = true,
+            hideBackground = true, hideScrollBar = true, friction = tonumber(LOCAL.scroll_friction) / 1000,
             horizontalScrollDisabled = true, isBounceEnabled = true
         })
     M.group:insert(M.scroll)

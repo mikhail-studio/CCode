@@ -191,6 +191,10 @@ M['unix_time'] = function()
     return os.time()
 end
 
+M['unix_ms'] = function()
+    return math.round(require('socket').gettime() * 1000)
+end
+
 M['parameter'] = function(name, type, parameter)
     local isComplete, result = pcall(function()
         if name == nil and type ~= nil then

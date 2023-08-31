@@ -119,6 +119,42 @@ M.create = function()
         M.ccoin.showAd.anchorX = 1
     M.group.dogsGroup:insert(M.ccoin.showAd)
 
+    M.ccoin.autoAd = display.newText(STR['robodog.autoAd'], MAX_X - 40, M.ccoin.y + 60, 'ubuntu', 34)
+        M.ccoin.autoAd:setFillColor(unpack(LOCAL.themes.text))
+        M.ccoin.autoAd.anchorX = 1
+    M.group.dogsGroup:insert(M.ccoin.autoAd)
+
+    M.ccoin.autoAd:addEventListener('touch', function(e)
+        if e.phase == 'began' then
+            display.getCurrentStage():setFocus(e.target)
+            e.target.alpha = 0.6
+            e.target.click = true
+        elseif e.phase == 'moved' and (e.xDelta > 20 or e.yDelta > 20) then
+            display.getCurrentStage():setFocus(nil)
+            e.target.alpha = 1
+            e.target.click = false
+        elseif e.phase == 'ended' or e.phase == 'cancelled' then
+            display.getCurrentStage():setFocus(nil)
+            e.target.alpha = 1
+            if e.target.click then
+                e.target.click = false
+                WINDOW.new(STR['robodog.autoAd.title'], {STR['button.comment'], STR['button.uncomment']}, function(e)
+                    if e.index == 1 then
+                        LOCAL.auto_ad = false
+                    elseif e.index == 2 then
+                        LOCAL.auto_ad = true
+                    end
+
+                    if e.index ~= 0 then
+                        NEW_DATA()
+                    end
+                end)
+            end
+        end
+
+        return true
+    end)
+
     M.ccoin.showAd:addEventListener('touch', function(e)
         if e.phase == 'began' then
             display.getCurrentStage():setFocus(e.target)
@@ -133,10 +169,10 @@ M.create = function()
             e.target.alpha = 1
             if e.target.click then
                 e.target.click = false
-                WINDOW.new(STR['robodog.showAd.title'], {STR['robodog.showAd.promo'], STR['robodog.showAd.watch']},
-                function(e)
+                WINDOW.new(STR['robodog.showAd.title'], {STR['robodog.showAd.promo'], STR['robodog.showAd.watch']}, function(e)
                     if e.index == 1 then
-                        if DEVELOPERS[LOCAL.name_tester] 
+                        if DEVELOPERS[LOCAL.name_tester]
+                        or DEVICE_ID == '3ff9ed460181c9542b18e030840bb7c25295d3c27fdde8523baa51df23e69203'
                         or DEVICE_ID == '120065e30b7f8ae6c187defebf408f39f1b5c2266e4d161ac0f340a710a9a884'
                         or DEVICE_ID == 'd9d5f682f19992801fb415b9606858ecb78cd7d63dbb48f058aac601e7c27777'
                         or DEVICE_ID == '1aed517f38d1c4b360ef68fb8572a9074a4f2102c2b8d579152ce61bea6d77eb' then
@@ -167,14 +203,16 @@ M.create = function()
                 end)
             end
         end
+
+        return true
     end)
 
     M.dog = {LOCAL.dog.face, LOCAL.dog.eyes, LOCAL.dog.ears, LOCAL.dog.mouth, LOCAL.dog.accessories}
-    M.face = display.newImage(M.getPath(1), CENTER_X - 18, buttonTheme.y + 300)
-    M.eyes = display.newImage(M.getPath(2), CENTER_X - 18, buttonTheme.y + 300)
-    M.ears = display.newImage(M.getPath(3), CENTER_X - 18, buttonTheme.y + 300)
-    M.mouth = display.newImage(M.getPath(4), CENTER_X - 18, buttonTheme.y + 300)
-    M.accessories = display.newImage(M.getPath(5), CENTER_X - 18, buttonTheme.y + 300)
+    M.face = display.newImage(M.getPath(1), CENTER_X - 18, buttonTheme.y + 360)
+    M.eyes = display.newImage(M.getPath(2), CENTER_X - 18, buttonTheme.y + 360)
+    M.ears = display.newImage(M.getPath(3), CENTER_X - 18, buttonTheme.y + 360)
+    M.mouth = display.newImage(M.getPath(4), CENTER_X - 18, buttonTheme.y + 360)
+    M.accessories = display.newImage(M.getPath(5), CENTER_X - 18, buttonTheme.y + 360)
 
     if M.face then M.group.dogsGroup:insert(M.face) end
     if M.eyes then M.group.dogsGroup:insert(M.eyes) end
@@ -183,7 +221,7 @@ M.create = function()
     if M.accessories then M.group.dogsGroup:insert(M.accessories) end
 
     M.frames = {}
-    local x_frame = DISPLAY_WIDTH / 6
+    local x_frame = ZERO_X + (DISPLAY_WIDTH - 580) / 2 + 50
     local y_frame = 0
 
     M.group.dogsGroup.frameGroup = {}
@@ -202,11 +240,11 @@ M.create = function()
             if M.frames[i].content then M.frames[i].content.height = 100 end
         if M.frames[i].content then M.group.dogsGroup.framesGroup:insert(M.frames[i].content) end
 
-        x_frame = x_frame + DISPLAY_WIDTH / 6
+        x_frame = x_frame + 120
         M.frames[i]:addEventListener('touch', function(e) e.i = i LISTENER(e, 'frame') end)
 
         M['frames' .. i] = {}
-        local _x_frame = DISPLAY_WIDTH / 7
+        local _x_frame = ZERO_X + (DISPLAY_WIDTH - 600 - 25) / 2 + 50
         local _y_frame = 0
 
         M.group.dogsGroup.frameGroup[i] = display.newGroup()
@@ -230,17 +268,17 @@ M.create = function()
                 if M['frames' .. i][j].content then M['frames' .. i][j].content.height = 100 end
             if M['frames' .. i][j].content then M.group.dogsGroup.frameGroup[i]:insert(M['frames' .. i][j].content) end
 
-            _x_frame = j % 6 == 0 and DISPLAY_WIDTH / 7 or _x_frame + DISPLAY_WIDTH / 7
-            _y_frame = j % 6 == 0 and _y_frame + DISPLAY_WIDTH / 7 or _y_frame
+            _x_frame = j % 6 == 0 and ZERO_X + (DISPLAY_WIDTH - 600 - 25) / 2 + 50 or _x_frame + 105
+            _y_frame = j % 6 == 0 and _y_frame + 105 or _y_frame
             M['frames' .. i][j]:addEventListener('touch', function(e) e.j, e.i = j, i LISTENER(e, 'frames') end)
         end
     end
 
-    local y = buttonTheme.y + 150
+    local y = buttonTheme.y + (400 * ((DISPLAY_WIDTH - 40) / 1860)) / 2 + 85
 
     for i = 1, #THEMES.array do
         local themeBlock = display.newImage('Sprites/' .. THEMES.array[i] .. 'Theme.png', CENTER_X, y)
-            themeBlock.height = themeBlock.height * ((DISPLAY_WIDTH - 40) / themeBlock.width)
+            themeBlock.height = 400 * ((DISPLAY_WIDTH - 40) / 1860)
             themeBlock.width = DISPLAY_WIDTH - 40
             themeBlock.strokeWidth = 10
             themeBlock.type = THEMES.array[i]
@@ -259,13 +297,14 @@ M.create = function()
         hideBackground = true,
         hideScrollBar = false,
         horizontalScrollDisabled = true,
-        isBounceEnabled = true
+        isBounceEnabled = true,
+        friction = tonumber(LOCAL.scroll_friction) / 1000
     }) M.group.learnGroup:insert(learnScroll)
 
     for i = #learns, 1, -1 do
         local v = learns[i]
 
-        local learnBlock = display.newRect(CENTER_X, y, DISPLAY_WIDTH - 40, 200)
+        local learnBlock = display.newRect(DISPLAY_WIDTH / 2, y, DISPLAY_WIDTH - 40, 200)
             learnBlock:setFillColor(unpack(LOCAL.themes.bgAdd5Color))
             learnBlock:addEventListener('touch', function(e)
                 e.scroll = learnScroll e.learns = learns
@@ -273,7 +312,7 @@ M.create = function()
             end)
         learnScroll:insert(learnBlock)
 
-        local previewImage = display.newImage('Sprites/Previews/preview' .. i .. '.jpg', CENTER_X, y)
+        local previewImage = display.newImage('Sprites/Previews/preview' .. i .. '.jpg', DISPLAY_WIDTH / 2, y)
             previewImage.height = 200
             previewImage.width = learnBlock.width / 2
             previewImage.x = previewImage.x - previewImage.width / 2

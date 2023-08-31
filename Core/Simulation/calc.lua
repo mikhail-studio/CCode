@@ -39,6 +39,7 @@ return function(params, default, withoutBrackets, isApi, isSetter)
         elseif params[i][2] == 'f' then
             result = result .. ' fun[\'' .. params[i][1] .. '\']'
             if params[i][1] == 'unix_time' then result = result .. '()' end
+            if params[i][1] == 'unix_ms' then result = result .. '()' end
         elseif params[i][2] == 'd' then
             result = result .. ' device[\'' .. params[i][1] .. '\']()'
         elseif params[i][2] == 'sl' then

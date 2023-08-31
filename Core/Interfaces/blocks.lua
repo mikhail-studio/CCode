@@ -73,8 +73,9 @@ listeners.but_list = function(target)
     end
 end
 
-listeners.checkLocalData = function(bIndex, pIndex, pType, data)
-    local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
+listeners.checkLocalData = function(bIndex, pIndex, pType, data, opt)
+    local opt = opt or {}
+    local script = opt.script or GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
 
     if pType == 'value' or script.params[bIndex].params[pIndex][1] then
         local name = pType ~= 'value' and script.params[bIndex].params[pIndex][1][1] or ''
@@ -118,7 +119,11 @@ listeners.checkLocalData = function(bIndex, pIndex, pType, data)
                 end
             end
 
-            SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
+            if opt.script then
+                return script
+            else
+                SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
+            end
         end
     end
 end
@@ -141,9 +146,10 @@ listeners.but_okay_end = function()
     end
 end
 
-listeners.but_okay = function(target)
+listeners.but_okay = function(target, opt)
+    local opt = opt or {}
     local data = GET_GAME_CODE(CURRENT_LINK)
-    local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
+    local script = opt.script or GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
 
     ALERT = true
     EXITS.remove()
@@ -268,7 +274,6 @@ listeners.but_okay = function(target)
                     end
 
                     SET_GAME_CODE(CURRENT_LINK, data)
-                    SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
 
                     if isEvent then
                         local diffScrollY = BLOCKS.group[8].y - BLOCKS.group.blocks[i].y + BLOCKS.group.blocks[i].height / 2
@@ -283,11 +288,16 @@ listeners.but_okay = function(target)
                                 or INFO.listName[BLOCKS.group.blocks[j].data.name][k][1] == 'var'
                                 or INFO.listName[BLOCKS.group.blocks[j].data.name][k][1] == 'table'
                                 or INFO.listName[BLOCKS.group.blocks[j].data.name][k][1] == 'value' then
-                                    listeners.checkLocalData(j, k - 1, INFO.listName[BLOCKS.group.blocks[j].data.name][k][1], data)
+                                    script = listeners.checkLocalData(j, k - 1, INFO.listName[BLOCKS.group.blocks[j].data.name][k][1], data, {
+                                        script = script
+                                    })
                                 end
                             end
                         end
+
+                        SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
                     else
+                        SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
                         display.getCurrentStage():setFocus(BLOCKS.group.blocks[i])
                         BLOCKS.group.blocks[i].click = true
                         BLOCKS.group.blocks[i].move = true
@@ -306,12 +316,6 @@ listeners.but_okay = function(target)
                 end
 
                 break
-            end
-        end
-
-        for i = 1, #BLOCKS.group.blocks do
-            if BLOCKS.group.blocks[i].checkbox.isOn then
-                BLOCKS.group.blocks[i].checkbox:setState({isOn = false})
             end
         end
     elseif INDEX_LIST == 3 then
@@ -470,13 +474,20 @@ listeners.but_okay = function(target)
 
     if INDEX_LIST ~= 1 then
         for i = 1, #BLOCKS.group.blocks do BLOCKS.group.blocks[i].checkbox:setState({isOn = false}) end
-        if INDEX_LIST ~= 2 and INDEX_LIST ~= 5 then SET_GAME_CODE(CURRENT_LINK, data) SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data) end
+        if INDEX_LIST ~= 2 and INDEX_LIST ~= 5 then
+            SET_GAME_CODE(CURRENT_LINK, data)
+            if opt.script then
+                return script
+            else
+                SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
+            end
+        end
     end
 end
 
 return function(e)
     if e.bIndex then
-        listeners.checkLocalData(e.bIndex, e.pIndex, e.pType, e.data)
+        return listeners.checkLocalData(e.bIndex, e.pIndex, e.pType, e.data, e.opt)
     elseif BLOCKS.group.isVisible and (ALERT or e.target.button == 'but_okay') then
         if e.phase == 'began' then
             display.getCurrentStage():setFocus(e.target)
@@ -500,7 +511,11 @@ return function(e)
                 elseif e.target.button == 'but_title'
                     then e.target.alpha = 1
                 else e.target.alpha = 0.9 end
-                listeners[e.target.button](e.target)
+                if e.opt and e.opt.script then
+                    return listeners[e.target.button](e.target)
+                else
+                    listeners[e.target.button](e.target)
+                end
             end
         end
         return true

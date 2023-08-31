@@ -105,7 +105,7 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
                     or target.text.id == 'pwidget' or target.text.id == 'pmedia' or target.text.id == 'fcustom'
                     or target.text.id == 'fscript' or target.text.id == 'fproject' or target.text.id == 'pfiles'
                     or target.text.id == 'rimages' or target.text.id == 'rsounds' or target.text.id == 'rvideos'
-                    or target.text.id == 'rfonts' or target.text.id == 'rothers' then
+                    or target.text.id == 'rfonts' or target.text.id == 'rothers' or target.text.id == 'rlevels' then
                         listScroll.buttons[i]:setFillColor(unpack(LOCAL.themes.editorAdd2Color))
                     else
                         listScroll.buttons[i]:setFillColor(unpack(LOCAL.themes.editorAddColor))
@@ -118,7 +118,7 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
                         if NOOBMODE then
                             listScroll.buttons[i].text.id = id == 1 and 'project' or id == 2 and 'tproject' or id == 3 and 'fproject'
                             or id == 4 and (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup' or 'pmedia')
-                            or (j == 1 and 'rimages' or j == 2 and 'rsounds' or 'rfonts')
+                            or (j == 1 and 'rimages' or j == 2 and 'rsounds' or j == 3 and 'rfonts' or 'rlevels')
                         elseif BLOCKS.custom then
                             listScroll.buttons[i].text.id = id == 1 and (j == 1 and 'event' or 'script')
                             or (id == 2 and (j == 1 and 'tevent' or 'tscript') or (id == 3 and (j == 1 and 'fcustom' or 'fscript')
@@ -131,7 +131,7 @@ listeners.set = function(target, buttons, isData, isList, buttonId)
                             or (id == 4 and (j == 1 and 'pobj' or j == 2 and 'ptext' or j == 3 and 'pgroup'
                             or j == 4 and 'pwidget' or j == 5 and 'pmedia' or 'pfiles')
                             or (j == 1 and 'rimages' or j == 2 and 'rsounds' or j == 3 and 'rvideos'
-                            or j == 4 and 'rfonts' or 'rothers'))))
+                            or j == 4 and 'rfonts' or j == 5 and 'rothers' or 'rlevels'))))
                         end
                     elseif isList then
                         listScroll.buttons[i].text.id = buttons.keys[j]
@@ -263,6 +263,10 @@ listeners.rsounds = function(target)
     listeners.set(target, EDITOR.resources.sounds)
 end
 
+listeners.rlevels = function(target)
+    listeners.set(target, EDITOR.resources.levels)
+end
+
 listeners.rvideos = function(target)
     listeners.set(target, EDITOR.resources.videos)
 end
@@ -338,12 +342,13 @@ end
 listeners.resource = function(target)
     if NOOBMODE then
         listeners.set(target, {
-            STR['editor.list.resource.images.noob'], STR['editor.list.resource.sounds'], STR['editor.list.resource.fonts']
+            STR['editor.list.resource.images.noob'], STR['editor.list.resource.sounds'],
+            STR['editor.list.resource.fonts'], STR['editor.list.resource.levels']
         }, true, nil, 9)
     elseif not BLOCKS.custom then
         listeners.set(target, {
             STR['editor.list.resource.images'], STR['editor.list.resource.sounds'], STR['editor.list.resource.videos'],
-            STR['editor.list.resource.fonts'], STR['editor.list.resource.others']
+            STR['editor.list.resource.fonts'], STR['editor.list.resource.others'], STR['editor.list.resource.levels']
         }, true, nil, 9)
     end
 end

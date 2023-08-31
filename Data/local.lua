@@ -9,8 +9,11 @@ if file then
     data = table.merge(data, JSON.decode(dataRead)) io.close(file)
     if data.autoplace == nil then data.autoplace = true end
     if data.ads_time == nil then data.ads_time = 0 end
+    if data.scroll_friction == nil then data.scroll_friction = 972 end
+    if data.backup_frequency == nil then data.backup_frequency = 15 end
     if data.bottom_height == nil then data.bottom_height = 0 end
     if data.old_dog == nil then data.old_dog = false end
+    if data.auto_ad == nil then data.auto_ad = false end
     if data.old_update == nil then data.old_update = false end
     if data.keystore == nil then data.keystore = {'testkey'} end data.back = 'System'
     if data.theme == nil then data.theme = 'default' end data.themes = THEMES.list[data.theme]
@@ -25,6 +28,9 @@ else
         back = 'System',
         keystore = {'testkey'},
         ads_time = 0,
+        auto_ad = false,
+        scroll_friction = 972,
+        backup_frequency = 15,
         bottom_height = 0,
         autoplace = true,
         show_ads = true,

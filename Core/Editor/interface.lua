@@ -28,7 +28,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
 
     DATA.new()
-        M.resources = {images = {}, sounds = {}, videos = {}, fonts = {}, others = {}}
+        M.resources = {images = {}, sounds = {}, videos = {}, fonts = {}, others = {}, levels = {}}
         M.vars = {project = COPY_TABLE(data.vars), script = COPY_TABLE(script.vars), event = {}}
         M.tables = {project = COPY_TABLE(data.tables), script = COPY_TABLE(script.tables), event = {}}
         M.funs = {project = COPY_TABLE(data.funs), script = COPY_TABLE(script.funs), custom = {}, _custom = {}}
@@ -66,7 +66,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         M.vars = {project = {}, script = {}, event = {}}
         M.tables = {project = {}, script = {}, event = {}}
         M.funs = {project = {}, script = {}, custom = {}, _custom = {}}
-        M.resources = {images = {}, sounds = {}, videos = {}, fonts = {}, others = {}}
+        M.resources = {images = {}, sounds = {}, videos = {}, fonts = {}, others = {}, levels = {}}
     end
 
     local buttonsText = {
@@ -225,7 +225,8 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
             x = scrollX, y = scrollY,
             width = scrollWidth, height = scrollHeight,
             hideScrollBar = false, horizontalScrollDisabled = true,
-            isBounceEnabled = true, backgroundColor = LOCAL.themes.editor
+            isBounceEnabled = true, backgroundColor = LOCAL.themes.editor,
+            friction = tonumber(LOCAL.scroll_friction) / 1000
         })
     M.group:insert(scroll)
 
@@ -326,6 +327,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
             width = MAX_X - buttons[28].x - 65, height = MAX_Y - buttons[1].y + 25,
             hideScrollBar = true, horizontalScrollDisabled = true,
             isBounceEnabled = true, backgroundColor = LOCAL.themes.bg,
+            friction = tonumber(LOCAL.scroll_friction) / 1000
         }) listScroll.scrollHeight = 0
     M.group:insert(listScroll)
 

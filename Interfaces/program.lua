@@ -21,12 +21,35 @@ local genBlocks = function()
     end
 end
 
+local lastMin = ''
 local backupTimerFunc = function()
     local date = os.date('*t')
-    local hour, minute = date.hour, date.min
+    local hour, minute = tostring(date.hour), tostring(date.min)
+    local diff = tonumber(LOCAL.backup_frequency)
+    local minutes, checkMin = {}, 0
 
-    if minute == 0 or minute == 15 or minute == 30 or minute == 45 then
-        local minute = minute == 0 and '00' or minute
+    while checkMin < 60 do
+        minutes[tostring(checkMin)] = true
+        checkMin = checkMin + diff
+    end
+
+    if LOCAL.auto_ad and tonumber(minute) % 10 == 0 and minute ~= lastMin then
+        GET_UNIX_MINUTE(function(minutes)
+            if minutes == 0 then
+                WINDOW.new(STR['robodog.showAd.error'], {STR['button.okay']}, function() end)
+                WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+            else
+                if not IS_WIN and not IS_SIM then
+                    lastMin = minute
+                    GANIN.ads('show', 'video')
+                end
+            end
+        end)
+    end
+
+    if minutes[minute] then
+        local minute = minute == '0' and '00' or minute
         local path = DOC_DIR .. '/' .. CURRENT_LINK .. '/Backups/' .. hour .. '.' .. minute
         local pathData = DOC_DIR .. '/' .. CURRENT_LINK .. '/Backups/data.json'
         local pathScript = DOC_DIR .. '/' .. CURRENT_LINK .. '/Scripts'

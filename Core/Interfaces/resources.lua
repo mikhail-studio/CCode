@@ -172,37 +172,61 @@ listeners.but_okay = function(target)
     RESOURCES.group[7].isVisible = false
 
     if INDEX_LIST == 1 then
-        local data = GET_GAME_CODE(CURRENT_LINK)
+        local function deleteBlock()
+            local data = GET_GAME_CODE(CURRENT_LINK)
 
-        for i = #RESOURCES.group.data, 1, -1 do
-            if not RESOURCES.group.blocks[i].indexFolder then
-                RESOURCES.group.blocks[i].checkbox.isVisible = false
+            for i = #RESOURCES.group.data, 1, -1 do
+                if not RESOURCES.group.blocks[i].indexFolder then
+                    RESOURCES.group.blocks[i].checkbox.isVisible = false
 
-                if RESOURCES.group.blocks[i].checkbox.isOn then
-                    local indexReal, indexInFolder = RESOURCES.group.blocks[i].getRealIndex(RESOURCES.group.blocks[i], data, 'others')
-                    local indexFolder = RESOURCES.group.blocks[i].getFolderIndex(RESOURCES.group.blocks[i])
+                    if RESOURCES.group.blocks[i].checkbox.isOn then
+                        local indexReal, indexInFolder = RESOURCES.group.blocks[i].getRealIndex(RESOURCES.group.blocks[i], data, 'others')
+                        local indexFolder = RESOURCES.group.blocks[i].getFolderIndex(RESOURCES.group.blocks[i])
 
-                    table.remove(data.resources.others, indexReal)
-                    table.remove(data.folders.others[indexFolder][2], indexInFolder)
+                        table.remove(data.resources.others, indexReal)
+                        table.remove(data.folders.others[indexFolder][2], indexInFolder)
 
-                    OS_REMOVE(DOC_DIR .. '/' .. CURRENT_LINK .. '/Resources/' .. RESOURCES.group.blocks[i].link)
-                    RESOURCES.group.blocks[i].remove(i)
+                        OS_REMOVE(DOC_DIR .. '/' .. CURRENT_LINK .. '/Resources/' .. RESOURCES.group.blocks[i].link)
+                        RESOURCES.group.blocks[i].remove(i)
+                    end
                 end
             end
+
+            for j = 1, #RESOURCES.group.blocks do
+                local y = j == 1 and 25 or RESOURCES.group.data[j - 1].y + 150
+                pcall(function() RESOURCES.group.blocks[j].y = y end)
+                pcall(function() RESOURCES.group.blocks[j].text.y = y end)
+                pcall(function() RESOURCES.group.blocks[j].polygon.y = y end)
+                pcall(function() RESOURCES.group.blocks[j].checkbox.y = y end)
+                pcall(function() RESOURCES.group.blocks[j].container.y = y end)
+                pcall(function() RESOURCES.group.data[j].y = y end)
+            end
+
+            SET_GAME_CODE(CURRENT_LINK, data)
+            RESOURCES.group[8]:setScrollHeight(150 * #RESOURCES.group.data)
         end
 
-        for j = 1, #RESOURCES.group.blocks do
-            local y = j == 1 and 25 or RESOURCES.group.data[j - 1].y + 150
-            pcall(function() RESOURCES.group.blocks[j].y = y end)
-            pcall(function() RESOURCES.group.blocks[j].text.y = y end)
-            pcall(function() RESOURCES.group.blocks[j].polygon.y = y end)
-            pcall(function() RESOURCES.group.blocks[j].checkbox.y = y end)
-            pcall(function() RESOURCES.group.blocks[j].container.y = y end)
-            pcall(function() RESOURCES.group.data[j].y = y end)
-        end
+        if LOCAL.confirm then
+            RESOURCES.group[8]:setIsLocked(true, 'vertical')
+            WINDOW.new(STR['blocks.sure?'], {STR['blocks.delete.no'], STR['blocks.delete.yes']}, function(e)
+                if e.index == 2 then
+                    deleteBlock()
+                else
+                    RESOURCES.group[8]:setIsLocked(false, 'vertical')
+                    for i = 1, #RESOURCES.group.blocks do
+                        if not RESOURCES.group.blocks[i].indexFolder then
+                            RESOURCES.group.blocks[i].checkbox.isVisible = false
 
-        SET_GAME_CODE(CURRENT_LINK, data)
-        RESOURCES.group[8]:setScrollHeight(150 * #RESOURCES.group.data)
+                            if RESOURCES.group.blocks[i].checkbox.isOn then
+                                RESOURCES.group.blocks[i].checkbox:setState({isOn = false})
+                            end
+                        end
+                    end
+                end
+            end, 4)
+        else
+            deleteBlock()
+        end
     elseif INDEX_LIST == 2 then
         local data = GET_GAME_CODE(CURRENT_LINK)
 

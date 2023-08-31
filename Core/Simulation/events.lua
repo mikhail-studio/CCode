@@ -41,8 +41,8 @@ M['onCondition'] = function(nested, params)
 end
 
 M['onUpdateVar'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true, nil, true) .. ' = function()'
-    GAME.lua = GAME.lua .. ' if GAME.hash == hash then local varsE, tablesE = {}, {}'
+    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true, nil, true) .. ' = function(_, oldValue)'
+    GAME.lua = GAME.lua .. ' if GAME.hash == hash then local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = oldValue'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 

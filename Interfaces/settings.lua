@@ -113,6 +113,36 @@ M.create = function()
     M.group:insert(bottom_height_button)
     M.group:insert(bottom_height_button.text)
 
+    local backup_frequency_text = display.newText({
+            text = STR['settings.backup_frequency'], x = ZERO_X + 20, y = bottom_height_text.y + 70,
+            font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
+        }) backup_frequency_text.anchorX = 0
+        backup_frequency_text:setFillColor(unpack(LOCAL.themes.text))
+    M.group:insert(backup_frequency_text)
+
+    local backup_frequency_button = display.newRect(rCenterX, backup_frequency_text.y, rMaxWidth, 60)
+        backup_frequency_button:setFillColor(0, 0, 0, 0.005)
+        backup_frequency_button.text = display.newText('', backup_frequency_button.x, backup_frequency_button.y, 'ubuntu', 30)
+        backup_frequency_button.text:setFillColor(unpack(LOCAL.themes.text))
+        backup_frequency_button.text.text = LOCAL.backup_frequency or 15
+    M.group:insert(backup_frequency_button)
+    M.group:insert(backup_frequency_button.text)
+
+    local scroll_friction_text = display.newText({
+            text = STR['settings.scroll_friction'], x = ZERO_X + 20, y = backup_frequency_text.y + 70,
+            font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
+        }) scroll_friction_text.anchorX = 0
+        scroll_friction_text:setFillColor(unpack(LOCAL.themes.text))
+    M.group:insert(scroll_friction_text)
+
+    local scroll_friction_button = display.newRect(rCenterX, scroll_friction_text.y, rMaxWidth, 60)
+        scroll_friction_button:setFillColor(0, 0, 0, 0.005)
+        scroll_friction_button.text = display.newText('', scroll_friction_button.x, scroll_friction_button.y, 'ubuntu', 30)
+        scroll_friction_button.text:setFillColor(unpack(LOCAL.themes.text))
+        scroll_friction_button.text.text = LOCAL.scroll_friction or 972
+    M.group:insert(scroll_friction_button)
+    M.group:insert(scroll_friction_button.text)
+
     local show_ads_text = display.newText({
             text = STR['settings.showads'], x = ZERO_X + 20, y = confirm_button.y + 70,
             font = 'ubuntu', fontSize = 30, width = lMaxWidth, height = 36
@@ -197,6 +227,8 @@ M.create = function()
     keystore_button:addEventListener('touch', function(e) LISTENER(e, 'keystore') end)
     autoplace_button:addEventListener('touch', function(e) LISTENER(e, 'autoplace') end)
     bottom_height_button:addEventListener('touch', function(e) LISTENER(e, 'bottom_height') end)
+    scroll_friction_button:addEventListener('touch', function(e) LISTENER(e, 'scroll_friction') end)
+    backup_frequency_button:addEventListener('touch', function(e) LISTENER(e, 'backup_frequency') end)
     -- show_ads_button:addEventListener('touch', function(e) LISTENER(e, 'show') end)
     -- pos_top_ads_button:addEventListener('touch', function(e) LISTENER(e, 'pos') end)
     -- orientation_group:addEventListener('touch', function(e) LISTENER(e, 'orientation') end)

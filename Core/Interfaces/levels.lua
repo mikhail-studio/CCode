@@ -167,37 +167,61 @@ listeners.but_okay = function(target)
     LEVELS.group[7].isVisible = false
 
     if INDEX_LIST == 1 then
-        local data = GET_GAME_CODE(CURRENT_LINK)
+        local function deleteBlock()
+            local data = GET_GAME_CODE(CURRENT_LINK)
 
-        for i = #LEVELS.group.data, 1, -1 do
-            if not LEVELS.group.blocks[i].indexFolder then
-                LEVELS.group.blocks[i].checkbox.isVisible = false
+            for i = #LEVELS.group.data, 1, -1 do
+                if not LEVELS.group.blocks[i].indexFolder then
+                    LEVELS.group.blocks[i].checkbox.isVisible = false
 
-                if LEVELS.group.blocks[i].checkbox.isOn then
-                    local indexReal, indexInFolder = LEVELS.group.blocks[i].getRealIndex(LEVELS.group.blocks[i], data, 'levels')
-                    local indexFolder = LEVELS.group.blocks[i].getFolderIndex(LEVELS.group.blocks[i])
+                    if LEVELS.group.blocks[i].checkbox.isOn then
+                        local indexReal, indexInFolder = LEVELS.group.blocks[i].getRealIndex(LEVELS.group.blocks[i], data, 'levels')
+                        local indexFolder = LEVELS.group.blocks[i].getFolderIndex(LEVELS.group.blocks[i])
 
-                    table.remove(data.resources.levels, indexReal)
-                    table.remove(data.folders.levels[indexFolder][2], indexInFolder)
+                        table.remove(data.resources.levels, indexReal)
+                        table.remove(data.folders.levels[indexFolder][2], indexInFolder)
 
-                    OS_REMOVE(DOC_DIR .. '/' .. CURRENT_LINK .. '/Levels/' .. LEVELS.group.blocks[i].link)
-                    LEVELS.group.blocks[i].remove(i)
+                        OS_REMOVE(DOC_DIR .. '/' .. CURRENT_LINK .. '/Levels/' .. LEVELS.group.blocks[i].link)
+                        LEVELS.group.blocks[i].remove(i)
+                    end
                 end
             end
+
+            for j = 1, #LEVELS.group.blocks do
+                local y = j == 1 and 25 or LEVELS.group.data[j - 1].y + 150
+                pcall(function() LEVELS.group.blocks[j].y = y end)
+                pcall(function() LEVELS.group.blocks[j].text.y = y end)
+                pcall(function() LEVELS.group.blocks[j].polygon.y = y end)
+                pcall(function() LEVELS.group.blocks[j].checkbox.y = y end)
+                pcall(function() LEVELS.group.blocks[j].container.y = y end)
+                pcall(function() LEVELS.group.data[j].y = y end)
+            end
+
+            SET_GAME_CODE(CURRENT_LINK, data)
+            LEVELS.group[8]:setScrollHeight(150 * #LEVELS.group.data)
         end
 
-        for j = 1, #LEVELS.group.blocks do
-            local y = j == 1 and 25 or LEVELS.group.data[j - 1].y + 150
-            pcall(function() LEVELS.group.blocks[j].y = y end)
-            pcall(function() LEVELS.group.blocks[j].text.y = y end)
-            pcall(function() LEVELS.group.blocks[j].polygon.y = y end)
-            pcall(function() LEVELS.group.blocks[j].checkbox.y = y end)
-            pcall(function() LEVELS.group.blocks[j].container.y = y end)
-            pcall(function() LEVELS.group.data[j].y = y end)
-        end
+        if LOCAL.confirm then
+            LEVELS.group[8]:setIsLocked(true, 'vertical')
+            WINDOW.new(STR['blocks.sure?'], {STR['blocks.delete.no'], STR['blocks.delete.yes']}, function(e)
+                if e.index == 2 then
+                    deleteBlock()
+                else
+                    LEVELS.group[8]:setIsLocked(false, 'vertical')
+                    for i = 1, #LEVELS.group.blocks do
+                        if not LEVELS.group.blocks[i].indexFolder then
+                            LEVELS.group.blocks[i].checkbox.isVisible = false
 
-        SET_GAME_CODE(CURRENT_LINK, data)
-        LEVELS.group[8]:setScrollHeight(150 * #LEVELS.group.data)
+                            if LEVELS.group.blocks[i].checkbox.isOn then
+                                LEVELS.group.blocks[i].checkbox:setState({isOn = false})
+                            end
+                        end
+                    end
+                end
+            end, 4)
+        else
+            deleteBlock()
+        end
     elseif INDEX_LIST == 2 then
         local data = GET_GAME_CODE(CURRENT_LINK)
 

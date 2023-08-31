@@ -326,34 +326,58 @@ listeners.but_okay = function(target)
     SCRIPTS.group[7].isVisible = false
 
     if INDEX_LIST == 1 then
-        for i = #SCRIPTS.group.data, 1, -1 do
-            if not SCRIPTS.group.blocks[i].indexFolder then
-                SCRIPTS.group.blocks[i].checkbox.isVisible = false
+        local function deleteBlock()
+            for i = #SCRIPTS.group.data, 1, -1 do
+                if not SCRIPTS.group.blocks[i].indexFolder then
+                    SCRIPTS.group.blocks[i].checkbox.isVisible = false
 
-                if SCRIPTS.group.blocks[i].checkbox.isOn then
-                    local data = GET_GAME_CODE(CURRENT_LINK)
-                    local indexReal, indexInFolder = SCRIPTS.group.blocks[i].getRealIndex(SCRIPTS.group.blocks[i], data, 'scripts')
-                    local indexFolder = SCRIPTS.group.blocks[i].getFolderIndex(SCRIPTS.group.blocks[i])
-                    DEL_GAME_SCRIPT(CURRENT_LINK, indexReal, data)
-                    table.remove(data.scripts, indexReal)
-                    table.remove(data.folders.scripts[indexFolder][2], indexInFolder)
-                    SET_GAME_CODE(CURRENT_LINK, data)
-                    SCRIPTS.group.blocks[i].remove(i)
+                    if SCRIPTS.group.blocks[i].checkbox.isOn then
+                        local data = GET_GAME_CODE(CURRENT_LINK)
+                        local indexReal, indexInFolder = SCRIPTS.group.blocks[i].getRealIndex(SCRIPTS.group.blocks[i], data, 'scripts')
+                        local indexFolder = SCRIPTS.group.blocks[i].getFolderIndex(SCRIPTS.group.blocks[i])
+                        DEL_GAME_SCRIPT(CURRENT_LINK, indexReal, data)
+                        table.remove(data.scripts, indexReal)
+                        table.remove(data.folders.scripts[indexFolder][2], indexInFolder)
+                        SET_GAME_CODE(CURRENT_LINK, data)
+                        SCRIPTS.group.blocks[i].remove(i)
+                    end
                 end
             end
+
+            for j = 1, #SCRIPTS.group.blocks do
+                local y = j == 1 and 25 or SCRIPTS.group.data[j - 1].y + 150
+                pcall(function() SCRIPTS.group.blocks[j].y = y end)
+                pcall(function() SCRIPTS.group.blocks[j].text.y = y end)
+                pcall(function() SCRIPTS.group.blocks[j].polygon.y = y end)
+                pcall(function() SCRIPTS.group.blocks[j].checkbox.y = y end)
+                pcall(function() SCRIPTS.group.blocks[j].container.y = y end)
+                pcall(function() SCRIPTS.group.data[j].y = y end)
+            end
+
+            SCRIPTS.group[8]:setScrollHeight(150 * #SCRIPTS.group.data)
         end
 
-        for j = 1, #SCRIPTS.group.blocks do
-            local y = j == 1 and 25 or SCRIPTS.group.data[j - 1].y + 150
-            pcall(function() SCRIPTS.group.blocks[j].y = y end)
-            pcall(function() SCRIPTS.group.blocks[j].text.y = y end)
-            pcall(function() SCRIPTS.group.blocks[j].polygon.y = y end)
-            pcall(function() SCRIPTS.group.blocks[j].checkbox.y = y end)
-            pcall(function() SCRIPTS.group.blocks[j].container.y = y end)
-            pcall(function() SCRIPTS.group.data[j].y = y end)
-        end
+        if LOCAL.confirm then
+            SCRIPTS.group[8]:setIsLocked(true, 'vertical')
+            WINDOW.new(STR['blocks.sure?'], {STR['blocks.delete.no'], STR['blocks.delete.yes']}, function(e)
+                if e.index == 2 then
+                    deleteBlock()
+                else
+                    SCRIPTS.group[8]:setIsLocked(false, 'vertical')
+                    for i = 1, #SCRIPTS.group.blocks do
+                        if not SCRIPTS.group.blocks[i].indexFolder then
+                            SCRIPTS.group.blocks[i].checkbox.isVisible = false
 
-        SCRIPTS.group[8]:setScrollHeight(150 * #SCRIPTS.group.data)
+                            if SCRIPTS.group.blocks[i].checkbox.isOn then
+                                SCRIPTS.group.blocks[i].checkbox:setState({isOn = false})
+                            end
+                        end
+                    end
+                end
+            end, 4)
+        else
+            deleteBlock()
+        end
     elseif INDEX_LIST == 2 then
         for i = #SCRIPTS.group.blocks, 1, -1 do
             if not SCRIPTS.group.blocks[i].indexFolder then

@@ -209,7 +209,7 @@ M['forEnd'] = function(params)
 end
 
 M['foreach'] = function(params)
-    GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() for key, value in pairs(' .. CALC(params[1], 'a', true) .. ')'
+    GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() for key, value in pairs(' .. CALC(params[1], '{}') .. ')'
     GAME.lua = GAME.lua .. ' do ' .. CALC(params[2], 'a', true) .. ' = value ' .. CALC(params[3], 'a', true) .. ' = key'
 end
 

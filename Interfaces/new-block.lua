@@ -264,7 +264,7 @@ local function textListener(event)
         M.group.types[1].scroll = WIDGET.newScrollView({
                 x = CENTER_X, y = (M.group[3].y + 2 + M.group[2].y) / 2,
                 width = DISPLAY_WIDTH, height = M.group[2].y - M.group[3].y + 2,
-                hideBackground = true, hideScrollBar = false,
+                hideBackground = true, hideScrollBar = false, friction = tonumber(LOCAL.scroll_friction) / 1000,
                 horizontalScrollDisabled = true, isBounceEnabled = true,
             })
         M.group:insert(M.group.types[1].scroll)
@@ -366,7 +366,7 @@ M.custom = function(i)
         M.group.types[15].scroll = WIDGET.newScrollView({
                 x = CENTER_X, y = (M.group[3].y + 2 + M.group[2].y) / 2,
                 width = DISPLAY_WIDTH, height = M.group[2].y - M.group[3].y + 2,
-                hideBackground = true, hideScrollBar = false,
+                hideBackground = true, hideScrollBar = false, friction = tonumber(LOCAL.scroll_friction) / 1000,
                 horizontalScrollDisabled = true, isBounceEnabled = true,
             })
         M.group:insert(M.group.types[15].scroll)
@@ -1057,7 +1057,7 @@ M.create = function()
             M.group.types[i].scroll = WIDGET.newScrollView({
                     x = CENTER_X, y = ((allowedIndex and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
                     width = DISPLAY_WIDTH, height = line.y - (allowedIndex and find.y + 2 or ZERO_Y + 1),
-                    hideBackground = true, hideScrollBar = false,
+                    hideBackground = true, hideScrollBar = false, friction = tonumber(LOCAL.scroll_friction) / 1000,
                     horizontalScrollDisabled = true, isBounceEnabled = true
                 }) M.group.types[i].currentScroll = 1
             M.group:insert(M.group.types[i].scroll)
@@ -1066,7 +1066,7 @@ M.create = function()
                 M.group.types[i].scroll2 = WIDGET.newScrollView({
                         x = CENTER_X, y = ((allowedIndex and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
                         width = DISPLAY_WIDTH, height = line.y - (allowedIndex and find.y + 2 or ZERO_Y + 1),
-                        hideBackground = true, hideScrollBar = false,
+                        hideBackground = true, hideScrollBar = false, friction = tonumber(LOCAL.scroll_friction) / 1000,
                         horizontalScrollDisabled = true, isBounceEnabled = true
                     }) M.group.types[i].scroll2.isVisible = false
                 M.group:insert(M.group.types[i].scroll2)
@@ -1075,7 +1075,7 @@ M.create = function()
                     M.group.types[i].scroll3 = WIDGET.newScrollView({
                             x = CENTER_X, y = ((allowedIndex and find.y + 2 or ZERO_Y + 1) + line.y) / 2,
                             width = DISPLAY_WIDTH, height = line.y - (allowedIndex and find.y + 2 or ZERO_Y + 1),
-                            hideBackground = true, hideScrollBar = false,
+                            hideBackground = true, hideScrollBar = false, friction = tonumber(LOCAL.scroll_friction) / 1000,
                             horizontalScrollDisabled = true, isBounceEnabled = true
                         }) M.group.types[i].scroll3.isVisible = false
                     M.group:insert(M.group.types[i].scroll3)

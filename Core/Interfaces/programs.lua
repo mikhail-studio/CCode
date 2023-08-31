@@ -131,36 +131,54 @@ listeners.but_okay = function(target)
     PROGRAMS.group[7].isVisible = false
 
     if INDEX_LIST == 1 then
-        for i = #PROGRAMS.group.blocks, 1, -1 do
-            PROGRAMS.group.blocks[i].checkbox.isVisible = false
+        local function deleteBlock()
+            for i = #PROGRAMS.group.blocks, 1, -1 do
+                PROGRAMS.group.blocks[i].checkbox.isVisible = false
 
-            if PROGRAMS.group.blocks[i].checkbox.isOn then
-                for j = 1, #LOCAL.apps do
-                    if LOCAL.apps[j] == PROGRAMS.group.blocks[i].link then
-                        table.remove(LOCAL.apps, j)
+                if PROGRAMS.group.blocks[i].checkbox.isOn then
+                    for j = 1, #LOCAL.apps do
+                        if LOCAL.apps[j] == PROGRAMS.group.blocks[i].link then
+                            table.remove(LOCAL.apps, j)
+                        end
                     end
-                end
 
-                if PROGRAMS.group.blocks[i].text.text == LOCAL.last then
-                    LOCAL.last = ''
-                    LOCAL.last_link = ''
-                    MENU.group[9].text = STR['menu.continue']
-                end
+                    if PROGRAMS.group.blocks[i].text.text == LOCAL.last then
+                        LOCAL.last = ''
+                        LOCAL.last_link = ''
+                        MENU.group[9].text = STR['menu.continue']
+                    end
 
-                NEW_DATA()
-                OS_REMOVE(DOC_DIR .. '/' .. PROGRAMS.group.blocks[i].link, true)
-                PROGRAMS.group.blocks[i].remove(i)
+                    NEW_DATA()
+                    OS_REMOVE(DOC_DIR .. '/' .. PROGRAMS.group.blocks[i].link, true)
+                    PROGRAMS.group.blocks[i].remove(i)
+                end
+            end
+
+            for j = 1, #PROGRAMS.group.blocks do
+                local y = j == 1 and 75 or PROGRAMS.group.data[j - 1].y + 150
+                PROGRAMS.group.blocks[j].y = y
+                PROGRAMS.group.blocks[j].text.y = y
+                PROGRAMS.group.blocks[j].container.y = y
+                PROGRAMS.group.blocks[j].checkbox.y = y
+                PROGRAMS.group.data[j].y = y
             end
         end
 
-        for j = 1, #PROGRAMS.group.blocks do
-            local y = j == 1 and 75 or PROGRAMS.group.data[j - 1].y + 150
-            PROGRAMS.group.blocks[j].y = y
-            PROGRAMS.group.blocks[j].text.y = y
-            PROGRAMS.group.blocks[j].container.y = y
-            PROGRAMS.group.blocks[j].checkbox.y = y
-            PROGRAMS.group.data[j].y = y
-        end
+        PROGRAMS.group[8]:setIsLocked(true, 'vertical')
+        WINDOW.new(STR['blocks.sure?'], {STR['blocks.delete.no'], STR['blocks.delete.yes']}, function(e)
+            if e.index == 2 then
+                deleteBlock()
+            else
+                PROGRAMS.group[8]:setIsLocked(false, 'vertical')
+                for i = 1, #PROGRAMS.group.blocks do
+                    PROGRAMS.group.blocks[i].checkbox.isVisible = false
+
+                    if PROGRAMS.group.blocks[i].checkbox.isOn then
+                        PROGRAMS.group.blocks[i].checkbox:setState({isOn = false})
+                    end
+                end
+            end
+        end, 4)
     elseif INDEX_LIST == 2 then
         for i = #PROGRAMS.group.blocks, 1, -1 do
             PROGRAMS.group.blocks[i].checkbox.isVisible = false

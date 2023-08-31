@@ -7,7 +7,8 @@ if 'Группы' then
 
         GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() GAME.group.groups[name]:removeSelf() end)'
         GAME.lua = GAME.lua .. ' GAME.group.groups[name] = display.newGroup() GAME.group.groups[name]._tag = \'TAG\''
-        GAME.lua = GAME.lua .. ' GAME.group.groups[name]._isGroup = true GAME.group:insert(GAME.group.groups[name]) end)'
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name]._isGroup = true GAME.group.groups[name].name = name'
+        GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.groups[name]) end)'
     end
 
     M['newContainer'] = function(params)
@@ -19,7 +20,7 @@ if 'Группы' then
         GAME.lua = GAME.lua .. ' GAME.group.groups[name] = display.newContainer(' .. width .. ', ' .. height .. ')'
         GAME.lua = GAME.lua .. ' GAME.group.groups[name]._tag = \'TAG\' GAME.group.groups[name]._isContainer = true'
         GAME.lua = GAME.lua .. ' GAME.group.groups[name].x = CENTER_X GAME.group.groups[name].y = CENTER_Y'
-        GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.groups[name]) end)'
+        GAME.lua = GAME.lua .. ' GAME.group.groups[name].name = name GAME.group:insert(GAME.group.groups[name]) end)'
     end
 
     M['removeGroup'] = function(params)

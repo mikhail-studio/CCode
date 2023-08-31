@@ -19,6 +19,12 @@ if 'Объект' then
         end) return isComplete and result or ''
     end
 
+    M['obj.group'] = function(name)
+        local isComplete, result = pcall(function()
+            return (GAME.group.objects[name] and GAME.group.objects[name].parent) and GAME.group.objects[name].parent.name or ''
+        end) return isComplete and result or ''
+    end
+
     M['obj.pos_x'] = function(name)
         local isComplete, result = pcall(function()
             return GAME.group.objects[name] and GET_X(GAME.group.objects[name].x, GAME.group.objects[name]) or 0
@@ -143,6 +149,16 @@ if 'Группа' then
     M['group.tag'] = function(name)
         local isComplete, result = pcall(function()
             return GAME.group.groups[name] and GAME.group.groups[name]._tag or ''
+        end) return isComplete and result or ''
+    end
+
+    M['group.table'] = function(name)
+        local isComplete, result = pcall(function()
+            if GAME.group.groups[name] then
+                local t = {} for i = 1, GAME.group.groups[name].numChildren do
+                    table.insert(t, GAME.group.groups[name][i].name or '')
+                end return t
+            end
         end) return isComplete and result or ''
     end
 

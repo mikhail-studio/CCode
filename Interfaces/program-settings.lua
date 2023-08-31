@@ -98,17 +98,17 @@ M.create = function()
 
     local orientation_icon = display.newRoundedRect(0, 0, 58, 100, 6)
         orientation_icon:setFillColor(unpack(LOCAL.themes.bg))
-        orientation_icon:setStrokeColor(LOCAL.themes.text)
+        orientation_icon:setStrokeColor(unpack(LOCAL.themes.text))
         orientation_icon.strokeWidth = 3
         orientation_icon.rotation = 90
     orientation_group:insert(orientation_icon)
 
     local orientation_icon_left = display.newRect(0, 15 - orientation_icon.height / 2, 30, 1.5)
-        orientation_icon_left:setFillColor(LOCAL.themes.text)
+        orientation_icon_left:setFillColor(unpack(LOCAL.themes.text))
     orientation_group:insert(orientation_icon_left)
 
     local orientation_icon_right = display.newRect(0, orientation_icon.height / 2 - 15, 30, 1.5)
-        orientation_icon_right:setFillColor(LOCAL.themes.text)
+        orientation_icon_right:setFillColor(unpack(LOCAL.themes.text))
     orientation_group:insert(orientation_icon_right)
 
     local path, icon, isIcon = DOC_DIR .. '/' .. CURRENT_LINK .. '/icon.png'
@@ -140,6 +140,9 @@ M.create = function()
 
     icon.id = 'icon'
     icon:addEventListener('touch', require 'Core.Interfaces.program-settings')
+
+    build_button.id = 'build_button'
+    build_button:addEventListener('touch', require 'Core.Interfaces.program-settings')
 
     version_button.id = 'version_button'
     version_button:addEventListener('touch', require 'Core.Interfaces.program-settings')

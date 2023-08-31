@@ -59,12 +59,22 @@ M.gen = function(params, mode)
     local text = ''
 
     for i = 1, #params do
-        if params[i][2] == 'vE' or params[i][2] == 'vS' or params[i][2] == 'vP' then
+        if params[i][2] == 'vE' then
             text = text .. '"' .. params[i][1] .. '"'
-        elseif params[i][2] == 'tE' or params[i][2] == 'tS' or params[i][2] == 'tP' then
+        elseif params[i][2] == 'vS' then
+            text = text .. '"*' .. params[i][1] .. '"'
+        elseif params[i][2] == 'vP' then
+            text = text .. '"^' .. params[i][1] .. '"'
+        elseif params[i][2] == 'tE' then
             text = text .. '{' .. params[i][1] .. '}'
-        elseif params[i][2] == 'fS' or params[i][2] == 'fP' then
-            text = text .. '$' .. params[i][1]
+        elseif params[i][2] == 'tS' then
+            text = text .. '{*' .. params[i][1] .. '}'
+        elseif params[i][2] == 'tP' then
+            text = text .. '{^' .. params[i][1] .. '}'
+        elseif params[i][2] == 'fS' then
+            text = text .. '$*' .. params[i][1]
+        elseif params[i][2] == 'fP' then
+            text = text .. '$^' .. params[i][1]
         elseif params[i][2] == 'fC' then
             text = text .. '$' .. (STR['blocks.' .. params[i][1]] or (BLOCKS.custom and BLOCKS.custom.name or 'a'))
         elseif params[i][2] == 'u' then

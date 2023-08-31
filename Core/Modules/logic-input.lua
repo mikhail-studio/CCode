@@ -459,6 +459,7 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor, i
 
             if paramsData and paramsData[1] and type(paramsData[1]) == 'table' then
                 if paramsData[1][2] == 'vE' then
+                    M.active = 'event'
                     for i = 1, #M.vars.event do
                         if M.vars.event[i] == paramsData[1][1] then
                             table.remove(M.vars.event, i)
@@ -482,6 +483,7 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor, i
                         end
                     end
                 elseif paramsData[1][2] == 'tE' then
+                    M.active = 'event'
                     for i = 1, #M.tables.event do
                         if M.tables.event[i] == paramsData[1][1] then
                             table.remove(M.tables.event, i)
@@ -505,6 +507,7 @@ M.new = function(mode, blockIndex, paramsIndex, paramsData, isLocal, isEditor, i
                         end
                     end
                 elseif paramsData[1][2] == 'fS' then
+                    M.active = 'script'
                     for i = 1, #M.funs.script do
                         if M.funs.script[i] == paramsData[1][1] then
                             table.remove(M.funs.script, i)

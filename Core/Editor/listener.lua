@@ -326,7 +326,7 @@ M['Hide'] = function(data, cursor, backup)
                 } or i == 3 and {STR['editor.list.project']} or i == 5 and EDITOR.fun
                 or i == 6 and EDITOR.math or i == 7 and EDITOR.log or i == 8 and EDITOR.device or {
                     STR['editor.list.resource.images'], STR['editor.list.resource.sounds'], STR['editor.list.resource.videos'],
-                    STR['editor.list.resource.fonts'], STR['editor.list.resource.others']
+                    STR['editor.list.resource.fonts'], STR['editor.list.resource.others'], STR['editor.list.resource.levels']
                 }
             elseif BLOCKS.custom then
                 buttons = i < 3 and {STR['editor.list.event'], STR['editor.list.script']} or i == 4 and {
@@ -341,7 +341,7 @@ M['Hide'] = function(data, cursor, backup)
                 } or i == 3 and {STR['editor.list.custom'], STR['editor.list.script'], STR['editor.list.project']} or i == 5 and EDITOR.fun
                 or i == 6 and EDITOR.math or i == 7 and EDITOR.log or i == 8 and EDITOR.device or {
                     STR['editor.list.resource.images'], STR['editor.list.resource.sounds'], STR['editor.list.resource.videos'],
-                    STR['editor.list.resource.fonts'], STR['editor.list.resource.others']
+                    STR['editor.list.resource.fonts'], STR['editor.list.resource.others'], STR['editor.list.resource.levels']
                 }
             end
 

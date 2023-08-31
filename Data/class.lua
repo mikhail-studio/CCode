@@ -18,9 +18,10 @@ return function()
             if index == '__table__' then
                 rawset(self, index, value)
             else
+                local oldValue = self.__table__[index]
                 self.__table__[index] = value
                 if _G.type(self.__table__[index .. '__set']) == 'function'
-                then self.__table__[index .. '__set'](value) end
+                then self.__table__[index .. '__set'](value, oldValue) end
             end
         end,
 

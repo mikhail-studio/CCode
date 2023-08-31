@@ -112,6 +112,8 @@ M.show = function(target, group, type, data, indexFolder, index)
             RESOURCES.new(value[1], index + 1, value[2])
         elseif type == 'fonts' then
             FONTS.new(value[1], index + 1, value[2])
+        elseif type == 'levels' then
+            LEVELS.new(value[1], index + 1, value[2])
         end
     end
 

@@ -91,7 +91,7 @@ M['newScrollView'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() e.target = nil ' .. listener .. '(e) end) end,'
     GAME.lua = GAME.lua .. ' verticalScrollDisabled = ' .. verticalScrollDisabled .. ', hideScrollBar = ' .. hideScrollBar .. ','
     GAME.lua = GAME.lua .. ' hideBackground = ' .. hideBackground .. ', backgroundColor = {colors[1]/255, colors[2]/255, colors[3]/255},'
-    GAME.lua = GAME.lua .. ' height = ' .. height .. '}) GAME.group.widgets[name].wtype = \'scroll\' end)'
+    GAME.lua = GAME.lua .. ' height = ' .. height .. '}) GAME.group.widgets[name].wtype = \'scroll\' GAME.group.widgets[name].name = name end)'
 end
 
 M['newSwitch'] = function(params)
