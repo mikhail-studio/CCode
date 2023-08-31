@@ -4,12 +4,16 @@
         "lang.en": "English",
         "lang.pt": "Brasileiro",
         "lang.es": "Español",
+        "lang.de": "Deutsch",
         "lang.pl": "Polski",
         "lang.ua": "Українська",
         "lang.by": "Беларускі",
         "lang.cn": "中文",
         "lang.jp": "日本語",
         "lang.custom": "Personalizado",
+        "backup.title": "Do you want to replace the current scripts with an older save?\n\nClick 'Next backup' to select an older backup by time, or, click 'Install backup' to replace the current scripts with a backup for this time\n\nCurrent last backup: ",
+        "backup.continue": "Next backup",
+        "backup.install": "Install backup",
         "button.yes": "Sí",
         "button.no": "No",
         "button.okay": "Ok",
@@ -19,6 +23,7 @@
         "button.remove": "Quitar",
         "button.rename": "Renombrar",
         "button.copy": "Copiar",
+        "button.backup": "Backups",
         "button.to.buffer": "Al búfer",
         "button.from.buffer": "Del búfer",
         "button.paste": "Pegar",
@@ -36,10 +41,12 @@
         "menu.myprogram": "Mis programas",
         "menu.continue": "Continuar",
         "menu.settings": "Configuraciones",
+        "menu.dogs": "My robodog",
         "menu.testers": "Versión de testers:",
         "menu.developers": "Versión de desarrolladores:",
         "menu.version.new": "¡Una nueva versión de prueba está disponible!",
         "menu.version.wait": "¡Espera chaval, no cierres la app!",
+        "menu.version.download": "Downloaded",
         "programs.entername": "Ingrese su nombre",
         "programs.changename": "Cambiar el nombre del programa",
         "programs.noobmode": "Modo simplificado",
@@ -61,6 +68,8 @@
         "scripts.entername.noob": "Enter scenario name",
         "scripts.changename": "Cambia el nombre del comando",
         "scripts.changename.noob": "Change scenario name",
+        "scripts.folder": "Create folder",
+        "scripts.changename.folder": "Change folder name",
         "scripts.sandbox": "Zona de Pruebas",
         "scripts.sandbox.exit": "Saliste de la Zona de Pruebas, selecciona una acción chaval",
         "scripts.sandbox.save": "Guardar",
@@ -78,6 +87,8 @@
         "sounds.changename": "Change sound name",
         "videos.entername": "Enter video name",
         "videos.changename": "Change video name",
+        "levels.entername": "Enter level name",
+        "levels.changename": "Change level name",
         "resources.entername": "Enter resource name",
         "resources.changename": "Change resource name",
         "fonts.entername": "Enter font name",
@@ -86,6 +97,13 @@
         "settings.applang": "Application language:",
         "settings.confirmdelete": "Confirm deletion:",
         "settings.autoplace": "Autofill parameters:",
+        "settings.scroll_friction": "Scroll friction:",
+        "settings.scroll_friction.enterheight": "Enter scroll friction",
+        "settings.backup_frequency": "Backup frequency (minutes):",
+        "settings.backup_frequency.enterheight": "Enter the backup frequency in minutes",
+        "settings.bottom_height": "Bottom border height:",
+        "settings.bottom_height.enterheight": "Enter bottom border height",
+        "settings.old_dog": "Standard robodog:",
         "settings.keystore": "Developer Key:",
         "settings.keystore.testkey": "Testkey",
         "settings.keystore.custom": "Custom",
@@ -120,12 +138,58 @@
         "errors.filter": "Error, empty name can't be used",
         "errors.min8sym": "Error, at least 8 characters are required",
         "errors.max32sym": "Error, maximum 32 characters allowed",
+        "errors.bottom_height": "Error, number should be from -300 to 300",
+        "errors.backup_frequency": "Error, number should be from 1 to 59",
+        "errors.scroll_friction": "Error, number should be from 10 to 1000",
         "build.start": "APK build started, please wait",
         "build.start.aab": "AAB build started, please wait",
         "export.start": "Export started, please wait",
         "import.error": "Import error #",
+        "import.successfully": "The project has been successfully imported",
         "game.debug": "The lua code of program is saved to clipboard",
         "game.isbug": "Failed to start simulation"
+    },
+    "beginner": {
+        "beginner.start.message": "Hi, I see you're here for the first time? I'm a cdog, and you? Let's find out your age, gender and name, do you agree?",
+        "beginner.start.button.anonim": "Anonim",
+        "beginner.gender.what": "And so, will we find out who you are, a man or a woman?",
+        "beginner.gender.man": "Man",
+        "beginner.gender.woman": "Woman",
+        "beginner.age.what": "Now, let's find out your age, I remind you, you can use CCode for people aged from 13 to 90 years",
+        "beginner.age": "Age",
+        "beginner.age.banned": "You are not allowed to use CCode due to age restrictions",
+        "beginner.name.what": "And finally, let's find out your name",
+        "beginner.name": "Name",
+        "beginner.entrance": "Thank you, now you can start using CCode, little hints: \n\nIn the tab 'My robodog' has a tab for training\n\nBy clicking the 'Discord' button on the bottom left of the menu, you can go to the Discord server, where you can ask questions and send bugs\n\nCCode is not the easiest application right now, so a lot of videos on YouTube and help in discord will be very useful for you\n\nWell, the 'Levels' button is not working yet"
+    },
+    "robodog": {
+        "robodog.showAd.title": "To get 20 ccoin, you need to watch a video ad",
+        "robodog.showAd.time": "You will be able to watch the ad again in minutes: ",
+        "robodog.showAd.error": "Ad loading error",
+        "robodog.showAd.promo": "Promocode",
+        "robodog.showAd.watch": "Watch",
+        "robodog.showAd": "Get ccoin",
+        "robodog.autoAd": "Autoreview",
+        "robodog.autoAd.title": "Do you want to turn on/off autoreview ads? When turned on, a video ad will be shown every 10 minutes, which will bring you 20 ccoin",
+        "robodog.learning": "Teaching",
+        "robodog.themes": "Themes",
+        "robodog.buy": "Buy",
+        "robodog.count.ccoin": "Amount of ccoin: ",
+        "robodog.not.enough.ccoin": "You don't have enough ccoin",
+        "robodog.successful.purchase.1": "You bought new face",
+        "robodog.successful.purchase.2": "You bought new eyes",
+        "robodog.successful.purchase.3": "You bought new ears",
+        "robodog.successful.purchase.4": "You bought new mouth",
+        "robodog.successful.purchase.5": "You bought new accessory",
+        "robodog.want.buy.1": "Do you want to buy this face?\nCost: ",
+        "robodog.want.buy.2": "Do you want to buy these eyes?\nCost: ",
+        "robodog.want.buy.3": "Do you want to buy these ears?\nCost: ",
+        "robodog.want.buy.4": "Do you want to buy these mouth?\nCost: ",
+        "robodog.want.buy.5": "Do you want to buy these accessory?\nCost: ",
+        "robodog.want.buy.apk": "Do you want to build apk?\nCost: 10 ccoin",
+        "robodog.want.buy.aab": "Do you want to build aab?\nCost: 100 ccoin",
+        "robodog.want.set.theme": "Do you want to install this theme?",
+        "robodog.need.ccoin": "Required quantity: "
     },
     "blocks": {
         "blocks.create.var": "Create variable",
@@ -140,7 +204,9 @@
         "blocks.create.files": "Files",
         "blocks.create.media": "Media",
         "blocks.create.transition": "Transitions",
-        "blocks.create.particle": "Particles",
+        "blocks.create.particles": "Particles",
+        "blocks.create.snapshot": "Snapshots",
+        "blocks.create.camera": "Camera",
         "blocks.create.block": "Create",
         "blocks.create.color": "Color",
         "blocks.create.copy": "Copy",
@@ -233,6 +299,11 @@
         "blocks.onCondition": "As long as condition is true",
         "blocks.onCondition.params": [
             "Condition:"
+        ],
+        "blocks.onUpdateVar": "When value of variable changes",
+        "blocks.onUpdateVar.params": [
+            "Variable name:",
+            "Old value:"
         ],
         "blocks.onTouchBegan": "When finger touches object",
         "blocks.onTouchBegan.params": [
@@ -651,6 +722,521 @@
         "blocks.backObject": "Place object on layer below",
         "blocks.backObject.params": [
             "Object name:"
+        ],
+        "blocks.deleteFilter": "Clear filter",
+        "blocks.deleteFilter.params": [
+            "Object name:"
+        ],
+        "blocks.setBlur": "Apply blur",
+        "blocks.setBlur.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Horizontal size:",
+            "Vertical size:",
+            "Horizontal sigma:",
+            "Vertical sigma:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setChromakey": "Apply chromakey",
+        "blocks.setChromakey.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Sensitivity:",
+            "Smoothing:",
+            "Color (R):",
+            "Color (G):",
+            "Color (B):",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setCrystallization": "Apply crystallization",
+        "blocks.setCrystallization.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Number of tiles:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setPixellization": "Apply pixellization",
+        "blocks.setPixellization.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Number of pixels:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setScatter": "Apply scatter",
+        "blocks.setScatter.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Filter intensity:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setOpTile": "Apply optile",
+        "blocks.setOpTile.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Filter intensity:",
+            "Angle:",
+            "Scale:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setBloom": "Apply bloom",
+        "blocks.setBloom.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Levels white:",
+            "Levels black:",
+            "Levels gamma:",
+            "Opacity:",
+            "Horizontal size:",
+            "Vertical size:",
+            "horizontal sigma:",
+            "Vertical sigma:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setColorChannelOffset": "Offset color channel",
+        "blocks.setColorChannelOffset.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Texels X:",
+            "Texels Y:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setCrosshatch": "Apply сrosshatch",
+        "blocks.setCrosshatch.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Grain:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setDissolve": "Apply dissolve",
+        "blocks.setDissolve.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Threshold:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setEmboss": "Apply emboss",
+        "blocks.setEmboss.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Filter intensity:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setFostedGlass": "Apply fosted glass",
+        "blocks.setFostedGlass.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Scale:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setWoodCut": "Apply wood cut",
+        "blocks.setWoodCut.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Filter intensity:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setZoomBlur": "Apply zoom blur",
+        "blocks.setZoomBlur.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Filter intensity:",
+            "Horizontal sigma:",
+            "Vertical sigma:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setVingette": "Apply vingette",
+        "blocks.setVingette.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Radius:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setVingetteMask": "Apply vingette mask",
+        "blocks.setVingetteMask.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "inner radius:",
+            "Outer radius:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setSwirl": "Apply brightness",
+        "blocks.setSwirl.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Brightness:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setStraighten": "Apply straighten",
+        "blocks.setStraighten.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Angle:",
+            "Wigth (%):",
+            "Height (%):",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setBulge": "Apply bulge",
+        "blocks.setBulge.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Bulge intensity:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setLinearWipe": "Apply linear mask",
+        "blocks.setLinearWipe.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Angle:",
+            "Smoothness:",
+            "Progress:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setIris": "Apply iris",
+        "blocks.setIris.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Center X:",
+            "Center Y:",
+            "Smoothness:",
+            "Aspect Ratio:",
+            "Aperture:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setPolkaDots": "Apply polka dot",
+        "blocks.setPolkaDots.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Number of dots:",
+            "Size of dots (%):",
+            "Dots aspect ratio:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setRadialWipe": "Apply radial mask",
+        "blocks.setRadialWipe.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Center X:",
+            "Center Y:",
+            "Orientation of axis:",
+            "Smoothness:",
+            "Progress:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setWobble": "Apply wobble",
+        "blocks.setWobble.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Wobble amplitude:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setСontrast": "Apply contrast",
+        "blocks.setСontrast.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Contrast:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setSaturate": "Apply saturation",
+        "blocks.setSaturate.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Saturation:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setSharpenLuminance": "Apply sharpness",
+        "blocks.setSharpenLuminance.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Sharpness:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setSobel": "Aplly Sobel filter",
+        "blocks.setSobel.params": [
+            "Object name:"
+        ],
+        "blocks.setSepia": "Apply sepia",
+        "blocks.setSepia.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Filter intensity:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setPosterize": "Apply posterization",
+        "blocks.setPosterize.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Colors per channel:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setMonotone": "Apply monotone",
+        "blocks.setMonotone.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Color (R):",
+            "Color (G):",
+            "Color (B):",
+            "Color (A):",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setHue": "Apply hue",
+        "blocks.setHue.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Angle:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setExposure": "Apply exposure",
+        "blocks.setExposure.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Exposure:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setDuotone": "Apply duotone",
+        "blocks.setDuotone.params": [
+            "Object name:",
+            "Light color:",
+            "Dark color:"
+        ],
+        "blocks.setColorPolynomial": "Apply polynomial color",
+        "blocks.setColorPolynomial.params": [
+            "Object name:",
+            "Coefficient (R):",
+            "Coefficient (G):",
+            "Coefficient (B):",
+            "Coefficient (A):"
+        ],
+        "blocks.setColorMatrix": "Apply color matrix",
+        "blocks.setColorMatrix.params": [
+            "Object name:",
+            "Coefficient (R):",
+            "Coefficient (G):",
+            "Coefficient (B):",
+            "Coefficient (A):"
         ]
     },
     "control": {
@@ -715,7 +1301,7 @@
         "blocks.foreachEnd": "End cycle (all table elements)",
         "blocks.foreach": "Bypass all table elements",
         "blocks.foreach.params": [
-            "Table name:",
+            "Table:",
             "Element:",
             "Key:"
         ],
@@ -791,6 +1377,11 @@
         "blocks.requestApiRes.params": [
             "Resource name:"
         ],
+        "blocks.requestApiThread": "Request lua5.3 method in the new stream",
+        "blocks.requestApiThread.params": [
+            "Lua code:",
+            "Function name:"
+        ],
         "blocks.toastShort": "Short pop-up notification",
         "blocks.toastShort.params": [
             "Text:"
@@ -849,6 +1440,13 @@
         "blocks.setAccelerometerFrequency": "Set accelerometer frequency",
         "blocks.setAccelerometerFrequency.params": [
             "Frequency (Hz):"
+        ],
+        "blocks.newAlert": "Show system notification",
+        "blocks.newAlert.params": [
+            "Title:",
+            "Text:",
+            "Buttons table:",
+            "Listener:"
         ],
         "blocks.scheduleNotification": "Register a notification",
         "blocks.scheduleNotification.params": [
@@ -1012,6 +1610,38 @@
             "Color2:",
             "Opacity1 (0-100):",
             "Opacity2 (0-100):"
+        ],
+        "blocks.setLinearGradient": "Set linear gradient",
+        "blocks.setLinearGradient.params": [
+            "Object name:",
+            "Angle:",
+            "Color dependency:",
+            "Color1:",
+            "Color2:",
+            "Opacity1 (0-100):",
+            "Opacity2 (0-100):"
+        ],
+        "blocks.setRadialGradient": "Set radial gradient",
+        "blocks.setRadialGradient.params": [
+            "Object name:",
+            "Aspect ratio:",
+            "Color dependency:",
+            "Color1:",
+            "Color2:",
+            "Center (X):",
+            "Center (Y):",
+            "Inner radius:",
+            "Outer radius:",
+            "Opacity1 (0-100):",
+            "Opacity2 (0-100):"
+        ],
+        "blocks.setMarchingAnts": "Set marching ants to stroke",
+        "blocks.setMarchingAnts.params": [
+            "Object name:"
+        ],
+        "blocks.removeMarchingAnts": "Remove marching ants from stroke",
+        "blocks.removeMarchingAnts.params": [
+            "Object name:"
         ]
     },
     "objects2": {
@@ -1068,10 +1698,18 @@
             "Mask name:",
             "Sprite name:"
         ],
+        "blocks.removeMask": "Remove mask",
+        "blocks.removeMask.params": [
+            "Mask name:"
+        ],
         "blocks.addMaskToObject": "Add mask to object",
         "blocks.addMaskToObject.params": [
             "Object name:",
             "Mask name:"
+        ],
+        "blocks.removeMaskFromObject": "Remove mask from object",
+        "blocks.removeMaskFromObject.params": [
+            "Object name:"
         ],
         "blocks.setMaskPos": "Set mask position",
         "blocks.setMaskPos.params": [
@@ -1109,6 +1747,12 @@
         "blocks.newGroup.params": [
             "Group name:"
         ],
+        "blocks.newContainer": "Create container",
+        "blocks.newContainer.params": [
+            "Group name:",
+            "Width:",
+            "Height:"
+        ],
         "blocks.removeGroup": "Remove group",
         "blocks.removeGroup.params": [
             "Group name:"
@@ -1143,8 +1787,13 @@
         ],
         "blocks.addGroupTag": "Insert tag to group",
         "blocks.addGroupTag.params": [
-            "Tag name:",
-            "Group name:"
+            "Group name:",
+            "Tag name:"
+        ],
+        "blocks.addGroupSnapshot": "Insert snapshot to group",
+        "blocks.addGroupSnapshot.params": [
+            "Group name:",
+            "Snapshot name:"
         ],
         "blocks.addGroupGroup": "Insert group2 to group1",
         "blocks.addGroupGroup.params": [
@@ -1495,6 +2144,153 @@
             "Bounce:",
             "Friction:",
             "Gravity:"
+        ],
+        "blocks.deleteJoint": "Delete joint",
+        "blocks.deleteJoint.params": [
+            "Joint name:"
+        ],
+        "blocks.setPivotJoint": "Set touch joint",
+        "blocks.setPivotJoint.params": [
+            "Joint name:",
+            "Object name:",
+            "Anchor X:",
+            "Anchor Y:"
+        ],
+        "blocks.setPivotMotor": "Set pivot motor",
+        "blocks.setPivotMotor.params": [
+            "Joint name:",
+            "State:",
+            "Motor speed:",
+            "Max torque:"
+        ],
+        "blocks.setPivotLimits": "Set pivot limits",
+        "blocks.setPivotLimits.params": [
+            "Joint name:",
+            "State:",
+            "Angle (min):",
+            "Angle (max):"
+        ],
+        "blocks.setDistanceJoint": "Set distance joint",
+        "blocks.setDistanceJoint.params": [
+            "Joint name:",
+            "Object1 name:",
+            "Object2 name:",
+            "Anchor X1:",
+            "Anchor Y1:",
+            "Anchor X2:",
+            "Anchor Y2:"
+        ],
+        "blocks.setDistanceSettings": "Set distance settings",
+        "blocks.setDistanceSettings.params": [
+            "Joint name:",
+            "Damping (0-100):",
+            "Frequency:",
+            "Length (min):"
+        ],
+        "blocks.setPistonJoint": "Set piston joint",
+        "blocks.setPistonJoint.params": [
+            "Joint name:",
+            "Object base name:",
+            "Object piston name:",
+            "Anchor X:",
+            "Anchor Y:",
+            "Axis X:",
+            "Axis Y:"
+        ],
+        "blocks.setPistonLimits": "Set piston limits",
+        "blocks.setPistonLimits.params": [
+            "Joint name:",
+            "State:",
+            "Move (from):",
+            "Move (to):"
+        ],
+        "blocks.setPistonMotor": "Set piston motor",
+        "blocks.setPistonMotor.params": [
+            "Joint name:",
+            "State:",
+            "Motor speed:",
+            "Max force:"
+        ],
+        "blocks.setWeldJoint": "Set weld joint",
+        "blocks.setWeldJoint.params": [
+            "Joint name:",
+            "Object1 name:",
+            "Object2 name:",
+            "Anchor X:",
+            "Anchor Y:"
+        ],
+        "blocks.setWeldSettings": "Set weld settings",
+        "blocks.setWeldSettings.params": [
+            "Joint name:",
+            "Damping (0-100):",
+            "Frequency:"
+        ],
+        "blocks.setWheelJoint": "Set wheel joint",
+        "blocks.setWheelJoint.params": [
+            "Joint name:",
+            "Object base name:",
+            "Object wheel name:",
+            "Anchor X:",
+            "Anchor Y:",
+            "Axis X:",
+            "Axis Y:"
+        ],
+        "blocks.setTouchTarget": "Set touch target",
+        "blocks.setTouchTarget.params": [
+            "Joint name:",
+            "Target X:",
+            "Target Y:"
+        ],
+        "blocks.setTouchSettings": "Set touch settings",
+        "blocks.setTouchSettings.params": [
+            "Joint name:",
+            "Damping (0-100):",
+            "Frequency:",
+            "Force (max):"
+        ],
+        "blocks.setRopeJoint": "Set rope joint",
+        "blocks.setRopeJoint.params": [
+            "Joint name:",
+            "Object1 name:",
+            "Object2 name:",
+            "Anchor X1:",
+            "Anchor Y1:",
+            "Anchor X2:",
+            "Anchor Y2:"
+        ],
+        "blocks.setRopeSettings": "Set rope settings",
+        "blocks.setRopeSettings.params": [
+            "Joint name:",
+            "Length (max):"
+        ],
+        "blocks.setFrictionJoint": "Set friction joint",
+        "blocks.setFrictionJoint.params": [
+            "Joint name:",
+            "Object1 name:",
+            "Object2 name:",
+            "Anchor X:",
+            "Anchor Y:"
+        ],
+        "blocks.setFrictionSettings": "Set friction settings",
+        "blocks.setFrictionSettings.params": [
+            "Joint name:",
+            "Damping (0-100):",
+            "Frequency:"
+        ],
+        "blocks.setPulleyJoint": "Set distance joint",
+        "blocks.setPulleyJoint.params": [
+            "Joint name:",
+            "Ratio of forces:",
+            "Object1 name:",
+            "Object2 name:",
+            "Stationary X1:",
+            "Stationary Y1:",
+            "Stationary X2:",
+            "Stationary Y2:",
+            "Body X1:",
+            "Body Y1:",
+            "Body X2:",
+            "Body Y2:"
         ]
     },
     "widgets": {
@@ -1777,6 +2573,22 @@
             "Folder path:",
             "Storage type:"
         ],
+        "blocks.newCapturePNG": "Create PNG capture",
+        "blocks.newCapturePNG.params": [
+            "Name:",
+            "Type:",
+            "File path:",
+            "Storage type:"
+        ],
+        "blocks.newCaptureJPEG": "Create JPEG capture",
+        "blocks.newCaptureJPEG.params": [
+            "Name:",
+            "Type:",
+            "File path:",
+            "Storage type:",
+            "Color:",
+            "Quality (0-100):"
+        ],
         "blocks.newFile": "Write to file",
         "blocks.newFile.params": [
             "File path:",
@@ -1817,6 +2629,30 @@
             "Sprite name:",
             "Sprite type:"
         ],
+        "blocks.convertFileToVideo": "Convert file to video",
+        "blocks.convertFileToVideo.params": [
+            "Video name:",
+            "File path:",
+            "Storage type:"
+        ],
+        "blocks.convertFileToSound": "Convert file to sound",
+        "blocks.convertFileToSound.params": [
+            "Sound name:",
+            "File path:",
+            "Storage type:"
+        ],
+        "blocks.convertFileToFont": "Convert file to font",
+        "blocks.convertFileToFont.params": [
+            "Font name:",
+            "File path:",
+            "Storage type:"
+        ],
+        "blocks.convertFileToRes": "Convert file to resource",
+        "blocks.convertFileToRes.params": [
+            "Resource name:",
+            "File path:",
+            "Storage type:"
+        ],
         "blocks.foreachFolderEnd": "End cycle (all files in folder)",
         "blocks.foreachFolder": "Bypass all files in folder",
         "blocks.foreachFolder.params": [
@@ -1827,6 +2663,15 @@
         "blocks.downloadFile": "Download file from internet",
         "blocks.downloadFile.params": [
             "Url:",
+            "File path:",
+            "After execution:",
+            "File Type:",
+            "Storage type:"
+        ],
+        "blocks.uploadFile": "Send file to server",
+        "blocks.uploadFile.params": [
+            "Url:",
+            "Mime type:",
             "File path:",
             "After execution:",
             "File Type:",
@@ -1871,10 +2716,15 @@
             "Storage type:",
             "Folder path:",
             "Storage type:"
+        ],
+        "blocks.installApk": "Install APK file",
+        "blocks.installApk.params": [
+            "File path:",
+            "Storage type:"
         ]
     },
     "snapshot": {
-        "blocks.snapshot": "Snapshots\n& Captures",
+        "blocks.snapshot": "Snapshots\n& Camera",
         "blocks.newSnapshot": "Create snapshot",
         "blocks.newSnapshot.params": [
             "Snapshot name:",
@@ -1979,6 +2829,93 @@
         "blocks.hideSnapshot": "Hide snapshot",
         "blocks.hideSnapshot.params": [
             "Snapshot name:"
+        ],
+        "blocks.addCamera": "Add to game camera",
+        "blocks.addCamera.params": [
+            "Name:",
+            "Type:",
+            "Layer:",
+            "Focus:"
+        ],
+        "blocks.removeCamera": "Remove from game camera",
+        "blocks.removeCamera.params": [
+            "Name:",
+            "Type:"
+        ],
+        "blocks.appendLayerCamera": "Create back camera layer",
+        "blocks.prependLayerCamera": "Create front camera layer",
+        "blocks.trackFocusCamera": "Update camera",
+        "blocks.trackCamera": "Automatically update camera",
+        "blocks.cancelCamera": "Cancel automatic updates",
+        "blocks.setFocusCamera": "Set camera focus",
+        "blocks.setFocusCamera.params": [
+            "Name:",
+            "Type:"
+        ],
+        "blocks.setOffsetCamera": "Set offset camera",
+        "blocks.setOffsetCamera.params": [
+            "Offset (X):",
+            "Offset (Y):"
+        ],
+        "blocks.setDampingCamera": "Set camera smoothness",
+        "blocks.setDampingCamera.params": [
+            "Smoothness:"
+        ],
+        "blocks.setParallaxCamera": "Set parallax to camera layer",
+        "blocks.setParallaxCamera.params": [
+            "Layer:",
+            "Parallax by X (0-100):",
+            "Parallax by Y (0-100):"
+        ],
+        "blocks.setOffsetLayerCamera": "Set offset camera layer",
+        "blocks.setOffsetLayerCamera.params": [
+            "Layer:",
+            "Offset (X):",
+            "Offset (Y):"
+        ],
+        "blocks.new3dScene": "Create 3d scene",
+        "blocks.new3dScene.params": [
+            "Width:",
+            "Height:"
+        ],
+        "blocks.upd3dScene": "Update 3d scene",
+        "blocks.eye3dScene": "Set camera position of 3d scene",
+        "blocks.eye3dScene.params": [
+            "Position (X):",
+            "Position (Y):",
+            "Position (Z):"
+        ],
+        "blocks.center3dScene": "Set camera center of 3d scene",
+        "blocks.center3dScene.params": [
+            "Position (X):",
+            "Position (Y):",
+            "Position (Z):"
+        ],
+        "blocks.new3dObject": "Create 3d object",
+        "blocks.new3dObject.params": [
+            "Object3d name:",
+            "Имя ресурса:"
+        ],
+        "blocks.move3dObject": "Set 3d object position",
+        "blocks.move3dObject.params": [
+            "Object3d name:",
+            "Position (X):",
+            "Position (Y):",
+            "Position (Z):"
+        ],
+        "blocks.scale3dObject": "Set 3d object scale",
+        "blocks.scale3dObject.params": [
+            "Object3d name:",
+            "Scale (X):",
+            "Scale (Y):",
+            "Scale (Z):"
+        ],
+        "blocks.rotate3dObject": "Set 3d object rotation",
+        "blocks.rotate3dObject.params": [
+            "Object3d name:",
+            "Rotation (X):",
+            "Rotation (Y):",
+            "Rotation (Z):"
         ]
     },
     "network": {
@@ -2232,7 +3169,144 @@
         ],
         "blocks.setTransitionPauseAll": "Pause all transition",
         "blocks.setTransitionResumeAll": "Resume all transition",
-        "blocks.setTransitionCancelAll": "Cancel all transition"
+        "blocks.setTransitionCancelAll": "Cancel all transition",
+        "blocks.newEmitter": "Create particles",
+        "blocks.newEmitter.params": [
+            "Particle name:",
+            "Particle type:"
+        ],
+        "blocks.newCustomEmitter": "Create custom particles",
+        "blocks.newCustomEmitter.params": [
+            "Particle name:",
+            "Particle table:",
+            "Sprite name:"
+        ],
+        "blocks.removeEmitter": "Remove particles",
+        "blocks.removeEmitter.params": [
+            "Particle name:"
+        ],
+        "blocks.removeAllEmitter": "Remove all particles",
+        "blocks.setEmitterPos": "Set particles position",
+        "blocks.setEmitterPos.params": [
+            "Particle name:",
+            "Position (X):",
+            "Position (Y):"
+        ],
+        "blocks.setEmitterSize": "Set particles size",
+        "blocks.setEmitterSize.params": [
+            "Particle name:",
+            "Size (%):"
+        ],
+        "blocks.setEmitterSpeed": "Set particles speed",
+        "blocks.setEmitterSpeed.params": [
+            "Particle name:",
+            "Speed:"
+        ],
+        "blocks.setEmitterRotation": "Set particles rotation",
+        "blocks.setEmitterRotation.params": [
+            "Particle name:",
+            "Rotation (0-360):"
+        ],
+        "blocks.setEmitterGravity": "Set particles gravity",
+        "blocks.setEmitterGravity.params": [
+            "Particle name:",
+            "Gravity (X):",
+            "Gravity (Y):"
+        ],
+        "blocks.setEmitterStartColor": "Set particles start color",
+        "blocks.setEmitterStartColor.params": [
+            "Particle name:",
+            "Color:",
+            "Opacity (0-100):"
+        ],
+        "blocks.setEmitterStartRGB": "Set particles RGB start color",
+        "blocks.setEmitterStartRGB.params": [
+            "Particle name:",
+            "Color (R):",
+            "Color (G):",
+            "Color (B):",
+            "Opacity (0-100):"
+        ],
+        "blocks.setEmitterFinishColor": "Set particles finite color",
+        "blocks.setEmitterFinishColor.params": [
+            "Particle name:",
+            "Color:",
+            "Opacity (0-100):"
+        ],
+        "blocks.setEmitterFinishRGB": "Set particles RGB finite color",
+        "blocks.setEmitterFinishRGB.params": [
+            "Particle name:",
+            "Color (R):",
+            "Color (G):",
+            "Color (B):",
+            "Opacity (0-100):"
+        ],
+        "blocks.newLinearEmitter": "Create linear particles",
+        "blocks.newLinearEmitter.params": [
+            "Particle name:",
+            "Sprite name:",
+            "Maximum particles:",
+            "Dependence angle:",
+            "Departure angle:",
+            "Departure angle deviation:",
+            "Speed:",
+            "Speed deviation:",
+            "Radiation range X:",
+            "Radiation range Y:",
+            "Gravity particles X:",
+            "Gravity particles Y:",
+            "Radial acceleration:",
+            "Acceleration deviation:",
+            "Tangential acceleration:",
+            "Acceleration deviation:",
+            "Particle lifetime:",
+            "Time deviation:",
+            "Initial size:",
+            "Size deviation:",
+            "Final size:",
+            "Size deviation:",
+            "Initial rotation:",
+            "Rotation deviation:",
+            "Final rotation:",
+            "Rotation deviation:",
+            "Initial color:",
+            "Color deviation:",
+            "Final color:",
+            "Color deviation:",
+            "Original color GL:",
+            "Target color GL:"
+        ],
+        "blocks.newRadialEmitter": "Create radial particles",
+        "blocks.newRadialEmitter.params": [
+            "Particle name:",
+            "Sprite name:",
+            "Maximum particles:",
+            "Dependence angle:",
+            "Departure angle:",
+            "Departure angle deviation:",
+            "Maximum radius:",
+            "Radius deviation:",
+            "Minimum radius:",
+            "Radius deviation:",
+            "Radial rotation:",
+            "Rotation deviation:",
+            "Particle lifetime:",
+            "Time deviation:",
+            "Initial size:",
+            "Size deviation:",
+            "Final size:",
+            "Size deviation:",
+            "Initial rotation:",
+            "Rotation deviation:",
+            "Final rotation:",
+            "Rotation deviation:",
+            "Initial color:",
+            "Color deviation:",
+            "Final color:",
+            "Color deviation:",
+            "Original color GL:",
+            "Target color GL:"
+        ]
     },
     "varsNoob": {
         "blocks.setVarNoob": "Create value",
@@ -2590,6 +3664,14 @@
         "editor.list.prop": "Properties",
         "editor.list.log": "Logic",
         "editor.list.device": "Device",
+        "editor.list.resource": "Resources",
+        "editor.list.resource.images": "Sprites",
+        "editor.list.resource.images.noob": "Images",
+        "editor.list.resource.sounds": "Sounds",
+        "editor.list.resource.videos": "Videos",
+        "editor.list.resource.fonts": "Fonts",
+        "editor.list.resource.others": "Other",
+        "editor.list.resource.levels": "Levels",
         "editor.list.custom": "Custom",
         "editor.list.event": "Event",
         "editor.list.script": "Script",
@@ -2598,6 +3680,8 @@
         "editor.list.prop.obj.noob": "Picture",
         "editor.list.prop.text": "Text",
         "editor.list.prop.media": "Media",
+        "editor.list.prop.media.noob": "Sounds",
+        "editor.list.prop.files": "Files",
         "editor.list.prop.group": "Group",
         "editor.list.prop.widget": "Widget"
     },
@@ -2610,17 +3694,26 @@
         "editor.list.fun.tostring": "to_text",
         "editor.list.fun.totable": "to_table",
         "editor.list.fun.len_table": "len_table",
+        "editor.list.fun.exists_in_table": "exists_in_table",
         "editor.list.fun.unix_time": "unix_time",
+        "editor.list.fun.unix_ms": "unix_time_ms",
         "editor.list.fun.encode": "encode_json",
         "editor.list.fun.gsub": "replace_in_text",
         "editor.list.fun.sub": "character_from_text",
         "editor.list.fun.len": "length_text",
         "editor.list.fun.find": "find_in_text",
         "editor.list.fun.split": "split_text",
+        "editor.list.fun.rep": "repeat_text",
+        "editor.list.fun.reverse": "reverse_text",
+        "editor.list.fun.upper": "text_to_uppercase",
+        "editor.list.fun.lower": "text_to_lowercase",
+        "editor.list.fun.byte": "text_to_bytes",
+        "editor.list.fun.char": "bytes_to_text",
         "editor.list.fun.match": "regular_expression",
         "editor.list.fun.color_pixel": "color_pixel",
         "editor.list.fun.get_ip": "get_own_ip",
-        "editor.list.fun.noise": "perlin_noise"
+        "editor.list.fun.noise": "perlin_noise",
+        "editor.list.fun.parameter": "parameter"
     },
     "editor.math": {
         "editor.list.math.random": "random",
@@ -2638,7 +3731,7 @@
         "editor.list.math.pi": "pi",
         "editor.list.math.exp": "exponent",
         "editor.list.math.factorial": "factorial",
-        "editor.list.math.log": "log",
+        "editor.list.math.log0": "log",
         "editor.list.math.log10": "log10",
         "editor.list.math.asin": "asin",
         "editor.list.math.acos": "acos",
@@ -2648,6 +3741,7 @@
     },
     "editor.prop": {
         "editor.list.prop.obj.touch": "touch",
+        "editor.list.prop.obj.group": "group",
         "editor.list.prop.obj.tag": "tag",
         "editor.list.prop.obj.var": "variables",
         "editor.list.prop.obj.pos_x": "pos_x",
@@ -2656,6 +3750,7 @@
         "editor.list.prop.obj.height": "height",
         "editor.list.prop.obj.rotation": "rotation",
         "editor.list.prop.obj.alpha": "opacity",
+        "editor.list.prop.obj.distance": "distance",
         "editor.list.prop.obj.name_texture": "name_texture",
         "editor.list.prop.obj.velocity_x": "velocity_x",
         "editor.list.prop.obj.velocity_y": "velocity_y",
@@ -2669,6 +3764,7 @@
         "editor.list.prop.text.rotation": "text_rotation",
         "editor.list.prop.text.alpha": "text_opacity",
         "editor.list.prop.group.tag": "group_tag",
+        "editor.list.prop.group.table": "group_table",
         "editor.list.prop.group.pos_x": "group_x_position",
         "editor.list.prop.group.pos_y": "group_y_position",
         "editor.list.prop.group.width": "group_width",
@@ -2687,7 +3783,12 @@
         "editor.list.prop.media.sound_volume": "sound_volume",
         "editor.list.prop.media.sound_total_time": "total_sound_time",
         "editor.list.prop.media.sound_pause": "sound_is_paused",
-        "editor.list.prop.media.sound_play": "sound_is_played"
+        "editor.list.prop.media.sound_play": "sound_is_played",
+        "editor.list.prop.files.length": "size_in_bytes",
+        "editor.list.prop.files.is_file": "file_ exists",
+        "editor.list.prop.files.is_folder": "folder_ exists",
+        "editor.list.prop.files.length_folder": "number_of_files",
+        "editor.list.prop.files.last_modified": "last_modified"
     },
     "editor.log": {
         "editor.list.log.true": "true",

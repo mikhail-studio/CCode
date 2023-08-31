@@ -3,12 +3,17 @@
         "lang.ru": "Русский",
         "lang.en": "English",
         "lang.pt": "Brasileiro",
+        "lang.es": "Español",
+        "lang.de": "Deutsch",
         "lang.pl": "Polski",
         "lang.ua": "Українська",
         "lang.by": "Беларускі",
         "lang.cn": "中文",
         "lang.jp": "日本語",
         "lang.custom": "Свой",
+        "backup.title": "Вы хочаце замяніць бягучыя скрыпты больш старым захаваннем?\n\nНацісніце \"Наступная рэзервовая копія\", каб выбраць больш старую рэзервовую копію па часе, або націсніце \"Усталяваць рэзервовую копію\", каб замяніць бягучыя сцэнары рэзервовай копіяй на гэты час\n\nБягучая апошняя рэзервовая копія:",
+        "backup.continue": "Next backup",
+        "backup.install": "Install backup",
         "button.yes": "Так",
         "button.no": "Не",
         "button.okay": "Добра",
@@ -18,6 +23,7 @@
         "button.remove": "Выдаліць",
         "button.rename": "Перайменаваць",
         "button.copy": "Скапіраваць",
+        "button.backup": "Backups",
         "button.to.buffer": "У бефер",
         "button.from.buffer": "З буфера",
         "button.paste": "Паставіць",
@@ -35,10 +41,12 @@
         "menu.myprogram": "Мае праграмы",
         "menu.continue": "Працягнуць",
         "menu.settings": "Параметры",
+        "menu.dogs": "Мой робопёс",
         "menu.testers": "Версія тэстараў:",
         "menu.developers": "Версія распрацоўнікаў:",
         "menu.version.new": "Выйшла новая тэстарская версія!",
         "menu.version.wait": "Пачакайце, калі ласка, не згартуйце дадатак!",
+        "menu.version.download": "Спампавана",
         "programs.entername": "Увядзіце назву праграмы",
         "programs.changename": "Змяніце назву праграмы",
         "programs.noobmode": " Спрошчаны рэжым",
@@ -46,20 +54,22 @@
         "program.pictures": "Малюнкі",
         "program.scripts": "Скрыпты",
         "program.scenarios": "Сцэнарыі",
-        "program.levels": "Levels",
+        "program.levels": "Ўзроўні",
         "program.sounds": "Гукі",
         "program.videos": "Відэа",
         "program.fonts": "Шрыфты",
         "program.resources": "Рэсурсы",
         "program.psettings": "Параметры кампаніі",
         "program.export": "Экспарт",
-        "program.build": "Build APK",
-        "program.aab": "Build AAB",
+        "program.build": "Сабраць APK",
+        "program.aab": "Сабраць AAB",
         "program.editor": "editor​​​​выразаў",
         "scripts.entername": "Увядзіце імя скрыпта",
         "scripts.entername.noob": "Увядзіце назву сцэнарыя",
         "scripts.changename": "Змяніце імя скрыпта",
         "scripts.changename.noob": "Змяніць назву сцэнарыя",
+        "scripts.folder": "Create folder",
+        "scripts.changename.folder": "Change folder name",
         "scripts.sandbox": "Пясочніца",
         "scripts.sandbox.exit": "Выберыце неабходнае дзеянне",
         "scripts.sandbox.save": "Захаваць",
@@ -77,6 +87,8 @@
         "sounds.changename": "Змяніце імя гуку",
         "videos.entername": "Увядзіце імя відэа",
         "videos.changename": "Змяніце імя відэа",
+        "levels.entername": "Enter level name",
+        "levels.changename": "Change level name",
         "resources.entername": "Увядзіце назву рэсурсу",
         "resources.changename": "Змяніце назву рэсурсу",
         "fonts.entername": "Увядзіце назву шрыфта",
@@ -85,17 +97,24 @@
         "settings.applang": "Мова праграмы:",
         "settings.confirmdelete": "Паказаць выдаленне:",
         "settings.autoplace": "Параметры аўтазапаўнення:",
-        "settings.keystore": "Developer Key:",
+        "settings.scroll_friction": "Scroll friction:",
+        "settings.scroll_friction.enterheight": "Enter scroll friction",
+        "settings.backup_frequency": "Backup frequency (minutes):",
+        "settings.backup_frequency.enterheight": "Enter the backup frequency in minutes",
+        "settings.bottom_height": "Вышыня ніжняй граніцы:",
+        "settings.bottom_height.enterheight": "Увядзіце вышыню ніжняй кропкі",
+        "settings.old_dog": "Стандартны робопёс:",
+        "settings.keystore": "Ключ распрацоўшчыка:",
         "settings.keystore.testkey": "Testkey",
-        "settings.keystore.custom": "Custom",
-        "settings.keystore.alias": "Key alias",
-        "settings.keystore.pass": "Key password",
-        "settings.keystore.create": "Create",
-        "settings.keystore.import": "Import",
-        "settings.keystore.enteralias": "Enter key alias",
-        "settings.keystore.enterpass": "Enter key password",
-        "settings.keystore.create.successfully": "Key was successfully created",
-        "settings.keystore.import.successfully": "Key was successfully imported",
+        "settings.keystore.custom": "Свой",
+        "settings.keystore.alias": "Імя ключа",
+        "settings.keystore.pass": "Пароль ключа",
+        "settings.keystore.create": "Стварыць",
+        "settings.keystore.import": "Імпарт",
+        "settings.keystore.enteralias": "Увядзіце імя ключа",
+        "settings.keystore.enterpass": "Увядзіце пароль ключа",
+        "settings.keystore.create.successfully": "Ключ паспяхова створаны",
+        "settings.keystore.import.successfully": "Ключ паспяхова імпартаваны",
         "settings.back": "Ніжняя панэль:",
         "settings.backCCode": "Праграма",
         "settings.backSystem": "Сістэма",
@@ -117,14 +136,60 @@
         "errors.package": "Памылка, у складзе карэктнае імя пакета",
         "errors.name": "Памылка, імя ўжо існуе",
         "errors.filter": " Памылка, нельга выкарыстоўваць пустое імя",
-        "errors.min8sym": "Error, at least 8 characters are required",
-        "errors.max32sym": "Error, maximum 32 characters allowed",
+        "errors.min8sym": "Памылка, мінімум 8 сімвалаў",
+        "errors.max32sym": "Памылка, максімум 32 сімвала",
+        "errors.bottom_height": "Памылка, лік павінны быць от -300 до 300",
+        "errors.backup_frequency": "Error, number should be from 1 to 59",
+        "errors.scroll_friction": "Error, number should be from 10 to 1000",
         "build.start": "Зборка APK пачынаецца, чакайце",
-        "build.start.aab": "AAB build started, please wait",
+        "build.start.aab": "Зборка AAB пачацца, чакаць",
         "export.start": "Экспарт неадкладна чакаецца",
         "import.error": "Памылка імпарту #",
+        "import.successfully": "The project has been successfully imported",
         "game.debug": "У буфер абмену захаваны код lua",
         "game.isbug": "Не ўдалося запусціць сімуляцыю"
+    },
+    "beginner": {
+        "beginner.start.message": "Hi, I see you're here for the first time? I'm a cdog, and you? Let's find out your age, gender and name, do you agree?",
+        "beginner.start.button.anonim": "Anonim",
+        "beginner.gender.what": "And so, will we find out who you are, a man or a woman?",
+        "beginner.gender.man": "Man",
+        "beginner.gender.woman": "Woman",
+        "beginner.age.what": "Now, let's find out your age, I remind you, you can use CCode for people aged from 13 to 90 years",
+        "beginner.age": "Age",
+        "beginner.age.banned": "You are not allowed to use CCode due to age restrictions",
+        "beginner.name.what": "And finally, let's find out your name",
+        "beginner.name": "Name",
+        "beginner.entrance": "Thank you, now you can start using CCode, little hints: \n\nIn the tab 'My robodog' has a tab for training\n\nBy clicking the 'Discord' button on the bottom left of the menu, you can go to the Discord server, where you can ask questions and send bugs\n\nCCode is not the easiest application right now, so a lot of videos on YouTube and help in discord will be very useful for you\n\nWell, the 'Levels' button is not working yet"
+    },
+    "robodog": {
+        "robodog.showAd.title": "To get 20 ccoin, you need to watch a video ad",
+        "robodog.showAd.time": "You will be able to watch the ad again in minutes: ",
+        "robodog.showAd.error": "Ad loading error",
+        "robodog.showAd.promo": "Promocode",
+        "robodog.showAd.watch": "Watch",
+        "robodog.showAd": "Get ccoin",
+        "robodog.autoAd": "Autoreview",
+        "robodog.autoAd.title": "Do you want to turn on/off autoreview ads? When turned on, a video ad will be shown every 10 minutes, which will bring you 20 ccoin",
+        "robodog.learning": "Teaching",
+        "robodog.themes": "Themes",
+        "robodog.buy": "Buy",
+        "robodog.count.ccoin": "Amount of ccoin: ",
+        "robodog.not.enough.ccoin": "You don't have enough ccoin",
+        "robodog.successful.purchase.1": "You bought new face",
+        "robodog.successful.purchase.2": "You bought new eyes",
+        "robodog.successful.purchase.3": "You bought new ears",
+        "robodog.successful.purchase.4": "You bought new mouth",
+        "robodog.successful.purchase.5": "You bought new accessory",
+        "robodog.want.buy.1": "Do you want to buy this face?\nCost: ",
+        "robodog.want.buy.2": "Do you want to buy these eyes?\nCost: ",
+        "robodog.want.buy.3": "Do you want to buy these ears?\nCost: ",
+        "robodog.want.buy.4": "Do you want to buy these mouth?\nCost: ",
+        "robodog.want.buy.5": "Do you want to buy these accessory?\nCost: ",
+        "robodog.want.buy.apk": "Do you want to build apk?\nCost: 10 ccoin",
+        "robodog.want.buy.aab": "Do you want to build aab?\nCost: 100 ccoin",
+        "robodog.want.set.theme": "Do you want to install this theme?",
+        "robodog.need.ccoin": "Required quantity: "
     },
     "blocks": {
         "blocks.create.var": "Стварыць пераменную",
@@ -136,8 +201,12 @@
         "blocks.create.filters": "Фільтры",
         "blocks.create.groups": "Групы",
         "blocks.create.tags": "Тэгі",
+        "blocks.create.files": "Файлы",
+        "blocks.create.media": "Медыя",
         "blocks.create.transition": " Пераходы",
-        "blocks.create.particle": "Часціцы",
+        "blocks.create.particles": "Particles",
+        "blocks.create.snapshot": "Snapshots",
+        "blocks.create.camera": "Camera",
         "blocks.create.block": "Стварыць",
         "blocks.create.color": "Колер",
         "blocks.create.copy": "Копія",
@@ -167,25 +236,31 @@
         "blocks.select.switchToggle": "Тумблер",
         "blocks.select.switchOn": "Уключаны",
         "blocks.select.switchOff": "Выключаны",
-        "blocks.select.adsInterstitial": "Banner",
+        "blocks.select.adsInterstitial": "Банер",
         "blocks.select.adsRewardedVideo": "RewardedVideo",
-        "blocks.select.adsVideo": "Video",
+        "blocks.select.adsVideo": "Відэа",
         "blocks.select.pic": "Малюнак",
         "blocks.select.obj": "Аб'ект",
         "blocks.select.text": "Тэкст",
         "blocks.select.group": "Група",
         "blocks.select.tag": "Тэг",
         "blocks.select.widget": "Віджэт",
-        "blocks.select.snapshot": "Snapshot",
+        "blocks.select.snapshot": "Здымак экрана",
         "blocks.select.progressDefault": "Стандарт",
         "blocks.select.progressDownload": "Спампаваць",
         "blocks.select.progressUpload": "Загрузіць",
         "blocks.select.redirectsTrue": "Аўтамат",
         "blocks.select.redirectsFalse": "Ручное",
-        "blocks.select.canvasModeAppend": "Append",
-        "blocks.select.canvasModeDiscard": "Discard",
-        "blocks.select.snapshotGroup": "Group",
-        "blocks.select.snapshotCanvas": "Canvas",
+        "blocks.select.canvasModeAppend": "Далучаць",
+        "blocks.select.canvasModeDiscard": "Выдаліць",
+        "blocks.select.snapshotGroup": "Група",
+        "blocks.select.snapshotCanvas": "Палатно",
+        "blocks.select.fileTypeBin": "Бінарны",
+        "blocks.select.fileTypeNonBin": "Стандарт",
+        "blocks.select.docTypeDocs": "Пастаянны",
+        "blocks.select.docTypeTemps": "Часовае",
+        "blocks.select.spriteTypeLinear": "Стандарт",
+        "blocks.select.spriteTypePixel": "Піксель",
         "blocks.color.red": "Чырвоны",
         "blocks.color.green": "Зялёныя",
         "blocks.color.blue": "Сіні",
@@ -225,6 +300,11 @@
         "blocks.onCondition.params": [
             "Умова:"
         ],
+        "blocks.onUpdateVar": "When value of variable changes",
+        "blocks.onUpdateVar.params": [
+            "Variable name:",
+            "Old value:"
+        ],
         "blocks.onTouchBegan": "Калі палец дакранаецца да прадмета",
         "blocks.onTouchBegan.params": [
             "Назва функцыі:",
@@ -256,6 +336,11 @@
         "blocks.onFirebase.params": [
             "Назва функцыі:",
             "Адказ:"
+        ],
+        "blocks.onFileDownload": "Спампаваць файла скончаны",
+        "blocks.onFileDownload.params": [
+            "Імя функцыі:",
+            "Імя табліцы:"
         ],
         "blocks.onBackPress": " Калі вы націснеце \"Назад\"",
         "blocks.onSuspend": "Прыкладанне было згорнута з экрана",
@@ -637,6 +722,521 @@
         "blocks.backObject": "Размясціце аб'ект на пласт ніжэй",
         "blocks.backObject.params": [
             "Імя аб'екта:"
+        ],
+        "blocks.deleteFilter": "Ачысціць фільтры",
+        "blocks.deleteFilter.params": [
+            "Імя аб'екта:"
+        ],
+        "blocks.setBlur": "Прымяніць размыццё",
+        "blocks.setBlur.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Гарызантальны размер:",
+            "Вертыкальны размер:",
+            "Гарызантальны сігма:",
+            "Вертыкальны сігма:",
+            "Расклад пераходу:",
+            "После выкананне:",
+            "Пры паўзе:",
+            "Пасле паўзе:",
+            "Пасле прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setChromakey": "Прымяніць хромакей",
+        "blocks.setChromakey.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Адчувальнасць:",
+            "Плаўнасць:",
+            "Колер (R):",
+            "Колер (G):",
+            "Колер (B):",
+            "Расклад пераходу:",
+            "Пасле выканання:",
+            "Пры паўзе:",
+            "Пасле паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setCrystallization": "Прымяніць крысталізацію",
+        "blocks.setCrystallization.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Лік тайлаў:",
+            "Расклад пераходу:",
+            "Пасле выканання:",
+            "Пры паўзе:",
+            "Пасле паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setPixellization": "Прымяніць пікселізацыю",
+        "blocks.setPixellization.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Лік пікселяў:",
+            "Расклад пераходу:",
+            "После выкананне:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setScatter": "Прымяніць роскід",
+        "blocks.setScatter.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Інтэнсіўнасць фільтра:",
+            "Расклад пераходу:",
+            "Пасля выканання:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setOpTile": "Прымяніць плітачнасць",
+        "blocks.setOpTile.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Інтэнсіўнасць фільтра:",
+            "Кут:",
+            "Размер:",
+            "Расклад пераходу:",
+            "Пасля выканання:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setBloom": "Прымяніць свячэнне",
+        "blocks.setBloom.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Узровень белага:",
+            "Узровень чорны:",
+            "Узровень гама:",
+            "Непразрыстасць:",
+            "Гарызантальны размер:",
+            "Вертыкальны размер:",
+            "Гарызантальны сігма:",
+            "Вертыкальны сігма:",
+            "Расклад пераходу:",
+            "Пасля выкананне:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пасле прыпынку:",
+            "Пасле паўтарэнні:"
+        ],
+        "blocks.setColorChannelOffset": "Рушаны каляровай канал",
+        "blocks.setColorChannelOffset.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Тэкселі по Х:",
+            "Тэкселі по Y:",
+            "Расклад пераходу:",
+            "Пасля выкананне:",
+            "Пры паўзе:",
+            "Пасле паўзе:",
+            "Пасле прыпынку:",
+            "Пасле паўтарэнні:"
+        ],
+        "blocks.setCrosshatch": "Прымяніць кроссхэтч",
+        "blocks.setCrosshatch.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Збожжа:",
+            "Расклад пераходу:",
+            "Пасле выканання:",
+            "Пры паўзе:",
+            "Пасле паўзы:",
+            "Пры прыпынку:",
+            "Пасле паўтарэнні:"
+        ],
+        "blocks.setDissolve": "Прымяніць растварэння",
+        "blocks.setDissolve.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Парог:",
+            "Расклад пераходу:",
+            "Пасля выкананне:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setEmboss": "Прымяніць цісненне",
+        "blocks.setEmboss.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Інтэнсіўнасць фільтра:",
+            "Расклад пераходу:",
+            "После выкананне:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setFostedGlass": "Прымяніць матавае шкло",
+        "blocks.setFostedGlass.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Размер:",
+            "Расклад пераходу:",
+            "После выкананне:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setWoodCut": "Прымяніць распілоўванне драўніны",
+        "blocks.setWoodCut.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Інтэнсіўнасць фільтра:",
+            "Расклад пераходу:",
+            "После выкананне:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setZoomBlur": "Прымяніць зум-размыццё",
+        "blocks.setZoomBlur.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Інтэнсіўнасць фільтра:",
+            "Гарызантальны сігма:",
+            "Вертыкальны сігма:",
+            "Расклад пераходу:",
+            "Пасля выканання:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setVingette": "Прымяніць віньетку",
+        "blocks.setVingette.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Радыус:",
+            "Расклад пераходу:",
+            "Пасля выканання:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setVingetteMask": "Прымяніць віньетную маску",
+        "blocks.setVingetteMask.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "унутраны радыус:",
+            "Вонкавы радыус:",
+            "Расклад пераходу:",
+            "Пасля выканання:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "When repeating:"
+        ],
+        "blocks.setSwirl": "Apply brightness",
+        "blocks.setSwirl.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Brightness:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setStraighten": "Apply straighten",
+        "blocks.setStraighten.params": [
+            "Object name:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Кут:",
+            "Парык (%):",
+            "Вышыня (%):",
+            "Расклад пераходу:",
+            "Пасля выканання:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setBulge": "Прымяніць выпукласць",
+        "blocks.setBulge.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Інтэнсіўнасць выпукласці:",
+            "Расклад пераходу:",
+            "Пасля выканання:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setLinearWipe": "Прымяніць лінейную маску",
+        "blocks.setLinearWipe.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Кут:",
+            "Памер матрыцы:",
+            "Ход выканання:",
+            "Расклад пераходу:",
+            "Пасле выканання:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setIris": "Прымяніць касач",
+        "blocks.setIris.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Цэнтр X:",
+            "Цэнтр Y:",
+            "Памер матрыцы:",
+            "Суадносіны бакоў:",
+            "Дыяфрагма:",
+            "Расклад пераходу:",
+            "Пасля выканання:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setPolkaDots": "Apply polka dot",
+        "blocks.setPolkaDots.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Number of dots:",
+            "Size of dots (%):",
+            "Dots aspect ratio:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setRadialWipe": "Apply radial mask",
+        "blocks.setRadialWipe.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Center X:",
+            "Center Y:",
+            "Orientation of axis:",
+            "Smoothness:",
+            "Progress:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setWobble": "Apply wobble",
+        "blocks.setWobble.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Wobble amplitude:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setСontrast": "Apply contrast",
+        "blocks.setСontrast.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Час (Секунды):",
+            "Кантраснасць:",
+            "Расклад пераходу:",
+            "Пасля выканання:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setSaturate": "Прымяніць насычэнне",
+        "blocks.setSaturate.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Насычанасць:",
+            "Расклад пераходу:",
+            "Пасля выканання:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setSharpenLuminance": "Прымяніць выразнасць",
+        "blocks.setSharpenLuminance.params": [
+            "Імя аб'екта:",
+            "Тып анімацыі:",
+            "Лік паўторы:",
+            "Час (Секунды):",
+            "Рэзкасьць:",
+            "Расклад пераходу:",
+            "Пасля выканання:",
+            "Пры паўзе:",
+            "Пасля паўзы:",
+            "Пры прыпынку:",
+            "Пры паўтарэнні:"
+        ],
+        "blocks.setSobel": "Прымяніць фільтр Собеля",
+        "blocks.setSobel.params": [
+            "Імя аб'екта:"
+        ],
+        "blocks.setSepia": "Прымяніць сепію",
+        "blocks.setSepia.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Filter intensity:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setPosterize": "Apply posterization",
+        "blocks.setPosterize.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Colors per channel:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setMonotone": "Apply monotone",
+        "blocks.setMonotone.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Color (R):",
+            "Color (G):",
+            "Color (B):",
+            "Color (A):",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setHue": "Apply hue",
+        "blocks.setHue.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Angle:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setExposure": "Apply exposure",
+        "blocks.setExposure.params": [
+            "Object name:",
+            "Animation type:",
+            "Number repetitions:",
+            "Time (Seconds):",
+            "Exposure:",
+            "Transition schedule:",
+            "After execution:",
+            "When paused:",
+            "After pause:",
+            "When stopping:",
+            "When repeating:"
+        ],
+        "blocks.setDuotone": "Apply duotone",
+        "blocks.setDuotone.params": [
+            "Object name:",
+            "Light color:",
+            "Dark color:"
+        ],
+        "blocks.setColorPolynomial": "Apply polynomial color",
+        "blocks.setColorPolynomial.params": [
+            "Object name:",
+            "Coefficient (R):",
+            "Coefficient (G):",
+            "Coefficient (B):",
+            "Coefficient (A):"
+        ],
+        "blocks.setColorMatrix": "Apply color matrix",
+        "blocks.setColorMatrix.params": [
+            "Object name:",
+            "Coefficient (R):",
+            "Coefficient (G):",
+            "Coefficient (B):",
+            "Coefficient (A):"
         ]
     },
     "control": {
@@ -647,7 +1247,7 @@
             "Час ( Секунды):",
             "Колькасць паўтораў:"
         ],
-        "blocks.timerNameEnd": "Завяршыць таймер",
+        "blocks.timerNameEnd": "End timer (with name)",
         "blocks.timerName": "Таймер з імем",
         "blocks.timerName.params": [
             "Імя таймера:",
@@ -693,15 +1293,15 @@
             "Назва зменнай:",
             "Крок:"
         ],
-        "blocks.whileEnd": "Канец паўтору",
+        "blocks.whileEnd": "End repeat (until condition is true)",
         "blocks.while": "Паўтараць, пакуль умова не выканае",
         "blocks.while.params": [
             "Умова:"
         ],
-        "blocks.foreachEnd": "Завяршыць цыкл",
+        "blocks.foreachEnd": "End cycle (all table elements)",
         "blocks.foreach": "Абыходзіць усю табліцу элементы",
         "blocks.foreach.params": [
-            "Імя табліцы:",
+            "Table:",
             "Element:",
             "Key:"
         ],
@@ -777,6 +1377,11 @@
         "blocks.requestApiRes.params": [
             " Назва рэсурсу:"
         ],
+        "blocks.requestApiThread": "Request lua5.3 method in the new stream",
+        "blocks.requestApiThread.params": [
+            "Lua code:",
+            "Function name:"
+        ],
         "blocks.toastShort": "Кароткае ўсплывальнае апавяшчэнне",
         "blocks.toastShort.params": [
             "Тэкст:"
@@ -835,6 +1440,13 @@
         "blocks.setAccelerometerFrequency": "Усталяваць частату акселерометра",
         "blocks.setAccelerometerFrequency.params": [
             "Частата (Гц):"
+        ],
+        "blocks.newAlert": "Show system notification",
+        "blocks.newAlert.params": [
+            "Title:",
+            "Text:",
+            "Buttons table:",
+            "Listener:"
         ],
         "blocks.scheduleNotification": "Зарэгістраваць апавяшчэнне",
         "blocks.scheduleNotification.params": [
@@ -998,6 +1610,38 @@
             "Колер2:",
             "Непразрыстасць1 (0-100):",
             "Непразрыстасць2 (0-100):"
+        ],
+        "blocks.setLinearGradient": "Set linear gradient",
+        "blocks.setLinearGradient.params": [
+            "Object name:",
+            "Angle:",
+            "Color dependency:",
+            "Color1:",
+            "Color2:",
+            "Opacity1 (0-100):",
+            "Opacity2 (0-100):"
+        ],
+        "blocks.setRadialGradient": "Set radial gradient",
+        "blocks.setRadialGradient.params": [
+            "Object name:",
+            "Aspect ratio:",
+            "Color dependency:",
+            "Color1:",
+            "Color2:",
+            "Center (X):",
+            "Center (Y):",
+            "Inner radius:",
+            "Outer radius:",
+            "Opacity1 (0-100):",
+            "Opacity2 (0-100):"
+        ],
+        "blocks.setMarchingAnts": "Set marching ants to stroke",
+        "blocks.setMarchingAnts.params": [
+            "Object name:"
+        ],
+        "blocks.removeMarchingAnts": "Remove marching ants from stroke",
+        "blocks.removeMarchingAnts.params": [
+            "Object name:"
         ]
     },
     "objects2": {
@@ -1054,10 +1698,18 @@
             " Імя маскі:",
             "Імя спрайта:"
         ],
+        "blocks.removeMask": "Remove mask",
+        "blocks.removeMask.params": [
+            "Mask name:"
+        ],
         "blocks.addMaskToObject": "Дадаць маску да аб'екта",
         "blocks.addMaskToObject.params": [
             "Назва аб'екта:",
             "Назва маскі:"
+        ],
+        "blocks.removeMaskFromObject": "Remove mask from object",
+        "blocks.removeMaskFromObject.params": [
+            "Object name:"
         ],
         "blocks.setMaskPos": "Усталяваць пазіцыю маскі",
         "blocks.setMaskPos.params": [
@@ -1095,6 +1747,12 @@
         "blocks.newGroup.params": [
             "Назва групы:"
         ],
+        "blocks.newContainer": "Create container",
+        "blocks.newContainer.params": [
+            "Group name:",
+            "Width:",
+            "Height:"
+        ],
         "blocks.removeGroup": "Выдаліць групу",
         "blocks.removeGroup.params": [
             "Назва групы:"
@@ -1129,8 +1787,13 @@
         ],
         "blocks.addGroupTag": "Уставіць тэг у групу",
         "blocks.addGroupTag.params": [
-            "Назва тэга:",
-            "Назва групы:"
+            "Group name:",
+            "Tag name:"
+        ],
+        "blocks.addGroupSnapshot": "Insert snapshot to group",
+        "blocks.addGroupSnapshot.params": [
+            "Group name:",
+            "Snapshot name:"
         ],
         "blocks.addGroupGroup": "Устаўце групу2 у групу1",
         "blocks.addGroupGroup.params": [
@@ -1481,6 +2144,153 @@
             "Адскок:",
             "Трэнне:",
             "Гравітацыя:"
+        ],
+        "blocks.deleteJoint": "Delete joint",
+        "blocks.deleteJoint.params": [
+            "Joint name:"
+        ],
+        "blocks.setPivotJoint": "Set touch joint",
+        "blocks.setPivotJoint.params": [
+            "Joint name:",
+            "Object name:",
+            "Anchor X:",
+            "Anchor Y:"
+        ],
+        "blocks.setPivotMotor": "Set pivot motor",
+        "blocks.setPivotMotor.params": [
+            "Joint name:",
+            "State:",
+            "Motor speed:",
+            "Max torque:"
+        ],
+        "blocks.setPivotLimits": "Set pivot limits",
+        "blocks.setPivotLimits.params": [
+            "Joint name:",
+            "State:",
+            "Angle (min):",
+            "Angle (max):"
+        ],
+        "blocks.setDistanceJoint": "Set distance joint",
+        "blocks.setDistanceJoint.params": [
+            "Joint name:",
+            "Object1 name:",
+            "Object2 name:",
+            "Anchor X1:",
+            "Anchor Y1:",
+            "Anchor X2:",
+            "Anchor Y2:"
+        ],
+        "blocks.setDistanceSettings": "Set distance settings",
+        "blocks.setDistanceSettings.params": [
+            "Joint name:",
+            "Damping (0-100):",
+            "Frequency:",
+            "Length (min):"
+        ],
+        "blocks.setPistonJoint": "Set piston joint",
+        "blocks.setPistonJoint.params": [
+            "Joint name:",
+            "Object base name:",
+            "Object piston name:",
+            "Anchor X:",
+            "Anchor Y:",
+            "Axis X:",
+            "Axis Y:"
+        ],
+        "blocks.setPistonLimits": "Set piston limits",
+        "blocks.setPistonLimits.params": [
+            "Joint name:",
+            "State:",
+            "Move (from):",
+            "Move (to):"
+        ],
+        "blocks.setPistonMotor": "Set piston motor",
+        "blocks.setPistonMotor.params": [
+            "Joint name:",
+            "State:",
+            "Motor speed:",
+            "Max force:"
+        ],
+        "blocks.setWeldJoint": "Set weld joint",
+        "blocks.setWeldJoint.params": [
+            "Joint name:",
+            "Object1 name:",
+            "Object2 name:",
+            "Anchor X:",
+            "Anchor Y:"
+        ],
+        "blocks.setWeldSettings": "Set weld settings",
+        "blocks.setWeldSettings.params": [
+            "Joint name:",
+            "Damping (0-100):",
+            "Frequency:"
+        ],
+        "blocks.setWheelJoint": "Set wheel joint",
+        "blocks.setWheelJoint.params": [
+            "Joint name:",
+            "Object base name:",
+            "Object wheel name:",
+            "Anchor X:",
+            "Anchor Y:",
+            "Axis X:",
+            "Axis Y:"
+        ],
+        "blocks.setTouchTarget": "Set touch target",
+        "blocks.setTouchTarget.params": [
+            "Joint name:",
+            "Target X:",
+            "Target Y:"
+        ],
+        "blocks.setTouchSettings": "Set touch settings",
+        "blocks.setTouchSettings.params": [
+            "Joint name:",
+            "Damping (0-100):",
+            "Frequency:",
+            "Force (max):"
+        ],
+        "blocks.setRopeJoint": "Set rope joint",
+        "blocks.setRopeJoint.params": [
+            "Joint name:",
+            "Object1 name:",
+            "Object2 name:",
+            "Anchor X1:",
+            "Anchor Y1:",
+            "Anchor X2:",
+            "Anchor Y2:"
+        ],
+        "blocks.setRopeSettings": "Set rope settings",
+        "blocks.setRopeSettings.params": [
+            "Joint name:",
+            "Length (max):"
+        ],
+        "blocks.setFrictionJoint": "Set friction joint",
+        "blocks.setFrictionJoint.params": [
+            "Joint name:",
+            "Object1 name:",
+            "Object2 name:",
+            "Anchor X:",
+            "Anchor Y:"
+        ],
+        "blocks.setFrictionSettings": "Set friction settings",
+        "blocks.setFrictionSettings.params": [
+            "Joint name:",
+            "Damping (0-100):",
+            "Frequency:"
+        ],
+        "blocks.setPulleyJoint": "Set distance joint",
+        "blocks.setPulleyJoint.params": [
+            "Joint name:",
+            "Ratio of forces:",
+            "Object1 name:",
+            "Object2 name:",
+            "Stationary X1:",
+            "Stationary Y1:",
+            "Stationary X2:",
+            "Stationary Y2:",
+            "Body X1:",
+            "Body Y1:",
+            "Body X2:",
+            "Body Y2:"
         ]
     },
     "widgets": {
@@ -1659,7 +2469,7 @@
         ]
     },
     "media": {
-        "blocks.media": "Медыя",
+        "blocks.media": "Media\n& Files",
         "blocks.newVideo": "Стварыць відэа",
         "blocks.newVideo.params": [
             "Назва носьбіта:",
@@ -1738,10 +2548,183 @@
         "blocks.removeVideo": "Выдаліць відэа",
         "blocks.removeVideo.params": [
             "Назва медыя:"
+        ],
+        "blocks.newFolder": "Create folder",
+        "blocks.newFolder.params": [
+            "Folder path:",
+            "Storage type:"
+        ],
+        "blocks.moveFolder": "Move folder1 to folder2 path",
+        "blocks.moveFolder.params": [
+            "Folder1 path:",
+            "Storage type:",
+            "Folder2 path:",
+            "Storage type:"
+        ],
+        "blocks.copyFolder": "Copy folder1 to folder2 path",
+        "blocks.copyFolder.params": [
+            "Folder1 path:",
+            "Storage type:",
+            "Folder2 path:",
+            "Storage type:"
+        ],
+        "blocks.removeFolder": "Remove folder",
+        "blocks.removeFolder.params": [
+            "Folder path:",
+            "Storage type:"
+        ],
+        "blocks.newCapturePNG": "Create PNG capture",
+        "blocks.newCapturePNG.params": [
+            "Name:",
+            "Type:",
+            "File path:",
+            "Storage type:"
+        ],
+        "blocks.newCaptureJPEG": "Create JPEG capture",
+        "blocks.newCaptureJPEG.params": [
+            "Name:",
+            "Type:",
+            "File path:",
+            "Storage type:",
+            "Color:",
+            "Quality (0-100):"
+        ],
+        "blocks.newFile": "Write to file",
+        "blocks.newFile.params": [
+            "File path:",
+            "Value:",
+            "File Type:",
+            "Storage type:"
+        ],
+        "blocks.readFile": "Read from file",
+        "blocks.readFile.params": [
+            "File path:",
+            "Variable name:",
+            "File Type:",
+            "Storage type:"
+        ],
+        "blocks.moveFile": "Move file1 to fil2 path",
+        "blocks.moveFile.params": [
+            "File1 path:",
+            "Storage type:",
+            "File1 path:",
+            "Storage type:"
+        ],
+        "blocks.copyFile": "Copy file1 to fil2 path",
+        "blocks.copyFile.params": [
+            "File1 path:",
+            "Storage type:",
+            "File1 path:",
+            "Storage type:"
+        ],
+        "blocks.removeFile": "Remove file",
+        "blocks.removeFile.params": [
+            "File path:",
+            "Storage type:"
+        ],
+        "blocks.convertFileToSprite": "Convert file to sprite",
+        "blocks.convertFileToSprite.params": [
+            "File path:",
+            "Storage type:",
+            "Sprite name:",
+            "Sprite type:"
+        ],
+        "blocks.convertFileToVideo": "Convert file to video",
+        "blocks.convertFileToVideo.params": [
+            "Video name:",
+            "File path:",
+            "Storage type:"
+        ],
+        "blocks.convertFileToSound": "Convert file to sound",
+        "blocks.convertFileToSound.params": [
+            "Sound name:",
+            "File path:",
+            "Storage type:"
+        ],
+        "blocks.convertFileToFont": "Convert file to font",
+        "blocks.convertFileToFont.params": [
+            "Font name:",
+            "File path:",
+            "Storage type:"
+        ],
+        "blocks.convertFileToRes": "Convert file to resource",
+        "blocks.convertFileToRes.params": [
+            "Resource name:",
+            "File path:",
+            "Storage type:"
+        ],
+        "blocks.foreachFolderEnd": "End cycle (all files in folder)",
+        "blocks.foreachFolder": "Bypass all files in folder",
+        "blocks.foreachFolder.params": [
+            "Table name:",
+            "Folder path:",
+            "Storage type:"
+        ],
+        "blocks.downloadFile": "Download file from internet",
+        "blocks.downloadFile.params": [
+            "Url:",
+            "File path:",
+            "After execution:",
+            "File Type:",
+            "Storage type:"
+        ],
+        "blocks.uploadFile": "Send file to server",
+        "blocks.uploadFile.params": [
+            "Url:",
+            "Mime type:",
+            "File path:",
+            "After execution:",
+            "File Type:",
+            "Storage type:"
+        ],
+        "blocks.exportFile": "Export file to phone",
+        "blocks.exportFile.params": [
+            "File path:",
+            "Storage type:",
+            "File name:",
+            "After execution:"
+        ],
+        "blocks.importFile": "Import file from phone",
+        "blocks.importFile.params": [
+            "File path:",
+            "Storage type:",
+            "Mime type:",
+            "After execution:"
+        ],
+        "blocks.compressZipFile": "Add file to ZIP archive",
+        "blocks.compressZipFile.params": [
+            "Archive path:",
+            "Storage type:",
+            "File path:",
+            "Storage type:",
+            "Compress level (0-9):",
+            "Password:"
+        ],
+        "blocks.compressZipFolder": "Add folder to ZIP archive",
+        "blocks.compressZipFolder.params": [
+            "Archive path:",
+            "Storage type:",
+            "Folder path:",
+            "Storage type:",
+            "Compress level (0-9):",
+            "Password:"
+        ],
+        "blocks.uncompressZip": "Unpack ZIP archive",
+        "blocks.uncompressZip.params": [
+            "Password:",
+            "Archive path:",
+            "Storage type:",
+            "Folder path:",
+            "Storage type:"
+        ],
+        "blocks.installApk": "Install APK file",
+        "blocks.installApk.params": [
+            "File path:",
+            "Storage type:"
         ]
     },
     "snapshot": {
-        "blocks.snapshot": "Здымкі\nі здымкі",
+        "blocks.snapshot": "Snapshots\n& Camera",
         "blocks.newSnapshot": "Create snapshot",
         "blocks.newSnapshot.params": [
             "Snapshot name:",
@@ -1846,6 +2829,93 @@
         "blocks.hideSnapshot": "Hide snapshot",
         "blocks.hideSnapshot.params": [
             "Snapshot name:"
+        ],
+        "blocks.addCamera": "Add to game camera",
+        "blocks.addCamera.params": [
+            "Name:",
+            "Type:",
+            "Layer:",
+            "Focus:"
+        ],
+        "blocks.removeCamera": "Remove from game camera",
+        "blocks.removeCamera.params": [
+            "Name:",
+            "Type:"
+        ],
+        "blocks.appendLayerCamera": "Create back camera layer",
+        "blocks.prependLayerCamera": "Create front camera layer",
+        "blocks.trackFocusCamera": "Update camera",
+        "blocks.trackCamera": "Automatically update camera",
+        "blocks.cancelCamera": "Cancel automatic updates",
+        "blocks.setFocusCamera": "Set camera focus",
+        "blocks.setFocusCamera.params": [
+            "Name:",
+            "Type:"
+        ],
+        "blocks.setOffsetCamera": "Set offset camera",
+        "blocks.setOffsetCamera.params": [
+            "Offset (X):",
+            "Offset (Y):"
+        ],
+        "blocks.setDampingCamera": "Set camera smoothness",
+        "blocks.setDampingCamera.params": [
+            "Smoothness:"
+        ],
+        "blocks.setParallaxCamera": "Set parallax to camera layer",
+        "blocks.setParallaxCamera.params": [
+            "Layer:",
+            "Parallax by X (0-100):",
+            "Parallax by Y (0-100):"
+        ],
+        "blocks.setOffsetLayerCamera": "Set offset camera layer",
+        "blocks.setOffsetLayerCamera.params": [
+            "Layer:",
+            "Offset (X):",
+            "Offset (Y):"
+        ],
+        "blocks.new3dScene": "Create 3d scene",
+        "blocks.new3dScene.params": [
+            "Width:",
+            "Height:"
+        ],
+        "blocks.upd3dScene": "Update 3d scene",
+        "blocks.eye3dScene": "Set camera position of 3d scene",
+        "blocks.eye3dScene.params": [
+            "Position (X):",
+            "Position (Y):",
+            "Position (Z):"
+        ],
+        "blocks.center3dScene": "Set camera center of 3d scene",
+        "blocks.center3dScene.params": [
+            "Position (X):",
+            "Position (Y):",
+            "Position (Z):"
+        ],
+        "blocks.new3dObject": "Create 3d object",
+        "blocks.new3dObject.params": [
+            "Object3d name:",
+            "Имя ресурса:"
+        ],
+        "blocks.move3dObject": "Set 3d object position",
+        "blocks.move3dObject.params": [
+            "Object3d name:",
+            "Position (X):",
+            "Position (Y):",
+            "Position (Z):"
+        ],
+        "blocks.scale3dObject": "Set 3d object scale",
+        "blocks.scale3dObject.params": [
+            "Object3d name:",
+            "Scale (X):",
+            "Scale (Y):",
+            "Scale (Z):"
+        ],
+        "blocks.rotate3dObject": "Set 3d object rotation",
+        "blocks.rotate3dObject.params": [
+            "Object3d name:",
+            "Rotation (X):",
+            "Rotation (Y):",
+            "Rotation (Z):"
         ]
     },
     "network": {
@@ -2099,7 +3169,144 @@
         ],
         "blocks.setTransitionPauseAll": "Прыпыніць усе пераходы",
         "blocks.setTransitionResumeAll": "Аднавіць усе пераходы",
-        "blocks.setTransitionCancelAll": "Скасаваць усе пераходы"
+        "blocks.setTransitionCancelAll": "Скасаваць усе пераходы",
+        "blocks.newEmitter": "Create particles",
+        "blocks.newEmitter.params": [
+            "Particle name:",
+            "Particle type:"
+        ],
+        "blocks.newCustomEmitter": "Create custom particles",
+        "blocks.newCustomEmitter.params": [
+            "Particle name:",
+            "Particle table:",
+            "Sprite name:"
+        ],
+        "blocks.removeEmitter": "Remove particles",
+        "blocks.removeEmitter.params": [
+            "Particle name:"
+        ],
+        "blocks.removeAllEmitter": "Remove all particles",
+        "blocks.setEmitterPos": "Set particles position",
+        "blocks.setEmitterPos.params": [
+            "Particle name:",
+            "Position (X):",
+            "Position (Y):"
+        ],
+        "blocks.setEmitterSize": "Set particles size",
+        "blocks.setEmitterSize.params": [
+            "Particle name:",
+            "Size (%):"
+        ],
+        "blocks.setEmitterSpeed": "Set particles speed",
+        "blocks.setEmitterSpeed.params": [
+            "Particle name:",
+            "Speed:"
+        ],
+        "blocks.setEmitterRotation": "Set particles rotation",
+        "blocks.setEmitterRotation.params": [
+            "Particle name:",
+            "Rotation (0-360):"
+        ],
+        "blocks.setEmitterGravity": "Set particles gravity",
+        "blocks.setEmitterGravity.params": [
+            "Particle name:",
+            "Gravity (X):",
+            "Gravity (Y):"
+        ],
+        "blocks.setEmitterStartColor": "Set particles start color",
+        "blocks.setEmitterStartColor.params": [
+            "Particle name:",
+            "Color:",
+            "Opacity (0-100):"
+        ],
+        "blocks.setEmitterStartRGB": "Set particles RGB start color",
+        "blocks.setEmitterStartRGB.params": [
+            "Particle name:",
+            "Color (R):",
+            "Color (G):",
+            "Color (B):",
+            "Opacity (0-100):"
+        ],
+        "blocks.setEmitterFinishColor": "Set particles finite color",
+        "blocks.setEmitterFinishColor.params": [
+            "Particle name:",
+            "Color:",
+            "Opacity (0-100):"
+        ],
+        "blocks.setEmitterFinishRGB": "Set particles RGB finite color",
+        "blocks.setEmitterFinishRGB.params": [
+            "Particle name:",
+            "Color (R):",
+            "Color (G):",
+            "Color (B):",
+            "Opacity (0-100):"
+        ],
+        "blocks.newLinearEmitter": "Create linear particles",
+        "blocks.newLinearEmitter.params": [
+            "Particle name:",
+            "Sprite name:",
+            "Maximum particles:",
+            "Dependence angle:",
+            "Departure angle:",
+            "Departure angle deviation:",
+            "Speed:",
+            "Speed deviation:",
+            "Radiation range X:",
+            "Radiation range Y:",
+            "Gravity particles X:",
+            "Gravity particles Y:",
+            "Radial acceleration:",
+            "Acceleration deviation:",
+            "Tangential acceleration:",
+            "Acceleration deviation:",
+            "Particle lifetime:",
+            "Time deviation:",
+            "Initial size:",
+            "Size deviation:",
+            "Final size:",
+            "Size deviation:",
+            "Initial rotation:",
+            "Rotation deviation:",
+            "Final rotation:",
+            "Rotation deviation:",
+            "Initial color:",
+            "Color deviation:",
+            "Final color:",
+            "Color deviation:",
+            "Original color GL:",
+            "Target color GL:"
+        ],
+        "blocks.newRadialEmitter": "Create radial particles",
+        "blocks.newRadialEmitter.params": [
+            "Particle name:",
+            "Sprite name:",
+            "Maximum particles:",
+            "Dependence angle:",
+            "Departure angle:",
+            "Departure angle deviation:",
+            "Maximum radius:",
+            "Radius deviation:",
+            "Minimum radius:",
+            "Radius deviation:",
+            "Radial rotation:",
+            "Rotation deviation:",
+            "Particle lifetime:",
+            "Time deviation:",
+            "Initial size:",
+            "Size deviation:",
+            "Final size:",
+            "Size deviation:",
+            "Initial rotation:",
+            "Rotation deviation:",
+            "Final rotation:",
+            "Rotation deviation:",
+            "Initial color:",
+            "Color deviation:",
+            "Final color:",
+            "Color deviation:",
+            "Original color GL:",
+            "Target color GL:"
+        ]
     },
     "varsNoob": {
         "blocks.setVarNoob": "Стварыць value",
@@ -2457,6 +3664,14 @@
         "editor.list.prop": "Уласцівасці",
         "editor.list.log": "Логіка",
         "editor.list.device": "Прылада",
+        "editor.list.resource": "Resources",
+        "editor.list.resource.images": "Sprites",
+        "editor.list.resource.images.noob": "Images",
+        "editor.list.resource.sounds": "Sounds",
+        "editor.list.resource.videos": "Videos",
+        "editor.list.resource.fonts": "Fonts",
+        "editor.list.resource.others": "Other",
+        "editor.list.resource.levels": "Levels",
         "editor.list.custom": "Карыстальніцкі",
         "editor.list.event": "Падзея",
         "editor.list.script": "Скрыпт",
@@ -2465,6 +3680,8 @@
         "editor.list.prop.obj.noob": "Малюнак",
         "editor.list.prop.text": "Тэкст",
         "editor.list.prop.media": "Медыя",
+        "editor.list.prop.media.noob": "Sounds",
+        "editor.list.prop.files": "Files",
         "editor.list.prop.group": "Група",
         "editor.list.prop.widget": "Віджэт"
     },
@@ -2477,17 +3694,26 @@
         "editor.list.fun.tostring": "У тэкст",
         "editor.list.fun.totable": "У табліцу",
         "editor.list.fun.len_table": "колькасць аб'ектаў у табліцы",
+        "editor.list.fun.exists_in_table": "exists_in_table",
         "editor.list.fun.unix_time": "час unix",
+        "editor.list.fun.unix_ms": "unix_time_ms",
         "editor.list.fun.encode": "кадзіраваць json",
         "editor.list.fun.gsub": "замяніць у тэксце",
         "editor.list.fun.sub": "сімвал з тэксту",
         "editor.list.fun.len": "даўжыня тэксту",
         "editor.list.fun.find": "знайсці ў тэксце",
         "editor.list.fun.split": "падзелены тэкст",
+        "editor.list.fun.rep": "repeat_text",
+        "editor.list.fun.reverse": "reverse_text",
+        "editor.list.fun.upper": "text_to_uppercase",
+        "editor.list.fun.lower": "text_to_lowercase",
+        "editor.list.fun.byte": "text_to_bytes",
+        "editor.list.fun.char": "bytes_to_text",
         "editor.list.fun.match": "рэгулярнае выраз",
         "editor.list.fun.color_pixel": "колер пікселя",
         "editor.list.fun.get_ip": "атрымаць уласны ip",
-        "editor.list.fun.noise": "перлін шум"
+        "editor.list.fun.noise": "перлін шум",
+        "editor.list.fun.parameter": "parameter"
     },
     "editor.math": {
         "editor.list.math.random": "выпадковы",
@@ -2505,7 +3731,7 @@
         "editor.list.math.pi": "пі",
         "editor.list.math.exp": "паказчык",
         "editor.list.math.factorial": "фактарыял",
-        "editor.list.math.log": "Лагарыфм",
+        "editor.list.math.log0": "log",
         "editor.list.math.log10": "Лагарыфм з 10",
         "editor.list.math.asin": "арксінус",
         "editor.list.math.acos": "аркасінус",
@@ -2515,6 +3741,7 @@
     },
     "editor.prop": {
         "editor.list.prop.obj.touch": "дотык",
+        "editor.list.prop.obj.group": "group",
         "editor.list.prop.obj.tag": "тэг ",
         "editor.list.prop.obj.var": "зменныя",
         "editor.list.prop.obj.pos_x": "пазіцыя x",
@@ -2523,6 +3750,7 @@
         "editor.list.prop.obj.height": "вышыня",
         "editor.list.prop.obj.rotation": "паварот",
         "editor.list.prop.obj.alpha": "непразрыстасць",
+        "editor.list.prop.obj.distance": "distance",
         "editor.list.prop.obj.name_texture": "імя тэкстуры",
         "editor.list.prop.obj.velocity_x": "хуткасць х",
         "editor.list.prop.obj.velocity_y": "хуткасць y",
@@ -2536,6 +3764,7 @@
         "editor.list.prop.text.rotation": "Паварот тэксту",
         "editor.list.prop.text.alpha": "Непразрыстасць тэксту",
         "editor.list.prop.group.tag": "тэг групы",
+        "editor.list.prop.group.table": "group_table",
         "editor.list.prop.group.pos_x": "пазіцыя x групы",
         "editor.list.prop.group.pos_y": "пазіцыя y групы",
         "editor.list.prop.group.width": "шырыня групы",
@@ -2554,7 +3783,12 @@
         "editor.list.prop.media.sound_volume": "гучнасць гуку",
         "editor.list.prop.media.sound_total_time": "агульны час гуку",
         "editor.list.prop.media.sound_pause": "гук прыпынены",
-        "editor.list.prop.media.sound_play": "прайграваецца гук"
+        "editor.list.prop.media.sound_play": "прайграваецца гук",
+        "editor.list.prop.files.length": "size_in_bytes",
+        "editor.list.prop.files.is_file": "file_ exists",
+        "editor.list.prop.files.is_folder": "folder_ exists",
+        "editor.list.prop.files.length_folder": "number_of_files",
+        "editor.list.prop.files.last_modified": "last_modified"
     },
     "editor.log": {
         "editor.list.log.true": "праўда",
