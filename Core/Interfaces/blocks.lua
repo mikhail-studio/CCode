@@ -2,6 +2,8 @@ local listeners = {}
 local LIST = require 'Core.Modules.interface-list'
 local LOGIC = require 'Core.Modules.logic-input'
 
+GANIN.az()
+
 listeners.but_title = function(target)
     EXITS.blocks()
 end
@@ -21,7 +23,8 @@ end
 
 listeners.but_list = function(target)
     if #BLOCKS.group.blocks ~= 0 then
-        local list = {STR['button.remove'], STR['button.copy'], STR['button.comment'], STR['button.debug'], STR['button.to.buffer']}
+        local list = {STR['button.remove'], STR['button.copy'], STR['button.comment'],
+            STR['button.debug'], STR['button.to.buffer'], STR['button.from.buffer']}
 
         if BLOCKS.custom then
             table.remove(list, 5)
@@ -42,6 +45,13 @@ listeners.but_list = function(target)
                     WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
                 elseif e.index == 5 then
                     pcall(function() BUFFER = COPY_TABLE(GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT)) end)
+                elseif e.index == 6 then
+                    pcall(function()
+                        for i = 1, #BUFFER_EVENT do
+                            local params = BUFFER_EVENT[i]
+                            BLOCKS.new(params.name, i, params.event, params.params, params.comment, params.nested, params.vars, params.tables)
+                        end
+                    end)
                 elseif e.index ~= 0 then
                     ALERT = false
                     INDEX_LIST = e.index
@@ -124,7 +134,11 @@ listeners.checkLocalData = function(bIndex, pIndex, pType, data, opt)
             else
                 SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
             end
+        elseif opt.script then
+            return script
         end
+    elseif opt.script then
+        return script
     end
 end
 
@@ -512,7 +526,7 @@ return function(e)
                     then e.target.alpha = 1
                 else e.target.alpha = 0.9 end
                 if e.opt and e.opt.script then
-                    return listeners[e.target.button](e.target)
+                    return listeners[e.target.button](e.target, e.opt)
                 else
                     listeners[e.target.button](e.target)
                 end

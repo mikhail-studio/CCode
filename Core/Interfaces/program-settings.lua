@@ -1,5 +1,7 @@
 local listeners = {}
 
+GANIN.az()
+
 listeners.title = function(target)
     EXITS.psettings()
 end

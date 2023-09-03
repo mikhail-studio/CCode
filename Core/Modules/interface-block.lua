@@ -66,6 +66,7 @@ local listener = function(e, scroll, group, type)
             elseif not e.target.checkbox.isVisible then
                 if type == 'programs' and ALERT then
                     local data = GET_GAME_CODE(e.target.link)
+                    GANIN.az()
 
                     if tonumber(data.build) > 1170 then
                         data = _supportOldestVersion(data, e.target.link)
@@ -145,10 +146,12 @@ local listener = function(e, scroll, group, type)
                                     PROGRAMS.group.isVisible = true
                                     require('Core.Share.build').new(CURRENT_LINK)
                                 else
-                                    local message = STR['robodog.not.enough.ccoin'] .. '\n' .. STR['robodog.need.ccoin'] .. '10'
-                                    WINDOW.new(message, {STR['button.close']}, function(ev) end, 3)
-                                    WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
-                                    WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                                    timer.new(1, 1, function()
+                                        local message = STR['robodog.not.enough.ccoin'] .. '\n' .. STR['robodog.need.ccoin'] .. '10'
+                                        WINDOW.new(message, {STR['button.close']}, function(ev) end, 3)
+                                        WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                                        WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                                    end)
                                 end
                             end
                         end, 4)
@@ -160,10 +163,12 @@ local listener = function(e, scroll, group, type)
                                     PROGRAMS.group.isVisible = true
                                     require('Core.Share.build').new(CURRENT_LINK, true)
                                 else
-                                    local message = STR['robodog.not.enough.ccoin'] .. '\n' .. STR['robodog.need.ccoin'] .. '100'
-                                    WINDOW.new(message, {STR['button.close']}, function(ev) end, 3)
-                                    WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
-                                    WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                                    timer.new(1, 1, function()
+                                        local message = STR['robodog.not.enough.ccoin'] .. '\n' .. STR['robodog.need.ccoin'] .. '100'
+                                        WINDOW.new(message, {STR['button.close']}, function(ev) end, 3)
+                                        WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                                        WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                                    end)
                                 end
                             end
                         end, 4)
@@ -191,7 +196,9 @@ local listener = function(e, scroll, group, type)
                         e.target.move = false
                         MOVE.stop(e, scroll, group, type)
                     elseif ALERT then
-                        native.showAlert('Мне лень', 'Не успел реализовать', {'Ок'})
+                        native.showAlert('Я Лёня, а не Илон',
+                            'Данный модуль в разработке, пожалуйста подождите, я как бы за бесплатно работаю\n' ..
+                            'This module is in development, please wait, I\'m kind of working for free', {'Ок'})
                     end
 
                     if e.target.timer then

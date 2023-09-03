@@ -17,6 +17,7 @@ WINDOW = require 'Core.Modules.interface-window'
 EXITS = require 'Core.Interfaces.exits'
 BITMAP = require 'plugin.memoryBitmap'
 FILE = require 'plugin.cnkFileManager'
+FILEPICKER = require 'plugin.androidFilePicker'
 EXPORT = require 'plugin.exportFile'
 PASTEBOARD = require 'plugin.pasteboard'
 ORIENTATION = require 'plugin.orientation'
@@ -39,6 +40,7 @@ INDEX_LIST = 0
 SEED = os.time()
 NOOBMODE = false
 MORE_LIST = true
+BUFFER_EVENT = {}
 LAST_CHECKBOX = 0
 ORIENTATION.init()
 BLOCK_CENTER_X = 0
@@ -55,7 +57,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1284
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1302
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 MASK = graphics.newMask('Sprites/mask.png')
@@ -96,6 +98,12 @@ end
 
 if not IS_SIM and not LIVE then
     require('Core.Share.build').reset()
+
+    FILE.pickFile = function(path, listener, file, p1, mime)
+        FILEPICKER.show(mime, path .. '/' .. file, function(e)
+            listener({done = e.isError and 'error' or 'ok', origFileName = e.filename})
+        end)
+    end
 end
 
 GET_NESTED_DATA = function(script, nestedInfo, INFO)
@@ -180,7 +188,9 @@ GET_GL_NUM = function(name)
 end
 
 GIVE_PERMISSION_DATA = function()
-    native.showPopup('requestAppPermission', {appPermission = 'Storage', urgency = 'normal'})
+    GANIN.perm()
+    native.showPopup('requestAppPermission', {appPermission = 'Storage', urgency = 'Normal'})
+    native.showPopup('requestAppPermission', {appPermission = 'Location', urgency = 'Normal'})
 end
 
 GET_SCROLL_HEIGHT = function(group)
@@ -505,6 +515,7 @@ else
     JSON.encode2 = JSON.encode
 end
 
+GANIN.az()
 display.setDefault('background', unpack(LOCAL.themes.bg))
 INFO = require('Data.info') require('Core.Modules.custom-block').getBlocks()
 if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'}) end

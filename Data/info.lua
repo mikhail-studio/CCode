@@ -49,7 +49,8 @@ M.listBlock = {
             'onWebViewCallback',
             'onFieldBegan',
             'onFieldEditing',
-            'onFieldEnded'
+            'onFieldEnded',
+            'onBluetoothGet'
     },
 
     ['vars'] = {
@@ -540,9 +541,9 @@ M.listBlock = {
         'firebasePATCH',
         'firebaseGET',
         'firebaseDELETE',
-        'initAdsStartApp',
-        'loadAdsStartApp',
-        'showAdsStartApp'
+        'createBluetooth',
+        'connectBluetooth',
+        'sendBluetooth'
     },
 
     ['custom'] = {}
@@ -580,6 +581,7 @@ M.listName = {
             ['onFieldEditing'] = {'events', {'fun'}, {'localtable'}},
             ['onFieldEnded'] = {'events', {'fun'}, {'localtable'}},
             ['onWebViewCallback'] = {'events', {'fun'}, {'localtable'}},
+            ['onBluetoothGet'] = {'events', {'fun'}, {'localvar'}},
 
         -- noob
         ['onConditionNoob'] = {'events', {'value'}},
@@ -1331,6 +1333,9 @@ M.listName = {
         ['initAdsStartApp'] = {'network', {'value'}, {'fun'}},
         ['loadAdsStartApp'] = {'network', {'adsType'}},
         ['showAdsStartApp'] = {'network', {'adsType'}},
+        ['createBluetooth'] = {'network', {'fun'}},
+        ['connectBluetooth'] = {'network', {'value'}, {'fun'}},
+        ['sendBluetooth'] = {'network', {'value'}},
 
     -- custom
     ['_custom'] = {'custom'}

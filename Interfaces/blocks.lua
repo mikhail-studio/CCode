@@ -1,6 +1,8 @@
 local BLOCK = require 'Core.Modules.logic-block'
 local M = {}
 
+GANIN.az()
+
 local genBlocks = function(data, script)
     for i = 1, #script.params do
         local params = script.params[i]

@@ -4,6 +4,14 @@ M['device_id'] = function()
     return DEVICE_ID
 end
 
+M['get_device'] = function()
+    return JSON.decode(GANIN.bluetooth('device'))
+end
+
+M['get_devices'] = function()
+    return JSON.decode(GANIN.bluetooth('devices'))
+end
+
 M['width_screen'] = function()
     return DISPLAY_WIDTH
 end

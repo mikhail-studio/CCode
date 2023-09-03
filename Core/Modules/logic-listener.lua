@@ -416,9 +416,7 @@ local function stopMoveLogicBlock(e, group, scroll)
             end
         end
 
-        if M.countClose > 0 or not e.target.data.nested then
-            SET_GAME_SCRIPT(CURRENT_LINK, M.script, CURRENT_SCRIPT, M.data)
-        end
+        SET_GAME_SCRIPT(CURRENT_LINK, M.script, CURRENT_SCRIPT, M.data)
     end
 end
 

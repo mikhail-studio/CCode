@@ -60,6 +60,8 @@ M.create = function()
     M.group.themeGroup = display.newGroup()
     M.group.learnGroup = display.newGroup()
 
+    GANIN.az()
+
     local bg = display.newImage(THEMES.bg(), CENTER_X, CENTER_Y)
         bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
         bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT

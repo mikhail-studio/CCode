@@ -2,11 +2,12 @@ local LISTENER = require 'Core.Interfaces.blocks'
 local BLOCK = require 'Core.Modules.logic-block'
 local M = {}
 
-local function getButtonText(comment, nested, name)
+local function getButtonText(comment, nested, name, event)
     local comment = comment and STR['button.uncomment'] or STR['button.comment']
     local nested = nested and (#nested > 0 and STR['button.show'] or STR['button.hide']) or nil
     local addIfElse = name == 'if' and STR['button.addIfElse'] or nil
-    return {STR['button.remove'], STR['button.copy'], comment, nested, addIfElse}
+    local toBuffer = event and STR['button.to.buffer'] or nil
+    return {STR['button.remove'], STR['button.copy'], comment, nested, addIfElse or toBuffer}
 end
 
 M.remove = function()
@@ -119,7 +120,9 @@ M.new = function(target)
         local needParams = #target.data.params > 12 and 12 or #target.data.params
         local theight = 120 + 60 * math.round((needParams - 2 < 0 and 0 or needParams - 2) / 2, 0)
         local height = nested and theight / size + 340 or theight / size + 264
-        local width = target.block.width / size + 20 if target.data.name == 'if' then height = height + 76 end
+        local width = target.block.width / size + 20
+        if target.data.name == 'if' then height = height + 76 end
+        if target.data.event then height = height + 76 end
 
         local bg = display.newRect(CENTER_X, CENTER_Y, DISPLAY_WIDTH * 2, DISPLAY_HEIGHT * 2)
             bg:setFillColor(1, 0.005)
@@ -131,6 +134,7 @@ M.new = function(target)
 
         local comment = target.data.comment
         local name = target.data.name
+        local event = target.data.event
         local length = #INFO.listName[name] - 1
         local _length = #target.data.params
 
@@ -153,13 +157,13 @@ M.new = function(target)
             local y = block.y + block.block.height / 2 + 50
         M.group:insert(block)
 
-        for i = 1, #getButtonText(comment, nested, name) do
+        for i = 1, #getButtonText(comment, nested, name, event) do
             local button = display.newRect(CENTER_X, y, width - 25, 66)
                 button:setFillColor(unpack(LOCAL.themes.bgAddColor))
             M.group:insert(button)
 
             button.text = display.newText({
-                    text = getButtonText(comment, nested, name)[i], align = 'left', fontSize = 24,
+                    text = getButtonText(comment, nested, name, event)[i], align = 'left', fontSize = 24,
                     x = CENTER_X + 10, y = y, font = 'ubuntu', height = 28, width = width - 40
                 }) button.text.id = i
                 button.text:setFillColor(unpack(LOCAL.themes.text))
@@ -179,16 +183,35 @@ M.new = function(target)
                     e.target:setFillColor(unpack(LOCAL.themes.bgAddColor))
                     if e.target.click then
                         e.target.click = false
-                        INDEX_LIST = e.target.text.id
+                        if e.target.text.text == STR['button.to.buffer'] then
+                            pcall(function()
+                                local index = target.getIndex(target)
+                                local blocks = {}
 
-                        for j = 1, #BLOCKS.group.blocks do
-                            BLOCKS.group.blocks[j].x = BLOCKS.group.blocks[j].x + 20
-                            BLOCKS.group.blocks[j].checkbox.isVisible = true
-                            BLOCKS.group.blocks[j].rects.isVisible = false
+                                for j = index, #BLOCKS.group.blocks do
+                                    local block = BLOCKS.group.blocks[j]
+
+                                    if block.data.event and j > index then
+                                        break
+                                    end
+
+                                    table.insert(blocks, block.data)
+                                end
+
+                                BUFFER_EVENT = COPY_TABLE(blocks)
+                            end) M.remove()
+                        else
+                            INDEX_LIST = e.target.text.id
+
+                            for j = 1, #BLOCKS.group.blocks do
+                                BLOCKS.group.blocks[j].x = BLOCKS.group.blocks[j].x + 20
+                                BLOCKS.group.blocks[j].checkbox.isVisible = true
+                                BLOCKS.group.blocks[j].rects.isVisible = false
+                            end
+
+                            onCheckboxPress({target = target}) M.remove()
+                            LISTENER({target = {button = 'but_okay', click = true}, phase = 'ended'})
                         end
-
-                        onCheckboxPress({target = target}) M.remove()
-                        LISTENER({target = {button = 'but_okay', click = true}, phase = 'ended'})
                     end
                 end
 

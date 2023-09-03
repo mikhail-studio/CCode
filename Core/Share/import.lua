@@ -127,6 +127,8 @@ return {
             end
         end
 
+        GANIN.az()
+
         if import then
             completeImportProject(import)
         else

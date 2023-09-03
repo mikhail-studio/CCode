@@ -1,6 +1,8 @@
 local BLOCK = require 'Core.Modules.interface-block'
 local M = {}
 
+GANIN.az()
+
 local genBlocks = function()
     local data, index = GET_GAME_CODE(CURRENT_LINK), 0
     -- local rightScripts = {}

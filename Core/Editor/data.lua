@@ -1,16 +1,18 @@
 local M = {}
 
+GANIN.az()
+
 M.fun = {
     names = {},
     keys = {},
     default = {
         'read_save', 'encode', 'len_table', 'concat', 'totable', 'tostring', 'tonumber', 'len', 'find',
         'sub', 'gsub', 'split', 'rep', 'reverse', 'upper', 'lower', 'byte', 'char', 'exists_in_table',
-        'unix_time', 'unix_ms', 'color_pixel', 'get_ip', 'random_str', 'match', 'noise', 'parameter'
+        'unix_time', 'unix_ms', 'color_pixel', 'get_ip', 'random_str', 'match', 'noise', 'parameter', 'timer'
     },
     noob = {
         'concat', 'random_str', 'tostring', 'tonumber', 'len', 'find', 'sub', 'gsub', 'rep', 'reverse',
-        'upper', 'lower', 'unix_time', 'color_pixel', 'totable', 'len_table', 'encode'
+        'upper', 'lower', 'unix_time', 'color_pixel', 'totable', 'len_table', 'encode', 'timer'
     }
 }
 
@@ -87,7 +89,7 @@ M.device = {
     keys = {
         'fps', 'device_id', 'width_screen', 'height_screen', 'top_point_screen',
         'bottom_point_screen', 'right_point_screen', 'left_point_screen', 'height_top', 'height_bottom',
-        'finger_touching_screen', 'finger_touching_screen_x', 'finger_touching_screen_y'
+        'finger_touching_screen', 'finger_touching_screen_x', 'finger_touching_screen_y', 'get_device', 'get_devices'
     }
 }
 
@@ -96,7 +98,7 @@ M.set = function(key, name)
     and EDITOR.data[EDITOR.cursor[1] + 1][2] == 's'))
     and (key == 'fC' or key == 'fS' or key == 'fP' or key == 'f' or key == 'm' or key == 'p'
     --[[or name == 'finger_touching_screen_x' or name == 'finger_touching_screen_y']])
-    and name ~= 'unix_ms' and name ~= 'unix_time' and name ~= 'pi' then
+    and name ~= 'timer' and name ~= 'unix_ms' and name ~= 'unix_time' and name ~= 'pi' then
         EDITOR.cursor[1] = EDITOR.cursor[1] + 1
         table.remove(EDITOR.data, EDITOR.cursor[1] - 1)
         table.insert(EDITOR.data, EDITOR.cursor[1] - 1, {'(', 's'})

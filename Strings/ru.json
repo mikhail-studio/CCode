@@ -343,7 +343,9 @@
             "blocks.onFieldEditing": "Пока текстовое поле редактируется",
             "blocks.onFieldEditing.params": ["Имя функции:", "Имя таблицы:"],
             "blocks.onFieldEnded": "Закончилось редактирование поля",
-            "blocks.onFieldEnded.params": ["Имя функции:", "Имя таблицы:"]
+            "blocks.onFieldEnded.params": ["Имя функции:", "Имя таблицы:"],
+            "blocks.onBluetoothGet": "Когда получено значение по bluetooth",
+            "blocks.onBluetoothGet.params": ["Имя функции:", "Имя переменной:"]
     },
 
     "vars": {
@@ -611,7 +613,7 @@
             "blocks.requestApi.params": ["Lua код:"],
             "blocks.requestApiRes": "Вызвать API метод из ресурса",
             "blocks.requestApiRes.params": ["Имя ресурса:"],
-            "blocks.requestApiThread": "Вызвать lua5.3 метод в новом потоке",
+            "blocks.requestApiThread": "Вызвать lua5.4 метод в новом потоке",
             "blocks.requestApiThread.params": ["Lua код:", "Имя функции:"],
             "blocks.toastShort": "Короткое всплывающее уведомление",
             "blocks.toastShort.params": ["Текст:"],
@@ -1214,7 +1216,13 @@
         "blocks.loadAdsStartApp": "Загрузить StartApp рекламу",
         "blocks.loadAdsStartApp.params": ["Тип рекламы:"],
         "blocks.showAdsStartApp": "Показать StartApp рекламу",
-        "blocks.showAdsStartApp.params": ["Тип рекламы:"]
+        "blocks.showAdsStartApp.params": ["Тип рекламы:"],
+        "blocks.createBluetooth": "Создать bluetooth соединение",
+        "blocks.createBluetooth.params": ["Слушатель соединения:"],
+        "blocks.connectBluetooth": "Подключиться к bluetooth соединению",
+        "blocks.connectBluetooth.params": ["Адрес:", "Слушатель соединения:"],
+        "blocks.sendBluetooth": "Отправить значение по bluetooth соединению",
+        "blocks.sendBluetooth.params": ["Значение:"]
     },
 
     "transition": {
@@ -1522,7 +1530,8 @@
         "editor.list.fun.color_pixel": "цвет_пикселя",
         "editor.list.fun.get_ip": "получить_свой_адрес",
         "editor.list.fun.noise": "шум_перлина",
-        "editor.list.fun.parameter": "параметр"
+        "editor.list.fun.parameter": "параметр",
+        "editor.list.fun.timer": "время_со_старта"
     },
 
     "editor.math": {
@@ -1636,6 +1645,8 @@
         "editor.list.device.finger_touching_screen": "палец_касается_экрана",
         "editor.list.device.finger_touching_screen_x": "палец_касается_экрана_x",
         "editor.list.device.finger_touching_screen_y": "палец_касается_экрана_y",
-        "editor.list.device.get_ip": "получить_свой_адрес"
+        "editor.list.device.get_ip": "получить_свой_адрес",
+        "editor.list.device.get_device": "собственное_bt_устройство",
+        "editor.list.device.get_devices": "подключенные_bt_устройства"
     }
 }

@@ -29,12 +29,13 @@ local function checkCheater()
     -- print(key2, LOCAL.key2)
     -- print(key3, LOCAL.key3)
 
-    if key ~= LOCAL.key or key2 ~= LOCAL.key2 or key3 ~= LOCAL.key3 then fuckCheater() return true end
+    if key ~= LOCAL.key or key2 ~= LOCAL.key2 or key3 ~= LOCAL.key3 or LOCAL.ccoin ~= LOCAL.speed then fuckCheater() return true end
 end
 
 M.set = function(count)
     if not checkCheater() then
         LOCAL.ccoin = tostring(count)
+        LOCAL.speed = LOCAL.ccoin
         LOCAL.key = CRYPTO.hmac(CRYPTO.sha256, CRYPTO.hmac(CRYPTO.md5, LOCAL.ccoin, 'sha256ключ'), 'md5ключ')
         NEW_DATA()
     end
@@ -51,10 +52,16 @@ M.setKeys = function()
 end
 
 M.init = function()
+    GANIN.az()
+
     if LOCAL.ccoin == nil then
         LOCAL.dog = {face = 1, ears = 1, eyes = 1, mouth =  1, accessories = 1}
         LOCAL.dogs = {face = {true}, ears = {true}, eyes = {true}, mouth = {true}, accessories = {true}}
         M.setKeys() M.set(0)
+    end
+
+    if LOCAL.speed == nil then
+        LOCAL.speed = LOCAL.ccoin
     end
 
     LOCAL.ccoin__set = function()
@@ -69,6 +76,8 @@ M.init = function()
 end
 
 M.buy = function(price)
+    GANIN.az()
+
     if LOCAL.ccoin then
         if not checkCheater() then
             if tonumber(LOCAL.ccoin) >= tonumber(price) then

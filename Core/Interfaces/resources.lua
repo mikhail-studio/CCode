@@ -4,6 +4,8 @@ local LIST = require 'Core.Modules.interface-list'
 local MOVE = require 'Core.Modules.interface-move'
 local FILTER = require 'Core.Modules.name-filter'
 
+GANIN.az()
+
 listeners.but_title = function(target)
     EXITS.resources()
 end

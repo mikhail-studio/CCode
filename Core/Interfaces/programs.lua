@@ -1,6 +1,8 @@
 local listeners = {}
 local LIST = require 'Core.Modules.interface-list'
 
+GANIN.az()
+
 listeners.but_title = function(target)
     EXITS.programs()
 end

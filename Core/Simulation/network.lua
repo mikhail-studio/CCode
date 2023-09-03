@@ -1,6 +1,19 @@
 local CALC = require 'Core.Simulation.calc'
 local M = {}
 
+M['createBluetooth'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GANIN.bluetooth(\'host\', function(e) ' .. CALC(params[1], 'a', true) .. '(e) end) end)'
+end
+
+M['connectBluetooth'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GANIN.bluetooth(\'connect\', ' .. CALC(params[1], '\'\'') .. ','
+    GAME.lua = GAME.lua .. ' function(e) ' .. CALC(params[2], 'a', true) .. '(e) end) end)'
+end
+
+M['sendBluetooth'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GANIN.bluetooth(\'send\', ' .. CALC(params[1], '\'{}\'') ..  ') end)'
+end
+
 M['createServer'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.stops, SERVER.createServer('
     GAME.lua = GAME.lua .. CALC(params[1], '22222') .. ', function(e) if GAME.hash == hash then'

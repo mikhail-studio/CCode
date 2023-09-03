@@ -1,6 +1,8 @@
 local LISTENER = require 'Core.Interfaces.settings'
 local M = {}
 
+GANIN.az()
+
 M.create = function()
     M.group = display.newGroup()
     M.group.isVisible = false

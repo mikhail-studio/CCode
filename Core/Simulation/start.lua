@@ -54,7 +54,7 @@ local function getStartLua(linkBuild)
     local cod19 = ' local hash = GAME.hash GAME.group.networks = {} GAME.group.const.touch_x, GAME.group.const.touch_y = 0, 0'
     local cod20 = ' local tmp = DOC_DIR .. \'/\' .. CURRENT_LINK .. \'/Temps\' OS_REMOVE(tmp, true) LFS.mkdir(tmp)'
     local cod21 = ' GAME.group.snapshots = {} GAME.group.joints = {} GAME_DEVICE_ID = \'' .. tostring(DEVICE_ID) .. '\''
-    local cod22 = ' GAME.group.particles = {} GAME.group.objects3d = {}'
+    local cod22 = ' GAME.group.particles = {} GAME.group.objects3d = {} GAME.timer = system.getTimer()'
 
     if linkBuild then
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = CLASS(), {}, {}, {}' .. require 'Data.build'

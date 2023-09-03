@@ -1165,15 +1165,20 @@ M.create = function()
                 end
             end
 
-            if startDelimiter > 2 then
-                M.group.types[i].scroll3:setScrollHeight(scroll3Height)
-            end
+            local function setScrollHeight()
+                if startDelimiter > 2 then
+                    M.group.types[i].scroll3:setScrollHeight(scroll3Height)
+                end
 
-            if startDelimiter > 1 then
-                M.group.types[i].scroll2:setScrollHeight(scroll2Height)
-            end
+                if startDelimiter > 1 then
+                    M.group.types[i].scroll2:setScrollHeight(scroll2Height)
+                end
 
-            M.group.types[i].scroll:setScrollHeight(scrollHeight)
+                M.group.types[i].scroll:setScrollHeight(scrollHeight)
+            end 
+
+            setScrollHeight()
+            timer.new(1000, 1, function() setScrollHeight() end)
         end M.noob()
     end
 end

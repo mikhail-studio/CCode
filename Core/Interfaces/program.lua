@@ -1,5 +1,7 @@
 local listeners = {}
 
+GANIN.az()
+
 listeners.but_title = function(target)
     EXITS.program()
 end

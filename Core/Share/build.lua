@@ -14,10 +14,11 @@ return {
             LFS.mkdir(DOC_DIR .. '/Build/Videos')
             LFS.mkdir(DOC_DIR .. '/Build/Fonts')
 
+            GANIN.az()
             PROGRAMS.group[8]:setIsLocked(true, 'vertical')
             WINDOW.new(STR['build.start' .. (isAab and '.aab' or '')], {}, function() PROGRAMS.group[8]:setIsLocked(false, 'vertical') end, 1)
 
-            timer.performWithDelay(1, function()
+            timer.performWithDelay(100, function()
                 local flds = {'Resources', 'Images', 'Sounds', 'Videos', 'Fonts'}
                 local icons = {'mipmap-hdpi-v4', 'mipmap-mdpi-v4', 'mipmap-ldpi-v4', 'mipmap-xhdpi-v4', 'mipmap-xxhdpi-v4', 'mipmap-xxxhdpi-v4'}
                 -- local icons = {'mipmap-hdpi', 'mipmap-mdpi', 'mipmap-xhdpi', 'mipmap-xxhdpi', 'mipmap-xxxhdpi'}

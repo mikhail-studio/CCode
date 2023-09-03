@@ -6,6 +6,8 @@ local LOGIC = require 'Core.Modules.logic-input'
 local TEXT = require 'Core.Editor.text'
 local M = {}
 
+GANIN.az()
+
 M.find = function(data)
     for i = 1, #data do
         if data[i][2] == '|' then

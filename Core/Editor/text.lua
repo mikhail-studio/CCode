@@ -1,6 +1,8 @@
 local CALC = require 'Core.Simulation.calc'
 local M = {}
 
+GANIN.az()
+
 M.check = function(data, withoutBrackets)
     return select(1, pcall(loadstring('pcall(function() local a = ' .. CALC(M.number(data, true), nil, withoutBrackets) .. ' end)')))
 end

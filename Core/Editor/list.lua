@@ -3,6 +3,8 @@ local DATA = require 'Core.Editor.data'
 local TEXT = require 'Core.Editor.text'
 local listeners = {}
 
+GANIN.az()
+
 listeners.listener = function(e)
     if e.phase == 'began' and ALERT then
         display.getCurrentStage():setFocus(e.target)

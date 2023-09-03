@@ -187,6 +187,10 @@ M['color_pixel'] = function(x, y)
     end) return isComplete and result or {0, 0, 0, 0}
 end
 
+M['timer'] = function()
+    return system.getTimer() - GAME.timer
+end
+
 M['unix_time'] = function()
     return os.time()
 end

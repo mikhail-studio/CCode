@@ -1,5 +1,7 @@
 local listeners = {}
 
+GANIN.az()
+
 listeners.title = function()
     EXITS.robodog()
 end

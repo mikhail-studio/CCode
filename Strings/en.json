@@ -343,7 +343,9 @@
             "blocks.onFieldEditing": "While text field is being edited",
             "blocks.onFieldEditing.params": ["Function name:", "Table name:"],
             "blocks.onFieldEnded": "Field editing is finished",
-            "blocks.onFieldEnded.params": ["Function name:", "Table name:"]
+            "blocks.onFieldEnded.params": ["Function name:", "Table name:"],
+            "blocks.onBluetoothGet": "When value is received via bluetooth",
+            "blocks.onBluetoothGet.params": ["Function name:", "Variable name:"]
     },
 
     "vars": {
@@ -611,7 +613,7 @@
             "blocks.requestApi.params": ["Lua code:"],
             "blocks.requestApiRes": "Request API method from resource",
             "blocks.requestApiRes.params": ["Resource name:"],
-            "blocks.requestApiThread": "Request lua5.3 method in the new stream",
+            "blocks.requestApiThread": "Request lua5.4 method in the new stream",
             "blocks.requestApiThread.params": ["Lua code:", "Function name:"],
             "blocks.toastShort": "Short pop-up notification",
             "blocks.toastShort.params": ["Text:"],
@@ -1214,7 +1216,13 @@
         "blocks.loadAdsStartApp": "Load StartApp ads",
         "blocks.loadAdsStartApp.params": ["Ads type:"],
         "blocks.showAdsStartApp": "Show StartApp ads",
-        "blocks.showAdsStartApp.params": ["Ads type:"]
+        "blocks.showAdsStartApp.params": ["Ads type:"],
+        "blocks.createBluetooth": "Create bluetooth connection",
+        "blocks.createBluetooth.params": ["Connection listener:"],
+        "blocks.connectBluetooth": "Connect to bluetooth connection",
+        "blocks.connectBluetooth.params": ["Address:", "Connection listener:"],
+        "blocks.sendBluetooth": "Send value via bluetooth connection",
+        "blocks.sendBluetooth.params": ["Value:"]
     },
 
     "transition": {
@@ -1522,7 +1530,8 @@
         "editor.list.fun.color_pixel": "color_pixel",
         "editor.list.fun.get_ip": "get_own_ip",
         "editor.list.fun.noise": "perlin_noise",
-        "editor.list.fun.parameter": "parameter"
+        "editor.list.fun.parameter": "parameter",
+        "editor.list.fun.timer": "time_from_start"
     },
 
     "editor.math": {
@@ -1636,6 +1645,8 @@
         "editor.list.device.finger_touching_screen": "finger_touching_screen",
         "editor.list.device.finger_touching_screen_x": "finger_touching_screen_x",
         "editor.list.device.finger_touching_screen_y": "finger_touching_screen_y",
-        "editor.list.device.get_ip": "get_own_ip"
+        "editor.list.device.get_ip": "get_own_ip",
+        "editor.list.device.get_device": "self_bt_device",
+        "editor.list.device.get_devices": "paired_bt_devices"
     }
 }

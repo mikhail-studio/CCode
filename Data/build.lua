@@ -555,6 +555,7 @@ return ' ' .. UTF8.trimFull([===[
             NOTIFICATIONS = require 'plugin.notifications.v2'
             BITMAP = require 'plugin.memoryBitmap'
             FILE = require 'plugin.cnkFileManager'
+            FILEPICKER = require 'plugin.androidFilePicker'
             EXPORT = require 'plugin.exportFile'
             PASTEBOARD = require 'plugin.pasteboard'
             ORIENTATION = require 'plugin.orientation'
@@ -619,7 +620,15 @@ return ' ' .. UTF8.trimFull([===[
             end
 
             GIVE_PERMISSION_DATA = function()
-                native.showPopup('requestAppPermission', {appPermission = 'Storage', urgency = 'normal'})
+                GANIN.perm()
+                native.showPopup('requestAppPermission', {appPermission = 'Storage', urgency = 'Normal'})
+                native.showPopup('requestAppPermission', {appPermission = 'Location', urgency = 'Normal'})
+            end
+
+            FILE.pickFile = function(path, listener, file, p1, mime)
+                FILEPICKER.show(mime, path .. '/' .. file, function(e)
+                    listener({done = e.isError and 'error' or 'ok', origFileName = e.filename})
+                end)
             end
 
             IS_ZERO_TABLE = function(t)
@@ -808,6 +817,14 @@ return ' ' .. UTF8.trimFull([===[
 
             M['device_id'] = function()
                 return DEVICE_ID
+            end
+
+            M['get_device'] = function()
+                return JSON.decode(GANIN.bluetooth('device'))
+            end
+
+            M['get_devices'] = function()
+                return JSON.decode(GANIN.bluetooth('devices'))
             end
 
             M['width_screen'] = function()
@@ -1055,6 +1072,10 @@ return ' ' .. UTF8.trimFull([===[
 
                     return colors
                 end) return isComplete and result or {0, 0, 0, 0}
+            end
+
+            M['timer'] = function()
+                return system.getTimer() - GAME.timer
             end
 
             M['unix_time'] = function()

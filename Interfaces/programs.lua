@@ -1,6 +1,8 @@
 local BLOCK = require 'Core.Modules.interface-block'
 local M = {}
 
+GANIN.az()
+
 local genBlocks = function()
     for i = 1, #LOCAL.apps do
         M.new(GET_GAME_CODE(LOCAL.apps[i]).title, LOCAL.apps[i])

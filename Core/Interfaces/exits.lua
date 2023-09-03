@@ -1,5 +1,7 @@
 local listeners = {}
 
+GANIN.az()
+
 listeners.programs = function()
     PROGRAMS.group:removeSelf()
     PROGRAMS.group = nil

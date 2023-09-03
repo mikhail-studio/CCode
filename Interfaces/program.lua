@@ -12,6 +12,8 @@ local LOCAL_STR = {
     'program.aab'
 }
 
+GANIN.az()
+
 local BLOCK = require 'Core.Modules.interface-block'
 local M = {}
 
@@ -34,18 +36,10 @@ local backupTimerFunc = function()
     end
 
     if LOCAL.auto_ad and tonumber(minute) % 10 == 0 and minute ~= lastMin then
-        GET_UNIX_MINUTE(function(minutes)
-            if minutes == 0 then
-                WINDOW.new(STR['robodog.showAd.error'], {STR['button.okay']}, function() end)
-                WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
-                WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
-            else
-                if not IS_WIN and not IS_SIM then
-                    lastMin = minute
-                    GANIN.ads('show', 'video')
-                end
-            end
-        end)
+        if not IS_WIN and not IS_SIM then
+            lastMin = minute
+            GANIN.ads('show', 'video')
+        end
     end
 
     if minutes[minute] then
