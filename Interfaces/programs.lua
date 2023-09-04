@@ -1,7 +1,7 @@
 local BLOCK = require 'Core.Modules.interface-block'
 local M = {}
 
-GANIN.az()
+GANIN.az(DOC_DIR, BUILD)
 
 local genBlocks = function()
     for i = 1, #LOCAL.apps do

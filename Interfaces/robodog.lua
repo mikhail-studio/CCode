@@ -60,7 +60,7 @@ M.create = function()
     M.group.themeGroup = display.newGroup()
     M.group.learnGroup = display.newGroup()
 
-    GANIN.az()
+    GANIN.az(DOC_DIR, BUILD)
 
     local bg = display.newImage(THEMES.bg(), CENTER_X, CENTER_Y)
         bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH

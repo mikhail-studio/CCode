@@ -1,7 +1,7 @@
 local listeners = {}
 
 listeners.but_myprogram = function(target)
-    GANIN.az()
+    GANIN.az(DOC_DIR, BUILD)
     MENU.group.isVisible = false
     PROGRAMS = require 'Interfaces.programs'
     PROGRAMS.create()
@@ -41,7 +41,7 @@ function _supportOldestVersion(data, link)
 end
 
 listeners.but_continue = function(target)
-    GANIN.az()
+    GANIN.az(DOC_DIR, BUILD)
     if LOCAL.last == '' then
         MENU.group.isVisible = false
         PROGRAMS = require 'Interfaces.programs'
@@ -68,7 +68,7 @@ listeners.but_continue = function(target)
 end
 
 listeners.but_settings = function(target)
-    GANIN.az()
+    GANIN.az(DOC_DIR, BUILD)
     MENU.group.isVisible = false
     SETTINGS = require 'Interfaces.settings'
     SETTINGS.create()

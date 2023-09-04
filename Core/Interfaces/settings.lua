@@ -1,7 +1,7 @@
 local LIST = require 'Core.Modules.interface-list'
 local listeners = {}
 
-GANIN.az()
+GANIN.az(DOC_DIR, BUILD)
 
 listeners.title = function()
     EXITS.settings()

@@ -307,6 +307,13 @@ end
 
 GET_Y = SET_Y
 
+GUID = function()
+    return ({('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'):gsub('[xy]', function(c)
+        local v = c == 'x' and math.random(0, 0xf) or math.random(8, 0xb)
+        return ('%x'):format(v)
+    end)})[1]
+end
+
 NEW_DATA = function()
     local saveData = COPY_TABLE(LOCAL) saveData.__table__.ccoin__set = '<type \'function\' is not supported by JSON.>'
     WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), ENCRYPT(JSON.encode3(saveData)))
@@ -495,8 +502,13 @@ end
 
 LOCAL = require 'Data.local' GET_SAFE_AREA()
 LANGS = {'en', 'ru', 'pt', 'es', 'de', 'pl', 'ua', 'by', 'cn', 'jp', 'custom'}
-LANG.custom = {} LANG.ru = {} LANG.en = {} LANG.pt = {} LANG.es = {} LANG.de = {}
-LANG.pl = {} LANG.ua = {} LANG.by = {} LANG.cn = {} LANG.jp = {}
+LANGS_TRANSLATE, LANG = {
+    'English', 'Русский', 'Brasileiro', 'Español', 'Deutsch',
+    'Polski', 'Українська', 'Беларускі', '中文', '日本語'
+}, {
+    custom = {}, ru = {}, en = {}, pt = {}, es = {}, de = {},
+    pl = {}, ua = {}, by = {}, cn = {}, jp = {}
+}
 
 for i = 1, #LANGS do
     local langData = JSON.decode(READ_FILE(system.pathForFile('Strings/' .. LANGS[i] .. '.json')))
@@ -515,7 +527,7 @@ else
     JSON.encode2 = JSON.encode
 end
 
-GANIN.az()
+GANIN.az(DOC_DIR, BUILD)
 display.setDefault('background', unpack(LOCAL.themes.bg))
 INFO = require('Data.info') require('Core.Modules.custom-block').getBlocks()
 if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'}) end

@@ -66,7 +66,7 @@ local listener = function(e, scroll, group, type)
             elseif not e.target.checkbox.isVisible then
                 if type == 'programs' and ALERT then
                     local data = GET_GAME_CODE(e.target.link)
-                    GANIN.az()
+                    GANIN.az(DOC_DIR, BUILD)
 
                     if tonumber(data.build) > 1170 then
                         data = _supportOldestVersion(data, e.target.link)

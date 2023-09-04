@@ -3,7 +3,7 @@ local DATA = require 'Core.Editor.data'
 local TEXT = require 'Core.Editor.text'
 local listeners = {}
 
-GANIN.az()
+GANIN.az(DOC_DIR, BUILD)
 
 listeners.listener = function(e)
     if e.phase == 'began' and ALERT then

@@ -52,7 +52,7 @@ M.setKeys = function()
 end
 
 M.init = function()
-    GANIN.az()
+    GANIN.az(DOC_DIR, BUILD)
 
     if LOCAL.ccoin == nil then
         LOCAL.dog = {face = 1, ears = 1, eyes = 1, mouth =  1, accessories = 1}
@@ -76,7 +76,7 @@ M.init = function()
 end
 
 M.buy = function(price)
-    GANIN.az()
+    GANIN.az(DOC_DIR, BUILD)
 
     if LOCAL.ccoin then
         if not checkCheater() then

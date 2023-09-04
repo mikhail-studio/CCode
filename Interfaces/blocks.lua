@@ -1,7 +1,7 @@
 local BLOCK = require 'Core.Modules.logic-block'
 local M = {}
 
-GANIN.az()
+GANIN.az(DOC_DIR, BUILD)
 
 local genBlocks = function(data, script)
     for i = 1, #script.params do

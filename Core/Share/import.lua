@@ -20,6 +20,10 @@ return {
                             local custom, dataCustom = GET_GAME_CUSTOM(), {} current_hash = hash
 
                             if current_hash == hash then
+                                pcall(function()
+                                    NEW_BLOCK.remove()
+                                end)
+                                
                                 for index, block in pairs(new_custom) do
                                     if tonumber(index) then
                                         local new_index, change_custom = tostring(custom.len + 1)
@@ -127,7 +131,7 @@ return {
             end
         end
 
-        GANIN.az()
+        GANIN.az(DOC_DIR, BUILD)
 
         if import then
             completeImportProject(import)

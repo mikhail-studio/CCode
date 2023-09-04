@@ -12,7 +12,7 @@ local LOCAL_STR = {
     'program.aab'
 }
 
-GANIN.az()
+GANIN.az(DOC_DIR, BUILD)
 
 local BLOCK = require 'Core.Modules.interface-block'
 local M = {}

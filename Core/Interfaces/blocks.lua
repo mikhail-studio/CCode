@@ -2,7 +2,7 @@ local listeners = {}
 local LIST = require 'Core.Modules.interface-list'
 local LOGIC = require 'Core.Modules.logic-input'
 
-GANIN.az()
+GANIN.az(DOC_DIR, BUILD)
 
 listeners.but_title = function(target)
     EXITS.blocks()
@@ -48,7 +48,7 @@ listeners.but_list = function(target)
                 elseif e.index == 6 then
                     pcall(function()
                         for i = 1, #BUFFER_EVENT do
-                            local params = BUFFER_EVENT[i]
+                            local params = COPY_TABLE(BUFFER_EVENT[i])
                             BLOCKS.new(params.name, i, params.event, params.params, params.comment, params.nested, params.vars, params.tables)
                         end
                     end)
@@ -467,7 +467,6 @@ listeners.but_okay = function(target, opt)
                 table.insert(script.params, blockIndex, blockData)
                 BLOCKS.new(blockData.name, blockIndex, blockData.event, blockData.params, blockData.comment)
 
-                SET_GAME_CODE(CURRENT_LINK, data)
                 SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
 
                 for j = 1, #BLOCKS.group.blocks do
@@ -480,6 +479,47 @@ listeners.but_okay = function(target, opt)
                 BLOCKS.group.blocks[blockIndex].click = true
                 BLOCKS.group.blocks[blockIndex].move = true
                 newMoveLogicBlock({target = BLOCKS.group.blocks[blockIndex]}, BLOCKS.group, BLOCKS.group[8], nil, true)
+
+                break
+            end
+        end
+    elseif INDEX_LIST == 6 then
+        for i = 1, #BLOCKS.group.blocks do
+            if BLOCKS.group.blocks[i].checkbox.isOn and BLOCKS.group.blocks[i].data.event then
+                BLOCKS.group.blocks[i].checkbox:setState({isOn = false})
+
+                local name = script.params[i].name
+
+                if UTF8.sub(name, UTF8.len(name)) == '2' then
+                    script.params[i].name = UTF8.sub(name, 1, UTF8.len(name) - 1)
+                else
+                    script.params[i].name = name .. '2'
+                end
+
+                script.params[i].params[1] = {}
+                BLOCKS.group.blocks[i].data.params[1] = {}
+                BLOCKS.group.blocks[i].data.name = script.params[i].name
+                BLOCKS.group.blocks[i].params[1].value.text = ''
+
+                local bWidth = BLOCKS.group.blocks[i].params[1].name.width
+                local bX = BLOCKS.group.blocks[i].params[1].name.x
+                local bY = BLOCKS.group.blocks[i].params[1].name.y
+
+                local textParams = STR['blocks.' .. script.params[i].name .. '.params'][1]
+                local textGetHeight = display.newText({
+                    text = textParams, align = 'left', fontSize = 22,
+                    x = 0, y = 5000, font = 'ubuntu', width = bWidth
+                }) if textGetHeight.height > 53 then textGetHeight.height = 53 end
+
+                BLOCKS.group.blocks[i].params[1].name:removeSelf()
+                BLOCKS.group.blocks[i].params[1].name = display.newText({
+                        text = textParams, align = 'left', height = textGetHeight.height, fontSize = 22,
+                        x = bX, y = bY, font = 'ubuntu', width = bWidth
+                    }) textGetHeight:removeSelf()
+                    BLOCKS.group.blocks[i].params[1].name:setFillColor(unpack(LOCAL.themes.blockText))
+                BLOCKS.group.blocks[i]:insert(BLOCKS.group.blocks[i].params[1].name)
+
+                SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
 
                 break
             end

@@ -14,7 +14,7 @@ return {
             LFS.mkdir(DOC_DIR .. '/Build/Videos')
             LFS.mkdir(DOC_DIR .. '/Build/Fonts')
 
-            GANIN.az()
+            GANIN.az(DOC_DIR, BUILD)
             PROGRAMS.group[8]:setIsLocked(true, 'vertical')
             WINDOW.new(STR['build.start' .. (isAab and '.aab' or '')], {}, function() PROGRAMS.group[8]:setIsLocked(false, 'vertical') end, 1)
 

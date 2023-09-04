@@ -1,6 +1,6 @@
 local M = {}
 
-GANIN.az()
+GANIN.az(DOC_DIR, BUILD)
 
 M.create = function()
     local data = GET_GAME_CODE(CURRENT_LINK)

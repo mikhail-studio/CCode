@@ -7,7 +7,9 @@ local function getButtonText(comment, nested, name, event)
     local nested = nested and (#nested > 0 and STR['button.show'] or STR['button.hide']) or nil
     local addIfElse = name == 'if' and STR['button.addIfElse'] or nil
     local toBuffer = event and STR['button.to.buffer'] or nil
-    return {STR['button.remove'], STR['button.copy'], comment, nested, addIfElse or toBuffer}
+    local replaceTouch = (name == 'onTouchBegan' or name == 'onTouchEnded' or name == 'onTouchMoved'
+    or name == 'onTouchBegan2' or name == 'onTouchEnded2' or name == 'onTouchMoved2') and STR['button.replaceTouch'] or nil
+    return {STR['button.remove'], STR['button.copy'], comment, nested, addIfElse or toBuffer or replaceTouch, toBuffer and replaceTouch or nil}
 end
 
 M.remove = function()
@@ -121,8 +123,13 @@ M.new = function(target)
         local theight = 120 + 60 * math.round((needParams - 2 < 0 and 0 or needParams - 2) / 2, 0)
         local height = nested and theight / size + 340 or theight / size + 264
         local width = target.block.width / size + 20
+
         if target.data.name == 'if' then height = height + 76 end
         if target.data.event then height = height + 76 end
+
+        if target.data.name == 'onTouchBegan2' or target.data.name == 'onTouchEnded2' or target.data.name == 'onTouchMoved2'
+        or target.data.name == 'onTouchBegan' or target.data.name == 'onTouchEnded' or target.data.name == 'onTouchMoved'
+        then height = height + 76 end
 
         local bg = display.newRect(CENTER_X, CENTER_Y, DISPLAY_WIDTH * 2, DISPLAY_HEIGHT * 2)
             bg:setFillColor(1, 0.005)
@@ -185,6 +192,8 @@ M.new = function(target)
                         e.target.click = false
                         if e.target.text.text == STR['button.to.buffer'] then
                             pcall(function()
+                                BUFFER_EVENT = {}
+
                                 local index = target.getIndex(target)
                                 local blocks = {}
 
@@ -195,7 +204,7 @@ M.new = function(target)
                                         break
                                     end
 
-                                    table.insert(blocks, block.data)
+                                    table.insert(blocks, COPY_TABLE(block.data))
                                 end
 
                                 BUFFER_EVENT = COPY_TABLE(blocks)

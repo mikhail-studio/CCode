@@ -5,7 +5,7 @@ local DATA = require 'Core.Editor.data'
 local TEXT = require 'Core.Editor.text'
 local M = {rScrollParams = {}, scrollY = 0}
 
-GANIN.az()
+GANIN.az(DOC_DIR, BUILD)
 
 local getFontSize = function(i)
     if CENTER_X == 360 then

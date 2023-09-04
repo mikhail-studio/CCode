@@ -1,6 +1,6 @@
 local M = {}
 
-GANIN.az()
+GANIN.az(DOC_DIR, BUILD)
 
 M.fun = {
     names = {},

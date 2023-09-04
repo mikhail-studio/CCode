@@ -1,6 +1,6 @@
 local listeners = {}
 
-GANIN.az()
+GANIN.az(DOC_DIR, BUILD)
 
 listeners.title = function(target)
     EXITS.psettings()
