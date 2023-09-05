@@ -626,6 +626,7 @@ return ' ' .. UTF8.trimFull([===[
             end
 
             FILE.pickFile = function(path, listener, file, p1, mime)
+                GIVE_PERMISSION_DATA()
                 FILEPICKER.show(mime, path .. '/' .. file, function(e)
                     listener({done = e.isError and 'error' or 'ok', origFileName = e.filename})
                 end)
@@ -793,7 +794,7 @@ return ' ' .. UTF8.trimFull([===[
                     gcinfo = gcinfo, assert = assert, debug = debug, GAME = GAME, collectgarbage = collectgarbage, GANIN = GANIN,
                     os = os, display = display, module = module, media = media, OS_REMOVE = OS_REMOVE, funsS = G_funsS, funsP = G_funsP,
                     native = native, coroutine = coroutine, CENTER_X = CENTER_X, CENTER_Y = CENTER_Y, JSON = JSON, ipairs = ipairs,
-                    TOP_HEIGHT = TOP_HEIGHT, network = network, _network_pathForFile = _network_pathForFile,
+                    TOP_HEIGHT = TOP_HEIGHT, network = network, _network_pathForFile = _network_pathForFile, print5 = require,
                     pcall = pcall, BUILD = BUILD, MAX_Y = MAX_Y, MAX_X = MAX_X, string = string, SIZE = SIZE,
                     xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, OS_MOVE = OS_MOVE, RENDER = RENDER,
                     table = table, lpeg = lpeg, COPY_TABLE = COPY_TABLE, DISPLAY_HEIGHT = DISPLAY_HEIGHT, OS_COPY = OS_COPY,
@@ -820,10 +821,12 @@ return ' ' .. UTF8.trimFull([===[
             end
 
             M['get_device'] = function()
+                GIVE_PERMISSION_DATA()
                 return JSON.decode(GANIN.bluetooth('device'))
             end
 
             M['get_devices'] = function()
+                GIVE_PERMISSION_DATA()
                 return JSON.decode(GANIN.bluetooth('devices'))
             end
 

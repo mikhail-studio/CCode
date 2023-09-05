@@ -531,7 +531,7 @@ GANIN.az(DOC_DIR, BUILD)
 display.setDefault('background', unpack(LOCAL.themes.bg))
 INFO = require('Data.info') require('Core.Modules.custom-block').getBlocks()
 if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'}) end
-Runtime:addEventListener('unhandledError', function(event) return GAME and GAME.hash ~= '' end)
+-- Runtime:addEventListener('unhandledError', function(event) return GAME and GAME.hash ~= '' end)
 
 GET_GLOBAL_TABLE = function()
     return {
@@ -539,7 +539,7 @@ GET_GLOBAL_TABLE = function()
         gcinfo = gcinfo, assert = assert, debug = debug, GAME = GAME, collectgarbage = collectgarbage, GANIN = GANIN,
         os = os, display = display, module = module, media = media, OS_REMOVE = OS_REMOVE, funsS = G_funsS, funsP = G_funsP,
         native = native, coroutine = coroutine, CENTER_X = CENTER_X, CENTER_Y = CENTER_Y, JSON = JSON, ipairs = ipairs,
-        TOP_HEIGHT = TOP_HEIGHT, network = network, _network_pathForFile = _network_pathForFile,
+        TOP_HEIGHT = TOP_HEIGHT, network = network, _network_pathForFile = _network_pathForFile, print5 = require,
         pcall = pcall, BUILD = BUILD, MAX_Y = MAX_Y, MAX_X = MAX_X, string = string, SIZE = SIZE,
         xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, OS_MOVE = OS_MOVE, RENDER = RENDER,
         table = table, lpeg = lpeg, COPY_TABLE = COPY_TABLE, DISPLAY_HEIGHT = DISPLAY_HEIGHT, OS_COPY = OS_COPY,

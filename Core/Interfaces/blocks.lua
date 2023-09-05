@@ -47,10 +47,15 @@ listeners.but_list = function(target)
                     pcall(function() BUFFER = COPY_TABLE(GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT)) end)
                 elseif e.index == 6 then
                     pcall(function()
+                        local data = GET_GAME_CODE(CURRENT_LINK)
+                        local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
+
                         for i = 1, #BUFFER_EVENT do
-                            local params = COPY_TABLE(BUFFER_EVENT[i])
+                            local params = COPY_TABLE(BUFFER_EVENT[i]) table.insert(script.params, i, params)
                             BLOCKS.new(params.name, i, params.event, params.params, params.comment, params.nested, params.vars, params.tables)
                         end
+
+                        SET_GAME_SCRIPT(CURRENT_LINK, script, CURRENT_SCRIPT, data)
                     end)
                 elseif e.index ~= 0 then
                     ALERT = false

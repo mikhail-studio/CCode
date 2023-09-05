@@ -15,10 +15,12 @@ M['newObject'] = function(params)
     GAME.lua = GAME.lua .. ' local image, sheetParams = display.newImage(link, system.DocumentsDirectory), {link, system.DocumentsDirectory}'
     GAME.lua = GAME.lua .. ' if filter == \'vector\' then local index = #GAME.group.textures + 1'
     GAME.lua = GAME.lua .. ' GAME.group.textures[index] = SVG.newTexture({filename = link, baseDir = system.DocumentsDirectory})'
-    GAME.lua = GAME.lua .. ' sheetParams = {GAME.group.textures[index].filename, GAME.group.textures[index].baseDir} end'
+    GAME.lua = GAME.lua .. ' sheetParams = {GAME.group.textures[index].filename, GAME.group.textures[index].baseDir}'
     GAME.lua = GAME.lua .. ' local imageSheet = graphics.newImageSheet(sheetParams[1], sheetParams[2],'
     GAME.lua = GAME.lua .. ' {width = image.width, height = image.height, numFrames = 1}) image:removeSelf() image = nil'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name] = display.newSprite(GAME.group, imageSheet, {name = \'\', frames = {1}})'
+    GAME.lua = GAME.lua .. ' else image:removeSelf() image = nil'
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name] = display.newImage(GAME.group, link, system.DocumentsDirectory) end'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name].x, GAME.group.objects[name].y = ' .. posX .. ', ' .. posY
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._width = GAME.group.objects[name].width'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._height = GAME.group.objects[name].height'
