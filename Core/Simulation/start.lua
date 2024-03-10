@@ -29,41 +29,45 @@ local function setCustom(name, logic)
 end
 
 local function getStartLua(linkBuild)
-    local funs1 = ' local fun, device = require \'Core.Functions.fun\', require \'Core.Functions.device\''
-    local funs2 = ' local other, select = require \'Core.Functions.other\', require \'Core.Functions.select\''
-    local funs3 = ' local math, prop = require \'Core.Functions.math\', require \'Core.Functions.prop\''
-    local funs4 = ' local SERVER, CLIENT = require \'Network.server\', require \'Network.client\''
-    local code1 = ' GAME.orientation = CURRENT_ORIENTATION display.setDefault(\'background\', 0) transition.ignoreEmptyReference = true'
-    local code2 = ' GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {} GAME.group.media = {} GAME.multi = false'
-    local code3 = ' GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {} GAME.currentStage = {} GAME.group.stops = {}'
-    local code4 = ' GAME.group.animations = {} GAME.group.widgets = {} GAME.group.tags = {TAG = {}} GAME.group.timers = {} GAME.group.ts = {}'
-    local code5 = ' GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} GAME.group.displays = {} device.start()'
-    local code6 = ' GAME.group.const.touch_fun = function(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\''
-    local code7 = ' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y for i = 1, #GAME.group.displays do GAME.group.displays[i](e)'
-    local code8 = ' end return true end Runtime:addEventListener(\'touch\', GAME.group.const.touch_fun) PHYSICS.start() GAME.group.collis = {}'
-    local code9 = ' for child = 1, display.currentStage.numChildren do GAME.currentStage[display.currentStage[child]] = true end'
-    local cod10 = ' GAME.group.conditions = {} GAME.group.const.enterFrame = function() for i = 1, #GAME.group.conditions do'
-    local cod11 = ' GAME.group.conditions[i]() end end Runtime:addEventListener(\'enterFrame\', GAME.group.const.enterFrame)'
-    local cod12 = ' GAME.group.backs = {} GAME.group.suspends = {} GAME.group.const.keyBack = function(e) if e.phase == \'up\''
-    local cod13 = ' and (e.keyName == \'back\' or e.keyName == \'escape\') then for i = 1, #GAME.group.backs do GAME.group.backs[i]()'
-    local cod14 = ' end return true end end Runtime:addEventListener(\'key\', GAME.group.const.keyBack) GAME.group.resumes = {}'
-    local cod15 = ' GAME.group.const.system = function(e) if e.type == \'applicationSuspend\' or e.type == \'applicationExit\' then for i = 1,'
-    local cod16 = ' #GAME.group.suspends do GAME.group.suspends[i]() end elseif e.type == \'applicationResume\' then for i = 1,'
-    local cod17 = ' #GAME.group.resumes do GAME.group.resumes[i]() end end end Runtime:addEventListener(\'system\', GAME.group.const.system)'
-    local cod18 = ' GAME.group.textures = {} GAME.group.accelerometers = {} GAME.hash = CRYPTO.digest(CRYPTO.md5, math.random(1, 999999999))'
-    local cod19 = ' local hash = GAME.hash GAME.group.networks = {} GAME.group.const.touch_x, GAME.group.const.touch_y = 0, 0'
-    local cod20 = ' local tmp = DOC_DIR .. \'/\' .. CURRENT_LINK .. \'/Temps\' OS_REMOVE(tmp, true) LFS.mkdir(tmp)'
-    local cod21 = ' GAME.group.snapshots = {} GAME.group.joints = {} GAME_DEVICE_ID = \'' .. tostring(DEVICE_ID) .. '\''
-    local cod22 = ' GAME.group.particles = {} GAME.group.objects3d = {} GAME.timer = system.getTimer()'
+    local funs1 = ' \n local fun, device = require \'Core.Functions.fun\', require \'Core.Functions.device\''
+    local funs2 = ' \n local other, select = require \'Core.Functions.other\', require \'Core.Functions.select\''
+    local funs3 = ' \n local math, prop = require \'Core.Functions.math\', require \'Core.Functions.prop\''
+    local funs4 = ' \n local SERVER, CLIENT = require \'Network.server\', require \'Network.client\''
+    local code1 = ' \n GAME.orientation = CURRENT_ORIENTATION display.setDefault(\'background\', 0) transition.ignoreEmptyReference = true'
+    local code2 = ' \n GAME.group = display.newGroup() GAME.group.texts = {} GAME.group.objects = {} GAME.group.media = {} GAME.multi = false'
+    local code3 = ' \n GAME.group.groups = {} GAME.group.masks = {} GAME.group.bitmaps = {} GAME.currentStage = {} GAME.group.stops = {}'
+    local code4 = ' \n GAME.group.animations = {} GAME.group.widgets = {} GAME.group.tags = {TAG = {}} GAME.group.timers = {} GAME.group.ts ='
+    local code5 = ' \n {} GAME.group.const = {touch = false, touch_x = 360, touch_y = 640} GAME.group.displays = {} device.start()'
+    local code6 = ' \n GAME.group.const.touch_fun = function(e) handlerTouch(e) GAME.group.const.touch = e.phase ~= \'ended\' and e.phase'
+    local code7 = ' \n ~= \'cancelled\' GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y for i = 1, #GAME.group.displays do'
+    local code8 = ' \n GAME.group.displays[i](e) end return true end Runtime:addEventListener(\'touch\', GAME.group.const.touch_fun)'
+    local code9 = ' \n PHYSICS.start() GAME.group.collis = {} for child = 1, display.currentStage.numChildren do'
+    local cod10 = ' \n GAME.currentStage[display.currentStage[child]] = true end GAME.group.conditions = {} GAME.group.const.enterFrame ='
+    local cod11 = ' \n function() for i = 1, #GAME.group.conditions do GAME.group.conditions[i]() end end'
+    local cod12 = ' \n Runtime:addEventListener(\'enterFrame\', GAME.group.const.enterFrame) GAME.group.backs = {} GAME.group.suspends = {}'
+    local cod13 = ' \n GAME.group.const.keyBack = function(e) if e.phase == \'up\' and (e.keyName == \'back\' or e.keyName == \'escape\') then'
+    local cod14 = ' \n for i = 1, #GAME.group.backs do GAME.group.backs[i]() end return true end end'
+    local cod15 = ' \n Runtime:addEventListener(\'key\', GAME.group.const.keyBack) GAME.group.resumes = {} GAME.group.const.system ='
+    local cod16 = ' \n function(e) if e.type == \'applicationSuspend\' or e.type == \'applicationExit\' then for i = 1, #GAME.group.suspends'
+    local cod17 = ' \n do GAME.group.suspends[i]() end elseif e.type == \'applicationResume\' then for i = 1, #GAME.group.resumes do'
+    local cod18 = ' \n GAME.group.resumes[i]() end end end Runtime:addEventListener(\'system\', GAME.group.const.system)'
+    local cod19 = ' \n GAME.group.textures = {} GAME.group.accelerometers = {} GAME.hash = CRYPTO.digest(CRYPTO.md5,'
+    local cod20 = ' \n math.random(1, 999999999)) local hash = GAME.hash GAME.group.networks = {} GAME.group.const.touch_x,'
+    local cod21 = ' \n GAME.group.const.touch_y = 0, 0 local tmp = DOC_DIR .. \'/\' .. CURRENT_LINK .. \'/Temps\' OS_REMOVE(tmp, true)'
+    local cod22 = ' \n LFS.mkdir(tmp) GAME.group.snapshots = {} GAME.group.joints = {} GAME_DEVICE_ID = \'' .. tostring(DEVICE_ID) .. '\''
+    local cod23 = ' \n GAME.group.particles = {} GAME.group.shaders = {} GAME.group.objects3d = {} GAME.timer = system.getTimer()'
+    local cod24 = ' \n FINGERS = {} FINGERS_ARRAY = {}'
 
     if linkBuild then
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = CLASS(), {}, {}, {}' .. require 'Data.build'
-            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10 .. cod11
-            .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19 .. cod20 .. cod21 .. cod22
+            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10
+            .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19 .. cod20
+            .. cod21 .. cod22 .. cod23 .. cod24
     else
         return 'pcall(function() local varsP, tablesP, funsP, funsC, a = CLASS(), {}, {}, {}' .. funs1 .. funs2 .. funs3 .. funs4
-            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10 .. cod11
-            .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19 .. cod20 .. cod21 .. cod22
+            .. code1 .. code2 .. code3 .. code4 .. code5 .. code6 .. code7 .. code8 .. code9 .. cod10
+            .. cod11 .. cod12 .. cod13 .. cod14 .. cod15 .. cod16 .. cod17 .. cod18 .. cod19 .. cod20
+            .. cod21 .. cod22 .. cod23 .. cod24
     end
 end
 
@@ -96,6 +100,7 @@ M.remove = function()
     pcall(function() for _, v in pairs(M.group.joints) do pcall(function() v:removeSelf() v = nil end) end end)
     pcall(function() for _, v in pairs(M.group.bitmaps) do pcall(function() v:releaseSelf() v = nil end) end end)
     pcall(function() for _, v in pairs(M.group.textures) do pcall(function() v:releaseSelf() v = nil end) end end)
+    pcall(function() for _, v in ipairs(M.group.shaders) do pcall(function() graphics.undefineEffect('filter.custom.' .. v.name) end) end end)
     pcall(function() for _, v in ipairs(M.group.stops) do v() end end) M.isStarted = nil
     pcall(function() PHYSICS.start() PHYSICS.setDrawMode('normal') PHYSICS.setGravity(0, 9.8) PHYSICS.stop() end)
     pcall(function() M.group:removeSelf() M.group = nil end) M.RESOURCES = nil SEED = os.time() math.randomseed(SEED)
@@ -104,7 +109,7 @@ M.remove = function()
     if not M.currentStage[display.currentStage[child]] then display.currentStage[child]:removeSelf() end end end)
     timer.performWithDelay(1, function() if CURRENT_ORIENTATION ~= M.orientation then setOrientationApp({type = M.orientation, sim = true})
     if (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) then GAME_GROUP_OPEN.scroll:scrollToPosition({y = M.scrollY, time = 0}) end end end)
-    pcall(function() PROGRAM.startTimer() end)
+    pcall(function() PROGRAM.startTimer() end) FINGERS = {} FINGERS_ARRAY = {}
 end
 
 M.new = function(linkBuild, isDebug)
@@ -112,13 +117,15 @@ M.new = function(linkBuild, isDebug)
     M.orientation, EVENTS.CUSTOM = 'portrait', {}
     M.data = GET_GAME_CODE(linkBuild or CURRENT_LINK) M.needBack, M.scripts = true, {}
     M.scrollY = (GAME_GROUP_OPEN and GAME_GROUP_OPEN.scroll) and select(2, GAME_GROUP_OPEN.scroll:getContentPosition()) or 0
-    M.lua = getStartLua(linkBuild) .. ' GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'
+    M.lua = getStartLua(linkBuild) .. ' \n GAME.RESOURCES = JSON.decode(\'' .. UTF8.gsub(JSON.encode(M.data.resources), '\n', '') .. '\')'
+    M.packageBuild = M.data.settings.package
+    M.isBuild = linkBuild
 
     if M.data.settings.orientation == 'portrait' and CURRENT_ORIENTATION ~= 'portrait' then
-        M.lua = M.lua .. ' setOrientationApp({type = \'portrait\', sim = true})'
+        M.lua = M.lua .. ' \n setOrientationApp({type = \'portrait\', sim = true})'
     elseif M.data.settings.orientation == 'landscape' and (linkBuild or CURRENT_ORIENTATION ~= 'landscape') then
-        M.lua = M.lua .. ' setOrientationApp({type = \'landscape\', sim = true})'
-    end M.lua = M.lua .. ' GAME.camera = CAMERA.createView() GAME.group:insert(GAME.camera)'
+        M.lua = M.lua .. ' \n setOrientationApp({type = \'landscape\', sim = true})'
+    end M.lua = M.lua .. ' \n GAME.camera = CAMERA.createView() GAME.group:insert(GAME.camera)'
 
     local onStartCount = 0
     local nestedIndex = 0
@@ -218,27 +225,13 @@ M.new = function(linkBuild, isDebug)
     for i = 1, #nestedEvent do
         if not nestedScript[dataEvent[i].script] then
             if #nestedScript > 0 then M.lua = M.lua .. ' end end script()' end
-            M.lua = M.lua .. ' local function script() local varsS, tablesS, funsS = CLASS(), {}, {}'
+            M.lua = M.lua .. ' \n local function script() local varsS, tablesS, funsS = CLASS(), {}, {}'
             nestedScript[dataEvent[i].script] = true
 
             for j = i, #nestedEvent do
-                local isFunBlock = dataEvent[j].name == 'onFun' or dataEvent[j].name == 'onFunParams'
-                or UTF8.sub(dataEvent[j].name, 1, 7) == '_custom' or dataEvent[j].name == 'onTouchBegan'
-                or dataEvent[j].name == 'onTouchEnded' or dataEvent[j].name == 'onTouchMoved'
-                or dataEvent[j].name == 'onTouchDisplayBegan' or dataEvent[j].name == 'onTouchDisplayEnded'
-                or dataEvent[j].name == 'onTouchDisplayMoved' or dataEvent[j].name == 'onSliderMoved'
-                or dataEvent[j].name == 'onFieldBegan' or dataEvent[j].name == 'onFieldEditing'
-                or dataEvent[j].name == 'onFieldEnded' or dataEvent[j].name == 'onWebViewCallback'
-                or dataEvent[j].name == 'onCondition' or dataEvent[j].name == 'onBackPress' or dataEvent[j].name == 'onUpdateVar'
-                or dataEvent[j].name == 'onSuspend' or dataEvent[j].name == 'onResume' or dataEvent[j].name == 'onFileDownload'
-                or dataEvent[j].name == 'onLocalCollisionBegan' or dataEvent[j].name == 'onLocalCollisionEnded'
-                or dataEvent[j].name == 'onLocalPreCollision' or dataEvent[j].name == 'onLocalPostCollision'
-                or dataEvent[j].name == 'onGlobalCollisionBegan' or dataEvent[j].name == 'onGlobalCollisionEnded'
-                or dataEvent[j].name == 'onGlobalPreCollision' or dataEvent[j].name == 'onGlobalPostCollision'
-                or dataEvent[j].name == 'onFirebase' or dataEvent[j].name == 'onSwitchCallback'
-                or dataEvent[j].name == 'onConditionNoob' or dataEvent[j].name == 'onFunNoob'
-                or dataEvent[j].name == 'onTouchBeganNoob' or dataEvent[j].name == 'onTouchEndedNoob'
-                or dataEvent[j].name == 'onTouchMovedNoob' or dataEvent[j].name == 'onLocalCollisionBeganNoob'
+                local isFunBlock = (INFO.listName[dataEvent[j].name] and INFO.listName[dataEvent[j].name][1] == 'events')
+                    or UTF8.sub(dataEvent[j].name, 1, 7) == '_custom'
+                if dataEvent[j].name == 'onStart' then isFunBlock = false end
 
                 if nestedScript[dataEvent[j].script] and not dataEvent[j].comment and isFunBlock then
                     pcall(function() EVENTS[dataEvent[j].name](nestedEvent[j], dataEvent[j].params) end)
@@ -246,32 +239,17 @@ M.new = function(linkBuild, isDebug)
             end
 
             onStartCount = onStartCount + 1
-            M.lua = M.lua .. ' function onStart' .. onStartCount .. '()'
+            M.lua = M.lua .. ' \n function onStart' .. onStartCount .. '()'
         end
 
-        if not dataEvent[i].comment and dataEvent[i].name ~= 'onFun' and dataEvent[i].name ~= 'onFunParams'
-        and UTF8.sub(dataEvent[i].name, 1, 7) ~= '_custom' and dataEvent[i].name ~= 'onTouchBegan'
-        and dataEvent[i].name ~= 'onTouchEnded' and dataEvent[i].name ~= 'onTouchMoved'
-        and dataEvent[i].name ~= 'onTouchDisplayBegan' and dataEvent[i].name ~= 'onTouchDisplayEnded'
-        and dataEvent[i].name ~= 'onTouchDisplayMoved' and dataEvent[i].name ~= 'onSliderMoved'
-        and dataEvent[i].name ~= 'onFieldBegan' and dataEvent[i].name ~= 'onFieldEditing'
-        and dataEvent[i].name ~= 'onFieldEnded' and dataEvent[i].name ~= 'onWebViewCallback'
-        and dataEvent[i].name ~= 'onCondition' and dataEvent[i].name ~= 'onBackPress' and dataEvent[i].name ~= 'onUpdateVar'
-        and dataEvent[i].name ~= 'onSuspend' and dataEvent[i].name ~= 'onResume' and dataEvent[i].name ~= 'onFileDownload'
-        and dataEvent[i].name ~= 'onLocalCollisionBegan' and dataEvent[i].name ~= 'onLocalCollisionEnded'
-        and dataEvent[i].name ~= 'onLocalPreCollision' and dataEvent[i].name ~= 'onLocalPostCollision'
-        and dataEvent[i].name ~= 'onGlobalCollisionBegan' and dataEvent[i].name ~= 'onGlobalCollisionEnded'
-        and dataEvent[i].name ~= 'onGlobalPreCollision' and dataEvent[i].name ~= 'onGlobalPostCollision'
-        and dataEvent[i].name ~= 'onFirebase' and dataEvent[i].name ~= 'onSwitchCallback'
-        and dataEvent[i].name ~= 'onConditionNoob' and dataEvent[i].name ~= 'onFunNoob'
-        and dataEvent[i].name ~= 'onTouchBeganNoob' and dataEvent[i].name ~= 'onTouchEndedNoob'
-        and dataEvent[i].name ~= 'onTouchMovedNoob' and dataEvent[i].name ~= 'onLocalCollisionBeganNoob' then
+        if not dataEvent[i].comment and ((INFO.listName[dataEvent[i].name] and INFO.listName[dataEvent[i].name][1] ~= 'events')
+        or dataEvent[i].name == 'onStart') and UTF8.sub(dataEvent[i].name, 1, 7) ~= '_custom' then
             pcall(function() EVENTS[dataEvent[i].name](nestedEvent[i], dataEvent[i].params) end)
         end
     end if #nestedEvent > 0 then M.lua = M.lua .. ' end end script()' end
 
     for i = 1, onStartCount do
-        M.lua = M.lua .. ' onStart' .. i .. '()'
+        M.lua = M.lua .. ' \n onStart' .. i .. '()'
     end M.lua = M.lua .. ' end) GAME.isStarted = true'
 
     if linkBuild or isDebug then

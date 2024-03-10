@@ -48,6 +48,14 @@ M['ruleFalse'] = function()
     return false
 end
 
+M['yes'] = function()
+    return true
+end
+
+M['no'] = function()
+    return false
+end
+
 M['alignLeft'] = function()
     return 'left'
 end

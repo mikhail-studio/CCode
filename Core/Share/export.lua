@@ -15,8 +15,6 @@ return {
         local data, dataCustom = GET_GAME_CODE(link), {}
         local name, custom = data.title, GET_GAME_CUSTOM()
 
-        GANIN.az(DOC_DIR, BUILD)
-
         for i = 1, #data.scripts do
             local script = GET_FULL_DATA(GET_GAME_SCRIPT(CURRENT_LINK, i, data))
             for j = 1, #script.params do

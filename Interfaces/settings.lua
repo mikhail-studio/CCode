@@ -1,16 +1,16 @@
 local LISTENER = require 'Core.Interfaces.settings'
 local M = {}
 
-GANIN.az(DOC_DIR, BUILD)
+
 
 M.create = function()
     M.group = display.newGroup()
     M.group.isVisible = false
 
     local bg = display.newImage(THEMES.bg(), CENTER_X, CENTER_Y)
-        bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
-        bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
-        bg.rotation = CENTER_X == 641 and 90 or 0
+        bg.width = CENTER_X == 640 + 0 and DISPLAY_HEIGHT or DISPLAY_WIDTH
+        bg.height = CENTER_X == 640 + 0 and DISPLAY_WIDTH or DISPLAY_HEIGHT
+        bg.rotation = CENTER_X == 640 + 0 and 90 or 0
     M.group:insert(bg)
 
     -- local lineH = display.newRect(MAX_X - 250, CENTER_Y, 10, DISPLAY_HEIGHT)

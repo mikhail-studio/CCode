@@ -12,8 +12,6 @@ local LOCAL_STR = {
     'program.aab'
 }
 
-GANIN.az(DOC_DIR, BUILD)
-
 local BLOCK = require 'Core.Modules.interface-block'
 local M = {}
 
@@ -38,7 +36,7 @@ local backupTimerFunc = function()
     if LOCAL.auto_ad and tonumber(minute) % 10 == 0 and minute ~= lastMin then
         if not IS_WIN and not IS_SIM then
             lastMin = minute
-            GANIN.ads('show', 'video')
+            ADS.showAd()
         end
     end
 
@@ -121,9 +119,9 @@ M.create = function(app, noobmode)
     end NOOBMODE = noobmode
 
     local bg = display.newImage(THEMES.bg(), CENTER_X, CENTER_Y)
-        bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
-        bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
-        bg.rotation = CENTER_X == 641 and 90 or 0
+        bg.width = CENTER_X == 640 + 0 and DISPLAY_HEIGHT or DISPLAY_WIDTH
+        bg.height = CENTER_X == 640 + 0 and DISPLAY_WIDTH or DISPLAY_HEIGHT
+        bg.rotation = CENTER_X == 640 + 0 and 90 or 0
     M.group:insert(bg)
 
     local title = display.newText(app, ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)

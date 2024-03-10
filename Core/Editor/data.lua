@@ -1,7 +1,5 @@
 local M = {}
 
-GANIN.az(DOC_DIR, BUILD)
-
 M.fun = {
     names = {},
     keys = {},
@@ -89,7 +87,8 @@ M.device = {
     keys = {
         'fps', 'device_id', 'width_screen', 'height_screen', 'top_point_screen',
         'bottom_point_screen', 'right_point_screen', 'left_point_screen', 'height_top', 'height_bottom',
-        'finger_touching_screen', 'finger_touching_screen_x', 'finger_touching_screen_y', 'get_device', 'get_devices'
+        'finger_touching_screen', 'finger_touching_screen_count', 'finger_touching_screen_x',
+        'finger_touching_screen_y', 'get_device', 'get_devices'
     }
 }
 
@@ -97,7 +96,7 @@ M.set = function(key, name)
     if (not (EDITOR.data[EDITOR.cursor[1] + 1] and EDITOR.data[EDITOR.cursor[1] + 1][1] == '('
     and EDITOR.data[EDITOR.cursor[1] + 1][2] == 's'))
     and (key == 'fC' or key == 'fS' or key == 'fP' or key == 'f' or key == 'm' or key == 'p'
-    --[[or name == 'finger_touching_screen_x' or name == 'finger_touching_screen_y']])
+    or name == 'finger_touching_screen_x' or name == 'finger_touching_screen_y')
     and name ~= 'timer' and name ~= 'unix_ms' and name ~= 'unix_time' and name ~= 'pi' then
         EDITOR.cursor[1] = EDITOR.cursor[1] + 1
         table.remove(EDITOR.data, EDITOR.cursor[1] - 1)

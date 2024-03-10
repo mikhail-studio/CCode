@@ -4,6 +4,8 @@ listeners.programs = function()
     PROGRAMS.group:removeSelf()
     PROGRAMS.group = nil
     MENU.group.isVisible = true
+    -- MENU.group.alpha = 0
+    -- timer.new(1, 1, function() transition.to(MENU.group, {alpha = 1, time = 200}) end)
 end
 
 listeners.program = function()
@@ -11,60 +13,80 @@ listeners.program = function()
     PROGRAM.group:removeSelf()
     PROGRAM.group = nil
     PROGRAMS.group.isVisible = true
+    -- PROGRAMS.group.alpha = 0
+    -- timer.new(1, 1, function() transition.to(PROGRAMS.group, {alpha = 1, time = 200}) end)
 end
 
 listeners.scripts = function()
     SCRIPTS.group:removeSelf()
     SCRIPTS.group = nil
     PROGRAM.group.isVisible = true
+    -- PROGRAM.group.x = -DISPLAY_WIDTH
+    -- timer.new(1, 1, function() transition.to(PROGRAM.group, {x = 0, time = 100}) end)
 end
 
 listeners.images = function()
     IMAGES.group:removeSelf()
     IMAGES.group = nil
     PROGRAM.group.isVisible = true
+    -- PROGRAM.group.x = -DISPLAY_WIDTH
+    -- timer.new(1, 1, function() transition.to(PROGRAM.group, {x = 0, time = 100}) end)
 end
 
 listeners.sounds = function()
     SOUNDS.group:removeSelf()
     SOUNDS.group = nil
     PROGRAM.group.isVisible = true
+    -- PROGRAM.group.x = -DISPLAY_WIDTH
+    -- timer.new(1, 1, function() transition.to(PROGRAM.group, {x = 0, time = 100}) end)
 end
 
 listeners.videos = function()
     VIDEOS.group:removeSelf()
     VIDEOS.group = nil
     PROGRAM.group.isVisible = true
+    -- PROGRAM.group.x = -DISPLAY_WIDTH
+    -- timer.new(1, 1, function() transition.to(PROGRAM.group, {x = 0, time = 100}) end)
 end
 
 listeners.levels = function()
     LEVELS.group:removeSelf()
     LEVELS.group = nil
     PROGRAM.group.isVisible = true
+    -- PROGRAM.group.x = -DISPLAY_WIDTH
+    -- timer.new(1, 1, function() transition.to(PROGRAM.group, {x = 0, time = 100}) end)
 end
 
 listeners.resources = function()
     RESOURCES.group:removeSelf()
     RESOURCES.group = nil
     PROGRAM.group.isVisible = true
+    -- PROGRAM.group.x = -DISPLAY_WIDTH
+    -- timer.new(1, 1, function() transition.to(PROGRAM.group, {x = 0, time = 100}) end)
 end
 
 listeners.fonts = function()
     FONTS.group:removeSelf()
     FONTS.group = nil
     PROGRAM.group.isVisible = true
+    -- PROGRAM.group.x = -DISPLAY_WIDTH
+    -- timer.new(1, 1, function() transition.to(PROGRAM.group, {x = 0, time = 100}) end)
 end
 
 listeners.psettings = function()
     PSETTINGS.group:removeSelf()
     PSETTINGS.group = nil
     PROGRAM.group.isVisible = true
+    -- PROGRAM.group.x = -DISPLAY_WIDTH
+    -- timer.new(1, 1, function() transition.to(PROGRAM.group, {x = 0, time = 100}) end)
 end
 
 listeners.settings = function()
     SETTINGS.group:removeSelf()
     SETTINGS.group = nil
     MENU.group.isVisible = true
+    -- SETTINGS.group.alpha = 0
+    -- timer.new(1, 1, function() transition.to(SETTINGS.group, {alpha = 1, time = 200}) end)
 end
 
 listeners.robodog = function()
@@ -74,7 +96,28 @@ listeners.robodog = function()
         ROBODOG.group:removeSelf()
         ROBODOG.group = nil
         MENU.group.isVisible = true
+        -- MENU.group.alpha = 0
+        -- timer.new(1, 1, function() transition.to(MENU.group, {alpha = 1, time = 200}) end)
     end
+end
+
+listeners.levels_view = function()
+    LEVELS_VIEW:openExitWindow(function(e)
+        if e.index == 2 then
+            timer.new(1, 1, function()
+                LEVELS_VIEW:openSaveWindow(function(e)
+                    if e.index == 2 then
+                        LEVELS_VIEW:save()
+                    end
+
+                    LEVELS_VIEW:destroy()
+                    LEVELS.group.isVisible = true
+                    system.deactivate('multitouch')
+                    display.setDefault('background', unpack(LOCAL.themes.bg))
+                end)
+            end)
+        end
+    end)
 end
 
 listeners.blocks = function()
@@ -146,6 +189,8 @@ listeners.blocks = function()
         BLOCKS.group:removeSelf()
         BLOCKS.group = nil
         SCRIPTS.group.isVisible = true
+        -- SCRIPTS.group.x = -DISPLAY_WIDTH
+        -- timer.new(1, 1, function() transition.to(SCRIPTS.group, {x = 0, time = 100}) end)
     end
 end
 
@@ -208,6 +253,8 @@ listeners.lis = function(event)
             listeners.videos()
         elseif LEVELS and LEVELS.group and LEVELS.group.isVisible then
             listeners.levels()
+        elseif LEVELS_VIEW and LEVELS_VIEW.group and LEVELS_VIEW.group.isVisible then
+            listeners.levels_view()
         elseif RESOURCES and RESOURCES.group and RESOURCES.group.isVisible then
             listeners.resources()
         elseif FONTS and FONTS.group and FONTS.group.isVisible then

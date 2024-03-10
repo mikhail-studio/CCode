@@ -490,9 +490,9 @@ M.create = function()
         end
 
         local bg = display.newImage(THEMES.bg(), CENTER_X, CENTER_Y)
-            bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
-            bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
-            bg.rotation = CENTER_X == 641 and 90 or 0
+            bg.width = CENTER_X == 640 + 0 and DISPLAY_HEIGHT or DISPLAY_WIDTH
+            bg.height = CENTER_X == 640 + 0 and DISPLAY_WIDTH or DISPLAY_HEIGHT
+            bg.rotation = CENTER_X == 640 + 0 and 90 or 0
         M.group:insert(bg)
 
         local line = display.newRect(CENTER_X, MAX_Y - 275, DISPLAY_WIDTH, 2)
@@ -505,12 +505,13 @@ M.create = function()
 
         local box = native.newTextField(5000, ZERO_Y + 50, DISPLAY_WIDTH - RIGHT_HEIGHT - 70, not IS_SIM and 28 or 56)
             timer.performWithDelay(1000, function()
-                if M.group and M.group.isVisible and box then
+                if M.group and box then
                     box.x = CENTER_X
                     box.isEditable = true
                     box.hasBackground = false
                     box.placeholder = STR['button.block.find']
                     box.font = native.newFont('ubuntu', 28)
+                    box.isVisible = M.group.isVisible and M.group.currentIndex == 1
 
                     pcall(function() if system.getInfo 'platform' == 'android' and not IS_SIM and box then
                         box:setTextColor(unpack(LOCAL.themes.fieldColor))
@@ -1139,6 +1140,8 @@ M.create = function()
                                 M.group.types[i].scroll:insert(M.group.types[i].blocks[j])
                             end
 
+                            print('blocks.' .. name)
+
                             M.group.types[i].blocks[j].text = display.newText({
                                     text = STR['blocks.' .. name],
                                     x = DISPLAY_WIDTH / 2 - M.group.types[i].blocks[j].width / 2 + 20,
@@ -1175,7 +1178,7 @@ M.create = function()
                 end
 
                 M.group.types[i].scroll:setScrollHeight(scrollHeight)
-            end 
+            end
 
             setScrollHeight()
             timer.new(1000, 1, function() setScrollHeight() end)

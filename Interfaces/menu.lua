@@ -1,18 +1,16 @@
 local M = {}
 
-GANIN.az(DOC_DIR, BUILD)
-
 M.create = function()
     M.group = display.newGroup()
     M.group.isVisible = false
 
     local bg = display.newImage(THEMES.menu(), CENTER_X, CENTER_Y)
-        bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
-        bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
-        bg.rotation = CENTER_X == 641 and 90 or 0
+        bg.width = CENTER_X == 640 + 0 and DISPLAY_HEIGHT or DISPLAY_WIDTH
+        bg.height = CENTER_X == 640 + 0 and DISPLAY_WIDTH or DISPLAY_HEIGHT
+        bg.rotation = CENTER_X == 640 + 0 and 90 or 0
     M.group:insert(bg)
 
-    local title = display.newText('CCode', CENTER_X, ZERO_Y + 182, 'ubuntu', 70)
+    local title = display.newText('CCode', CENTER_X, ZERO_Y + 182 - 50, 'ubuntu', 70)
         title:setFillColor(unpack(LOCAL.themes.text))
     M.group:insert(title)
 
@@ -22,7 +20,20 @@ M.create = function()
         elseif LOCAL.name_tester ~= '' then
             testers.text = STR['menu.testers'] .. '  ' .. LOCAL.name_tester
         end testers:setFillColor(unpack(LOCAL.themes.text))
+        testers.isVisible = false
     M.group:insert(testers)
+
+    local but_tg = display.newImage('Sprites/tg.png', CENTER_X - DISPLAY_WIDTH / 4, title.y + 175)
+        but_tg.width = 300
+        but_tg.button = 'but_tg'
+        but_tg:addEventListener('touch', require 'Core.Interfaces.menu')
+    M.group:insert(but_tg)
+
+    local but_ad = display.newImage('Sprites/ad.png', CENTER_X + DISPLAY_WIDTH / 4, title.y + 175)
+        but_ad.width = 300
+        but_ad.button = 'but_ad'
+        but_ad:addEventListener('touch', require 'Core.Interfaces.menu')
+    M.group:insert(but_ad)
 
     local but_social = display.newImage(THEMES.discord(), ZERO_X + 60, MAX_Y - 50)
         but_social.width = 70
@@ -31,7 +42,7 @@ M.create = function()
         but_social:addEventListener('touch', require 'Core.Interfaces.menu')
     M.group:insert(but_social)
 
-    local but_myprogram = display.newImage(THEMES.menubut(), CENTER_X, title.y + 500, 396, 138)
+    local but_myprogram = display.newImage(THEMES.menubut(), CENTER_X, title.y + 500 + 100, 396, 138)
         but_myprogram.alpha = 0.9
         but_myprogram.button = 'but_myprogram'
         but_myprogram:addEventListener('touch', require 'Core.Interfaces.menu')
@@ -46,11 +57,11 @@ M.create = function()
         }) text_myprogram:setFillColor(unpack(LOCAL.themes.text))
     M.group:insert(text_myprogram)
 
-    local delimiter1 = display.newRect(CENTER_X, title.y + 400, 300, 5)
+    local delimiter1 = display.newRect(CENTER_X, title.y + 400 + 100, 300, 5)
         delimiter1:setFillColor(unpack(LOCAL.themes.strokeColor))
     M.group:insert(delimiter1)
 
-    local but_continue = display.newImage(THEMES.menubut(), CENTER_X, title.y + 300, 396, 138)
+    local but_continue = display.newImage(THEMES.menubut(), CENTER_X, title.y + 300 + 100, 396, 138)
         but_continue.alpha = 0.9
         but_continue.button = 'but_continue'
         but_continue:addEventListener('touch', require 'Core.Interfaces.menu')
@@ -65,11 +76,11 @@ M.create = function()
         }) text_continue:setFillColor(unpack(LOCAL.themes.text))
     M.group:insert(text_continue)
 
-    local delimiter2 = display.newRect(CENTER_X, title.y + 600, 300, 5)
+    local delimiter2 = display.newRect(CENTER_X, title.y + 600 + 100, 300, 5)
         delimiter2:setFillColor(unpack(LOCAL.themes.strokeColor))
     M.group:insert(delimiter2)
 
-    local but_settings = display.newImage(THEMES.menubut(), CENTER_X, title.y + 900, 396, 138)
+    local but_settings = display.newImage(THEMES.menubut(), CENTER_X, title.y + 900 + 100, 396, 138)
         but_settings.alpha = 0.9
         but_settings.button = 'but_settings'
         but_settings:addEventListener('touch', require 'Core.Interfaces.menu')
@@ -88,11 +99,11 @@ M.create = function()
         build:setFillColor(unpack(LOCAL.themes.text))
     M.group:insert(build)
 
-    local delimiter3 = display.newRect(CENTER_X, title.y + 800, 300, 5)
+    local delimiter3 = display.newRect(CENTER_X, title.y + 800 + 100, 300, 5)
         delimiter3:setFillColor(unpack(LOCAL.themes.strokeColor))
     M.group:insert(delimiter3)
 
-    local but_dogs = display.newImage(THEMES.menubut(), CENTER_X, title.y + 700, 396, 138)
+    local but_dogs = display.newImage(THEMES.menubut(), CENTER_X, title.y + 700 + 100, 396, 138)
         but_dogs.alpha = 0.9
         but_dogs.button = 'but_dogs'
         but_dogs:addEventListener('touch', require 'Core.Interfaces.menu')
@@ -122,9 +133,13 @@ M.create = function()
     -- snowflakes:toBack()
     -- bg:toBack()
 
-    if CENTER_X == 641 then
+    if CENTER_X == 640 + 0 then
         title.y = ZERO_Y + 82 + 220
         title.x = CENTER_X - 350
+        but_tg.y = MAX_Y - but_tg.height / 2 - 50
+        but_tg.x = CENTER_X - 550
+        but_ad.y = MAX_Y - but_ad.height / 2 - 50
+        but_ad.x = CENTER_X - 150
         but_social.y = ZERO_Y + 45
         but_social.x = ZERO_X + 47
         build.x, build.y = MAX_X - 100, MAX_Y - 40

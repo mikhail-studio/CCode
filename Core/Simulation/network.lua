@@ -68,8 +68,28 @@ M['firebasePATCH'] = function(params, method) M['requestFirebase'](params, 'PATC
 M['firebaseGET'] = function(params, method) M['requestFirebase'](params, 'GET') end
 M['firebaseDELETE'] = function(params, method) M['requestFirebase'](params, 'DELETE') end
 
-M['openURL'] = function(params, method)
+M['openURL'] = function(params)
     GAME.lua = GAME.lua .. ' pcall(function() system.openURL(' .. CALC(params[1]) .. ')  end)'
+end
+
+M['initUnityAds'] = function(params)
+    if GAME.packageBuild and GAME.isBuild then
+        GAME.lua = GAME.lua .. ' pcall(function() print(111) local data ='
+        GAME.lua = GAME.lua .. ' JSON.decode(ENCRYPT_SSL(ENCRYPT(' .. CALC(params[1], '\'\'') .. ', true), true))'
+        GAME.lua = GAME.lua .. ' print(222) GAME.adsListener = ' .. CALC(params[2], 'a', true)
+        GAME.lua = GAME.lua .. ' if \'' .. GAME.packageBuild .. '\' ~= data.package then return end print(333)'
+        GAME.lua = GAME.lua .. ' ADS.init(function(e) print(444) pcall(function()'
+        GAME.lua = GAME.lua .. ' if e.phase == \'init\' or e.phase == \'failed\' or e.phase == \'skipped\''
+        GAME.lua = GAME.lua .. ' or e.phase == \'displayed\' then GAME.adsListener(e) elseif e.phase == \'loaded\''
+        GAME.lua = GAME.lua .. ' then ADS.show(\'AndroidVideo\') end end) end, {gameId = tostring(data.id)}) end)'
+    else
+        GAME.lua = GAME.lua .. ' pcall(function() GAME.adsListener = ' .. CALC(params[2], 'a', true)
+        GAME.lua = GAME.lua .. ' GAME.adsListener({phase = \'init\'}) end)'
+    end
+end
+
+M['showUnityAds'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() print(555) ADS.showAd() end)'
 end
 
 -- M['initAdsStartApp'] = function(params)

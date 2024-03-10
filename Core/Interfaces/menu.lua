@@ -1,11 +1,13 @@
 local listeners = {}
 
 listeners.but_myprogram = function(target)
-    GANIN.az(DOC_DIR, BUILD)
+
     MENU.group.isVisible = false
     PROGRAMS = require 'Interfaces.programs'
     PROGRAMS.create()
     PROGRAMS.group.isVisible = true
+    -- PROGRAMS.group.alpha = 0
+    -- timer.new(1, 1, function() transition.to(PROGRAMS.group, {alpha = 1, time = 200}) end)
 end
 
 function _supportOldestVersion(data, link)
@@ -41,12 +43,14 @@ function _supportOldestVersion(data, link)
 end
 
 listeners.but_continue = function(target)
-    GANIN.az(DOC_DIR, BUILD)
+
     if LOCAL.last == '' then
         MENU.group.isVisible = false
         PROGRAMS = require 'Interfaces.programs'
         PROGRAMS.create()
         PROGRAMS.group.isVisible = true
+        -- PROGRAMS.group.alpha = 0
+        -- timer.new(1, 1, function() transition.to(PROGRAMS.group, {alpha = 1, time = 200}) end)
     else
         local data = GET_GAME_CODE(LOCAL.last_link)
 
@@ -63,20 +67,32 @@ listeners.but_continue = function(target)
             PROGRAM = require 'Interfaces.program'
             PROGRAM.create(LOCAL.last, data.noobmode)
             PROGRAM.group.isVisible = true
+            -- PROGRAM.group.alpha = 0
+            -- timer.new(1, 1, function() transition.to(PROGRAM.group, {alpha = 1, time = 200}) end)
         end
     end
 end
 
 listeners.but_settings = function(target)
-    GANIN.az(DOC_DIR, BUILD)
+
     MENU.group.isVisible = false
     SETTINGS = require 'Interfaces.settings'
     SETTINGS.create()
     SETTINGS.group.isVisible = true
+    -- SETTINGS.group.alpha = 0
+    -- timer.new(1, 1, function() transition.to(SETTINGS.group, {alpha = 1, time = 200}) end)
 end
 
 listeners.but_social = function(target)
     system.openURL('https://discord.gg/7eYnvAgXdX')
+end
+
+listeners.but_tg = function(target)
+    system.openURL('https://t.me/ccode_official')
+end
+
+listeners.but_ad = function(target)
+    system.openURL('https://forms.gle/kSAGfqkr1e86GKfn7')
 end
 
 listeners.but_dogs = function(target)
@@ -84,6 +100,8 @@ listeners.but_dogs = function(target)
     ROBODOG = require 'Interfaces.robodog'
     ROBODOG.create()
     ROBODOG.group.isVisible = true
+    -- ROBODOG.group.alpha = 0
+    -- timer.new(1, 1, function() transition.to(ROBODOG.group, {alpha = 1, time = 200}) end)
 end
 
 return function(e)

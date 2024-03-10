@@ -552,6 +552,8 @@ return ' ' .. UTF8.trimFull([===[
                 appResize(event.type, event.lis)
             end
 
+            ADS = require 'plugin.unityads.v4'
+            CIPHER = require 'plugin.openssl'.get_cipher 'aes-256-cbc'
             NOTIFICATIONS = require 'plugin.notifications.v2'
             BITMAP = require 'plugin.memoryBitmap'
             FILE = require 'plugin.cnkFileManager'
@@ -568,6 +570,7 @@ return ' ' .. UTF8.trimFull([===[
             LFS = require 'lfs'
             WIDGET = require 'widget'
             CRYPTO = require 'crypto'
+            MIME = require 'mime'
 
             SEED = os.time()
             ORIENTATION.init()
@@ -582,6 +585,17 @@ return ' ' .. UTF8.trimFull([===[
             ZERO_Y = CENTER_Y - DISPLAY_HEIGHT / 2 + TOP_HEIGHT
             MAX_X = CENTER_X + DISPLAY_WIDTH / 2 - RIGHT_HEIGHT
             MAX_Y = CENTER_Y + DISPLAY_HEIGHT / 2 - BOTTOM_HEIGHT
+
+            ADS.setPrivacyMode('mixed')
+            ADS.setPersonalizedAds(true)
+
+            ADS.showAd = function()
+                if ADS.isLoaded('AndroidVideo') then
+                    ADS.show('AndroidVideo')
+                else
+                    ADS.load('AndroidVideo')
+                end
+            end
 
             GET_GL_NUM = function(name)
                 return ({
@@ -619,10 +633,18 @@ return ' ' .. UTF8.trimFull([===[
                 end
             end
 
+            ENCRYPT = function(text, isUn)
+                return isUn and MIME.unb64(text or '') or MIME.b64(text or '')
+            end
+
+            ENCRYPT_SSL = function(text, isUn)
+                return isUn and CIPHER:decrypt(text, 'ccode', 'ganin')
+                    or CIPHER:encrypt(text, 'ccode', 'ganin')
+            end
+
             GIVE_PERMISSION_DATA = function()
                 GANIN.perm()
                 native.showPopup('requestAppPermission', {appPermission = 'Storage', urgency = 'Normal'})
-                native.showPopup('requestAppPermission', {appPermission = 'Location', urgency = 'Normal'})
             end
 
             FILE.pickFile = function(path, listener, file, p1, mime)

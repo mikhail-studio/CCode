@@ -84,6 +84,14 @@ M.getResource = function(link)
     end
 end
 
+M.getLevel = function(link)
+    for i = 1, #GAME.RESOURCES.levels do
+        if GAME.RESOURCES.levels[i][1] == link then
+            return CURRENT_LINK .. '/Levels/' .. GAME.RESOURCES.levels[i][2]
+        end
+    end
+end
+
 M.getSound = function(link)
     for i = 1, #GAME.RESOURCES.sounds do
         if GAME.RESOURCES.sounds[i][1] == link then

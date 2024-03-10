@@ -1,14 +1,23 @@
 local CALC = require 'Core.Simulation.calc'
 local M = {}
 
-M['newText'] = function(params)
+M['newText'] = function(params, isLevel)
     local name, text = CALC(params[1]), CALC(params[2])
     local font, size = CALC(params[3], '\'ubuntu\''), CALC(params[4], '36')
     local colors, alpha = CALC(params[5], '{255, 255, 255}'), CALC(params[6], '100')
     local posX = '(SET_X(' .. CALC(params[7]) .. '))'
     local posY = '(SET_Y(' .. CALC(params[8]) .. '))'
 
-    GAME.lua = GAME.lua .. ' pcall(function() local name, colors, font = ' .. name .. ', ' .. colors .. ', other.getFont(' .. font .. ')'
+    if isLevel then
+        name = 'object.name'
+        text = 'object.type[2]'
+        font = 'object.font'
+        size = 'object.size'
+        posX = '(SET_X(object.x))'
+        posY = '(SET_Y(object.y))'
+    end
+
+    GAME.lua = GAME.lua .. ' \n pcall(function() local name, colors, font = ' .. name .. ', ' .. colors .. ', other.getFont(' .. font .. ')'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[name]:removeSelf() end) GAME.group.texts[name] ='
     GAME.lua = GAME.lua .. ' display.newText(GAME.group, tostring(' .. text .. '), ' .. posX .. ', ' .. posY .. ', font, ' .. size .. ')'
     GAME.lua = GAME.lua .. ' pcall(function() GAME.group.texts[name]:setFillColor(colors[1]/255, colors[2]/255, colors[3]/255) end)'
@@ -18,6 +27,11 @@ M['newText'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.texts[name]._body = \'\' GAME.group.texts[name]._hitbox = {}'
     GAME.lua = GAME.lua .. ' GAME.group.texts[name]._touch = \'\' GAME.group.texts[name]._tag = \'TAG\''
     GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.texts[name]) GAME.group.texts[name].name = name end)'
+
+    if isLevel then
+        GAME.lua = GAME.lua .. ' pcall(function() local obj = GAME.group.objects[object.name]'
+        GAME.lua = GAME.lua .. ' obj.rotation = object.rotation end)'
+    end
 end
 
 M['newText2'] = function(params)

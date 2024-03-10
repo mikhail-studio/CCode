@@ -4,7 +4,7 @@ local LIST = require 'Core.Modules.interface-list'
 local MOVE = require 'Core.Modules.interface-move'
 local FILTER = require 'Core.Modules.name-filter'
 
-GANIN.az(DOC_DIR, BUILD)
+
 
 listeners.but_title = function(target)
     EXITS.scripts()
@@ -357,6 +357,7 @@ listeners.but_okay = function(target)
             end
 
             SCRIPTS.group[8]:setScrollHeight(150 * #SCRIPTS.group.data)
+            SCRIPTS.group[8]:setIsLocked(false, 'vertical')
         end
 
         if LOCAL.confirm then

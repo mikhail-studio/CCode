@@ -5,12 +5,12 @@ local DATA = require 'Core.Editor.data'
 local TEXT = require 'Core.Editor.text'
 local M = {rScrollParams = {}, scrollY = 0}
 
-GANIN.az(DOC_DIR, BUILD)
+
 
 local getFontSize = function(i)
     if CENTER_X == 360 then
         return (i == 1 or i == 2) and 24 or 36
-    elseif CENTER_X == 641 then
+    elseif CENTER_X == 640 + 0 then
         return (i == 17 or i == 18) and 24 or 36
     end
 end
@@ -110,7 +110,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     M.group:insert(redo)
     M.group:insert(redo.text)
 
-    if CENTER_X == 641 then
+    if CENTER_X == 640 + 0 then
         list.y = ZERO_Y + 38
         undo.y = ZERO_Y + 38
         redo.y = ZERO_Y + 38
@@ -128,7 +128,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         targetWidth = BLOCKS.group.blocks[blockIndex].block.width
         targetData = COPY_TABLE(BLOCKS.group.blocks[blockIndex].data)
         length, _length = #INFO.listName[targetData.name] - 1, #targetData.params
-        twidth, size = CENTER_X == 641 and (MAX_X - ZERO_X - 844) * 1.5 or targetWidth * 1.0, CENTER_X == 641 and 1.5 or 1.0
+        twidth, size = CENTER_X == 640 + 0 and (MAX_X - ZERO_X - 844) * 1.5 or targetWidth * 1.0, CENTER_X == 640 + 0 and 1.5 or 1.0
 
         if _length > length then
             for i = 1, _length do
@@ -150,7 +150,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
         then targetWidth = DISPLAY_WIDTH - LEFT_HEIGHT - RIGHT_HEIGHT - 60
         else targetWidth = BLOCKS.group.blocks[1].block.width end
         targetData, length = {event = false, name = '', params = paramsData, color = blockIndex}, #paramsData
-        twidth, size = CENTER_X == 641 and (MAX_X - ZERO_X - 844) * 1.5 or targetWidth * 1.0, CENTER_X == 641 and 1.5 or 1.0
+        twidth, size = CENTER_X == 640 + 0 and (MAX_X - ZERO_X - 844) * 1.5 or targetWidth * 1.0, CENTER_X == 640 + 0 and 1.5 or 1.0
     end
 
     local blockScroll = WIDGET.newScrollView({
@@ -207,7 +207,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     local buttonsX = ZERO_X + 54
     local buttonsY = MAX_Y - 655
 
-    if CENTER_X == 641 then
+    if CENTER_X == 640 + 0 then
         buttonsY = MAX_Y - 355
         for i = 8, 1, -1 do table.insert(buttonsText, 25, buttonsText[i]) end
         for i = 8, 1, -1 do table.remove(buttonsText, 1) end
@@ -217,7 +217,7 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
     local scrollHeight = buttonsY - 45 - blockScroll.y - 160
     local scrollWidth, scrollX = DISPLAY_WIDTH, CENTER_X
 
-    if CENTER_X == 641 then
+    if CENTER_X == 640 + 0 then
         scrollHeight = buttonsY - 95 - title.y - title.height
         scrollY = (title.y + title.height + buttonsY - 35) / 2
         scrollWidth, scrollX, blockScroll.y = 745, ZERO_X + 404, scrollY
@@ -242,17 +242,17 @@ M.create = function(blockName, blockIndex, paramsData, paramsIndex, newOrientati
             buttons[i].text.id = i == 28 and 'Ok' or i == 1 and 'Text' or i == 2 and 'Hide' or i == 6 and 'Local' or buttons[i].text.text
         M.group:insert(buttons[i].text)
 
-        if CENTER_X == 641 then
+        if CENTER_X == 640 + 0 then
             buttons[i].text.id = i == 28 and 'Ok' or i == 17 and 'Text' or i == 18 and 'Hide' or i == 22 and 'Local' or buttons[i].text.text
         end
 
         buttonsX = i % 4 == 0 and ZERO_X + 54 or buttonsX + 100
         buttonsY = i % 4 == 0 and buttonsY + 100 or buttonsY
 
-        if CENTER_X == 641 and i == 16 then
+        if CENTER_X == 640 + 0 and i == 16 then
             buttonsX = buttonsX + 400
             buttonsY = MAX_Y - 355
-        elseif CENTER_X == 641 and i > 16 and i % 4 == 0 then
+        elseif CENTER_X == 640 + 0 and i > 16 and i % 4 == 0 then
             buttonsX = buttonsX + 400
         end
 

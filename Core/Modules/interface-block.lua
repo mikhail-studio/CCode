@@ -66,7 +66,7 @@ local listener = function(e, scroll, group, type)
             elseif not e.target.checkbox.isVisible then
                 if type == 'programs' and ALERT then
                     local data = GET_GAME_CODE(e.target.link)
-                    GANIN.az(DOC_DIR, BUILD)
+
 
                     if tonumber(data.build) > 1170 then
                         data = _supportOldestVersion(data, e.target.link)
@@ -92,6 +92,9 @@ local listener = function(e, scroll, group, type)
                         LOCAL.last_link = CURRENT_LINK
                         MENU.group[9].text = LOCAL.last
                         NEW_DATA()
+
+                        -- PROGRAM.group.alpha = 0
+                        -- timer.new(1, 1, function() transition.to(PROGRAM.group, {alpha = 1, time = 200}) end)
                     end
                 elseif type == 'program' and ALERT then
                     if e.target.text.text == STR['program.scripts'] or e.target.text.text == STR['program.scenarios'] then
@@ -99,41 +102,57 @@ local listener = function(e, scroll, group, type)
                         SCRIPTS = require 'Interfaces.scripts'
                         SCRIPTS.create()
                         SCRIPTS.group.isVisible = true
+                        -- SCRIPTS.group.x = DISPLAY_WIDTH
+                        -- timer.new(1, 1, function() transition.to(SCRIPTS.group, {x = 0, time = 100}) end)
                     elseif e.target.text.text == STR['program.images'] or e.target.text.text == STR['program.pictures'] then
                         group.isVisible = false
                         IMAGES = require 'Interfaces.images'
                         IMAGES.create()
                         IMAGES.group.isVisible = true
+                        -- IMAGES.group.x = DISPLAY_WIDTH
+                        -- timer.new(1, 1, function() transition.to(IMAGES.group, {x = 0, time = 100}) end)
                     elseif e.target.text.text == STR['program.levels'] then
                         group.isVisible = false
                         LEVELS = require 'Interfaces.levels'
                         LEVELS.create()
                         LEVELS.group.isVisible = true
+                        -- LEVELS.group.x = DISPLAY_WIDTH
+                        -- timer.new(1, 1, function() transition.to(LEVELS.group, {x = 0, time = 100}) end)
                     elseif e.target.text.text == STR['program.sounds'] then
                         group.isVisible = false
                         SOUNDS = require 'Interfaces.sounds'
                         SOUNDS.create()
                         SOUNDS.group.isVisible = true
+                        -- SOUNDS.group.x = DISPLAY_WIDTH
+                        -- timer.new(1, 1, function() transition.to(SOUNDS.group, {x = 0, time = 100}) end)
                     elseif e.target.text.text == STR['program.videos'] then
                         group.isVisible = false
                         VIDEOS = require 'Interfaces.videos'
                         VIDEOS.create()
                         VIDEOS.group.isVisible = true
+                        -- VIDEOS.group.x = DISPLAY_WIDTH
+                        -- timer.new(1, 1, function() transition.to(VIDEOS.group, {x = 0, time = 100}) end)
                     elseif e.target.text.text == STR['program.fonts'] then
                         group.isVisible = false
                         FONTS = require 'Interfaces.fonts'
                         FONTS.create()
                         FONTS.group.isVisible = true
+                        -- FONTS.group.x = DISPLAY_WIDTH
+                        -- timer.new(1, 1, function() transition.to(FONTS.group, {x = 0, time = 100}) end)
                     elseif e.target.text.text == STR['program.resources'] then
                         group.isVisible = false
                         RESOURCES = require 'Interfaces.resources'
                         RESOURCES.create()
                         RESOURCES.group.isVisible = true
+                        -- RESOURCES.group.x = DISPLAY_WIDTH
+                        -- timer.new(1, 1, function() transition.to(RESOURCES.group, {x = 0, time = 100}) end)
                     elseif e.target.text.text == STR['menu.settings'] then
                         group.isVisible = false
                         PSETTINGS = require 'Interfaces.program-settings'
                         PSETTINGS.create()
                         PSETTINGS.group.isVisible = true
+                        -- PSETTINGS.group.x = DISPLAY_WIDTH
+                        -- timer.new(1, 1, function() transition.to(PSETTINGS.group, {x = 0, time = 100}) end)
                     elseif e.target.text.text == STR['program.export'] then
                         group:removeSelf() group = nil
                         PROGRAMS.group.isVisible = true
@@ -196,9 +215,9 @@ local listener = function(e, scroll, group, type)
                         e.target.move = false
                         MOVE.stop(e, scroll, group, type)
                     elseif ALERT then
-                        native.showAlert('Я Лёня, а не Илон',
-                            'Данный модуль в разработке, пожалуйста подождите, я как бы за бесплатно работаю\n' ..
-                            'This module is in development, please wait, I\'m kind of working for free', {'Ок'})
+                        group.isVisible = false
+                        LEVELS_VIEW = require 'Core.Levels.view'
+                        LEVELS_VIEW:create(e.target.link)
                     end
 
                     if e.target.timer then

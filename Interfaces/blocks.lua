@@ -1,7 +1,7 @@
 local BLOCK = require 'Core.Modules.logic-block'
 local M = {}
 
-GANIN.az(DOC_DIR, BUILD)
+
 
 local genBlocks = function(data, script)
     for i = 1, #script.params do
@@ -30,9 +30,9 @@ M.create = function(custom)
     local script = GET_GAME_SCRIPT(CURRENT_LINK, CURRENT_SCRIPT, data)
 
     local bg = display.newImage(THEMES.bg(), CENTER_X, CENTER_Y)
-        bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
-        bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
-        bg.rotation = CENTER_X == 641 and 90 or 0
+        bg.width = CENTER_X == 640 + 0 and DISPLAY_HEIGHT or DISPLAY_WIDTH
+        bg.height = CENTER_X == 640 + 0 and DISPLAY_WIDTH or DISPLAY_HEIGHT
+        bg.rotation = CENTER_X == 640 + 0 and 90 or 0
     M.group:insert(bg)
 
     local title = display.newText(script.title, ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)

@@ -23,6 +23,36 @@ return {
             listener({isError = true, typeError = 'filter'}) return
         end
 
-        listener({isError = false, text = text}) return
+        listener({isError = false, text = text})
+    end,
+
+    simpleCheck = function(text, listener, data, oldText)
+        local text = UTF8.trim(text)
+
+        if UTF8.len(text) > 0 then
+            for i = 1, #data do
+                if data[i] == text or (_G.type(data[i]) == 'table' and data[i].name == text) then
+                    if oldText and oldText == text then
+                        listener({isError = false, text = text}) return
+                    end
+
+                    listener({isError = true, typeError = 'name'}) return
+                end
+            end
+        else
+            listener({isError = true, typeError = 'filter'}) return
+        end
+
+        listener({isError = false, text = text})
+    end,
+
+    numberCheck = function(text, listener)
+        local text = UTF8.trim(text)
+
+        if not (UTF8.len(text) > 0 and tonumber(text)) then
+            listener({isError = true, typeError = 'number'}) return
+        end
+
+        listener({isError = false, text = text})
     end
 }

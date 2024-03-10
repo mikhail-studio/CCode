@@ -131,7 +131,7 @@ return {
             end
         end
 
-        GANIN.az(DOC_DIR, BUILD)
+        
 
         if import then
             completeImportProject(import)

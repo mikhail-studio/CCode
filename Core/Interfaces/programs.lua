@@ -1,7 +1,7 @@
 local listeners = {}
 local LIST = require 'Core.Modules.interface-list'
 
-GANIN.az(DOC_DIR, BUILD)
+
 
 listeners.but_title = function(target)
     EXITS.programs()
@@ -164,6 +164,8 @@ listeners.but_okay = function(target)
                 PROGRAMS.group.blocks[j].checkbox.y = y
                 PROGRAMS.group.data[j].y = y
             end
+
+            PROGRAMS.group[8]:setIsLocked(false, 'vertical')
         end
 
         PROGRAMS.group[8]:setIsLocked(true, 'vertical')

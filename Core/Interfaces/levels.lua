@@ -4,8 +4,6 @@ local LIST = require 'Core.Modules.interface-list'
 local MOVE = require 'Core.Modules.interface-move'
 local FILTER = require 'Core.Modules.name-filter'
 
-GANIN.az(DOC_DIR, BUILD)
-
 listeners.but_title = function(target)
     EXITS.levels()
 end
@@ -50,7 +48,7 @@ listeners.but_add = function(target)
                             table.insert(data.folders.levels[1][2], 1, data.resources.levels[1])
 
                             SET_GAME_CODE(CURRENT_LINK, data)
-                            WRITE_FILE(path, JSON.encode3({title = e.text}))
+                            WRITE_FILE(path, JSON.encode3({title = e.text, params = {}, sprites = {}}))
                             LEVELS.new(e.text, 2, 'Level' .. numLevel)
 
                             if folderIsComment then
@@ -201,6 +199,7 @@ listeners.but_okay = function(target)
 
             SET_GAME_CODE(CURRENT_LINK, data)
             LEVELS.group[8]:setScrollHeight(150 * #LEVELS.group.data)
+            LEVELS.group[8]:setIsLocked(false, 'vertical')
         end
 
         if LOCAL.confirm then

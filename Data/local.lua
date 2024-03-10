@@ -17,7 +17,7 @@ if file then
     if data.old_update == nil then data.old_update = false end
     if data.keystore == nil then data.keystore = {'testkey'} end data.back = 'System'
     if data.theme == nil then data.theme = 'default' end data.themes = THEMES.list[data.theme]
-    local _data = COPY_TABLE(data) _data.__table__.ccoin__set = '<type \'function\' is not supported by JSON.>'
+    local _data = COPY_TABLE(data) _data.__table__.niocc__set = '<type \'function\' is not supported by JSON.>'
     WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), ENCRYPT(JSON.encode3(_data)))
 else
     data, custom = table.merge(data, {

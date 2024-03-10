@@ -60,12 +60,12 @@ M.create = function()
     M.group.themeGroup = display.newGroup()
     M.group.learnGroup = display.newGroup()
 
-    GANIN.az(DOC_DIR, BUILD)
+
 
     local bg = display.newImage(THEMES.bg(), CENTER_X, CENTER_Y)
-        bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
-        bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
-        bg.rotation = CENTER_X == 641 and 90 or 0
+        bg.width = CENTER_X == 640 + 0 and DISPLAY_HEIGHT or DISPLAY_WIDTH
+        bg.height = CENTER_X == 640 + 0 and DISPLAY_WIDTH or DISPLAY_HEIGHT
+        bg.rotation = CENTER_X == 640 + 0 and 90 or 0
     M.group:insert(bg)
 
     local width = DISPLAY_WIDTH - RIGHT_HEIGHT - 60
@@ -108,7 +108,7 @@ M.create = function()
     M.group:insert(buttonLearnText)
 
     M.ccoin = M.getCCoin(buttonDogs.x - buttonDogs.width / 2 + 40, buttonTheme.y + 80, 50)
-        timer.new(1, 1, function() M.ccoin.text.text = LOCAL.ccoin end)
+        timer.new(1, 1, function() M.ccoin.text.text = LOCAL.niocc end)
     M.group.dogsGroup:insert(M.ccoin)
 
     M.ccoin.text = display.newText('...', M.ccoin.x + 40, M.ccoin.y, 'ubuntu', 36)
@@ -174,33 +174,45 @@ M.create = function()
                 WINDOW.new(STR['robodog.showAd.title'], {STR['robodog.showAd.promo'], STR['robodog.showAd.watch']}, function(e)
                     if e.index == 1 then
                         if DEVELOPERS[LOCAL.name_tester]
-                        or DEVICE_ID == '3ff9ed460181c9542b18e030840bb7c25295d3c27fdde8523baa51df23e69203'
-                        or DEVICE_ID == '120065e30b7f8ae6c187defebf408f39f1b5c2266e4d161ac0f340a710a9a884'
-                        or DEVICE_ID == 'd9d5f682f19992801fb415b9606858ecb78cd7d63dbb48f058aac601e7c27777'
-                        or DEVICE_ID == '1aed517f38d1c4b360ef68fb8572a9074a4f2102c2b8d579152ce61bea6d77eb' then
-                            CCOIN.set(tonumber(LOCAL.ccoin) + 1000)
+                        or DEVICE_ID == ''
+                        or DEVICE_ID == ''
+                        or DEVICE_ID == ''
+                        or DEVICE_ID == '20036611d40a5d1d1b3b0df1628cdf2cdca95c8a5af6a16b470d70bb5b9ba082' then
+                            CCOIN.set(tonumber(LOCAL.niocc) + 1000)
                         end
                     elseif e.index == 2 then
-                        GET_UNIX_MINUTE(function(minutes)
-                            if minutes == 0 then
-                                WINDOW.new(STR['robodog.showAd.error'], {STR['button.okay']}, function() end)
-                                WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
-                                WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
-                            else
-                                if minutes >= LOCAL.ads_time + 5 then
-                                    LOCAL.ads_time = minutes NEW_DATA()
+                        -- GET_UNIX_MINUTE(function(minutes)
+                            -- if minutes == 0 then
+                            --     WINDOW.new(STR['robodog.showAd.error'], {STR['button.okay']}, function() end)
+                            --     WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                            --     WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                            -- else
+                            timer.new(1, 1, function()
+                                local minutes = math.round(os.time() / 60)
+                                if minutes >= LOCAL.ads_time + 1 then
                                     if not IS_WIN and not IS_SIM then
-                                        GANIN.ads('show', 'video')
+                                        LOCAL.ads_time = minutes NEW_DATA()
+                                        ADS.showAd()
+                                        -- if ADS.isLoaded('AndroidVideo') then
+                                        --     LOCAL.ads_time = minutes NEW_DATA()
+                                        --     ADS.showAd()
+                                        -- else
+                                        --     ADS.load('AndroidVideo')
+                                        --     WINDOW.new(STR['robodog.showAd.error'], {STR['button.okay']}, function() end)
+                                        --     WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                                        --     WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                                        -- end
                                     end
                                 else
-                                    local time = tostring(LOCAL.ads_time - minutes + 5)
+                                    local time = tostring(LOCAL.ads_time - minutes + 1)
                                     local message = STR['robodog.showAd.time'] .. time
                                     WINDOW.new(message, {STR['button.okay']}, function() end)
                                     WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
                                     WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
                                 end
-                            end
-                        end)
+                            end)
+                            -- end
+                        -- end)
                     end
                 end)
             end

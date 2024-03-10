@@ -2,7 +2,7 @@ local CALC = require 'Core.Simulation.calc'
 local M = {}
 
 if 'Физика 1' then
-    M['setBody'] = function(params)
+    M['setBody'] = function(params, isLevel)
         local name = CALC(params[1])
         local type = CALC(params[2], '\'dynamic\'')
         local density = #params == 4 and '1' or CALC(params[3], '1')
@@ -12,6 +12,15 @@ if 'Физика 1' then
         local categoryBit = #params == 4 and 'nil' or CALC(params[7], 'nil')
         local maskBits = #params == 4 and 'nil' or CALC(params[8], 'nil')
         local hitbox = 'GAME.group.objects[name]._hitbox'
+
+        if isLevel then
+            name = 'object.name'
+            type = 'object.body'
+            density = 'object.density'
+            bounce = 'object.bounce'
+            friction = 'object.friction'
+            gravity = '0 - object.gravity'
+        end
 
         GAME.lua = GAME.lua .. ' pcall(function() local name, type = ' .. name .. ', ' .. type
         GAME.lua = GAME.lua .. ' local maskBits, categoryBit = ' .. maskBits .. ', ' .. categoryBit
@@ -27,6 +36,12 @@ if 'Физика 1' then
         GAME.lua = GAME.lua .. ' GAME.group.objects[name]._maskBits = maskBits'
         GAME.lua = GAME.lua .. ' GAME.group.objects[name]._categoryBit = categoryBit'
         GAME.lua = GAME.lua .. ' GAME.group.objects[name].gravityScale = GAME.group.objects[name]._gravity end)'
+
+        if isLevel then
+            GAME.lua = GAME.lua .. ' pcall(function() local name = object.name'
+            GAME.lua = GAME.lua .. ' GAME.group.objects[name].isFixedRotation = object.isFixedRotation'
+            GAME.lua = GAME.lua .. ' GAME.group.objects[name].isSensor = object.isSensor end)'
+        end
     end
 
     M['setBodyType'] = function(params)
@@ -117,7 +132,7 @@ if 'Физика 1' then
         GAME.lua = GAME.lua .. ' GAME.group.objects[name]._hitbox.shape = ' .. polygon .. ' end)'
     end
 
-    M['updHitbox'] = function(params)
+    M['updHitbox'] = function(params, isLevel)
         local name = CALC(params[1])
         local type = 'GAME.group.objects[name]._body'
         local friction = 'GAME.group.objects[name]._friction'
@@ -131,11 +146,15 @@ if 'Физика 1' then
         local isFixedRotation = 'GAME.group.objects[name].isFixedRotation'
         local isBullet = 'GAME.group.objects[name].isBullet'
 
+        if isLevel then
+            name = 'object.name'
+        end
+
         GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name
         GAME.lua = GAME.lua .. ' local isSensor, isFixedRotation, isBullet = false, false, false pcall(function()'
         GAME.lua = GAME.lua .. ' isFixedRotation = ' .. isFixedRotation .. ' isSensor, isBullet = ' .. isSensor .. ', ' .. isBullet .. ' end)'
         GAME.lua = GAME.lua .. ' pcall(function() PHYSICS.removeBody(GAME.group.objects[name]) end)'
-        GAME.lua = GAME.lua .. ' local params = other.getPhysicsParams(' .. friction .. ', ' .. bounce .. ', ' .. density .. ', ' .. hitbox .. ','
+        GAME.lua = GAME.lua .. ' print(123) local params = other.getPhysicsParams(' .. friction .. ', ' .. bounce .. ', ' .. density .. ', ' .. hitbox .. ','
         GAME.lua = GAME.lua .. ' {' .. categoryBit .. ', ' .. maskBits .. '}) PHYSICS.addBody(GAME.group.objects[name], \'dynamic\','
         GAME.lua = GAME.lua .. ' UNPACK(params)) pcall(function() GAME.group.objects[name].isSensor = isSensor end)'
         GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[name].bodyType = ' .. type .. ' end)'

@@ -54,7 +54,11 @@ M.new = function(title, textListener, inputListener, oldText, textCheckbox, isTe
             for i = 1, #textCheckbox do
                 M.checkbox[i] = WIDGET.newSwitch({
                         x = M.line.x - M.line.width / 2 + 35, y = y,
-                        style = 'checkbox', width = 70, height = 70
+                        style = 'checkbox', width = 70, height = 70, onPress = function()
+                            if _G.type(M.checkbox[i]) == 'table' and _G.type(M.checkbox[i].listener) == 'function' then
+                                M.checkbox[i].listener()
+                            end
+                        end
                     })
                 M.group:insert(M.checkbox[i])
 

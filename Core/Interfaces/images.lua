@@ -4,8 +4,6 @@ local LIST = require 'Core.Modules.interface-list'
 local MOVE = require 'Core.Modules.interface-move'
 local FILTER = require 'Core.Modules.name-filter'
 
-GANIN.az(DOC_DIR, BUILD)
-
 listeners.but_title = function(target)
     EXITS.images()
 end
@@ -247,6 +245,7 @@ listeners.but_okay = function(target)
 
             SET_GAME_CODE(CURRENT_LINK, data)
             IMAGES.group[8]:setScrollHeight(150 * #IMAGES.group.data)
+            IMAGES.group[8]:setIsLocked(false, 'vertical')
         end
 
         if LOCAL.confirm then

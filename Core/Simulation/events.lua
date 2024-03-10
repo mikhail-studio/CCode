@@ -18,74 +18,74 @@ M.requestNestedBlock = function(nested)
 end
 
 M['onStart'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() local function event() local varsE, tablesE = {}, {}'
+    GAME.lua = GAME.lua .. ' \n pcall(function() local function event() local varsE, tablesE = {}, {}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end event() end)'
 end
 
 M['onFun'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function()'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function()'
     GAME.lua = GAME.lua .. ' if GAME.hash == hash then local varsE, tablesE = {}, {}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 
 M['onFunParams'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(...) if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(...) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = COPY_TABLE_P({...}, true)'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 
 M['onCondition'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.conditions, function() if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' \n pcall(function() table.insert(GAME.group.conditions, function() if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {} if ' .. CALC(params[1]) .. ' then'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end) end)'
 end
 
 M['onUpdateVar'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true, nil, true) .. ' = function(_, oldValue)'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true, nil, true) .. ' = function(_, oldValue)'
     GAME.lua = GAME.lua .. ' if GAME.hash == hash then local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = oldValue'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 
 M['onTouchBegan2'] = function(nested, params)
-    local guid = GUID()
-    M['onTouchBegan'](nested, {{{guid, 'fP'}}, params[2]})
-    M.BLOCKS['setListener']({params[1], {{guid, 'fP'}}})
+    local guid = GUID() M['onTouchBegan'](nested, {{{guid, 'fP'}}, params[2]})
+    GAME.lua = GAME.lua .. ' timer.new(1, 1, function()'
+    M.BLOCKS['setListener']({params[1], {{guid, 'fP'}}}) GAME.lua = GAME.lua .. ' end)'
 end
 
 M['onTouchBegan'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(e) if e.phase == \'began\' then if GAME.hash'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(e) if e.phase == \'began\' then if GAME.hash'
     GAME.lua = GAME.lua .. ' == hash then local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = COPY_TABLE(e, true)'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end end)'
 end
 
 M['onTouchEnded2'] = function(nested, params)
-    local guid = GUID()
-    M['onTouchEnded'](nested, {{{guid, 'fP'}}, params[2]})
-    M.BLOCKS['setListener']({params[1], {{guid, 'fP'}}})
+    local guid = GUID() M['onTouchEnded'](nested, {{{guid, 'fP'}}, params[2]})
+    GAME.lua = GAME.lua .. ' timer.new(1, 1, function()'
+    M.BLOCKS['setListener']({params[1], {{guid, 'fP'}}}) GAME.lua = GAME.lua .. ' end)'
 end
 
 M['onTouchEnded'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(e) if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(e) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' if (e.phase == \'ended\' or e.phase == \'cancelled\') and e._ccode_event.isTouch then'
     GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = COPY_TABLE(e, true)'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end end)'
 end
 
 M['onTouchMoved2'] = function(nested, params)
-    local guid = GUID()
-    M['onTouchMoved'](nested, {{{guid, 'fP'}}, params[2]})
-    M.BLOCKS['setListener']({params[1], {{guid, 'fP'}}})
+    local guid = GUID() M['onTouchMoved'](nested, {{{guid, 'fP'}}, params[2]})
+    GAME.lua = GAME.lua .. ' timer.new(1, 1, function()'
+    M.BLOCKS['setListener']({params[1], {{guid, 'fP'}}}) GAME.lua = GAME.lua .. ' end)'
 end
 
 M['onTouchMoved'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(e) if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(e) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' if e.phase == \'moved\' and e._ccode_event.isTouch then'
     GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = COPY_TABLE(e, true)'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end end)'
 end
 
 M['onTouchDisplayBegan'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.displays, function(e) if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' \n pcall(function() table.insert(GAME.group.displays, function(e) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' if e.phase == \'began\' then local varsE, tablesE = {}, {} ' .. CALC(params[1], 'a', true)
     GAME.lua = GAME.lua .. ' = {_ccode_event = e, name = \'_ccode_display\', x = GET_X(e.x), y = GET_Y(e.y), xStart = GET_X(e.xStart),'
     GAME.lua = GAME.lua .. ' yStart = GET_Y(e.yStart), id = e.id, xDelta = e.xDelta, yDelta = e.yDelta}'
@@ -93,15 +93,15 @@ M['onTouchDisplayBegan'] = function(nested, params)
 end
 
 M['onTouchDisplayEnded'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.displays, function(e) if GAME.hash == hash then if e.phase == \'ended\''
-    GAME.lua = GAME.lua .. ' or e.phase == \'cancelled\' then local varsE, tablesE = {}, {} ' .. CALC(params[1], 'a', true)
+    GAME.lua = GAME.lua .. ' \n pcall(function() table.insert(GAME.group.displays, function(e) if GAME.hash == hash then if e.phase =='
+    GAME.lua = GAME.lua .. ' \'ended\' or e.phase == \'cancelled\' then local varsE, tablesE = {}, {} ' .. CALC(params[1], 'a', true)
     GAME.lua = GAME.lua .. ' = {_ccode_event = e, name = \'_ccode_display\', x = GET_X(e.x), y = GET_Y(e.y), xStart = GET_X(e.xStart),'
     GAME.lua = GAME.lua .. ' yStart = GET_Y(e.yStart), id = e.id, xDelta = e.xDelta, yDelta = e.yDelta}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end) end)'
 end
 
 M['onTouchDisplayMoved'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.displays, function(e) if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' \n pcall(function() table.insert(GAME.group.displays, function(e) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' if e.phase == \'moved\' then local varsE, tablesE = {}, {} ' .. CALC(params[1], 'a', true)
     GAME.lua = GAME.lua .. ' = {_ccode_event = e, name = \'_ccode_display\', x = GET_X(e.x), y = GET_Y(e.y), xStart = GET_X(e.xStart),'
     GAME.lua = GAME.lua .. ' yStart = GET_Y(e.yStart), id = e.id, xDelta = e.xDelta, yDelta = e.yDelta}'
@@ -109,51 +109,51 @@ M['onTouchDisplayMoved'] = function(nested, params)
 end
 
 M['onFirebase'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(response) if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(response) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = response'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 
 M['onFileDownload'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(e) if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(e) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' if e.phase == \'ended\' then local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = e'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end end)'
 end
 
 M['onSliderMoved'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(value) if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(value) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = value'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 
 M['onBluetoothGet'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(e) if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(e) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = e.result'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 
 M['onSwitchCallback'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(e) if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(e) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' local varsE, tablesE = {}, {} ' .. CALC(params[2], 'a', true) .. ' = e.target.isOn'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 
 M['onWebViewCallback'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p, n) if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p, n) if GAME.hash == hash then'
     GAME.lua = GAME.lua .. ' local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {name = n, type = p.type, url = p.url, errorCode = p.errorCode, errorMessage = p.errorMessage}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end)'
 end
 
 M['onFieldBegan'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p, n)'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p, n)'
     GAME.lua = GAME.lua .. ' if GAME.hash == hash then if p.phase == \'began\' then local varsE, tablesE,'
     GAME.lua = GAME.lua .. ' p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true) .. ' = {name = n}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end end)'
 end
 
 M['onFieldEditing'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p, n) if GAME.hash == hash then if'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p, n) if GAME.hash == hash then if'
     GAME.lua = GAME.lua .. ' p.phase == \'editing\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {numDeleted = p.numDeleted, startPosition = p.startPosition, name = n,'
     GAME.lua = GAME.lua .. ' text = p.text, oldText = p.oldText, newCharacters = p.newCharacters}'
@@ -161,32 +161,32 @@ M['onFieldEditing'] = function(nested, params)
 end
 
 M['onFieldEnded'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p, n) if GAME.hash == hash then if'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p, n) if GAME.hash == hash then if'
     GAME.lua = GAME.lua .. ' p.phase == \'ended\' or p.phase == \'submitted\' then local varsE, tablesE, p = {}, {},'
     GAME.lua = GAME.lua .. ' COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true) .. ' = {name = n, text = GAME.group.widgets[n].text}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end end end)'
 end
 
 M['onBackPress'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() GAME.needBack = false table.insert(GAME.group.backs, function() pcall(function()'
+    GAME.lua = GAME.lua .. ' \n pcall(function() GAME.needBack = false table.insert(GAME.group.backs, function() pcall(function()'
     GAME.lua = GAME.lua .. ' if GAME.hash == hash then local varsE, tablesE = {}, {}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end) end) end)'
 end
 
 M['onSuspend'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.suspends, function() pcall(function()'
+    GAME.lua = GAME.lua .. ' \n pcall(function() table.insert(GAME.group.suspends, function() pcall(function()'
     GAME.lua = GAME.lua .. ' if GAME.hash == hash then local varsE, tablesE = {}, {}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end) end) end)'
 end
 
 M['onResume'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.resumes, function() pcall(function()'
+    GAME.lua = GAME.lua .. ' \n pcall(function() table.insert(GAME.group.resumes, function() pcall(function()'
     GAME.lua = GAME.lua .. ' if GAME.hash == hash then local varsE, tablesE = {}, {}'
     M.requestNestedBlock(nested) GAME.lua = GAME.lua .. ' end end) end) end)'
 end
 
 M['onLocalCollisionBegan'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
     GAME.lua = GAME.lua .. ' p.phase == \'began\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, selfElement = p.selfElement, otherElement = p.otherElement, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction, tangentSpeed'
@@ -196,7 +196,7 @@ M['onLocalCollisionBegan'] = function(nested, params)
 end
 
 M['onLocalCollisionEnded'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
     GAME.lua = GAME.lua .. ' p.phase == \'ended\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, selfElement = p.selfElement, otherElement = p.otherElement, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction, tangentSpeed'
@@ -205,7 +205,7 @@ M['onLocalCollisionEnded'] = function(nested, params)
 end
 
 M['onLocalPreCollision'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
     GAME.lua = GAME.lua .. ' p.phase == \'pre\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, selfElement = p.selfElement, otherElement = p.otherElement, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction},'
@@ -214,7 +214,7 @@ M['onLocalPreCollision'] = function(nested, params)
 end
 
 M['onLocalPostCollision'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
     GAME.lua = GAME.lua .. ' p.phase == \'post\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, selfElement = p.selfElement, otherElement = p.otherElement, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction}, name'
@@ -224,7 +224,7 @@ M['onLocalPostCollision'] = function(nested, params)
 end
 
 M['onGlobalCollisionBegan'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
     GAME.lua = GAME.lua .. ' p.phase == \'began\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, element1 = p.element1, element2 = p.element2, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction, tangentSpeed'
@@ -234,7 +234,7 @@ M['onGlobalCollisionBegan'] = function(nested, params)
 end
 
 M['onGlobalCollisionEnded'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
     GAME.lua = GAME.lua .. ' p.phase == \'ended\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, element1 = p.element1, element2 = p.element2, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction, tangentSpeed'
@@ -243,7 +243,7 @@ M['onGlobalCollisionEnded'] = function(nested, params)
 end
 
 M['onGlobalPreCollision'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
     GAME.lua = GAME.lua .. ' p.phase == \'pre\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, element1 = p.element1, element2 = p.element2, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction},'
@@ -253,7 +253,7 @@ M['onGlobalPreCollision'] = function(nested, params)
 end
 
 M['onGlobalPostCollision'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
+    GAME.lua = GAME.lua .. ' \n pcall(function() ' .. CALC(params[1], 'a', true) .. ' = function(p) if GAME.hash == hash then if'
     GAME.lua = GAME.lua .. ' p.phase == \'post\' then local varsE, tablesE, p = {}, {}, COPY_TABLE(p, true) ' .. CALC(params[2], 'a', true)
     GAME.lua = GAME.lua .. ' = {contact = p.contact, element1 = p.element1, element2 = p.element2, _contact ='
     GAME.lua = GAME.lua .. ' {isTouching = p.contact.isTouching, bounce = p.contact.bounce, friction = p.contact.friction}, name1'
@@ -263,9 +263,9 @@ M['onGlobalPostCollision'] = function(nested, params)
 end
 
 M['onTouchBeganNoob'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' timer.new(1, 1, function() pcall(function() local name = ' .. CALC(params[1])
-    GAME.lua = GAME.lua .. ' GAME.group.objects[name]:addEventListener(\'touch\', function(e)'
-    GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' \n timer.new(1, 1, function() pcall(function() local name = ' .. CALC(params[1])
+    GAME.lua = GAME.lua .. ' GAME.group.objects[name]:addEventListener(\'touch\', function(e) handlerTouch(e)'
+    GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() if GAME.hash == hash then handlerTouch(e)'
     GAME.lua = GAME.lua .. ' e.target._touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\' GAME.group.const.touch'
     GAME.lua = GAME.lua .. ' = e.target._touch GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y if e.target._touch then'
     GAME.lua = GAME.lua .. ' if GAME.multi then display.getCurrentStage():setFocus(e.target, e.id) else'
@@ -278,9 +278,9 @@ M['onTouchBeganNoob'] = function(nested, params)
 end
 
 M['onTouchMovedNoob'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' timer.new(1, 1, function() pcall(function() local name = ' .. CALC(params[1])
+    GAME.lua = GAME.lua .. ' \n timer.new(1, 1, function() pcall(function() local name = ' .. CALC(params[1])
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]:addEventListener(\'touch\', function(e)'
-    GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() if GAME.hash == hash then handlerTouch(e)'
     GAME.lua = GAME.lua .. ' e.target._touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\' GAME.group.const.touch'
     GAME.lua = GAME.lua .. ' = e.target._touch GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y if e.target._touch then'
     GAME.lua = GAME.lua .. ' if GAME.multi then display.getCurrentStage():setFocus(e.target, e.id) else'
@@ -293,9 +293,9 @@ M['onTouchMovedNoob'] = function(nested, params)
 end
 
 M['onTouchEndedNoob'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' timer.new(1, 1, function() pcall(function() local name = ' .. CALC(params[1])
+    GAME.lua = GAME.lua .. ' \n timer.new(1, 1, function() pcall(function() local name = ' .. CALC(params[1])
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]:addEventListener(\'touch\', function(e)'
-    GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() if GAME.hash == hash then'
+    GAME.lua = GAME.lua .. ' local isComplete, result = pcall(function() if GAME.hash == hash then handlerTouch(e)'
     GAME.lua = GAME.lua .. ' e.target._touch = e.phase ~= \'ended\' and e.phase ~= \'cancelled\' GAME.group.const.touch'
     GAME.lua = GAME.lua .. ' = e.target._touch GAME.group.const.touch_x, GAME.group.const.touch_y = e.x, e.y if e.target._touch then'
     GAME.lua = GAME.lua .. ' if GAME.multi then display.getCurrentStage():setFocus(e.target, e.id) else'
@@ -308,7 +308,7 @@ M['onTouchEndedNoob'] = function(nested, params)
 end
 
 M['onLocalCollisionBeganNoob'] = function(nested, params)
-    GAME.lua = GAME.lua .. ' timer.new(1, 1, function() pcall(function() local name, name2 = ' .. CALC(params[1]) .. ', ' .. CALC(params[2])
+    GAME.lua = GAME.lua .. ' \n timer.new(1, 1, function() pcall(function() local name, name2 = ' .. CALC(params[1]) .. ', ' .. CALC(params[2])
     GAME.lua = GAME.lua .. ' GAME.group.objects[name].collision = function(s, e) if GAME.hash == hash then local isComplete, result ='
     GAME.lua = GAME.lua .. ' pcall(function() return (function(p) if GAME.hash == hash then if p.phase == \'began\' then'
     GAME.lua = GAME.lua .. ' if p.other.name == name2 then' M.requestNestedBlock(nested)

@@ -49,12 +49,24 @@ M['finger_touching_screen'] = function()
     return GAME.group.const.touch
 end
 
-M['finger_touching_screen_x'] = function()
-    return GAME.group.const.touch_x - CENTER_X
+M['finger_touching_screen_count'] = function()
+    return #FINGERS_ARRAY
+end
+
+M['finger_touching_screen_x'] = function(index)
+    if index and FINGERS_ARRAY[index] then
+        return FINGERS_ARRAY[index].x - CENTER_X
+    else
+        return GAME.group.const.touch_x - CENTER_X
+    end
 end
 
 M['finger_touching_screen_y'] = function()
-    return CENTER_Y - GAME.group.const.touch_y
+    if index and FINGERS_ARRAY[index] then
+        return FINGERS_ARRAY[index].y - CENTER_Y
+    else
+        return CENTER_Y - GAME.group.const.touch_y
+    end
 end
 
 M['fps'] = function()

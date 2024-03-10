@@ -2,12 +2,13 @@ LANG, STR = {}, {}
 
 CLASS = require 'Data.class'
 THEMES = require 'Data.themes'
-GANIN = require 'plugin.ganin'
+ADS = require 'plugin.unityads.v4'
 CLIENT = require 'Network.client'
 SERVER = require 'Network.server'
+CLASS_IS_REQUIRED = require 'class'
 RENDER = require 'Core.Simulation.render'
-ANIMATION = require 'plugin.animation'
 NOTIFICATIONS = require 'plugin.notifications.v2'
+CIPHER = require 'plugin.openssl'.get_cipher 'aes-256-cbc'
 PARTICLE = require 'Emitter.particleDesigner'
 NOISE = require 'Core.Modules.noise'
 CAMERA = require 'Core.Modules.camera'
@@ -57,7 +58,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1302
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1331
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 MASK = graphics.newMask('Sprites/mask.png')
@@ -69,8 +70,21 @@ KEYORDER = {
     'face', 'eyes', 'ears', 'mouth', 'accessories'
 } for i = 10000, 1, -1 do table.insert(KEYORDER, 1, tostring(i)) end
 
+ADS.setPrivacyMode('mixed')
+ADS.setPersonalizedAds(true)
+
+ADS.showAd = function()
+    if ADS.isLoaded('AndroidVideo') then
+        ADS.show('AndroidVideo')
+    else
+        ADS.load('AndroidVideo')
+    end
+end
+
 GET_SAFE_AREA = function()
     TOP_HEIGHT, LEFT_HEIGHT, BOTTOM_HEIGHT, RIGHT_HEIGHT = display.getSafeAreaInsets()
+    -- TOP_HEIGHT = 100
+    -- BOTTOM_HEIGHT = 100
     BOTTOM_HEIGHT = (system.getInfo('deviceID') == 'd5e815039ddf2736' and 90 or BOTTOM_HEIGHT) + LOCAL.bottom_height
     ZERO_X = CENTER_X - DISPLAY_WIDTH / 2 + LEFT_HEIGHT
     ZERO_Y = CENTER_Y - DISPLAY_HEIGHT / 2 + TOP_HEIGHT
@@ -96,7 +110,19 @@ if IS_SIM or IS_WIN then
     end
 end
 
-if not IS_SIM and not LIVE then
+if IS_SIM or IS_WIN then
+    GANIN = {
+        relaunch = function() end,
+        perm = function() end,
+        bluetooth = function() end,
+        path = function() return '/data/data' end,
+        webview = function(listener) listener() end
+    }
+else
+    GANIN = require 'plugin.ganin'
+end
+
+if (not IS_SIM) and (not LIVE) then
     require('Core.Share.build').reset()
 
     FILE.pickFile = function(path, listener, file, p1, mime)
@@ -189,8 +215,7 @@ end
 
 GIVE_PERMISSION_DATA = function()
     GANIN.perm()
-    native.showPopup('requestAppPermission', {appPermission = 'Storage', urgency = 'Normal'})
-    native.showPopup('requestAppPermission', {appPermission = 'Location', urgency = 'Normal'})
+    -- native.showPopup('requestAppPermission', {appPermission = 'Storage', urgency = 'Normal'})
 end
 
 GET_SCROLL_HEIGHT = function(group)
@@ -315,7 +340,7 @@ GUID = function()
 end
 
 NEW_DATA = function()
-    local saveData = COPY_TABLE(LOCAL) saveData.__table__.ccoin__set = '<type \'function\' is not supported by JSON.>'
+    local saveData = COPY_TABLE(LOCAL) saveData.__table__.niocc__set = '<type \'function\' is not supported by JSON.>'
     WRITE_FILE(system.pathForFile('local.json', system.DocumentsDirectory), ENCRYPT(JSON.encode3(saveData)))
 end
 
@@ -406,6 +431,11 @@ end
 
 ENCRYPT = function(text, isUn)
     return isUn and MIME.unb64(text or '') or MIME.b64(text or '')
+end
+
+ENCRYPT_SSL = function(text, isUn)
+    return isUn and CIPHER:decrypt(text, 'ccode', 'ganin')
+        or CIPHER:encrypt(text, 'ccode', 'ganin')
 end
 
 NEW_APP_CODE = function(title, link, checkbox)
@@ -527,20 +557,99 @@ else
     JSON.encode2 = JSON.encode
 end
 
-GANIN.az(DOC_DIR, BUILD)
+-- LOCAL.orientation = 'landscape'
+-- LOCAL.orientation = 'portrait'
 display.setDefault('background', unpack(LOCAL.themes.bg))
 INFO = require('Data.info') require('Core.Modules.custom-block').getBlocks()
 if LOCAL.orientation == 'landscape' then setOrientationApp({type = 'landscape'}) end
 -- Runtime:addEventListener('unhandledError', function(event) return GAME and GAME.hash ~= '' end)
 
+SET_FOCUS = function(target, id)
+    if id then
+        display.getCurrentStage():setFocus(target, id)
+    else
+        display.getCurrentStage():setFocus(target)
+    end
+
+    target.isFocus = true
+end
+
+NIL_FOCUS = function(target, id)
+    if id then
+        display.getCurrentStage():setFocus(target, nil)
+    else
+        display.getCurrentStage():setFocus(nil)
+    end
+
+    target.isFocus = nil
+end
+
+BUTTONS_LISTENER = function(e, listener)
+    if e.phase == 'began' then
+        SET_FOCUS(e.target)
+        handlerTouch(e)
+        listener(e)
+    elseif e.phase == 'moved' and (math.abs(e.xDelta) > 30 or math.abs(e.yDelta) > 30) then
+        NIL_FOCUS(e.target)
+        handlerTouch({phase = 'ended', id = e.id})
+        listener(e)
+    elseif e.phase == 'ended' or e.phase == 'cancelled' then
+        handlerTouch(e)
+
+        if e.target.isFocus then
+            e.phase = 'ended'
+            NIL_FOCUS(e.target)
+            listener(e)
+        end
+    end
+
+    return true
+end
+
+original_require = require
+require = function(module, isSingle)
+    if isSingle then package.loaded[module] = nil end
+    return original_require(module)
+end
+
+FINGERS = {}
+FINGERS_ARRAY = {}
+
+function handlerTouch(e)
+    local id = e.id and tostring(e.id) or 'userdata: 00000001'
+
+    if e.phase == 'began' then
+        table.insert(FINGERS_ARRAY, {x = e.x, y = e.y, id = id})
+        FINGERS[id] = #FINGERS_ARRAY
+    elseif e.phase == 'moved' then
+        if not FINGERS[id] then
+            return
+        end
+
+        FINGERS_ARRAY[FINGERS[id]].x = e.x
+        FINGERS_ARRAY[FINGERS[id]].y = e.y
+    elseif e.phase == 'ended' or e.phase == 'cancelled' then
+        if not FINGERS[id] then
+            return
+        end
+
+        for i = FINGERS[id] + 1, #FINGERS_ARRAY do
+            FINGERS[FINGERS_ARRAY[i].id] = i - 1
+        end
+
+        table.remove(FINGERS_ARRAY, FINGERS[id])
+        FINGERS[id] = nil
+    end
+end
+
 GET_GLOBAL_TABLE = function()
     return {
         sendLaunchAnalytics = sendLaunchAnalytics, transition = transition, tostring = tostring, tonumber = tonumber,
-        gcinfo = gcinfo, assert = assert, debug = debug, GAME = GAME, collectgarbage = collectgarbage, GANIN = GANIN,
+        gcinfo = gcinfo, assert = assert, GAME = GAME, collectgarbage = collectgarbage, GANIN = GANIN,
         os = os, display = display, module = module, media = media, OS_REMOVE = OS_REMOVE, funsS = G_funsS, funsP = G_funsP,
         native = native, coroutine = coroutine, CENTER_X = CENTER_X, CENTER_Y = CENTER_Y, JSON = JSON, ipairs = ipairs,
         TOP_HEIGHT = TOP_HEIGHT, network = network, _network_pathForFile = _network_pathForFile, print5 = require,
-        pcall = pcall, BUILD = BUILD, MAX_Y = MAX_Y, MAX_X = MAX_X, string = string, SIZE = SIZE,
+        pcall = pcall, BUILD = BUILD, MAX_Y = MAX_Y, MAX_X = MAX_X, string = string, SIZE = SIZE, print = print,
         xpcall = xpcall, ZERO_Y = ZERO_Y, ZERO_X = ZERO_X, package = package, OS_MOVE = OS_MOVE, RENDER = RENDER,
         table = table, lpeg = lpeg, COPY_TABLE = COPY_TABLE, DISPLAY_HEIGHT = DISPLAY_HEIGHT, OS_COPY = OS_COPY,
         unpack = unpack, setmetatable = setmetatable, next = next, RIGHT_HEIGHT = RIGHT_HEIGHT,

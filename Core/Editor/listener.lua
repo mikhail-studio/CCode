@@ -6,7 +6,7 @@ local LOGIC = require 'Core.Modules.logic-input'
 local TEXT = require 'Core.Editor.text'
 local M = {}
 
-GANIN.az(DOC_DIR, BUILD)
+
 
 M.find = function(data)
     for i = 1, #data do

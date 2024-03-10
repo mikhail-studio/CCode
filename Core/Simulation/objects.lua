@@ -1,14 +1,22 @@
 local CALC = require 'Core.Simulation.calc'
 local M = {}
 
-M['newObject'] = function(params)
+M['newObject'] = function(params, isLevel)
     local name = CALC(params[1])
     local link = #params == 3 and name or CALC(params[2])
     local posX = '(SET_X(' .. CALC(#params == 3 and params[2] or params[3]) .. '))'
     local posY = '(SET_Y(' .. CALC(#params == 3 and params[3] or params[4]) .. '))'
 
-    GAME.lua = GAME.lua .. ' pcall(function() local _link = ' .. link .. ' local name = ' .. (#params == 3 and '_link' or name)
-    GAME.lua = GAME.lua .. ' local link, filter = other.getImage(_link) pcall(function()'
+    if isLevel then
+        name = 'object.name'
+        link = '{CURRENT_LINK .. \'/Images/\' .. object.type[2], object.type[3]}'
+        posX = '(SET_X(object.x))'
+        posY = '(SET_Y(object.y))'
+    end
+
+    GAME.lua = GAME.lua .. ' \n pcall(function() local _link = ' .. link .. ' local name = ' .. (#params == 3 and '_link' or name)
+    GAME.lua = GAME.lua .. ' local link, filter if _G.type(_link) == \'table\' then link, filter = _link[1], _link[2]'
+    GAME.lua = GAME.lua .. ' else link, filter = other.getImage(_link) end pcall(function()'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]:removeSelf() GAME.group.objects[name] = nil end)'
     GAME.lua = GAME.lua .. ' display.setDefault(\'magTextureFilter\', filter ~= \'linear\' and \'nearest\' or \'linear\')'
     GAME.lua = GAME.lua .. ' display.setDefault(\'minTextureFilter\', filter ~= \'linear\' and \'nearest\' or \'linear\')'
@@ -32,6 +40,16 @@ M['newObject'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._data = {} GAME.group.objects[name]._baseDir = system.DocumentsDirectory'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._listeners = {}'
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._size, GAME.group.objects[name].name = 1, name end)'
+
+    if isLevel then
+        GAME.lua = GAME.lua .. ' pcall(function() local obj = GAME.group.objects[object.name]'
+        GAME.lua = GAME.lua .. ' obj.width = object.width obj.height = object.height'
+        GAME.lua = GAME.lua .. ' obj.rotation = object.rotation obj._density = object.density'
+        GAME.lua = GAME.lua .. ' obj._friction = object.friction obj._gravity = object.gravity'
+        GAME.lua = GAME.lua .. ' obj._bounce = object.bounce obj.isSensor = object.isSensor'
+        GAME.lua = GAME.lua .. ' obj.isFixedRotation = object.isFixedRotation obj._body = object.body if object.body ~= \'\' then'
+        require('Core.Simulation.events').BLOCKS['setBody']({}, true) GAME.lua = GAME.lua .. ' end end)'
+    end
 end
 
 M['newSprite'] = function(params)

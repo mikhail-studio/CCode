@@ -33,6 +33,8 @@ M.getListButtons = function(type)
         return {STR['blocks.select.docTypeDocs'], STR['blocks.select.docTypeTemps']}
     elseif type == 'spriteType' then
         return {STR['blocks.select.spriteTypePixel'], STR['blocks.select.spriteTypeLinear']}
+    elseif type == 'physicsGroup' then
+        return {STR['blocks.select.yes'], STR['blocks.select.no']}
     elseif type == 'inputType' then
         return {
             STR['blocks.select.inputDefault'],
@@ -137,6 +139,8 @@ M.getListValue = function(type, text)
         return text == STR['blocks.select.docTypeTemps'] and 'docTypeTemps' or 'docTypeDocs'
     elseif type == 'spriteType' then
         return text == STR['blocks.select.spriteTypeLinear'] and 'spriteTypeLinear' or 'spriteTypePixel'
+    elseif type == 'physicsGroup' then
+        return text == STR['blocks.select.yes'] and 'yes' or 'no'
     elseif type == 'captureName' then
         return text == STR['blocks.select.group'] and 'group' or 'obj'
     elseif type == 'inputType' then

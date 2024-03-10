@@ -8,6 +8,8 @@ M.list = {
         bgAdd3Color = {0.18, 0.18, 0.2},
         bgAdd4Color = {0.16, 0.16, 0.18},
         bgAdd5Color = {0.24, 0.24, 0.26},
+        levelColor = {0.37, 0.37, 0.39},
+        levelAddColor = {0.05, 0.05, 0.07},
         editor = {0.11, 0.11, 0.13},
         editorAddColor = {0.14, 0.14, 0.16},
         editorAdd2Color = {0.17, 0.17, 0.19},
@@ -198,6 +200,78 @@ end
 
 M.iconComment = function()
     return 'Sprites/Themes/' .. LOCAL.theme .. '/iconComment.png'
+end
+
+M.addLevel = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/addLevel.png'
+end
+
+M.eyeLevel = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/eyeLevel.png'
+end
+
+M.moveLevel = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/moveLevel.png'
+end
+
+M.scaleLevel = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/scaleLevel.png'
+end
+
+M.rotateLevel = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/rotateLevel.png'
+end
+
+M.cloneLevel = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/cloneLevel.png'
+end
+
+M.deleteLevel = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/deleteLevel.png'
+end
+
+M.saveLevel = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/saveLevel.png'
+end
+
+M.nameObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconName.png'
+end
+
+M.widthObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconWidth.png'
+end
+
+M.heightObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconHeight.png'
+end
+
+M.xObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconX.png'
+end
+
+M.yObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconY.png'
+end
+
+M.textObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconText.png'
+end
+
+M.sizeObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconSize.png'
+end
+
+M.rotate2Object = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconRotate.png'
+end
+
+M.layerObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconLayer.png'
+end
+
+M.bodyObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconBody.png'
 end
 
 M.menu = function()

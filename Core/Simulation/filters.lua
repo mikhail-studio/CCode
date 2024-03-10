@@ -10,6 +10,17 @@ M['deleteFilter'] = function(params)
     GAME.lua = GAME.lua .. ' GAME.group.objects[name]._effect = nil end)'
 end
 
+M['defineEffect'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() table.insert(GAME.group.shaders, 1, {category = \'filter\', name = ' .. CALC(params[1]) ..  ','
+    GAME.lua = GAME.lua .. ' isTimeDependent = ' .. CALC(params[2], 'true') .. '}) GAME.group.shaders[1].vertex = ' .. CALC(params[3])
+    GAME.lua = GAME.lua .. ' GAME.group.shaders[1].fragment = ' .. CALC(params[4]) .. ' graphics.defineEffect(GAME.group.shaders[1]) end)'
+end
+
+M['setCustomEffect'] = function(params)
+    GAME.lua = GAME.lua .. ' pcall(function() GAME.group.objects[' .. CALC(params[1]) .. '].fill.effect'
+    GAME.lua = GAME.lua .. ' = \'filter.custom.' .. CALC(params[2], nil, true) .. '\' end)'
+end
+
 M['setBlur'] = function(params)
     local name = CALC(params[1])
     local direction, count, time = CALC(params[2]), CALC(params[3], '1'), CALC(params[4], '1')

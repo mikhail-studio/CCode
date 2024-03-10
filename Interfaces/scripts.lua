@@ -1,7 +1,7 @@
 local BLOCK = require 'Core.Modules.interface-block'
 local M = {}
 
-GANIN.az(DOC_DIR, BUILD)
+
 
 local genBlocks = function()
     local data, index = GET_GAME_CODE(CURRENT_LINK), 0
@@ -44,9 +44,9 @@ M.create = function()
     M.group.blocks = {}
 
     local bg = display.newImage(THEMES.bg(), CENTER_X, CENTER_Y)
-        bg.width = CENTER_X == 641 and DISPLAY_HEIGHT or DISPLAY_WIDTH
-        bg.height = CENTER_X == 641 and DISPLAY_WIDTH or DISPLAY_HEIGHT
-        bg.rotation = CENTER_X == 641 and 90 or 0
+        bg.width = CENTER_X == 640 + 0 and DISPLAY_HEIGHT or DISPLAY_WIDTH
+        bg.height = CENTER_X == 640 + 0 and DISPLAY_WIDTH or DISPLAY_HEIGHT
+        bg.rotation = CENTER_X == 640 + 0 and 90 or 0
     M.group:insert(bg)
 
     local title = display.newText(STR['program.' .. (NOOBMODE and 'scenarios' or 'scripts')], ZERO_X + 40, ZERO_Y + 30, 'ubuntu', 50)

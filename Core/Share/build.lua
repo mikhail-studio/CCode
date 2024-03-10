@@ -14,7 +14,6 @@ return {
             LFS.mkdir(DOC_DIR .. '/Build/Videos')
             LFS.mkdir(DOC_DIR .. '/Build/Fonts')
 
-            GANIN.az(DOC_DIR, BUILD)
             PROGRAMS.group[8]:setIsLocked(true, 'vertical')
             WINDOW.new(STR['build.start' .. (isAab and '.aab' or '')], {}, function() PROGRAMS.group[8]:setIsLocked(false, 'vertical') end, 1)
 
@@ -31,7 +30,7 @@ return {
                     end
                 end
 
-                WRITE_FILE(DOC_DIR .. '/Build/game.lua', GAME.new(link))
+                WRITE_FILE(DOC_DIR .. '/Build/game.lua', GAME.new(link, nil))
 
                 local title = GAME.data.title
                 local build = GAME.data.settings.build
@@ -63,7 +62,7 @@ return {
             OS_REMOVE(DOC_DIR .. '/list.json')
             OS_REMOVE(DOC_DIR .. '/Build', true)
             CURRENT_LINK = LAST_CURRENT_LINK or CURRENT_LINK
-            CCOIN.set(tonumber(LOCAL.ccoin) + (isAab and 100 or 10))
+            CCOIN.set(tonumber(LOCAL.niocc) + (isAab and 100 or 10))
             pcall(function() PROGRAMS.group[8]:setIsLocked(false, 'vertical') end)
         end
     end,

@@ -2,13 +2,30 @@ local CALC = require 'Core.Simulation.calc'
 local M = {}
 
 if 'Группы' then
-    M['newGroup'] = function(params)
+    M['newGroup'] = function(params, isLevel)
         local name = CALC(params[1])
+
+        if isLevel then
+            name = 'data.title'
+        end
 
         GAME.lua = GAME.lua .. ' pcall(function() local name = ' .. name .. ' pcall(function() GAME.group.groups[name]:removeSelf() end)'
         GAME.lua = GAME.lua .. ' GAME.group.groups[name] = display.newGroup() GAME.group.groups[name]._tag = \'TAG\''
         GAME.lua = GAME.lua .. ' GAME.group.groups[name]._isGroup = true GAME.group.groups[name].name = name'
         GAME.lua = GAME.lua .. ' GAME.group:insert(GAME.group.groups[name]) end)'
+    end
+
+    M['newLevel'] = function(params)
+        GAME.lua = GAME.lua .. ' \n pcall(function() local data = JSON.decode(READ_FILE(DOC_DIR'
+        GAME.lua = GAME.lua .. ' .. \'/\' .. other.getLevel(' .. CALC(params[1]) .. ')))'
+        require('Core.Simulation.events').BLOCKS['newGroup']({}, true)
+        GAME.lua = GAME.lua .. ' for _, object in ipairs(data.params) do if object.type[1] == \'image\' then'
+        require('Core.Simulation.events').BLOCKS['newObject']({}, true)
+        require('Core.Simulation.events').BLOCKS['addGroupObject']({}, true)
+        GAME.lua = GAME.lua .. ' elseif object.type[1] == \'text\' then'
+        require('Core.Simulation.events').BLOCKS['newText']({}, true)
+        require('Core.Simulation.events').BLOCKS['addGroupText']({}, true)
+        GAME.lua = GAME.lua .. ' end end end)'
     end
 
     M['newContainer'] = function(params)
@@ -31,16 +48,34 @@ if 'Группы' then
     end
 
     M['showGroup'] = function(params)
-        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. CALC(params[1]) .. '].isVisible = true end)'
+        local name = CALC(params[1])
+        local resumePhysics = CALC(params[2])
+
+        GAME.lua = GAME.lua .. ' pcall(function() local name, resumePhysics = ' .. name .. ', ' .. resumePhysics
+        GAME.lua = GAME.lua .. ' local group = GAME.group.groups[name] group.isVisible = true'
+        GAME.lua = GAME.lua .. ' if resumePhysics then for index = 1, group.numChildren do local object = {name ='
+        GAME.lua = GAME.lua .. ' group[index].name}' require('Core.Simulation.events').BLOCKS['updHitbox']({}, true)
+        GAME.lua = GAME.lua .. ' end end end)'
     end
 
     M['hideGroup'] = function(params)
-        GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. CALC(params[1]) .. '].isVisible = false end)'
+        local name = CALC(params[1])
+        local pausePhysics = CALC(params[2])
+
+        GAME.lua = GAME.lua .. ' pcall(function() local name, pausePhysics = ' .. name .. ', ' .. pausePhysics
+        GAME.lua = GAME.lua .. ' local group = GAME.group.groups[name] group.isVisible = false'
+        GAME.lua = GAME.lua .. ' if pausePhysics then for index = 1, group.numChildren do'
+        GAME.lua = GAME.lua .. ' pcall(function() PHYSICS.removeBody(group[index]) end) end end end)'
     end
 
-    M['addGroupObject'] = function(params)
+    M['addGroupObject'] = function(params, isLevel)
         local nameGroup = CALC(params[1])
         local nameObject = CALC(params[2])
+
+        if isLevel then
+            nameGroup = 'data.title'
+            nameObject = 'object.name'
+        end
 
         GAME.lua = GAME.lua .. ' pcall(function() local nameGroup, nameObject = ' .. nameGroup .. ', ' .. nameObject
         GAME.lua = GAME.lua .. ' GAME.group.groups[nameGroup]:insert(GAME.group.objects[nameObject])'
@@ -49,9 +84,14 @@ if 'Группы' then
         GAME.lua = GAME.lua .. ' obj.x = SET_X(GET_X(obj.x), obj) obj.y = SET_Y(GET_Y(obj.y), obj) end end)'
     end
 
-    M['addGroupText'] = function(params)
+    M['addGroupText'] = function(params, isLevel)
         local nameGroup = CALC(params[1])
         local nameText = CALC(params[2])
+
+        if isLevel then
+            nameGroup = 'data.title'
+            nameText = 'object.name'
+        end
 
         GAME.lua = GAME.lua .. ' pcall(function() GAME.group.groups[' .. nameGroup .. ']:insert(GAME.group.texts[' .. nameText .. ']) end)'
     end
