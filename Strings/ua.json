@@ -11,7 +11,7 @@
         "lang.cn": "中文",
         "lang.jp": "日本語",
         "lang.custom": "Власна",
-        "backup.title": "Ви впевнені, що хочете замінити поточні скрипти на старіші збереження?\n\n Натисніть «Наступний бекап», щоб вибрати старіший бекап по часу, або натисніть «Установити бекап», щоб замінити поточні скрипти бекапом\n\n Поточний останній бекап:",
+        "backup.title": "Ви впевнені, що хочете замінити поточні скрипти на старіші бекапи(збереження)?\n\n Натисніть «Наступний бекап», щоб вибрати старіший бекап по часу, або натисніть «Установити бекап», щоб замінити поточні скрипти бекапом\n\n Поточний останній бекап: ",
         "backup.continue": "Наступний бекап",
         "backup.install": "Установити бекап",
         "button.yes": "Так",
@@ -35,6 +35,7 @@
         "button.hide": "Приховати",
         "button.show": "Показати",
         "button.addIfElse": "Додати умову",
+        "button.replaceTouch": "Змінити режим",
         "button.block.find": "Знайти блок",
         "button.pasteFromClipboard": "Вставити з буфера обміну",
         "button.importLuaFile": "Імпортувати .lua файл",
@@ -87,8 +88,40 @@
         "sounds.changename": "Змініть назву звуку",
         "videos.entername": "Введіть назву відео",
         "videos.changename": "Змініть назву відео",
-        "levels.entername": "Enter level name",
-        "levels.changename": "Change level name",
+        "levels.entername": "Введіть назву рівня",
+        "levels.changename": "Змінити назву рівня",
+        "levels.enterobjtype": "Виберіть, який об’єкт створити",
+        "levels.enterobjname": "Введіть назву об'єкта",
+        "levels.entertextname": "Введіть назву тексту",
+        "levels.entertextlabel": "Введіть текст",
+        "levels.changeobjname": "Змінити назву об'єкта",
+        "levels.enterobjx": "Введіть позицію X об'єкта",
+        "levels.enterobjy": "Введіть позицію Y об'єкта",
+        "levels.enterobjwidth": "Введіть ширину об'єкта",
+        "levels.enterobjheight": "Введіть висоту об'єкта",
+        "levels.enterobjtext": "Введіть текст",
+        "levels.enterobjsize": "Введіть розмір тексту",
+        "levels.enterobjrotate": "Введіть оберт об'єкта",
+        "levels.enterobjbody": "Оберіть тіло фіз. об'єкта",
+        "levels.enterobjbody.nil": "Без фізики",
+        "levels.enterobjbody.type": "Оберіть тип тіла",
+        "levels.enterobjbody.dynamic": "Динамічний",
+        "levels.enterobjbody.static": "Статичний",
+        "levels.enterobjgravity": "Введіть гравітацію об'єкта",
+        "levels.enterobjbounce": "Введіть відскок об'єкта",
+        "levels.enterobjdensity": "Введіть вагу об'єкта",
+        "levels.enterobjfriction": "Введіть тертя об'єкта",
+        "levels.enterobjfixed": "Оберіть фіксацію об'єкта",
+        "levels.enterobjfixed.true": "Заборонити фізичний оберт",
+        "levels.enterobjfixed.false": "Дозволити фізичний оберт",
+        "levels.enterobjsensor": "Оберіть фізичну невидимість об'єкта",
+        "levels.enterobjsensor.true": "Невидимий (сенсорний)",
+        "levels.enterobjsensor.false": "Видимий (не сенсорний)",
+        "levels.enterobjlayer": "Введіть шар об'єкта",
+        "levels.enterobjlayercurrent": "Поточний шар:",
+        "levels.enterobjlayerall": "Усього шарів:",
+        "levels.save": "Зберегти рівень?",
+        "levels.exit": "Ви дійсно хочете вийти з редактора?",
         "resources.entername": "Введіть ім'я ресурсу",
         "resources.changename": "Змінення імені ресурсу",
         "fonts.entername": "Введіть назву шрифту",
@@ -97,10 +130,10 @@
         "settings.applang": "Мова програми:",
         "settings.confirmdelete": "Підтвердити видалення:",
         "settings.autoplace": "Параметри автозаповнення:",
-        "settings.scroll_friction": "Scroll friction:",
-        "settings.scroll_friction.enterheight": "Enter scroll friction",
-        "settings.backup_frequency": "Backup frequency (minutes):",
-        "settings.backup_frequency.enterheight": "Enter the backup frequency in minutes",
+        "settings.scroll_friction": "Інтенсивність прокрутки:",
+        "settings.scroll_friction.enterheight": "Введіть інтенсивність прокрутки",
+        "settings.backup_frequency": "Частота бекапів (хвилин):",
+        "settings.backup_frequency.enterheight": "Введіть частоту бекапів у хвилинах",
         "settings.bottom_height": "Висота нижньої межи:",
         "settings.bottom_height.enterheight": "Ввести висоту нижньої межі",
         "settings.old_dog": "Стандартний робопес:",
@@ -133,14 +166,15 @@
         "psettings.enterversion": "Введіть ім'я версії",
         "psettings.enterpackage": "Введіть ім'я пакету",
         "errors.build": "Помилка, введіть ЦІЛЕ ЧИСЛО",
+        "errors.number": "Помилка, введіть ЧИСЛО",
         "errors.package": "Помилка, введіть правильне ім'я пакету",
         "errors.name": "Помилка, ім'я вже споживається",
         "errors.filter": "Помилка, порожню назву не можна використовувати",
         "errors.min8sym": "Помилка, потрібно принаймні 8 символів",
         "errors.max32sym": "Помилка, дозволено максимум 32 символи",
         "errors.bottom_height": "Помилка, число має бути з -300 до 300",
-        "errors.backup_frequency": "Error, number should be from 1 to 59",
-        "errors.scroll_friction": "Error, number should be from 10 to 1000",
+        "errors.backup_frequency": "Помилка, число має бути від 1 до 59",
+        "errors.scroll_friction": "Помилка, число має бути від 10 до 1000",
         "build.start": "Запуск збірки APK, зачекайте",
         "build.start.aab": "AAB збірка розпочалась, будь ласка, зачекайте",
         "export.start": "Експорт було розпочато, будь ласка, зачекайте",
@@ -155,22 +189,22 @@
         "beginner.gender.what": "І так, нумо дізнаємося про вашу стать, чоловіча/жіноча",
         "beginner.gender.man": "Чоловіча",
         "beginner.gender.woman": "Жіноча",
-        "beginner.age.what": "А тепер введи свій вік, я нагадаю тобі, ти можеш використовувати CCode з 13 до 90 років",
+        "beginner.age.what": "А тепер введи свій вік, я нагадаю тобі, ти можеш використовувати CCode з 5 до 90 років",
         "beginner.age": "Вік",
         "beginner.age.banned": "Ви не можете використовувати CCode у зв'язку з обмеженнями віку",
         "beginner.name.what": "І, нарешті, дізнаймось ваше ім'я",
         "beginner.name": "Ім’я",
-        "beginner.entrance": "Дякую зараз ви можете почати використовувати CCode, маленькі підказки: \n\nВкладка 'Мій робопес ' має вкладку навчання\n\nНатискаючи на кнопку 'Discord' в лівому нижньому кутку, ви можете увійти на сервер Discord, де ви можете задавати питання і відправляти баги\n\nCCode не є найпростішою програмою назараз, так що багато відео на YouTube і допомога у discord буде дуже корисною для тебе\n\nНу, кнопка \"Рівні\" ще не працює"
+        "beginner.entrance": "Дякую зараз ви можете почати використовувати CCode, маленькі підказки: \n\nВкладка 'Мій робопес ' має вкладку навчання\n\nНатискаючи на кнопку 'Discord' в лівому нижньому кутку, ви можете увійти на сервер Discord, де ви можете задавати питання і відправляти баги\n\nCCode не є найпростішою програмою назараз, так що багато відео на YouTube і допомога у discord буде дуже корисною для тебе"
     },
     "robodog": {
-        "robodog.showAd.title": "To get 20 ccoin, you need to watch a video ad",
+        "robodog.showAd.title": "Щоб отримати 20 сікоінів, потрібно переглянути рекламу",
         "robodog.showAd.time": "Ви зможете знову дивитися рекламу через: ",
         "robodog.showAd.error": "Помилка завантаження реклами",
         "robodog.showAd.promo": "Промокод",
         "robodog.showAd.watch": "Дивитися",
         "robodog.showAd": "Отримати сікоіни",
-        "robodog.autoAd": "Autoreview",
-        "robodog.autoAd.title": "Do you want to turn on/off autoreview ads? When turned on, a video ad will be shown every 10 minutes, which will bring you 20 ccoin",
+        "robodog.autoAd": "Автопереглядач",
+        "robodog.autoAd.title": "Ви хочете, щоб ввімкнути/вимкнути автоперегляд? Якщо увімкнено, відеореклама буде показана кожні 10 хвилин, що принесе вам 20 ccoin",
         "robodog.learning": "Навчання",
         "robodog.themes": "Теми",
         "robodog.buy": "Купити",
@@ -186,8 +220,8 @@
         "robodog.want.buy.3": "Ви хочете придбати ці вуха?\nВартість: ",
         "robodog.want.buy.4": "Ви хочете придбати цей рот?\nВартість: ",
         "robodog.want.buy.5": "Ви хочете придбати цей аксесуар?\nВартість: ",
-        "robodog.want.buy.apk": "Do you want to build apk?\nCost: 10 ccoin",
-        "robodog.want.buy.aab": "Do you want to build aab?\nCost: 100 ccoin",
+        "robodog.want.buy.apk": "Ви хочете збілдити apk?\nВартість: 10 ccoin",
+        "robodog.want.buy.aab": "Збірка aab тимчасово недоступна",
         "robodog.want.set.theme": "Встановити цю тему?",
         "robodog.need.ccoin": "Необхідна кількість: "
     },
@@ -199,7 +233,7 @@
         "blocks.create.fun.noob": "Створити дію",
         "blocks.create.objects": "Об'єкти",
         "blocks.create.filters": "Фільтри",
-        "blocks.create.groups": "Групи",
+        "blocks.create.groups": "Рівні",
         "blocks.create.tags": "Теги",
         "blocks.create.files": "Файли",
         "blocks.create.media": "Медіа",
@@ -242,7 +276,7 @@
         "blocks.select.pic": "Малюнок",
         "blocks.select.obj": "Об'єкт",
         "blocks.select.text": "Текст",
-        "blocks.select.group": "Група",
+        "blocks.select.group": "Рівень",
         "blocks.select.tag": "Тег",
         "blocks.select.widget": "Віджет",
         "blocks.select.snapshot": "Снапшот",
@@ -261,6 +295,8 @@
         "blocks.select.docTypeTemps": "Тимчасовий",
         "blocks.select.spriteTypeLinear": "Стандартний",
         "blocks.select.spriteTypePixel": "Піксельний",
+        "blocks.select.yes": "Так",
+        "blocks.select.no": "Ні",
         "blocks.color.red": "Червоний",
         "blocks.color.green": "Зелений",
         "blocks.color.blue": "Синій",
@@ -303,7 +339,22 @@
         "blocks.onUpdateVar": "Коли значення змінної зміниться",
         "blocks.onUpdateVar.params": [
             "Назва змінної:",
-            "Old value:"
+            "Старе значення:"
+        ],
+        "blocks.onTouchBegan2": "Коли палець торкається об'єкта",
+        "blocks.onTouchBegan2.params": [
+            "Назва об'єкта:",
+            "Назва таблиці:"
+        ],
+        "blocks.onTouchEnded2": "Коли палець відпускає об'єкт",
+        "blocks.onTouchEnded2.params": [
+            "Назва об'єкта:",
+            "Назва таблиці:"
+        ],
+        "blocks.onTouchMoved2": "Коли палець рухається по об’єкту",
+        "blocks.onTouchMoved2.params": [
+            "Назва об'єкта:",
+            "Назва таблиці:"
         ],
         "blocks.onTouchBegan": "Коли палець торкається об'єкта",
         "blocks.onTouchBegan.params": [
@@ -331,6 +382,11 @@
         "blocks.onTouchDisplayMoved": "Під час переміщення пальцем по екрану",
         "blocks.onTouchDisplayMoved.params": [
             "Назва таблиці:"
+        ],
+        "blocks.onAdsLoad": "Коли Unity Ads отримуває подію",
+        "blocks.onAdsLoad.params": [
+            "Назва функції:",
+            "Table name:"
         ],
         "blocks.onFirebase": "Отримано відповідь від Firebase",
         "blocks.onFirebase.params": [
@@ -414,6 +470,11 @@
         "blocks.onFieldEnded.params": [
             "Назва функції:",
             "Назва таблиці:"
+        ],
+        "blocks.onBluetoothGet": "При отриманні значення через bluetooth",
+        "blocks.onBluetoothGet.params": [
+            "Назва функції:",
+            "Назва змінної:"
         ]
     },
     "vars": {
@@ -616,6 +677,13 @@
             "Позиція (X):",
             "Позиція (Y):"
         ],
+        "blocks.cloneObject": "Clone object",
+        "blocks.cloneObject.params": [
+            "Object name (clone):",
+            "Object name (original):",
+            "Position (X):",
+            "Position (Y):"
+        ],
         "blocks.setPos": "Установити позицію об'єкту",
         "blocks.setPos.params": [
             "Назва об'єкту:",
@@ -726,6 +794,18 @@
         "blocks.deleteFilter": "Видалити фільтр",
         "blocks.deleteFilter.params": [
             "Назва об'єкта:"
+        ],
+        "blocks.defineEffect": "Create shader filter (OpenGL-ES 2.0)",
+        "blocks.defineEffect.params": [
+            "Shader name:",
+            "Dependence on time:",
+            "Vertex code:",
+            "Fragment code:"
+        ],
+        "blocks.setCustomEffect": "Apply shader filter",
+        "blocks.setCustomEffect.params": [
+            "Object name:",
+            "Shader name:"
         ],
         "blocks.setBlur": "Застосувати розмиття",
         "blocks.setBlur.params": [
@@ -1301,7 +1381,7 @@
         "blocks.foreachEnd": "Кінець циклу (всі елементи таблиці)",
         "blocks.foreach": "Пройтися по всім елементам таблиці",
         "blocks.foreach.params": [
-            "Table:",
+            "Таблиця:",
             "Елемент:",
             "Ключ:"
         ],
@@ -1377,10 +1457,10 @@
         "blocks.requestApiRes.params": [
             "Назва ресурсу:"
         ],
-        "blocks.requestApiThread": "Ваниш хуесос",
+        "blocks.requestApiThread": "Request lua5.4 method in the new stream",
         "blocks.requestApiThread.params": [
-            "Ваниш, скинь сиськи:",
-            "Я точно не создатель лучших игр на свете:"
+            "Lua код:",
+            "Назва функції:"
         ],
         "blocks.toastShort": "Коротке спливаюче сповіщення",
         "blocks.toastShort.params": [
@@ -1408,22 +1488,6 @@
         "blocks.setBackgroundHEX": "Встановити HEX колір фону",
         "blocks.setBackgroundHEX.params": [
             "Колір (Hex):"
-        ],
-        "blocks.newLevel": "Завантажити рівень",
-        "blocks.newLevel.params": [
-            "Назва рівня:"
-        ],
-        "blocks.removeLevel": "Вивантажити рівень",
-        "blocks.removeLevel.params": [
-            "Назва рівня:"
-        ],
-        "blocks.showLevel": "Показати рівень",
-        "blocks.showLevel.params": [
-            "Назва рівня:"
-        ],
-        "blocks.hideLevel": "Сховати рівень",
-        "blocks.hideLevel.params": [
-            "Назва рівня:"
         ],
         "blocks.setPortraitOrientation": "Встановити вертикальну орієнтацію",
         "blocks.setPortraitOrientation.params": [
@@ -1742,123 +1806,117 @@
         ]
     },
     "groups": {
-        "blocks.groups": "Групи\n& Теги",
-        "blocks.newGroup": "Створити групу",
+        "blocks.groups": "Levels\n& Tags",
+        "blocks.newGroup": "Create empty level",
         "blocks.newGroup.params": [
-            "Назва групи:"
+            "Level name:"
+        ],
+        "blocks.newLevel": "Load level",
+        "blocks.newLevel.params": [
+            "Level name:"
         ],
         "blocks.newContainer": "Створити контейнер",
         "blocks.newContainer.params": [
-            "Назва групи:",
+            "Level name:",
             "Ширина:",
             "Висота:"
         ],
-        "blocks.removeGroup": "Видалити групу",
+        "blocks.removeGroup": "Remove level",
         "blocks.removeGroup.params": [
-            "Назва групи:"
+            "Level name:"
         ],
-        "blocks.showGroup": "Показати групу",
+        "blocks.showGroup": "Show level",
         "blocks.showGroup.params": [
-            "Назва групи:"
+            "Level name:"
         ],
-        "blocks.hideGroup": "Сховати групу",
+        "blocks.hideGroup": "Hide level",
         "blocks.hideGroup.params": [
-            "Назва групи:"
+            "Level name:"
         ],
-        "blocks.addGroupObject": "Вставити об'єкт у групу",
+        "blocks.addGroupObject": "Insert object to level",
         "blocks.addGroupObject.params": [
-            "Назва групи:",
+            "Level name:",
             "Назва об'єкту:"
         ],
-        "blocks.addGroupText": "Вставити текст в групу",
+        "blocks.addGroupText": "Insert text to level",
         "blocks.addGroupText.params": [
-            "Назва групи:",
+            "Level name:",
             "Назва тексту:"
         ],
-        "blocks.addGroupWidget": "Вставити віджет в групу",
-        "blocks.addGroupWidget.params": [
-            "Назва групи:",
-            "Назва віджету:"
-        ],
-        "blocks.addGroupMedia": "Вставити медіа в групу",
-        "blocks.addGroupMedia.params": [
-            "Назва групи:",
-            "Назва медіа:"
-        ],
-        "blocks.addGroupTag": "Вставити тег у групу",
+        "blocks.addGroupTag": "Insert tag to level",
         "blocks.addGroupTag.params": [
-            "Назва групи:",
+            "Level name:",
             "Назва тегу:"
         ],
-        "blocks.addGroupSnapshot": "Вставити снапшот до групи",
+        "blocks.addGroupSnapshot": "Insert snapshot to level",
         "blocks.addGroupSnapshot.params": [
-            "Назва групи:",
+            "Level name:",
             "Назва снапшоту:"
         ],
-        "blocks.addGroupGroup": "Вставити групу2 до групи1",
+        "blocks.addGroupGroup": "Insert level2 to level1",
         "blocks.addGroupGroup.params": [
-            "Назва групи1:",
-            "Назва групи2:"
+            "Level1 name:",
+            "Level2 name:"
         ],
-        "blocks.setGroupPos": "Встановити позицію групи",
+        "blocks.setGroupPos": "Set level position",
         "blocks.setGroupPos.params": [
-            "Назва групи:",
+            "Level name:",
             "Позиція (X):",
             "Позиція (Y):"
         ],
-        "blocks.setGroupSize": "Установити розмір групи",
+        "blocks.setGroupSize": "Set level size",
         "blocks.setGroupSize.params": [
-            "Назва групи:",
+            "Level name:",
             "Ширина:",
             "Висота:"
         ],
-        "blocks.setGroupRotation": "Установити поворот групи",
+        "blocks.setGroupRotation": "Set level rotation",
         "blocks.setGroupRotation.params": [
-            "Назва групи:",
+            "Level name:",
             "Обертання (0-360):"
         ],
-        "blocks.setGroupAlpha": "Установити прозорість групи",
+        "blocks.setGroupAlpha": "Set level opacity",
         "blocks.setGroupAlpha.params": [
-            "Назва групи:",
+            "Level name:",
             "Непрозорість (0-100):"
         ],
-        "blocks.updGroupPosX": "Змінити позицію X групи",
+        "blocks.updGroupPosX": "Change level position X",
         "blocks.updGroupPosX.params": [
-            "Назва групи:",
+            "Level name:",
             "Позиція (X):"
         ],
-        "blocks.updGroupPosY": "Змінити позицію Y групи",
+        "blocks.updGroupPosY": "Change level position Y",
         "blocks.updGroupPosY.params": [
-            "Назва групи:",
+            "Level name:",
             "Позиція (Y):"
         ],
-        "blocks.updGroupWidth": "Змінити ширину групи",
+        "blocks.updGroupWidth": "Змінити ширину рівня",
         "blocks.updGroupWidth.params": [
-            "Назва групи:",
+            "Назва рівня:",
             "Ширина:"
         ],
-        "blocks.updGroupHeight": "Змінити висоту групи",
+        "blocks.updGroupHeight": "Змінити висоту рівня",
         "blocks.updGroupHeight.params": [
-            "Назва групи:",
+            "Назва рівня:",
             "Висота:"
         ],
-        "blocks.updGroupRotation": "Змінити поворот групи",
+        "blocks.updGroupRotation": "Змінити оберт рівня",
         "blocks.updGroupRotation.params": [
-            "Назва групи:",
+            "Назва рівня:",
             "Обертання (0-360):"
         ],
-        "blocks.updGroupAlpha": "Змінити непрозорість групи",
+        "blocks.updGroupAlpha": "Змінити непрозорість рівня",
         "blocks.updGroupAlpha.params": [
-            "Назва групи:",
+            "Назва рівня:",
             "Прозорість (0-100):"
         ],
-        "blocks.frontGroup": "Покладіть групу на шар вище",
+        "blocks.frontGroup": "Розмістити рівень вище шару",
         "blocks.frontGroup.params": [
-            "Назва групи:"
+            "Назва рівня:"
         ],
-        "blocks.backGroup": "Розмістити групу на шар нижче",
+        "blocks.backGroup": "Розмістити рівень нижче шару",
         "blocks.backGroup.params": [
-            "Назва групи:"
+            "Назва рівня:"
         ],
         "blocks.newTag": "Створити тег",
         "blocks.newTag.params": [
@@ -1896,10 +1954,10 @@
             "Назва тегу:",
             "Назва медіа:"
         ],
-        "blocks.addTagGroup": "Додати тег до групи",
+        "blocks.addTagGroup": "Add tag to level",
         "blocks.addTagGroup.params": [
             "Назва тегу:",
-            "Назва групи:"
+            "Level name:"
         ],
         "blocks.addTagTag": "Додати тег1 до тегу2",
         "blocks.addTagTag.params": [
@@ -2873,49 +2931,50 @@
             "Зміщення (X):",
             "Зміщення (Y):"
         ],
-        "blocks.new3dScene": "Create 3d scene",
+        "blocks.new3dScene": "Створити 3d сцену",
         "blocks.new3dScene.params": [
-            "Width:",
-            "Height:"
+            "Ширина:",
+            "Висота:"
         ],
-        "blocks.upd3dScene": "Update 3d scene",
-        "blocks.eye3dScene": "Set camera position of 3d scene",
+        "blocks.upd3dScene": "Оновити 3d сцену",
+        "blocks.eye3dScene": "Установити положення камери 3d сцени",
         "blocks.eye3dScene.params": [
-            "Position (X):",
-            "Position (Y):",
-            "Position (Z):"
+            "Позиція (X):",
+            "Позиція (Y):",
+            "Позиція (Z):"
         ],
-        "blocks.center3dScene": "Set camera center of 3d scene",
+        "blocks.center3dScene": "Установити камеру по центру 3d сцени",
         "blocks.center3dScene.params": [
-            "Position (X):",
-            "Position (Y):",
-            "Position (Z):"
+            "Позиція (X):",
+            "Позиція (Y):",
+            "Позиція (Z):"
         ],
-        "blocks.new3dObject": "Create 3d object",
+        "blocks.new3dObject": "Створити 3d об'єкт",
         "blocks.new3dObject.params": [
-            "Object3d name:",
-            "Имя ресурса:"
+            "Назва 3d об'єкту:",
+            "Resource name (.obj):",
+            "Resource name (.png):"
         ],
-        "blocks.move3dObject": "Set 3d object position",
+        "blocks.move3dObject": "Установити положення 3d об'єкта",
         "blocks.move3dObject.params": [
-            "Object3d name:",
-            "Position (X):",
-            "Position (Y):",
-            "Position (Z):"
+            "Назва 3d об'єкту:",
+            "Позиція (X):",
+            "Позиція (Y):",
+            "Позиція (Z):"
         ],
-        "blocks.scale3dObject": "Set 3d object scale",
+        "blocks.scale3dObject": "Установити масштаб 3d об'єкта",
         "blocks.scale3dObject.params": [
-            "Object3d name:",
-            "Scale (X):",
-            "Scale (Y):",
-            "Scale (Z):"
+            "Назва 3d об'єкту:",
+            "Масштаб (X):",
+            "Масштаб (Y):",
+            "Масштаб (Z):"
         ],
-        "blocks.rotate3dObject": "Set 3d object rotation",
+        "blocks.rotate3dObject": "Установити оберт 3d об'єкту",
         "blocks.rotate3dObject.params": [
-            "Object3d name:",
-            "Rotation (X):",
-            "Rotation (Y):",
-            "Rotation (Z):"
+            "Назва 3d об'єкту:",
+            "Оберт (X):",
+            "Оберт (Y):",
+            "Оберт (Z):"
         ]
     },
     "network": {
@@ -3021,6 +3080,12 @@
             "Ключ:",
             "Слухач запиту:"
         ],
+        "blocks.initUnityAds": "Init Unity Ads",
+        "blocks.initUnityAds.params": [
+            "Secret token:",
+            "Listener (Function):"
+        ],
+        "blocks.showUnityAds": "Show Unity Ads",
         "blocks.initAdsStartApp": "Ініціалізувати реклами StartApp",
         "blocks.initAdsStartApp.params": [
             "Токен:",
@@ -3033,6 +3098,19 @@
         "blocks.showAdsStartApp": "Показати реклами StartApp",
         "blocks.showAdsStartApp.params": [
             "Тип реклам:"
+        ],
+        "blocks.createBluetooth": "Створити Bluetooth-підключення",
+        "blocks.createBluetooth.params": [
+            "Слухач підключення:"
+        ],
+        "blocks.connectBluetooth": "Приєднатися до Bluetooth-підключення",
+        "blocks.connectBluetooth.params": [
+            "Адреса:",
+            "Слухач підключення:"
+        ],
+        "blocks.sendBluetooth": "Надіслати значення за допомогою Bluetooth-підключення",
+        "blocks.sendBluetooth.params": [
+            "Значення:"
         ]
     },
     "transition": {
@@ -3241,71 +3319,71 @@
             "Колір (B):",
             "Прозорість (0-100):"
         ],
-        "blocks.newLinearEmitter": "Хуй ваниша меньше чем использованрый карандаш",
+        "blocks.newLinearEmitter": "Створити лінійні частки",
         "blocks.newLinearEmitter.params": [
             "Назва часток:",
             "Назва спрайту:",
             "Максимум часток:",
             "Кут залежності:",
-            "Departure angle:",
-            "Departure angle deviation:",
+            "Кут з'їзду:",
+            "Відхилення кута виходу:",
             "Швидкість:",
-            "Speed deviation:",
-            "Radiation range X:",
-            "Radiation range Y:",
-            "Gravity particles X:",
-            "Gravity particles Y:",
-            "Radial acceleration:",
-            "Acceleration deviation:",
-            "Tangential acceleration:",
-            "Acceleration deviation:",
-            "Particle lifetime:",
-            "Time deviation:",
-            "Initial size:",
-            "Size deviation:",
-            "Final size:",
-            "Size deviation:",
-            "Initial rotation:",
-            "Rotation deviation:",
-            "Final rotation:",
-            "Rotation deviation:",
-            "Initial color:",
-            "Color deviation:",
-            "Final color:",
-            "Color deviation:",
-            "Original color GL:",
-            "Target color GL:"
+            "Швидкість відхилення:",
+            "Діапазон випромінювання X:",
+            "Діапазон випромінювання Y:",
+            "Гравітація часток по X:",
+            "Гравітація часток по Y:",
+            "Радіальне прискорення:",
+            "Відхилення прискорення:",
+            "Тангенційне прискорення:",
+            "Відхилення прискорення:",
+            "Час буття часток:",
+            "Відхилення часу:",
+            "Початковий розмір:",
+            "Відхилення розміру:",
+            "Остаточний розмір:",
+            "Відхилення розміру:",
+            "Початковий оберт:",
+            "Відхилення оберта:",
+            "Кінцевий оберт:",
+            "Відхилення оберта:",
+            "Початковий колір:",
+            "Відхилення кольору:",
+            "Остаточний колір:",
+            "Відхилення кольору:",
+            "Початковий колір GL:",
+            "Цільовий колір GL:"
         ],
-        "blocks.newRadialEmitter": "Create radial particles",
+        "blocks.newRadialEmitter": "Створити радіальні частинки",
         "blocks.newRadialEmitter.params": [
-            "Particle name:",
-            "Sprite name:",
-            "Maximum particles:",
-            "Dependence angle:",
-            "Departure angle:",
-            "Departure angle deviation:",
-            "Maximum radius:",
-            "Radius deviation:",
-            "Minimum radius:",
-            "Radius deviation:",
-            "Radial rotation:",
-            "Rotation deviation:",
-            "Particle lifetime:",
-            "Time deviation:",
-            "Initial size:",
-            "Size deviation:",
-            "Final size:",
-            "Size deviation:",
-            "Initial rotation:",
-            "Rotation deviation:",
-            "Final rotation:",
-            "Rotation deviation:",
-            "Initial color:",
-            "Color deviation:",
-            "Final color:",
-            "Color deviation:",
-            "Original color GL:",
-            "Target color GL:"
+            "Назва часток:",
+            "Назва спрайту:",
+            "Максимум часток:",
+            "Кут залежності:",
+            "Кут з'їзду:",
+            "Відхилення кута виходу:",
+            "Максимальний радіус:",
+            "Відхилення радіусу:",
+            "Мінімальний радіус:",
+            "Відхилення радіусу:",
+            "Радіальний оберт:",
+            "Відхилення оберта:",
+            "Час буття часток:",
+            "Відхилення часу:",
+            "Початковий розмір:",
+            "Відхилення розміру:",
+            "Остаточний розмір:",
+            "Відхилення розміру:",
+            "Початковий оберт:",
+            "Відхилення оберта:",
+            "Кінцевий оберт:",
+            "Відхилення оберта:",
+            "Початковий колір:",
+            "Відхилення кольору:",
+            "Остаточний колір:",
+            "Відхилення кольору:",
+            "Початковий колір GL:",
+            "Цільовий колір GL:"
         ]
     },
     "varsNoob": {
@@ -3327,9 +3405,9 @@
         "blocks.readValueNoob.params": [
             "Назва значення:"
         ],
-        "blocks.addGroupObjectNoob": "Вставити зображення в групу",
+        "blocks.addGroupObjectNoob": "Insert picture to level",
         "blocks.addGroupObjectNoob.params": [
-            "Назва групи:",
+            "Level name:",
             "Назва зображення:"
         ],
         "blocks.addTagObjectNoob": "Додати тег до зображення",
@@ -3671,7 +3749,7 @@
         "editor.list.resource.videos": "Відео",
         "editor.list.resource.fonts": "Шрифти",
         "editor.list.resource.others": "Інше",
-        "editor.list.resource.levels": "Levels",
+        "editor.list.resource.levels": "Рівні",
         "editor.list.custom": "Власні",
         "editor.list.event": "Подія",
         "editor.list.script": "Скрипт",
@@ -3682,7 +3760,7 @@
         "editor.list.prop.media": "Медіа",
         "editor.list.prop.media.noob": "Звуки",
         "editor.list.prop.files": "Файли",
-        "editor.list.prop.group": "Групи",
+        "editor.list.prop.group": "Level",
         "editor.list.prop.widget": "Віджети"
     },
     "editor.fun": {
@@ -3696,7 +3774,7 @@
         "editor.list.fun.len_table": "довжина_таблиці",
         "editor.list.fun.exists_in_table": "є_в_таблиці",
         "editor.list.fun.unix_time": "unix_час",
-        "editor.list.fun.unix_ms": "unix_time_ms",
+        "editor.list.fun.unix_ms": "unix_час_мс",
         "editor.list.fun.encode": "закодувати_json",
         "editor.list.fun.gsub": "замінити_в_тексті",
         "editor.list.fun.sub": "символ_з_тексту",
@@ -3713,7 +3791,8 @@
         "editor.list.fun.color_pixel": "колір_пікселя",
         "editor.list.fun.get_ip": "отримати_власний_IP",
         "editor.list.fun.noise": "шум перліна",
-        "editor.list.fun.parameter": "параметр"
+        "editor.list.fun.parameter": "параметр",
+        "editor.list.fun.timer": "час_з_початку"
     },
     "editor.math": {
         "editor.list.math.random": "випадкове",
@@ -3741,7 +3820,7 @@
     },
     "editor.prop": {
         "editor.list.prop.obj.touch": "дотик",
-        "editor.list.prop.obj.group": "group",
+        "editor.list.prop.obj.group": "level",
         "editor.list.prop.obj.tag": "тег",
         "editor.list.prop.obj.var": "змінні",
         "editor.list.prop.obj.pos_x": "позиція_x",
@@ -3763,14 +3842,14 @@
         "editor.list.prop.text.height": "висота_тексту",
         "editor.list.prop.text.rotation": "оберт_тексту",
         "editor.list.prop.text.alpha": "непрозорість_тексту",
-        "editor.list.prop.group.tag": "тег_групи",
-        "editor.list.prop.group.table": "group_table",
-        "editor.list.prop.group.pos_x": "позиція_x_групи",
-        "editor.list.prop.group.pos_y": "позиція_группи_Y",
-        "editor.list.prop.group.width": "ширина_группи",
-        "editor.list.prop.group.height": "висота_групи",
-        "editor.list.prop.group.rotation": "обертання_групи",
-        "editor.list.prop.group.alpha": "непрозорість_групи",
+        "editor.list.prop.group.tag": "level_tag",
+        "editor.list.prop.group.table": "level_table",
+        "editor.list.prop.group.pos_x": "level_x_position",
+        "editor.list.prop.group.pos_y": "level_y_position",
+        "editor.list.prop.group.width": "level_width",
+        "editor.list.prop.group.height": "level_height",
+        "editor.list.prop.group.rotation": "level_rotation",
+        "editor.list.prop.group.alpha": "level_opacity",
         "editor.list.prop.widget.tag": "тег_віджету",
         "editor.list.prop.widget.pos_x": "віджет_позиція_X",
         "editor.list.prop.widget.pos_y": "віджет_позиція_Y",
@@ -3816,8 +3895,11 @@
         "editor.list.device.height_top": "висота_верхньої_межи",
         "editor.list.device.height_bottom": "висота_нижньої_мережи",
         "editor.list.device.finger_touching_screen": "палець_торкається_екрану",
+        "editor.list.device.finger_touching_screen_count": "number_fingers_on_screen",
         "editor.list.device.finger_touching_screen_x": "палець_торкається_екрану_x",
         "editor.list.device.finger_touching_screen_y": "палець_торкається_екрану_y",
-        "editor.list.device.get_ip": "отримати_власний_IP"
+        "editor.list.device.get_ip": "отримати_власний_IP",
+        "editor.list.device.get_device": "сам_bt_девайс",
+        "editor.list.device.get_devices": "підк_bt_девайс"
     }
 }

@@ -35,6 +35,7 @@
         "button.hide": "Esconder",
         "button.show": "Mostrar",
         "button.addIfElse": "Añadir condición",
+        "button.replaceTouch": "Change mode",
         "button.block.find": "Buscar bloque",
         "button.pasteFromClipboard": "Pegar algo del portapapeles",
         "button.importLuaFile": "Importar archivo lua",
@@ -89,6 +90,38 @@
         "videos.changename": "Change video name",
         "levels.entername": "Enter level name",
         "levels.changename": "Change level name",
+        "levels.enterobjtype": "Choose which object to create",
+        "levels.enterobjname": "Enter name of object",
+        "levels.entertextname": "Enter name of text",
+        "levels.entertextlabel": "Enter the text",
+        "levels.changeobjname": "Change name of object",
+        "levels.enterobjx": "Enter X position of object",
+        "levels.enterobjy": "Enter Y position of object",
+        "levels.enterobjwidth": "Enter width of object",
+        "levels.enterobjheight": "Enter height of object",
+        "levels.enterobjtext": "Enter the text",
+        "levels.enterobjsize": "Enter text size",
+        "levels.enterobjrotate": "Enter rotation of object",
+        "levels.enterobjbody": "Select physical object body",
+        "levels.enterobjbody.nil": "Without physics",
+        "levels.enterobjbody.type": "Choose body type",
+        "levels.enterobjbody.dynamic": "Dynamic",
+        "levels.enterobjbody.static": "Static",
+        "levels.enterobjgravity": "Enter gravity of object",
+        "levels.enterobjbounce": "Enter bounce of object",
+        "levels.enterobjdensity": "Enter density of object",
+        "levels.enterobjfriction": "Enter friction of object",
+        "levels.enterobjfixed": "Select object fixation",
+        "levels.enterobjfixed.true": "Ban physical rotation",
+        "levels.enterobjfixed.false": "Allow physical rotation",
+        "levels.enterobjsensor": "Select physical invisibility of object",
+        "levels.enterobjsensor.true": "Invisible (sensor)",
+        "levels.enterobjsensor.false": "Visible (not sensor)",
+        "levels.enterobjlayer": "Enter object layer",
+        "levels.enterobjlayercurrent": "Current layer:",
+        "levels.enterobjlayerall": "Total layers:",
+        "levels.save": "Do you want to keep level?",
+        "levels.exit": "Do you want to exit editor?",
         "resources.entername": "Enter resource name",
         "resources.changename": "Change resource name",
         "fonts.entername": "Enter font name",
@@ -133,6 +166,7 @@
         "psettings.enterversion": "Enter version name",
         "psettings.enterpackage": "Enter package",
         "errors.build": "Error, enter INTEGER",
+        "errors.number": "Error, enter NUMBER",
         "errors.package": "Error, enter valid package name",
         "errors.name": "Error, name already used",
         "errors.filter": "Error, empty name can't be used",
@@ -155,12 +189,12 @@
         "beginner.gender.what": "And so, will we find out who you are, a man or a woman?",
         "beginner.gender.man": "Man",
         "beginner.gender.woman": "Woman",
-        "beginner.age.what": "Now, let's find out your age, I remind you, you can use CCode for people aged from 13 to 90 years",
+        "beginner.age.what": "Now, let's find out your age, I remind you, you can use CCode for people aged from 5 to 90 years",
         "beginner.age": "Age",
         "beginner.age.banned": "You are not allowed to use CCode due to age restrictions",
         "beginner.name.what": "And finally, let's find out your name",
         "beginner.name": "Name",
-        "beginner.entrance": "Thank you, now you can start using CCode, little hints: \n\nIn the tab 'My robodog' has a tab for training\n\nBy clicking the 'Discord' button on the bottom left of the menu, you can go to the Discord server, where you can ask questions and send bugs\n\nCCode is not the easiest application right now, so a lot of videos on YouTube and help in discord will be very useful for you\n\nWell, the 'Levels' button is not working yet"
+        "beginner.entrance": "Thank you, now you can start using CCode, little hints: \n\nIn the tab 'My robodog' has a tab for training\n\nBy clicking the 'Discord' button on the bottom left of the menu, you can go to the Discord server, where you can ask questions and send bugs\n\nCCode is not the easiest application right now, so a lot of videos on YouTube and help in discord will be very useful for you"
     },
     "robodog": {
         "robodog.showAd.title": "To get 20 ccoin, you need to watch a video ad",
@@ -187,7 +221,7 @@
         "robodog.want.buy.4": "Do you want to buy these mouth?\nCost: ",
         "robodog.want.buy.5": "Do you want to buy these accessory?\nCost: ",
         "robodog.want.buy.apk": "Do you want to build apk?\nCost: 10 ccoin",
-        "robodog.want.buy.aab": "Do you want to build aab?\nCost: 100 ccoin",
+        "robodog.want.buy.aab": "The aab build is temporarily unavailable",
         "robodog.want.set.theme": "Do you want to install this theme?",
         "robodog.need.ccoin": "Required quantity: "
     },
@@ -199,7 +233,7 @@
         "blocks.create.fun.noob": "Create action",
         "blocks.create.objects": "Objects",
         "blocks.create.filters": "Filters",
-        "blocks.create.groups": "Groups",
+        "blocks.create.groups": "Levels",
         "blocks.create.tags": "Tags",
         "blocks.create.files": "Files",
         "blocks.create.media": "Media",
@@ -242,7 +276,7 @@
         "blocks.select.pic": "Picture",
         "blocks.select.obj": "Object",
         "blocks.select.text": "Text",
-        "blocks.select.group": "Group",
+        "blocks.select.group": "Level",
         "blocks.select.tag": "Tag",
         "blocks.select.widget": "Widget",
         "blocks.select.snapshot": "Snapshot",
@@ -261,6 +295,8 @@
         "blocks.select.docTypeTemps": "Temporary",
         "blocks.select.spriteTypeLinear": "Default",
         "blocks.select.spriteTypePixel": "Pixel",
+        "blocks.select.yes": "Yes",
+        "blocks.select.no": "No",
         "blocks.color.red": "Red",
         "blocks.color.green": "Green",
         "blocks.color.blue": "Blue",
@@ -305,6 +341,21 @@
             "Variable name:",
             "Old value:"
         ],
+        "blocks.onTouchBegan2": "When finger touches object",
+        "blocks.onTouchBegan2.params": [
+            "Object name:",
+            "Table name:"
+        ],
+        "blocks.onTouchEnded2": "When finger releases object",
+        "blocks.onTouchEnded2.params": [
+            "Object name:",
+            "Table name:"
+        ],
+        "blocks.onTouchMoved2": "When finger moves over object",
+        "blocks.onTouchMoved2.params": [
+            "Object name:",
+            "Table name:"
+        ],
         "blocks.onTouchBegan": "When finger touches object",
         "blocks.onTouchBegan.params": [
             "Function name:",
@@ -330,6 +381,11 @@
         ],
         "blocks.onTouchDisplayMoved": "When finger moves over screen",
         "blocks.onTouchDisplayMoved.params": [
+            "Table name:"
+        ],
+        "blocks.onAdsLoad": "Unity Ads receives event",
+        "blocks.onAdsLoad.params": [
+            "Function name:",
             "Table name:"
         ],
         "blocks.onFirebase": "Response received from Firebase",
@@ -414,6 +470,11 @@
         "blocks.onFieldEnded.params": [
             "Function name:",
             "Table name:"
+        ],
+        "blocks.onBluetoothGet": "When value is received via bluetooth",
+        "blocks.onBluetoothGet.params": [
+            "Function name:",
+            "Variable name:"
         ]
     },
     "vars": {
@@ -616,6 +677,13 @@
             "Position (X):",
             "Position (Y):"
         ],
+        "blocks.cloneObject": "Clone object",
+        "blocks.cloneObject.params": [
+            "Object name (clone):",
+            "Object name (original):",
+            "Position (X):",
+            "Position (Y):"
+        ],
         "blocks.setPos": "Set object position",
         "blocks.setPos.params": [
             "Object name:",
@@ -726,6 +794,18 @@
         "blocks.deleteFilter": "Clear filter",
         "blocks.deleteFilter.params": [
             "Object name:"
+        ],
+        "blocks.defineEffect": "Create shader filter (OpenGL-ES 2.0)",
+        "blocks.defineEffect.params": [
+            "Shader name:",
+            "Dependence on time:",
+            "Vertex code:",
+            "Fragment code:"
+        ],
+        "blocks.setCustomEffect": "Apply shader filter",
+        "blocks.setCustomEffect.params": [
+            "Object name:",
+            "Shader name:"
         ],
         "blocks.setBlur": "Apply blur",
         "blocks.setBlur.params": [
@@ -1377,7 +1457,7 @@
         "blocks.requestApiRes.params": [
             "Resource name:"
         ],
-        "blocks.requestApiThread": "Request lua5.3 method in the new stream",
+        "blocks.requestApiThread": "Request lua5.4 method in the new stream",
         "blocks.requestApiThread.params": [
             "Lua code:",
             "Function name:"
@@ -1408,22 +1488,6 @@
         "blocks.setBackgroundHEX": "Set HEX background color",
         "blocks.setBackgroundHEX.params": [
             "Color (Hex):"
-        ],
-        "blocks.newLevel": "Load level",
-        "blocks.newLevel.params": [
-            "Level name:"
-        ],
-        "blocks.removeLevel": "Unload level",
-        "blocks.removeLevel.params": [
-            "Level name:"
-        ],
-        "blocks.showLevel": "Show level",
-        "blocks.showLevel.params": [
-            "Level name:"
-        ],
-        "blocks.hideLevel": "Hide level",
-        "blocks.hideLevel.params": [
-            "Level name:"
         ],
         "blocks.setPortraitOrientation": "Set portrait orientation",
         "blocks.setPortraitOrientation.params": [
@@ -1742,123 +1806,117 @@
         ]
     },
     "groups": {
-        "blocks.groups": "Groups\n& Tags",
-        "blocks.newGroup": "Create group",
+        "blocks.groups": "Levels\n& Tags",
+        "blocks.newGroup": "Create empty level",
         "blocks.newGroup.params": [
-            "Group name:"
+            "Level name:"
+        ],
+        "blocks.newLevel": "Load level",
+        "blocks.newLevel.params": [
+            "Level name:"
         ],
         "blocks.newContainer": "Create container",
         "blocks.newContainer.params": [
-            "Group name:",
+            "Level name:",
             "Width:",
             "Height:"
         ],
-        "blocks.removeGroup": "Remove group",
+        "blocks.removeGroup": "Remove level",
         "blocks.removeGroup.params": [
-            "Group name:"
+            "Level name:"
         ],
-        "blocks.showGroup": "Show group",
+        "blocks.showGroup": "Show level",
         "blocks.showGroup.params": [
-            "Group name:"
+            "Level name:"
         ],
-        "blocks.hideGroup": "Hide group",
+        "blocks.hideGroup": "Hide level",
         "blocks.hideGroup.params": [
-            "Group name:"
+            "Level name:"
         ],
-        "blocks.addGroupObject": "Insert object to group",
+        "blocks.addGroupObject": "Insert object to level",
         "blocks.addGroupObject.params": [
-            "Group name:",
+            "Level name:",
             "Object name:"
         ],
-        "blocks.addGroupText": "Insert text to group",
+        "blocks.addGroupText": "Insert text to level",
         "blocks.addGroupText.params": [
-            "Group name:",
+            "Level name:",
             "Text name:"
         ],
-        "blocks.addGroupWidget": "Insert widget to group",
-        "blocks.addGroupWidget.params": [
-            "Group name:",
-            "Widget name:"
-        ],
-        "blocks.addGroupMedia": "Insert media to group",
-        "blocks.addGroupMedia.params": [
-            "Group name:",
-            "Media name:"
-        ],
-        "blocks.addGroupTag": "Insert tag to group",
+        "blocks.addGroupTag": "Insert tag to level",
         "blocks.addGroupTag.params": [
-            "Group name:",
+            "Level name:",
             "Tag name:"
         ],
-        "blocks.addGroupSnapshot": "Insert snapshot to group",
+        "blocks.addGroupSnapshot": "Insert snapshot to level",
         "blocks.addGroupSnapshot.params": [
-            "Group name:",
+            "Level name:",
             "Snapshot name:"
         ],
-        "blocks.addGroupGroup": "Insert group2 to group1",
+        "blocks.addGroupGroup": "Insert level2 to level1",
         "blocks.addGroupGroup.params": [
-            "Group1 name:",
-            "Group2 name:"
+            "Level1 name:",
+            "Level2 name:"
         ],
-        "blocks.setGroupPos": "Set group position",
+        "blocks.setGroupPos": "Set level position",
         "blocks.setGroupPos.params": [
-            "Group name:",
+            "Level name:",
             "Position (X):",
             "Position (Y):"
         ],
-        "blocks.setGroupSize": "Set group size",
+        "blocks.setGroupSize": "Set level size",
         "blocks.setGroupSize.params": [
-            "Group name:",
+            "Level name:",
             "Width:",
             "Height:"
         ],
-        "blocks.setGroupRotation": "Set group rotation",
+        "blocks.setGroupRotation": "Set level rotation",
         "blocks.setGroupRotation.params": [
-            "Group name:",
+            "Level name:",
             "Rotation (0-360):"
         ],
-        "blocks.setGroupAlpha": "Set group opacity",
+        "blocks.setGroupAlpha": "Set level opacity",
         "blocks.setGroupAlpha.params": [
-            "Group name:",
+            "Level name:",
             "Opacity (0-100):"
         ],
-        "blocks.updGroupPosX": "Change group position X",
+        "blocks.updGroupPosX": "Change level position X",
         "blocks.updGroupPosX.params": [
-            "Group name:",
+            "Level name:",
             "Position (X):"
         ],
-        "blocks.updGroupPosY": "Change group position Y",
+        "blocks.updGroupPosY": "Change level position Y",
         "blocks.updGroupPosY.params": [
-            "Group name:",
+            "Level name:",
             "Position (Y):"
         ],
-        "blocks.updGroupWidth": "Change group width",
+        "blocks.updGroupWidth": "Change level width",
         "blocks.updGroupWidth.params": [
-            "Group name:",
+            "Level name:",
             "Width:"
         ],
-        "blocks.updGroupHeight": "Change group height",
+        "blocks.updGroupHeight": "Change level height",
         "blocks.updGroupHeight.params": [
-            "Group name:",
+            "Level name:",
             "Height:"
         ],
-        "blocks.updGroupRotation": "Change group rotation",
+        "blocks.updGroupRotation": "Change level rotation",
         "blocks.updGroupRotation.params": [
-            "Group name:",
+            "Level name:",
             "Rotation (0-360):"
         ],
-        "blocks.updGroupAlpha": "Change group opacity",
+        "blocks.updGroupAlpha": "Change level opacity",
         "blocks.updGroupAlpha.params": [
-            "Group name:",
+            "Level name:",
             "Opacity (0-100):"
         ],
-        "blocks.frontGroup": "Place group on layer above",
+        "blocks.frontGroup": "Place level on layer above",
         "blocks.frontGroup.params": [
-            "Group name:"
+            "Level name:"
         ],
-        "blocks.backGroup": "Place group on layer below",
+        "blocks.backGroup": "Place level on layer below",
         "blocks.backGroup.params": [
-            "Group name:"
+            "Level name:"
         ],
         "blocks.newTag": "Create tag",
         "blocks.newTag.params": [
@@ -1896,10 +1954,10 @@
             "Tag name:",
             "Media name:"
         ],
-        "blocks.addTagGroup": "Add tag to group",
+        "blocks.addTagGroup": "Add tag to level",
         "blocks.addTagGroup.params": [
             "Tag name:",
-            "Group name:"
+            "Level name:"
         ],
         "blocks.addTagTag": "Add tag1 to tag2",
         "blocks.addTagTag.params": [
@@ -2894,7 +2952,8 @@
         "blocks.new3dObject": "Create 3d object",
         "blocks.new3dObject.params": [
             "Object3d name:",
-            "Имя ресурса:"
+            "Resource name (.obj):",
+            "Resource name (.png):"
         ],
         "blocks.move3dObject": "Set 3d object position",
         "blocks.move3dObject.params": [
@@ -3021,6 +3080,12 @@
             "Key:",
             "Request listener:"
         ],
+        "blocks.initUnityAds": "Init Unity Ads",
+        "blocks.initUnityAds.params": [
+            "Secret token:",
+            "Listener (Function):"
+        ],
+        "blocks.showUnityAds": "Show Unity Ads",
         "blocks.initAdsStartApp": "Initialize StartApp ads",
         "blocks.initAdsStartApp.params": [
             "Token:",
@@ -3033,6 +3098,19 @@
         "blocks.showAdsStartApp": "Show StartApp ads",
         "blocks.showAdsStartApp.params": [
             "Ads type:"
+        ],
+        "blocks.createBluetooth": "Create bluetooth connection",
+        "blocks.createBluetooth.params": [
+            "Connection listener:"
+        ],
+        "blocks.connectBluetooth": "Connect to bluetooth connection",
+        "blocks.connectBluetooth.params": [
+            "Address:",
+            "Connection listener:"
+        ],
+        "blocks.sendBluetooth": "Send value via bluetooth connection",
+        "blocks.sendBluetooth.params": [
+            "Value:"
         ]
     },
     "transition": {
@@ -3327,9 +3405,9 @@
         "blocks.readValueNoob.params": [
             "Value name:"
         ],
-        "blocks.addGroupObjectNoob": "Insert picture to group",
+        "blocks.addGroupObjectNoob": "Insert picture to level",
         "blocks.addGroupObjectNoob.params": [
-            "Group name:",
+            "Level name:",
             "Picture name:"
         ],
         "blocks.addTagObjectNoob": "Add tag to picture",
@@ -3682,7 +3760,7 @@
         "editor.list.prop.media": "Media",
         "editor.list.prop.media.noob": "Sounds",
         "editor.list.prop.files": "Files",
-        "editor.list.prop.group": "Group",
+        "editor.list.prop.group": "Level",
         "editor.list.prop.widget": "Widget"
     },
     "editor.fun": {
@@ -3713,7 +3791,8 @@
         "editor.list.fun.color_pixel": "color_pixel",
         "editor.list.fun.get_ip": "get_own_ip",
         "editor.list.fun.noise": "perlin_noise",
-        "editor.list.fun.parameter": "parameter"
+        "editor.list.fun.parameter": "parameter",
+        "editor.list.fun.timer": "time_from_start"
     },
     "editor.math": {
         "editor.list.math.random": "random",
@@ -3741,7 +3820,7 @@
     },
     "editor.prop": {
         "editor.list.prop.obj.touch": "touch",
-        "editor.list.prop.obj.group": "group",
+        "editor.list.prop.obj.group": "level",
         "editor.list.prop.obj.tag": "tag",
         "editor.list.prop.obj.var": "variables",
         "editor.list.prop.obj.pos_x": "pos_x",
@@ -3763,14 +3842,14 @@
         "editor.list.prop.text.height": "text_height",
         "editor.list.prop.text.rotation": "text_rotation",
         "editor.list.prop.text.alpha": "text_opacity",
-        "editor.list.prop.group.tag": "group_tag",
-        "editor.list.prop.group.table": "group_table",
-        "editor.list.prop.group.pos_x": "group_x_position",
-        "editor.list.prop.group.pos_y": "group_y_position",
-        "editor.list.prop.group.width": "group_width",
-        "editor.list.prop.group.height": "group_height",
-        "editor.list.prop.group.rotation": "group_rotation",
-        "editor.list.prop.group.alpha": "group_opacity",
+        "editor.list.prop.group.tag": "level_tag",
+        "editor.list.prop.group.table": "level_table",
+        "editor.list.prop.group.pos_x": "level_x_position",
+        "editor.list.prop.group.pos_y": "level_y_position",
+        "editor.list.prop.group.width": "level_width",
+        "editor.list.prop.group.height": "level_height",
+        "editor.list.prop.group.rotation": "level_rotation",
+        "editor.list.prop.group.alpha": "level_opacity",
         "editor.list.prop.widget.tag": "widget_tag",
         "editor.list.prop.widget.pos_x": "widget_x_position",
         "editor.list.prop.widget.pos_y": "widget_y_position",
@@ -3816,8 +3895,11 @@
         "editor.list.device.height_top": "top_border_height",
         "editor.list.device.height_bottom": "bottom_border_height",
         "editor.list.device.finger_touching_screen": "finger_touching_screen",
+        "editor.list.device.finger_touching_screen_count": "number_fingers_on_screen",
         "editor.list.device.finger_touching_screen_x": "finger_touching_screen_x",
         "editor.list.device.finger_touching_screen_y": "finger_touching_screen_y",
-        "editor.list.device.get_ip": "get_own_ip"
+        "editor.list.device.get_ip": "get_own_ip",
+        "editor.list.device.get_device": "self_bt_device",
+        "editor.list.device.get_devices": "paired_bt_devices"
     }
 }

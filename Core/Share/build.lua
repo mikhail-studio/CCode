@@ -10,6 +10,7 @@ return {
             LFS.mkdir(DOC_DIR .. '/Build')
             LFS.mkdir(DOC_DIR .. '/Build/Resources')
             LFS.mkdir(DOC_DIR .. '/Build/Images')
+            LFS.mkdir(DOC_DIR .. '/Build/Levels')
             LFS.mkdir(DOC_DIR .. '/Build/Sounds')
             LFS.mkdir(DOC_DIR .. '/Build/Videos')
             LFS.mkdir(DOC_DIR .. '/Build/Fonts')
@@ -18,7 +19,7 @@ return {
             WINDOW.new(STR['build.start' .. (isAab and '.aab' or '')], {}, function() PROGRAMS.group[8]:setIsLocked(false, 'vertical') end, 1)
 
             timer.performWithDelay(100, function()
-                local flds = {'Resources', 'Images', 'Sounds', 'Videos', 'Fonts'}
+                local flds = {'Resources', 'Images', 'Sounds', 'Levels', 'Videos', 'Fonts'}
                 local icons = {'mipmap-hdpi-v4', 'mipmap-mdpi-v4', 'mipmap-ldpi-v4', 'mipmap-xhdpi-v4', 'mipmap-xxhdpi-v4', 'mipmap-xxxhdpi-v4'}
                 -- local icons = {'mipmap-hdpi', 'mipmap-mdpi', 'mipmap-xhdpi', 'mipmap-xxhdpi', 'mipmap-xxxhdpi'}
 
@@ -62,7 +63,7 @@ return {
             OS_REMOVE(DOC_DIR .. '/list.json')
             OS_REMOVE(DOC_DIR .. '/Build', true)
             CURRENT_LINK = LAST_CURRENT_LINK or CURRENT_LINK
-            CCOIN.set(tonumber(LOCAL.niocc) + (isAab and 100 or 10))
+            -- CCOIN.set(tonumber(LOCAL.niocc) + (isAab and 100 or 10))
             pcall(function() PROGRAMS.group[8]:setIsLocked(false, 'vertical') end)
         end
     end,

@@ -2,7 +2,7 @@ local M = {}
 
 M['get_text'] = function(name)
     local isComplete, result = pcall(function()
-        return GAME.group.texts[name or '0'] and GAME.group.texts[name or '0'].text or ''
+        return GAME_texts[name or '0'] and GAME_texts[name or '0'].text or ''
     end) return isComplete and result or ''
 end
 

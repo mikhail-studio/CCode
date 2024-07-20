@@ -6,7 +6,9 @@ local listTypes = {
     {'clone', 'all'}, {'delete', 'all'}, {'name', 'all'},
     {'x', 'all'}, {'y', 'all'}, {'width', 'image'}, {'height', 'image'},
     {'text', 'text'}, {'size', 'text'}, {'rotate2', 'all'}, {'layer', 'all'},
-    {'body', 'image'}
+    {'body', 'image'}, {'gravity', 'image'}, {'bounce', 'image'},
+    {'density', 'image'}, {'friction', 'image'},
+    {'fixed', 'image'}, {'sensor', 'image'}
 }
 
 local function clear()
@@ -43,7 +45,11 @@ function M:saveClone(data)
             data.name = data.name .. math.random(100000, 999999)
             data.x, data.y = data.x + 10, data.y + 10
             table.insert(P.level.params, data)
-            addSprite(data.type[2])
+
+            if data.type[1] == 'image' then
+                addSprite(data.type[2])
+            end
+
             return data
         end
     end
@@ -53,7 +59,10 @@ function M:saveDelete(data)
     for index, obj in ipairs(P.level.params) do
         if obj.name == data.name then
             table.remove(P.level.params, index)
-            deleteSprite(data.type[2])
+
+            if data.type[1] == 'image' then
+                deleteSprite(data.type[2])
+            end
         end
     end
 end
@@ -80,6 +89,38 @@ function M:saveRotation(currentObj, data)
     for index, obj in ipairs(P.level.params) do
         if obj.name == data.name then
             P.level.params[index].rotation = currentObj.rotation
+        end
+    end
+end
+
+function M:saveGravity(currentObj, data)
+    for index, obj in ipairs(P.level.params) do
+        if obj.name == data.name then
+            P.level.params[index].gravity = currentObj.gravity
+        end
+    end
+end
+
+function M:saveDensity(currentObj, data)
+    for index, obj in ipairs(P.level.params) do
+        if obj.name == data.name then
+            P.level.params[index].density = currentObj.density
+        end
+    end
+end
+
+function M:saveBounce(currentObj, data)
+    for index, obj in ipairs(P.level.params) do
+        if obj.name == data.name then
+            P.level.params[index].bounce = currentObj.bounce
+        end
+    end
+end
+
+function M:saveFriction(currentObj, data)
+    for index, obj in ipairs(P.level.params) do
+        if obj.name == data.name then
+            P.level.params[index].friction = currentObj.friction
         end
     end
 end
@@ -118,6 +159,30 @@ function M:saveLayer(value, img)
     end
 end
 
+function M:saveBody(currentObj, data)
+    for index, obj in ipairs(P.level.params) do
+        if obj.name == data.name then
+            P.level.params[index].body = currentObj.body
+        end
+    end
+end
+
+function M:saveFixed(currentObj, data)
+    for index, obj in ipairs(P.level.params) do
+        if obj.name == data.name then
+            P.level.params[index].isFixedRotation = currentObj.isFixedRotation
+        end
+    end
+end
+
+function M:saveSensor(currentObj, data)
+    for index, obj in ipairs(P.level.params) do
+        if obj.name == data.name then
+            P.level.params[index].isSensor = currentObj.isSensor
+        end
+    end
+end
+
 local completeImportPicture = function(import)
     if import.done and import.done == 'ok' then
         local name = P.importName
@@ -136,9 +201,10 @@ local completeImportPicture = function(import)
         end
 
         local obj = {
-            y = 0, x = 0, rotation = 0, body = 'nil',
+            y = 0, x = 0, rotation = 0, body = '',
             type = {'image', textureLink, isPixel and 'nearest' or 'linear'},
             gravity = -1, bounce = 0, density = 1, friction = 0,
+            isFixedRotation = false, isSensor = false,
             width = width, height = height, name = name
         }
 

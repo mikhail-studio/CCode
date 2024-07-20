@@ -23,7 +23,7 @@ return {
                                 pcall(function()
                                     NEW_BLOCK.remove()
                                 end)
-                                
+
                                 for index, block in pairs(new_custom) do
                                     if tonumber(index) then
                                         local new_index, change_custom = tostring(custom.len + 1)
@@ -130,8 +130,6 @@ return {
                 listener({isError = true, idError = 1})
             end
         end
-
-        
 
         if import then
             completeImportProject(import)

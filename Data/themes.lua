@@ -274,6 +274,30 @@ M.bodyObject = function()
     return 'Sprites/Themes/' .. LOCAL.theme .. '/iconBody.png'
 end
 
+M.gravityObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconGravity.png'
+end
+
+M.bounceObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconBounce.png'
+end
+
+M.densityObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconDensity.png'
+end
+
+M.frictionObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconFriction.png'
+end
+
+M.fixedObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconFixed.png'
+end
+
+M.sensorObject = function()
+    return 'Sprites/Themes/' .. LOCAL.theme .. '/iconSensor.png'
+end
+
 M.menu = function()
     return LOCAL.theme == 'default' and 'Sprites/menu.png' or 'Sprites/Themes/' .. LOCAL.theme .. '/bg.png'
 end

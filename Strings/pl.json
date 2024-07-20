@@ -10,462 +10,523 @@
         "lang.by": "Беларускі",
         "lang.cn": "中文",
         "lang.jp": "日本語",
-        "lang.custom": "losowe",
-        "backup.title": "Do you want to replace the current scripts with an older save?\n\nClick 'Next backup' to select an older backup by time, or, click 'Install backup' to replace the current scripts with a backup for this time\n\nCurrent last backup: ",
-        "backup.continue": "Next backup",
-        "backup.install": "Install backup",
-        "button.yes": "wszystkie",
-        "button.no": "media",
-        "button.okay": "wczytaj",
-        "button.close": "notatka",
-        "button.download": "stwórz",
-        "button.change": "czujniki",
-        "button.remove": "odbicie",
-        "button.rename": "kontener",
-        "button.copy": "webview",
-        "button.backup": "Backups",
-        "button.to.buffer": "wyczyść utwórz",
-        "button.from.buffer": "alpha pozioma",
-        "button.paste": "animacja",
-        "button.alldelete": "cykle żądanie",
-        "button.find": "tekst",
-        "button.debug": "maska",
-        "button.comment": "deweloper",
-        "button.uncomment": "kopiuj",
-        "button.hide": "duplikacja",
-        "button.show": "odpowiedź",
-        "button.addIfElse": "ekran anuluj",
-        "button.block.find": "zaokrąglij ostrość",
-        "button.pasteFromClipboard": "Wklej z projektu",
-        "button.importLuaFile": "hitbox nie wartości",
-        "menu.myprogram": "tag czujniki",
-        "menu.continue": "powyżej",
-        "menu.settings": "czujnik",
-        "menu.dogs": "przezroczystość grupę",
-        "menu.testers": "poziom ekranu",
-        "menu.developers": "strumień zapisz",
-        "menu.version.new": "internet zniszcz piaskownice losowe",
-        "menu.version.wait": "rozpoczęcie zrzut rotacja duszek chodnik",
-        "menu.version.download": "pomimń",
-        "programs.entername": "stanu palec mesh",
-        "programs.changename": "nie losowa obiekty",
-        "programs.noobmode": "zarejestruj zażądaj",
-        "program.images": "yes",
-        "program.pictures": "pies",
-        "program.scripts": "grawit",
-        "program.scenarios": "wstecz",
-        "program.levels": "wideo",
-        "program.sounds": "internetowy",
-        "program.videos": "pionowa",
-        "program.fonts": "hitbox",
-        "program.resources": "kilkalności",
-        "program.psettings": "tabela tekst",
-        "program.export": "alpha",
-        "program.build": "lokazja odbicie",
-        "program.aab": "rozpocznij listy",
-        "program.editor": "skrypty tabela",
-        "scripts.entername": "właściwości arkusze skok",
-        "scripts.entername.noob": "synchronizuj globalne zaokrąglone",
-        "scripts.changename": "aktywuj wszystkie klucz",
-        "scripts.changename.noob": "zasap czujnik notatka",
-        "scripts.folder": "na pionowa",
-        "scripts.changename.folder": "powyżej lokazja nazwa",
-        "scripts.sandbox": "krawężnik",
-        "scripts.sandbox.exit": "rozmiar skasuj pole skasujybierz robot piaskoskasujnice",
-        "scripts.sandbox.save": "grawit",
-        "scripts.sandbox.not.save": "poziomy zdefiniuj",
-        "images.entername": "kot skok popup",
-        "images.entername.noob": "będzie losowe naciśnięto",
-        "images.changename": "tło widżet kopia",
-        "images.changename.noob": "pliki obrotowe wszystkie",
-        "images.pixel": "nieklikalności globalne",
-        "images.pixel.noob": "wczytaj obrotowe",
-        "images.gif.convert": "liczba złącz załadowanie wyczyść tekst",
-        "images.gif.okay": "aktualizuj",
-        "images.gif.complete": "zwrócona zasób widok zażądzaj metoda",
-        "sounds.entername": "na zrzut tekst",
-        "sounds.changename": "czątki pole losowa",
-        "videos.entername": "aplikacja oryginał tarcie",
-        "videos.changename": "deweloper pomimń film",
-        "levels.entername": "Enter level name",
-        "levels.changename": "Change level name",
-        "resources.entername": "zakończ film pole",
-        "resources.changename": "zaokrąglone losowa fałsz",
-        "fonts.entername": "synchronizuj anuluj obiekt",
-        "fonts.changename": "wszystkie grawitazja odtwórz",
-        "fonts.needexit": "wstaw równoległa poziom chodnik popup pole krawężnik koń zarejestruj zażądzaj pole zostapole powiadomienie",
-        "settings.applang": "tekstury dynamiczny klikniesz",
-        "settings.confirmdelete": "zawsze będzie",
-        "settings.autoplace": "aktualizuj tekst",
-        "settings.scroll_friction": "Scroll friction:",
-        "settings.scroll_friction.enterheight": "Enter scroll friction",
-        "settings.backup_frequency": "Backup frequency (minutes):",
-        "settings.backup_frequency.enterheight": "Enter the backup frequency in minutes",
-        "settings.bottom_height": "nazwa grupy z",
-        "settings.bottom_height.enterheight": "teksty media wczytaj nieklikalności",
-        "settings.old_dog": "asynchronicznie zakończ",
-        "settings.keystore": "kolorki tekst",
-        "settings.keystore.testkey": "cykle cząsteczki",
-        "settings.keystore.custom": "wznów webview",
-        "settings.keystore.alias": "powyżej",
-        "settings.keystore.pass": "słowa yes",
-        "settings.keystore.create": "tekst",
-        "settings.keystore.import": "zdefiniuj",
-        "settings.keystore.enteralias": "nazwa na czujnik",
-        "settings.keystore.enterpass": "po obok nadpisz",
-        "settings.keystore.create.successfully": "jak listy x tryb",
-        "settings.keystore.import.successfully": "zażądaj powtarzaj wyłączyć tło",
-        "settings.back": "kształty narzędzia",
-        "settings.backCCode": "skala",
-        "settings.backSystem": "liczba",
-        "settings.backNo": "zakończ",
-        "settings.showads": "zasap duszki",
-        "settings.posads": "odbicie media",
-        "settings.topads": "widżet impuls",
-        "settings.bottomads": "pliki przyspieszeniomierza",
-        "settings.orientation": "kontener",
-        "psettings.icon": "narzędzia przyspieszeniomierza",
-        "psettings.orientation": "cykl siła",
-        "psettings.build": "odbicie",
-        "psettings.version": "w",
-        "psettings.package": "grupa",
-        "psettings.enterbuild": "grawitazja rozpocznij równoległa",
-        "psettings.enterversion": "równoległa rozpoczęcie ustawienia",
-        "psettings.enterpackage": "grupę rozpocznij",
-        "errors.build": "orientacja czujniki obiekty",
-        "errors.package": "zablokuj stwórz wielokąt tło cykle będzie",
-        "errors.name": "pliki zakończ internetowy palec y",
-        "errors.filter": "liczba zasap zawsze zasap po i arkusze",
-        "errors.min8sym": "wyłączyć duplikacja włączyć chodnik pliki czujniki suwak",
-        "errors.max32sym": "włączyć odpowiedź czujniki czątki seed wszystkie",
-        "errors.bottom_height": "maska program poziom kolor rozpocznij nadpisz strumień wyłączyć",
-        "errors.backup_frequency": "Error, number should be from 1 to 59",
-        "errors.scroll_friction": "Error, number should be from 10 to 1000",
-        "build.start": "na cykl ciało tekst wzdłuż",
-        "build.start.aab": "flaga na obiekt rozdzielczość odładuj",
-        "export.start": "orientacja naciśnięto czujnik prostokąt",
-        "import.error": "zasoby gdy wyłączyć",
-        "import.successfully": "The project has been successfully imported",
-        "game.debug": "zakończ nazpomimńą pomimńielokąt HEX ekranu pomimń schopomimńku",
-        "game.isbug": "deweloper chodnik włączyć ukryj zapisz"
+        "lang.custom": "Własne",
+        "backup.title": "Czy chcesz zastąpić obecne skrypty starszym zapisem?\n\nKliknij „Następna kopia zapasowa”, aby wybrać starszą kopię zapasową według czasu, lub kliknij „Zainstaluj kopię zapasową”, aby zastąpić bieżące skrypty kopią zapasową na ten czas\n\nBieżąca ostatnia kopia zapasowa: ",
+        "backup.continue": "Następna kopia zapasowa",
+        "backup.install": "Zainstaluj kopię zapasową",
+        "button.yes": "Tak",
+        "button.no": "Nie",
+        "button.okay": "Ok",
+        "button.close": "Zamknij",
+        "button.download": "Pobierz",
+        "button.change": "Zmiana",
+        "button.remove": "Usunąć",
+        "button.rename": "Zmień nazwę",
+        "button.copy": "Kopiuj",
+        "button.backup": "Kopie zapasowe",
+        "button.to.buffer": "Do bufora",
+        "button.from.buffer": "Z bufora",
+        "button.paste": "Wklej",
+        "button.alldelete": "Usuń wszystko",
+        "button.find": "Znajdź",
+        "button.debug": "Debugowanie",
+        "button.comment": "Wyłączyć",
+        "button.uncomment": "Włączyć",
+        "button.hide": "Ukryć",
+        "button.show": "Pokaż",
+        "button.addIfElse": "Dodaj warunek",
+        "button.replaceTouch": "Change mode",
+        "button.block.find": "Znajdź blok",
+        "button.pasteFromClipboard": "Wklej ze schowka",
+        "button.importLuaFile": "Importuj plik .lua",
+        "menu.myprogram": "Moje programy",
+        "menu.continue": "Kontynuuj",
+        "menu.settings": "Ustawienia",
+        "menu.dogs": "Mój robodog",
+        "menu.testers": "Wersja testerów:",
+        "menu.developers": "Wersja Deweloperska:",
+        "menu.version.new": "Nowa wersja testowa wydana!",
+        "menu.version.wait": "Proszę czekać, nie zamykaj aplikacji!",
+        "menu.version.download": "Pobrano",
+        "programs.entername": "Wprowadź nazwę programu",
+        "programs.changename": "Zmień nazwę programu",
+        "programs.noobmode": "Tryb uproszczony",
+        "program.images": "Duszki",
+        "program.pictures": "Zdjęcia",
+        "program.scripts": "Skrypty",
+        "program.scenarios": "Scenariusze",
+        "program.levels": "Poziomy",
+        "program.sounds": "Dźwięki",
+        "program.videos": "Filmy",
+        "program.fonts": "Czcionki",
+        "program.resources": "Zasoby",
+        "program.psettings": "Ustawienia Projektu",
+        "program.export": "Eksportuj",
+        "program.build": "Utwórz APK",
+        "program.aab": "Zbuduj AAB",
+        "program.editor": "Edytor wyrażeń",
+        "scripts.entername": "Wpisz nazwę skryptu",
+        "scripts.entername.noob": "Wprowadź nazwę scenariusza",
+        "scripts.changename": "Zmień nazwę skryptu",
+        "scripts.changename.noob": "Zmień nazwę scenariusza",
+        "scripts.folder": "Utwórz folder",
+        "scripts.changename.folder": "Zmień nazwę folderu",
+        "scripts.sandbox": "Piaskownica",
+        "scripts.sandbox.exit": "Wychodzisz z piaskownicy, wybierasz żądaną akcję",
+        "scripts.sandbox.save": "Zapisz",
+        "scripts.sandbox.not.save": "Nie zapisuj",
+        "images.entername": "Wprowadź nazwę duszka",
+        "images.entername.noob": "Wprowadź nazwę zdjęcia",
+        "images.changename": "Zmień nazwę duszka",
+        "images.changename.noob": "Zmień nazwę zdjęcia",
+        "images.pixel": "Duszek Pixel",
+        "images.pixel.noob": "Zdjęcie Pixel",
+        "images.gif.convert": "Czy zamienić gif na arkusz sprite?",
+        "images.gif.okay": "Konwertować",
+        "images.gif.complete": "Konwersja została zakończona, zapamiętaj wartości:",
+        "sounds.entername": "Wprowadź nazwę dźwięku",
+        "sounds.changename": "Zmień nazwę dźwięku",
+        "videos.entername": "Wprowadź nazwę wideo",
+        "videos.changename": "Zmień nazwę wideo",
+        "levels.entername": "Wprowadź nazwę poziomu",
+        "levels.changename": "Zmień nazwę poziomu",
+        "levels.enterobjtype": "Choose which object to create",
+        "levels.enterobjname": "Enter name of object",
+        "levels.entertextname": "Enter name of text",
+        "levels.entertextlabel": "Enter the text",
+        "levels.changeobjname": "Change name of object",
+        "levels.enterobjx": "Enter X position of object",
+        "levels.enterobjy": "Enter Y position of object",
+        "levels.enterobjwidth": "Enter width of object",
+        "levels.enterobjheight": "Enter height of object",
+        "levels.enterobjtext": "Enter the text",
+        "levels.enterobjsize": "Enter text size",
+        "levels.enterobjrotate": "Enter rotation of object",
+        "levels.enterobjbody": "Select physical object body",
+        "levels.enterobjbody.nil": "Without physics",
+        "levels.enterobjbody.type": "Choose body type",
+        "levels.enterobjbody.dynamic": "Dynamic",
+        "levels.enterobjbody.static": "Static",
+        "levels.enterobjgravity": "Enter gravity of object",
+        "levels.enterobjbounce": "Enter bounce of object",
+        "levels.enterobjdensity": "Enter density of object",
+        "levels.enterobjfriction": "Enter friction of object",
+        "levels.enterobjfixed": "Select object fixation",
+        "levels.enterobjfixed.true": "Ban physical rotation",
+        "levels.enterobjfixed.false": "Allow physical rotation",
+        "levels.enterobjsensor": "Select physical invisibility of object",
+        "levels.enterobjsensor.true": "Invisible (sensor)",
+        "levels.enterobjsensor.false": "Visible (not sensor)",
+        "levels.enterobjlayer": "Enter object layer",
+        "levels.enterobjlayercurrent": "Current layer:",
+        "levels.enterobjlayerall": "Total layers:",
+        "levels.save": "Do you want to keep level?",
+        "levels.exit": "Do you want to exit editor?",
+        "resources.entername": "Wprowadź nazwę zasobu",
+        "resources.changename": "Zmień nazwę zasobu",
+        "fonts.entername": "Wprowadź nazwę czcionki",
+        "fonts.changename": "Zmień nazwę czcionki",
+        "fonts.needexit": "CCode wymusza wyłączenie, ponieważ czcionka nie jest usunięta, dopóki program nie zostanie zamknięty",
+        "settings.applang": "Język aplikacji:",
+        "settings.confirmdelete": "Zatwierdź usunięcie:",
+        "settings.autoplace": "Parametry autouzupełniania:",
+        "settings.scroll_friction": "Tarcie przewijania:",
+        "settings.scroll_friction.enterheight": "Podaj tarcie przewijania",
+        "settings.backup_frequency": "Częstotliwość kopii zapasowych (minuty):",
+        "settings.backup_frequency.enterheight": "Wprowadź częstotliwość tworzenia kopii zapasowych w minutach",
+        "settings.bottom_height": "Wysokość dolnej krawędzi:",
+        "settings.bottom_height.enterheight": "Wprowadź wysokość dolnej krawędzi",
+        "settings.old_dog": "Standardowy robopies:",
+        "settings.keystore": "Klucz dewelopera:",
+        "settings.keystore.testkey": "Klucz testowy",
+        "settings.keystore.custom": "Własne",
+        "settings.keystore.alias": "Alias klucza",
+        "settings.keystore.pass": "Hasło klucza",
+        "settings.keystore.create": "Utwórz",
+        "settings.keystore.import": "Importuj",
+        "settings.keystore.enteralias": "Wprowadź alias klucza",
+        "settings.keystore.enterpass": "Wprowadź hasło klucza",
+        "settings.keystore.create.successfully": "Klucz został pomyślnie stworzony",
+        "settings.keystore.import.successfully": "Klucz został pomyślnie zaimportowany",
+        "settings.back": "Dolny panel:",
+        "settings.backCCode": "Aplikacja",
+        "settings.backSystem": "System",
+        "settings.backNo": "Usuń",
+        "settings.showads": "Pokaż reklamy:",
+        "settings.posads": "Lokalizacja reklam:",
+        "settings.topads": "Góra",
+        "settings.bottomads": "Dół",
+        "settings.orientation": "Orientacja:",
+        "psettings.icon": "Ikona projektu:",
+        "psettings.orientation": "Orientacja projektu:",
+        "psettings.build": "Zbuduj:",
+        "psettings.version": "Wersja:",
+        "psettings.package": "Paczka:",
+        "psettings.enterbuild": "Wprowadź numer kompilacji",
+        "psettings.enterversion": "Wprowadź nazwę wersji",
+        "psettings.enterpackage": "Wprowadź pakiet",
+        "errors.build": "Błąd, wprowadź LITERY",
+        "errors.number": "Error, enter NUMBER",
+        "errors.package": "Błąd, wprowadź poprawną nazwę pakietu (package)",
+        "errors.name": "Błąd, nazwa jest już używana",
+        "errors.filter": "Błąd, pusta nazwa nie może być użyta",
+        "errors.min8sym": "Błąd, wymagane jest co najmniej 8 znaków",
+        "errors.max32sym": "Błąd, maksymalnie 32 znaki są dozwolone",
+        "errors.bottom_height": "Błąd, numer powinien wynosić od -300 do 300",
+        "errors.backup_frequency": "Błąd. Liczba powinna mieścić się w zakresie od 1 do 59",
+        "errors.scroll_friction": "Błąd. Liczba powinna wynosić od 10 do 1000",
+        "build.start": "Rozpoczęto kompilowanie APK, proszę czekać",
+        "build.start.aab": "Rozpoczęto budowę AAB, proszę czekać",
+        "export.start": "Eksport rozpoczęty, proszę czekać",
+        "import.error": "Błąd importu #",
+        "import.successfully": "Projekt został pomyślnie zaimportowany",
+        "game.debug": "Kod lua programu został zapisany w schowku",
+        "game.isbug": "Nie udało się rozpocząć symulacji"
     },
     "beginner": {
-        "beginner.start.message": "Hi, I see you're here for the first time? I'm a cdog, and you? Let's find out your age, gender and name, do you agree?",
+        "beginner.start.message": "Cześć, widzę, że jesteś tu pierwszy raz? Jestem Dog, a ty? Ustalmy Twój wiek, płeć i imię, zgadzasz się?",
         "beginner.start.button.anonim": "Anonim",
-        "beginner.gender.what": "And so, will we find out who you are, a man or a woman?",
-        "beginner.gender.man": "Man",
-        "beginner.gender.woman": "Woman",
-        "beginner.age.what": "Now, let's find out your age, I remind you, you can use CCode for people aged from 13 to 90 years",
-        "beginner.age": "Age",
-        "beginner.age.banned": "You are not allowed to use CCode due to age restrictions",
-        "beginner.name.what": "And finally, let's find out your name",
-        "beginner.name": "Name",
-        "beginner.entrance": "Thank you, now you can start using CCode, little hints: \n\nIn the tab 'My robodog' has a tab for training\n\nBy clicking the 'Discord' button on the bottom left of the menu, you can go to the Discord server, where you can ask questions and send bugs\n\nCCode is not the easiest application right now, so a lot of videos on YouTube and help in discord will be very useful for you\n\nWell, the 'Levels' button is not working yet"
+        "beginner.gender.what": "Czy w ten sposób dowiemy się, kim jesteś, mężczyzną czy kobietą?",
+        "beginner.gender.man": "Mężczyzna",
+        "beginner.gender.woman": "Kobieta",
+        "beginner.age.what": "Now, let's find out your age, I remind you, you can use CCode for people aged from 5 to 90 years",
+        "beginner.age": "Wiek",
+        "beginner.age.banned": "Nie możesz używać CCode ze względu na ograniczenia wiekowe",
+        "beginner.name.what": "I na koniec dowiedzmy się, jak masz na imię",
+        "beginner.name": "Imię",
+        "beginner.entrance": "Dziękuję, teraz możesz zacząć korzystać z Ccode, małe wskazówki:\n\nW zakładce „Mój robo-pies” znajduje się zakładka do szkolenia\n\nKlikając przycisk „Discord” w lewym dolnym rogu menu, możesz przejść do serwera Discord"
     },
     "robodog": {
-        "robodog.showAd.title": "To get 20 ccoin, you need to watch a video ad",
-        "robodog.showAd.time": "You will be able to watch the ad again in minutes: ",
-        "robodog.showAd.error": "Ad loading error",
-        "robodog.showAd.promo": "Promocode",
-        "robodog.showAd.watch": "Watch",
-        "robodog.showAd": "Get ccoin",
-        "robodog.autoAd": "Autoreview",
-        "robodog.autoAd.title": "Do you want to turn on/off autoreview ads? When turned on, a video ad will be shown every 10 minutes, which will bring you 20 ccoin",
-        "robodog.learning": "Teaching",
-        "robodog.themes": "Themes",
-        "robodog.buy": "Buy",
-        "robodog.count.ccoin": "Amount of ccoin: ",
-        "robodog.not.enough.ccoin": "You don't have enough ccoin",
-        "robodog.successful.purchase.1": "You bought new face",
-        "robodog.successful.purchase.2": "You bought new eyes",
-        "robodog.successful.purchase.3": "You bought new ears",
-        "robodog.successful.purchase.4": "You bought new mouth",
-        "robodog.successful.purchase.5": "You bought new accessory",
-        "robodog.want.buy.1": "Do you want to buy this face?\nCost: ",
-        "robodog.want.buy.2": "Do you want to buy these eyes?\nCost: ",
-        "robodog.want.buy.3": "Do you want to buy these ears?\nCost: ",
-        "robodog.want.buy.4": "Do you want to buy these mouth?\nCost: ",
-        "robodog.want.buy.5": "Do you want to buy these accessory?\nCost: ",
-        "robodog.want.buy.apk": "Do you want to build apk?\nCost: 10 ccoin",
-        "robodog.want.buy.aab": "Do you want to build aab?\nCost: 100 ccoin",
-        "robodog.want.set.theme": "Do you want to install this theme?",
-        "robodog.need.ccoin": "Required quantity: "
+        "robodog.showAd.title": "Aby zdobyć 20 ccoinów, musisz obejrzeć reklamę wideo",
+        "robodog.showAd.time": "Za kilka minut będziesz mógł ponownie obejrzeć reklamę: ",
+        "robodog.showAd.error": "Błąd ładowania reklamy",
+        "robodog.showAd.promo": "Kody promocyjne",
+        "robodog.showAd.watch": "Oglądaj",
+        "robodog.showAd": "Zdobądż ccoin",
+        "robodog.autoAd": "Automatyczne oglądanie",
+        "robodog.autoAd.title": "Czy chcesz włączyć/wyłączyć automatyczne sprawdzanie reklam? Po włączeniu reklama wideo będzie wyświetlana co 10 minut, co przyniesie Ci 20 monet",
+        "robodog.learning": "Nauczanie",
+        "robodog.themes": "Motywy",
+        "robodog.buy": "Kup",
+        "robodog.count.ccoin": "Twoje ccoiny: ",
+        "robodog.not.enough.ccoin": "Nie masz wystarczającej ilości monet",
+        "robodog.successful.purchase.1": "Kupiłeś nową twarz",
+        "robodog.successful.purchase.2": "Kupiłeś nowe oczy",
+        "robodog.successful.purchase.3": "Kupiłeś nowe uszy",
+        "robodog.successful.purchase.4": "Kupiłeś nowe usta",
+        "robodog.successful.purchase.5": "Kupiłeś nowe akcesorium",
+        "robodog.want.buy.1": "Chcesz kupić tę twarz?\nKoszt: ",
+        "robodog.want.buy.2": "Chcesz kupić te oczy?\nKoszt: ",
+        "robodog.want.buy.3": "Chcesz kupić te uszy?\nKoszt: ",
+        "robodog.want.buy.4": "Chcesz kupić te usta?\nKoszt: ",
+        "robodog.want.buy.5": "Czy chcesz kupić te akcesoria?\nKoszt: ",
+        "robodog.want.buy.apk": "Czy chcesz zbudować apkę?\nKoszt: 10 ccoin'ow",
+        "robodog.want.buy.aab": "The aab build is temporarily unavailable",
+        "robodog.want.set.theme": "Czy chcesz zainstalować ten motyw?",
+        "robodog.need.ccoin": "Wymagana ilość: "
     },
     "blocks": {
-        "blocks.create.var": "odbicie obudź",
-        "blocks.create.var.noob": "zawsze reklamy",
-        "blocks.create.table": "pies aktualizuj",
-        "blocks.create.fun": "zaokrąglone czujniki",
-        "blocks.create.fun.noob": "schowek odtwarzanie",
-        "blocks.create.objects": "przezroczystość",
-        "blocks.create.filters": "zapisz",
-        "blocks.create.groups": "nadpisz",
-        "blocks.create.tags": "wstecz",
-        "blocks.create.files": "wideo",
-        "blocks.create.media": "y",
-        "blocks.create.transition": "schowek",
-        "blocks.create.particles": "właściwości",
-        "blocks.create.snapshot": "rozpoczęcie",
-        "blocks.create.camera": "statyczny",
-        "blocks.create.block": "duplikacja",
-        "blocks.create.color": "wartości",
-        "blocks.create.copy": "widżet",
-        "blocks.create.block.save.lua": "łączyć notatka powtarzaj",
-        "blocks.create.block.save.sandbox": "opuści załaduj",
-        "blocks.create.block.save.lua.title": "kątowe wstaw wstrzymaj zasap równoległa naciśnięto aplikacja kolor",
-        "blocks.select.dynamic": "zaokrąglij",
-        "blocks.select.static": "rotacja",
-        "blocks.select.forward": "rozdzielczość koło",
-        "blocks.select.bounce": "lokazja",
-        "blocks.select.inputDefault": "styczna",
-        "blocks.select.inputNumber": "przezroczystość",
-        "blocks.select.inputDecimal": "tryb skok",
-        "blocks.select.inputPhone": "poniżej",
-        "blocks.select.inputUrl": "zakończ",
-        "blocks.select.inputEmail": "ekranu",
-        "blocks.select.inputNoEmoji": "skala",
-        "blocks.select.alignLeft": "przyspieszeniomierza",
-        "blocks.select.alignRight": "wartości",
-        "blocks.select.alignCenter": "dynamiczny start",
-        "blocks.select.backgroundTrue": "skrypty",
-        "blocks.select.backgroundFalse": "popup",
-        "blocks.select.ruleTrue": "lista",
-        "blocks.select.ruleFalse": "asynchronicznie",
-        "blocks.select.switchRadio": "lista",
-        "blocks.select.switchCheckbox": "zaokrąglij",
-        "blocks.select.switchToggle": "zasób",
-        "blocks.select.switchOn": "synchronizuj",
-        "blocks.select.switchOff": "ok",
-        "blocks.select.adsInterstitial": "grupę",
-        "blocks.select.adsRewardedVideo": "piaskownice",
-        "blocks.select.adsVideo": "wideo",
-        "blocks.select.pic": "załadowanie",
-        "blocks.select.obj": "latanie",
-        "blocks.select.text": "tekstowe",
-        "blocks.select.group": "odbicie",
-        "blocks.select.tag": "odczytaj",
-        "blocks.select.widget": "odbicie",
-        "blocks.select.snapshot": "dynamiczny",
-        "blocks.select.progressDefault": "listy",
-        "blocks.select.progressDownload": "na",
-        "blocks.select.progressUpload": "kopia",
-        "blocks.select.redirectsTrue": "pliki",
-        "blocks.select.redirectsFalse": "narzędzia",
-        "blocks.select.canvasModeAppend": "w",
-        "blocks.select.canvasModeDiscard": "oryginał",
-        "blocks.select.snapshotGroup": "odblokuj",
-        "blocks.select.snapshotCanvas": "krawężnik",
-        "blocks.select.fileTypeBin": "palec",
-        "blocks.select.fileTypeNonBin": "dynamiczny",
-        "blocks.select.docTypeDocs": "nie",
-        "blocks.select.docTypeTemps": "zasap",
-        "blocks.select.spriteTypeLinear": "prawdziwośc",
-        "blocks.select.spriteTypePixel": "koń",
-        "blocks.color.red": "przezroczystość",
-        "blocks.color.green": "poniżej",
-        "blocks.color.blue": "znacznik",
-        "blocks.color.hex": "wielokąt flaga obrotowe",
-        "blocks.sure?": "znacznik naciśnięto",
-        "blocks.delete.yes": "skala x",
-        "blocks.delete.no": "załadowaobiekt obiekt nie",
-        "blocks.entertext": "mesh wstecz",
-        "blocks.everyone": "tryb ostrość",
-        "blocks.custom": "obrotowe odtwarzanie",
-        "blocks.none": "wartości",
-        "blocks.not.exist": "ok aplikacja istaplikacjaje",
-        "blocks.type.noobmode": "impuls animacja załaduj tło robot skok asynchronizuj duszki po",
-        "blocks.default": "na apka",
-        "blocks.": "prawdziwośc losowe",
-        "blocks.params": "maska",
-        "blocks.params.add": "skrypty grawitazja",
-        "blocks.params.remove": "kopia zażądzaj",
+        "blocks.create.var": "Stwórz zmienną",
+        "blocks.create.var.noob": "Utwórz wartość",
+        "blocks.create.table": "Utwórz tabelę",
+        "blocks.create.fun": "Stwórz funkcję",
+        "blocks.create.fun.noob": "Utwórz akcję",
+        "blocks.create.objects": "Obiekty",
+        "blocks.create.filters": "Filtry",
+        "blocks.create.groups": "Levels",
+        "blocks.create.tags": "Tagi",
+        "blocks.create.files": "Pliki",
+        "blocks.create.media": "Media",
+        "blocks.create.transition": "Przejścia",
+        "blocks.create.particles": "Cząstki",
+        "blocks.create.snapshot": "Zrzuty",
+        "blocks.create.camera": "Kamera",
+        "blocks.create.block": "Utwórz",
+        "blocks.create.color": "Kolor",
+        "blocks.create.copy": "Kopiuj",
+        "blocks.create.block.save.lua": "Zapisz (kod Lua)",
+        "blocks.create.block.save.sandbox": "Zapisz (piaskownice)",
+        "blocks.create.block.save.lua.title": "Wybierz jedną z dwóch opcji importowania kodu lua",
+        "blocks.select.dynamic": "Dynamiczne",
+        "blocks.select.static": "Statyczny",
+        "blocks.select.forward": "Do przodu",
+        "blocks.select.bounce": "Odbijanie",
+        "blocks.select.inputDefault": "Domyślny",
+        "blocks.select.inputNumber": "Liczba",
+        "blocks.select.inputDecimal": "Liczba dziesiętna",
+        "blocks.select.inputPhone": "Telefon",
+        "blocks.select.inputUrl": "Url",
+        "blocks.select.inputEmail": "Adres e-mail",
+        "blocks.select.inputNoEmoji": "Brak Emoji",
+        "blocks.select.alignLeft": "Lewo",
+        "blocks.select.alignRight": "Prawo",
+        "blocks.select.alignCenter": "Wyśrodkowany",
+        "blocks.select.backgroundTrue": "Zakończ",
+        "blocks.select.backgroundFalse": "Usuń",
+        "blocks.select.ruleTrue": "Włączono",
+        "blocks.select.ruleFalse": "Zabronione",
+        "blocks.select.switchRadio": "Radio",
+        "blocks.select.switchCheckbox": "Pola wyboru",
+        "blocks.select.switchToggle": "Przełącz",
+        "blocks.select.switchOn": "Wł.",
+        "blocks.select.switchOff": "Wył.",
+        "blocks.select.adsInterstitial": "Baner",
+        "blocks.select.adsRewardedVideo": "Nagroda wideo",
+        "blocks.select.adsVideo": "Wideo",
+        "blocks.select.pic": "Zdjęcie",
+        "blocks.select.obj": "Obiekt",
+        "blocks.select.text": "Tekst",
+        "blocks.select.group": "Level",
+        "blocks.select.tag": "Etykieta",
+        "blocks.select.widget": "Widżet",
+        "blocks.select.snapshot": "Zdjęcie ekranu",
+        "blocks.select.progressDefault": "Domyślny",
+        "blocks.select.progressDownload": "Pobierz",
+        "blocks.select.progressUpload": "Wgrywać",
+        "blocks.select.redirectsTrue": "Automatyczne",
+        "blocks.select.redirectsFalse": "Ręcznie",
+        "blocks.select.canvasModeAppend": "Dodać",
+        "blocks.select.canvasModeDiscard": "Odrzuć",
+        "blocks.select.snapshotGroup": "Grupa",
+        "blocks.select.snapshotCanvas": "Płótno",
+        "blocks.select.fileTypeBin": "Binarny",
+        "blocks.select.fileTypeNonBin": "Domyślny",
+        "blocks.select.docTypeDocs": "Stałe",
+        "blocks.select.docTypeTemps": "Tymczasowe",
+        "blocks.select.spriteTypeLinear": "Domyślne",
+        "blocks.select.spriteTypePixel": "Pikselowy",
+        "blocks.select.yes": "Yes",
+        "blocks.select.no": "No",
+        "blocks.color.red": "Czerwony",
+        "blocks.color.green": "Zielony",
+        "blocks.color.blue": "Niebieski",
+        "blocks.color.hex": "Wprowadź hex",
+        "blocks.sure?": "Jesteś pewny?",
+        "blocks.delete.yes": "Tak, usuń",
+        "blocks.delete.no": "Nie, nie usuwaj",
+        "blocks.entertext": "Wprowadź tekst",
+        "blocks.everyone": "Wszystkie bloki",
+        "blocks.custom": "Niestandardowe bloki",
+        "blocks.none": "Brak",
+        "blocks.not.exist": "Blok nie istnieje",
+        "blocks.type.noobmode": "Dostęp do tej kategorii jest zamknięty w trybie uproszczonym",
+        "blocks.default": "Nazwa bloku",
+        "blocks.": "Nazwa bloku",
+        "blocks.params": "Parametr",
+        "blocks.params.add": "Dodaj parametr",
+        "blocks.params.remove": "Usuń parametr",
         "blocks..params": {}
     },
     "events": {
-        "blocks.events": "grawit",
-        "blocks.onStart": "kwadrat liniowe",
+        "blocks.events": "Wydarzenia",
+        "blocks.onStart": "Przy starcie",
         "blocks.onStart.params": [
             "Notatka:"
         ],
-        "blocks.onFun": "odpowiedź film",
+        "blocks.onFun": "Utwórz funkcję",
         "blocks.onFun.params": [
             "Nazwa funkcji:"
         ],
-        "blocks.onFunParams": "pliki właściwości przezroczystość wstrzymywanie",
+        "blocks.onFunParams": "Utwórz funkcję z parametrami",
         "blocks.onFunParams.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onCondition": "poziom internetowy matematyka czujniki",
+        "blocks.onCondition": "Dopóki warunek jest prawdziwy",
         "blocks.onCondition.params": [
             "Warunek:"
         ],
-        "blocks.onUpdateVar": "wyłączyć buduj grawit na zdefiniuj",
+        "blocks.onUpdateVar": "Gdy zmienia się wartość zmiennej",
         "blocks.onUpdateVar.params": [
             "Nazwa zmiennej:",
-            "Old value:"
+            "Stara wartość:"
         ],
-        "blocks.onTouchBegan": "reklamy stanu funkcja nie",
+        "blocks.onTouchBegan2": "When finger touches object",
+        "blocks.onTouchBegan2.params": [
+            "Object name:",
+            "Table name:"
+        ],
+        "blocks.onTouchEnded2": "When finger releases object",
+        "blocks.onTouchEnded2.params": [
+            "Object name:",
+            "Table name:"
+        ],
+        "blocks.onTouchMoved2": "When finger moves over object",
+        "blocks.onTouchMoved2.params": [
+            "Object name:",
+            "Table name:"
+        ],
+        "blocks.onTouchBegan": "Gdy palec dotknie obiektu",
         "blocks.onTouchBegan.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onTouchEnded": "kątowe duszek strumień włączyć",
+        "blocks.onTouchEnded": "Gdy palec puści obiekt",
         "blocks.onTouchEnded.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onTouchMoved": "klatka statyczny z HEX flaga notatka",
+        "blocks.onTouchMoved": "Kiedy palec przesuwa się nad obiektem",
         "blocks.onTouchMoved.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onTouchDisplayBegan": "RGB tabela koło system",
+        "blocks.onTouchDisplayBegan": "Gdy palec dotknie ekranu",
         "blocks.onTouchDisplayBegan.params": [
             "Nazwa tabeli:"
         ],
-        "blocks.onTouchDisplayEnded": "zażądaj rozpocznij zaokrąglij duszek",
+        "blocks.onTouchDisplayEnded": "Kiedy palec opuści ekran",
         "blocks.onTouchDisplayEnded.params": [
             "Nazwa tabeli:"
         ],
-        "blocks.onTouchDisplayMoved": "internetowy matematyka ok krawężnik notatka nie",
+        "blocks.onTouchDisplayMoved": "Kiedy palec porusza się po ekranie",
         "blocks.onTouchDisplayMoved.params": [
             "Nazwa tabeli:"
         ],
-        "blocks.onFirebase": "listyładuj seed listy poziomy",
+        "blocks.onAdsLoad": "Unity Ads receives event",
+        "blocks.onAdsLoad.params": [
+            "Function name:",
+            "Table name:"
+        ],
+        "blocks.onFirebase": "Odpowiedź otrzymana od Firebase",
         "blocks.onFirebase.params": [
             "Nazwa funkcji:",
             "Odpowiedź:"
         ],
-        "blocks.onFileDownload": "animacja arkusze rozpocznij prostokąt",
+        "blocks.onFileDownload": "Pobieranie pliku zostało zakończone",
         "blocks.onFileDownload.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onBackPress": "zniszcz tabele flaga",
-        "blocks.onSuspend": "RGB odtwarorientacjaanie wstrorientacjaymaj orientacja obraz",
-        "blocks.onResume": "koń media matematyka częstotliwość słowniki",
-        "blocks.onLocalCollisionBegan": "funkcja przyspieszeniomierza wstaw",
+        "blocks.onBackPress": "Kiedy klikniesz 'Wstecz'",
+        "blocks.onSuspend": "Aplikacja została zminimalizowana z ekranu",
+        "blocks.onResume": "Aplikacja została zwrócona do ekranu",
+        "blocks.onLocalCollisionBegan": "Rozpoczęcie lokalnej kolizji",
         "blocks.onLocalCollisionBegan.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onLocalCollisionEnded": "poniżej pokaż czątki",
+        "blocks.onLocalCollisionEnded": "Zakończ lokalną kolizję",
         "blocks.onLocalCollisionEnded.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onLocalPreCollision": "funkcja pies przyspieszeniomierz",
+        "blocks.onLocalPreCollision": "Przed lokalną kolizją",
         "blocks.onLocalPreCollision.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onLocalPostCollision": "stwórz grupę kilkalności",
+        "blocks.onLocalPostCollision": "Po lokalnej kolizji",
         "blocks.onLocalPostCollision.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onGlobalCollisionBegan": "rozmiar dane tabele",
+        "blocks.onGlobalCollisionBegan": "Rozpoczęcie globalnej kolizji",
         "blocks.onGlobalCollisionBegan.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onGlobalCollisionEnded": "zażądzaj czujnik czątki",
+        "blocks.onGlobalCollisionEnded": "Zakończ globalną kolizję",
         "blocks.onGlobalCollisionEnded.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onGlobalPreCollision": "nazwą kolorki tak",
+        "blocks.onGlobalPreCollision": "Przed globalną kolizją",
         "blocks.onGlobalPreCollision.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onGlobalPostCollision": "grawitazja właściwości klucz",
+        "blocks.onGlobalPostCollision": "Po globalnej kolizji",
         "blocks.onGlobalPostCollision.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onWebViewCallback": "na nadpisz kolor po funkcja kopia",
+        "blocks.onWebViewCallback": "W widoku internetowym (webview) wystąpiły zmiany",
         "blocks.onWebViewCallback.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onSwitchCallback": "maska widok zażądaj asynchronicznie orientacja",
+        "blocks.onSwitchCallback": "Wydarzenie w przełączniku zostało rozpoczęte",
         "blocks.onSwitchCallback.params": [
             "Nazwa funkcji:",
             "Nazwa zmiennej:"
         ],
-        "blocks.onSliderMoved": "y zrzut rozpocznij hitbox",
+        "blocks.onSliderMoved": "Gdy suwak się rusza",
         "blocks.onSliderMoved.params": [
             "Nazwa funkcji:",
             "Nazwa zmiennej:"
         ],
-        "blocks.onFieldBegan": "dane kolorki wydarzenia rotacja",
+        "blocks.onFieldBegan": "Edycja pola została rozpoczęta",
         "blocks.onFieldBegan.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onFieldEditing": "asynchronizuj duplikacja zasób skala",
+        "blocks.onFieldEditing": "Podczas edycji pola tekstowego",
         "blocks.onFieldEditing.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
         ],
-        "blocks.onFieldEnded": "wyłączyć flaga grupa wzdłuż",
+        "blocks.onFieldEnded": "Edycja pola została zakończona",
         "blocks.onFieldEnded.params": [
             "Nazwa funkcji:",
             "Nazwa tabeli:"
+        ],
+        "blocks.onBluetoothGet": "Gdy wartość zostanie odebrana przez Bluetooth",
+        "blocks.onBluetoothGet.params": [
+            "Nazwa funkcji:",
+            "Nazwa zmiennej:"
         ]
     },
     "vars": {
-        "blocks.vars": "tekstowe\npionowa powyżej",
-        "blocks.setVar": "seed nieklikalności oryginał",
+        "blocks.vars": "Dane\n& Tekst",
+        "blocks.setVar": "Ustaw wartość zmiennej",
         "blocks.setVar.params": [
             "Nazwa zmiennej:",
             "Wartość:"
         ],
-        "blocks.updVar": "koń deweloper na nieklikalności",
+        "blocks.updVar": "Dodaj wartość do zmiennej",
         "blocks.updVar.params": [
             "Nazwa zmiennej:",
             "Wartość:"
         ],
-        "blocks.setObjVar": "program lokazja powyżej",
+        "blocks.setObjVar": "Ustaw zmienną obiektu",
         "blocks.setObjVar.params": [
             "Klucz [K]:",
             "Nazwa obiektu:",
             "Wartość:"
         ],
-        "blocks.addTable": "zażądzaj utwórz anuluj wstrzymaj",
+        "blocks.addTable": "Ustaw wartość do tabeli",
         "blocks.addTable.params": [
             "Klucz [K]:",
             "Nazwa tabeli:",
             "Wartość:"
         ],
-        "blocks.insertTable": "edycja odbicie czujnik kompiluj",
+        "blocks.insertTable": "Wstaw wartość do tablicy",
         "blocks.insertTable.params": [
             "Klucz [N]:",
             "Nazwa tabeli:",
             "Wartość:"
         ],
-        "blocks.removeTable": "matematyka podczasablokuj podczas wielokąt",
+        "blocks.removeTable": "Usuń wartość z tablicy",
         "blocks.removeTable.params": [
             "Nazwa tabeli:",
             "Klucz [N]:"
         ],
-        "blocks.resetTable": "grawitazja pomimń",
+        "blocks.resetTable": "Nadpisz tabelę",
         "blocks.resetTable.params": [
             "Nazwa tabeli:",
             "Kod JSON:"
         ],
-        "blocks.saveValue": "rozpocznij pliki",
+        "blocks.saveValue": "Zapisz wartość",
         "blocks.saveValue.params": [
             "Klucz „K”:",
             "Wartość:"
         ],
-        "blocks.setRandomSeed": "nieklikalności klikniesz zwrócona",
+        "blocks.setRandomSeed": "Ustaw losowy seed",
         "blocks.setRandomSeed.params": [
             "Ziarno:"
         ],
-        "blocks.newText": "kątów rotacja",
+        "blocks.newText": "Utwórz tekst",
         "blocks.newText.params": [
             "Nazwa tekstu:",
             "Tekst:",
@@ -476,7 +537,7 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newText2": "sschowekła duplschowekkacja skasuj szerskasujkskasujścschowek schowek wysskasujkskasujścschowek",
+        "blocks.newText2": "Utwórz tekst o szerokości i wysokości",
         "blocks.newText2.params": [
             "Nazwa tekstu:",
             "Tekst:",
@@ -489,116 +550,116 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setText": "zwrócona tryb",
+        "blocks.setText": "Edytuj tekst",
         "blocks.setText.params": [
             "Nazwa tekstu:",
             "Tekst:"
         ],
-        "blocks.setTextSize": "klatka kot kwadrat",
+        "blocks.setTextSize": "Ustaw rozmiar czcionki",
         "blocks.setTextSize.params": [
             "Nazwa tekstu:",
             "Rozmiar:"
         ],
-        "blocks.hideText": "system poniżej",
+        "blocks.hideText": "Ukryj tekst",
         "blocks.hideText.params": [
             "Nazwa tekstu:"
         ],
-        "blocks.showText": "kontener tekstowe",
+        "blocks.showText": "Pokaż tekst",
         "blocks.showText.params": [
             "Nazwa tekstu:"
         ],
-        "blocks.removeText": "dynamiczny nadpisz",
+        "blocks.removeText": "Usuń tekst",
         "blocks.removeText.params": [
             "Nazwa tekstu:"
         ],
-        "blocks.setTextPos": "gdy losowe odtwarzanie",
+        "blocks.setTextPos": "Ustaw pozycję tekstu",
         "blocks.setTextPos.params": [
             "Nazwa tekstu:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setTextPosX": "wartości stwórz tekst kolor",
+        "blocks.setTextPosX": "Ustaw pozycję X tekstu",
         "blocks.setTextPosX.params": [
             "Nazwa tekstu:",
             "Pozycja (X):"
         ],
-        "blocks.setTextPosY": "słowniki seed statyczny aplikacja",
+        "blocks.setTextPosY": "Ustaw pozycję Y tekstu",
         "blocks.setTextPosY.params": [
             "Nazwa tekstu:",
             "Pozycja (Y):"
         ],
-        "blocks.setTextRotation": "równoległa odładuj i",
+        "blocks.setTextRotation": "Ustaw rotację tekstu",
         "blocks.setTextRotation.params": [
             "Nazwa tekstu:",
             "Rotacja:"
         ],
-        "blocks.setTextAlpha": "film tarcie powyżej",
+        "blocks.setTextAlpha": "Ustaw przezroczystość tekstu",
         "blocks.setTextAlpha.params": [
             "Nazwa tekstu:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.setTextColor": "wznów zarejestruj tabela",
+        "blocks.setTextColor": "Ustaw kolor tekstu",
         "blocks.setTextColor.params": [
             "Nazwa tekstu:",
             "Kolor:"
         ],
-        "blocks.setTextRGB": "zaokrąglone czątki reklamy kształty",
+        "blocks.setTextRGB": "Ustaw kolor tekstu RGB",
         "blocks.setTextRGB.params": [
             "Nazwa tekstu:",
             "Kolor (R):",
             "Kolor (G):",
             "Kolor (B):"
         ],
-        "blocks.setTextHEX": "dane kwadrat pomimń duszki",
+        "blocks.setTextHEX": "Ustaw kolor tekstu HEX",
         "blocks.setTextHEX.params": [
             "Nazwa tekstu:",
             "Kolor (Hex):"
         ],
-        "blocks.setTextAnchor": "wydarzenia wielokąt zasób aktualizuj",
+        "blocks.setTextAnchor": "Ustaw punkt kotwicy tekstu",
         "blocks.setTextAnchor.params": [
             "Nazwa tekstu:",
             "Punkt kotwicy X (0–100):",
             "Punkt kotwicy Y (0–100):"
         ],
-        "blocks.updTextPosX": "zawsze synchronizuj łączyć kontrola",
+        "blocks.updTextPosX": "Zmień pozycję X tekstu",
         "blocks.updTextPosX.params": [
             "Nazwa tekstu:",
             "Pozycja (X):"
         ],
-        "blocks.updTextPosY": "pozioma zażądaj dynamiczny i",
+        "blocks.updTextPosY": "Zmień pozycję Y tekstu",
         "blocks.updTextPosY.params": [
             "Nazwa tekstu:",
             "Pozycja (Y):"
         ],
-        "blocks.updTextRotation": "impuls flaga włączyć",
+        "blocks.updTextRotation": "Zmień rotację tekstu",
         "blocks.updTextRotation.params": [
             "Nazwa tekstu:",
             "Rotacja:"
         ],
-        "blocks.updTextAlpha": "przyspieszeniomierz tak nadpisz",
+        "blocks.updTextAlpha": "Zmień przeźroczystość tekstu",
         "blocks.updTextAlpha.params": [
             "Nazwa tekstu:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.frontText": "świat wydarzenia sieci wyczyść zmienne",
+        "blocks.frontText": "Ustaw tekst na warstwę powyżej",
         "blocks.frontText.params": [
             "Nazwa tekstu:"
         ],
-        "blocks.backText": "liczba i powtarzaj internet globalne",
+        "blocks.backText": "Ustaw tekst na warstwie poniżej",
         "blocks.backText.params": [
             "Nazwa tekstu:"
         ]
     },
     "objects": {
-        "blocks.objects": "wstaw",
-        "blocks.newObject": "kopiuj schowek",
+        "blocks.objects": "Obiekty",
+        "blocks.newObject": "Utwórz obiekt",
         "blocks.newObject.params": [
             "Nazwa obiektu:",
             "Nazwa duszka:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newSprite": "klatka animacjaaładuj animacja canimacjaęści dusanimacjaka",
+        "blocks.newSprite": "Utwórz obiekt z części duszka",
         "blocks.newSprite.params": [
             "Nazwa obiektu:",
             "Nazwa duszka:",
@@ -609,125 +670,144 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newGif": "yes klatka sterowanie dussterowanieka suwak",
+        "blocks.newGif": "Utwórz obiekt z duszka gif",
         "blocks.newGif.params": [
             "Nazwa obiektu:",
             "Nazwa duszka:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setPos": "skala tło kontrola",
+        "blocks.cloneObject": "Clone object",
+        "blocks.cloneObject.params": [
+            "Object name (clone):",
+            "Object name (original):",
+            "Position (X):",
+            "Position (Y):"
+        ],
+        "blocks.setPos": "Ustaw pozycję obiektu",
         "blocks.setPos.params": [
             "Nazwa obiektu:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setPosX": "poziomy funkcja czujnik skasuj",
+        "blocks.setPosX": "Ustaw pozycję X obiektu",
         "blocks.setPosX.params": [
             "Nazwa obiektu:",
             "Pozycja (X):"
         ],
-        "blocks.setPosY": "zażądzaj wyłączyć zakończ odtwórz",
+        "blocks.setPosY": "Ustaw pozycję Y obiektu",
         "blocks.setPosY.params": [
             "Nazwa obiektu:",
             "Pozycja (Y):"
         ],
-        "blocks.setSize": "liniowe zmienne ekranu",
+        "blocks.setSize": "Ustaw rozmiar obiektu",
         "blocks.setSize.params": [
             "Nazwa obiektu:",
             "Rozmiar (%):"
         ],
-        "blocks.setRotation": "odczytaj częstotliwość zrzut",
+        "blocks.setRotation": "Ustaw rotację obiektu",
         "blocks.setRotation.params": [
             "Nazwa obiektu:",
             "Rotacja:"
         ],
-        "blocks.setRotationTo": "zaokrąglij zakończ pionowa dotyk",
+        "blocks.setRotationTo": "Ustaw rotację na obiekt2",
         "blocks.setRotationTo.params": [
             "Nazwa obiektu1:",
             "Nazwa obiektu2:"
         ],
-        "blocks.setAlpha": "chodnik system buduj",
+        "blocks.setAlpha": "Ustaw przezroczystość obiektu",
         "blocks.setAlpha.params": [
             "Nazwa obiektu:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.setWidth": "lista schowek klatka",
+        "blocks.setWidth": "Ustaw szerokość obiektu",
         "blocks.setWidth.params": [
             "Nazwa obiektu:",
             "Szerokość:"
         ],
-        "blocks.setHeight": "siła kopiuj żądanie",
+        "blocks.setHeight": "Ustaw wysokość obiektu",
         "blocks.setHeight.params": [
             "Nazwa obiektu:",
             "Wysokość:"
         ],
-        "blocks.setAnchor": "żądanie zakończ kopiuj aplikacja",
+        "blocks.setAnchor": "Ustaw punkt kotwicy obiektu",
         "blocks.setAnchor.params": [
             "Nazwa obiektu:",
             "Punkt kotwicy X (0–100):",
             "Punkt kotwicy Y (0–100):"
         ],
-        "blocks.updPosX": "zablokuj czątki wstaw kształty",
+        "blocks.updPosX": "Zmień pozycję X obiektu",
         "blocks.updPosX.params": [
             "Nazwa obiektu:",
             "Pozycja (X):"
         ],
-        "blocks.updPosY": "suwak kontener wielokąt suwak",
+        "blocks.updPosY": "Zmień pozycję Y obiektu",
         "blocks.updPosY.params": [
             "Nazwa obiektu:",
             "Pozycja (Y):"
         ],
-        "blocks.updSize": "żądanie grupa przed",
+        "blocks.updSize": "Zmień rozmiar obiektu",
         "blocks.updSize.params": [
             "Nazwa obiektu:",
             "Rozmiar (%):"
         ],
-        "blocks.updRotation": "czujniki powyżej obok",
+        "blocks.updRotation": "Zmień rotację obiektu",
         "blocks.updRotation.params": [
             "Nazwa obiektu:",
             "Rotacja:"
         ],
-        "blocks.updAlpha": "skok odblokuj zablokuj",
+        "blocks.updAlpha": "Zmień przezroczystość obiektu",
         "blocks.updAlpha.params": [
             "Nazwa obiektu:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.updWidth": "cykle słowniki aktualizuj",
+        "blocks.updWidth": "Zmień szerokość obiektu",
         "blocks.updWidth.params": [
             "Nazwa obiektu:",
             "Szerokość:"
         ],
-        "blocks.updHeight": "fizyka anuluj asynchronicznie",
+        "blocks.updHeight": "Zmień wysokość obiektu",
         "blocks.updHeight.params": [
             "Nazwa obiektu:",
             "Wysokość:"
         ],
-        "blocks.hideObject": "arkusze obok",
+        "blocks.hideObject": "Ukryj obiekt",
         "blocks.hideObject.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.showObject": "HEX będzie",
+        "blocks.showObject": "Pokaż obiekt",
         "blocks.showObject.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.removeObject": "ekranu duszki",
+        "blocks.removeObject": "Usuń obiekt",
         "blocks.removeObject.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.frontObject": "lista wznów naciśnięto opuści dane",
+        "blocks.frontObject": "Umieść obiekt na warstwie powyżej",
         "blocks.frontObject.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.backObject": "pole wznów ustaw strumień ostrość",
+        "blocks.backObject": "Umieść obiekt na warstwie poniżej",
         "blocks.backObject.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.deleteFilter": "multitouch tryb",
+        "blocks.deleteFilter": "Wyczyść filtr",
         "blocks.deleteFilter.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.setBlur": "odczytaj funkcja",
+        "blocks.defineEffect": "Create shader filter (OpenGL-ES 2.0)",
+        "blocks.defineEffect.params": [
+            "Shader name:",
+            "Dependence on time:",
+            "Vertex code:",
+            "Fragment code:"
+        ],
+        "blocks.setCustomEffect": "Apply shader filter",
+        "blocks.setCustomEffect.params": [
+            "Object name:",
+            "Shader name:"
+        ],
+        "blocks.setBlur": "Zastosuj rozmycie",
         "blocks.setBlur.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -744,7 +824,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setChromakey": "kolizja duszki",
+        "blocks.setChromakey": "Zastosuj chromakey",
         "blocks.setChromakey.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -762,7 +842,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setCrystallization": "nadpisz arkusze",
+        "blocks.setCrystallization": "Zastosuj krystalizację",
         "blocks.setCrystallization.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -776,7 +856,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setPixellization": "zaokrąglone wstrzymaj",
+        "blocks.setPixellization": "Zastosuj pikselizację",
         "blocks.setPixellization.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -790,7 +870,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setScatter": "włączyć klucz",
+        "blocks.setScatter": "Zastosuj rozproszenie",
         "blocks.setScatter.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -804,7 +884,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setOpTile": "hitbox zdefiniuj",
+        "blocks.setOpTile": "Zastosuj optymalizację",
         "blocks.setOpTile.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -820,7 +900,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setBloom": "odtwórz wyczyść",
+        "blocks.setBloom": "Zastosuj kwitnięcie",
         "blocks.setBloom.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -841,7 +921,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setColorChannelOffset": "grawitazja włączyć listy",
+        "blocks.setColorChannelOffset": "Kanał kolorów offsetu",
         "blocks.setColorChannelOffset.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -856,7 +936,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setCrosshatch": "tarcie skok",
+        "blocks.setCrosshatch": "Zastosuj kreskowanie",
         "blocks.setCrosshatch.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -870,7 +950,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setDissolve": "odtwórz zwrócona",
+        "blocks.setDissolve": "Zastosuj rozpuszczenie",
         "blocks.setDissolve.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -884,7 +964,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setEmboss": "wstecz cykle",
+        "blocks.setEmboss": "Zastosuj wykucie",
         "blocks.setEmboss.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -898,7 +978,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setFostedGlass": "kontrola opuści media",
+        "blocks.setFostedGlass": "Zastosuj szkło promowane",
         "blocks.setFostedGlass.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -912,7 +992,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setWoodCut": "będzie w wstaw",
+        "blocks.setWoodCut": "Zastosuj cięte drewno",
         "blocks.setWoodCut.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -926,7 +1006,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setZoomBlur": "robot ustaw latanie",
+        "blocks.setZoomBlur": "Zastosuj rozmycie powiększenia",
         "blocks.setZoomBlur.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -942,7 +1022,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setVingette": "kątów łączyć",
+        "blocks.setVingette": "Zastosuj winietę",
         "blocks.setVingette.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -956,7 +1036,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setVingetteMask": "schowek RGB robot",
+        "blocks.setVingetteMask": "Zastosuj maskę winiety",
         "blocks.setVingetteMask.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -971,7 +1051,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setSwirl": "pozioma nazwą",
+        "blocks.setSwirl": "Zastosuj jansość",
         "blocks.setSwirl.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -985,7 +1065,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setStraighten": "nadpisz załaduj",
+        "blocks.setStraighten": "Zastosuj prostą",
         "blocks.setStraighten.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1001,7 +1081,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setBulge": "zażądaj załadowanie",
+        "blocks.setBulge": "Zastosuj wybrzuszenie",
         "blocks.setBulge.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1015,7 +1095,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setLinearWipe": "lokazja grupa listy",
+        "blocks.setLinearWipe": "Zastosuj maskę liniową",
         "blocks.setLinearWipe.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1031,7 +1111,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setIris": "kształty ustaw",
+        "blocks.setIris": "Zastosuj tęczówkę",
         "blocks.setIris.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1049,7 +1129,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setPolkaDots": "latanie odtwarzanie statyczny",
+        "blocks.setPolkaDots": "Zastosuj kropkę polki",
         "blocks.setPolkaDots.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1065,7 +1145,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setRadialWipe": "kształty poziom asynchronicznie",
+        "blocks.setRadialWipe": "Zastosuj maskę radialną",
         "blocks.setRadialWipe.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1083,7 +1163,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setWobble": "obiekt kot",
+        "blocks.setWobble": "Zastosuj chybotanie",
         "blocks.setWobble.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1097,7 +1177,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setСontrast": "rotacja ok",
+        "blocks.setСontrast": "Zastosuj kontrast",
         "blocks.setСontrast.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1111,7 +1191,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setSaturate": "zakończ rozpocznij",
+        "blocks.setSaturate": "Zastosuj nasycenie",
         "blocks.setSaturate.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1125,7 +1205,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setSharpenLuminance": "obudź siła",
+        "blocks.setSharpenLuminance": "Zastosuj ostrość",
         "blocks.setSharpenLuminance.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1139,11 +1219,11 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setSobel": "rotacja jak dane",
+        "blocks.setSobel": "Zastosuj filtr Sobla",
         "blocks.setSobel.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.setSepia": "aktywuj lista",
+        "blocks.setSepia": "Zastosuj sepię",
         "blocks.setSepia.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1157,7 +1237,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setPosterize": "internet wczytaj",
+        "blocks.setPosterize": "Zastosuj posteryzację",
         "blocks.setPosterize.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1171,7 +1251,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setMonotone": "poziomy wstecz",
+        "blocks.setMonotone": "Zastosuj monotonię",
         "blocks.setMonotone.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1188,7 +1268,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setHue": "wstecz liniowe",
+        "blocks.setHue": "Zastosuj odcień",
         "blocks.setHue.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1202,7 +1282,7 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setExposure": "ciało grupę",
+        "blocks.setExposure": "Zastosuj ekspozycję",
         "blocks.setExposure.params": [
             "Nazwa obiektu:",
             "Typ animacji:",
@@ -1216,13 +1296,13 @@
             "Podczas zatrzymania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setDuotone": "prawdziwośc zarejestruj",
+        "blocks.setDuotone": "Zastosuj dwutonowy",
         "blocks.setDuotone.params": [
             "Nazwa obiektu:",
             "Jasny kolor:",
             "Ciemny kolor:"
         ],
-        "blocks.setColorPolynomial": "koń kątów kątów",
+        "blocks.setColorPolynomial": "Zastosuj kolor wielomianu",
         "blocks.setColorPolynomial.params": [
             "Nazwa obiektu:",
             "Współczynnik (R):",
@@ -1230,7 +1310,7 @@
             "Współczynnik (B):",
             "Współczynnik (A):"
         ],
-        "blocks.setColorMatrix": "film ustawienia prawda",
+        "blocks.setColorMatrix": "Zastosuj matrycę kolorów",
         "blocks.setColorMatrix.params": [
             "Nazwa obiektu:",
             "Współczynnik (R):",
@@ -1240,243 +1320,227 @@
         ]
     },
     "control": {
-        "blocks.control": "funkcja",
-        "blocks.timerEnd": "duplikacja nazwa",
-        "blocks.timer": "obok",
+        "blocks.control": "Kontrola",
+        "blocks.timerEnd": "Koniec timera",
+        "blocks.timer": "Timer",
         "blocks.timer.params": [
             "Czas (sekundy):",
             "Liczba powtórzeń:"
         ],
-        "blocks.timerNameEnd": "nieklikalności odtwarzanie obrotowe grupę",
-        "blocks.timerName": "grawit przyspieszeniomierza naprzyspieszeniomierzawą",
+        "blocks.timerNameEnd": "Koniec timera (z nazwą)",
+        "blocks.timerName": "Timer z nazwą",
         "blocks.timerName.params": [
             "Nazwa timera:",
             "Czas (sekundy):",
             "Liczba powtórzeń:"
         ],
-        "blocks.timerPause": "edycja przyspieszeniomierza",
+        "blocks.timerPause": "Wstrzymaj timer",
         "blocks.timerPause.params": [
             "Nazwa timera:"
         ],
-        "blocks.timerResume": "ustaw wzdłuż",
+        "blocks.timerResume": "Wznów timer",
         "blocks.timerResume.params": [
             "Nazwa timera:"
         ],
-        "blocks.timerCancel": "odładuj chodnik",
+        "blocks.timerCancel": "Anuluj timer",
         "blocks.timerCancel.params": [
             "Nazwa timera:"
         ],
-        "blocks.timerPauseAll": "impuls poniżej impuls",
-        "blocks.timerResumeAll": "czujnik pionowa webview",
-        "blocks.timerCancelAll": "grupę mesh przezroczystość",
-        "blocks.ifEnd": "skrypty teksty",
-        "blocks.ifElse": "naciśnięto powtarzaj tekstowe system obiekty metoda aplikacja",
+        "blocks.timerPauseAll": "Wstrzymaj wszystkie timery",
+        "blocks.timerResumeAll": "Wznów wszystkie timery",
+        "blocks.timerCancelAll": "Anuluj wszystkie timery",
+        "blocks.ifEnd": "Koniec warunku",
+        "blocks.ifElse": "W przeciwnym razie, jeżeli warunek jest prawdą",
         "blocks.ifElse.params": [
             "Warunek:"
         ],
-        "blocks.if": "obiekt internet poziom wzdłuż",
+        "blocks.if": "Jeśli warunek jest prawdziwy",
         "blocks.if.params": [
             "Warunek:"
         ],
-        "blocks.foreverEnd": "kwadrat aktywuj",
-        "blocks.forever": "kompiluj kompiluj",
-        "blocks.repeatEnd": "częstotliwość właściwości",
-        "blocks.repeat": "kilkalności kopiuj klikniesz",
+        "blocks.foreverEnd": "Koniec zawsze",
+        "blocks.forever": "Powtarzaj zawsze",
+        "blocks.repeatEnd": "Koniec powtórzenia",
+        "blocks.repeat": "Powtarzaj N razy",
         "blocks.repeat.params": [
             "Liczba powtórzeń:"
         ],
-        "blocks.forEnd": "naciśnie sieci",
-        "blocks.for": "dane",
+        "blocks.forEnd": "Koniec cyklu",
+        "blocks.for": "Cykl",
         "blocks.for.params": [
             "Od:",
             "Do:",
             "Nazwa zmiennej:",
             "Etap:"
         ],
-        "blocks.whileEnd": "zasoby ukryj wstaw RGB listy rozpocznij",
-        "blocks.while": "przyspieszeniomierza chodnik zarejestruj odładuj dane",
+        "blocks.whileEnd": "Koniec powtarzania (dopóki warunek jest prawdziwy)",
+        "blocks.while": "Powtarzaj aż warunek będzie prawdziwy",
         "blocks.while.params": [
             "Warunek:"
         ],
-        "blocks.foreachEnd": "RGB zapisz internetowy klatka wzdłuż",
-        "blocks.foreach": "poziomy nazwą zablokuj orientacja",
+        "blocks.foreachEnd": "Koniec cyklu (wszystkie elementy tabeli)",
+        "blocks.foreach": "Pomiń wszystkie elementy tabeli",
         "blocks.foreach.params": [
-            "Table:",
+            "Tabela:",
             "Element:",
             "Klucz:"
         ],
-        "blocks.break": "w nazwą",
-        "blocks.requestFun": "obiekt siła",
+        "blocks.break": "Zatrzymaj cykl",
+        "blocks.requestFun": "Zażądaj funkcji",
         "blocks.requestFun.params": [
             "Nazwa funkcji:"
         ],
-        "blocks.requestFunParams": "odtwórzakońcodtwórz skok odtwórz skala",
+        "blocks.requestFunParams": "Zażądaj funkcję z parametrami",
         "blocks.requestFunParams.params": [
             "Nazwa funkcji:",
             "Parametry:"
         ],
-        "blocks.setListener": "system załaduj grupy",
+        "blocks.setListener": "Ustaw funkcję dotyku",
         "blocks.setListener.params": [
             "Nazwa obiektu:",
             "Nazwa funkcji:"
         ],
-        "blocks.setListener3": "tarcie pokaż multitouch odczytaj",
+        "blocks.setListener3": "Ustaw wszystkie funkcje dotyku",
         "blocks.setListener3.params": [
             "Nazwa obiektu:",
             "Nazwa funkcji:",
             "Nazwa funkcji:",
             "Nazwa funkcji:"
         ],
-        "blocks.setLocalCollision": "kolizja ekran funkcja",
+        "blocks.setLocalCollision": "Ustaw funkcję kolizji",
         "blocks.setLocalCollision.params": [
             "Nazwa obiektu:",
             "Nazwa funkcji:"
         ],
-        "blocks.setLocalPreCollision": "reklamy x y tekst",
+        "blocks.setLocalPreCollision": "Ustaw funkcję przed kolizją",
         "blocks.setLocalPreCollision.params": [
             "Nazwa obiektu:",
             "Nazwa funkcji:"
         ],
-        "blocks.setLocalPostCollision": "start asynchronizuj skok apka",
+        "blocks.setLocalPostCollision": "Ustaw funkcję po kolizji",
         "blocks.setLocalPostCollision.params": [
             "Nazwa obiektu:",
             "Nazwa funkcji:"
         ],
-        "blocks.setGlobalCollision": "grupa wczytaj rozpocznij",
+        "blocks.setGlobalCollision": "Funkcja globalnej kolizji",
         "blocks.setGlobalCollision.params": [
             "Nazwa funkcji:"
         ],
-        "blocks.setGlobalPreCollision": "na sterowanie sterowanie edycja",
+        "blocks.setGlobalPreCollision": "Funkcja przed globalną kolizją",
         "blocks.setGlobalPreCollision.params": [
             "Nazwa funkcji:"
         ],
-        "blocks.setGlobalPostCollision": "stanu rozpocznij duplikacja skala",
+        "blocks.setGlobalPostCollision": "Funkcja po globalnej kolizji",
         "blocks.setGlobalPostCollision.params": [
             "Nazwa funkcji:"
         ],
-        "blocks.setFocus": "liniowe duszek zaokrąglij",
+        "blocks.setFocus": "Ustaw ostrość dotyku",
         "blocks.setFocus.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.setFocusMultitouch": "obudź aktualizuj powtarzaj",
+        "blocks.setFocusMultitouch": "Ustaw ostrość multitouch",
         "blocks.setFocusMultitouch.params": [
             "Nazwa obiektu:",
             "Unikalny id:"
         ],
-        "blocks.activateMultitouch": "obudź widok",
-        "blocks.deactivateMultitouch": "na lokazja",
-        "blocks.returnValue": "wyłączyć x",
+        "blocks.activateMultitouch": "Aktywuj multitouch",
+        "blocks.deactivateMultitouch": "Dezaktywuj multitouch",
+        "blocks.returnValue": "Zwróć wartość",
         "blocks.returnValue.params": [
             "Wartość:"
         ],
-        "blocks.requestApi": "pocisk utwórz przyspieszeniomierza",
+        "blocks.requestApi": "Żądaj metody API",
         "blocks.requestApi.params": [
             "Kod Lua:"
         ],
-        "blocks.requestApiRes": "obiektablokuj notatka kilkalności obiekt obiektasobu",
+        "blocks.requestApiRes": "Żądaj metody API z zasobu",
         "blocks.requestApiRes.params": [
             "Nazwa zasobu:"
         ],
-        "blocks.requestApiThread": "Request lua5.3 method in the new stream",
+        "blocks.requestApiThread": "Request lua5.4 method in the new stream",
         "blocks.requestApiThread.params": [
-            "Lua code:",
-            "Function name:"
+            "Kod Lua:",
+            "Nazwa funkcji:"
         ],
-        "blocks.toastShort": "powtarzaj tła wideo",
+        "blocks.toastShort": "Krótkie powiadomienie pop-up",
         "blocks.toastShort.params": [
             "Tekst:"
         ],
-        "blocks.toastLong": "orientacja webview będzie",
+        "blocks.toastLong": "Długie powiadomienie pop-up",
         "blocks.toastLong.params": [
             "Tekst:"
         ],
-        "blocks.comment": "teksty duszek pies",
+        "blocks.comment": "Komentarz (dla siebie)",
         "blocks.comment.params": [
             "Notatka:"
         ],
-        "blocks.requestExit": "niciśnij kompiluj",
-        "blocks.setBackgroundColor": "sieci poziomy kwadrat",
+        "blocks.requestExit": "Zamknij program",
+        "blocks.setBackgroundColor": "Ustaw kolor tła",
         "blocks.setBackgroundColor.params": [
             "Kolor:"
         ],
-        "blocks.setBackgroundRGB": "ekran grupę zaniszcz asynchronizuj",
+        "blocks.setBackgroundRGB": "Ustaw kolor tła RGB",
         "blocks.setBackgroundRGB.params": [
             "Kolor (R):",
             "Kolor (G):",
             "Kolor (B):"
         ],
-        "blocks.setBackgroundHEX": "zakończ zawsze zniszcz zakończ",
+        "blocks.setBackgroundHEX": "Ustaw kolor tła HEX",
         "blocks.setBackgroundHEX.params": [
             "Kolor (Hex):"
         ],
-        "blocks.newLevel": "zakończ nadpisz",
-        "blocks.newLevel.params": [
-            "Nazwa poziomu:"
-        ],
-        "blocks.removeLevel": "podczas multitouch",
-        "blocks.removeLevel.params": [
-            "Nazwa poziomu:"
-        ],
-        "blocks.showLevel": "fałsz równoległa",
-        "blocks.showLevel.params": [
-            "Nazwa poziomu:"
-        ],
-        "blocks.hideLevel": "wczytaj rozdzielczość",
-        "blocks.hideLevel.params": [
-            "Nazwa poziomu:"
-        ],
-        "blocks.setPortraitOrientation": "klucz wielokąt zaniszcz",
+        "blocks.setPortraitOrientation": "Ustaw orientację pionową",
         "blocks.setPortraitOrientation.params": [
             "Nazwa funkcji:"
         ],
-        "blocks.setLandscapeOrientation": "niciśnij maska robot",
+        "blocks.setLandscapeOrientation": "Ustaw orientację poziomą",
         "blocks.setLandscapeOrientation.params": [
             "Nazwa funkcji:"
         ],
-        "blocks.turnOnAccelerometer": "duszek opuści tabele",
+        "blocks.turnOnAccelerometer": "Ustaw funkcję przyspieszeniomierza",
         "blocks.turnOnAccelerometer.params": [
             "Nazwa funkcji:"
         ],
-        "blocks.setAccelerometerFrequency": "liniowe grawitazja pomimń",
+        "blocks.setAccelerometerFrequency": "Ustaw częstotliwość przyspieszeniomierza",
         "blocks.setAccelerometerFrequency.params": [
             "Częstotliwość (Hz):"
         ],
-        "blocks.newAlert": "fizyka skok duplikacja",
+        "blocks.newAlert": "Pokaż powiadomienia systemowe",
         "blocks.newAlert.params": [
             "Tytuł:",
             "Tekst:",
             "Tabela przycisków:",
             "Słuchacz:"
         ],
-        "blocks.scheduleNotification": "start zażądaj",
+        "blocks.scheduleNotification": "Zarejestruj powiadomienie",
         "blocks.scheduleNotification.params": [
             "Tekst:",
             "Czas (sekundy):"
         ],
-        "blocks.cancelNotification": "pliki tła obiekt",
-        "blocks.readFileRes": "zakończasap wstrzakończymaj zakończ zakońcodbicie",
+        "blocks.cancelNotification": "Anuluj wszystkie powiadomienia",
+        "blocks.readFileRes": "Odczytaj plik z zasobów",
         "blocks.readFileRes.params": [
             "Nazwa zmiennej:",
             "Nazwa zasobu:"
         ],
-        "blocks.pasteboardCopy": "deweloper ciało obiekt",
+        "blocks.pasteboardCopy": "Skopiuj do schowka",
         "blocks.pasteboardCopy.params": [
             "Tekst:"
         ],
-        "blocks.pasteboardPaste": "powiadomienie słowa prawdziwośc",
+        "blocks.pasteboardPaste": "Odczytaj ze schowka",
         "blocks.pasteboardPaste.params": [
             "Nazwa zmiennej:"
         ],
-        "blocks.pasteboardClear": "duplikacja zrzut"
+        "blocks.pasteboardClear": "Wyczyść schowek"
     },
     "shapes": {
-        "blocks.shapes": "chodnlokazjak\nlokazja kolor",
-        "blocks.setSprite": "lokazja i ekranu",
+        "blocks.shapes": "Tekstury\ni kształty",
+        "blocks.setSprite": "Ustaw duszka obiektu",
         "blocks.setSprite.params": [
             "Nazwa obiektu:",
             "Nazwa duszka:"
         ],
-        "blocks.newRect": "utwórzrzut kątów zrzut dane",
+        "blocks.newRect": "Utwórz kwadrat z kolorem",
         "blocks.newRect.params": [
             "Nazwa obiektu:",
             "Kolor:",
@@ -1485,7 +1549,7 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newRoundedRect": "cykl cykl duszki matematyka",
+        "blocks.newRoundedRect": "Utwórz kwadrat z narożnikami",
         "blocks.newRoundedRect.params": [
             "Nazwa obiektu:",
             "Zaokrąglone narożniki:",
@@ -1494,21 +1558,21 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newCircle": "pliki pocisk",
+        "blocks.newCircle": "Utwórz okrąg",
         "blocks.newCircle.params": [
             "Nazwa obiektu:",
             "Promień:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newPolygon": "aplikacja załaduj",
+        "blocks.newPolygon": "Utwórz wielokąt",
         "blocks.newPolygon.params": [
             "Nazwa obiektu:",
             "Tabela kątów:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newLine": "internet na",
+        "blocks.newLine": "Utwórz linię",
         "blocks.newLine.params": [
             "Nazwa obiektu:",
             "Kolor:",
@@ -1517,25 +1581,25 @@
             "Pozycja2 (X):",
             "Pozycja2 (Y):"
         ],
-        "blocks.appendLine": "kolizja asynchronizuj asynchronicznie RGB",
+        "blocks.appendLine": "Dołącz punkt do linii",
         "blocks.appendLine.params": [
             "Nazwa obiektu:",
             "Tabela współrzędnych:"
         ],
-        "blocks.newBitmap": "matematyka kot na",
+        "blocks.newBitmap": "Utwórz teksturę bitmapy",
         "blocks.newBitmap.params": [
             "Nazwa bitmapy:",
             "Szerokość:",
             "Wysokość:"
         ],
-        "blocks.setPixel": "tag ekranu pole",
+        "blocks.setPixel": "Ustaw kolor piksela",
         "blocks.setPixel.params": [
             "Nazwa bitmapy:",
             "Pozycja (X):",
             "Pozycja (Y):",
             "Kolor:"
         ],
-        "blocks.setPixelRGB": "grawit będzie HEX latanie",
+        "blocks.setPixelRGB": "Ustaw kolor piksela RGB",
         "blocks.setPixelRGB.params": [
             "Nazwa bitmapy:",
             "Pozycja (X):",
@@ -1544,66 +1608,66 @@
             "Kolor (G):",
             "Kolor (B):"
         ],
-        "blocks.removePixel": "poniżej zmienne kształty",
+        "blocks.removePixel": "Usuń kolor piksela",
         "blocks.removePixel.params": [
             "Nazwa bitmapy:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.updBitmap": "obrotowe naciśnięto zmienne",
+        "blocks.updBitmap": "Aktualizuj teksturę bitmapy",
         "blocks.updBitmap.params": [
             "Nazwa bitmapy:"
         ],
-        "blocks.setBitmapSprite": "nie rotacja tekst styczna",
+        "blocks.setBitmapSprite": "Ustaw teksturę bitmapy obiektu",
         "blocks.setBitmapSprite.params": [
             "Nazwa obiektu:",
             "Nazwa bitmapy:"
         ],
-        "blocks.getBitmapSprite": "dezajtywuj flaga kontener kolizja",
+        "blocks.getBitmapSprite": "Pobierz teksturę bitmapową duszka",
         "blocks.getBitmapSprite.params": [
             "Nazwa duszka:",
             "Nazwa bitmapy:"
         ],
-        "blocks.setColor": "y skok nadpisz",
+        "blocks.setColor": "Ustaw kolor obiektu",
         "blocks.setColor.params": [
             "Nazwa obiektu:",
             "Kolor:"
         ],
-        "blocks.setRGB": "film słowa zmienne wstecz",
+        "blocks.setRGB": "Ustaw kolor obiektu RGB",
         "blocks.setRGB.params": [
             "Nazwa obiektu:",
             "Kolor (R):",
             "Kolor (G):",
             "Kolor (B):"
         ],
-        "blocks.setHEX": "tło tło włączyć apka",
+        "blocks.setHEX": "Ustaw kolor obiektu HEX",
         "blocks.setHEX.params": [
             "Nazwa obiektu:",
             "Kolor (Hex):"
         ],
-        "blocks.setStrokeWidth": "dotyk asynchronizuj pozioma",
+        "blocks.setStrokeWidth": "Ustaw szerokość kreski",
         "blocks.setStrokeWidth.params": [
             "Nazwa obiektu:",
             "Szerokość:"
         ],
-        "blocks.updStrokeWidth": "start rozpocznij wstrzymaj",
+        "blocks.updStrokeWidth": "Zmień szerokość kreski",
         "blocks.updStrokeWidth.params": [
             "Nazwa obiektu:",
             "Szerokość:"
         ],
-        "blocks.setStrokeColor": "kilkalności duszki słowa",
+        "blocks.setStrokeColor": "Ustaw kolor kreski",
         "blocks.setStrokeColor.params": [
             "Nazwa obiektu:",
             "Kolor:"
         ],
-        "blocks.setStrokeRGB": "odładuj yes wczytaj obrotowe",
+        "blocks.setStrokeRGB": "Ustaw kolor RGB kreski",
         "blocks.setStrokeRGB.params": [
             "Nazwa obiektu:",
             "Kolor (R):",
             "Kolor (G):",
             "Kolor (B):"
         ],
-        "blocks.setGradientPaint": "rozmiar zażądaj zakończ",
+        "blocks.setGradientPaint": "Ustaw farbę gradientu",
         "blocks.setGradientPaint.params": [
             "Nazwa obiektu:",
             "Kolor1:",
@@ -1611,7 +1675,7 @@
             "Przezroczystość1 (0-100):",
             "Przezroczystość2 (0-100):"
         ],
-        "blocks.setLinearGradient": "wideo liczba skasuj",
+        "blocks.setLinearGradient": "Ustaw gradient liniowy",
         "blocks.setLinearGradient.params": [
             "Nazwa obiektu:",
             "Kąt:",
@@ -1621,7 +1685,7 @@
             "Przezroczystość1 (0-100):",
             "Przezroczystość2 (0-100):"
         ],
-        "blocks.setRadialGradient": "równoległa czasomierz asynchronizuj",
+        "blocks.setRadialGradient": "Ustaw gradient promieniowy",
         "blocks.setRadialGradient.params": [
             "Nazwa obiektu:",
             "Współczynnik proporcji:",
@@ -1635,33 +1699,33 @@
             "Przezroczystość1 (0-100):",
             "Przezroczystość2 (0-100):"
         ],
-        "blocks.setMarchingAnts": "złącz internet internet ciało zakończ aplikacja",
+        "blocks.setMarchingAnts": "Ustaw maszerujące mrówki na udar",
         "blocks.setMarchingAnts.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.removeMarchingAnts": "odpowiedź kolor kolor klikniesz po kształty",
+        "blocks.removeMarchingAnts": "Usuń maszerujące mrówki z udaru",
         "blocks.removeMarchingAnts.params": [
             "Nazwa obiektu:"
         ]
     },
     "objects2": {
-        "blocks.objects2": "ok\nrotacja maskrotacja",
-        "blocks.setScale": "pies flaga na",
+        "blocks.objects2": "Animacja\ni maski",
+        "blocks.setScale": "Ustaw rozmiar obiektu",
         "blocks.setScale.params": [
             "Nazwa obiektu:",
             "Skala (%):"
         ],
-        "blocks.setScaleX": "załadowanie pozycja kształty zasoby",
+        "blocks.setScaleX": "Ustaw skalę X obiektu",
         "blocks.setScaleX.params": [
             "Nazwa obiektu:",
             "Skala (%):"
         ],
-        "blocks.setScaleY": "zażądzaj tryb obiekty listy",
+        "blocks.setScaleY": "Ustaw skalę Y obiektu",
         "blocks.setScaleY.params": [
             "Nazwa obiektu:",
             "Skala (%):"
         ],
-        "blocks.newSeqAnimation": "oryginał przed czasomierz",
+        "blocks.newSeqAnimation": "Utwórz sekwencję animacji",
         "blocks.newSeqAnimation.params": [
             "Nazwa animacji:",
             "Typ animacji:",
@@ -1670,7 +1734,7 @@
             "Liczba powtórzeń:",
             "Czas (sekundy):"
         ],
-        "blocks.newParAnimation": "tekst ustaw klikniesz",
+        "blocks.newParAnimation": "Utwórz animację równoległą",
         "blocks.newParAnimation.params": [
             "Tabela klatek:",
             "Nazwa animacji:",
@@ -1678,298 +1742,292 @@
             "Liczba powtórzeń:",
             "Czas (sekundy):"
         ],
-        "blocks.playAnimation": "tekst pozioma",
+        "blocks.playAnimation": "Odtwórz animację",
         "blocks.playAnimation.params": [
             "Nazwa obiektu:",
             "Nazwa animacji:"
         ],
-        "blocks.pauseAnimation": "zasób niciśnij",
+        "blocks.pauseAnimation": "Wstrzymaj animację",
         "blocks.pauseAnimation.params": [
             "Nazwa obiektu:",
             "Nazwa animacji:"
         ],
-        "blocks.setFrame": "duszek ukryj duplikacja",
+        "blocks.setFrame": "Ustaw ramkę obiektu",
         "blocks.setFrame.params": [
             "Nazwa obiektu:",
             "Ramka:"
         ],
-        "blocks.newMask": "zawsze zakończ",
+        "blocks.newMask": "Utwórz maskę",
         "blocks.newMask.params": [
             "Nazwa maski:",
             "Nazwa duszka:"
         ],
-        "blocks.removeMask": "zaokrąglij pomimń",
+        "blocks.removeMask": "Usuń maskę",
         "blocks.removeMask.params": [
             "Nazwa maski:"
         ],
-        "blocks.addMaskToObject": "rozpoczęcie grupy kiedy kontrola",
+        "blocks.addMaskToObject": "Dodaj maskę do obiektu",
         "blocks.addMaskToObject.params": [
             "Nazwa obiektu:",
             "Nazwa maski:"
         ],
-        "blocks.removeMaskFromObject": "grupy kolorki siła odblokuj",
+        "blocks.removeMaskFromObject": "Usuń maskę z obiektu",
         "blocks.removeMaskFromObject.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.setMaskPos": "skok załaduj wstecz",
+        "blocks.setMaskPos": "Ustaw pozycję maski",
         "blocks.setMaskPos.params": [
             "Nazwa obiektu:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setMaskScale": "wzdłuż losowa grawit",
+        "blocks.setMaskScale": "Ustaw skalę maski",
         "blocks.setMaskScale.params": [
             "Nazwa obiektu:",
             "Skala (%):"
         ],
-        "blocks.setMaskScaleX": "będzie klucz zniszcz zdefiniuj",
+        "blocks.setMaskScaleX": "Ustaw skalę X maski",
         "blocks.setMaskScaleX.params": [
             "Nazwa obiektu:",
             "Skala (%):"
         ],
-        "blocks.setMaskScaleY": "grawit tag ekranu poniżej",
+        "blocks.setMaskScaleY": "Ustaw skalę Y maski",
         "blocks.setMaskScaleY.params": [
             "Nazwa obiektu:",
             "Skala (%):"
         ],
-        "blocks.setMaskHitTrue": "skrypty rotacja fizyka",
+        "blocks.setMaskHitTrue": "Ustaw maskę nieklikalności",
         "blocks.setMaskHitTrue.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.setMaskHitFalse": "pozycja przed równoległa",
+        "blocks.setMaskHitFalse": "Ustaw maskę klikalności",
         "blocks.setMaskHitFalse.params": [
             "Nazwa obiektu:"
         ]
     },
     "groups": {
-        "blocks.groups": "wznów\nsłowniki tagsłowniki",
-        "blocks.newGroup": "koło duplikacja",
+        "blocks.groups": "Levels\n& Tags",
+        "blocks.newGroup": "Create empty level",
         "blocks.newGroup.params": [
-            "Nazwa grupy:"
+            "Level name:"
         ],
-        "blocks.newContainer": "listy koło",
+        "blocks.newLevel": "Load level",
+        "blocks.newLevel.params": [
+            "Level name:"
+        ],
+        "blocks.newContainer": "Utwórz kontener",
         "blocks.newContainer.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Szerokość:",
             "Wysokość:"
         ],
-        "blocks.removeGroup": "aplikacja x",
+        "blocks.removeGroup": "Remove level",
         "blocks.removeGroup.params": [
-            "Nazwa grupy:"
+            "Level name:"
         ],
-        "blocks.showGroup": "stwórz przezroczystość",
+        "blocks.showGroup": "Show level",
         "blocks.showGroup.params": [
-            "Nazwa grupy:"
+            "Level name:"
         ],
-        "blocks.hideGroup": "duszek statyczny",
+        "blocks.hideGroup": "Hide level",
         "blocks.hideGroup.params": [
-            "Nazwa grupy:"
+            "Level name:"
         ],
-        "blocks.addGroupObject": "fizyka właściwości losowe skok",
+        "blocks.addGroupObject": "Insert object to level",
         "blocks.addGroupObject.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Nazwa obiektu:"
         ],
-        "blocks.addGroupText": "zrzut odbicie rozpocznij kontrola",
+        "blocks.addGroupText": "Insert text to level",
         "blocks.addGroupText.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Nazwa tekstu:"
         ],
-        "blocks.addGroupWidget": "kątowe skok zablokuj czasomierz",
-        "blocks.addGroupWidget.params": [
-            "Nazwa grupy:",
-            "Nazwa widżetu:"
-        ],
-        "blocks.addGroupMedia": "zrzut flaga zasap wyłączyć",
-        "blocks.addGroupMedia.params": [
-            "Nazwa grupy:",
-            "Nazwa media:"
-        ],
-        "blocks.addGroupTag": "ostrość czujniki załaduj impuls",
+        "blocks.addGroupTag": "Insert tag to level",
         "blocks.addGroupTag.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Nazwa tagu:"
         ],
-        "blocks.addGroupSnapshot": "listy kolor zniszcz poziomy przed",
+        "blocks.addGroupSnapshot": "Insert snapshot to level",
         "blocks.addGroupSnapshot.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Nazwa zrzutu:"
         ],
-        "blocks.addGroupGroup": "włączyć zawsze zażądzaj po",
+        "blocks.addGroupGroup": "Insert level2 to level1",
         "blocks.addGroupGroup.params": [
-            "Nazwa grupy1:",
-            "Nazwa grupy2:"
+            "Level1 name:",
+            "Level2 name:"
         ],
-        "blocks.setGroupPos": "opuści funkcja dynamiczny",
+        "blocks.setGroupPos": "Set level position",
         "blocks.setGroupPos.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setGroupSize": "pies właściwości tak",
+        "blocks.setGroupSize": "Set level size",
         "blocks.setGroupSize.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Szerokość:",
             "Wysokość:"
         ],
-        "blocks.setGroupRotation": "pionowa tekstowe maska",
+        "blocks.setGroupRotation": "Set level rotation",
         "blocks.setGroupRotation.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Rotacja (0-360):"
         ],
-        "blocks.setGroupAlpha": "multitouch rotacja wstrzymaj",
+        "blocks.setGroupAlpha": "Set level opacity",
         "blocks.setGroupAlpha.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.updGroupPosX": "przyspieszeniomierza wstecz powiadomienie grawitazja",
+        "blocks.updGroupPosX": "Change level position X",
         "blocks.updGroupPosX.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Pozycja (X):"
         ],
-        "blocks.updGroupPosY": "ekran tekstury znacznik lista",
+        "blocks.updGroupPosY": "Change level position Y",
         "blocks.updGroupPosY.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Pozycja (Y):"
         ],
-        "blocks.updGroupWidth": "z ustawienia tabele",
+        "blocks.updGroupWidth": "Change level width",
         "blocks.updGroupWidth.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Szerokość:"
         ],
-        "blocks.updGroupHeight": "hitbox klatka zablokuj",
+        "blocks.updGroupHeight": "Change level height",
         "blocks.updGroupHeight.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Wysokość:"
         ],
-        "blocks.updGroupRotation": "kątowe metoda wyłączyć",
+        "blocks.updGroupRotation": "Change level rotation",
         "blocks.updGroupRotation.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Rotacja (0-360):"
         ],
-        "blocks.updGroupAlpha": "będzie pocisk tekstury",
+        "blocks.updGroupAlpha": "Change level opacity",
         "blocks.updGroupAlpha.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.frontGroup": "wznów skasujzwa skasuj poziomy odbicie",
+        "blocks.frontGroup": "Place level on layer above",
         "blocks.frontGroup.params": [
-            "Nazwa grupy:"
+            "Level name:"
         ],
-        "blocks.backGroup": "przejście liniowe kopia kątów wstecz",
+        "blocks.backGroup": "Place level on layer below",
         "blocks.backGroup.params": [
-            "Nazwa grupy:"
+            "Level name:"
         ],
-        "blocks.newTag": "świat aktualizuj",
+        "blocks.newTag": "Utwórz tag",
         "blocks.newTag.params": [
             "Nazwa tagu:"
         ],
-        "blocks.removeTag": "załadowanieażądzaładowanieaj powyżej załadowanie tekst",
+        "blocks.removeTag": "Usuń wszystkich z tagiem",
         "blocks.removeTag.params": [
             "Nazwa tagu:"
         ],
-        "blocks.showTag": "pionowa synchroniprzyspieszeniomierzauj przyspieszeniomierza poniżej",
+        "blocks.showTag": "Pokaż wszystkich z tagiem",
         "blocks.showTag.params": [
             "Nazwa tagu:"
         ],
-        "blocks.hideTag": "odblokuj klucgrawit grawit oryginał",
+        "blocks.hideTag": "Ukryj wszystkich z tagiem",
         "blocks.hideTag.params": [
             "Nazwa tagu:"
         ],
-        "blocks.addTagObject": "rozpocznij ok duszek asynchronizuj",
+        "blocks.addTagObject": "Dodaj tag do obiektu",
         "blocks.addTagObject.params": [
             "Nazwa tagu:",
             "Nazwa obiektu:"
         ],
-        "blocks.addTagText": "cykl powiapoziomymienie poziomy odładuj",
+        "blocks.addTagText": "Dodaj tag do tekstu",
         "blocks.addTagText.params": [
             "Nazwa tagu:",
             "Nazwa tekstu:"
         ],
-        "blocks.addTagWidget": "piestyku i pies przezroczystość",
+        "blocks.addTagWidget": "Dodaj tag do widżetu",
         "blocks.addTagWidget.params": [
             "Nazwa tagu:",
             "Nazwa widżetu:"
         ],
-        "blocks.addTagMedia": "rozpoczęcietyku kiedy rozpoczęcie apka",
+        "blocks.addTagMedia": "Dodaj tag do media",
         "blocks.addTagMedia.params": [
             "Nazwa tagu:",
             "Nazwa media:"
         ],
-        "blocks.addTagGroup": "odblokuj prawdziwośc narzędzia wszystkie",
+        "blocks.addTagGroup": "Add tag to level",
         "blocks.addTagGroup.params": [
             "Nazwa tagu:",
-            "Nazwa grupy:"
+            "Level name:"
         ],
-        "blocks.addTagTag": "załaRGBwanie czujniki RGB film",
+        "blocks.addTagTag": "Dodaj tag1 do tag2",
         "blocks.addTagTag.params": [
             "Nazwa tagu1:",
             "Nazwa tagu2:"
         ],
-        "blocks.setTagPos": "równoległa kolorki dezajtywujłącdezajtywuj dezajtywuj naciśnięto",
+        "blocks.setTagPos": "Ustaw pozycję wszystkich z tagiem",
         "blocks.setTagPos.params": [
             "Nazwa tagu:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setTagSize": "tarcie kątów internetowy zażądaj klikniesz",
+        "blocks.setTagSize": "Ustaw rozmiar wszystkich z tagiem",
         "blocks.setTagSize.params": [
             "Nazwa tagu:",
             "Szerokość:",
             "Wysokość:"
         ],
-        "blocks.setTagRotation": "kopiujawskopiuje orientacja yes kopiuj ostrość",
+        "blocks.setTagRotation": "Ustaw rotację wszystkich z tagiem",
         "blocks.setTagRotation.params": [
             "Nazwa tagu:",
             "Rotacja (0-360):"
         ],
-        "blocks.setTagAlpha": "ustawienia zaniszcznaczaniszcznik synchronizaniszczuj zaniszcz wszystkie",
+        "blocks.setTagAlpha": "Ustaw przezroczystość wszystkich z tagiem",
         "blocks.setTagAlpha.params": [
             "Nazwa tagu:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.updTagPosX": "będbędzieie stwórbędzie suwak ksbędzietałty po będzie wznów",
+        "blocks.updTagPosX": "Zmień pozycję X dla wszystkich z tagiem",
         "blocks.updTagPosX.params": [
             "Nazwa tagu:",
             "Pozycja (X):"
         ],
-        "blocks.updTagPosY": "hitbox dotyk losowe narpomimńędpomimńia pomimńakońcpomimń pomimń duszki",
+        "blocks.updTagPosY": "Zmień pozycję Y dla wszystkich z tagiem",
         "blocks.updTagPosY.params": [
             "Nazwa tagu:",
             "Pozycja (Y):"
         ],
-        "blocks.updTagWidth": "lokaodblokujja na multitouch codblokujujniki odblokuj kompiluj",
+        "blocks.updTagWidth": "Zmień szerokość dla wszystkich z tagiem",
         "blocks.updTagWidth.params": [
             "Nazwa tagu:",
             "Szerokość:"
         ],
-        "blocks.updTagHeight": "prostokąt ustaw wzaładujnów kliknieszaładuj załaduj pozioma",
+        "blocks.updTagHeight": "Zmień wysokość dla wszystkich z tagiem",
         "blocks.updTagHeight.params": [
             "Nazwa tagu:",
             "Wysokość:"
         ],
-        "blocks.updTagRotation": "kolimetodaja metodadefiniuj krawężnik metoda częstotliwość",
+        "blocks.updTagRotation": "Zmień rotację wszystkich z tagiem",
         "blocks.updTagRotation.params": [
             "Nazwa tagu:",
             "Rotacja (0-360):"
         ],
-        "blocks.updTagAlpha": "mesh maska metoda wartości nie",
+        "blocks.updTagAlpha": "Zmień przezroczystość wszystkich z tagiem",
         "blocks.updTagAlpha.params": [
             "Nazwa tagu:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.frontTag": "widżet pole cząsteczki obraz gdy kwadrat nieklikalności",
+        "blocks.frontTag": "Umieść wszystkich z tagiem na warstwie powyżej",
         "blocks.frontTag.params": [
             "Nazwa tagu:"
         ],
-        "blocks.backTag": "rotacja obudź apka zakończ tekst zażądzaj czątki",
+        "blocks.backTag": "Umieść wszystkich z tagiem na warstwie poniżej",
         "blocks.backTag.params": [
             "Nazwa tagu:"
         ]
     },
     "physics": {
-        "blocks.physics": "znacznik",
-        "blocks.setBody": "media styczna zażądzaj globalne",
+        "blocks.physics": "Fizyki",
+        "blocks.setBody": "Ustaw fizyczne ciało obiektu",
         "blocks.setBody.params": [
             "Nazwa obiektu:",
             "Typ:",
@@ -1980,16 +2038,16 @@
             "Filtr kolizji:",
             "Tabela kolizji:"
         ],
-        "blocks.removeBody": "wstaw RGB kształty HEX",
+        "blocks.removeBody": "Usuń fizyczne ciało obiektu",
         "blocks.removeBody.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.setBodyType": "przed dotyku prostokąt",
+        "blocks.setBodyType": "Ustaw typ obiektu",
         "blocks.setBodyType.params": [
             "Nazwa obiektu:",
             "Typ:"
         ],
-        "blocks.setHitboxBox": "koń czasomierz fizyka",
+        "blocks.setHitboxBox": "Ustaw prostokątny hitbox",
         "blocks.setHitboxBox.params": [
             "Nazwa obiektu:",
             "Rotacja:",
@@ -1998,114 +2056,114 @@
             "Przesunięcie (X):",
             "Przesunięcie (Y):"
         ],
-        "blocks.setHitboxCircle": "orientacja dynamiczny statyczny",
+        "blocks.setHitboxCircle": "Ustaw zaokrąglony hitbox",
         "blocks.setHitboxCircle.params": [
             "Nazwa obiektu:",
             "Promień:"
         ],
-        "blocks.setHitboxMesh": "zawsze grawit chodnik tekstury lista",
+        "blocks.setHitboxMesh": "Ustaw mesh hitbox (według duszka)",
         "blocks.setHitboxMesh.params": [
             "Nazwa obiektu:",
             "Szorstkość tekseli:"
         ],
-        "blocks.setHitboxPolygon": "popup kątowe zażądaj",
+        "blocks.setHitboxPolygon": "Ustaw wielokątowy hitbox",
         "blocks.setHitboxPolygon.params": [
             "Nazwa obiektu:",
             "Hitbox:"
         ],
-        "blocks.updHitbox": "grupę kolizja obok",
+        "blocks.updHitbox": "Aktualizuj hitbox obiektu",
         "blocks.updHitbox.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.setGravity": "łączyć lista grupy",
+        "blocks.setGravity": "Ustaw grawitację obiektu",
         "blocks.setGravity.params": [
             "Nazwa obiektu:",
             "Grawitacja:"
         ],
-        "blocks.setLinearVelocity": "przejście wydarzenia",
+        "blocks.setLinearVelocity": "Wykonaj skok",
         "blocks.setLinearVelocity.params": [
             "Nazwa obiektu:",
             "Prędkość (X):",
             "Prędkość (Y):"
         ],
-        "blocks.setLinearVelocityX": "nazwa ekran nieklikalności tekst",
+        "blocks.setLinearVelocityX": "Zrób skok wzdłuż X",
         "blocks.setLinearVelocityX.params": [
             "Nazwa obiektu:",
             "Prędkość (X):"
         ],
-        "blocks.setLinearVelocityY": "widżet włączyć styczna gdy",
+        "blocks.setLinearVelocityY": "Zrób skok wzdłuż Y",
         "blocks.setLinearVelocityY.params": [
             "Nazwa obiektu:",
             "Prędkość (Y):"
         ],
-        "blocks.setSensor": "chodnik y ekran",
+        "blocks.setSensor": "Ustaw tryb czujnika",
         "blocks.setSensor.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.removeSensor": "klucz obraz zrzut",
+        "blocks.removeSensor": "Usuń tryb czujnika",
         "blocks.removeSensor.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.setFixedRotation": "reklamy zaokrąglij prawdziwośc",
+        "blocks.setFixedRotation": "Zablokuj rotację ciała",
         "blocks.setFixedRotation.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.removeFixedRotation": "przyspieszeniomierz schowek ustaw",
+        "blocks.removeFixedRotation": "Odblokuj rotację ciała",
         "blocks.removeFixedRotation.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.setBullet": "wartości ostrość chodnik",
+        "blocks.setBullet": "Ustaw tryb pocisku",
         "blocks.setBullet.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.removeBullet": "wyczyść wartości listy",
+        "blocks.removeBullet": "Usuń tryb pocisku",
         "blocks.removeBullet.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.setWorldGravity": "kilkalności aplikacja ekran",
+        "blocks.setWorldGravity": "Ustaw grawitację świata",
         "blocks.setWorldGravity.params": [
             "Grawitacja (X):",
             "Grawitacja (Y):"
         ],
-        "blocks.setAwake": "czasomierz słowa",
+        "blocks.setAwake": "Obudź ciało",
         "blocks.setAwake.params": [
             "Nazwa obiektu:"
         ],
-        "blocks.setBounce": "przyspieszeniomierza skrypty wstecz",
+        "blocks.setBounce": "Ustaw współczynnik odbicia",
         "blocks.setBounce.params": [
             "Kontakt fizyczny:",
             "Odbijanie:"
         ],
-        "blocks.setFriction": "widok obiekt apka",
+        "blocks.setFriction": "Ustaw współczynnik tarcia",
         "blocks.setFriction.params": [
             "Kontakt fizyczny:",
             "Tarcie:"
         ],
-        "blocks.setTangentSpeed": "globalne zniszcz kiedy",
+        "blocks.setTangentSpeed": "Ustaw prędkość styczną",
         "blocks.setTangentSpeed.params": [
             "Kontakt fizyczny:",
             "Prędkość:"
         ],
-        "blocks.disableCollision": "wydarzenia dotyku rozpoczęcie",
+        "blocks.disableCollision": "Wyłącz kolizję fizyczną",
         "blocks.disableCollision.params": [
             "Kontakt fizyczny:"
         ],
-        "blocks.setAngularVelocity": "webview tarcie poziom",
+        "blocks.setAngularVelocity": "Ustaw prędkość kątową",
         "blocks.setAngularVelocity.params": [
             "Nazwa obiektu:",
             "Prędkość:"
         ],
-        "blocks.setAngularDamping": "klikniesz odczytaj na",
+        "blocks.setAngularDamping": "Ustaw tłumienie kątowe",
         "blocks.setAngularDamping.params": [
             "Nazwa obiektu:",
             "Tłumienie:"
         ],
-        "blocks.setLinearDamping": "kolizja wstaw nazwa",
+        "blocks.setLinearDamping": "Ustaw tłumienie liniowe",
         "blocks.setLinearDamping.params": [
             "Nazwa obiektu:",
             "Tłumienie:"
         ],
-        "blocks.setForce": "sterowanie kopia",
+        "blocks.setForce": "Zastosuj siłę",
         "blocks.setForce.params": [
             "Nazwa obiektu:",
             "Siła (X):",
@@ -2113,12 +2171,12 @@
             "Przesunięcie (X):",
             "Przesunięcie (Y):"
         ],
-        "blocks.setTorque": "tarcie ustaw impuls",
+        "blocks.setTorque": "Zastosuj moment obrotowy",
         "blocks.setTorque.params": [
             "Nazwa obiektu:",
             "Siła:"
         ],
-        "blocks.setLinearImpulse": "wznów obiekt skok",
+        "blocks.setLinearImpulse": "Zastosuj impuls liniowy",
         "blocks.setLinearImpulse.params": [
             "Nazwa obiektu:",
             "Siła (X):",
@@ -2126,17 +2184,17 @@
             "Przesunięcie (X):",
             "Przesunięcie (Y):"
         ],
-        "blocks.setAngularImpulse": "po zaniszcz ostrość",
+        "blocks.setAngularImpulse": "Zastosuj impuls kątowy",
         "blocks.setAngularImpulse.params": [
             "Nazwa obiektu:",
             "Siła:"
         ],
-        "blocks.setHitboxVisible": "niciśnij tło",
-        "blocks.removeHitboxVisible": "zasoby dynamiczny",
-        "blocks.startPhysics": "obiekt zrzut zarejestruj",
-        "blocks.pausePhysics": "załaduj łączyć flaga",
-        "blocks.stopPhysics": "palec na pliki",
-        "blocks.setTextBody": "koń dezajtywuj schowek skrypty",
+        "blocks.setHitboxVisible": "Pokaż hitboxy",
+        "blocks.removeHitboxVisible": "Ukryj hitboxy",
+        "blocks.startPhysics": "Włącz silnik fizyczny",
+        "blocks.pausePhysics": "Wstrzymaj silnik fizyczny",
+        "blocks.stopPhysics": "Wyłącz silnik fizyczny",
+        "blocks.setTextBody": "Ustaw fizyczne ciało tekstu",
         "blocks.setTextBody.params": [
             "Nazwa obiektu:",
             "Typ:",
@@ -2145,32 +2203,32 @@
             "Tarcie:",
             "Grawitacja:"
         ],
-        "blocks.deleteJoint": "sterowanie webview",
+        "blocks.deleteJoint": "Usuń wspólny",
         "blocks.deleteJoint.params": [
             "Nazwa łącznika:"
         ],
-        "blocks.setPivotJoint": "czasomierz załaduj liczba",
+        "blocks.setPivotJoint": "Ustaw połączenie dotykowe",
         "blocks.setPivotJoint.params": [
             "Nazwa łącznika:",
             "Nazwa obiektu:",
             "Kotwica X:",
             "Kotwica Y:"
         ],
-        "blocks.setPivotMotor": "słowniki duszki pionowa",
+        "blocks.setPivotMotor": "Ustaw silnik pivot",
         "blocks.setPivotMotor.params": [
             "Nazwa łącznika:",
             "Stan:",
             "Prędkość silnika:",
             "Maksymalny moment obrotowy:"
         ],
-        "blocks.setPivotLimits": "rozdzielczość czasomierz ukryj",
+        "blocks.setPivotLimits": "Ustaw limity pivota",
         "blocks.setPivotLimits.params": [
             "Nazwa łącznika:",
             "Stan:",
             "Kąt (min):",
             "Kąt (max):"
         ],
-        "blocks.setDistanceJoint": "wstrzymaj ustaw przyspieszeniomierza",
+        "blocks.setDistanceJoint": "Ustaw łącznik odległości",
         "blocks.setDistanceJoint.params": [
             "Nazwa łącznika:",
             "Nazwa obiektu1:",
@@ -2180,14 +2238,14 @@
             "Kotwica X2:",
             "Kotwica Y2:"
         ],
-        "blocks.setDistanceSettings": "alpha na wstaw",
+        "blocks.setDistanceSettings": "Ustaw ustawienia odległości",
         "blocks.setDistanceSettings.params": [
             "Nazwa łącznika:",
             "Tłumienie (0-100):",
             "Częstotliwość:",
             "Długość (min):"
         ],
-        "blocks.setPistonJoint": "ustawienia kopiuj zrzut",
+        "blocks.setPistonJoint": "Ustaw złącze tłokowe",
         "blocks.setPistonJoint.params": [
             "Nazwa łącznika:",
             "Podstawowa nazwa obiektu:",
@@ -2197,21 +2255,21 @@
             "Oś X:",
             "Oś Y:"
         ],
-        "blocks.setPistonLimits": "mesh tekstowe ostrość",
+        "blocks.setPistonLimits": "Ustaw limity tłoka",
         "blocks.setPistonLimits.params": [
             "Nazwa łącznika:",
             "Stan:",
             "Przesuń (od):",
             "Przenieś (do):"
         ],
-        "blocks.setPistonMotor": "niciśnij czasomierz powtarzaj",
+        "blocks.setPistonMotor": "Ustaw silnik tłokowy",
         "blocks.setPistonMotor.params": [
             "Nazwa łącznika:",
             "Stan:",
             "Prędkość silnika:",
             "Siła maksymalna:"
         ],
-        "blocks.setWeldJoint": "załadowanie popup zasób",
+        "blocks.setWeldJoint": "Ustaw złącznik spawany",
         "blocks.setWeldJoint.params": [
             "Nazwa łącznika:",
             "Nazwa obiektu1:",
@@ -2219,13 +2277,13 @@
             "Kotwica X:",
             "Kotwica Y:"
         ],
-        "blocks.setWeldSettings": "zablokuj zasap wideo",
+        "blocks.setWeldSettings": "Ustaw ustawienia spawania",
         "blocks.setWeldSettings.params": [
             "Nazwa łącznika:",
             "Tłumienie (0-100):",
             "Częstotliwość:"
         ],
-        "blocks.setWheelJoint": "oryginał listy styczna",
+        "blocks.setWheelJoint": "Ustaw łącznik koła",
         "blocks.setWheelJoint.params": [
             "Nazwa łącznika:",
             "Podstawowa nazwa obiektu:",
@@ -2235,20 +2293,20 @@
             "Oś X:",
             "Oś Y:"
         ],
-        "blocks.setTouchTarget": "tag kot grupy",
+        "blocks.setTouchTarget": "Ustaw cel dotykowy",
         "blocks.setTouchTarget.params": [
             "Nazwa łącznika:",
             "Cel X:",
             "Cel Y:"
         ],
-        "blocks.setTouchSettings": "flaga kątów koń",
+        "blocks.setTouchSettings": "Ustaw ustawienia dotyku",
         "blocks.setTouchSettings.params": [
             "Nazwa łącznika:",
             "Tłumienie (0-100):",
             "Częstotliwość:",
             "Siła (max):"
         ],
-        "blocks.setRopeJoint": "stanu listy duplikacja",
+        "blocks.setRopeJoint": "Ustaw złącze linowe",
         "blocks.setRopeJoint.params": [
             "Nazwa łącznika:",
             "Nazwa obiektu1:",
@@ -2258,12 +2316,12 @@
             "Kotwica X2:",
             "Kotwica Y2:"
         ],
-        "blocks.setRopeSettings": "obok powtarzaj klatka",
+        "blocks.setRopeSettings": "Ustaw ustawienia liny",
         "blocks.setRopeSettings.params": [
             "Nazwa łącznika:",
             "Długość (max):"
         ],
-        "blocks.setFrictionJoint": "zasób media odpowiedź",
+        "blocks.setFrictionJoint": "Ustaw złącze tarcia",
         "blocks.setFrictionJoint.params": [
             "Nazwa łącznika:",
             "Nazwa obiektu1:",
@@ -2271,13 +2329,13 @@
             "Kotwica X:",
             "Kotwica Y:"
         ],
-        "blocks.setFrictionSettings": "kontrola podczas i",
+        "blocks.setFrictionSettings": "Ustaw ustawienia tarcia",
         "blocks.setFrictionSettings.params": [
             "Nazwa łącznika:",
             "Tłumienie (0-100):",
             "Częstotliwość:"
         ],
-        "blocks.setPulleyJoint": "z film internetowy",
+        "blocks.setPulleyJoint": "Ustaw łącznik odległości",
         "blocks.setPulleyJoint.params": [
             "Nazwa łącznika:",
             "Stosunek sił:",
@@ -2294,15 +2352,15 @@
         ]
     },
     "widgets": {
-        "blocks.widgets": "obudź",
-        "blocks.newWebView": "zasap kolorki duplikacja",
+        "blocks.widgets": "Widżety",
+        "blocks.newWebView": "Utwórz widok internetowy",
         "blocks.newWebView.params": [
             "Nazwa widżetu:",
             "Adres URL:",
             "Szerokość:",
             "Wysokość:"
         ],
-        "blocks.newHSlider": "obraz wartości wyczyść",
+        "blocks.newHSlider": "Utwórz poziomy suwak",
         "blocks.newHSlider.params": [
             "Nazwa widżetu:",
             "Szerokość:",
@@ -2310,7 +2368,7 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newVSlider": "kontrola wstaw zarejestruj",
+        "blocks.newVSlider": "Utwórz pionowy suwak",
         "blocks.newVSlider.params": [
             "Nazwa widżetu:",
             "Wysokość:",
@@ -2318,7 +2376,7 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newField": "przyspieszeniomierza liczba opuści powtarzaj",
+        "blocks.newField": "Utwórz jednoliniowe pole tekstowe",
         "blocks.newField.params": [
             "Nazwa widżetu:",
             "Tekst:",
@@ -2333,7 +2391,7 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newBox": "klucz wyłączyć zmienne listy",
+        "blocks.newBox": "Utwórz wieloliniowe pole tekstowe",
         "blocks.newBox.params": [
             "Nazwa widżetu:",
             "Tekst:",
@@ -2347,71 +2405,71 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setWidgetPos": "alpha krawężnik globalne",
+        "blocks.setWidgetPos": "Ustaw pozycję widżetu",
         "blocks.setWidgetPos.params": [
             "Nazwa widżetu:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setWidgetSize": "narzędzia reklamy odczytaj",
+        "blocks.setWidgetSize": "Ustaw rozmiar widżetu",
         "blocks.setWidgetSize.params": [
             "Nazwa widżetu:",
             "Szerokość:",
             "Wysokość:"
         ],
-        "blocks.setWidgetListener": "grupę yes ekran",
+        "blocks.setWidgetListener": "Ustaw zmianę funkcji",
         "blocks.setWidgetListener.params": [
             "Nazwa widżetu:",
             "Nazwa funkcji:"
         ],
-        "blocks.setWebViewFront": "dane wartości opuści wartości zwrócona",
+        "blocks.setWebViewFront": "Przejdź do strony do przodu",
         "blocks.setWebViewFront.params": [
             "Nazwa widżetu:"
         ],
-        "blocks.setWebViewBack": "roodładujdodładujielcodładujość codładujęstotliwość wstrodładujymaj odładuj ostrość",
+        "blocks.setWebViewBack": "Przejdź do strony z powrotem",
         "blocks.setWebViewBack.params": [
             "Nazwa widżetu:"
         ],
-        "blocks.updWebViewSite": "start asynchroniczniestaasynchronicznie asynchronicznie asynchronicznieidoku powiadomienie",
+        "blocks.updWebViewSite": "Aktualizuj stronę w widoku sieci",
         "blocks.updWebViewSite.params": [
             "Nazwa widżetu:"
         ],
-        "blocks.setWebViewLink": "apka stiórz tekst i iidoku przejście",
+        "blocks.setWebViewLink": "Ustaw adres Url w widoku sieci",
         "blocks.setWebViewLink.params": [
             "Nazwa widżetu:",
             "Adres URL:"
         ],
-        "blocks.setSliderValue": "rozpoczęcie tabela pies",
+        "blocks.setSliderValue": "Ustaw wartość suwaka",
         "blocks.setSliderValue.params": [
             "Nazwa widżetu:",
             "Wartość (0-100):"
         ],
-        "blocks.setFieldSecure": "dezajtywuj yes schowek",
+        "blocks.setFieldSecure": "Ustaw tryb hasła",
         "blocks.setFieldSecure.params": [
             "Nazwa widżetu:"
         ],
-        "blocks.removeFieldSecure": "tekst ekran fałsz",
+        "blocks.removeFieldSecure": "Usuń tryb hasła",
         "blocks.removeFieldSecure.params": [
             "Nazwa widżetu:"
         ],
-        "blocks.setFieldRule": "jak start zrzut zniszcz stwórz tekstozniszczym",
+        "blocks.setFieldRule": "Pozwolenie na wprowadzenie w polu tekstowym",
         "blocks.setFieldRule.params": [
             "Nazwa widżetu:",
             "Zasada:"
         ],
-        "blocks.setFieldText": "tło tło kolizja odczytaj tłookolizjaym",
+        "blocks.setFieldText": "Ustaw tekst w polu tekstowym",
         "blocks.setFieldText.params": [
             "Nazwa widżetu:",
             "Tekst:"
         ],
-        "blocks.setFieldFocus": "kątowe załadowanie losowa pionowa zaokrąglij",
+        "blocks.setFieldFocus": "Ustaw skupienie na pole tekstowe",
         "blocks.setFieldFocus.params": [
             "Nazwa widżetu:"
         ],
-        "blocks.setFieldFocusNil": "listy właściwości",
-        "blocks.hidePanelInterface": "tak wznów liniowe",
-        "blocks.showPanelInterface": "zasoby łączyć odbicie",
-        "blocks.newScrollView": "wstaw multitouch tak",
+        "blocks.setFieldFocusNil": "Wyłącz klawiaturę",
+        "blocks.hidePanelInterface": "Ukryj panele interfejsu",
+        "blocks.showPanelInterface": "Pokaż panele interfejsu",
+        "blocks.newScrollView": "Utwórz widok przewijania",
         "blocks.newScrollView.params": [
             "Nazwa widżetu:",
             "Pasek przewijania:",
@@ -2427,7 +2485,7 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newSwitch": "narzędzia flaga",
+        "blocks.newSwitch": "Utwórz przełącznik",
         "blocks.newSwitch.params": [
             "Nazwa widżetu:",
             "Typ:",
@@ -2439,38 +2497,38 @@
             "Podczas dotykania:",
             "Po dotknięciu:"
         ],
-        "blocks.setSwitchState": "seed poziom pole",
+        "blocks.setSwitchState": "Ustaw stan przełącznika",
         "blocks.setSwitchState.params": [
             "Nazwa widżetu:",
             "Status:"
         ],
-        "blocks.insertToScroll": "program powyżej zakończ",
+        "blocks.insertToScroll": "Wstaw do przewijania",
         "blocks.insertToScroll.params": [
             "Nazwa widżetu:",
             "Nazwa:",
             "Typ:"
         ],
-        "blocks.takeFocusScroll": "piaskownice HEX załaduj reklamy",
+        "blocks.takeFocusScroll": "Ustaw skupienie na przewijaniu",
         "blocks.takeFocusScroll.params": [
             "Nazwa widżetu:",
             "Tabela zdarzeń:"
         ],
-        "blocks.removeWidget": "powiadomienie notatka",
+        "blocks.removeWidget": "Usuń widget",
         "blocks.removeWidget.params": [
             "Nazwa widżetu:"
         ],
-        "blocks.showWidget": "stwórz świat",
+        "blocks.showWidget": "Pokaż widżet",
         "blocks.showWidget.params": [
             "Nazwa widżetu:"
         ],
-        "blocks.hideWidget": "ekran tak",
+        "blocks.hideWidget": "Ukryj widżet",
         "blocks.hideWidget.params": [
             "Nazwa widżetu:"
         ]
     },
     "media": {
-        "blocks.media": "grupę\nmatematyka plmatematykakmatematyka",
-        "blocks.newVideo": "zakończ dynamiczny",
+        "blocks.media": "Media\ni pliki",
+        "blocks.newVideo": "Utwórz wideo",
         "blocks.newVideo.params": [
             "Nazwa media:",
             "Nazwa wideo:",
@@ -2480,7 +2538,7 @@
             "Szerokość:",
             "Wysokość:"
         ],
-        "blocks.newRemoteVideo": "wczytaj tekst siła",
+        "blocks.newRemoteVideo": "Utwórz sterowane wideo",
         "blocks.newRemoteVideo.params": [
             "Nazwa media:",
             "Adres URL:",
@@ -2490,17 +2548,17 @@
             "Szerokość:",
             "Wysokość:"
         ],
-        "blocks.loadSound": "zaokrąglone po",
+        "blocks.loadSound": "Wczytaj dźwięk",
         "blocks.loadSound.params": [
             "Nazwa media:",
             "Nazwa dźwięku:"
         ],
-        "blocks.loadStream": "wartości ciało wszystkie",
+        "blocks.loadStream": "Wczytaj strumieniowy dźwięk",
         "blocks.loadStream.params": [
             "Nazwa media:",
             "Nazwa dźwięku:"
         ],
-        "blocks.playSound": "grupa cykl",
+        "blocks.playSound": "Odtwórz dźwięk",
         "blocks.playSound.params": [
             "Nazwa media:",
             "Liczba powtórzeń:",
@@ -2508,79 +2566,79 @@
             "Czas (sekundy):",
             "Zanikanie (sekundy):"
         ],
-        "blocks.resumeMedia": "tekstury edycja",
+        "blocks.resumeMedia": "Wznów media",
         "blocks.resumeMedia.params": [
             "Nazwa media:"
         ],
-        "blocks.pauseMedia": "dotyku narzędzia",
+        "blocks.pauseMedia": "Wstrzymaj media",
         "blocks.pauseMedia.params": [
             "Nazwa media:"
         ],
-        "blocks.seekMedia": "metoda pionowa zaniszcz latanie multitouch",
+        "blocks.seekMedia": "Przewiń media do znacznika czasu",
         "blocks.seekMedia.params": [
             "Nazwa media:",
             "Czas (sekundy):"
         ],
-        "blocks.setVolume": "czujniki prostokąt kopiuj",
+        "blocks.setVolume": "Ustaw głośność dźwięku",
         "blocks.setVolume.params": [
             "Nazwa media:",
             "Głośność:"
         ],
-        "blocks.fadeVolume": "naciśnie naciśnięto zażądaj",
+        "blocks.fadeVolume": "Głośność zaniku dźwięku",
         "blocks.fadeVolume.params": [
             "Nazwa media:",
             "Czas (sekundy):",
             "Głośność:"
         ],
-        "blocks.stopSound": "lista zrzut",
+        "blocks.stopSound": "Zatrzymaj dźwięk",
         "blocks.stopSound.params": [
             "Nazwa media:"
         ],
-        "blocks.stopTimerSound": "mesh listy naciśnie tekstury",
+        "blocks.stopTimerSound": "Zatrzymaj dźwięk z timerem",
         "blocks.stopTimerSound.params": [
             "Nazwa media:",
             "Czas (sekundy):"
         ],
-        "blocks.disposeSound": "nieklikalności impuls",
+        "blocks.disposeSound": "Usuń dźwięk",
         "blocks.disposeSound.params": [
             "Nazwa media:"
         ],
-        "blocks.removeVideo": "odpowiedź zaniszcz",
+        "blocks.removeVideo": "Usuń wideo",
         "blocks.removeVideo.params": [
             "Nazwa media:"
         ],
-        "blocks.newFolder": "częstotliwość obiekty",
+        "blocks.newFolder": "Utwórz folder",
         "blocks.newFolder.params": [
             "Ścieżka folderu:",
             "Typ pamięci:"
         ],
-        "blocks.moveFolder": "pole kompiluj przyspieszeniomierza robot zapisz",
+        "blocks.moveFolder": "Przenieś folder1 do ścieżki folderu2",
         "blocks.moveFolder.params": [
             "Ścieżka folderu1:",
             "Typ pamięci:",
             "Ścieżka folderu2:",
             "Typ pamięci:"
         ],
-        "blocks.copyFolder": "zasób stwórz internet schowek żądanie",
+        "blocks.copyFolder": "Skopiuj folder1 do ścieżki folderu2",
         "blocks.copyFolder.params": [
             "Ścieżka folderu1:",
             "Typ pamięci:",
             "Ścieżka folderu2:",
             "Typ pamięci:"
         ],
-        "blocks.removeFolder": "system kot",
+        "blocks.removeFolder": "Usuń folder",
         "blocks.removeFolder.params": [
             "Ścieżka folderu:",
             "Typ pamięci:"
         ],
-        "blocks.newCapturePNG": "alpha nieklikalności tak",
+        "blocks.newCapturePNG": "Utwórz przechwytywanie PNG",
         "blocks.newCapturePNG.params": [
             "Nazwa:",
             "Typ:",
             "Ścieżka pliku:",
             "Typ pamięci:"
         ],
-        "blocks.newCaptureJPEG": "ciało hitbox klikniesz",
+        "blocks.newCaptureJPEG": "Utwórz przechwytywanie JPEG",
         "blocks.newCaptureJPEG.params": [
             "Nazwa:",
             "Typ:",
@@ -2589,78 +2647,78 @@
             "Kolor:",
             "Jakość (0-100):"
         ],
-        "blocks.newFile": "wartości synchronizuj w",
+        "blocks.newFile": "Zapisz do pliku",
         "blocks.newFile.params": [
             "Ścieżka pliku:",
             "Wartość:",
             "Typ pliku:",
             "Typ pamięci:"
         ],
-        "blocks.readFile": "aktualiimpulsuj impuls listy",
+        "blocks.readFile": "Odczytaj z pliku",
         "blocks.readFile.params": [
             "Ścieżka pliku:",
             "Nazwa zmiennej:",
             "Typ pliku:",
             "Typ pamięci:"
         ],
-        "blocks.moveFile": "kolizja strumień powtarzaj cząsteczki pole",
+        "blocks.moveFile": "Przenieś plik1 do ścieżki pliku2",
         "blocks.moveFile.params": [
             "Ścieżka pliku1:",
             "Typ pamięci:",
             "Ścieżka pliku1:",
             "Typ pamięci:"
         ],
-        "blocks.copyFile": "odbicie fizyka metoda flaga listy",
+        "blocks.copyFile": "Skopiuj plik1 do ścieżki pliku2",
         "blocks.copyFile.params": [
             "Ścieżka pliku1:",
             "Typ pamięci:",
             "Ścieżka pliku1:",
             "Typ pamięci:"
         ],
-        "blocks.removeFile": "stanu tabele",
+        "blocks.removeFile": "Usuń plik",
         "blocks.removeFile.params": [
             "Ścieżka pliku:",
             "Typ pamięci:"
         ],
-        "blocks.convertFileToSprite": "ekran hitbox zablokuj pies",
+        "blocks.convertFileToSprite": "Konwertuj plik na duszka",
         "blocks.convertFileToSprite.params": [
             "Ścieżka pliku:",
             "Typ pamięci:",
             "Nazwa duszka:",
             "Typ duszka:"
         ],
-        "blocks.convertFileToVideo": "kopiuj tło matematyka notatka",
+        "blocks.convertFileToVideo": "Konwertuj plik na wideo",
         "blocks.convertFileToVideo.params": [
             "Nazwa wideo:",
             "Ścieżka pliku:",
             "Typ pamięci:"
         ],
-        "blocks.convertFileToSound": "zwrócowidok poziomy widok latanie",
+        "blocks.convertFileToSound": "Konwertuj plik na dźwięk",
         "blocks.convertFileToSound.params": [
             "Nazwa dźwięku:",
             "Ścieżka pliku:",
             "Typ pamięci:"
         ],
-        "blocks.convertFileToFont": "odblokuj zakończ utwórz kilkalności",
+        "blocks.convertFileToFont": "Konwertuj plik na czcionkę",
         "blocks.convertFileToFont.params": [
             "Nazwa czcionki:",
             "Ścieżka pliku:",
             "Typ pamięci:"
         ],
-        "blocks.convertFileToRes": "duzmienneacja zmienne kot zwrócona",
+        "blocks.convertFileToRes": "Konwertuj plik na zasób",
         "blocks.convertFileToRes.params": [
             "Nazwa zasobu:",
             "Ścieżka pliku:",
             "Typ pamięci:"
         ],
-        "blocks.foreachFolderEnd": "żądanie klucz łączyć zakończ pozycja poniżej",
-        "blocks.foreachFolder": "pokażstrzymaj przezroczystość dynamiczny pokaż zaokrąglone",
+        "blocks.foreachFolderEnd": "Koniec cyklu (wszystkie pliki w folderze)",
+        "blocks.foreachFolder": "Pomiń wszystkie pliki w folderze",
         "blocks.foreachFolder.params": [
             "Nazwa tabeli:",
             "Ścieżka folderu:",
             "Typ pamięci:"
         ],
-        "blocks.downloadFile": "chodnik notatka wstaw wszystkie",
+        "blocks.downloadFile": "Pobierz plik z Internetu",
         "blocks.downloadFile.params": [
             "Adres Url:",
             "Ścieżka pliku:",
@@ -2668,7 +2726,7 @@
             "Typ pliku:",
             "Typ pamięci:"
         ],
-        "blocks.uploadFile": "duszek RGB kilkalności ostrość",
+        "blocks.uploadFile": "Wyślij plik do serwera",
         "blocks.uploadFile.params": [
             "Adres URL:",
             "Typ MIME:",
@@ -2677,21 +2735,21 @@
             "Typ pliku:",
             "Typ pamięci:"
         ],
-        "blocks.exportFile": "właściwości aktywuj ukryj odpowiedź",
+        "blocks.exportFile": "Eksportuj plik do telefonu",
         "blocks.exportFile.params": [
             "Ścieżka pliku:",
             "Typ pamięci:",
             "Nazwa pliku:",
             "Po wykonaniu:"
         ],
-        "blocks.importFile": "arkuslistae obiekty lista narzędzia",
+        "blocks.importFile": "Importuj plik z telefonu",
         "blocks.importFile.params": [
             "Ścieżka pliku:",
             "Typ pamięci:",
             "Typ MIME:",
             "Po wykonaniu:"
         ],
-        "blocks.compressZipFile": "poziom popup tła seed klucz",
+        "blocks.compressZipFile": "Dodaj plik do archiwum ZIP",
         "blocks.compressZipFile.params": [
             "Ścieżka archiwum:",
             "Typ pamięci:",
@@ -2700,7 +2758,7 @@
             "Poziom kompresji (0-9):",
             "Hasło:"
         ],
-        "blocks.compressZipFolder": "orientacja prawdziwośc pozioma tarcie cykl",
+        "blocks.compressZipFolder": "Dodaj folder do archiwum ZIP",
         "blocks.compressZipFolder.params": [
             "Ścieżka archiwum:",
             "Typ pamięci:",
@@ -2709,7 +2767,7 @@
             "Poziom kompresji (0-9):",
             "Hasło:"
         ],
-        "blocks.uncompressZip": "klucz złącz tarcie",
+        "blocks.uncompressZip": "Rozpakuj archiwum ZIP",
         "blocks.uncompressZip.params": [
             "Hasło:",
             "Ścieżka archiwum:",
@@ -2717,15 +2775,15 @@
             "Ścieżka folderu:",
             "Typ pamięci:"
         ],
-        "blocks.installApk": "flaga media tabela",
+        "blocks.installApk": "Instaluj plik APK",
         "blocks.installApk.params": [
             "Ścieżka pliku:",
             "Typ pamięci:"
         ]
     },
     "snapshot": {
-        "blocks.snapshot": "kształty\nczęstotliwość impuls",
-        "blocks.newSnapshot": "zniszcz zdefiniuj",
+        "blocks.snapshot": "Zrzuty\ni kamera",
+        "blocks.newSnapshot": "Utwórz zrzut",
         "blocks.newSnapshot.params": [
             "Nazwa zrzutu:",
             "Nazwa zrzutu:",
@@ -2734,208 +2792,209 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.invalidateSnapshot": "fałsz wznów",
+        "blocks.invalidateSnapshot": "Aktualizuj zrzut",
         "blocks.invalidateSnapshot.params": [
             "Nazwa zrzutu:",
             "Typ zrzutu:"
         ],
-        "blocks.addToSnapshot": "obiekt niciśnij zwrócona",
+        "blocks.addToSnapshot": "Dodaj do zrzutu",
         "blocks.addToSnapshot.params": [
             "Nazwa zrzutu:",
             "Typ zrzutu:",
             "Nazwa:",
             "Typ:"
         ],
-        "blocks.removeFromSnapshot": "poniżej czasomierz czasomierzrczasomierzutu",
+        "blocks.removeFromSnapshot": "Usuń z zrzutu",
         "blocks.removeFromSnapshot.params": [
             "Nazwa zrzutu:",
             "Typ zrzutu:",
             "Nazwa:",
             "Typ:"
         ],
-        "blocks.setSnapshotColor": "start na pozycja",
+        "blocks.setSnapshotColor": "Ustaw kolor zrzutu",
         "blocks.setSnapshotColor.params": [
             "Nazwa zrzutu:",
             "Kolor:"
         ],
-        "blocks.setSnapshotPos": "cykle grupa tekst",
+        "blocks.setSnapshotPos": "Ustaw pozycję zrzutu",
         "blocks.setSnapshotPos.params": [
             "Nazwa zrzutu:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setSnapshotSize": "zasap y odbicie",
+        "blocks.setSnapshotSize": "Ustaw rozmiar zrzutu",
         "blocks.setSnapshotSize.params": [
             "Nazwa zrzutu:",
             "Szerokość:",
             "Wysokość:"
         ],
-        "blocks.setSnapshotRotation": "obraz maska oryginał",
+        "blocks.setSnapshotRotation": "Ustaw rotację zrzutu",
         "blocks.setSnapshotRotation.params": [
             "Nazwa zrzutu:",
             "Rotacja (0-360):"
         ],
-        "blocks.setSnapshotAlpha": "krawężnik liniowe alpha",
+        "blocks.setSnapshotAlpha": "Ustaw przezroczystość zrzutu",
         "blocks.setSnapshotAlpha.params": [
             "Nazwa zrzutu:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.updSnapshotPosX": "zablokuj webview załaduj orientacja",
+        "blocks.updSnapshotPosX": "Zmień pozycję X zrzutu",
         "blocks.updSnapshotPosX.params": [
             "Nazwa zrzutu:",
             "Pozycja (X):"
         ],
-        "blocks.updSnapshotPosY": "yes tekstury duplikacja podczas",
+        "blocks.updSnapshotPosY": "Zmień pozycję Y zrzutu",
         "blocks.updSnapshotPosY.params": [
             "Nazwa zrzutu:",
             "Pozycja (Y):"
         ],
-        "blocks.updSnapshotWidth": "i wstecz odpowiedź",
+        "blocks.updSnapshotWidth": "Zmień szerokość zrzutu",
         "blocks.updSnapshotWidth.params": [
             "Nazwa zrzutu:",
             "Szerokość:"
         ],
-        "blocks.updSnapshotHeight": "styczna ostrość powyżej",
+        "blocks.updSnapshotHeight": "Zmień wysokość zrzutu",
         "blocks.updSnapshotHeight.params": [
             "Nazwa zrzutu:",
             "Wysokość:"
         ],
-        "blocks.updSnapshotRotation": "zrzut stanu załadowanie",
+        "blocks.updSnapshotRotation": "Zmień rotację zrzutu",
         "blocks.updSnapshotRotation.params": [
             "Nazwa zrzutu:",
             "Rotacja (0-360):"
         ],
-        "blocks.updSnapshotAlpha": "jak pomimń wartości",
+        "blocks.updSnapshotAlpha": "Zmień przezroczystość zrzutu",
         "blocks.updSnapshotAlpha.params": [
             "Nazwa zrzutu:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.frontSnapshot": "jak obok oryginał duszki załaduj",
+        "blocks.frontSnapshot": "Umieść zrzut na warstwie powyżej",
         "blocks.frontSnapshot.params": [
             "Nazwa zrzutu:"
         ],
-        "blocks.backSnapshot": "buduj utwórz zdefiniuj wartości robot",
+        "blocks.backSnapshot": "Umieść zrzut na warstwie poniżej",
         "blocks.backSnapshot.params": [
             "Nazwa zrzutu:"
         ],
-        "blocks.removeSnapshot": "system kolor",
+        "blocks.removeSnapshot": "Usuń zrzut",
         "blocks.removeSnapshot.params": [
             "Nazwa zrzutu:"
         ],
-        "blocks.showSnapshot": "cykl i",
+        "blocks.showSnapshot": "Pokaż zrzut",
         "blocks.showSnapshot.params": [
             "Nazwa zrzutu:"
         ],
-        "blocks.hideSnapshot": "skrypty powtarzaj",
+        "blocks.hideSnapshot": "Ukryj zrzut",
         "blocks.hideSnapshot.params": [
             "Nazwa zrzutu:"
         ],
-        "blocks.addCamera": "lista program alpha obrotowe",
+        "blocks.addCamera": "Dodaj do kamery gry",
         "blocks.addCamera.params": [
             "Nazwa:",
             "Typ:",
             "Warstwa:",
             "Skupienie na:"
         ],
-        "blocks.removeCamera": "buduj ustaw wznów styczna",
+        "blocks.removeCamera": "Usuń z kamery gry",
         "blocks.removeCamera.params": [
             "Nazwa:",
             "Typ:"
         ],
-        "blocks.appendLayerCamera": "maska w popup zdefiniuj",
-        "blocks.prependLayerCamera": "koń słowniki fałsz powyżej",
-        "blocks.trackFocusCamera": "impuls hitbox",
-        "blocks.trackCamera": "zrzut film narzędzia",
-        "blocks.cancelCamera": "animacja ciało strumień",
-        "blocks.setFocusCamera": "słowa tabela ekranu",
+        "blocks.appendLayerCamera": "Utwórz tylną warstwę kamery",
+        "blocks.prependLayerCamera": "Utwórz przednią warstwę kamery",
+        "blocks.trackFocusCamera": "Aktualizuj kamerę",
+        "blocks.trackCamera": "Automatycznie aktualizuj kamerę",
+        "blocks.cancelCamera": "Anuluj automatyczne aktualizacje",
+        "blocks.setFocusCamera": "Ustaw skupienie kamery",
         "blocks.setFocusCamera.params": [
             "Nazwa:",
             "Typ:"
         ],
-        "blocks.setOffsetCamera": "mesh aplikacja flaga",
+        "blocks.setOffsetCamera": "Ustaw przesunięcie kamery",
         "blocks.setOffsetCamera.params": [
             "Przesunięcie (X):",
             "Przesunięcie (Y):"
         ],
-        "blocks.setDampingCamera": "grawit apka odładuj",
+        "blocks.setDampingCamera": "Ustaw płynność kamery",
         "blocks.setDampingCamera.params": [
             "Gładkość:"
         ],
-        "blocks.setParallaxCamera": "liniowe pocisk rotacja wyczyść oryginał",
+        "blocks.setParallaxCamera": "Ustaw paralaks na warstwę kamery",
         "blocks.setParallaxCamera.params": [
             "Warstwa:",
             "Paralaks X (0-100):",
             "Paralaks Y (0-100):"
         ],
-        "blocks.setOffsetLayerCamera": "ustaw zasap i wznów",
+        "blocks.setOffsetLayerCamera": "Ustaw przesunięcie warstwy kamery",
         "blocks.setOffsetLayerCamera.params": [
             "Warstwa:",
             "Przesunięcie (X):",
             "Przesunięcie (Y):"
         ],
-        "blocks.new3dScene": "Create 3d scene",
+        "blocks.new3dScene": "Otwórz scene 3D",
         "blocks.new3dScene.params": [
-            "Width:",
-            "Height:"
+            "Szerokość:",
+            "Wysokość:"
         ],
-        "blocks.upd3dScene": "Update 3d scene",
-        "blocks.eye3dScene": "Set camera position of 3d scene",
+        "blocks.upd3dScene": "Aktualizuj scenę 3D",
+        "blocks.eye3dScene": "Ustaw pozycję kamery dla sceny 3D",
         "blocks.eye3dScene.params": [
-            "Position (X):",
-            "Position (Y):",
-            "Position (Z):"
+            "Pozycja (X):",
+            "Pozycja (Y):",
+            "Pozycja (Z):"
         ],
-        "blocks.center3dScene": "Set camera center of 3d scene",
+        "blocks.center3dScene": "Ustaw środek kamery sceny 3D",
         "blocks.center3dScene.params": [
-            "Position (X):",
-            "Position (Y):",
-            "Position (Z):"
+            "Pozycja (X):",
+            "Pozycja (Y):",
+            "Pozycja (Z):"
         ],
-        "blocks.new3dObject": "Create 3d object",
+        "blocks.new3dObject": "Stwórz obiekt 3D",
         "blocks.new3dObject.params": [
-            "Object3d name:",
-            "Имя ресурса:"
+            "Nazwa obiektu 3D:",
+            "Resource name (.obj):",
+            "Resource name (.png):"
         ],
-        "blocks.move3dObject": "Set 3d object position",
+        "blocks.move3dObject": "Ustaw pozycję obiektu 3D",
         "blocks.move3dObject.params": [
-            "Object3d name:",
-            "Position (X):",
-            "Position (Y):",
-            "Position (Z):"
+            "Nazwa obiektu 3D:",
+            "Pozycja (X):",
+            "Pozycja (Y):",
+            "Pozycja (Z):"
         ],
-        "blocks.scale3dObject": "Set 3d object scale",
+        "blocks.scale3dObject": "Ustaw skalę obiektu 3D",
         "blocks.scale3dObject.params": [
-            "Object3d name:",
-            "Scale (X):",
-            "Scale (Y):",
-            "Scale (Z):"
+            "Nazwa obiektu 3D:",
+            "Skala (X):",
+            "Skala (Y):",
+            "Skala (Z):"
         ],
-        "blocks.rotate3dObject": "Set 3d object rotation",
+        "blocks.rotate3dObject": "Ustaw rotację obiektu 3D",
         "blocks.rotate3dObject.params": [
-            "Object3d name:",
-            "Rotation (X):",
-            "Rotation (Y):",
-            "Rotation (Z):"
+            "Nazwa obiektu 3D:",
+            "Obrót (X):",
+            "Obrót (Y):",
+            "Obrót (Z):"
         ]
     },
     "network": {
-        "blocks.network": "zażądaj",
-        "blocks.openURL": "słopoleniki zdefiniuj skrypty pole latanie",
+        "blocks.network": "Sieć",
+        "blocks.openURL": "Otwórz adres URL w przeglądarce",
         "blocks.openURL.params": [
             "Adres URL:"
         ],
-        "blocks.createServer": "przed poziomy naciśnięto",
+        "blocks.createServer": "Utwórz serwer LAN",
         "blocks.createServer.params": [
             "Port:",
             "Słuchacz serwera:"
         ],
-        "blocks.connectToServer": "włącchodnikyć chodnik zrzut wstecz",
+        "blocks.connectToServer": "Połącz z serwerem LAN",
         "blocks.connectToServer.params": [
             "Adres IP:",
             "Port:",
             "Słuchacz klienta:"
         ],
-        "blocks.requestGET": "poziom równoległa dane",
+        "blocks.requestGET": "Asynchroniczne żądanie GET",
         "blocks.requestGET.params": [
             "Adres URL:",
             "Treść żądania:",
@@ -2945,7 +3004,7 @@
             "Przekierowanie:",
             "Limit czasu (sekundy):"
         ],
-        "blocks.requestPOST": "webview obiekt skasuj",
+        "blocks.requestPOST": "Asynchroniczne żądanie POST",
         "blocks.requestPOST.params": [
             "Adres URL:",
             "Treść żądania:",
@@ -2955,7 +3014,7 @@
             "Przekierowanie:",
             "Limit czasu (sekundy):"
         ],
-        "blocks.requestPUT": "duplikacja duszek matematyka",
+        "blocks.requestPUT": "Asynchroniczne żądanie PUT",
         "blocks.requestPUT.params": [
             "Adres URL:",
             "Treść żądania:",
@@ -2965,7 +3024,7 @@
             "Przekierowanie:",
             "Limit czasu (sekundy):"
         ],
-        "blocks.requestPATCH": "przejście odtwarzanie listy",
+        "blocks.requestPATCH": "Asynchroniczne żądanie PATCH",
         "blocks.requestPATCH.params": [
             "Adres URL:",
             "Treść żądania:",
@@ -2975,7 +3034,7 @@
             "Przekierowanie:",
             "Limit czasu (sekundy):"
         ],
-        "blocks.requestHEAD": "przyspieszeniomierz hitbox załaduj",
+        "blocks.requestHEAD": "Asynchroniczne żądanie HEAD",
         "blocks.requestHEAD.params": [
             "Adres URL:",
             "Treść żądania:",
@@ -2985,7 +3044,7 @@
             "Przekierowanie:",
             "Limit czasu (sekundy):"
         ],
-        "blocks.requestDELETE": "koń obok obudź",
+        "blocks.requestDELETE": "Asynchroniczne żądanie DELETE",
         "blocks.requestDELETE.params": [
             "Adres URL:",
             "Treść żądania:",
@@ -2995,49 +3054,68 @@
             "Przekierowanie:",
             "Limit czasu (sekundy):"
         ],
-        "blocks.firebasePUT": "odbicie orientacja grupę",
+        "blocks.firebasePUT": "Zapisz w Firebase",
         "blocks.firebasePUT.params": [
             "Token:",
             "Wartość:",
             "Klucz:",
             "Żądanie słuchacza:"
         ],
-        "blocks.firebasePATCH": "chodnikstachodnik chodnik tekstowe",
+        "blocks.firebasePATCH": "Aktualizuj w Firebase",
         "blocks.firebasePATCH.params": [
             "Token:",
             "Wartość:",
             "Klucz:",
             "Żądanie słuchacza:"
         ],
-        "blocks.firebaseGET": "powiadomienie załadowanie nie",
+        "blocks.firebaseGET": "Pobierz z Firebase",
         "blocks.firebaseGET.params": [
             "Token:",
             "Klucz:",
             "Żądanie słuchacza:"
         ],
-        "blocks.firebaseDELETE": "sieci na impuls",
+        "blocks.firebaseDELETE": "Usuń z Firebase",
         "blocks.firebaseDELETE.params": [
             "Token:",
             "Klucz:",
             "Żądanie słuchacza:"
         ],
-        "blocks.initAdsStartApp": "zrzut listy obok",
+        "blocks.initUnityAds": "Init Unity Ads",
+        "blocks.initUnityAds.params": [
+            "Secret token:",
+            "Listener (Function):"
+        ],
+        "blocks.showUnityAds": "Show Unity Ads",
+        "blocks.initAdsStartApp": "Zainicjuj reklamy StartApp",
         "blocks.initAdsStartApp.params": [
             "Token:",
             "Słuchacz:"
         ],
-        "blocks.loadAdsStartApp": "dezajtywuj poziom obiekt",
+        "blocks.loadAdsStartApp": "Załaduj reklamy StartApp",
         "blocks.loadAdsStartApp.params": [
             "Typ reklam:"
         ],
-        "blocks.showAdsStartApp": "wznów przezroczystość klucz",
+        "blocks.showAdsStartApp": "Pokaż reklamy StartApp",
         "blocks.showAdsStartApp.params": [
             "Typ reklam:"
+        ],
+        "blocks.createBluetooth": "Utwórz połączenie bluetooth",
+        "blocks.createBluetooth.params": [
+            "Słuchacz połączenia:"
+        ],
+        "blocks.connectBluetooth": "Połącz się z połączeniem Bluetooth",
+        "blocks.connectBluetooth.params": [
+            "Adres:",
+            "Łączenie połączenia:"
+        ],
+        "blocks.sendBluetooth": "Wyślij wartość przez połączenie Bluetooth",
+        "blocks.sendBluetooth.params": [
+            "Wartość:"
         ]
     },
     "transition": {
-        "blocks.transition": "zablokuj\nprzyspieszeniomierz zażądzaj",
-        "blocks.setTransitionTo": "obudź ekranu",
+        "blocks.transition": "Przejścia\n& Cząsteczki",
+        "blocks.setTransitionTo": "Rozpocznij przejście",
         "blocks.setTransitionTo.params": [
             "Nazwa:",
             "Typ:",
@@ -3059,7 +3137,7 @@
             "Podczas przerwania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setTransitionPos": "aktualizuj prawdziwośc seed",
+        "blocks.setTransitionPos": "Ustaw przejście pozycji",
         "blocks.setTransitionPos.params": [
             "Nazwa:",
             "Typ:",
@@ -3075,7 +3153,7 @@
             "Podczas przerwania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setTransitionSize": "zawsze maska poniżej",
+        "blocks.setTransitionSize": "Ustaw przejście rozmiaru",
         "blocks.setTransitionSize.params": [
             "Nazwa:",
             "Typ:",
@@ -3091,7 +3169,7 @@
             "Podczas przerwania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setTransitionScale": "zaokrąglij naciśnięto zwrócona",
+        "blocks.setTransitionScale": "Ustaw skalę przejścia",
         "blocks.setTransitionScale.params": [
             "Nazwa:",
             "Typ:",
@@ -3107,7 +3185,7 @@
             "Podczas przerwania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setTransitionRotation": "zablokuj zarejestruj losowa",
+        "blocks.setTransitionRotation": "Ustaw przejście rotacji",
         "blocks.setTransitionRotation.params": [
             "Nazwa:",
             "Typ animacji:",
@@ -3122,7 +3200,7 @@
             "Podczas przerwania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setTransitionAlpha": "obrotowe skasuj asynchronizuj",
+        "blocks.setTransitionAlpha": "Ustaw przejście alpha",
         "blocks.setTransitionAlpha.params": [
             "Nazwa:",
             "Typ animacji:",
@@ -3137,7 +3215,7 @@
             "Podczas przerwania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setTransitionAngles": "tekst nazwą kopia",
+        "blocks.setTransitionAngles": "Ustaw przejście kątów",
         "blocks.setTransitionAngles.params": [
             "Nazwa:",
             "Typ animacji:",
@@ -3152,74 +3230,74 @@
             "Podczas przerwania:",
             "Podczas powtarzania:"
         ],
-        "blocks.setTransitionPause": "wstrzymaj zrzut",
+        "blocks.setTransitionPause": "Wstrzymaj przejście",
         "blocks.setTransitionPause.params": [
             "Nazwa:",
             "Typ:"
         ],
-        "blocks.setTransitionResume": "pionowa flaga",
+        "blocks.setTransitionResume": "Wznów przejście",
         "blocks.setTransitionResume.params": [
             "Nazwa:",
             "Typ:"
         ],
-        "blocks.setTransitionCancel": "impuls kilkalności",
+        "blocks.setTransitionCancel": "Anuluj przejście",
         "blocks.setTransitionCancel.params": [
             "Nazwa:",
             "Typ:"
         ],
-        "blocks.setTransitionPauseAll": "złącz powyżej aktywuj",
-        "blocks.setTransitionResumeAll": "system reklamy ustaw",
-        "blocks.setTransitionCancelAll": "ciało zaokrąglone będzie",
-        "blocks.newEmitter": "liczba flaga",
+        "blocks.setTransitionPauseAll": "Wstrzymaj wszystkie przejścia",
+        "blocks.setTransitionResumeAll": "Wznów wszystkie przejścia",
+        "blocks.setTransitionCancelAll": "Anuluj wszystkie przejścia",
+        "blocks.newEmitter": "Utwórz cząsteczki",
         "blocks.newEmitter.params": [
             "Nazwa cząsteczek:",
             "Typ cząsteczek:"
         ],
-        "blocks.newCustomEmitter": "latanie skok żądanie",
+        "blocks.newCustomEmitter": "Utwórz niestandardowe cząsteczki",
         "blocks.newCustomEmitter.params": [
             "Nazwa cząsteczek:",
             "Tabela cząsteczek:",
             "Nazwa duszka:"
         ],
-        "blocks.removeEmitter": "opuści zapisz",
+        "blocks.removeEmitter": "Usuń cząsteczki",
         "blocks.removeEmitter.params": [
             "Nazwa cząsteczek:"
         ],
-        "blocks.removeAllEmitter": "deweloper cykl zmienne",
-        "blocks.setEmitterPos": "edycja będzie znacznik",
+        "blocks.removeAllEmitter": "Usuń wszystkie cząsteczki",
+        "blocks.setEmitterPos": "Ustaw pozycję cząsteczek",
         "blocks.setEmitterPos.params": [
             "Nazwa cząsteczek:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setEmitterSize": "kolor powtarzaj tak",
+        "blocks.setEmitterSize": "Ustaw rozmiar cząsteczek",
         "blocks.setEmitterSize.params": [
             "Nazwa cząsteczek:",
             "Rozmiar (%):"
         ],
-        "blocks.setEmitterSpeed": "czujniki rozpocznij wyłączyć",
+        "blocks.setEmitterSpeed": "Ustaw prędkość cząsteczek",
         "blocks.setEmitterSpeed.params": [
             "Nazwa cząsteczek:",
             "Prędkość:"
         ],
-        "blocks.setEmitterRotation": "nadpisz naciśnie duszek",
+        "blocks.setEmitterRotation": "Ustaw rotację cząsteczek",
         "blocks.setEmitterRotation.params": [
             "Nazwa cząsteczek:",
             "Rotacja (0-360):"
         ],
-        "blocks.setEmitterGravity": "anuluj internet kompiluj",
+        "blocks.setEmitterGravity": "Ustaw grawitację cząsteczek",
         "blocks.setEmitterGravity.params": [
             "Nazwa cząsteczek:",
             "Grawitacja (X):",
             "Grawitacja (Y):"
         ],
-        "blocks.setEmitterStartColor": "ciało klucz asynchronizuj zasób",
+        "blocks.setEmitterStartColor": "Ustaw kolor początkowy cząsteczek",
         "blocks.setEmitterStartColor.params": [
             "Nazwa cząsteczek:",
             "Kolor:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.setEmitterStartRGB": "obiekty fałsz pole kolorki wstaw",
+        "blocks.setEmitterStartRGB": "Ustaw początkowy kolor RGB cząsteczek",
         "blocks.setEmitterStartRGB.params": [
             "Nazwa cząsteczek:",
             "Kolor (R):",
@@ -3227,13 +3305,13 @@
             "Kolor (B):",
             "Przezroczystość (0-100):"
         ],
-        "blocks.setEmitterFinishColor": "naciśnięto metoda z mesh",
+        "blocks.setEmitterFinishColor": "Ustaw kolor końcowy cząsteczek",
         "blocks.setEmitterFinishColor.params": [
             "Nazwa cząsteczek:",
             "Kolor:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.setEmitterFinishRGB": "klikniesz kontrola edycja zniszcz zażądaj",
+        "blocks.setEmitterFinishRGB": "Ustaw końcowy kolor RGB cząsteczek",
         "blocks.setEmitterFinishRGB.params": [
             "Nazwa cząsteczek:",
             "Kolor (R):",
@@ -3241,248 +3319,248 @@
             "Kolor (B):",
             "Przezroczystość (0-100):"
         ],
-        "blocks.newLinearEmitter": "Create linear particles",
+        "blocks.newLinearEmitter": "Twórz cząstki liniowe",
         "blocks.newLinearEmitter.params": [
-            "Particle name:",
-            "Sprite name:",
-            "Maximum particles:",
-            "Dependence angle:",
-            "Departure angle:",
-            "Departure angle deviation:",
-            "Speed:",
-            "Speed deviation:",
-            "Radiation range X:",
-            "Radiation range Y:",
-            "Gravity particles X:",
-            "Gravity particles Y:",
-            "Radial acceleration:",
-            "Acceleration deviation:",
-            "Tangential acceleration:",
-            "Acceleration deviation:",
-            "Particle lifetime:",
-            "Time deviation:",
-            "Initial size:",
-            "Size deviation:",
-            "Final size:",
-            "Size deviation:",
-            "Initial rotation:",
-            "Rotation deviation:",
-            "Final rotation:",
-            "Rotation deviation:",
-            "Initial color:",
-            "Color deviation:",
-            "Final color:",
-            "Color deviation:",
-            "Original color GL:",
-            "Target color GL:"
+            "Nazwa cząsteczek:",
+            "Nazwa duszka:",
+            "Maksymalne cząstki:",
+            "Kąt zależności:",
+            "Kąt zejścia:",
+            "Odchylenie kąta zejścia:",
+            "Prędkość:",
+            "Odchylenie prędkości:",
+            "Zasięg promieniowania X:",
+            "Zasięg promieniowania Y:",
+            "Cząstki grawitacyjne X:",
+            "Cząstki grawitacyjne Y:",
+            "Przyspieszenie promieniowe:",
+            "Odchylenie przyspieszenia:",
+            "Przyspieszenie styczne:",
+            "Odchylenie przyspieszenia:",
+            "Żywotność cząstek:",
+            "Odchylenie czasu:",
+            "Początkowy rozmiar:",
+            "Odchylenie wielkości:",
+            "Ostateczny rozmiar:",
+            "Odchylenie wielkości:",
+            "Początkowa rotacja:",
+            "Odchylenie obrotu:",
+            "Końcowa rotacja:",
+            "Odchylenie obrotu:",
+            "Kolor początkowy:",
+            "Odchylenie kolorów:",
+            "Finalny kolor:",
+            "Odchylenie kolorów:",
+            "Oryginalny kolor GL:",
+            "Kolor docelowy GL:"
         ],
-        "blocks.newRadialEmitter": "Create radial particles",
+        "blocks.newRadialEmitter": "Twórz cząstki radialne",
         "blocks.newRadialEmitter.params": [
-            "Particle name:",
-            "Sprite name:",
-            "Maximum particles:",
-            "Dependence angle:",
-            "Departure angle:",
-            "Departure angle deviation:",
-            "Maximum radius:",
-            "Radius deviation:",
-            "Minimum radius:",
-            "Radius deviation:",
-            "Radial rotation:",
-            "Rotation deviation:",
-            "Particle lifetime:",
-            "Time deviation:",
-            "Initial size:",
-            "Size deviation:",
-            "Final size:",
-            "Size deviation:",
-            "Initial rotation:",
-            "Rotation deviation:",
-            "Final rotation:",
-            "Rotation deviation:",
-            "Initial color:",
-            "Color deviation:",
-            "Final color:",
-            "Color deviation:",
-            "Original color GL:",
-            "Target color GL:"
+            "Nazwa cząsteczek:",
+            "Nazwa duszka:",
+            "Maksymalne cząstki:",
+            "Kąt zależności:",
+            "Kąt zejścia:",
+            "Odchylenie kąta zejścia:",
+            "Maksymalny promień:",
+            "Odchylenie promienia:",
+            "Minimalny promień:",
+            "Odchylenie promienia:",
+            "Obrót promieniowy:",
+            "Odchylenie obrotu:",
+            "Żywotność cząstek:",
+            "Odchylenie czasu:",
+            "Początkowy rozmiar:",
+            "Odchylenie wielkości:",
+            "Ostateczny rozmiar:",
+            "Odchylenie wielkości:",
+            "Początkowa rotacja:",
+            "Odchylenie obrotu:",
+            "Końcowa rotacja:",
+            "Odchylenie obrotu:",
+            "Kolor początkowy:",
+            "Odchylenie kolorów:",
+            "Finalny kolor:",
+            "Odchylenie kolorów:",
+            "Oryginalny kolor GL:",
+            "Kolor docelowy GL:"
         ]
     },
     "varsNoob": {
-        "blocks.setVarNoob": "obok czujnik",
+        "blocks.setVarNoob": "Utwórz wartość",
         "blocks.setVarNoob.params": [
             "Nazwa wartości:",
             "Wartość:"
         ],
-        "blocks.updVarNoob": "poziom listy",
+        "blocks.updVarNoob": "Dodaj wartość",
         "blocks.updVarNoob.params": [
             "Nazwa wartości:",
             "Wartość:"
         ],
-        "blocks.saveValueNoob": "powtarzaj kontener",
+        "blocks.saveValueNoob": "Zapisz wartość",
         "blocks.saveValueNoob.params": [
             "Nazwa wartości:"
         ],
-        "blocks.readValueNoob": "apka rotacja aktywuj aktywujapisów",
+        "blocks.readValueNoob": "Odczytuj wartość z zapisów",
         "blocks.readValueNoob.params": [
             "Nazwa wartości:"
         ],
-        "blocks.addGroupObjectNoob": "kontener webview grupę x",
+        "blocks.addGroupObjectNoob": "Insert picture to level",
         "blocks.addGroupObjectNoob.params": [
-            "Nazwa grupy:",
+            "Level name:",
             "Nazwa zdjęcia:"
         ],
-        "blocks.addTagObjectNoob": "powyżej film seed zaokrąglone",
+        "blocks.addTagObjectNoob": "Dodaj tag do zdjęcia",
         "blocks.addTagObjectNoob.params": [
             "Nazwa tagu:",
             "Nazwa zdjęcia:"
         ]
     },
     "mediaNoob": {
-        "blocks.mediaNoob": "zaokrąglij",
-        "blocks.playSoundNoob": "obrotowe właściwości",
+        "blocks.mediaNoob": "Dźwięki",
+        "blocks.playSoundNoob": "Odtwórz dźwięk",
         "blocks.playSoundNoob.params": [
             "Nazwa dźwięku:",
             "Liczba powtórzeń:"
         ],
-        "blocks.resumeMediaNoob": "animacja dotyk",
+        "blocks.resumeMediaNoob": "Wznów dźwięk",
         "blocks.resumeMediaNoob.params": [
             "Nazwa dźwięku:"
         ],
-        "blocks.pauseMediaNoob": "na wydarzenia",
+        "blocks.pauseMediaNoob": "Wstrzymaj dźwięk",
         "blocks.pauseMediaNoob.params": [
             "Nazwa dźwięku:"
         ],
-        "blocks.seekMediaNoob": "włączyć nazwą ustawienia pozioma internet",
+        "blocks.seekMediaNoob": "Przewiń dźwięk do znacznika czasu",
         "blocks.seekMediaNoob.params": [
             "Nazwa dźwięku:",
             "Czas (sekundy):"
         ],
-        "blocks.setVolumeNoob": "robot zaniszcz kolor",
+        "blocks.setVolumeNoob": "Ustaw głośność dźwięku",
         "blocks.setVolumeNoob.params": [
             "Nazwa dźwięku:",
             "Głośność:"
         ],
-        "blocks.fadeVolumeNoob": "aktualizuj asynchronizuj funkcja",
+        "blocks.fadeVolumeNoob": "Zanikaj głośność dźwięku",
         "blocks.fadeVolumeNoob.params": [
             "Nazwa dźwięku:",
             "Czas (sekundy):",
             "Głośność:"
         ],
-        "blocks.stopSoundNoob": "gdy tabela",
+        "blocks.stopSoundNoob": "Zatrzymaj dźwięk",
         "blocks.stopSoundNoob.params": [
             "Nazwa dźwięku:"
         ],
-        "blocks.stopTimerSoundNoob": "powyżejawspowyżeje utwórpowyżej powyżej ustawienia",
+        "blocks.stopTimerSoundNoob": "Zatrzymaj dźwięk z timerem",
         "blocks.stopTimerSoundNoob.params": [
             "Nazwa dźwięku:",
             "Czas (sekundy):"
         ]
     },
     "objectsNoob": {
-        "blocks.objectsNoob": "prostokąt",
-        "blocks.newObjectNoob": "włączyć zakończ",
+        "blocks.objectsNoob": "Zdjęcia",
+        "blocks.newObjectNoob": "Utwórz zdjęcie",
         "blocks.newObjectNoob.params": [
             "Nazwa zdjęcia:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newGifNoob": "zakończ duplikacja na",
+        "blocks.newGifNoob": "Utwórz zdjęcie gif",
         "blocks.newGifNoob.params": [
             "Nazwa zdjęcia:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setPosNoob": "naciśnie obrotowe kiedy",
+        "blocks.setPosNoob": "Ustaw pozycję zdjęcia",
         "blocks.setPosNoob.params": [
             "Nazwa zdjęcia:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setPosXNoob": "obiekty wznów tło cykl",
+        "blocks.setPosXNoob": "Ustaw pozycję X zdjęcia",
         "blocks.setPosXNoob.params": [
             "Nazwa zdjęcia:",
             "Pozycja (X):"
         ],
-        "blocks.setPosYNoob": "odpowiedź naciśnięto zapisz klucz",
+        "blocks.setPosYNoob": "Ustaw pozycję Y zdjęcia",
         "blocks.setPosYNoob.params": [
             "Nazwa zdjęcia:",
             "Pozycja (Y):"
         ],
-        "blocks.setSizeNoob": "popup słowa pliki",
+        "blocks.setSizeNoob": "Ustaw rozmiar zdjęcia",
         "blocks.setSizeNoob.params": [
             "Nazwa zdjęcia:",
             "Rozmiar (%):"
         ],
-        "blocks.setRotationNoob": "prawda HEX sieci",
+        "blocks.setRotationNoob": "Ustaw rotację zdjęcia",
         "blocks.setRotationNoob.params": [
             "Nazwa zdjęcia:",
             "Rotacja (0-360):"
         ],
-        "blocks.setRotationToNoob": "kolorki wyczyść kompiluj tekst",
+        "blocks.setRotationToNoob": "Ustaw rotację na zdjęcie2",
         "blocks.setRotationToNoob.params": [
             "Nazwa zdjęcia1:",
             "Nazwa zdjęcia2:"
         ],
-        "blocks.setAlphaNoob": "przyspieszeniomierza wstrzymaj przed",
+        "blocks.setAlphaNoob": "Ustaw przezroczystość zdjęcia",
         "blocks.setAlphaNoob.params": [
             "Nazwa zdjęcia:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.setWidthNoob": "obraz grupy przejście",
+        "blocks.setWidthNoob": "Ustaw szerokość zdjęcia",
         "blocks.setWidthNoob.params": [
             "Nazwa zdjęcia:",
             "Szerokość:"
         ],
-        "blocks.setHeightNoob": "aplikacja asynchronizuj ekranu",
+        "blocks.setHeightNoob": "Ustaw wysokość zdjęcia",
         "blocks.setHeightNoob.params": [
             "Nazwa zdjęcia:",
             "Wysokość:"
         ],
-        "blocks.updPosXNoob": "seed obiekt powtarzaj tła",
+        "blocks.updPosXNoob": "Zmień pozycję X zdjęcia",
         "blocks.updPosXNoob.params": [
             "Nazwa zdjęcia:",
             "Pozycja (X):"
         ],
-        "blocks.updPosYNoob": "załadowanie rotacja i naciśnie",
+        "blocks.updPosYNoob": "Zmień pozycję Y zdjęcia",
         "blocks.updPosYNoob.params": [
             "Nazwa zdjęcia:",
             "Pozycja (Y):"
         ],
-        "blocks.updSizeNoob": "lista zaokrąglone listy",
+        "blocks.updSizeNoob": "Zmień rozmiar zdjęcia",
         "blocks.updSizeNoob.params": [
             "Nazwa zdjęcia:",
             "Rozmiar (%):"
         ],
-        "blocks.updRotationNoob": "tekst losowa załadowanie",
+        "blocks.updRotationNoob": "Zmień rotację zdjęcia",
         "blocks.updRotationNoob.params": [
             "Nazwa zdjęcia:",
             "Rotacja (0-360):"
         ],
-        "blocks.updAlphaNoob": "pomimń wideo grawitazja",
+        "blocks.updAlphaNoob": "Zmień przezroczystość zdjęcia",
         "blocks.updAlphaNoob.params": [
             "Nazwa zdjęcia:",
             "Przezroczystość (0-100):"
         ],
-        "blocks.updWidthNoob": "powtarzaj buduj ciało",
+        "blocks.updWidthNoob": "Zmień szerokość zdjęcia",
         "blocks.updWidthNoob.params": [
             "Nazwa zdjęcia:",
             "Szerokość:"
         ],
-        "blocks.updHeightNoob": "ok żądanie ciało",
+        "blocks.updHeightNoob": "Zmień wysokość zdjęcia",
         "blocks.updHeightNoob.params": [
             "Nazwa zdjęcia:",
             "Wysokość:"
         ]
     },
     "shapesNoob": {
-        "blocks.shapesNoob": "zasap",
-        "blocks.setSpriteNoob": "pozioma w wartości reklamy",
+        "blocks.shapesNoob": "Kształty",
+        "blocks.setSpriteNoob": "Nałóż zdjęcie2 na zdjęcie1",
         "blocks.setSpriteNoob.params": [
             "Nazwa zdjęcia1:",
             "Nazwa zdjęcia2:"
         ],
-        "blocks.newRectNoob": "stwóraktualizuj koń aktualizuj webview",
+        "blocks.newRectNoob": "Utwórz kwadrat z kolorem",
         "blocks.newRectNoob.params": [
             "Nazwa zdjęcia:",
             "Kolor:",
@@ -3491,7 +3569,7 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newRoundedRectNoob": "aktualiwznówuj prwznówejście wznów webview",
+        "blocks.newRoundedRectNoob": "Utwórz kwadrat z narożnikami",
         "blocks.newRoundedRectNoob.params": [
             "Nazwa zdjęcia:",
             "Zaokrąglone narożniki:",
@@ -3500,81 +3578,81 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.newCircleNoob": "kolorki impuls",
+        "blocks.newCircleNoob": "Utwórz okrąg",
         "blocks.newCircleNoob.params": [
             "Nazwa zdjęcia:",
             "Promień:",
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setColorNoob": "film powtarzaj deweloper",
+        "blocks.setColorNoob": "Ustaw kolor zdjęcia",
         "blocks.setColorNoob.params": [
             "Nazwa zdjęcia:",
             "Kolor:"
         ],
-        "blocks.hideObjectNoob": "ostrość grawitazja",
+        "blocks.hideObjectNoob": "Ukryj zdjęcie",
         "blocks.hideObjectNoob.params": [
             "Nazwa zdjęcia:"
         ],
-        "blocks.showObjectNoob": "cząsteczki alpha",
+        "blocks.showObjectNoob": "Pokaż zdjęcie",
         "blocks.showObjectNoob.params": [
             "Nazwa zdjęcia:"
         ],
-        "blocks.removeObjectNoob": "grupę będzie",
+        "blocks.removeObjectNoob": "Usuń zdjęcie",
         "blocks.removeObjectNoob.params": [
             "Nazwa zdjęcia:"
         ],
-        "blocks.frontObjectNoob": "kolorki kontener częstotliwość tag kolizja",
+        "blocks.frontObjectNoob": "Umieść zdjęcie na warstwie powyżej",
         "blocks.frontObjectNoob.params": [
             "Nazwa zdjęcia:"
         ],
-        "blocks.backObjectNoob": "zakończ tekst wyłączyć krawężnik kontener",
+        "blocks.backObjectNoob": "Umieść zdjęcie na warstwie poniżej",
         "blocks.backObjectNoob.params": [
             "Nazwa zdjęcia:"
         ]
     },
     "physicsNoob": {
-        "blocks.setBodyNoob": "obiekty suwak nadpisz fizyka",
+        "blocks.setBodyNoob": "Ustaw fizyczne ciało zdjęcia",
         "blocks.setBodyNoob.params": [
             "Nazwa zdjęcia:",
             "Typ:",
             "Odbijanie:",
             "Grawitacja:"
         ],
-        "blocks.removeBodyNoob": "asynchronicznie strumień gdy liniowe",
+        "blocks.removeBodyNoob": "Usuń ciało fizyczne zdjęcia",
         "blocks.removeBodyNoob.params": [
             "Nazwa zdjęcia:"
         ],
-        "blocks.setLinearVelocityXNoob": "fałsz kształty styczna teksty",
+        "blocks.setLinearVelocityXNoob": "Zrób skok wzdłuż X",
         "blocks.setLinearVelocityXNoob.params": [
             "Nazwa zdjęcia:",
             "Prędkość (X):"
         ],
-        "blocks.setLinearVelocityYNoob": "złącz obiekt kompiluj sieci",
+        "blocks.setLinearVelocityYNoob": "Zrób skok wzdłuż Y",
         "blocks.setLinearVelocityYNoob.params": [
             "Nazwa zdjęcia:",
             "Prędkość (Y):"
         ],
-        "blocks.setSensorNoob": "chodnik grupy losowe orientacja",
+        "blocks.setSensorNoob": "Usuń możliwość kolizji zdjęcia",
         "blocks.setSensorNoob.params": [
             "Nazwa zdjęcia:"
         ],
-        "blocks.removeSensorNoob": "ustawienia zasap nazwa zmienne",
+        "blocks.removeSensorNoob": "Przywróć możliwość kolizji zdjęcia",
         "blocks.removeSensorNoob.params": [
             "Nazwa zdjęcia:"
         ],
-        "blocks.setFixedRotationNoob": "zwrócona lista grupy",
+        "blocks.setFixedRotationNoob": "Zablokuj rotację zdjęcia",
         "blocks.setFixedRotationNoob.params": [
             "Nazwa zdjęcia:"
         ],
-        "blocks.removeFixedRotationNoob": "schowek pole skrypty",
+        "blocks.removeFixedRotationNoob": "Odblokuj rotację zdjęcia",
         "blocks.removeFixedRotationNoob.params": [
             "Nazwa zdjęcia:"
         ]
     },
     "transitionNoob": {
-        "blocks.transitionNoob": "ustaw",
-        "blocks.setTransitionPosNoob": "zasób globalne statyczny",
+        "blocks.transitionNoob": "Przejścia",
+        "blocks.setTransitionPosNoob": "Ustaw przejście pozycji",
         "blocks.setTransitionPosNoob.params": [
             "Nazwa:",
             "Typ:",
@@ -3582,7 +3660,7 @@
             "Pozycja (X):",
             "Pozycja (Y):"
         ],
-        "blocks.setTransitionSizeNoob": "aplikacja hitbox grupa",
+        "blocks.setTransitionSizeNoob": "Ustaw przejście rozmiaru",
         "blocks.setTransitionSizeNoob.params": [
             "Nazwa:",
             "Typ:",
@@ -3590,7 +3668,7 @@
             "Szerokość:",
             "Wysokość:"
         ],
-        "blocks.setTransitionScaleNoob": "webview grawitazja aktywuj",
+        "blocks.setTransitionScaleNoob": "Ustaw skalę przejścia",
         "blocks.setTransitionScaleNoob.params": [
             "Nazwa:",
             "Typ:",
@@ -3598,14 +3676,14 @@
             "Skala (X):",
             "Skala (Y):"
         ],
-        "blocks.setTransitionRotationNoob": "hitbox prawdziwośc reklamy",
+        "blocks.setTransitionRotationNoob": "Ustaw przejście rotacji",
         "blocks.setTransitionRotationNoob.params": [
             "Nazwa:",
             "Typ:",
             "Czas (sekundy):",
             "Rotacja (0-360):"
         ],
-        "blocks.setTransitionAlphaNoob": "obok kontrola rozpocznij",
+        "blocks.setTransitionAlphaNoob": "Ustaw przejście przezroczystości",
         "blocks.setTransitionAlphaNoob.params": [
             "Nazwa:",
             "Typ:",
@@ -3614,76 +3692,76 @@
         ]
     },
     "eventsNoob": {
-        "blocks.onConditionNoob": "przyspieszeniomierza apka duplikacja kopia nieklikalności",
+        "blocks.onConditionNoob": "Powtarzaj aż warunek będzie prawdziwy",
         "blocks.onConditionNoob.params": [
             "Warunek:"
         ],
-        "blocks.onFunNoob": "mesh maska",
+        "blocks.onFunNoob": "Utwórz akcję",
         "blocks.onFunNoob.params": [
             "Akcja:"
         ],
-        "blocks.onTouchBeganNoob": "kontener powyżej na nazwa",
+        "blocks.onTouchBeganNoob": "Gdy palec dotknie zdjęcia",
         "blocks.onTouchBeganNoob.params": [
             "Nazwa zdjęcia:"
         ],
-        "blocks.onTouchEndedNoob": "losowe sieci kolor tak",
+        "blocks.onTouchEndedNoob": "Gdy palec puści zdjęcie",
         "blocks.onTouchEndedNoob.params": [
             "Nazwa zdjęcia:"
         ],
-        "blocks.onTouchMovedNoob": "wideo znacznik obiektdczas kontrola obiekt poziomy",
+        "blocks.onTouchMovedNoob": "Kiedy palec porusza się po zdjęciu",
         "blocks.onTouchMovedNoob.params": [
             "Nazwa zdjęcia:"
         ],
-        "blocks.onTouchDisplayBeganNoob": "odblokuj rozdzielczość zaokrąglone wyczyść",
-        "blocks.onTouchDisplayEndedNoob": "przyspieszeniomierza nadpisz liniowe rozpocznij",
-        "blocks.onTouchDisplayMovedNoob": "globalne hitboxniżej naciśnięto narzędzia hitbox będzie",
-        "blocks.onLocalCollisionBeganNoob": "obudź listy siła",
+        "blocks.onTouchDisplayBeganNoob": "Gdy palec dotknie ekranu",
+        "blocks.onTouchDisplayEndedNoob": "Kiedy palec opuści ekran",
+        "blocks.onTouchDisplayMovedNoob": "Kiedy palec porusza się po ekranie",
+        "blocks.onLocalCollisionBeganNoob": "Gdy zdjęcia kolidują",
         "blocks.onLocalCollisionBeganNoob.params": [
             "Nazwa zdjęcia1:",
             "Nazwa zdjęcia2:"
         ],
-        "blocks.requestFunNoob": "kontener ostrość",
+        "blocks.requestFunNoob": "Wykonaj akcję",
         "blocks.requestFunNoob.params": [
             "Akcja:"
         ]
     },
     "editor.interface": {
-        "editor.window.error": "obraz zwrócona zwróconayrażeniu",
-        "editor.button.error": "multitouch",
-        "editor.button.text": "prostokąt",
-        "editor.button.local": "tło suwak",
-        "editor.button.hide": "klucz",
-        "editor.list.var": "załaduj",
-        "editor.list.var.noob": "robot",
-        "editor.list.table": "ekranu",
-        "editor.list.funs": "zniszcz",
-        "editor.list.funs.noob": "prawdziwośc",
-        "editor.list.fun": "podczas",
-        "editor.list.fun.noob": "grupy",
-        "editor.list.math": "pozycja",
-        "editor.list.prop": "zmienne",
-        "editor.list.log": "sieci",
-        "editor.list.device": "cykle",
-        "editor.list.resource": "pionowa",
-        "editor.list.resource.images": "program",
-        "editor.list.resource.images.noob": "sterowanie",
-        "editor.list.resource.sounds": "kompiluj",
-        "editor.list.resource.videos": "przezroczystość",
-        "editor.list.resource.fonts": "listy",
-        "editor.list.resource.others": "deweloper",
-        "editor.list.resource.levels": "Levels",
-        "editor.list.custom": "włączyć",
-        "editor.list.event": "oryginał",
-        "editor.list.script": "częstotliwość",
-        "editor.list.project": "tak",
-        "editor.list.prop.obj": "czątki",
-        "editor.list.prop.obj.noob": "zasób",
-        "editor.list.prop.text": "odczytaj",
-        "editor.list.prop.media": "wyczyść",
-        "editor.list.prop.media.noob": "zablokuj",
-        "editor.list.prop.files": "kolizja",
-        "editor.list.prop.group": "oryginał",
-        "editor.list.prop.widget": "kopia"
+        "editor.window.error": "Błąd w wyrażeniu",
+        "editor.button.error": "Napraw",
+        "editor.button.text": "Tekst",
+        "editor.button.local": "{ }",
+        "editor.button.hide": "Ukryj",
+        "editor.list.var": "Zmienne",
+        "editor.list.var.noob": "Wartości",
+        "editor.list.table": "Tabele",
+        "editor.list.funs": "Funkcje",
+        "editor.list.funs.noob": "Akcje",
+        "editor.list.fun": "Metody",
+        "editor.list.fun.noob": "Narzędzia",
+        "editor.list.math": "Matematyka",
+        "editor.list.prop": "Właściwości",
+        "editor.list.log": "Logika",
+        "editor.list.device": "Urządzenie",
+        "editor.list.resource": "Zasoby",
+        "editor.list.resource.images": "Duszki",
+        "editor.list.resource.images.noob": "Zdjęcia",
+        "editor.list.resource.sounds": "Dźwięki",
+        "editor.list.resource.videos": "Filmy",
+        "editor.list.resource.fonts": "Czcionki",
+        "editor.list.resource.others": "Inne",
+        "editor.list.resource.levels": "Poziomy",
+        "editor.list.custom": "Niestandardowe",
+        "editor.list.event": "Wydarzenie",
+        "editor.list.script": "Skrypt",
+        "editor.list.project": "Projekt",
+        "editor.list.prop.obj": "Obiekt",
+        "editor.list.prop.obj.noob": "Zdjęcie",
+        "editor.list.prop.text": "Tekst",
+        "editor.list.prop.media": "Media",
+        "editor.list.prop.media.noob": "Dźwięki",
+        "editor.list.prop.files": "Pliki",
+        "editor.list.prop.group": "Level",
+        "editor.list.prop.widget": "Widżet"
     },
     "editor.fun": {
         "editor.list.fun.get_text": "sieci",
@@ -3693,10 +3771,10 @@
         "editor.list.fun.tonumber": "będzie",
         "editor.list.fun.tostring": "tryb",
         "editor.list.fun.totable": "grupę",
-        "editor.list.fun.len_table": "niciśnij",
+        "editor.list.fun.len_table": "długość_tabeli",
         "editor.list.fun.exists_in_table": "przyspieszeniomierz",
         "editor.list.fun.unix_time": "wideo",
-        "editor.list.fun.unix_ms": "unix_time_ms",
+        "editor.list.fun.unix_ms": "unix_czas_ms",
         "editor.list.fun.encode": "pliki",
         "editor.list.fun.gsub": "obok",
         "editor.list.fun.sub": "statyczny",
@@ -3712,8 +3790,9 @@
         "editor.list.fun.match": "suwak",
         "editor.list.fun.color_pixel": "kolorki",
         "editor.list.fun.get_ip": "czujniki",
-        "editor.list.fun.noise": "alpha",
-        "editor.list.fun.parameter": "klikniesz"
+        "editor.list.fun.noise": "szum_perlina",
+        "editor.list.fun.parameter": "klikniesz",
+        "editor.list.fun.timer": "czas_od_rozpoczęcia"
     },
     "editor.math": {
         "editor.list.math.random": "częstotliwość",
@@ -3729,9 +3808,9 @@
         "editor.list.math.tan": "odczytaj",
         "editor.list.math.ctan": "tekst",
         "editor.list.math.pi": "fałsz",
-        "editor.list.math.exp": "grawitazja",
+        "editor.list.math.exp": "wykładnik",
         "editor.list.math.factorial": "orientacja",
-        "editor.list.math.log0": "nieklikalności",
+        "editor.list.math.log0": "log",
         "editor.list.math.log10": "kiedy",
         "editor.list.math.asin": "obraz",
         "editor.list.math.acos": "zakończ",
@@ -3741,7 +3820,7 @@
     },
     "editor.prop": {
         "editor.list.prop.obj.touch": "po",
-        "editor.list.prop.obj.group": "group",
+        "editor.list.prop.obj.group": "level",
         "editor.list.prop.obj.tag": "grupa",
         "editor.list.prop.obj.var": "dotyk",
         "editor.list.prop.obj.pos_x": "obiekty",
@@ -3750,7 +3829,7 @@
         "editor.list.prop.obj.height": "dotyk",
         "editor.list.prop.obj.rotation": "schowek",
         "editor.list.prop.obj.alpha": "listy",
-        "editor.list.prop.obj.distance": "czątki",
+        "editor.list.prop.obj.distance": "dystans",
         "editor.list.prop.obj.name_texture": "naciśnięto",
         "editor.list.prop.obj.velocity_x": "przezroczystość",
         "editor.list.prop.obj.velocity_y": "media",
@@ -3763,17 +3842,17 @@
         "editor.list.prop.text.height": "znacznik",
         "editor.list.prop.text.rotation": "czasomierz",
         "editor.list.prop.text.alpha": "załaduj",
-        "editor.list.prop.group.tag": "odpowiedź",
-        "editor.list.prop.group.table": "group_table",
-        "editor.list.prop.group.pos_x": "program",
-        "editor.list.prop.group.pos_y": "zasap",
-        "editor.list.prop.group.width": "kopiuj",
-        "editor.list.prop.group.height": "tekstowe",
-        "editor.list.prop.group.rotation": "duszki",
-        "editor.list.prop.group.alpha": "poziomy",
+        "editor.list.prop.group.tag": "level_tag",
+        "editor.list.prop.group.table": "level_table",
+        "editor.list.prop.group.pos_x": "level_x_position",
+        "editor.list.prop.group.pos_y": "level_y_position",
+        "editor.list.prop.group.width": "level_width",
+        "editor.list.prop.group.height": "level_height",
+        "editor.list.prop.group.rotation": "level_rotation",
+        "editor.list.prop.group.alpha": "level_opacity",
         "editor.list.prop.widget.tag": "anuluj",
-        "editor.list.prop.widget.pos_x": "yes",
-        "editor.list.prop.widget.pos_y": "prawdziwośc",
+        "editor.list.prop.widget.pos_x": "pozycja_x_widżetu",
+        "editor.list.prop.widget.pos_y": "pozycja_y_widżetu",
         "editor.list.prop.widget.value": "w",
         "editor.list.prop.widget.state": "rozpocznij",
         "editor.list.prop.widget.text": "wartości",
@@ -3793,7 +3872,7 @@
     "editor.log": {
         "editor.list.log.true": "odblokuj",
         "editor.list.log.false": "suwak",
-        "editor.list.log.nil": "poniżej",
+        "editor.list.log.nil": "zero",
         "editor.list.log.>": "fałsz",
         "editor.list.log.<": "wstrzymywanie",
         "editor.list.log.>=": "funkcja",
@@ -3816,8 +3895,11 @@
         "editor.list.device.height_top": "zwrócona",
         "editor.list.device.height_bottom": "kiedy",
         "editor.list.device.finger_touching_screen": "zakończ",
+        "editor.list.device.finger_touching_screen_count": "number_fingers_on_screen",
         "editor.list.device.finger_touching_screen_x": "animacja",
         "editor.list.device.finger_touching_screen_y": "duplikacja",
-        "editor.list.device.get_ip": "system"
+        "editor.list.device.get_ip": "system",
+        "editor.list.device.get_device": "Samo_bt_urządzenie",
+        "editor.list.device.get_devices": "Sparowane_, bt_urządzenie"
     }
 }

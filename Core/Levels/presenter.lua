@@ -2,7 +2,7 @@ local M = {}
 local P = {}
 
 -- P.size = 1.1
-P.size = 1.005
+P.size = 1.02
 P.localSize = 0
 
 M.enterNewConfig = function(type, img, value)
@@ -62,7 +62,35 @@ M.enterNewConfig = function(type, img, value)
         end,
 
         body = function()
-            --
+            M.model:saveBody({body = value}, obj)
+        end,
+
+        fixed = function()
+            M.model:saveFixed({isFixedRotation = value}, obj)
+        end,
+
+        sensor = function()
+            M.model:saveSensor({isSensor = value}, obj)
+        end,
+
+        gravity = function()
+            local value = tonumber(value)
+            M.model:saveGravity({gravity = value}, obj)
+        end,
+
+        density = function()
+            local value = tonumber(value)
+            M.model:saveDensity({density = value}, obj)
+        end,
+
+        bounce = function()
+            local value = tonumber(value)
+            M.model:saveBounce({bounce = value}, obj)
+        end,
+
+        friction = function()
+            local value = tonumber(value)
+            M.model:saveFriction({friction = value}, obj)
         end
     }
 
@@ -105,7 +133,12 @@ M.cloneListener = function(e)
     elseif e.phase == 'ended' or e.phase == 'cancelled' then
         if e.target.isFocus then
             NIL_FOCUS(e.target)
-            M.view:cloneImage(M.model:saveClone(img.data))
+
+            if img.data.type[1] == 'text' then
+                M.view:cloneText(M.model:saveClone(img.data))
+            else
+                M.view:cloneImage(M.model:saveClone(img.data))
+            end
         end
     end
 
@@ -382,19 +415,28 @@ M.canvasListener = function(e)
         if e.phase == 'began' then
             P.distance = distance
         elseif e.phase == 'moved' then
-            if distance < P.distance and math.abs(distance - P.distance) > 20 and P.localSize > -11 then
+            if distance < P.distance and math.abs(distance - P.distance) > 2 and P.localSize > -11*4 then
                 map.sizeGroup.xScale = map.sizeGroup.xScale / P.size
                 map.sizeGroup.yScale = map.sizeGroup.yScale / P.size
                 P.localSize = P.localSize - P.size
-            elseif distance > P.distance and math.abs(distance - P.distance) > 20 and P.localSize < 22 then
+            elseif distance > P.distance and math.abs(distance - P.distance) > 2 and P.localSize < 22*4 then
                 map.sizeGroup.xScale = map.sizeGroup.xScale * P.size
                 map.sizeGroup.yScale = map.sizeGroup.yScale * P.size
                 P.localSize = P.localSize + P.size
             end
 
+            P.distanceMove = true
             P.distance = distance
         end
 
+        return true
+    end
+
+    if P.distanceMove and #FINGERS_ARRAY == 0 then
+        P.distanceMove = false
+    end
+
+    if P.distanceMove then
         return true
     end
 

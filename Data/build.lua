@@ -1,4 +1,4 @@
-return ' ' .. UTF8.trimFull([===[
+return ' ' .. [===[
     display.setStatusBar(display.HiddenStatusBar)
     display.setStatusBar(display.TranslucentStatusBar)
     display.setStatusBar(display.HiddenStatusBar)
@@ -7,6 +7,207 @@ return ' ' .. UTF8.trimFull([===[
         display.setStatusBar(display.HiddenStatusBar)
         display.setStatusBar(display.TranslucentStatusBar)
         display.setStatusBar(display.HiddenStatusBar)
+
+        if true then
+            -- Класс Quaternion
+            Quaternion = {}
+            Quaternion.__index = Quaternion
+
+            -- Создание нового кватерниона
+            function Quaternion.new(w, x, y, z)
+              local quat = {}
+              setmetatable(quat, Quaternion)
+              quat.w = w or 0
+              quat.x = x or 0
+              quat.y = y or 0
+              quat.z = z or 0
+              return quat
+            end
+
+            -- Нормализация кватерниона
+            function Quaternion:normalize()
+              local length = math.sqrt(self.w * self.w + self.x * self.x + self.y * self.y + self.z * self.z)
+              self.w = self.w / length
+              self.x = self.x / length
+              self.y = self.y / length
+              self.z = self.z / length
+            end
+
+            -- Умножение кватернионов
+            function Quaternion:mul(other)
+              local w = self.w * other.w - self.x * other.x - self.y * other.y - self.z * other.z
+              local x = self.w * other.x + self.x * other.w + self.y * other.z - self.z * other.y
+              local y = self.w * other.y - self.x * other.z + self.y * other.w + self.z * other.x
+              local z = self.w * other.z + self.x * other.y - self.y * other.x + self.z * other.w
+              return Quaternion.new(w, x, y, z)
+            end
+
+            -- Поворот кватерниона по углам Эйлера
+            function rotateQuaternionByEulerAngles(quaternion, eulerX, eulerY, eulerZ)
+              -- Преобразование углов Эйлера в радианы
+              local radX = math.rad(eulerX)
+              local radY = math.rad(eulerY)
+              local radZ = math.rad(eulerZ)
+
+              -- Вычисление половинных углов
+              local halfRadX = radX / 2
+              local halfRadY = radY / 2
+              local halfRadZ = radZ / 2
+
+              -- Вычисление синусов и косинусов половинных углов
+              local sinX = math.sin(halfRadX)
+              local cosX = math.cos(halfRadX)
+              local sinY = math.sin(halfRadY)
+              local cosY = math.cos(halfRadY)
+              local sinZ = math.sin(halfRadZ)
+              local cosZ = math.cos(halfRadZ)
+
+              -- Создание кватерниона из углов Эйлера
+              local rotationQuaternion = Quaternion.new(cosY * cosX * cosZ + sinY * sinX * sinZ,
+                                                        sinY * cosX * cosZ - cosY * sinX * sinZ,
+                                                        cosY * sinX * cosZ + sinY * cosX * sinZ,
+                                                        cosY * cosX * sinZ - sinY * sinX * cosZ)
+
+              -- Нормализация кватерниона поворота
+              rotationQuaternion:normalize()
+
+              -- Умножение исходного кватерниона на кватернион поворота
+              local rotatedQuaternion = rotationQuaternion:mul(quaternion)
+
+              -- Возвращение повернутого кватерниона
+              return rotatedQuaternion
+            end
+
+            FINGERS = {}
+            FINGERS_ARRAY = {}
+
+            function handlerTouch(e)
+                local id = e.id and tostring(e.id) or 'userdata: 00000001'
+
+                if e.phase == 'began' then
+                    table.insert(FINGERS_ARRAY, {x = e.x, y = e.y, id = id})
+                    FINGERS[id] = #FINGERS_ARRAY
+                elseif e.phase == 'moved' then
+                    if not FINGERS[id] then
+                        return
+                    end
+
+                    FINGERS_ARRAY[FINGERS[id]].x = e.x
+                    FINGERS_ARRAY[FINGERS[id]].y = e.y
+                elseif e.phase == 'ended' or e.phase == 'cancelled' then
+                    if not FINGERS[id] then
+                        return
+                    end
+
+                    for i = FINGERS[id] + 1, #FINGERS_ARRAY do
+                        FINGERS[FINGERS_ARRAY[i].id] = i - 1
+                    end
+
+                    table.remove(FINGERS_ARRAY, FINGERS[id])
+                    FINGERS[id] = nil
+                end
+            end
+        end
+
+        local RENDER = (function()
+            local Bytemap = require 'plugin.Bytemap'
+            local moonassimp = require 'plugin.moonassimp'
+            local tinyrenderer = require 'plugin.tinyrenderer'
+
+            local _ = require 'plugin.MemoryBlob'
+            local quaternion = Quaternion.new(1, 0, 0, 0)
+            local M = {}
+
+            M.createObject = function(path, path2, baseDir)
+                local import, errmsg = moonassimp.import_file(path,
+                    -- post-processing flags:
+                	   'triangulate', 'gen normals')
+                local meshes = import:meshes()
+
+                local model = tinyrenderer.NewModel()
+                local mesh1 = meshes[1]
+
+                pcall(function()
+                    for i = 1, mesh1:num_vertices() do
+                    	model:AddVertex(mesh1:position(i))
+                    	model:AddNormal(mesh1:normal(i))
+                    	pcall(function() model:AddUV(mesh1:texture_coords(1, i)) end)
+                    end
+                end)
+
+                pcall(function()
+                    for i = 1, mesh1:num_faces() do
+                    	local face = mesh1:face(i)
+                    	model:AddFace(face:indices())
+                    end
+                end)
+
+                pcall(function()
+                    local bmap = Bytemap.loadTexture({
+                            filename = path2,
+                            baseDir = baseDir, is_non_external = true
+                        })
+                    moonassimp.release_import(import)
+
+                    local texture = tinyrenderer.NewTexture()
+                        texture:Bind(bmap:GetBytes({format = 'rgba'}), bmap.width, bmap.height, 4)
+                    model:SetDiffuse(texture)
+                end)
+
+                local object = tinyrenderer.NewObject(model)
+                    M.root:Insert(object)
+                return object
+            end
+
+            M.scaleObject = function(obj, x, y, z)
+                obj:SetScale(x, y, z)
+            end
+
+            M.rotateObject = function(obj, x, y, z)
+                local quat = rotateQuaternionByEulerAngles(quaternion, x, y, z)
+            	obj:SetRotation(quat.x, quat.y, quat.z, quat.w)
+            end
+
+            M.moveObject = function(obj, x, y, z)
+                obj:SetPosition(x, y, z)
+            end
+
+            M.eyeScene = function(x, y, z)
+                M.scene:SetEye(x, y, z)
+            end
+
+            M.centerScene = function(x, y, z)
+                M.scene:SetCenter(x, y, z)
+            end
+
+            M.createScene = function(width, height)
+                if not M.scene then
+                    M.bm = Bytemap.newTexture({width = width, height = height, format = 'rgba'})
+                    M.image = display.newImage(M.bm.filename, M.bm.baseDir)
+                    M.image.x, M.image.y = display.contentCenterX, display.contentCenterY
+
+                    M.scene = tinyrenderer.NewScene(M.bm.width, M.bm.height, {has_alpha = true, using_blob = true})
+                    M.root = M.scene:GetRoot()
+                    M.bm:BindBlob(M.scene:GetBlob())
+                end
+            end
+
+            M.removeScene = function()
+                M.scene:Clear()
+                M.scene = nil
+                M.root = nil
+                M.bm = nil
+                M.image = nil
+            end
+
+            M.updateScene = function()
+                M.scene:Clear()
+                M.scene:Render()
+                M.bm:invalidate()
+            end
+
+            return M
+        end)()
 
         local CAMERA = (function()
             local lib_perspective = {}
@@ -711,23 +912,23 @@ return ' ' .. UTF8.trimFull([===[
 
             SET_X = function(x, obj)
                 if obj and (obj._isGroup or obj._snapshot or obj._container) then return x end
-                return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-                and GAME.group.widgets[obj._scroll].wtype == 'scroll')
-                and x + GAME.group.widgets[obj._scroll].width / 2 or CENTER_X + x) or 0
+                return type(x) == 'number' and ((obj and obj._scroll and GAME_widgets[obj._scroll]
+                and GAME_widgets[obj._scroll].wtype == 'scroll')
+                and x + GAME_widgets[obj._scroll].width / 2 or CENTER_X + x) or 0
             end
 
             SET_Y = function(y, obj)
-                if obj and obj._isGroup then return type(y) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-                and GAME.group.widgets[obj._scroll].wtype == 'scroll') and 0 - y - CENTER_Y or 0 - y ) or 0 end
-                return type(y) == 'number' and (((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-                and GAME.group.widgets[obj._scroll].wtype == 'scroll') or (obj and (obj._snapshot or obj._container))) and 0 - y or CENTER_Y - y) or 0
+                if obj and obj._isGroup then return type(y) == 'number' and ((obj and obj._scroll and GAME_widgets[obj._scroll]
+                and GAME_widgets[obj._scroll].wtype == 'scroll') and 0 - y - CENTER_Y or 0 - y ) or 0 end
+                return type(y) == 'number' and (((obj and obj._scroll and GAME_widgets[obj._scroll]
+                and GAME_widgets[obj._scroll].wtype == 'scroll') or (obj and (obj._snapshot or obj._container))) and 0 - y or CENTER_Y - y) or 0
             end
 
             GET_X = function(x, obj)
                 if obj and (obj._isGroup or obj._snapshot or obj._container) then return x end
-                return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-                and GAME.group.widgets[obj._scroll].wtype == 'scroll')
-                and x - GAME.group.widgets[obj._scroll].width / 2 or x - CENTER_X) or 0
+                return type(x) == 'number' and ((obj and obj._scroll and GAME_widgets[obj._scroll]
+                and GAME_widgets[obj._scroll].wtype == 'scroll')
+                and x - GAME_widgets[obj._scroll].width / 2 or x - CENTER_X) or 0
             end
 
             GET_Y = SET_Y
@@ -843,12 +1044,10 @@ return ' ' .. UTF8.trimFull([===[
             end
 
             M['get_device'] = function()
-                GIVE_PERMISSION_DATA()
                 return JSON.decode(GANIN.bluetooth('device'))
             end
 
             M['get_devices'] = function()
-                GIVE_PERMISSION_DATA()
                 return JSON.decode(GANIN.bluetooth('devices'))
             end
 
@@ -889,12 +1088,24 @@ return ' ' .. UTF8.trimFull([===[
                 return GAME.group.const.touch
             end
 
-            M['finger_touching_screen_x'] = function()
-                return GAME.group.const.touch_x - CENTER_X
+            M['finger_touching_screen_count'] = function()
+                return #FINGERS_ARRAY
+            end
+
+            M['finger_touching_screen_x'] = function(index)
+                if index and FINGERS_ARRAY[index] then
+                    return FINGERS_ARRAY[index].x - CENTER_X
+                else
+                    return GAME.group.const.touch_x - CENTER_X
+                end
             end
 
             M['finger_touching_screen_y'] = function()
-                return CENTER_Y - GAME.group.const.touch_y
+                if index and FINGERS_ARRAY[index] then
+                    return FINGERS_ARRAY[index].y - CENTER_Y
+                else
+                    return CENTER_Y - GAME.group.const.touch_y
+                end
             end
 
             M['fps'] = function()
@@ -914,7 +1125,7 @@ return ' ' .. UTF8.trimFull([===[
 
             M['get_text'] = function(name)
                 local isComplete, result = pcall(function()
-                    return GAME.group.texts[name or '0'] and GAME.group.texts[name or '0'].text or ''
+                    return GAME_texts[name or '0'] and GAME_texts[name or '0'].text or ''
                 end) return isComplete and result or ''
             end
 
@@ -1107,6 +1318,10 @@ return ' ' .. UTF8.trimFull([===[
                 return os.time()
             end
 
+            M['unix_ms'] = function()
+                return math.round(require('socket').gettime() * 1000)
+            end
+
             M['parameter'] = function(name, type, parameter)
                 local isComplete, result = pcall(function()
                     if name == nil and type ~= nil then
@@ -1285,88 +1500,94 @@ return ' ' .. UTF8.trimFull([===[
             if 'Объект' then
                 M['obj.touch'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.objects[name] and GAME.group.objects[name]._touch or false
+                        return GAME_objects[name] and GAME_objects[name]._touch or false
                     end) return isComplete and result
                 end
 
                 M['obj.var'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.objects[name] and GAME.group.objects[name]._data or {}
+                        return GAME_objects[name] and GAME_objects[name]._data or {}
                     end) return isComplete and result or {}
                 end
 
                 M['obj.tag'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.objects[name] and GAME.group.objects[name]._tag or ''
+                        return GAME_objects[name] and GAME_objects[name]._tag or ''
+                    end) return isComplete and result or ''
+                end
+
+                M['obj.group'] = function(name)
+                    local isComplete, result = pcall(function()
+                        return (GAME_objects[name] and GAME_objects[name].parent) and GAME_objects[name].parent.name or ''
                     end) return isComplete and result or ''
                 end
 
                 M['obj.pos_x'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.objects[name] and GET_X(GAME.group.objects[name].x, GAME.group.objects[name]) or 0
+                        return GAME_objects[name] and GET_X(GAME_objects[name].x, GAME_objects[name]) or 0
                     end) return isComplete and result or 0
                 end
 
                 M['obj.pos_y'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.objects[name] and GET_Y(GAME.group.objects[name].y, GAME.group.objects[name]) or 0
+                        return GAME_objects[name] and GET_Y(GAME_objects[name].y, GAME_objects[name]) or 0
                     end) return isComplete and result or 0
                 end
 
                 M['obj.width'] = function(name)
                     local isComplete, result = pcall(function()
-                        return (GAME.group.objects[name] and GAME.group.objects[name]._radius)
-                        and (GAME.group.objects[name].path.radius or 0) or (GAME.group.objects[name] and GAME.group.objects[name].width or 0)
+                        return (GAME_objects[name] and GAME_objects[name]._radius)
+                        and (GAME_objects[name].path.radius or 0) or (GAME_objects[name] and GAME_objects[name].width or 0)
                     end) return isComplete and result or 0
                 end
 
                 M['obj.height'] = function(name)
                     local isComplete, result = pcall(function()
-                        return (GAME.group.objects[name] and GAME.group.objects[name]._radius)
-                        and (GAME.group.objects[name].path.radius or 0) or (GAME.group.objects[name] and GAME.group.objects[name].height or 0)
+                        return (GAME_objects[name] and GAME_objects[name]._radius)
+                        and (GAME_objects[name].path.radius or 0) or (GAME_objects[name] and GAME_objects[name].height or 0)
                     end) return isComplete and result or 0
                 end
 
                 M['obj.rotation'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.objects[name] and GAME.group.objects[name].rotation or 0
+                        return GAME_objects[name] and GAME_objects[name].rotation or 0
                     end) return isComplete and result or 0
                 end
 
                 M['obj.alpha'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.objects[name] and GAME.group.objects[name].alpha * 100 or 100
+                        return GAME_objects[name] and GAME_objects[name].alpha * 100 or 100
                     end) return isComplete and result or 100
                 end
 
                 M['obj.distance'] = function(name1, name2)
                     local isComplete, result = pcall(function()
-                        return _G.math.sqrt(((GAME.group.objects[name1].x - GAME.group.objects[name2].x) ^ 2)
-                        + ((GAME.group.objects[name1].y - GAME.group.objects[name2].y) ^ 2))
+                        return _G.math.sqrt(((GAME_objects[name1].x - GAME_objects[name2].x) ^ 2)
+                        + ((GAME_objects[name1].y - GAME_objects[name2].y) ^ 2))
                     end) return isComplete and result or 0
                 end
 
                 M['obj.name_texture'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.objects[name] and GAME.group.objects[name]._name or ''
+                        return GAME_objects[name] and GAME_objects[name]._name or ''
                     end) return isComplete and result or ''
                 end
 
                 M['obj.velocity_x'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.objects[name]._body ~= '' and select(1, GAME.group.objects[name]:getLinearVelocity()) or 0
+                        return GAME_objects[name]._body ~= '' and select(1, GAME_objects[name]:getLinearVelocity()) or 0
                     end) return isComplete and result or 0
                 end
 
                 M['obj.velocity_y'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.objects[name]._body ~= '' and 0 - select(2, GAME.group.objects[name]:getLinearVelocity()) or 0
+                        return GAME_objects[name]._body ~= '' and 0 - select(2, GAME_objects[name]:getLinearVelocity()) or 0
                     end) return isComplete and result or 0
                 end
 
                 M['obj.angular_velocity'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.objects[name]._body ~= '' and GAME.group.objects[name].angularVelocity or 0
+                        return GAME_objects[name]._body ~= '' and GAME_objects[name].angularVelocity or 0
                     end) return isComplete and result or 0
                 end
             end
@@ -1374,49 +1595,49 @@ return ' ' .. UTF8.trimFull([===[
             if 'Текст' then
                 M['text.get_text'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.texts[name or '0'] and GAME.group.texts[name or '0'].text or ''
+                        return GAME_texts[name or '0'] and GAME_texts[name or '0'].text or ''
                     end) return isComplete and result or ''
                 end
 
                 M['text.tag'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.texts[name] and GAME.group.texts[name]._tag or ''
+                        return GAME_texts[name] and GAME_texts[name]._tag or ''
                     end) return isComplete and result or ''
                 end
 
                 M['text.pos_x'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.texts[name] and GET_X(GAME.group.texts[name].x, GAME.group.texts[name]) or 0
+                        return GAME_texts[name] and GET_X(GAME_texts[name].x, GAME_texts[name]) or 0
                     end) return isComplete and result or 0
                 end
 
                 M['text.pos_y'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.texts[name] and GET_Y(GAME.group.texts[name].y, GAME.group.texts[name]) or 0
+                        return GAME_texts[name] and GET_Y(GAME_texts[name].y, GAME_texts[name]) or 0
                     end) return isComplete and result or 0
                 end
 
                 M['text.width'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.texts[name] and GAME.group.texts[name].width or 0
+                        return GAME_texts[name] and GAME_texts[name].width or 0
                     end) return isComplete and result or 0
                 end
 
                 M['text.height'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.texts[name] and GAME.group.texts[name].height or 0
+                        return GAME_texts[name] and GAME_texts[name].height or 0
                     end) return isComplete and result or 0
                 end
 
                 M['text.rotation'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.texts[name] and GAME.group.texts[name].rotation or 0
+                        return GAME_texts[name] and GAME_texts[name].rotation or 0
                     end) return isComplete and result or 0
                 end
 
                 M['text.alpha'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.texts[name] and GAME.group.texts[name].alpha * 100 or 100
+                        return GAME_texts[name] and GAME_texts[name].alpha * 100 or 100
                     end) return isComplete and result or 100
                 end
             end
@@ -1424,43 +1645,53 @@ return ' ' .. UTF8.trimFull([===[
             if 'Группа' then
                 M['group.tag'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.groups[name] and GAME.group.groups[name]._tag or ''
+                        return GAME_groups[name] and GAME_groups[name]._tag or ''
+                    end) return isComplete and result or ''
+                end
+
+                M['group.table'] = function(name)
+                    local isComplete, result = pcall(function()
+                        if GAME_groups[name] then
+                            local t = {} for i = 1, GAME_groups[name].numChildren do
+                                table.insert(t, GAME_groups[name][i].name or '')
+                            end return t
+                        end
                     end) return isComplete and result or ''
                 end
 
                 M['group.pos_x'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.groups[name] and GAME.group.groups[name].x or 0
+                        return GAME_groups[name] and GAME_groups[name].x or 0
                     end) return isComplete and result or 0
                 end
 
                 M['group.pos_y'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.groups[name] and 0 - GAME.group.groups[name].y or 0
+                        return GAME_groups[name] and 0 - GAME_groups[name].y or 0
                     end) return isComplete and result or 0
                 end
 
                 M['group.width'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.groups[name] and GAME.group.groups[name].width or 0
+                        return GAME_groups[name] and GAME_groups[name].width or 0
                     end) return isComplete and result or 0
                 end
 
                 M['group.height'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.groups[name] and GAME.group.groups[name].height or 0
+                        return GAME_groups[name] and GAME_groups[name].height or 0
                     end) return isComplete and result or 0
                 end
 
                 M['group.rotation'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.groups[name] and GAME.group.groups[name].rotation or 0
+                        return GAME_groups[name] and GAME_groups[name].rotation or 0
                     end) return isComplete and result or 0
                 end
 
                 M['group.alpha'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.groups[name] and GAME.group.groups[name].alpha * 100 or 100
+                        return GAME_groups[name] and GAME_groups[name].alpha * 100 or 100
                     end) return isComplete and result or 100
                 end
             end
@@ -1468,44 +1699,44 @@ return ' ' .. UTF8.trimFull([===[
             if 'Виджет' then
                 M['widget.tag'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.widgets[name] and GAME.group.widgets[name]._tag or ''
+                        return GAME_widgets[name] and GAME_widgets[name]._tag or ''
                     end) return isComplete and result or ''
                 end
 
                 M['widget.pos_x'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.widgets[name] and GET_X(GAME.group.widgets[name].x, GAME.group.widgets[name]) or 0
+                        return GAME_widgets[name] and GET_X(GAME_widgets[name].x, GAME_widgets[name]) or 0
                     end) return isComplete and result or 0
                 end
 
                 M['widget.pos_y'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.widgets[name] and GET_Y(GAME.group.widgets[name].y, GAME.group.widgets[name]) or 0
+                        return GAME_widgets[name] and GET_Y(GAME_widgets[name].y, GAME_widgets[name]) or 0
                     end) return isComplete and result or 0
                 end
 
                 M['widget.value'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.widgets[name] and (GAME.group.widgets[name].wtype == 'slider' and GAME.group.widgets[name].value or 0) or 50
+                        return GAME_widgets[name] and (GAME_widgets[name].wtype == 'slider' and GAME_widgets[name].value or 0) or 50
                     end) return isComplete and result or 50
                 end
 
                 M['widget.state'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.widgets[name]
-                            and (GAME.group.widgets[name].wtype == 'switch' and GAME.group.widgets[name].isOn or false) or false
+                        return GAME_widgets[name]
+                            and (GAME_widgets[name].wtype == 'switch' and GAME_widgets[name].isOn or false) or false
                     end) return isComplete and result
                 end
 
                 M['widget.text'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.widgets[name] and (GAME.group.widgets[name].wtype == 'field' and GAME.group.widgets[name].text or '') or ''
+                        return GAME_widgets[name] and (GAME_widgets[name].wtype == 'field' and GAME_widgets[name].text or '') or ''
                     end) return isComplete and result or ''
                 end
 
                 M['widget.link'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.widgets[name] and (GAME.group.widgets[name].wtype == 'webview' and GAME.group.widgets[name].url or '') or ''
+                        return GAME_widgets[name] and (GAME_widgets[name].wtype == 'webview' and GAME_widgets[name].url or '') or ''
                     end) return isComplete and result or ''
                 end
             end
@@ -1513,43 +1744,43 @@ return ' ' .. UTF8.trimFull([===[
             if 'Медиа' then
                 M['media.current_time'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.media[name] and GAME.group.media[name].currentTime or 0
+                        return GAME_media[name] and GAME_media[name].currentTime or 0
                     end) return isComplete and result or 0
                 end
 
                 M['media.total_time'] = function(name)
                     local isComplete, result = pcall(function()
-                        return GAME.group.media[name] and GAME.group.media[name].totalTime or 0
+                        return GAME_media[name] and GAME_media[name].totalTime or 0
                     end) return isComplete and result or 0
                 end
 
                 M['media.sound_volume'] = function(name)
                     local isComplete, result = pcall(function()
-                        return audio.getVolume((GAME.group.media[name] and GAME.group.media[name][2]) and {channel=GAME.group.media[name][2]} or nil)
+                        return audio.getVolume((GAME_media[name] and GAME_media[name][2]) and {channel=GAME_media[name][2]} or nil)
                     end) return isComplete and result or 0
                 end
 
                 M['media.sound_total_time'] = function(name)
                     local isComplete, result = pcall(function()
-                        return (GAME.group.media[name] and GAME.group.media[name][1]) and audio.getDuration(GAME.group.media[name][1]) or 0
+                        return (GAME_media[name] and GAME_media[name][1]) and audio.getDuration(GAME_media[name][1]) or 0
                     end) return isComplete and result or 0
                 end
 
                 M['media.sound_pause'] = function(name)
                     local isComplete, result = pcall(function()
-                        return (GAME.group.media[name] and GAME.group.media[name][2]) and audio.isChannelPaused(GAME.group.media[name][2]) or nil
+                        return (GAME_media[name] and GAME_media[name][2]) and audio.isChannelPaused(GAME_media[name][2]) or nil
                     end) return isComplete and result or nil
                 end
 
                 M['media.sound_play'] = function(name)
                     local isComplete, result = pcall(function()
-                        return (GAME.group.media[name] and GAME.group.media[name][2]) and audio.isChannelPlaying(GAME.group.media[name][2]) or nil
+                        return (GAME_media[name] and GAME_media[name][2]) and audio.isChannelPlaying(GAME_media[name][2]) or nil
                     end) return isComplete and result or nil
                 end
             end
 
             if 'Файлы' then
-                M['files.length'] = function(path, isTemp) print(path, isTemp)
+                M['files.length'] = function(path, isTemp)
                     local isComplete, result = pcall(function()
                         return GANIN.file('length', DOC_DIR .. '/' .. CURRENT_LINK .. '/' .. (isTemp and 'Temps' or 'Documents') .. '/' .. path)
                     end) return isComplete and result or 0
@@ -1631,6 +1862,14 @@ return ' ' .. UTF8.trimFull([===[
             end
 
             M['ruleFalse'] = function()
+                return false
+            end
+
+            M['yes'] = function()
+                return true
+            end
+
+            M['no'] = function()
                 return false
             end
 
@@ -1768,16 +2007,16 @@ return ' ' .. UTF8.trimFull([===[
                 local data, width, height = IMPACK.image.load(link, system.DocumentsDirectory, {req_comp = 3})
                 local x, y, size = 1, 1, width * height
 
-                GAME.group.bitmaps[name] = BITMAP.newTexture({width = width, height = height})
+                GAME_bitmaps[name] = BITMAP.newTexture({width = width, height = height})
 
                 for i = 1, size do
                     local args = {data:byte(i * 3 - 2, i * 3)}
-                    GAME.group.bitmaps[name]:setPixel(x, y, args[1] / 255, args[2] / 255, args[3] / 255, 1)
+                    GAME_bitmaps[name]:setPixel(x, y, args[1] / 255, args[2] / 255, args[3] / 255, 1)
                     x = x == width and 1 or x + 1
                     y = x == 1 and y + 1 or y
                 end
 
-                GAME.group.bitmaps[name]:invalidate()
+                GAME_bitmaps[name]:invalidate()
             end
 
             M.getPhysicsParams = function(friction, bounce, density, hitbox, filter)
@@ -1844,6 +2083,14 @@ return ' ' .. UTF8.trimFull([===[
                         return CURRENT_LINK .. '/Resources/' .. GAME.RESOURCES.others[i][2]
                     elseif GAME.RESOURCES.others[i][1] == 'Documents:' .. link or GAME.RESOURCES.others[i][1] == 'Temps:' .. link then
                         return GAME.RESOURCES.others[i][2]
+                    end
+                end
+            end
+
+            M.getLevel = function(link)
+                for i = 1, #GAME.RESOURCES.levels do
+                    if GAME.RESOURCES.levels[i][1] == link then
+                        return CURRENT_LINK .. '/Levels/' .. GAME.RESOURCES.levels[i][2]
                     end
                 end
             end
@@ -1919,4 +2166,4 @@ return ' ' .. UTF8.trimFull([===[
 
         DEVICE_ID = CRYPTO.hmac(CRYPTO.sha256, system.getInfo('deviceID'), system.getInfo('deviceID') .. 'md5')
         local fun, device, other, select, math, prop = getFun(), getDevice(), getOther(), getSelect(), getMath(), getProp()
-]===])
+]===]

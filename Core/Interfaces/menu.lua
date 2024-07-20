@@ -27,7 +27,6 @@ function _supportOldestVersion(data, link)
     if not data.resources.levels then
         data.resources.levels = {}
         data.folders.levels = {{'1', {}, false}}
-        LFS.mkdir(DOC_DIR .. '/' .. link .. '/Levels')
     end
 
     if script and script.custom then
@@ -38,6 +37,8 @@ function _supportOldestVersion(data, link)
     if tonumber(data.build) < BUILD then
         data.build = tostring(BUILD)
     end
+    
+    LFS.mkdir(DOC_DIR .. '/' .. link .. '/Levels')
 
     return data
 end

@@ -2,7 +2,7 @@ local listeners = {}
 local LIST = require 'Core.Modules.interface-list'
 local LOGIC = require 'Core.Modules.logic-input'
 
-
+GANIN.az()
 
 listeners.but_title = function(target)
     EXITS.blocks()

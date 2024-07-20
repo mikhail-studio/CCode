@@ -12,8 +12,8 @@
         "lang.jp": "日本語",
         "lang.custom": "Customizado",
         "backup.title": "Você quer reescrever os scripts recentes com um antigo save?\nClique em \"Próximo backup\" para selecionar um backup antigo, ou clique em \"instalar backup\" para repassar uma cópia na próxima vez\nscript mais recente: ",
-        "backup.continue": "Próximo backup",
-        "backup.install": "Instalar backup",
+        "backup.continue": "Restaurar backup",
+        "backup.install": "Fazer backup",
         "button.yes": "Sim",
         "button.no": "Não",
         "button.okay": "OK",
@@ -25,16 +25,17 @@
         "button.copy": "Copiar",
         "button.backup": "Backups",
         "button.to.buffer": "To buffer",
-        "button.from.buffer": "From buffer",
+        "button.from.buffer": "Do buffer",
         "button.paste": "Colar",
-        "button.alldelete": "Limpar",
+        "button.alldelete": "Limpar tudo",
         "button.find": "Encontrar",
         "button.debug": "Depuração",
-        "button.comment": "Comentar",
-        "button.uncomment": "Descomentar",
+        "button.comment": "Desativar bloco",
+        "button.uncomment": "Ativar bloco",
         "button.hide": "Ocultar",
         "button.show": "Mostrar blocos conectados",
         "button.addIfElse": "Adicionar condição",
+        "button.replaceTouch": "Change mode",
         "button.block.find": "Encontrar bloco",
         "button.pasteFromClipboard": "Colar da área de transferência",
         "button.importLuaFile": "Importar",
@@ -87,8 +88,40 @@
         "sounds.changename": "Editar nome do som",
         "videos.entername": "Digite o nome do vídeo",
         "videos.changename": "Alterar nome do vídeo",
-        "levels.entername": "Enter level name",
-        "levels.changename": "Change level name",
+        "levels.entername": "Digite o nome do nível",
+        "levels.changename": "Alterar nome do nível",
+        "levels.enterobjtype": "Choose which object to create",
+        "levels.enterobjname": "Enter name of object",
+        "levels.entertextname": "Enter name of text",
+        "levels.entertextlabel": "Enter the text",
+        "levels.changeobjname": "Change name of object",
+        "levels.enterobjx": "Enter X position of object",
+        "levels.enterobjy": "Enter Y position of object",
+        "levels.enterobjwidth": "Enter width of object",
+        "levels.enterobjheight": "Enter height of object",
+        "levels.enterobjtext": "Enter the text",
+        "levels.enterobjsize": "Enter text size",
+        "levels.enterobjrotate": "Enter rotation of object",
+        "levels.enterobjbody": "Select physical object body",
+        "levels.enterobjbody.nil": "Without physics",
+        "levels.enterobjbody.type": "Choose body type",
+        "levels.enterobjbody.dynamic": "Dynamic",
+        "levels.enterobjbody.static": "Static",
+        "levels.enterobjgravity": "Enter gravity of object",
+        "levels.enterobjbounce": "Enter bounce of object",
+        "levels.enterobjdensity": "Enter density of object",
+        "levels.enterobjfriction": "Enter friction of object",
+        "levels.enterobjfixed": "Select object fixation",
+        "levels.enterobjfixed.true": "Ban physical rotation",
+        "levels.enterobjfixed.false": "Allow physical rotation",
+        "levels.enterobjsensor": "Select physical invisibility of object",
+        "levels.enterobjsensor.true": "Invisible (sensor)",
+        "levels.enterobjsensor.false": "Visible (not sensor)",
+        "levels.enterobjlayer": "Enter object layer",
+        "levels.enterobjlayercurrent": "Current layer:",
+        "levels.enterobjlayerall": "Total layers:",
+        "levels.save": "Do you want to keep level?",
+        "levels.exit": "Do you want to exit editor?",
         "resources.entername": "Digite o nome do recurso",
         "resources.changename": "Altere o nome do recurso",
         "fonts.entername": "Digite o nome da fonte",
@@ -97,10 +130,10 @@
         "settings.applang": "Idioma:",
         "settings.confirmdelete": "Confirmar exclusão de blocos:",
         "settings.autoplace": "Preenchimento automático de parâmetro nos blocos:",
-        "settings.scroll_friction": "Scroll friction:",
-        "settings.scroll_friction.enterheight": "Enter scroll friction",
-        "settings.backup_frequency": "Backup frequency (minutes):",
-        "settings.backup_frequency.enterheight": "Enter the backup frequency in minutes",
+        "settings.scroll_friction": "Fricção de rolagem:",
+        "settings.scroll_friction.enterheight": "Insira o atrito de rolagem",
+        "settings.backup_frequency": "Frequência de Backup (minutos):",
+        "settings.backup_frequency.enterheight": "Insira a frequência de backup em minutos",
         "settings.bottom_height": "Altura da borda inferior:",
         "settings.bottom_height.enterheight": "Digite a altura da borda inferior",
         "settings.old_dog": "Mostrar pet:",
@@ -133,14 +166,15 @@
         "psettings.enterversion": "Digite o nome da versão",
         "psettings.enterpackage": "Digite o nome do pacote",
         "errors.build": "Erro, digite um NÚMERO INTEIRO",
+        "errors.number": "Error, enter NUMBER",
         "errors.package": "Erro, digite um nome de pacote válido",
         "errors.name": "Erro, o nome já está em uso",
         "errors.filter": "Erro, não é possível usar um nome vazio",
         "errors.min8sym": "Erro, são necessários no mínimo 8 caracteres",
         "errors.max32sym": "Erro, são permitidos no máximo 32 caracteres",
         "errors.bottom_height": "Erro, o número deve estar entre -300 e 300",
-        "errors.backup_frequency": "Error, number should be from 1 to 59",
-        "errors.scroll_friction": "Error, number should be from 10 to 1000",
+        "errors.backup_frequency": "Erro, o número deve ser de 1 a 59",
+        "errors.scroll_friction": "Erro, o número deve ser de 10 a 1000",
         "build.start": "A compilação do APK foi iniciada, aguarde",
         "build.start.aab": "A compilação do AAB foi iniciada, aguarde",
         "export.start": "A exportação foi iniciada, aguarde",
@@ -155,41 +189,41 @@
         "beginner.gender.what": "E então, você é homem ou mulher?",
         "beginner.gender.man": "Homem",
         "beginner.gender.woman": "Mulher",
-        "beginner.age.what": "Agora vamos ver sua idade, lembrando que você pode usar o CCode de 13 a 90 anos",
+        "beginner.age.what": "Now, let's find out your age, I remind you, you can use CCode for people aged from 5 to 90 years",
         "beginner.age": "Idade",
         "beginner.age.banned": "Você não tem permissão para usar o CCode devido a restrições de idade",
         "beginner.name.what": "E finalmente, vamos ver o seu nome",
         "beginner.name": "Nome",
-        "beginner.entrance": "Obrigado, agora você pode começar a usar o CCode, pequenas dicas:\n\nNa aba 'Meu robodog' tem uma aba para treinamento\n\nAo clicar no botão 'Discord' no canto inferior esquerdo do menu, você pode ir ao servidor Discord, onde você pode fazer perguntas e enviar bugs\n\nO CCode não é o aplicativo mais fácil no momento, então muitos vídeos no YouTube e ajuda no discord serão muito úteis para você\n\nBem, o botão 'Níveis' ainda não está funcionando"
+        "beginner.entrance": "Obrigado, agora você pode começar a usar o CCode, pequenas dicas:\n\nNa aba 'Meu robodog' tem uma aba para treinamento\n\nAo clicar no botão 'Discord' no canto inferior esquerdo do menu, você pode ir ao servidor Discord, onde você pode fazer perguntas e enviar bugs\n\nO CCode não é o aplicativo mais fácil no momento, então muitos vídeos no YouTube e ajuda no discord serão muito úteis para você"
     },
     "robodog": {
-        "robodog.showAd.title": "To get 20 ccoin, you need to watch a video ad",
+        "robodog.showAd.title": "Para obter 20 moedas, você precisa assistir a um anúncio em vídeo",
         "robodog.showAd.time": "Você poderá assistir o anúncio em: ",
         "robodog.showAd.error": "Erro ao carregor o anúncio",
-        "robodog.showAd.promo": "Promocode",
-        "robodog.showAd.watch": "Watch",
-        "robodog.showAd": "Get ccoin",
-        "robodog.autoAd": "Autoreview",
-        "robodog.autoAd.title": "Do you want to turn on/off autoreview ads? When turned on, a video ad will be shown every 10 minutes, which will bring you 20 ccoin",
-        "robodog.learning": "Teaching",
-        "robodog.themes": "Themes",
-        "robodog.buy": "Buy",
-        "robodog.count.ccoin": "Amount of ccoin: ",
-        "robodog.not.enough.ccoin": "You don't have enough ccoin",
-        "robodog.successful.purchase.1": "You bought new face",
-        "robodog.successful.purchase.2": "You bought new eyes",
-        "robodog.successful.purchase.3": "You bought new ears",
-        "robodog.successful.purchase.4": "You bought new mouth",
-        "robodog.successful.purchase.5": "You bought new accessory",
-        "robodog.want.buy.1": "Do you want to buy this face?\nCost: ",
-        "robodog.want.buy.2": "Do you want to buy these eyes?\nCost: ",
-        "robodog.want.buy.3": "Do you want to buy these ears?\nCost: ",
-        "robodog.want.buy.4": "Do you want to buy these mouth?\nCost: ",
-        "robodog.want.buy.5": "Do you want to buy these accessory?\nCost: ",
-        "robodog.want.buy.apk": "Do you want to build apk?\nCost: 10 ccoin",
-        "robodog.want.buy.aab": "Do you want to build aab?\nCost: 100 ccoin",
-        "robodog.want.set.theme": "Do you want to install this theme?",
-        "robodog.need.ccoin": "Required quantity: "
+        "robodog.showAd.promo": "Código promocional",
+        "robodog.showAd.watch": "Assistir",
+        "robodog.showAd": "Obter moeda",
+        "robodog.autoAd": "Revisão automática",
+        "robodog.autoAd.title": "Quer ativar/desativar anúncios de revisão automática? Quando ativado, um anúncio em vídeo será exibido a cada 10 minutos, o que renderá 20 ccoins",
+        "robodog.learning": "Ensino",
+        "robodog.themes": "Temas",
+        "robodog.buy": "Comprar",
+        "robodog.count.ccoin": "Quantidade de moeda: ",
+        "robodog.not.enough.ccoin": "Você não tem moedas suficientes",
+        "robodog.successful.purchase.1": "Você comprou skin nova",
+        "robodog.successful.purchase.2": "Você comprou novos olhos",
+        "robodog.successful.purchase.3": "Você comprou novas orelhas",
+        "robodog.successful.purchase.4": "Você comprou uma boca nova",
+        "robodog.successful.purchase.5": "Você comprou um novo acessório",
+        "robodog.want.buy.1": "Você quer comprar esse rosto?\nCusto: ",
+        "robodog.want.buy.2": "Você quer comprar esses olhos?\nCusto: ",
+        "robodog.want.buy.3": "Você quer comprar essas orelhas?\nCusto: ",
+        "robodog.want.buy.4": "Você quer comprar essas bocas?\nCusto: ",
+        "robodog.want.buy.5": "Quer comprar esses acessórios?\nCusto: ",
+        "robodog.want.buy.apk": "Você quer construir apk?\nCusto: 10 moedas",
+        "robodog.want.buy.aab": "The aab build is temporarily unavailable",
+        "robodog.want.set.theme": "Quer instalar esse tema?",
+        "robodog.need.ccoin": "Quantidade exigida:"
     },
     "blocks": {
         "blocks.create.var": "Criar variável",
@@ -199,7 +233,7 @@
         "blocks.create.fun.noob": "Criar ação",
         "blocks.create.objects": "Objetos",
         "blocks.create.filters": "Filtros",
-        "blocks.create.groups": "Grupos",
+        "blocks.create.groups": "Levels",
         "blocks.create.tags": "Tags",
         "blocks.create.files": "Arquivos",
         "blocks.create.media": "Mídia",
@@ -242,7 +276,7 @@
         "blocks.select.pic": "Sprite",
         "blocks.select.obj": "Objeto",
         "blocks.select.text": "Texto",
-        "blocks.select.group": "Grupo",
+        "blocks.select.group": "Level",
         "blocks.select.tag": "Tag",
         "blocks.select.widget": "Widget",
         "blocks.select.snapshot": "Captura de tela",
@@ -261,6 +295,8 @@
         "blocks.select.docTypeTemps": "Temporário",
         "blocks.select.spriteTypeLinear": "Padrão",
         "blocks.select.spriteTypePixel": "Pixel",
+        "blocks.select.yes": "Yes",
+        "blocks.select.no": "No",
         "blocks.color.red": "Vermelho",
         "blocks.color.green": "Verde",
         "blocks.color.blue": "azul",
@@ -303,7 +339,22 @@
         "blocks.onUpdateVar": "Quando o valor da variável mudar",
         "blocks.onUpdateVar.params": [
             "Nome da variável:",
-            "Old value:"
+            "Valor antigo:"
+        ],
+        "blocks.onTouchBegan2": "When finger touches object",
+        "blocks.onTouchBegan2.params": [
+            "Object name:",
+            "Table name:"
+        ],
+        "blocks.onTouchEnded2": "When finger releases object",
+        "blocks.onTouchEnded2.params": [
+            "Object name:",
+            "Table name:"
+        ],
+        "blocks.onTouchMoved2": "When finger moves over object",
+        "blocks.onTouchMoved2.params": [
+            "Object name:",
+            "Table name:"
         ],
         "blocks.onTouchBegan": "Quando o dedo toca o objeto",
         "blocks.onTouchBegan.params": [
@@ -331,6 +382,11 @@
         "blocks.onTouchDisplayMoved": "Enquanto o dedo se move na tela",
         "blocks.onTouchDisplayMoved.params": [
             "Nome da tabela:"
+        ],
+        "blocks.onAdsLoad": "Unity Ads receives event",
+        "blocks.onAdsLoad.params": [
+            "Function name:",
+            "Table name:"
         ],
         "blocks.onFirebase": "Quando a resposta do Firebase é recebida",
         "blocks.onFirebase.params": [
@@ -414,6 +470,11 @@
         "blocks.onFieldEnded.params": [
             "Nome da função:",
             "Nome da tabela:"
+        ],
+        "blocks.onBluetoothGet": "Quando o valor é recebido via bluetooth",
+        "blocks.onBluetoothGet.params": [
+            "Nome da função:",
+            "Nome da variável:"
         ]
     },
     "vars": {
@@ -616,6 +677,13 @@
             "Posição (X):",
             "Posição (Y):"
         ],
+        "blocks.cloneObject": "Clone object",
+        "blocks.cloneObject.params": [
+            "Object name (clone):",
+            "Object name (original):",
+            "Position (X):",
+            "Position (Y):"
+        ],
         "blocks.setPos": "Definir posição do objeto",
         "blocks.setPos.params": [
             "Nome do objeto:",
@@ -726,6 +794,18 @@
         "blocks.deleteFilter": "Удалить фильтр",
         "blocks.deleteFilter.params": [
             "Имя объекта:"
+        ],
+        "blocks.defineEffect": "Create shader filter (OpenGL-ES 2.0)",
+        "blocks.defineEffect.params": [
+            "Shader name:",
+            "Dependence on time:",
+            "Vertex code:",
+            "Fragment code:"
+        ],
+        "blocks.setCustomEffect": "Apply shader filter",
+        "blocks.setCustomEffect.params": [
+            "Object name:",
+            "Shader name:"
         ],
         "blocks.setBlur": "Наложить размытие",
         "blocks.setBlur.params": [
@@ -1301,7 +1381,7 @@
         "blocks.foreachEnd": "Fim do ciclo (para cada elemento na tabela)",
         "blocks.foreach": "Para cada elemento na tabela",
         "blocks.foreach.params": [
-            "Table:",
+            "Mesa:",
             "Elemento:",
             "Chave:"
         ],
@@ -1377,10 +1457,10 @@
         "blocks.requestApiRes.params": [
             "Nome do recurso:"
         ],
-        "blocks.requestApiThread": "Request lua5.3 method in the new stream",
+        "blocks.requestApiThread": "Request lua5.4 method in the new stream",
         "blocks.requestApiThread.params": [
-            "Lua code:",
-            "Function name:"
+            "Código Lua:",
+            "Nome da função:"
         ],
         "blocks.toastShort": "Notificação pop-up curta",
         "blocks.toastShort.params": [
@@ -1408,22 +1488,6 @@
         "blocks.setBackgroundHEX": "Definir cor HEX de fundo",
         "blocks.setBackgroundHEX.params": [
             "Cor (Hex):"
-        ],
-        "blocks.newLevel": "Carregar nível",
-        "blocks.newLevel.params": [
-            "Nome do nível:"
-        ],
-        "blocks.removeLevel": "Descarregar nível",
-        "blocks.removeLevel.params": [
-            "Nome do nível:"
-        ],
-        "blocks.showLevel": "Mostrar nível",
-        "blocks.showLevel.params": [
-            "Nome do nível:"
-        ],
-        "blocks.hideLevel": "Ocultar nível",
-        "blocks.hideLevel.params": [
-            "Nome do nível:"
         ],
         "blocks.setPortraitOrientation": "Definir orientação retrato",
         "blocks.setPortraitOrientation.params": [
@@ -1688,7 +1752,7 @@
             "Nome do objeto:",
             "Animation name:"
         ],
-        "blocks.setFrame": "Definir frame do objeto",
+        "blocks.setFrame": "Definir quadro do objeto",
         "blocks.setFrame.params": [
             "Nome do objeto:",
             "Quadro:"
@@ -1742,123 +1806,117 @@
         ]
     },
     "groups": {
-        "blocks.groups": "Grupos\ne Tags",
-        "blocks.newGroup": "Criar grupo",
+        "blocks.groups": "Levels\n& Tags",
+        "blocks.newGroup": "Create empty level",
         "blocks.newGroup.params": [
-            "Nome do grupo:"
+            "Level name:"
         ],
-        "blocks.newContainer": "Create container",
+        "blocks.newLevel": "Load level",
+        "blocks.newLevel.params": [
+            "Level name:"
+        ],
+        "blocks.newContainer": "Criar contêiner",
         "blocks.newContainer.params": [
-            "Group name:",
-            "Width:",
-            "Height:"
+            "Level name:",
+            "Largura:",
+            "Altura:"
         ],
-        "blocks.removeGroup": "Remover grupo",
+        "blocks.removeGroup": "Remove level",
         "blocks.removeGroup.params": [
-            "Nome do grupo:"
+            "Level name:"
         ],
-        "blocks.showGroup": "Mostrar grupo",
+        "blocks.showGroup": "Show level",
         "blocks.showGroup.params": [
-            "Nome do grupo:"
+            "Level name:"
         ],
-        "blocks.hideGroup": "Ocultar grupo",
+        "blocks.hideGroup": "Hide level",
         "blocks.hideGroup.params": [
-            "Nome do grupo:"
+            "Level name:"
         ],
-        "blocks.addGroupObject": "Adicionar objeto ao grupo",
+        "blocks.addGroupObject": "Insert object to level",
         "blocks.addGroupObject.params": [
-            "Nome do grupo:",
+            "Level name:",
             "Nome do objeto:"
         ],
-        "blocks.addGroupText": "Adicionar texto ao grupo",
+        "blocks.addGroupText": "Insert text to level",
         "blocks.addGroupText.params": [
-            "Nome do grupo:",
+            "Level name:",
             "Nome do texto:"
         ],
-        "blocks.addGroupWidget": "Adicionar widget ao grupo",
-        "blocks.addGroupWidget.params": [
-            "Nome do grupo:",
-            "Widget name:"
-        ],
-        "blocks.addGroupMedia": "Adicionar mídia ao grupo",
-        "blocks.addGroupMedia.params": [
-            "Nome do grupo:",
-            "Media name:"
-        ],
-        "blocks.addGroupTag": "Adicionar tag ao grupo",
+        "blocks.addGroupTag": "Insert tag to level",
         "blocks.addGroupTag.params": [
-            "Group name:",
-            "Tag name:"
+            "Level name:",
+            "Nome da etiqueta:"
         ],
-        "blocks.addGroupSnapshot": "Insert snapshot to group",
+        "blocks.addGroupSnapshot": "Insert snapshot to level",
         "blocks.addGroupSnapshot.params": [
-            "Group name:",
-            "Snapshot name:"
+            "Level name:",
+            "Nome do instantâneo:"
         ],
-        "blocks.addGroupGroup": "Adicionar grupo2 ao grupo1",
+        "blocks.addGroupGroup": "Insert level2 to level1",
         "blocks.addGroupGroup.params": [
-            "Nome do grupo1:",
-            "Nome do grupo2:"
+            "Level1 name:",
+            "Level2 name:"
         ],
-        "blocks.setGroupPos": "Definir posição do grupo",
+        "blocks.setGroupPos": "Set level position",
         "blocks.setGroupPos.params": [
-            "Nome do grupo:",
+            "Level name:",
             "Position (X):",
             "Position (Y):"
         ],
-        "blocks.setGroupSize": "Definir tamanho do grupo",
+        "blocks.setGroupSize": "Set level size",
         "blocks.setGroupSize.params": [
-            "Nome do grupo:",
+            "Level name:",
             "Width:",
             "Height:"
         ],
-        "blocks.setGroupRotation": "Definir rotação do grupo",
+        "blocks.setGroupRotation": "Set level rotation",
         "blocks.setGroupRotation.params": [
-            "Nome do grupo:",
+            "Level name:",
             "Rotation (0-360):"
         ],
-        "blocks.setGroupAlpha": "Definir a opacidade do grupo",
+        "blocks.setGroupAlpha": "Set level opacity",
         "blocks.setGroupAlpha.params": [
-            "Nome do grupo:",
+            "Level name:",
             "Opacity (0-100):"
         ],
-        "blocks.updGroupPosX": "Alterar posição X do grupo",
+        "blocks.updGroupPosX": "Change level position X",
         "blocks.updGroupPosX.params": [
-            "Nome do grupo:",
+            "Level name:",
             "Position (X):"
         ],
-        "blocks.updGroupPosY": "Alterar posição Y do grupo",
+        "blocks.updGroupPosY": "Change level position Y",
         "blocks.updGroupPosY.params": [
-            "Nome do grupo:",
+            "Level name:",
             "Position (Y):"
         ],
-        "blocks.updGroupWidth": "Alterar largura do grupo",
+        "blocks.updGroupWidth": "Change level width",
         "blocks.updGroupWidth.params": [
-            "Nome do grupo:",
+            "Level name:",
             "Width:"
         ],
-        "blocks.updGroupHeight": "Alterar altura do grupo",
+        "blocks.updGroupHeight": "Change level height",
         "blocks.updGroupHeight.params": [
-            "Nome do grupo:",
+            "Level name:",
             "Height:"
         ],
-        "blocks.updGroupRotation": "Alterar rotação do grupo",
+        "blocks.updGroupRotation": "Change level rotation",
         "blocks.updGroupRotation.params": [
-            "Nome do grupo:",
+            "Level name:",
             "Rotation (0-360):"
         ],
-        "blocks.updGroupAlpha": "Alterar opacidade do grupo",
+        "blocks.updGroupAlpha": "Change level opacity",
         "blocks.updGroupAlpha.params": [
-            "Nome do grupo:",
+            "Level name:",
             "Opacity (0-100):"
         ],
-        "blocks.frontGroup": "Colocar grupo na camada de cima",
+        "blocks.frontGroup": "Place level on layer above",
         "blocks.frontGroup.params": [
-            "Nome do grupo:"
+            "Level name:"
         ],
-        "blocks.backGroup": "Colocar grupo na camada de baixo",
+        "blocks.backGroup": "Place level on layer below",
         "blocks.backGroup.params": [
-            "Nome do grupo:"
+            "Level name:"
         ],
         "blocks.newTag": "Criar tag",
         "blocks.newTag.params": [
@@ -1896,10 +1954,10 @@
             "Nome da tag:",
             "Nome da mídia:"
         ],
-        "blocks.addTagGroup": "Adicionar tag ao grupo",
+        "blocks.addTagGroup": "Add tag to level",
         "blocks.addTagGroup.params": [
             "Nome da tag:",
-            "Nome do grupo:"
+            "Level name:"
         ],
         "blocks.addTagTag": "Adicionar tag1 à tag2",
         "blocks.addTagTag.params": [
@@ -2145,152 +2203,152 @@
             "Atrito:",
             "Gravidade:"
         ],
-        "blocks.deleteJoint": "Delete joint",
+        "blocks.deleteJoint": "Excluir junta",
         "blocks.deleteJoint.params": [
-            "Joint name:"
+            "Nome conjunto:"
         ],
-        "blocks.setPivotJoint": "Set touch joint",
+        "blocks.setPivotJoint": "Definir junta de toque",
         "blocks.setPivotJoint.params": [
-            "Joint name:",
-            "Object name:",
-            "Anchor X:",
-            "Anchor Y:"
+            "Nome conjunto:",
+            "Nome do objeto:",
+            "Âncora X:",
+            "Привязка Y:"
         ],
-        "blocks.setPivotMotor": "Set pivot motor",
+        "blocks.setPivotMotor": "Definir motor de pivot",
         "blocks.setPivotMotor.params": [
-            "Joint name:",
-            "State:",
-            "Motor speed:",
-            "Max torque:"
+            "Nome conjunto:",
+            "Estado:",
+            "Velocidade do motor:",
+            "Máximo de torque:"
         ],
-        "blocks.setPivotLimits": "Set pivot limits",
+        "blocks.setPivotLimits": "Definir limites pivô",
         "blocks.setPivotLimits.params": [
-            "Joint name:",
-            "State:",
-            "Angle (min):",
-            "Angle (max):"
+            "Nome conjunto:",
+            "Estado:",
+            "Ângulo (mínimo):",
+            "Ângulo (máximo):"
         ],
-        "blocks.setDistanceJoint": "Set distance joint",
+        "blocks.setDistanceJoint": "Definir distância conjunta",
         "blocks.setDistanceJoint.params": [
-            "Joint name:",
-            "Object1 name:",
-            "Object2 name:",
-            "Anchor X1:",
-            "Anchor Y1:",
-            "Anchor X2:",
-            "Anchor Y2:"
+            "Nome conjunto:",
+            "Nome do objeto1:",
+            "Nome do objeto2:",
+            "Âncora X1:",
+            "Âncora Y1:",
+            "Âncora X2:",
+            "Âncora Y2:"
         ],
-        "blocks.setDistanceSettings": "Set distance settings",
+        "blocks.setDistanceSettings": "Definir configurações de distância",
         "blocks.setDistanceSettings.params": [
-            "Joint name:",
-            "Damping (0-100):",
-            "Frequency:",
-            "Length (min):"
+            "Nome conjunto:",
+            "Amortecimento (0-100):",
+            "Frequência:",
+            "Comprimento (mínimo):"
         ],
-        "blocks.setPistonJoint": "Set piston joint",
+        "blocks.setPistonJoint": "Definir junta do pistão",
         "blocks.setPistonJoint.params": [
-            "Joint name:",
-            "Object base name:",
-            "Object piston name:",
-            "Anchor X:",
-            "Anchor Y:",
-            "Axis X:",
-            "Axis Y:"
+            "Nome conjunto:",
+            "Nome da base do objeto:",
+            "Nome do pistão do objeto:",
+            "Âncora X:",
+            "Âncora Y:",
+            "Eixo X:",
+            "Eixo Y:"
         ],
-        "blocks.setPistonLimits": "Set piston limits",
+        "blocks.setPistonLimits": "Definir limites de pistão",
         "blocks.setPistonLimits.params": [
-            "Joint name:",
-            "State:",
-            "Move (from):",
-            "Move (to):"
+            "Nome conjunto:",
+            "Estado:",
+            "Mover-se a partir de:",
+            "Mover para:"
         ],
-        "blocks.setPistonMotor": "Set piston motor",
+        "blocks.setPistonMotor": "Definir motor de pistão",
         "blocks.setPistonMotor.params": [
-            "Joint name:",
-            "State:",
-            "Motor speed:",
-            "Max force:"
+            "Nome conjunto:",
+            "Estado:",
+            "Velocidade do motor:",
+            "Força máxima:"
         ],
-        "blocks.setWeldJoint": "Set weld joint",
+        "blocks.setWeldJoint": "Definir junta de solda",
         "blocks.setWeldJoint.params": [
-            "Joint name:",
-            "Object1 name:",
-            "Object2 name:",
-            "Anchor X:",
-            "Anchor Y:"
+            "Nome conjunto:",
+            "Nome do objeto1:",
+            "Nome do objeto2:",
+            "Âncora X:",
+            "Âncora Y:"
         ],
-        "blocks.setWeldSettings": "Set weld settings",
+        "blocks.setWeldSettings": "Definir configurações de soldagem",
         "blocks.setWeldSettings.params": [
-            "Joint name:",
-            "Damping (0-100):",
-            "Frequency:"
+            "Nome conjunto:",
+            "Amortecimento (0-100):",
+            "Frequência:"
         ],
-        "blocks.setWheelJoint": "Set wheel joint",
+        "blocks.setWheelJoint": "Definir junta da roda",
         "blocks.setWheelJoint.params": [
-            "Joint name:",
-            "Object base name:",
-            "Object wheel name:",
-            "Anchor X:",
-            "Anchor Y:",
-            "Axis X:",
-            "Axis Y:"
+            "Nome conjunto:",
+            "Nome base do objeto:",
+            "Nome da roda de objetos:",
+            "Âncora X:",
+            "Âncora Y:",
+            "Eixo X:",
+            "Eixo Y:"
         ],
-        "blocks.setTouchTarget": "Set touch target",
+        "blocks.setTouchTarget": "Definir alvo de toque",
         "blocks.setTouchTarget.params": [
-            "Joint name:",
-            "Target X:",
-            "Target Y:"
+            "Nome conjunto:",
+            "Alvo X:",
+            "Alvo Y:"
         ],
-        "blocks.setTouchSettings": "Set touch settings",
+        "blocks.setTouchSettings": "Definir configurações de toque",
         "blocks.setTouchSettings.params": [
-            "Joint name:",
-            "Damping (0-100):",
-            "Frequency:",
-            "Force (max):"
+            "Nome conjunto:",
+            "Amortecimento (0-100):",
+            "Frequência:",
+            "Força (máx.):"
         ],
-        "blocks.setRopeJoint": "Set rope joint",
+        "blocks.setRopeJoint": "Definir junta de corda",
         "blocks.setRopeJoint.params": [
-            "Joint name:",
-            "Object1 name:",
-            "Object2 name:",
-            "Anchor X1:",
+            "Nome conjunto:",
+            "Nome do objeto1:",
+            "Nome do objeto2:",
+            "Âncora X1:",
             "Anchor Y1:",
-            "Anchor X2:",
-            "Anchor Y2:"
+            "Âncora X2:",
+            "Âncora Y2:"
         ],
-        "blocks.setRopeSettings": "Set rope settings",
+        "blocks.setRopeSettings": "Definir configurações de corda",
         "blocks.setRopeSettings.params": [
-            "Joint name:",
-            "Length (max):"
+            "Nome conjunto:",
+            "Comprimento (máx.):"
         ],
-        "blocks.setFrictionJoint": "Set friction joint",
+        "blocks.setFrictionJoint": "Definir junta de fricção",
         "blocks.setFrictionJoint.params": [
-            "Joint name:",
-            "Object1 name:",
-            "Object2 name:",
-            "Anchor X:",
-            "Anchor Y:"
+            "Nome conjunto:",
+            "Nome do objeto1:",
+            "Nome do objeto2:",
+            "Âncora X:",
+            "Âncora Y:"
         ],
-        "blocks.setFrictionSettings": "Set friction settings",
+        "blocks.setFrictionSettings": "Definir configurações de fricção",
         "blocks.setFrictionSettings.params": [
-            "Joint name:",
-            "Damping (0-100):",
-            "Frequency:"
+            "Nome conjunto:",
+            "Amortecimento (0-100):",
+            "Frequência:"
         ],
-        "blocks.setPulleyJoint": "Set distance joint",
+        "blocks.setPulleyJoint": "Definir junta de distância",
         "blocks.setPulleyJoint.params": [
-            "Joint name:",
-            "Ratio of forces:",
-            "Object1 name:",
-            "Object2 name:",
-            "Stationary X1:",
-            "Stationary Y1:",
-            "Stationary X2:",
-            "Stationary Y2:",
-            "Body X1:",
-            "Body Y1:",
-            "Body X2:",
-            "Body Y2:"
+            "Nome conjunto:",
+            "Razão de forças:",
+            "Nome do objeto1:",
+            "Nome do objeto2:",
+            "Estacionário X1:",
+            "Estacionário Y1:",
+            "Estacionário X2:",
+            "Estacionário Y2:",
+            "Corpo X1:",
+            "Corpo Y1:",
+            "Corpo X2:",
+            "Corpo Y2:"
         ]
     },
     "widgets": {
@@ -2717,10 +2775,10 @@
             "Local da pasta:",
             "Tipo de armazenamento:"
         ],
-        "blocks.installApk": "Install APK file",
+        "blocks.installApk": "Instalar arquivo APK",
         "blocks.installApk.params": [
-            "File path:",
-            "Storage type:"
+            "Caminho do arquivo:",
+            "Tipo de armazenamento:"
         ]
     },
     "snapshot": {
@@ -2873,49 +2931,50 @@
             "Deslocamento em X:",
             "Deslocamento em Y:"
         ],
-        "blocks.new3dScene": "Create 3d scene",
+        "blocks.new3dScene": "Criar cena 3d",
         "blocks.new3dScene.params": [
-            "Width:",
-            "Height:"
+            "Largura:",
+            "Altura:"
         ],
-        "blocks.upd3dScene": "Update 3d scene",
-        "blocks.eye3dScene": "Set camera position of 3d scene",
+        "blocks.upd3dScene": "Atualizar cena 3D",
+        "blocks.eye3dScene": "Definir a posição da câmera do cenário 3d",
         "blocks.eye3dScene.params": [
-            "Position (X):",
-            "Position (Y):",
-            "Position (Z):"
+            "Posição (X):",
+            "Posição (Y):",
+            "Posição (Z):"
         ],
-        "blocks.center3dScene": "Set camera center of 3d scene",
+        "blocks.center3dScene": "Definir o centro da câmera da cena 3D",
         "blocks.center3dScene.params": [
-            "Position (X):",
-            "Position (Y):",
-            "Position (Z):"
+            "Posição (X):",
+            "Posição (Y):",
+            "Posição (Z):"
         ],
-        "blocks.new3dObject": "Create 3d object",
+        "blocks.new3dObject": "Criar objeto 3D",
         "blocks.new3dObject.params": [
-            "Object3d name:",
-            "Имя ресурса:"
+            "Nome do objeto 3d:",
+            "Resource name (.obj):",
+            "Resource name (.png):"
         ],
-        "blocks.move3dObject": "Set 3d object position",
+        "blocks.move3dObject": "Definir posição de objeto 3d",
         "blocks.move3dObject.params": [
-            "Object3d name:",
-            "Position (X):",
-            "Position (Y):",
-            "Position (Z):"
+            "Nome do objeto 3d:",
+            "Posição (X):",
+            "Posição (Y):",
+            "Posição (Z):"
         ],
-        "blocks.scale3dObject": "Set 3d object scale",
+        "blocks.scale3dObject": "Definir escala de objeto 3d",
         "blocks.scale3dObject.params": [
-            "Object3d name:",
-            "Scale (X):",
-            "Scale (Y):",
-            "Scale (Z):"
+            "Nome do objeto 3d:",
+            "Escala (X):",
+            "Escala (Y):",
+            "Escala (Z):"
         ],
-        "blocks.rotate3dObject": "Set 3d object rotation",
+        "blocks.rotate3dObject": "Definir rotação de objeto 3d",
         "blocks.rotate3dObject.params": [
-            "Object3d name:",
-            "Rotation (X):",
-            "Rotation (Y):",
-            "Rotation (Z):"
+            "Nome do objeto 3d:",
+            "Rotação (X):",
+            "Rotação (Y):",
+            "Rotação (Z):"
         ]
     },
     "network": {
@@ -3021,6 +3080,12 @@
             "Key:",
             "Ouvinte da requisição:"
         ],
+        "blocks.initUnityAds": "Init Unity Ads",
+        "blocks.initUnityAds.params": [
+            "Secret token:",
+            "Listener (Function):"
+        ],
+        "blocks.showUnityAds": "Show Unity Ads",
         "blocks.initAdsStartApp": "Inicializar anúncios do StartApp",
         "blocks.initAdsStartApp.params": [
             "Token:",
@@ -3033,6 +3098,19 @@
         "blocks.showAdsStartApp": "Mostrar anúncios do StartApp",
         "blocks.showAdsStartApp.params": [
             "Tipo de anúncio:"
+        ],
+        "blocks.createBluetooth": "Criar conexão Bluetooth",
+        "blocks.createBluetooth.params": [
+            "Ouvinte de conexão:"
+        ],
+        "blocks.connectBluetooth": "Conecte-se à conexão bluetooth",
+        "blocks.connectBluetooth.params": [
+            "Endereço:",
+            "Ouvinte de conexão:"
+        ],
+        "blocks.sendBluetooth": "Enviar valor via conexão bluetooth",
+        "blocks.sendBluetooth.params": [
+            "Valor:"
         ]
     },
     "transition": {
@@ -3170,142 +3248,142 @@
         "blocks.setTransitionPauseAll": "Pausar toda a transição",
         "blocks.setTransitionResumeAll": "Retomar toda a transição",
         "blocks.setTransitionCancelAll": "Cancelar toda a transição",
-        "blocks.newEmitter": "Create particles",
+        "blocks.newEmitter": "Cria partículas",
         "blocks.newEmitter.params": [
-            "Particle name:",
-            "Particle type:"
+            "Nome da partícula:",
+            "Tipo de partícula:"
         ],
-        "blocks.newCustomEmitter": "Create custom particles",
+        "blocks.newCustomEmitter": "Criar partículas personalizadas",
         "blocks.newCustomEmitter.params": [
-            "Particle name:",
-            "Particle table:",
-            "Sprite name:"
+            "Nome da partícula:",
+            "Tabela de partículas:",
+            "Nome da sprite:"
         ],
-        "blocks.removeEmitter": "Remove particles",
+        "blocks.removeEmitter": "Remover partículas",
         "blocks.removeEmitter.params": [
-            "Particle name:"
+            "Nome da partícula:"
         ],
-        "blocks.removeAllEmitter": "Remove all particles",
-        "blocks.setEmitterPos": "Set particles position",
+        "blocks.removeAllEmitter": "Remover todas as partículas",
+        "blocks.setEmitterPos": "Definir posição de partículas",
         "blocks.setEmitterPos.params": [
-            "Particle name:",
-            "Position (X):",
-            "Position (Y):"
+            "Nome da partícula:",
+            "Posição (X):",
+            "Posição (Y):"
         ],
-        "blocks.setEmitterSize": "Set particles size",
+        "blocks.setEmitterSize": "Definir tamanho de partículas",
         "blocks.setEmitterSize.params": [
-            "Particle name:",
-            "Size (%):"
+            "Nome da partícula:",
+            "Tamanho (%):"
         ],
-        "blocks.setEmitterSpeed": "Set particles speed",
+        "blocks.setEmitterSpeed": "Definir velocidade das partículas",
         "blocks.setEmitterSpeed.params": [
-            "Particle name:",
-            "Speed:"
+            "Nome da partícula:",
+            "Velocidade:"
         ],
-        "blocks.setEmitterRotation": "Set particles rotation",
+        "blocks.setEmitterRotation": "Definir rotação das partículas",
         "blocks.setEmitterRotation.params": [
-            "Particle name:",
-            "Rotation (0-360):"
+            "Nome da partícula:",
+            "Rotação (0-360):"
         ],
-        "blocks.setEmitterGravity": "Set particles gravity",
+        "blocks.setEmitterGravity": "Definir a gravidade das partículas",
         "blocks.setEmitterGravity.params": [
-            "Particle name:",
-            "Gravity (X):",
-            "Gravity (Y):"
+            "Nome da partícula:",
+            "Gravidade (X):",
+            "Gravidade (Y):"
         ],
-        "blocks.setEmitterStartColor": "Set particles start color",
+        "blocks.setEmitterStartColor": "Definir cor inicial das partículas",
         "blocks.setEmitterStartColor.params": [
-            "Particle name:",
-            "Color:",
-            "Opacity (0-100):"
+            "Nome da partícula:",
+            "Cor:",
+            "Opacidade (0-100):"
         ],
-        "blocks.setEmitterStartRGB": "Set particles RGB start color",
+        "blocks.setEmitterStartRGB": "Definir cor inicial RGB das partículas",
         "blocks.setEmitterStartRGB.params": [
-            "Particle name:",
-            "Color (R):",
-            "Color (G):",
-            "Color (B):",
-            "Opacity (0-100):"
+            "Nome da partícula:",
+            "Cor (R):",
+            "Cor (G):",
+            "Cor (B):",
+            "Opacidade (0-100):"
         ],
-        "blocks.setEmitterFinishColor": "Set particles finite color",
+        "blocks.setEmitterFinishColor": "Define a cor finita de partículas",
         "blocks.setEmitterFinishColor.params": [
-            "Particle name:",
-            "Color:",
-            "Opacity (0-100):"
+            "Nome da partícula:",
+            "Cor:",
+            "Opacidade (0-100):"
         ],
-        "blocks.setEmitterFinishRGB": "Set particles RGB finite color",
+        "blocks.setEmitterFinishRGB": "Definir cor finita de partículas RGB",
         "blocks.setEmitterFinishRGB.params": [
-            "Particle name:",
-            "Color (R):",
-            "Color (G):",
-            "Color (B):",
-            "Opacity (0-100):"
+            "Nome da partícula:",
+            "Cor (R):",
+            "Cor (G):",
+            "Cor (B):",
+            "Opacidade (0-100):"
         ],
-        "blocks.newLinearEmitter": "Create linear particles",
+        "blocks.newLinearEmitter": "Criar partículas lineares",
         "blocks.newLinearEmitter.params": [
-            "Particle name:",
-            "Sprite name:",
-            "Maximum particles:",
-            "Dependence angle:",
-            "Departure angle:",
-            "Departure angle deviation:",
-            "Speed:",
-            "Speed deviation:",
-            "Radiation range X:",
-            "Radiation range Y:",
-            "Gravity particles X:",
-            "Gravity particles Y:",
-            "Radial acceleration:",
-            "Acceleration deviation:",
-            "Tangential acceleration:",
-            "Acceleration deviation:",
-            "Particle lifetime:",
-            "Time deviation:",
-            "Initial size:",
-            "Size deviation:",
-            "Final size:",
-            "Size deviation:",
-            "Initial rotation:",
-            "Rotation deviation:",
-            "Final rotation:",
-            "Rotation deviation:",
-            "Initial color:",
-            "Color deviation:",
-            "Final color:",
-            "Color deviation:",
-            "Original color GL:",
-            "Target color GL:"
+            "Nome da partícula:",
+            "Nome da sprite:",
+            "Máximo de partículas:",
+            "Ângulo de dependência:",
+            "Ângulo de saída:",
+            "Desvio do ângulo de partida:",
+            "Velocidade:",
+            "Desvio de velocidade:",
+            "Faixa de radiação X:",
+            "Faixa de radiação Y:",
+            "Partículas gravitacionais X:",
+            "Partículas gravitacionais Y:",
+            "Aceleração radial:",
+            "Desvio de aceleração:",
+            "Aceleração tangencial:",
+            "Desvio de aceleração:",
+            "Vida útil da partícula:",
+            "Desvio de tempo:",
+            "Tamanho inicial:",
+            "Desvio de tamanho:",
+            "Tamanho final:",
+            "Desvio de tamanho:",
+            "Rotação inicial:",
+            "Desvio de rotação:",
+            "Rotação final:",
+            "Desvio de rotação:",
+            "Cor inicial:",
+            "Desvio de cor:",
+            "Cor final:",
+            "Desvio de cor:",
+            "Cor original GL:",
+            "Cor alvo GL:"
         ],
-        "blocks.newRadialEmitter": "Create radial particles",
+        "blocks.newRadialEmitter": "Criar partículas radiais",
         "blocks.newRadialEmitter.params": [
-            "Particle name:",
-            "Sprite name:",
-            "Maximum particles:",
-            "Dependence angle:",
-            "Departure angle:",
-            "Departure angle deviation:",
-            "Maximum radius:",
-            "Radius deviation:",
-            "Minimum radius:",
-            "Radius deviation:",
-            "Radial rotation:",
-            "Rotation deviation:",
-            "Particle lifetime:",
-            "Time deviation:",
-            "Initial size:",
-            "Size deviation:",
-            "Final size:",
-            "Size deviation:",
-            "Initial rotation:",
-            "Rotation deviation:",
-            "Final rotation:",
-            "Rotation deviation:",
-            "Initial color:",
-            "Color deviation:",
-            "Final color:",
-            "Color deviation:",
-            "Original color GL:",
-            "Target color GL:"
+            "Nome da partícula:",
+            "Nome da sprite:",
+            "Máximo de partículas:",
+            "Ângulo de dependência:",
+            "Ângulo de saída:",
+            "Desvio do ângulo de partida:",
+            "Raio máximo:",
+            "Desvio do raio:",
+            "Raio mínimo:",
+            "Desvio do raio:",
+            "Rotação radial:",
+            "Desvio de rotação:",
+            "Vida útil da partícula:",
+            "Desvio de tempo:",
+            "Tamanho inicial:",
+            "Desvio de tamanho:",
+            "Tamanho final:",
+            "Desvio de tamanho:",
+            "Rotação inicial:",
+            "Desvio de rotação:",
+            "Rotação final:",
+            "Desvio de rotação:",
+            "Cor inicial:",
+            "Desvio de cor:",
+            "Cor final:",
+            "Desvio de cor:",
+            "Cor original GL:",
+            "Cor alvo GL:"
         ]
     },
     "varsNoob": {
@@ -3327,9 +3405,9 @@
         "blocks.readValueNoob.params": [
             "Nome da variável:"
         ],
-        "blocks.addGroupObjectNoob": "Inserir imagem para o grupo",
+        "blocks.addGroupObjectNoob": "Insert picture to level",
         "blocks.addGroupObjectNoob.params": [
-            "Nome do grupo:",
+            "Level name:",
             "Nome da imagem:"
         ],
         "blocks.addTagObjectNoob": "Adicionar tag à imagem",
@@ -3671,7 +3749,7 @@
         "editor.list.resource.videos": "Vídeos",
         "editor.list.resource.fonts": "Fontes",
         "editor.list.resource.others": "Outros",
-        "editor.list.resource.levels": "Levels",
+        "editor.list.resource.levels": "Níveis",
         "editor.list.custom": "Customizadas",
         "editor.list.event": "Evento",
         "editor.list.script": "Script",
@@ -3682,7 +3760,7 @@
         "editor.list.prop.media": "Mídia",
         "editor.list.prop.media.noob": "Sons",
         "editor.list.prop.files": "Arquivos",
-        "editor.list.prop.group": "Grupo",
+        "editor.list.prop.group": "Level",
         "editor.list.prop.widget": "Widget"
     },
     "editor.fun": {
@@ -3696,7 +3774,7 @@
         "editor.list.fun.len_table": "tamanho_da_tabela",
         "editor.list.fun.exists_in_table": "existe_na_tabela",
         "editor.list.fun.unix_time": "tempo_unix",
-        "editor.list.fun.unix_ms": "unix_time_ms",
+        "editor.list.fun.unix_ms": "tempo_unix_milissegundos",
         "editor.list.fun.encode": "codificar_json",
         "editor.list.fun.gsub": "substituir_no_texto",
         "editor.list.fun.sub": "caractere_do_texto",
@@ -3713,7 +3791,8 @@
         "editor.list.fun.color_pixel": "cor_do_pixel",
         "editor.list.fun.get_ip": "obter_endereco_ip",
         "editor.list.fun.noise": "ruido_perlin",
-        "editor.list.fun.parameter": "parametro"
+        "editor.list.fun.parameter": "parametro",
+        "editor.list.fun.timer": "hora_de_início"
     },
     "editor.math": {
         "editor.list.math.random": "aleatorio",
@@ -3741,7 +3820,7 @@
     },
     "editor.prop": {
         "editor.list.prop.obj.touch": "toque",
-        "editor.list.prop.obj.group": "group",
+        "editor.list.prop.obj.group": "level",
         "editor.list.prop.obj.tag": "tag",
         "editor.list.prop.obj.var": "variáveis",
         "editor.list.prop.obj.pos_x": "posição_x",
@@ -3763,14 +3842,14 @@
         "editor.list.prop.text.height": "altura_texto",
         "editor.list.prop.text.rotation": "rotação_texto",
         "editor.list.prop.text.alpha": "opacidade_texto",
-        "editor.list.prop.group.tag": "tag_grupo",
-        "editor.list.prop.group.table": "group_table",
-        "editor.list.prop.group.pos_x": "posição_x_grupo",
-        "editor.list.prop.group.pos_y": "posição_y_grupo",
-        "editor.list.prop.group.width": "largura_grupo",
-        "editor.list.prop.group.height": "altura_grupo",
-        "editor.list.prop.group.rotation": "rotação_grupo",
-        "editor.list.prop.group.alpha": "opacidade_grupo",
+        "editor.list.prop.group.tag": "level_tag",
+        "editor.list.prop.group.table": "level_table",
+        "editor.list.prop.group.pos_x": "level_x_position",
+        "editor.list.prop.group.pos_y": "level_y_position",
+        "editor.list.prop.group.width": "level_width",
+        "editor.list.prop.group.height": "level_height",
+        "editor.list.prop.group.rotation": "level_rotation",
+        "editor.list.prop.group.alpha": "level_opacity",
         "editor.list.prop.widget.tag": "tag_widget",
         "editor.list.prop.widget.pos_x": "posição_x_widget",
         "editor.list.prop.widget.pos_y": "posição_y_widget",
@@ -3816,8 +3895,11 @@
         "editor.list.device.height_top": "altura_borda_superior",
         "editor.list.device.height_bottom": "altura_borda_inferior",
         "editor.list.device.finger_touching_screen": "dedo_tocando_tela",
+        "editor.list.device.finger_touching_screen_count": "number_fingers_on_screen",
         "editor.list.device.finger_touching_screen_x": "dedo_tocando_tela_x",
         "editor.list.device.finger_touching_screen_y": "dedo_tocando_tela_y",
-        "editor.list.device.get_ip": "obter_ip"
+        "editor.list.device.get_ip": "obter_ip",
+        "editor.list.device.get_device": "dispositivo_bluetooth_próprio",
+        "editor.list.device.get_devices": "dispositivos_pareados_bluetooth"
     }
 }

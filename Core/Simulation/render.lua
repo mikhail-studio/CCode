@@ -7,7 +7,7 @@ local _ = require 'Core.Simulation.quatRotateEuler'
 local quaternion = Quaternion.new(1, 0, 0, 0)
 local M = {}
 
-M.createObject = function(path, folder, baseDir)
+M.createObject = function(path, path2, baseDir)
     local import, errmsg = moonassimp.import_file(path,
         -- post-processing flags:
     	   'triangulate', 'gen normals')
@@ -16,20 +16,24 @@ M.createObject = function(path, folder, baseDir)
     local model = tinyrenderer.NewModel()
     local mesh1 = meshes[1]
 
-    for i = 1, mesh1:num_vertices() do
-    	model:AddVertex(mesh1:position(i))
-    	model:AddNormal(mesh1:normal(i))
-    	pcall(function() model:AddUV(mesh1:texture_coords(1, i)) end)
-    end
+    pcall(function()
+        for i = 1, mesh1:num_vertices() do
+        	model:AddVertex(mesh1:position(i))
+        	model:AddNormal(mesh1:normal(i))
+        	pcall(function() model:AddUV(mesh1:texture_coords(1, i)) end)
+        end
+    end)
 
-    for i = 1, mesh1:num_faces() do
-    	local face = mesh1:face(i)
-    	model:AddFace(face:indices())
-    end
+    pcall(function()
+        for i = 1, mesh1:num_faces() do
+        	local face = mesh1:face(i)
+        	model:AddFace(face:indices())
+        end
+    end)
 
     pcall(function()
         local bmap = Bytemap.loadTexture({
-                filename = folder .. '/' .. mesh1:material():texture_path('diffuse', 1),
+                filename = path2,
                 baseDir = baseDir, is_non_external = true
             })
         moonassimp.release_import(import)

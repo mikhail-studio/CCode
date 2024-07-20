@@ -160,7 +160,7 @@
         "beginner.age.banned": "You are not allowed to use CCode due to age restrictions",
         "beginner.name.what": "And finally, let's find out your name",
         "beginner.name": "Name",
-        "beginner.entrance": "Thank you, now you can start using CCode, little hints: \n\nIn the tab 'My robodog' has a tab for training\n\nBy clicking the 'Discord' button on the bottom left of the menu, you can go to the Discord server, where you can ask questions and send bugs\n\nCCode is not the easiest application right now, so a lot of videos on YouTube and help in discord will be very useful for you\n\nWell, the 'Levels' button is not working yet"
+        "beginner.entrance": "Thank you, now you can start using CCode, little hints: \n\nIn the tab 'My robodog' has a tab for training\n\nBy clicking the 'Discord' button on the bottom left of the menu, you can go to the Discord server, where you can ask questions and send bugs\n\nCCode is not the easiest application right now, so a lot of videos on YouTube and help in discord will be very useful for you"
     },
     "robodog": {
         "robodog.showAd.title": "To get 20 ccoin, you need to watch a video ad",
@@ -187,7 +187,7 @@
         "robodog.want.buy.4": "Do you want to buy these mouth?\nCost: ",
         "robodog.want.buy.5": "Do you want to buy these accessory?\nCost: ",
         "robodog.want.buy.apk": "Do you want to build apk?\nCost: 10 ccoin",
-        "robodog.want.buy.aab": "Do you want to build aab?\nCost: 100 ccoin",
+        "robodog.want.buy.aab": "The aab build is temporarily unavailable",
         "robodog.want.set.theme": "Do you want to install this theme?",
         "robodog.need.ccoin": "Required quantity: "
     },

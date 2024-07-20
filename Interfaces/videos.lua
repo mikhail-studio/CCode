@@ -89,4 +89,6 @@ M.create = function()
     genBlocks()
 end
 
+GANIN.za()
+
 return M

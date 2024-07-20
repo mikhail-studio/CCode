@@ -158,39 +158,42 @@ local listener = function(e, scroll, group, type)
                         PROGRAMS.group.isVisible = true
                         require('Core.Share.export').new(CURRENT_LINK)
                     elseif e.target.text.text == STR['program.build'] then
-                        WINDOW.new(STR['robodog.want.buy.apk'], {STR['button.close'], STR['robodog.buy']}, function(e)
-                            if e.index == 2 then
-                                timer.new(1, 1, function()
-                                    if CCOIN.buy('10') then
+                        -- WINDOW.new(STR['robodog.want.buy.apk'], {STR['button.close']}, function(e)
+                        --     if e.index == 2 then
+                        --         timer.new(1, 1, function()
+                                    -- if CCOIN.buy('10') then
                                         group:removeSelf() group = nil
                                         PROGRAMS.group.isVisible = true
                                         require('Core.Share.build').new(CURRENT_LINK)
-                                    else
-                                        local message = STR['robodog.not.enough.ccoin'] .. '\n' .. STR['robodog.need.ccoin'] .. '10'
-                                        WINDOW.new(message, {STR['button.close']}, function(ev) end, 3)
-                                        WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
-                                        WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
-                                    end
-                                end)
-                            end
-                        end, 4)
+                                    -- else
+                                    --     local message = STR['robodog.not.enough.ccoin'] .. '\n' .. STR['robodog.need.ccoin'] .. '10'
+                                    --     WINDOW.new(message, {STR['button.close']}, function(ev) end, 3)
+                                    --     WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                                    --     WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                                    -- end
+                        --         end)
+                        --     end
+                        -- end, 4)
                     elseif e.target.text.text == STR['program.aab'] then
-                        WINDOW.new(STR['robodog.want.buy.aab'], {STR['button.close'], STR['robodog.buy']}, function(e)
-                            if e.index == 2 then
-                                timer.new(1, 1, function()
-                                    if CCOIN.buy('100') then
-                                        group:removeSelf() group = nil
-                                        PROGRAMS.group.isVisible = true
-                                        require('Core.Share.build').new(CURRENT_LINK, true)
-                                    else
-                                        local message = STR['robodog.not.enough.ccoin'] .. '\n' .. STR['robodog.need.ccoin'] .. '100'
-                                        WINDOW.new(message, {STR['button.close']}, function(ev) end, 3)
-                                        WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
-                                        WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
-                                    end
-                                end)
-                            end
+                        WINDOW.new(STR['robodog.want.buy.aab'], {STR['button.close']}, function(e)
+                        --     if e.index == 2 then
+                        --         timer.new(1, 1, function()
+                                    -- if CCOIN.buy('100') then
+                                        -- group:removeSelf() group = nil
+                                        -- PROGRAMS.group.isVisible = true
+                                        -- require('Core.Share.build').new(CURRENT_LINK, true)
+                                    -- else
+                                    --     local message = STR['robodog.not.enough.ccoin'] .. '\n' .. STR['robodog.need.ccoin'] .. '100'
+                                    --     WINDOW.new(message, {STR['button.close']}, function(ev) end, 3)
+                                    --     WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                                    --     WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
+                                    -- end
+                        --         end)
+                        --     end
                         end, 4)
+
+                        WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
+                        WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
                     end
                 elseif type == 'scripts' then
                     if e.target.move then

@@ -112,7 +112,6 @@ listeners.levels_view = function()
 
                     LEVELS_VIEW:destroy()
                     LEVELS.group.isVisible = true
-                    system.deactivate('multitouch')
                     display.setDefault('background', unpack(LOCAL.themes.bg))
                 end)
             end)

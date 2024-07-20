@@ -8,7 +8,11 @@ local Themes = require('Data.themes')
 local Filter = require('Core.Modules.name-filter')
 
 function M:destroyOverride()
+    FINGERS = {} FINGERS_ARRAY = {}
+    Runtime:removeEventListener('touch', LevelPresenter.canvasListener)
+    Runtime:removeEventListener('mouse', LevelPresenter.mouseListener)
     system.deactivate('multitouch')
+
     P.map:removeSelf() P.map = nil
     P.bottbar:removeSelf() P.bottbar = nil
     P.sidebar:removeSelf() P.sidebar = nil
@@ -19,8 +23,9 @@ function M:toFront()
     P.app:toFront()
 end
 
-function M:create(levelLink)
+function M:create(levelLink, orientation)
     M.group = display.newGroup()
+    FINGERS = {} FINGERS_ARRAY = {}
 
     P.map = display.newGroup()
     M.group:insert(P.map)
@@ -91,6 +96,13 @@ function M:create(levelLink)
     P.app:setStrokeColor(0.3, 0.8, 0.5, 0.7)
     P.app.strokeWidth = 12
 
+    GANIN.az()
+
+    if orientation == 'landscape' then
+        P.phone.rotation = 90
+        P.app.rotation = 90
+    end
+
     P.map.sizeGroup.xScale = P.map.sizeGroup.xScale * 0.6
     P.map.sizeGroup.yScale = P.map.sizeGroup.yScale * 0.6
 
@@ -112,9 +124,12 @@ function P:createSidebar()
     local theme = Themes.list.default
     local size = DISPLAY_WIDTH / 8
     local y = size / 2 + size / 4 -- ZERO_Y + size - size / 4
+    local scrollHeight = size + y
     local conf = {
         'name', 'x', 'y', 'width', 'height',
-        'text', 'size', 'rotate2', 'layer', 'body'
+        'text', 'size', 'rotate2', 'layer', 'body',
+        'gravity', 'bounce', 'density', 'friction',
+        'fixed', 'sensor'
     }
 
     P.bgSidebar = display.newRect(P.sidebar,
@@ -151,7 +166,10 @@ function P:createSidebar()
         end)
 
         y = y + 20 + size
+        scrollHeight = scrollHeight + 20 + size
     end
+
+    P.scrollSidebar:setScrollHeight(scrollHeight)
 end
 
 function P:createBottbar()
@@ -326,40 +344,52 @@ local enterConfig = {
     height = {STR['levels.enterobjheight'], nil, 'height'},
     size = {STR['levels.enterobjsize'], nil, 'size'},
     rotate2 = {STR['levels.enterobjrotate'], nil, 'rotation'},
+    gravity = {STR['levels.enterobjgravity'], nil, 'gravity'},
+    bounce = {STR['levels.enterobjbounce'], nil, 'bounce'},
+    density = {STR['levels.enterobjdensity'], nil, 'density'},
+    friction = {STR['levels.enterobjfriction'], nil, 'friction'},
 
     text = {STR['levels.enterobjname'], function(event, data, oldText)
         local isEnded = event.phase == 'ended' or event.phase == 'submitted'
         if isEnded and not ALERT then
-            Filter.simpleCheck(event.target.text, function(ev)
-                if ev.isError then
-                    INPUT.remove(false)
-                    WINDOW.new(STR['errors.' .. ev.typeError],
-                        {STR['button.close']}, function() end, 5)
-                    WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
-                    WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
-                else
-                    INPUT.remove(true, ev.text)
-                end
-            end, data, oldText)
+            INPUT.remove(true, event.target.text)
         end
     end, 'text'},
 
-    body = {STR['levels.enterobjname'], function(event, data, oldText)
-        local isEnded = event.phase == 'ended' or event.phase == 'submitted'
-        if isEnded and not ALERT then
-            Filter.simpleCheck(event.target.text, function(ev)
-                if ev.isError then
-                    INPUT.remove(false)
-                    WINDOW.new(STR['errors.' .. ev.typeError],
-                        {STR['button.close']}, function() end, 5)
-                    WINDOW.buttons[1].x = WINDOW.bg.x + WINDOW.bg.width / 4 - 5
-                    WINDOW.buttons[1].text.x = WINDOW.buttons[1].x
-                else
-                    INPUT.remove(true, ev.text)
-                end
-            end, data, oldText)
+    body = {STR['levels.enterobjbody'], function(event, img)
+        if event.index == 1 then
+            LevelPresenter.enterNewConfig('body', img, '')
+        elseif event.index == 2 then
+            timer.new(1, 1, function()
+                WINDOW.new(STR['levels.enterobjbody'], {
+                    STR['levels.enterobjbody.dynamic'],
+                    STR['levels.enterobjbody.static']
+                }, function(e)
+                    if e.index == 1 then
+                        LevelPresenter.enterNewConfig('body', img, 'dynamic')
+                    elseif e.index == 2 then
+                        LevelPresenter.enterNewConfig('body', img, 'static')
+                    end
+                end, 4)
+            end)
         end
-    end, 'body'}
+    end, 'body'},
+
+    fixed = {STR['levels.enterobjfixed'], function(event, img)
+        if event.index == 1 then
+            LevelPresenter.enterNewConfig('fixed', img, true)
+        elseif event.index == 2 then
+            LevelPresenter.enterNewConfig('fixed', img, false)
+        end
+    end, 'fixed'},
+
+    sensor = {STR['levels.enterobjsensor'], function(event, img)
+        if event.index == 1 then
+            LevelPresenter.enterNewConfig('sensor', img, true)
+        elseif event.index == 2 then
+            LevelPresenter.enterNewConfig('sensor', img, false)
+        end
+    end, 'sensor'}
 }
 
 enterConfig.y[2] = enterConfig.x[2]
@@ -367,6 +397,11 @@ enterConfig.width[2] = enterConfig.x[2]
 enterConfig.height[2] = enterConfig.x[2]
 enterConfig.size[2] = enterConfig.x[2]
 enterConfig.rotate2[2] = enterConfig.x[2]
+
+enterConfig.gravity[2] = enterConfig.x[2]
+enterConfig.bounce[2] = enterConfig.x[2]
+enterConfig.density[2] = enterConfig.x[2]
+enterConfig.friction[2] = enterConfig.x[2]
 
 function M:openEnterWindow(type, img, data)
     local inputText = enterConfig[type][1]
@@ -390,18 +425,35 @@ function M:openEnterWindow(type, img, data)
         end
     end
 
-    INPUT.new(inputText, function(event)
-            textEnterListener(event, data, oldText)
-        end, inputEnterListener, tostring(oldText), checkbox)
-    INPUT.bg:setFillColor(unpack(LOCAL.themes.bgAdd4Color))
+    if type == 'body' then
+        WINDOW.new(inputText, {
+            STR['levels.enterobjbody.nil'],
+            STR['levels.enterobjbody.type']
+        }, function(e) textEnterListener(e, img) end, 4)
+    elseif type == 'fixed' then
+        WINDOW.new(inputText, {
+            STR['levels.enterobjfixed.true'],
+            STR['levels.enterobjfixed.false']
+        }, function(e) textEnterListener(e, img) end, 4)
+    elseif type == 'sensor' then
+        WINDOW.new(inputText, {
+            STR['levels.enterobjsensor.true'],
+            STR['levels.enterobjsensor.false']
+        }, function(e) textEnterListener(e, img) end, 4)
+    else
+        INPUT.new(inputText, function(event)
+                textEnterListener(event, data, oldText)
+            end, inputEnterListener, tostring(oldText), checkbox)
+        INPUT.bg:setFillColor(unpack(LOCAL.themes.bgAdd4Color))
 
-    if type == 'layer' then
-        INPUT.checkbox[1].listener = function()
-            INPUT.checkbox[1]:setState({isOn = false})
-        end
+        if type == 'layer' then
+            INPUT.checkbox[1].listener = function()
+                INPUT.checkbox[1]:setState({isOn = false})
+            end
 
-        INPUT.checkbox[2].listener = function()
-            INPUT.checkbox[2]:setState({isOn = false})
+            INPUT.checkbox[2].listener = function()
+                INPUT.checkbox[2]:setState({isOn = false})
+            end
         end
     end
 end
@@ -524,7 +576,9 @@ function M:clear()
         P.rotateLevel, P.cloneLevel, P.deleteLevel,
         P.nameLevel, P.xLevel, P.yLevel,
         P.widthLevel, P.heightLevel, P.rotate2Level,
-        P.layerLevel, P.textLevel, P.sizeLevel, P.bodyLevel
+        P.layerLevel, P.textLevel, P.sizeLevel, P.bodyLevel,
+        P.gravityLevel, P.densityLevel, P.bounceLevel, P.frictionLevel,
+        P.fixedLevel, P.sensorLevel
     }
 
     for _, obj in pairs(objs) do

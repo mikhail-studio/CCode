@@ -160,7 +160,7 @@
         "beginner.age.banned": "年齢制限のためにCCodeを使用することはできません",
         "beginner.name.what": "そして最後に、あなたの名前を調べましょう",
         "beginner.name": "名前",
-        "beginner.entrance": "ありがとう、今、あなたはCコード、少しヒントを使い始めることができます: \n\n「私のロボ犬」のタブには、トレーニング用のタブがあります\n\nメニューの左下にある「破棄」ボタンをクリックすると、Discordサーバーに移動して質問をしたり、バグを送信したりすることができます\n\nCコードは今最も簡単なアプリケーションではないので、youtubeの多くのビデオとdiscordのヘルプはあなたにとって非常に役立ちます\n\nまあ、「レベル」ボタンはまだ機能していません"
+        "beginner.entrance": "ありがとう、今、あなたはCコード、少しヒントを使い始めることができます: \n\n「私のロボ犬」のタブには、トレーニング用のタブがあります\n\nメニューの左下にある「破棄」ボタンをクリックすると、Discordサーバーに移動して質問をしたり、バグを送信したりすることができます\n\nCコードは今最も簡単なアプリケーションではないので、youtubeの多くのビデオとdiscordのヘルプはあなたにとって非常に役立ちます\n\nまあ"
     },
     "robodog": {
         "robodog.showAd.title": "To get 20 ccoin, you need to watch a video ad",
@@ -187,7 +187,7 @@
         "robodog.want.buy.4": "この口を購入しますか？\n料金： ",
         "robodog.want.buy.5": "このアクセサリーを購入しますか？\n料金： ",
         "robodog.want.buy.apk": "Do you want to build apk?\nCost: 10 ccoin",
-        "robodog.want.buy.aab": "Do you want to build aab?\nCost: 100 ccoin",
+        "robodog.want.buy.aab": "The aab build is temporarily unavailable",
         "robodog.want.set.theme": "このテーマをインストールしますか?",
         "robodog.need.ccoin": "必要量： "
     },

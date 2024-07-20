@@ -45,7 +45,8 @@ settings = {
 		['plugin.MemoryBlob'] = {publisherId = 'com.xibalbastudios'},
 		['plugin.androidFilePicker'] = {publisherId = 'tech.scotth', marketplaceId = '2mfldi'},
 		['plugin.videoEditor'] = {publisherId = 'tech.scotth', marketplaceId = '2mfldi'},
-		['plugin.unityads.v4'] = {publisherId = 'com.solar2d'}
+		['plugin.unityads.v4'] = {publisherId = 'com.solar2d'},
+		['plugin.appmetrica'] = {publisherId = 'tech.scotth', marketplaceId = '2mfldi'}
 	},
 
 	excludeFiles = {

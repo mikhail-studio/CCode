@@ -6,6 +6,7 @@ ADS = require 'plugin.unityads.v4'
 CLIENT = require 'Network.client'
 SERVER = require 'Network.server'
 CLASS_IS_REQUIRED = require 'class'
+APPMETRICA = require 'plugin.appmetrica'
 RENDER = require 'Core.Simulation.render'
 NOTIFICATIONS = require 'plugin.notifications.v2'
 CIPHER = require 'plugin.openssl'.get_cipher 'aes-256-cbc'
@@ -58,7 +59,7 @@ DISPLAY_HEIGHT = display.actualContentHeight
 IS_WIN = system.getInfo 'platform' ~= 'android'
 IS_SIM = system.getInfo 'environment' == 'simulator'
 DOC_DIR = system.pathForFile('', system.DocumentsDirectory)
-BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1331
+BUILD = (not IS_SIM and not IS_WIN) and system.getInfo('androidAppVersionCode') or 1353
 MY_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/ganin'
 RES_PATH = '/data/data/' .. tostring(system.getInfo('androidAppPackageName')) .. '/files/coronaResources'
 MASK = graphics.newMask('Sprites/mask.png')
@@ -112,11 +113,13 @@ end
 
 if IS_SIM or IS_WIN then
     GANIN = {
+        az = function() end,
         relaunch = function() end,
         perm = function() end,
         bluetooth = function() end,
         path = function() return '/data/data' end,
-        webview = function(listener) listener() end
+        webview = function(listener) listener() end,
+        za = function() end
     }
 else
     GANIN = require 'plugin.ganin'
@@ -311,23 +314,23 @@ end
 
 SET_X = function(x, obj)
     if obj and (obj._isGroup or obj._snapshot or obj._container) then return x end
-    return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-    and GAME.group.widgets[obj._scroll].wtype == 'scroll')
-    and x + GAME.group.widgets[obj._scroll].width / 2 or CENTER_X + x) or 0
+    return type(x) == 'number' and ((obj and obj._scroll and GAME_widgets[obj._scroll]
+    and GAME_widgets[obj._scroll].wtype == 'scroll')
+    and x + GAME_widgets[obj._scroll].width / 2 or CENTER_X + x) or 0
 end
 
 SET_Y = function(y, obj)
-    if obj and obj._isGroup then return type(y) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-    and GAME.group.widgets[obj._scroll].wtype == 'scroll') and 0 - y - CENTER_Y or 0 - y ) or 0 end
-    return type(y) == 'number' and (((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-    and GAME.group.widgets[obj._scroll].wtype == 'scroll') or (obj and (obj._snapshot or obj._container))) and 0 - y or CENTER_Y - y) or 0
+    if obj and obj._isGroup then return type(y) == 'number' and ((obj and obj._scroll and GAME_widgets[obj._scroll]
+    and GAME_widgets[obj._scroll].wtype == 'scroll') and 0 - y - CENTER_Y or 0 - y ) or 0 end
+    return type(y) == 'number' and (((obj and obj._scroll and GAME_widgets[obj._scroll]
+    and GAME_widgets[obj._scroll].wtype == 'scroll') or (obj and (obj._snapshot or obj._container))) and 0 - y or CENTER_Y - y) or 0
 end
 
 GET_X = function(x, obj)
     if obj and (obj._isGroup or obj._snapshot or obj._container) then return x end
-    return type(x) == 'number' and ((obj and obj._scroll and GAME.group.widgets[obj._scroll]
-    and GAME.group.widgets[obj._scroll].wtype == 'scroll')
-    and x - GAME.group.widgets[obj._scroll].width / 2 or x - CENTER_X) or 0
+    return type(x) == 'number' and ((obj and obj._scroll and GAME_widgets[obj._scroll]
+    and GAME_widgets[obj._scroll].wtype == 'scroll')
+    and x - GAME_widgets[obj._scroll].width / 2 or x - CENTER_X) or 0
 end
 
 GET_Y = SET_Y
@@ -496,7 +499,10 @@ timer.new = function(sec, rep, lis) return timer.performWithDelay(sec, lis, rep)
 math.sum = function(...) local args, num = {...}, 0 for i = 1, #args do num = num + args[i] end return num end
 math.getMaskBits = function(t) local s = 0 for j = 1, #t do s = s + math.getBit(t[j]) end return s end
 math.getBit = function(i) return 2 ^ (i-1) end
-table.len, math.round, table.merge = function(t)
+UTF8.toAscii, table.len, math.round, table.merge = function(text)
+    local text = tostring(text) or '' local result = '' UTF8.gsub(text, '.',
+    function(symbol) result = result .. '_' .. UTF8.byte(symbol) end) return result
+end, function(t)
     return type(t) == 'table' and ((type(#t) == 'number' and #t > 0) and #t
     or (function() local i = 0 for k in pairs(t) do i = i + 1 end return i end)()) or 0
 end, function(num, exp)
@@ -604,12 +610,6 @@ BUTTONS_LISTENER = function(e, listener)
     end
 
     return true
-end
-
-original_require = require
-require = function(module, isSingle)
-    if isSingle then package.loaded[module] = nil end
-    return original_require(module)
 end
 
 FINGERS = {}
